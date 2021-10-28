@@ -176,7 +176,7 @@ class MgmtSoC(SoCMini):
         # SPI Flash --------------------------------------------------------------------------------
         from litespi.modules import W25Q128JV
         from litespi.opcodes import SpiNorFlashOpCodes as Codes
-        # self.add_spi_flash(mode="4x", module=W25Q128JV(Codes.READ_1_1_4), with_master=False)
+        self.add_spi_flash(mode="4x", module=W25Q128JV(Codes.READ_1_1_4), with_master=False)
 
         # Add ROM linker region --------------------------------------------------------------------
         self.bus.add_region("rom", SoCRegion(
@@ -185,8 +185,8 @@ class MgmtSoC(SoCMini):
             linker = True)
         )
 
-        # self.submodules.uart_bridge = UARTWishboneBridge(platform.request("serial"), sys_clk_freq, baudrate=115200)
-        # self.add_wb_master(self.uart_bridge.wishbone)
+        self.submodules.uart_bridge = UARTWishboneBridge(platform.request("serial"), sys_clk_freq, baudrate=115200)
+        self.add_wb_master(self.uart_bridge.wishbone)
 
         # # Wishbone Master
         # if kwargs["bus"] == "wishbone":
