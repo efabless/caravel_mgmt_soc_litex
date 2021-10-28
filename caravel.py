@@ -76,13 +76,19 @@ class MGMTSoC(SoCMini):
         self.submodules.gpio = GPIOTristate(platform.request("gpio"))
         #self.add_csr("gpio")
         
-        # Add a master wb port
+        # Add a master wb port for external masters
         wb_bus = wishbone.Interface()
         self.bus.add_master(master=wb_bus)
         platform.add_extension(wb_bus.get_ios("wb"))
         wb_pads = platform.request("wb")
-        self.comb += wb_bus.connect_to_pads(wb_pads, mode="master")
+        self.comb += wb_bus.connect_to_pads(wb_pads, mode="slave")
         
+        # Add a wb port for external slaves
+        wb_bus = wishbone.Interface()
+        self.bus.add_slave(name="extern_slave", slave=wb_bus, region=SoCRegion(origin=0x30000000, size=8192))
+        platform.add_extension(wb_bus.get_ios("wb"))
+        wb_pads = platform.request("wb")
+        self.comb += wb_bus.connect_to_pads(wb_pads, mode="master")
 
         #Use OpenRAM
         spram_size = 2 * 1024
