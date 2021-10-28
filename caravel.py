@@ -46,8 +46,6 @@ class MGMTSoC(SoCMini):
     }
 
     def __init__(self, sys_clk_freq=int(100e6),
-        with_pwm        = False,
-        with_mmcm       = False,
         with_gpio       = False, gpio_width=32,
         with_spi_master = True, spi_master_data_width=1, spi_master_clk_freq=1e6,
         **kwargs
@@ -92,8 +90,7 @@ class MGMTSoC(SoCMini):
             self.add_csr("gpio")
 
         
-        # UP5K has single port RAM, which is a dedicated 128 kilobyte block.
-        # Use this as CPU RAM.
+        #Use OpenRAM
         spram_size = 2 * 1024
         self.submodules.spram = OpenRAM(size=spram_size)
         self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
@@ -143,11 +140,11 @@ def main():
     builder_args(parser)
 
     # Cores
-    parser.add_argument("--with-pwm",              action="store_true",   help="Add PWM core")
-    parser.add_argument("--with-mmcm",             action="store_true",   help="Add MMCM (Xilinx 7-series) core")
-    parser.add_argument("--with-uart",             action="store_true",   help="Add UART core")
-    parser.add_argument("--uart-fifo-depth",       default=16, type=int,  help="UART FIFO depth (default=16)")
-    parser.add_argument("--with-ctrl",             action="store_true",   help="Add bus controller core")
+    #parser.add_argument("--with-pwm",              action="store_true",   help="Add PWM core")
+    #parser.add_argument("--with-mmcm",             action="store_true",   help="Add MMCM (Xilinx 7-series) core")
+    #parser.add_argument("--with-uart",             action="store_true",   help="Add UART core")
+    #parser.add_argument("--uart-fifo-depth",       default=16, type=int,  help="UART FIFO depth (default=16)")
+    #parser.add_argument("--with-ctrl",             action="store_true",   help="Add bus controller core")
     parser.add_argument("--with-timer",            action="store_true",   help="Add timer core")
     parser.add_argument("--with-spi-master",       action="store_true",   help="Add SPI master core")
     parser.add_argument("--spi-master-data-width", default=8,   type=int, help="SPI master data width")

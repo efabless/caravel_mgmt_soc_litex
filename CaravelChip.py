@@ -40,13 +40,13 @@ _io = [
 # Platform -----------------------------------------------------------------------------------------
 
 class Platform(GenericPlatform):
-    def __init__(self, vname):
+    def __init__(self, vname=""):
         GenericPlatform.__init__(self, "", _io)
-
+        
     def build(self, fragment, build_dir, **kwargs):
         os.makedirs(build_dir, exist_ok=True)
         os.chdir(build_dir)
         top_output = self.get_verilog(fragment)
-        top_output.write(vname)
+        top_output.write("mgmt_soc.v")
 
 
