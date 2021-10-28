@@ -206,54 +206,54 @@ class MgmtSoC(SoCMini):
 # Build --------------------------------------------------------------------------------------------
 
 
-def soc_argdict(args):
-    ret = {}
-    for arg in [
-        "with_pwm",
-        "with_mmcm",
-        "with_uart",
-        "uart_fifo_depth",
-        "with_ctrl",
-        "with_timer",
-        "with_gpio",
-        "gpio_width",
-        "with_spi_master",
-        "spi_master_data_width",
-        "spi_master_clk_freq",
-        "csr_data_width",
-        "csr_address_width",
-        "csr_paging"]:
-        ret[arg] = getattr(args, arg)
-    return ret
+# def soc_argdict(args):
+#     ret = {}
+#     for arg in [
+#         "with_pwm",
+#         "with_mmcm",
+#         "with_uart",
+#         "uart_fifo_depth",
+#         "with_ctrl",
+#         "with_timer",
+#         "with_gpio",
+#         "gpio_width",
+#         "with_spi_master",
+#         "spi_master_data_width",
+#         "spi_master_clk_freq",
+#         "csr_data_width",
+#         "csr_address_width",
+#         "csr_paging"]:
+#         ret[arg] = getattr(args, arg)
+#     return ret
 
 
 def main():
 
-    parser = argparse.ArgumentParser(description="Caravel Management SoC")
-    builder_args(parser)
-
-    # Bus
-    parser.add_argument("--bus",                   default="wishbone",    type=str, help="Type of Bus (wishbone, axi)")
-
-    # Cores
-    parser.add_argument("--with-pwm",              action="store_true",   help="Add PWM core")
-    parser.add_argument("--with-mmcm",             action="store_true",   help="Add MMCM (Xilinx 7-series) core")
-    parser.add_argument("--with-uart",             action="store_true",   help="Add UART core")
-    parser.add_argument("--uart-fifo-depth",       default=16, type=int,  help="UART FIFO depth (default=16)")
-    parser.add_argument("--with-ctrl",             action="store_true",   help="Add bus controller core")
-    parser.add_argument("--with-timer",            action="store_true",   help="Add timer core")
-    parser.add_argument("--with-spi-master",       action="store_true",   help="Add SPI master core")
-    parser.add_argument("--spi-master-data-width", default=8,   type=int, help="SPI master data width")
-    parser.add_argument("--spi-master-clk-freq",   default=8e6, type=int, help="SPI master output clock frequency")
-    parser.add_argument("--with-gpio",             action="store_true",   help="Add GPIO core")
-    parser.add_argument("--gpio-width",            default=32,  type=int, help="GPIO signals width")
-
-    # CSR settings
-    parser.add_argument("--csr-data-width",    default=8,     type=int, help="CSR bus data-width (8 or 32, default=8)")
-    parser.add_argument("--csr-address-width", default=14,    type=int, help="CSR bus address-width")
-    parser.add_argument("--csr-paging",        default=0x800, type=int, help="CSR bus paging")
-
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser(description="Caravel Management SoC")
+    # builder_args(parser)
+    #
+    # # Bus
+    # parser.add_argument("--bus",                   default="wishbone",    type=str, help="Type of Bus (wishbone, axi)")
+    #
+    # # Cores
+    # parser.add_argument("--with-pwm",              action="store_true",   help="Add PWM core")
+    # parser.add_argument("--with-mmcm",             action="store_true",   help="Add MMCM (Xilinx 7-series) core")
+    # parser.add_argument("--with-uart",             action="store_true",   help="Add UART core")
+    # parser.add_argument("--uart-fifo-depth",       default=16, type=int,  help="UART FIFO depth (default=16)")
+    # parser.add_argument("--with-ctrl",             action="store_true",   help="Add bus controller core")
+    # parser.add_argument("--with-timer",            action="store_true",   help="Add timer core")
+    # parser.add_argument("--with-spi-master",       action="store_true",   help="Add SPI master core")
+    # parser.add_argument("--spi-master-data-width", default=8,   type=int, help="SPI master data width")
+    # parser.add_argument("--spi-master-clk-freq",   default=8e6, type=int, help="SPI master output clock frequency")
+    # parser.add_argument("--with-gpio",             action="store_true",   help="Add GPIO core")
+    # parser.add_argument("--gpio-width",            default=32,  type=int, help="GPIO signals width")
+    #
+    # # CSR settings
+    # parser.add_argument("--csr-data-width",    default=8,     type=int, help="CSR bus data-width (8 or 32, default=8)")
+    # parser.add_argument("--csr-address-width", default=14,    type=int, help="CSR bus address-width")
+    # parser.add_argument("--csr-paging",        default=0x800, type=int, help="CSR bus paging")
+    #
+    # args = parser.parse_args()
 
     # soc     = MgmtSoC(**soc_argdict(args))
     soc     = MgmtSoC()
