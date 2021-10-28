@@ -26,26 +26,13 @@ from litex.soc.interconnect import wishbone
 from litex.soc.cores.gpio import GPIOTristate
 from litex.soc.cores.spi import SPIMaster, SPISlave
 
-#############
-
 # from migen.genlib.resetsync import AsyncResetSynchronizer
-
-# from litex.soc.cores.ram import Up5kSPRAM
-# from litex.soc.cores.spi_flash import SpiFlash
-# #from litex.soc.cores.clock import iCE40PLL
-# from litex.soc.integration.soc_core import SoCCore, SoCMini
-# from litex.soc.integration.builder import Builder, builder_argdict, builder_args
-# #from litex.build.lattice.programmer import IceStormProgrammer
-# from litex.soc.integration.soc_core import soc_core_argdict, soc_core_args
 # from litex.soc.integration.doc import AutoDoc
 from litex.soc.integration.soc import SoCRegion
-
-from litex.soc.cores.uart import UARTWishboneBridge
-
-
 import litex.soc.doc as lxsocdoc
-
 from litex.soc.cores.uart import UARTWishboneBridge
+from litespi.modules import W25Q128JV
+from litespi.opcodes import SpiNorFlashOpCodes as Codes
 from OpenRAM import *
 
 # IOs ----------------------------------------------------------------------------------------------
@@ -55,16 +42,16 @@ _io = [
 
     # Serial
     ("serial", 0,
-     Subsignal("rx", Pins("1")),
      Subsignal("tx", Pins("1")),
+     Subsignal("rx", Pins("1")),
      ),
 
     # SPI Master
     ("spi_master", 0,
-     Subsignal("clk", Pins(1)),
      Subsignal("cs_n", Pins(1)),
-     Subsignal("mosi", Pins(1)),
+     Subsignal("clk", Pins(1)),
      Subsignal("miso", Pins(1)),
+     Subsignal("mosi", Pins(1)),
      ),
 
     # SPIFlash
@@ -82,6 +69,20 @@ _io = [
      Subsignal("clk", Pins("1")),
      Subsignal("dq", Pins("1 1 1 1")),
      ),
+
+    ("hkspi_sram", 0,
+     Subsignal("hkspi_sram_clk", Pins("1")),
+     Subsignal("hkspi_sram_csb", Pins("1")),
+     Subsignal("hkspi_sram_addr", Pins("1 1 1 1")),
+     Subsignal("hkspi_sram_data", Pins("1 1 1 1")),
+     ),
+
+    ("gpio", 0, Pins(32)),
+
+    ("user_irq", 0, Pins("1")),
+
+    ("trap", 0, Pins("1")),
+
 ]
 
 # Platform -----------------------------------------------------------------------------------------
@@ -111,30 +112,19 @@ class MgmtSoC(SoCMini):
     }
 
     def __init__(self, sys_clk_freq=int(100e6),
-        with_gpio       = True,
-        gpio_width=32,
-        with_spi_master = True,
-        spi_master_data_width=1,
-        spi_master_clk_freq=1e6,
         **kwargs
     ):
+
+        gpio_width=32
+        spi_master_data_width=8
+        spi_master_clk_freq=1e6
 
         platform = Platform(_io)
 
         # CRG --------------------------------------------------------------------------------------
         self.submodules.crg = CRG(platform.request("sys_clk"), rst=platform.request("sys_rst"))
 
-        # UART
-        # if kwargs["with_uart"]:
-        platform.add_extension([
-            ("serial", 0,
-                Subsignal("tx",  Pins(1)),
-                Subsignal("rx", Pins(1)),
-            )
-        ])
-
         # SoCMini ----------------------------------------------------------------------------------
-        # print(kwargs)
         SoCMini.__init__(self, platform,
                          clk_freq=sys_clk_freq,
                          cpu_type="vexriscv",
@@ -146,25 +136,14 @@ class MgmtSoC(SoCMini):
                          uart_name = "crossover",
                          **kwargs)
 
-        # if with_spi_master:
-        # platform.add_extension([
-        #     ("spi_master", 0,
-        #         Subsignal("clk",  Pins(1)),
-        #         Subsignal("cs_n", Pins(1)),
-        #         Subsignal("mosi", Pins(1)),
-        #         Subsignal("miso", Pins(1)),
-        #     )
-        # ])
-        # self.submodules.spi_master = SPIMaster(
-        #     pads         = platform.request("spi_master"),
-        #     data_width   = spi_master_data_width,
-        #     sys_clk_freq = sys_clk_freq,
-        #     spi_clk_freq = spi_master_clk_freq,
-        # )
+        self.submodules.spi_master = SPIMaster(
+            pads         = platform.request("spi_master"),
+            data_width   = spi_master_data_width,
+            sys_clk_freq = sys_clk_freq,
+            spi_clk_freq = spi_master_clk_freq,
+        )
 
         # GPIO
-        # if with_gpio:
-        platform.add_extension([("gpio", 0, Pins(gpio_width))])
         self.submodules.gpio = GPIOTristate(platform.request("gpio"))
         self.add_csr("gpio")
 
@@ -174,8 +153,6 @@ class MgmtSoC(SoCMini):
         self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
 
         # SPI Flash --------------------------------------------------------------------------------
-        from litespi.modules import W25Q128JV
-        from litespi.opcodes import SpiNorFlashOpCodes as Codes
         self.add_spi_flash(mode="4x", module=W25Q128JV(Codes.READ_1_1_4), with_master=False)
 
         # Add ROM linker region --------------------------------------------------------------------
@@ -191,17 +168,18 @@ class MgmtSoC(SoCMini):
         # # Wishbone Master
         # if kwargs["bus"] == "wishbone":
         wb_bus = wishbone.Interface()
-        self.bus.add_master(master=wb_bus)
+        # self.bus.add_master(master=wb_bus)
+        self.bus.add_slave(name="wb_slave", slave=wb_bus, region=SoCRegion(origin=0x30000000, size=8192))
         platform.add_extension(wb_bus.get_ios("wb"))
         wb_pads = platform.request("wb")
-        self.comb += wb_bus.connect_to_pads(wb_pads, mode="slave")
+        self.comb += wb_bus.connect_to_pads(wb_pads, mode="master")
 
         # # IRQs
-        # for name, loc in sorted(self.irq.locs.items()):
-        #     module = getattr(self, name)
+        for name, loc in sorted(self.irq.locs.items()):
+            module = getattr(self, name)
         #     platform.add_extension([("irq_"+name, 0, Pins(1))])
-        #     irq_pin = platform.request("irq_"+name)
-        #     self.comb += irq_pin.eq(module.ev.irq)
+            irq_pin = platform.request("irq_"+name)
+            self.comb += irq_pin.eq(module.ev.irq)
 
 # Build --------------------------------------------------------------------------------------------
 
