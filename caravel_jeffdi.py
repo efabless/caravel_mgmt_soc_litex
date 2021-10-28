@@ -258,7 +258,7 @@ def main():
     # soc     = MgmtSoC(**soc_argdict(args))
     soc     = MgmtSoC()
     # builder = Builder(soc, **builder_argdict(args))
-    builder = Builder(soc)
+    builder = Builder(soc, compile_software=False)
     builder.build()
 
     lxsocdoc.generate_docs(soc, "build/documentation/", project_name="Caravel Management SoC", author="Efabless")
