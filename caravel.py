@@ -55,13 +55,16 @@ class MGMTSoC(SoCMini):
 
         SoCMini.__init__(self, platform, clk_freq=sys_clk_freq, **kwargs)
 
-        # Add a master SPI controller
-        self.submodules.spi_master = SPIMaster(
-                pads         = platform.request("spi_master"),
-                data_width   = 2,
-                sys_clk_freq = sys_clk_freq,
-                spi_clk_freq = 1e5,
+        # Add a master SPI controller w/ a clock divider
+        spi_master = SPIMaster(
+            pads=platform.request("spi_master"),
+            data_width=2,
+            sys_clk_freq=sys_clk_freq,
+            spi_clk_freq=1e5,
         )
+        spi_master.add_clk_divider()
+        self.submodules.spi_master = spi_master
+        #self.add_interrupt(interrupt_name="spi_master")
 
         """
         # Add a master wb port for external masters
@@ -113,6 +116,8 @@ class MGMTSoC(SoCMini):
 
         # Add 6 IRQ lines
         self.submodules.gpio = GPIOIn(platform.request("IRQ"), with_irq=True)
+
+
 
 def main():
     soc     = MGMTSoC()
