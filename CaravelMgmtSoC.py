@@ -58,12 +58,10 @@ _io = [
 
     # Logic Analyzer
     ("la", 0,
-     Subsignal("o", Pins(128)),
-     Subsignal("i", Pins(128)),
-     Subsignal("oe", Pins(128)),
-    ),
-    ("la_ien", 0,
-     Subsignal("o", Pins(128)),
+     Subsignal("output", Pins(128)),
+     Subsignal("input", Pins(128)),
+     Subsignal("oenb", Pins(128)),
+     Subsignal("iena", Pins(128)),
     ),
 
     # User's input control

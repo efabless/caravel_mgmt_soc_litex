@@ -20,7 +20,7 @@ from litex.soc.integration.soc_core import *
 from litex.build.generic_platform import *
 from litex.soc.cores.uart import UARTWishboneBridge
 from litex.soc.cores.gpio import *
-#from GPIOASIC import *
+from GPIOASIC import LogicAnalyzer
 from litex.soc.cores.spi import SPIMaster, SPISlave
 import litex.soc.doc as lxsocdoc
 
@@ -107,8 +107,8 @@ class MGMTSoC(SoCMini):
         # self.add_csr("gpio")
 
         # Add the logic Analyzer
-        self.submodules.la = GPIOTristate(platform.request("la"))
-        self.submodules.la_ien = GPIOOut(platform.request("la_ien"))
+        self.submodules.la = LogicAnalyzer(platform.request("la"))
+        # self.submodules.la_ien = GPIOOut(platform.request("la_ien"))
 
         # Add the user's input control
         self.submodules.mprj_wb_iena = GPIOOut(platform.request("mprj_wb_iena"))
@@ -118,8 +118,7 @@ class MGMTSoC(SoCMini):
 
         # Add 6 IRQ lines
         # self.submodules.gpio = GPIOIn(platform.request("IRQ"), with_irq=True)
-        irq = platform.request("irq")
-        self.cpu.interrupt.eq(irq)
+        self.cpu.interrupt.eq(platform.request("irq"))
 
 
 def main():
