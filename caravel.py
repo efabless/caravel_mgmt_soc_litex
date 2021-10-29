@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-# This file is Copyright (c) 2019 Sean Cross <sean@xobs.io>
-# This file is Copyright (c) 2018 David Shah <dave@ds0.me>
+# Copyright (c) 2020 Antmicro <www.antmicro.com>
+# Copyright (c) 2020 Florent Kermarrec <florent@enjoy-digital.fr>
+# Copyright (c) 2021 Efabless <www.efaless.com>
 
-# License: BSD
-
+# SPDX-License-Identifier: BSD-2-Clause
 
 import argparse
 from os import path
@@ -19,11 +19,12 @@ from litex.soc.integration.soc import SoCRegion
 from litex.soc.integration.soc_core import *
 from litex.build.generic_platform import *
 from litex.soc.cores.uart import UARTWishboneBridge
-from litex.soc.cores.gpio import GPIOTristate
+from litex.soc.cores.gpio import *
+#from GPIOASIC import *
 from litex.soc.cores.spi import SPIMaster, SPISlave
 import litex.soc.doc as lxsocdoc
 
-from CaravelChip import Platform
+from CaravelMgmtSoC import Platform
 from OpenRAM import *
 
 # MGMTSoC
@@ -39,31 +40,22 @@ class MGMTSoC(SoCMini):
 
         platform = Platform("mgmt_soc")
 
-        kwargs["cpu_type"]="vexriscv"
-        kwargs["cpu_variant"] = "minimal+debug"
-        kwargs["integrated_sram_size"] = 0
-        kwargs["integrated_rom_size"]  = 0
-        kwargs["csr_data_width"] = 32
-        kwargs["cpu_reset_address"] = self.mem_map["spiflash"]
-        kwargs["uart_name"]   = "crossover"
-        kwargs["with_timer"]   = True
+        kwargs["cpu_type"]              ="vexriscv"
+        kwargs["cpu_variant"]           = "minimal+debug"
+        kwargs["integrated_sram_size"]  = 0
+        kwargs["integrated_rom_size"]   = 0
+        kwargs["csr_data_width"]        = 32
+        kwargs["cpu_reset_address"]     = self.mem_map["spiflash"]
+        kwargs["with_uart"]             = True
+        kwargs["with_timer"]            = True
         
 
         # CRG --------------------------------------------------------------------------------------
         self.submodules.crg = CRG(platform.request("sys_clk"), rst=platform.request("sys_rst"))
 
-        #print(kwargs)
         SoCMini.__init__(self, platform, clk_freq=sys_clk_freq, **kwargs)
 
         # Add a master SPI controller
-        platform.add_extension([
-                ("spi_master", 0,
-                    Subsignal("clk",  Pins(1)),
-                    Subsignal("cs_n", Pins(1)),
-                    Subsignal("mosi", Pins(1)),
-                    Subsignal("miso", Pins(1)),
-                )
-        ])
         self.submodules.spi_master = SPIMaster(
                 pads         = platform.request("spi_master"),
                 data_width   = 2,
@@ -71,18 +63,15 @@ class MGMTSoC(SoCMini):
                 spi_clk_freq = 1e5,
         )
 
-        # Add a GPIO Pin
-        platform.add_extension([("gpio", 0, Pins(1))])
-        self.submodules.gpio = GPIOTristate(platform.request("gpio"))
-        #self.add_csr("gpio")
-        
+        """
         # Add a master wb port for external masters
         wb_bus = wishbone.Interface()
         self.bus.add_master(master=wb_bus)
         platform.add_extension(wb_bus.get_ios("wb"))
         wb_pads = platform.request("wb")
         self.comb += wb_bus.connect_to_pads(wb_pads, mode="slave")
-        
+        """
+
         # Add a wb port for external slaves
         wb_bus = wishbone.Interface()
         self.bus.add_slave(name="extern_slave", slave=wb_bus, region=SoCRegion(origin=0x30000000, size=8192))
@@ -106,10 +95,24 @@ class MGMTSoC(SoCMini):
             size   = 8*1024*1024,
             linker = True)
         )
-
-        self.submodules.uart_bridge = UARTWishboneBridge(platform.request("serial"), sys_clk_freq, baudrate=115200)
+        # Add Debug Interface (UART)
+        self.submodules.uart_bridge = UARTWishboneBridge(platform.request("serial_dbg"), sys_clk_freq, baudrate=115200)
         self.add_wb_master(self.uart_bridge.wishbone)
 
+        # Add a GPIO Pin
+        self.submodules.gpio = GPIOTristate(platform.request("gpio"))
+        # self.add_csr("gpio")
+
+        # Add the logic Analyzer
+        self.submodules.gpio = GPIOTristate(platform.request("la"))
+        self.submodules.gpio = GPIOOut(platform.request("la_ien"))
+
+        # Add the user's input control
+        self.submodules.gpio = GPIOOut(platform.request("mprj_wb_iena"))
+        self.submodules.gpio = GPIOOut(platform.request("user_irq_ena"))
+
+        # Add 6 IRQ lines
+        self.submodules.gpio = GPIOIn(platform.request("IRQ"), with_irq=True)
 
 def main():
     soc     = MGMTSoC()
