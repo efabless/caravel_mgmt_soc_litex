@@ -40,20 +40,20 @@ class MGMTSoC(SoCMini):
 
         platform = Platform("mgmt_soc")
 
-        kwargs["cpu_type"]              ="vexriscv"
-        kwargs["cpu_variant"]           = "minimal+debug"
-        kwargs["integrated_sram_size"]  = 0
-        kwargs["integrated_rom_size"]   = 0
-        kwargs["csr_data_width"]        = 32
-        kwargs["cpu_reset_address"]     = self.mem_map["spiflash"]
-        kwargs["with_uart"]             = True
-        kwargs["with_timer"]            = True
-        
-
         # CRG --------------------------------------------------------------------------------------
         self.submodules.crg = CRG(platform.request("sys_clk"), rst=platform.request("sys_rst"))
 
-        SoCMini.__init__(self, platform, clk_freq=sys_clk_freq, **kwargs)
+        SoCMini.__init__(self, platform,
+                         clk_freq=sys_clk_freq,
+                         cpu_type="vexriscv",
+                         cpu_variant="minimal+debug",
+                         cpu_reset_address=self.mem_map["spiflash"],
+                         csr_data_width=32,
+                         integrated_sram_size=0,
+                         integrated_rom_size=0,
+                         with_uart=True,
+                         with_timer=True,
+                         **kwargs)
 
         # Add a master SPI controller w/ a clock divider
         spi_master = SPIMaster(
@@ -107,16 +107,19 @@ class MGMTSoC(SoCMini):
         # self.add_csr("gpio")
 
         # Add the logic Analyzer
-        self.submodules.gpio = GPIOTristate(platform.request("la"))
-        self.submodules.gpio = GPIOOut(platform.request("la_ien"))
+        self.submodules.la = GPIOTristate(platform.request("la"))
+        self.submodules.la_ien = GPIOOut(platform.request("la_ien"))
 
         # Add the user's input control
-        self.submodules.gpio = GPIOOut(platform.request("mprj_wb_iena"))
-        self.submodules.gpio = GPIOOut(platform.request("user_irq_ena"))
+        self.submodules.mprj_wb_iena = GPIOOut(platform.request("mprj_wb_iena"))
+        self.add_csr("mprj_wb_iena")
+        self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
+        self.add_csr("user_irq_ena")
 
         # Add 6 IRQ lines
-        self.submodules.gpio = GPIOIn(platform.request("IRQ"), with_irq=True)
-
+        # self.submodules.gpio = GPIOIn(platform.request("IRQ"), with_irq=True)
+        irq = platform.request("irq")
+        self.cpu.interrupt.eq(irq)
 
 
 def main():

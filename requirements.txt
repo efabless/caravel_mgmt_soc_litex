@@ -1,0 +1,3 @@
+git+https://github.com/enjoy-digital/litex.git
+git+https://github.com/litex-hub/litespi.git
+git+https://github.com/litex-hub/pythondata-cpu-vexriscv.git

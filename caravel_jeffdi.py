@@ -23,7 +23,7 @@ from litex.soc.integration.soc_core import *
 from litex.soc.integration.builder import *
 from litex.soc.interconnect import wishbone
 
-from litex.soc.cores.gpio import GPIOTristate
+from litex.soc.cores.gpio import GPIOTristate, GPIOOut, GPIOIn
 from litex.soc.cores.spi import SPIMaster, SPISlave
 
 # from migen.genlib.resetsync import AsyncResetSynchronizer
@@ -68,6 +68,9 @@ _io = [
      Subsignal("cs_n", Pins("1")),
      Subsignal("clk", Pins("1")),
      Subsignal("dq", Pins("1 1 1 1")),
+     # Subsignal("dq_i", Pins("1 1 1 1")),
+     # Subsignal("dq_o", Pins("1 1 1 1")),
+     # Subsignal("dq_oe", Pins("1 1 1 1")),
      ),
 
     ("hkspi_sram", 0,
@@ -77,9 +80,14 @@ _io = [
      Subsignal("hkspi_sram_data", Pins("1 1 1 1")),
      ),
 
-    ("gpio", 0, Pins(32)),
+    ("gpio", 0,
+     Subsignal("o", Pins(1)),
+     Subsignal("i", Pins(1)),
+     Subsignal("oe", Pins(1)),
+     ),
 
-    ("user_irq", 0, Pins("1")),
+    ("irq", 0, Pins("1 1 1 1 1 1")),
+    ("user_irq_ena", 0, Pins("1 1 1")),
 
     ("trap", 0, Pins("1")),
 
@@ -174,12 +182,19 @@ class MgmtSoC(SoCMini):
         wb_pads = platform.request("wb")
         self.comb += wb_bus.connect_to_pads(wb_pads, mode="master")
 
+        # self.cpu.interrupt.eq(self.cpu.reset)
+        irq = platform.request("irq")
+        self.cpu.interrupt.eq(irq)
+
+        self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
+        self.add_csr("user_irq_ena")
+
         # # IRQs
-        for name, loc in sorted(self.irq.locs.items()):
-            module = getattr(self, name)
+        # for name, loc in sorted(self.irq.locs.items()):
+        #     module = getattr(self, name)
         #     platform.add_extension([("irq_"+name, 0, Pins(1))])
-            irq_pin = platform.request("irq_"+name)
-            self.comb += irq_pin.eq(module.ev.irq)
+        #     irq_pin = platform.request("irq_"+name)
+        #     self.comb += irq_pin.eq(module.ev.irq)
 
 # Build --------------------------------------------------------------------------------------------
 

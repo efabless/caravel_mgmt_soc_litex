@@ -68,15 +68,19 @@ _io = [
 
     # User's input control
     ("mprj_wb_iena", 0,
-     Subsignal("o", Pins(1)),
+     Pins(1)
+     # Subsignal("o", Pins(1)),
     ),
+
     ("user_irq_ena", 0,
-     Subsignal("o", Pins(3)),
+     Pins(3)
+     # Subsignal("o", Pins(3)),
     ),
 
      # 6 IRQ lines
-    ("IRQ", 0,
-     Subsignal("i", Pins(6)),
+    ("irq", 0,
+     Pins(6)
+     # Subsignal("i", Pins(6)),
     ),
 
 ]
