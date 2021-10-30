@@ -80,7 +80,7 @@ _io = [
     ),
 
      # 6 IRQ lines
-    ("irq", 0,
+    ("user_irq", 0,
      Pins(6)
      # Subsignal("i", Pins(6)),
     ),

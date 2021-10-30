@@ -113,13 +113,14 @@ class MGMTSoC(SoCMini):
 
         # Add the user's input control
         self.submodules.mprj_wb_iena = GPIOOut(platform.request("mprj_wb_iena"))
-        self.add_csr("mprj_wb_iena")
+        # self.add_csr("mprj_wb_iena")
         self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
-        self.add_csr("user_irq_ena")
+        # self.add_csr("user_irq_ena")
 
         # Add 6 IRQ lines
-        # self.submodules.gpio = GPIOIn(platform.request("IRQ"), with_irq=True)
-        self.cpu.interrupt.eq(platform.request("irq"))
+        self.submodules.user_irq = GPIOIn(platform.request("user_irq"), with_irq=True)
+        # self.cpu.interrupt.eq(platform.request("irq"))
+        self.irq.add("user_irq", use_loc_if_exists=True)
 
 
 def main():
