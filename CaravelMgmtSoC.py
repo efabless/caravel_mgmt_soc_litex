@@ -10,8 +10,8 @@ from litex.build.lattice import LatticePlatform
 
 # IOs ----------------------------------------------------------------------------------------------
 _io = [
-    ("sys_clk", 0, Pins(1)),
-    ("sys_rst", 0, Pins(1)),
+    ("core_clk", 0, Pins(1)),
+    ("core_rst", 0, Pins(1)),
         # Serial
  
     ("serial_dbg", 0,
@@ -35,10 +35,11 @@ _io = [
         Subsignal("hold", Pins("1")),
     ),
     # QSPI mode
-    ("spiflash4x", 0,
-        Subsignal("cs_n", Pins("1")),
-        Subsignal("clk",  Pins("1")),
-        Subsignal("dq",   Pins("1 1 1 1")),
+    # ("spiflash4x", 0,
+    ("flash4x", 0,
+        Subsignal("cs_n", Pins(1)),
+        Subsignal("clk",  Pins(1)),
+        Subsignal("dq",   Pins(4)),
     ),
 
     # SPI master Controller
@@ -51,9 +52,12 @@ _io = [
 
     # GPIO Pin
     ("gpio", 0,
-        Subsignal("o",  Pins(1)),
-        Subsignal("i", Pins(1)),
-        Subsignal("oe", Pins(1)),
+        Subsignal("out_pad",  Pins(1)),
+        Subsignal("in_pad", Pins(1)),
+        Subsignal("outenb_pad", Pins(1)),
+        Subsignal("inenb_pad", Pins(1)),
+        Subsignal("mode0_pad", Pins(1)),
+        Subsignal("mode1_pad", Pins(1)),
     ),
 
     # Logic Analyzer

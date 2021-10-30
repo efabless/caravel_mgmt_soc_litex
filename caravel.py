@@ -20,7 +20,7 @@ from litex.soc.integration.soc_core import *
 from litex.build.generic_platform import *
 from litex.soc.cores.uart import UARTWishboneBridge
 from litex.soc.cores.gpio import *
-from GPIOASIC import LogicAnalyzer
+from GPIOASIC import *
 from litex.soc.cores.spi import SPIMaster, SPISlave
 import litex.soc.doc as lxsocdoc
 
@@ -41,7 +41,7 @@ class MGMTSoC(SoCMini):
         platform = Platform("mgmt_soc")
 
         # CRG --------------------------------------------------------------------------------------
-        self.submodules.crg = CRG(platform.request("sys_clk"), rst=platform.request("sys_rst"))
+        self.submodules.crg = CRG(platform.request("core_clk"), rst=platform.request("core_rst"))
 
         SoCMini.__init__(self, platform,
                          clk_freq=sys_clk_freq,
@@ -90,7 +90,7 @@ class MGMTSoC(SoCMini):
         # SPI Flash --------------------------------------------------------------------------------
         from litespi.modules import W25Q128JV
         from litespi.opcodes import SpiNorFlashOpCodes as Codes
-        self.add_spi_flash(mode="4x", module=W25Q128JV(Codes.READ_1_1_4), with_master=False)
+        self.add_spi_flash(name="flash", mode="4x", module=W25Q128JV(Codes.READ_1_1_4), with_master=False)
 
         # Add ROM linker region --------------------------------------------------------------------
         self.bus.add_region("rom", SoCRegion(
@@ -103,7 +103,8 @@ class MGMTSoC(SoCMini):
         self.add_wb_master(self.uart_bridge.wishbone)
 
         # Add a GPIO Pin
-        self.submodules.gpio = GPIOTristate(platform.request("gpio"))
+        # self.submodules.gpio = GPIOTristate(platform.request("gpio"))
+        self.submodules.gpio = GPIOASIC(platform.request("gpio"))
         # self.add_csr("gpio")
 
         # Add the logic Analyzer
