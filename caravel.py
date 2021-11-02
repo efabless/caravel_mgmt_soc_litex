@@ -118,9 +118,9 @@ class MGMTSoC(SoCMini):
         # self.add_csr("user_irq_ena")
 
         # Add 6 IRQ lines
-        self.submodules.user_irq = GPIOIn(platform.request("user_irq"), with_irq=True)
-        # self.cpu.interrupt.eq(platform.request("irq"))
-        self.irq.add("user_irq", use_loc_if_exists=True)
+        for i in range(len(platform.request("user_irq"))):
+            setattr(self.submodules,"user_irq_"+str(i),GPIOIn(user_irq[i], with_irq=True))
+            self.irq.add("user_irq_"+str(i), use_loc_if_exists=True)
 
 
 def main():
