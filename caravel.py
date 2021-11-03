@@ -30,8 +30,8 @@ from OpenRAM import *
 # MGMTSoC
 class MGMTSoC(SoCMini):
     SoCMini.mem_map = {
-        "sram":             0x10000000,
-        "spiflash":         0x20000000,
+        "sram":             0x20000000,
+        "spiflash":         0x00000000,
         "csr":              0xf0000000,
         "vexriscv_debug":   0xf00f0000,
     }
@@ -74,23 +74,26 @@ class MGMTSoC(SoCMini):
         wb_pads = platform.request("wb")
         self.comb += wb_bus.connect_to_pads(wb_pads, mode="slave")
         """
-
+        """
         # Add a wb port for external slaves
         wb_bus = wishbone.Interface()
         self.bus.add_slave(name="extern_slave", slave=wb_bus, region=SoCRegion(origin=0x30000000, size=8192))
         platform.add_extension(wb_bus.get_ios("wb"))
         wb_pads = platform.request("wb")
         self.comb += wb_bus.connect_to_pads(wb_pads, mode="master")
-
+        
         #Use OpenRAM
         spram_size = 2 * 1024
         self.submodules.spram = OpenRAM(size=spram_size)
         self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
+        """
 
         # SPI Flash --------------------------------------------------------------------------------
         from litespi.modules import W25Q128JV
         from litespi.opcodes import SpiNorFlashOpCodes as Codes
-        self.add_spi_flash(name="flash", mode="4x", module=W25Q128JV(Codes.READ_1_1_4), with_master=False)
+        #self.add_spi_flash(name="flash", mode="1x", module=W25Q128JV(Codes.READ_1_1_4), with_master=False)
+        self.add_spi_flash(name="spiflash", mode="1x", module=W25Q128JV(Codes.READ_1_1_1), with_master=False)
+
 
         # Add ROM linker region --------------------------------------------------------------------
         self.bus.add_region("rom", SoCRegion(
@@ -118,9 +121,9 @@ class MGMTSoC(SoCMini):
         # self.add_csr("user_irq_ena")
 
         # Add 6 IRQ lines
-        for i in range(len(platform.request("user_irq"))):
-            setattr(self.submodules,"user_irq_"+str(i),GPIOIn(user_irq[i], with_irq=True))
-            self.irq.add("user_irq_"+str(i), use_loc_if_exists=True)
+        #for i in range(len(platform.request("user_irq"))):
+        #    setattr(self.submodules,"user_irq_"+str(i),GPIOIn(user_irq[i], with_irq=True))
+        #    self.irq.add("user_irq_"+str(i), use_loc_if_exists=True)
 
 
 def main():
