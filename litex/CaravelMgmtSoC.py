@@ -10,8 +10,11 @@ from litex.build.lattice import LatticePlatform
 
 # IOs ----------------------------------------------------------------------------------------------
 _io = [
-    ("core_clk", 0, Pins(1)),
-    ("core_rst", 0, Pins(1)),
+    # ("core_clk", 0, Pins(1)),
+    # ("core_rst", 0, Pins(1)),
+    ("sys_clk", 0, Pins(1)),
+    ("sys_rst", 0, Pins(1)),
+
         # Serial
  
     ("serial_dbg", 0,

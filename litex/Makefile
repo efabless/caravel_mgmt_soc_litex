@@ -14,22 +14,13 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+all: mgmt_soc
 
-sim: test.hex
-	#iverilog -pfileline=1 -o test.vvp *.v
-	iverilog -o test.vvp *.v
-	vvp test.vvp
+mgmt_soc: caravel.py
+	python3 caravel.py
+	cp build/CaravelMgmtSoC/gateware/mgmt_soc.v ../sim/.
 
-test.elf: test.c start.s link.ld
-	riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,link.ld,--strip-debug -ffreestanding -nostdlib -o $@ test.c start.s
-
-test.bin: test.elf
-	riscv64-unknown-elf-objcopy -O binary $<  $@
-
-test.hex: test.elf
-	riscv64-unknown-elf-objcopy -O verilog $<  $@
-
-clean:
-	rm -f *.elf *.hex *.bin *.vvp *.vcd *.log
+setup:
+	pip install -r requirements.txt
 
 .PHONY: clean hex all

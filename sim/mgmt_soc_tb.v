@@ -1,7 +1,9 @@
 `timescale 1 ns / 1 ps
 module mgmt_soc_tb;
-    reg core_clk;
-	reg core_rst;
+    //reg core_clk;
+    reg sys_clk;
+	//reg core_rst;
+	reg sys_rst;
 	reg serial_rx;
 	wire serial_tx;
 	wire spi_master_clk;
@@ -30,37 +32,40 @@ module mgmt_soc_tb;
 	output wire [2:0] user_irq_ena;
 
     // The Clock
-    initial core_clk <= 0;
-    always #50 core_clk <= (core_clk === 1'b0);     // 10MHz Clock
+    initial sys_clk <= 0;
+    always #50 sys_clk <= (sys_clk === 1'b0);     // 10MHz Clock
 
     // PoR
     initial begin
-        core_rst <= 1'b0;
+        sys_rst <= 1'b0;
         #500;
-        core_rst <= 1'b1;
+        sys_rst <= 1'b1;
 		#5000;
-		core_rst <= 1'b0;
+		sys_rst <= 1'b0;
 	end
 
     initial begin
 		$dumpfile("mgmt_soc_tb.vcd");
 		$dumpvars(0, mgmt_soc_tb);
-/*
+
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
 		repeat (25) begin
-			repeat (1000) @(posedge core_clk);
+			repeat (1000) @(posedge sys_clk);
 			$display("+1000 cycles");
 		end
 		$display("%c[1;31m",27);
 		$display ("Monitor: Timeout, Test Failed");
-		$display("%c[0m",27);*/
-		#12_000;
+		$display("%c[0m",27);
+
+//		#10_250;
 		$finish;
 	end
 
     top muv (
-        .core_clk(core_clk),
-        .core_rst(core_rst),
+        //.core_clk(core_clk),
+        .sys_clk(sys_clk),
+        //.core_rst(core_rst),
+        .sys_rst(sys_rst),
         /*
         reg serial_rx,
         wire serial_tx,

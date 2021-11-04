@@ -41,8 +41,8 @@ class MGMTSoC(SoCMini):
         platform = Platform("mgmt_soc")
 
         # CRG --------------------------------------------------------------------------------------
-        self.submodules.crg = CRG(platform.request("core_clk"), rst=platform.request("core_rst"))
-
+        self.submodules.crg = CRG(platform.request("sys_clk"), rst=platform.request("sys_rst"))
+        """
         SoCMini.__init__(self, platform,
                          clk_freq=sys_clk_freq,
                          cpu_type="vexriscv",
@@ -54,26 +54,33 @@ class MGMTSoC(SoCMini):
                          with_uart=True,
                          with_timer=True,
                          **kwargs)
+        """
 
+        SoCMini.__init__(self, platform,
+                         clk_freq=sys_clk_freq,
+                         cpu_type="picorv32",
+                         cpu_variant="minimal",
+                         cpu_reset_address=self.mem_map["spiflash"],
+                         csr_data_width=32,
+                         integrated_sram_size=0,
+                         integrated_rom_size=0,
+                         with_uart=True,
+                         with_timer=True,
+                         **kwargs)
+
+        '''
         # Add a master SPI controller w/ a clock divider
         spi_master = SPIMaster(
             pads=platform.request("spi_master"),
-            data_width=2,
+            data_width=8,
             sys_clk_freq=sys_clk_freq,
             spi_clk_freq=1e5,
         )
         spi_master.add_clk_divider()
         self.submodules.spi_master = spi_master
         #self.add_interrupt(interrupt_name="spi_master")
+        '''
 
-        """
-        # Add a master wb port for external masters
-        wb_bus = wishbone.Interface()
-        self.bus.add_master(master=wb_bus)
-        platform.add_extension(wb_bus.get_ios("wb"))
-        wb_pads = platform.request("wb")
-        self.comb += wb_bus.connect_to_pads(wb_pads, mode="slave")
-        """
         """
         # Add a wb port for external slaves
         wb_bus = wishbone.Interface()
@@ -92,7 +99,8 @@ class MGMTSoC(SoCMini):
         from litespi.modules import W25Q128JV
         from litespi.opcodes import SpiNorFlashOpCodes as Codes
         #self.add_spi_flash(name="flash", mode="1x", module=W25Q128JV(Codes.READ_1_1_4), with_master=False)
-        self.add_spi_flash(name="spiflash", mode="1x", module=W25Q128JV(Codes.READ_1_1_1), with_master=False)
+        # self.add_spi_flash(name="spiflash", mode="1x", module=W25Q128JV(Codes.READ_1_1_1), with_master=False)
+        self.add_spi_flash(name="spiflash", mode="1x", module=W25Q128JV(Codes.READ_1_1_1), with_master=True)
 
 
         # Add ROM linker region --------------------------------------------------------------------
@@ -120,10 +128,13 @@ class MGMTSoC(SoCMini):
         self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
         # self.add_csr("user_irq_ena")
 
+        '''
         # Add 6 IRQ lines
-        #for i in range(len(platform.request("user_irq"))):
-        #    setattr(self.submodules,"user_irq_"+str(i),GPIOIn(user_irq[i], with_irq=True))
-        #    self.irq.add("user_irq_"+str(i), use_loc_if_exists=True)
+        user_irq = platform.request("user_irq")
+        for i in range(len(user_irq)):
+            setattr(self.submodules,"user_irq_"+str(i),GPIOIn(user_irq[i], with_irq=True))
+            self.irq.add("user_irq_"+str(i), use_loc_if_exists=True)
+        '''
 
 
 def main():

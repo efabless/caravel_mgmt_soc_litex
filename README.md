@@ -2,10 +2,19 @@
 
 To install litex library dependencies
 ```
-pip install -r requirements.txt
+cd litex
+make setup
 ```
 To build the caravel mgmt soc
 
 ```
-python3 caravel.py
+cd litex
+make
+```
+
+To simulate
+
+```
+cd sim
+make clean sim
 ```
