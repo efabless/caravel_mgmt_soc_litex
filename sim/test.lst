@@ -1,0 +1,264 @@
+
+test.elf:     file format elf32-littleriscv
+
+
+Disassembly of section .text:
+
+00000000 <start>:
+   0:	00000093          	li	ra,0
+   4:	00000193          	li	gp,0
+   8:	00000213          	li	tp,0
+   c:	00000293          	li	t0,0
+  10:	00000313          	li	t1,0
+  14:	00000393          	li	t2,0
+  18:	00000413          	li	s0,0
+  1c:	00000493          	li	s1,0
+  20:	00000513          	li	a0,0
+  24:	00000593          	li	a1,0
+  28:	00000613          	li	a2,0
+  2c:	00000693          	li	a3,0
+  30:	00000713          	li	a4,0
+  34:	00000793          	li	a5,0
+  38:	00000813          	li	a6,0
+  3c:	00000893          	li	a7,0
+  40:	00000913          	li	s2,0
+  44:	00000993          	li	s3,0
+  48:	00000a13          	li	s4,0
+  4c:	00000a93          	li	s5,0
+  50:	00000b13          	li	s6,0
+  54:	00000b93          	li	s7,0
+  58:	00000c13          	li	s8,0
+  5c:	00000c93          	li	s9,0
+  60:	00000d13          	li	s10,0
+  64:	00000d93          	li	s11,0
+  68:	00000e13          	li	t3,0
+  6c:	00000e93          	li	t4,0
+  70:	00000f13          	li	t5,0
+  74:	00000f93          	li	t6,0
+  78:	00000517          	auipc	a0,0x0
+  7c:	28c50513          	addi	a0,a0,652 # 304 <_etext>
+  80:	20000597          	auipc	a1,0x20000
+  84:	f8058593          	addi	a1,a1,-128 # 20000000 <_ebss>
+  88:	20000617          	auipc	a2,0x20000
+  8c:	f7860613          	addi	a2,a2,-136 # 20000000 <_ebss>
+  90:	00c5dc63          	bge	a1,a2,a8 <end_init_data>
+
+00000094 <loop_init_data>:
+  94:	00052683          	lw	a3,0(a0)
+  98:	00d5a023          	sw	a3,0(a1)
+  9c:	00450513          	addi	a0,a0,4
+  a0:	00458593          	addi	a1,a1,4
+  a4:	fec5c8e3          	blt	a1,a2,94 <loop_init_data>
+
+000000a8 <end_init_data>:
+  a8:	20000517          	auipc	a0,0x20000
+  ac:	f5850513          	addi	a0,a0,-168 # 20000000 <_ebss>
+  b0:	20000597          	auipc	a1,0x20000
+  b4:	f5058593          	addi	a1,a1,-176 # 20000000 <_ebss>
+  b8:	00b55863          	bge	a0,a1,c8 <end_init_bss>
+
+000000bc <loop_init_bss>:
+  bc:	00052023          	sw	zero,0(a0)
+  c0:	00450513          	addi	a0,a0,4
+  c4:	feb54ce3          	blt	a0,a1,bc <loop_init_bss>
+
+000000c8 <end_init_bss>:
+  c8:	1c4000ef          	jal	ra,28c <main>
+
+000000cc <loop>:
+  cc:	0000006f          	j	cc <loop>
+
+000000d0 <flashio_worker_begin>:
+  d0:	280002b7          	lui	t0,0x28000
+  d4:	12000313          	li	t1,288
+  d8:	00629023          	sh	t1,0(t0) # 28000000 <_ebss+0x8000000>
+  dc:	000281a3          	sb	zero,3(t0)
+  e0:	02060863          	beqz	a2,110 <flashio_worker_L1>
+  e4:	00800f13          	li	t5,8
+  e8:	0ff67393          	zext.b	t2,a2
+
+000000ec <flashio_worker_L4>:
+  ec:	0073de93          	srli	t4,t2,0x7
+  f0:	01d28023          	sb	t4,0(t0)
+  f4:	010eee93          	ori	t4,t4,16
+  f8:	01d28023          	sb	t4,0(t0)
+  fc:	00139393          	slli	t2,t2,0x1
+ 100:	0ff3f393          	zext.b	t2,t2
+ 104:	ffff0f13          	addi	t5,t5,-1
+ 108:	fe0f12e3          	bnez	t5,ec <flashio_worker_L4>
+ 10c:	00628023          	sb	t1,0(t0)
+
+00000110 <flashio_worker_L1>:
+ 110:	06058063          	beqz	a1,170 <flashio_worker_L3>
+ 114:	02000f13          	li	t5,32
+ 118:	00052383          	lw	t2,0(a0)
+
+0000011c <flashio_worker_LY>:
+ 11c:	00800f93          	li	t6,8
+
+00000120 <flashio_worker_L2>:
+ 120:	01f3de93          	srli	t4,t2,0x1f
+ 124:	01d28023          	sb	t4,0(t0)
+ 128:	010eee93          	ori	t4,t4,16
+ 12c:	01d28023          	sb	t4,0(t0)
+ 130:	0002ce83          	lbu	t4,0(t0)
+ 134:	002efe93          	andi	t4,t4,2
+ 138:	001ede93          	srli	t4,t4,0x1
+ 13c:	00139393          	slli	t2,t2,0x1
+ 140:	01d3e3b3          	or	t2,t2,t4
+ 144:	ffff0f13          	addi	t5,t5,-1
+ 148:	000f1863          	bnez	t5,158 <flashio_worker_LX>
+ 14c:	00752023          	sw	t2,0(a0)
+ 150:	00450513          	addi	a0,a0,4
+ 154:	00052383          	lw	t2,0(a0)
+
+00000158 <flashio_worker_LX>:
+ 158:	ffff8f93          	addi	t6,t6,-1
+ 15c:	fc0f92e3          	bnez	t6,120 <flashio_worker_L2>
+ 160:	fff58593          	addi	a1,a1,-1
+ 164:	fa059ce3          	bnez	a1,11c <flashio_worker_LY>
+ 168:	000f0463          	beqz	t5,170 <flashio_worker_L3>
+ 16c:	00752023          	sw	t2,0(a0)
+
+00000170 <flashio_worker_L3>:
+ 170:	08000313          	li	t1,128
+ 174:	006281a3          	sb	t1,3(t0)
+ 178:	00008067          	ret
+
+0000017c <csr_write_simple>:
+ 17c:	fe010113          	addi	sp,sp,-32
+ 180:	00812e23          	sw	s0,28(sp)
+ 184:	02010413          	addi	s0,sp,32
+ 188:	fea42623          	sw	a0,-20(s0)
+ 18c:	feb42423          	sw	a1,-24(s0)
+ 190:	fe842783          	lw	a5,-24(s0)
+ 194:	fec42703          	lw	a4,-20(s0)
+ 198:	00e7a023          	sw	a4,0(a5)
+ 19c:	00000013          	nop
+ 1a0:	01c12403          	lw	s0,28(sp)
+ 1a4:	02010113          	addi	sp,sp,32
+ 1a8:	00008067          	ret
+
+000001ac <gpio_mode1_write>:
+ 1ac:	fe010113          	addi	sp,sp,-32
+ 1b0:	00112e23          	sw	ra,28(sp)
+ 1b4:	00812c23          	sw	s0,24(sp)
+ 1b8:	02010413          	addi	s0,sp,32
+ 1bc:	fea42623          	sw	a0,-20(s0)
+ 1c0:	f00017b7          	lui	a5,0xf0001
+ 1c4:	80078593          	addi	a1,a5,-2048 # f0000800 <_ebss+0xd0000800>
+ 1c8:	fec42503          	lw	a0,-20(s0)
+ 1cc:	fb1ff0ef          	jal	ra,17c <csr_write_simple>
+ 1d0:	00000013          	nop
+ 1d4:	01c12083          	lw	ra,28(sp)
+ 1d8:	01812403          	lw	s0,24(sp)
+ 1dc:	02010113          	addi	sp,sp,32
+ 1e0:	00008067          	ret
+
+000001e4 <gpio_mode0_write>:
+ 1e4:	fe010113          	addi	sp,sp,-32
+ 1e8:	00112e23          	sw	ra,28(sp)
+ 1ec:	00812c23          	sw	s0,24(sp)
+ 1f0:	02010413          	addi	s0,sp,32
+ 1f4:	fea42623          	sw	a0,-20(s0)
+ 1f8:	f00017b7          	lui	a5,0xf0001
+ 1fc:	80478593          	addi	a1,a5,-2044 # f0000804 <_ebss+0xd0000804>
+ 200:	fec42503          	lw	a0,-20(s0)
+ 204:	f79ff0ef          	jal	ra,17c <csr_write_simple>
+ 208:	00000013          	nop
+ 20c:	01c12083          	lw	ra,28(sp)
+ 210:	01812403          	lw	s0,24(sp)
+ 214:	02010113          	addi	sp,sp,32
+ 218:	00008067          	ret
+
+0000021c <gpio_ien_write>:
+ 21c:	fe010113          	addi	sp,sp,-32
+ 220:	00112e23          	sw	ra,28(sp)
+ 224:	00812c23          	sw	s0,24(sp)
+ 228:	02010413          	addi	s0,sp,32
+ 22c:	fea42623          	sw	a0,-20(s0)
+ 230:	f00017b7          	lui	a5,0xf0001
+ 234:	80878593          	addi	a1,a5,-2040 # f0000808 <_ebss+0xd0000808>
+ 238:	fec42503          	lw	a0,-20(s0)
+ 23c:	f41ff0ef          	jal	ra,17c <csr_write_simple>
+ 240:	00000013          	nop
+ 244:	01c12083          	lw	ra,28(sp)
+ 248:	01812403          	lw	s0,24(sp)
+ 24c:	02010113          	addi	sp,sp,32
+ 250:	00008067          	ret
+
+00000254 <gpio_oe_write>:
+ 254:	fe010113          	addi	sp,sp,-32
+ 258:	00112e23          	sw	ra,28(sp)
+ 25c:	00812c23          	sw	s0,24(sp)
+ 260:	02010413          	addi	s0,sp,32
+ 264:	fea42623          	sw	a0,-20(s0)
+ 268:	f00017b7          	lui	a5,0xf0001
+ 26c:	80c78593          	addi	a1,a5,-2036 # f000080c <_ebss+0xd000080c>
+ 270:	fec42503          	lw	a0,-20(s0)
+ 274:	f09ff0ef          	jal	ra,17c <csr_write_simple>
+ 278:	00000013          	nop
+ 27c:	01c12083          	lw	ra,28(sp)
+ 280:	01812403          	lw	s0,24(sp)
+ 284:	02010113          	addi	sp,sp,32
+ 288:	00008067          	ret
+
+0000028c <main>:
+ 28c:	ff010113          	addi	sp,sp,-16
+ 290:	00112623          	sw	ra,12(sp)
+ 294:	00812423          	sw	s0,8(sp)
+ 298:	01010413          	addi	s0,sp,16
+ 29c:	00100513          	li	a0,1
+ 2a0:	f7dff0ef          	jal	ra,21c <gpio_ien_write>
+ 2a4:	00100513          	li	a0,1
+ 2a8:	f3dff0ef          	jal	ra,1e4 <gpio_mode0_write>
+ 2ac:	00100513          	li	a0,1
+ 2b0:	efdff0ef          	jal	ra,1ac <gpio_mode1_write>
+ 2b4:	00100513          	li	a0,1
+ 2b8:	f65ff0ef          	jal	ra,21c <gpio_ien_write>
+ 2bc:	00100513          	li	a0,1
+ 2c0:	f95ff0ef          	jal	ra,254 <gpio_oe_write>
+ 2c4:	00000513          	li	a0,0
+ 2c8:	f55ff0ef          	jal	ra,21c <gpio_ien_write>
+ 2cc:	00000513          	li	a0,0
+ 2d0:	f15ff0ef          	jal	ra,1e4 <gpio_mode0_write>
+ 2d4:	00000513          	li	a0,0
+ 2d8:	ed5ff0ef          	jal	ra,1ac <gpio_mode1_write>
+ 2dc:	00000513          	li	a0,0
+ 2e0:	f3dff0ef          	jal	ra,21c <gpio_ien_write>
+ 2e4:	00000513          	li	a0,0
+ 2e8:	f6dff0ef          	jal	ra,254 <gpio_oe_write>
+ 2ec:	00000013          	nop
+ 2f0:	00078513          	mv	a0,a5
+ 2f4:	00c12083          	lw	ra,12(sp)
+ 2f8:	00812403          	lw	s0,8(sp)
+ 2fc:	01010113          	addi	sp,sp,16
+ 300:	00008067          	ret
+
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1b41                	addi	s6,s6,-16
+   2:	0000                	unimp
+   4:	7200                	flw	fs0,32(a2)
+   6:	7369                	lui	t1,0xffffa
+   8:	01007663          	bgeu	zero,a6,14 <start+0x14>
+   c:	0011                	c.nop	4
+   e:	0000                	unimp
+  10:	1004                	addi	s1,sp,32
+  12:	7205                	lui	tp,0xfffe1
+  14:	3376                	fld	ft6,376(sp)
+  16:	6932                	flw	fs2,12(sp)
+  18:	7032                	flw	ft0,44(sp)
+  1a:	0030                	addi	a2,sp,8
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347          	fmsub.d	ft6,ft6,ft4,ft7,rmm
+   4:	2820                	fld	fs0,80(s0)
+   6:	29554e47          	fmsub.s	ft8,fa0,fs5,ft5,rmm
+   a:	3120                	fld	fs0,96(a0)
+   c:	2e31                	jal	328 <_etext+0x24>
+   e:	2e31                	jal	32a <_etext+0x26>
+  10:	0030                	addi	a2,sp,8

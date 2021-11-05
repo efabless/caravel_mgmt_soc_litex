@@ -16,6 +16,8 @@
 
 VERILATOR_DIR=/usr/local/Cellar/verilator/4.200_1/share/verilator/include
 
+
+
 sim: test.hex
 	#iverilog -pfileline=1 -o test.vvp *.v
 	iverilog -o test.vvp *.v
@@ -33,13 +35,14 @@ sim_cvc: test.hex mgmt_soc.v mgmt_soc_tb.v
 	
 
 test.elf: test.c start.s link.ld
-	riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,link.ld,--strip-debug -ffreestanding -nostdlib -o $@ test.c start.s
+	riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,link.ld,--strip-debug -ffreestanding -nostdlib -o $@  start.s test.c
 
 test.bin: test.elf
 	riscv64-unknown-elf-objcopy -O binary $<  $@
 
 test.hex: test.elf
 	riscv64-unknown-elf-objcopy -O verilog $<  $@
+	riscv64-unknown-elf-objdump -D $< > test.lst
 
 clean:
 	rm -f *.elf *.hex *.bin *.vvp *.vcd *.log
