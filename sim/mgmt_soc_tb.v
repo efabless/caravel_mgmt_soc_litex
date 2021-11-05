@@ -4,20 +4,23 @@ module mgmt_soc_tb;
     reg sys_clk;
 	//reg core_rst;
 	reg sys_rst;
+	/*
 	reg serial_rx;
 	wire serial_tx;
 	wire spi_master_clk;
 	wire spi_master_cs_n;
 	wire spi_master_mosi;
-	reg spi_master_miso;
+	wire spi_master_miso;
+	*/
 	wire spiflash_cs_n;
 	wire spiflash_clk;
 	wire spiflash_miso;
-	wire reg spiflash_mosi;
+	wire spiflash_mosi;
 	//input wire spiflash_wp,
 	//input wire spiflash_hold,
 	reg serial_dbg_rx;
 	wire serial_dbg_tx;
+	/*
 	output wire gpio_out_pad;
 	reg gpio_in_pad;
 	output wire gpio_outenb_pad;
@@ -30,7 +33,7 @@ module mgmt_soc_tb;
 	wire [127:0] la_iena;
 	output wire mprj_wb_iena;
 	output wire [2:0] user_irq_ena;
-
+*/
     // The Clock
     initial sys_clk <= 0;
     always #50 sys_clk <= (sys_clk === 1'b0);     // 10MHz Clock
@@ -81,7 +84,8 @@ module mgmt_soc_tb;
         .serial_dbg_rx(1'b0),
         .serial_dbg_tx(),
         .spiflash_wp(),
-        .spiflash_hold(),
+        .spiflash_hold()
+		/*
         output wire gpio_out_pad,
         reg gpio_in_pad,
         output wire gpio_outenb_pad,
@@ -94,6 +98,7 @@ module mgmt_soc_tb;
         wire [127:0] la_iena,
         output wire mprj_wb_iena,
         output wire [2:0] user_irq_ena
+		*/
     );
 
     spiflash #(

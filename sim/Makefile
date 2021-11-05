@@ -27,6 +27,10 @@ sim2: test.hex mgmt_soc.v mgmt_soc_tb.v
 	make -C obj_dir/ -f Vtop.mk
 	g++ -I obj_dir -I$(VERILATOR_DIR) testbench.cpp $(VERILATOR_DIR)/verilated.cpp $(VERILATOR_DIR)/verilated_vcd_c.cpp obj_dir/Vtop__ALL.a -Wc++11-extensions -o testbench
 
+sim_cvc: test.hex mgmt_soc.v mgmt_soc_tb.v
+	# run this first before using the target:  docker run --rm -it -v $(pwd):/data cvc
+	
+
 test.elf: test.c start.s link.ld
 	riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,link.ld,--strip-debug -ffreestanding -nostdlib -o $@ test.c start.s
 

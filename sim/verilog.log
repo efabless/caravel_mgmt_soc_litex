@@ -1,0 +1,63 @@
+OSS_CVC_7.00b-x86_64-rhel6x of 07/07/14 (Linux-elf).
+Copyright (c) 1991-2014 Tachyon Design Automation Corp.
+  All Rights reserved.  Licensed software subject to prohibitions and
+  restrictions.  See OSS CVC artistic license included with release.
+Today is Fri Nov  5 18:21:11 2021.
+Elaborating source file "VexRiscv.v"
+Elaborating source file "mgmt_soc.v"
+Elaborating source file "mgmt_soc_tb.v"
+Elaborating source file "picorv32.v"
+**picorv32.v(35) WARN** [640] `debug macro definition formal argument x (no. 0) not used in macro body
+**picorv32.v(35) WARN** [638] argument macro `debug expands to nothing - use `undef
+**picorv32.v(47) WARN** [640] `assert macro definition formal argument x (no. 0) not used in macro body
+**picorv32.v(47) WARN** [638] argument macro `assert expands to nothing - use `undef
+Elaborating source file "spiflash.v"
+**mgmt_soc.v(4381) WARN** [531] picorv32(picorv32) explicit connection list fewer ports 25 connected than type's 27
+**mgmt_soc_tb.v(69) WARN** [531] muv(top) explicit connection list fewer ports 10 connected than type's 24
+**picorv32.v(2670) WARN** [531] picorv32_core(picorv32) explicit connection list fewer ports 22 connected than type's 27
+**picorv32.v(2934) WARN** [531] picorv32_core(picorv32) explicit connection list fewer ports 22 connected than type's 27
+**spiflash.v(107) WARN** [620] array memory has 16777216 cells - standard only requires maximum of 16777215
+Highest level modules:
+VexRiscv
+mgmt_soc_tb
+picorv32_regs
+picorv32_pcpi_mul
+picorv32_pcpi_fast_mul
+picorv32_pcpi_div
+picorv32_axi
+picorv32_wb
+**mgmt_soc.v(4385) WARN** [602] picorv32(picorv32$$1) input port pcpi_rd (line **picorv32.v(115)) width 32 mismatch with 1'd0 width 1
+
+Reading test.hex
+test.hex loaded into memory
+Memory 5 bytes = 0x13 0x01 0x01 0xfe 0x23
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
++1000 cycles
+ [1;31m
+Monitor: Timeout, Test Failed
+ [0m
+Halted at location **mgmt_soc_tb.v(64) time 2499950000 ps from call to $finish.
+  There were 0 error(s), 10 warning(s), and 1711 inform(s).
