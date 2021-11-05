@@ -79,9 +79,7 @@ module mgmt_soc_tb;
         .spiflash_miso(spiflash_miso),
         .spiflash_mosi(spiflash_mosi),
         .serial_dbg_rx(1'b0),
-        .serial_dbg_tx()
-
-        /*
+        .serial_dbg_tx(),
         .spiflash_wp(),
         .spiflash_hold(),
         output wire gpio_out_pad,
@@ -96,7 +94,6 @@ module mgmt_soc_tb;
         wire [127:0] la_iena,
         output wire mprj_wb_iena,
         output wire [2:0] user_irq_ena
-        */
     );
 
     spiflash #(

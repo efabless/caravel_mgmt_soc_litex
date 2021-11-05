@@ -144,6 +144,11 @@ def main():
 
     lxsocdoc.generate_docs(soc, "build/documentation/", project_name="Caravel Management SoC", author="Efabless")
 
+    from migen.sim import Simulator, TopLevel
+    from migen.sim.vcd import TopLevel
+    sim = Simulator(soc, TopLevel("ledblinker.vcd"))
+    sim.run(200)
+
 
 if __name__ == "__main__":
     main()

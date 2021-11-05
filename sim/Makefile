@@ -14,11 +14,18 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+VERILATOR_DIR=/usr/local/Cellar/verilator/4.200_1/share/verilator/include
 
 sim: test.hex
 	#iverilog -pfileline=1 -o test.vvp *.v
 	iverilog -o test.vvp *.v
 	vvp test.vvp
+
+sim2: test.hex mgmt_soc.v mgmt_soc_tb.v
+	#verilator --trace --top mgmt_soc_tb --timescale '1 ns / 1 ps' -cc *.v
+	verilator --trace --top top --timescale '1 ns / 1 ps' -Wno-COMBDLY -Wno-WIDTH -Wno-CASEINCOMPLETE -Wno-PINMISSING -cc mgmt_soc.v picorv32.v
+	make -C obj_dir/ -f Vtop.mk
+	g++ -I obj_dir -I$(VERILATOR_DIR) testbench.cpp $(VERILATOR_DIR)/verilated.cpp $(VERILATOR_DIR)/verilated_vcd_c.cpp obj_dir/Vtop__ALL.a -Wc++11-extensions -o testbench
 
 test.elf: test.c start.s link.ld
 	riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,link.ld,--strip-debug -ffreestanding -nostdlib -o $@ test.c start.s
