@@ -29,6 +29,7 @@ sim2: test.hex mgmt_soc.v mgmt_soc_tb.v
 
 sim_cvc: test.hex mgmt_soc.v mgmt_soc_tb.v
 	# run this first before using the target:  docker run --rm -it -v $(pwd):/data cvc
+	cvc64 +interp *.v
 	
 
 test.elf: test.c start.s link.ld
