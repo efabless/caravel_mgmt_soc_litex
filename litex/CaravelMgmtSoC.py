@@ -115,7 +115,9 @@ class Platform(GenericPlatform):
     # def build(self, *args, **kwargs):
     #     return self.toolchain.build(self, *args, **kwargs)
 
+    """
     def get_verilog(self, fragment, **kwargs):
         return verilog.convert(fragment, platform=self, regular_comb=False, **kwargs)
+    """
 
 
