@@ -18,18 +18,18 @@ module mgmt_soc_tb;
 	wire spiflash_wp;
 	wire spiflash_hold;
 	
-	wire serial_dbg_rx;
+	wire serial_dbg_rx = 1'b0;
 	wire serial_dbg_tx;
 	
 	wire gpio_out_pad;
-	reg gpio_in_pad;
+	wire gpio_in_pad;
 	wire gpio_outenb_pad;
 	wire gpio_inenb_pad;
 	wire gpio_mode0_pad;
 	wire gpio_mode1_pad;
 	
 	wire [127:0] la_output;
-	reg [127:0] la_input;
+	wire [127:0] la_input;
 	wire [127:0] la_oenb;
 	wire [127:0] la_iena;
 	wire mprj_wb_iena;
@@ -57,10 +57,7 @@ module mgmt_soc_tb;
 			repeat (1000) @(posedge sys_clk);
 			$display("+1000 cycles");
 		end
-		$display("%c[1;31m",27);
 		$display ("Monitor: Timeout, Test Failed");
-		$display("%c[0m",27);
-	
 		$finish;
 	end
 
@@ -77,7 +74,7 @@ module mgmt_soc_tb;
         .spiflash_clk(spiflash_clk),
         .spiflash_miso(spiflash_miso),
         .spiflash_mosi(spiflash_mosi),
-        .serial_dbg_rx(1'b0),
+        .serial_dbg_rx(serial_dbg_rx),
         .serial_dbg_tx(),
         .spiflash_wp(),
         .spiflash_hold(),
