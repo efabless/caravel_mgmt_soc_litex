@@ -68,7 +68,6 @@ class MGMTSoC(SoCMini):
                          with_timer=True,
                          **kwargs)
 
-        '''
         # Add a master SPI controller w/ a clock divider
         spi_master = SPIMaster(
             pads=platform.request("spi_master"),
@@ -79,7 +78,6 @@ class MGMTSoC(SoCMini):
         spi_master.add_clk_divider()
         self.submodules.spi_master = spi_master
         #self.add_interrupt(interrupt_name="spi_master")
-        '''
 
         """
         # Add a wb port for external slaves
@@ -88,12 +86,12 @@ class MGMTSoC(SoCMini):
         platform.add_extension(wb_bus.get_ios("wb"))
         wb_pads = platform.request("wb")
         self.comb += wb_bus.connect_to_pads(wb_pads, mode="master")
-        
+        """
+
         #Use OpenRAM
         spram_size = 2 * 1024
         self.submodules.spram = OpenRAM(size=spram_size)
         self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
-        """
 
         # SPI Flash --------------------------------------------------------------------------------
         from litespi.modules import W25Q128JV
@@ -128,13 +126,11 @@ class MGMTSoC(SoCMini):
         self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
         # self.add_csr("user_irq_ena")
 
-        '''
         # Add 6 IRQ lines
         user_irq = platform.request("user_irq")
         for i in range(len(user_irq)):
             setattr(self.submodules,"user_irq_"+str(i),GPIOIn(user_irq[i], with_irq=True))
             self.irq.add("user_irq_"+str(i), use_loc_if_exists=True)
-        '''
 
 
 def main():
@@ -144,10 +140,10 @@ def main():
 
     lxsocdoc.generate_docs(soc, "build/documentation/", project_name="Caravel Management SoC", author="Efabless")
 
-    from migen.sim import Simulator, TopLevel
-    from migen.sim.vcd import TopLevel
-    sim = Simulator(soc, TopLevel("ledblinker.vcd"))
-    sim.run(200)
+    # from migen.sim import Simulator, TopLevel
+    # from migen.sim.vcd import TopLevel
+    # sim = Simulator(soc, TopLevel("ledblinker.vcd"))
+    # sim.run(200)
 
 
 if __name__ == "__main__":
