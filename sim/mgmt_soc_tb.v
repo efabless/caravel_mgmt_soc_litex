@@ -1,35 +1,39 @@
 `timescale 1 ns / 1 ps
 module mgmt_soc_tb;
-    //reg core_clk;
     reg sys_clk;
-	//reg core_rst;
 	reg sys_rst;
-	reg serial_rx;
+
+	wire serial_rx;
 	wire serial_tx;
+	
 	wire spi_master_clk;
 	wire spi_master_cs_n;
 	wire spi_master_mosi;
 	wire spi_master_miso;
+	
 	wire spiflash_cs_n;
 	wire spiflash_clk;
 	wire spiflash_miso;
 	wire spiflash_mosi;
-	//input wire spiflash_wp,
-	//input wire spiflash_hold,
-	reg serial_dbg_rx;
+	wire spiflash_wp;
+	wire spiflash_hold;
+	
+	wire serial_dbg_rx;
 	wire serial_dbg_tx;
-	output wire gpio_out_pad;
+	
+	wire gpio_out_pad;
 	reg gpio_in_pad;
-	output wire gpio_outenb_pad;
-	output wire gpio_inenb_pad;
-	output wire gpio_mode0_pad;
-	output wire gpio_mode1_pad;
+	wire gpio_outenb_pad;
+	wire gpio_inenb_pad;
+	wire gpio_mode0_pad;
+	wire gpio_mode1_pad;
+	
 	wire [127:0] la_output;
 	reg [127:0] la_input;
 	wire [127:0] la_oenb;
 	wire [127:0] la_iena;
-	output wire mprj_wb_iena;
-	output wire [2:0] user_irq_ena;
+	wire mprj_wb_iena;
+	wire [2:0] user_irq_ena;
 
     // The Clock
     initial sys_clk <= 0;
@@ -56,15 +60,12 @@ module mgmt_soc_tb;
 		$display("%c[1;31m",27);
 		$display ("Monitor: Timeout, Test Failed");
 		$display("%c[0m",27);
-
-//		#10_250;
+	
 		$finish;
 	end
 
     top muv (
-        //.core_clk(core_clk),
         .sys_clk(sys_clk),
-        //.core_rst(core_rst),
         .sys_rst(sys_rst),
         .serial_rx(serial_rx),
         .serial_tx(serial_tx),
