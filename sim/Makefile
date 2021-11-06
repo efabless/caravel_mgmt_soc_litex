@@ -35,7 +35,7 @@ sim_cvc: test.hex mgmt_soc.v mgmt_soc_tb.v
 	
 
 test.elf: test.c start.s link.ld
-	riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,link.ld,--strip-debug -ffreestanding -nostdlib -o $@  start.s test.c
+	riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,link.ld,--strip-debug -ffreestanding -nostdlib -mstrict-align -o $@  start.s test.c
 
 test.bin: test.elf
 	riscv64-unknown-elf-objcopy -O binary $<  $@

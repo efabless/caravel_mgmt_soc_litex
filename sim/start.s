@@ -84,6 +84,8 @@ call main
 loop:
 j loop
 
+.balign 4
+
 .global flashio_worker_begin
 .global flashio_worker_end
 

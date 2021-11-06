@@ -3,6 +3,8 @@
 // Word size: 32
 // Write size: 8
 
+`define NODBG
+
 module sram_1rw1r_32_256_8_sky130(
 // Port 0: RW
     clk0,csb0,web0,wmask0,addr0,din0,dout0,
@@ -45,10 +47,12 @@ module sram_1rw1r_32_256_8_sky130(
     addr0_reg = addr0;
     din0_reg = din0;
     dout0 = 32'bx;
+`ifdef DBG
     if ( !csb0_reg && web0_reg ) 
       $display($time," Reading %m addr0=%b dout0=%b",addr0_reg,mem[addr0_reg]);
     if ( !csb0_reg && !web0_reg )
       $display($time," Writing %m addr0=%b din0=%b wmask0=%b",addr0_reg,din0_reg,wmask0_reg);
+`endif
   end
 
   reg  csb1_reg;
@@ -60,11 +64,15 @@ module sram_1rw1r_32_256_8_sky130(
   begin
     csb1_reg = csb1;
     addr1_reg = addr1;
+`ifdef DBG
     if (!csb0 && !web0 && !csb1 && (addr0 == addr1))
          $display($time," WARNING: Writing and reading addr0=%b and addr1=%b simultaneously!",addr0,addr1);
+`endif
     dout1 = 32'bx;
+`ifdef DBG
     if ( !csb1_reg ) 
       $display($time," Reading %m addr1=%b dout1=%b",addr1_reg,mem[addr1_reg]);
+`endif
   end
 
 reg [DATA_WIDTH-1:0]    mem [0:RAM_DEPTH-1];
