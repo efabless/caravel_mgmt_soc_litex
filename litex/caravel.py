@@ -64,10 +64,11 @@ class MGMTSoC(SoCMini):
                          csr_data_width=32,
                          integrated_sram_size=0,
                          integrated_rom_size=0,
-                         with_uart=True,
-                         with_timer=True,
+                         # with_uart=True,
+                         # with_timer=True,
                          **kwargs)
 
+        """
         # Add a master SPI controller w/ a clock divider
         spi_master = SPIMaster(
             pads=platform.request("spi_master"),
@@ -78,6 +79,7 @@ class MGMTSoC(SoCMini):
         spi_master.add_clk_divider()
         self.submodules.spi_master = spi_master
         #self.add_interrupt(interrupt_name="spi_master")
+        """
 
         """
         # Add a wb port for external slaves
@@ -108,8 +110,8 @@ class MGMTSoC(SoCMini):
             linker = True)
         )
         # Add Debug Interface (UART)
-        self.submodules.uart_bridge = UARTWishboneBridge(platform.request("serial_dbg"), sys_clk_freq, baudrate=115200)
-        self.add_wb_master(self.uart_bridge.wishbone)
+        # self.submodules.uart_bridge = UARTWishboneBridge(platform.request("serial_dbg"), sys_clk_freq, baudrate=115200)
+        # self.add_wb_master(self.uart_bridge.wishbone)
 
         # Add a GPIO Pin
         # self.submodules.gpio = GPIOTristate(platform.request("gpio"))
@@ -117,7 +119,7 @@ class MGMTSoC(SoCMini):
         # self.add_csr("gpio")
 
         # Add the logic Analyzer
-        self.submodules.la = LogicAnalyzer(platform.request("la"))
+        # self.submodules.la = LogicAnalyzer(platform.request("la"))
         # self.submodules.la_ien = GPIOOut(platform.request("la_ien"))
 
         # Add the user's input control

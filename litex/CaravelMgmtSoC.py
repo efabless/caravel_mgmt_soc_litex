@@ -115,9 +115,35 @@ class Platform(GenericPlatform):
     # def build(self, *args, **kwargs):
     #     return self.toolchain.build(self, *args, **kwargs)
 
-    """
     def get_verilog(self, fragment, **kwargs):
         return verilog.convert(fragment, platform=self, regular_comb=False, **kwargs)
-    """
 
+    def _new_print_combinatorial_logic_sim(f, ns):
+        r = ""
+        if f.comb:
+            from collections import defaultdict
 
+            target_stmt_map = defaultdict(list)
+
+            for statement in verilog.flat_iteration(f.comb):
+                targets = verilog.list_targets(statement)
+                for t in targets:
+                    target_stmt_map[t].append(statement)
+
+            groups = verilog.group_by_targets(f.comb)
+
+            for n, (t, stmts) in enumerate(target_stmt_map.items()):
+                assert isinstance(t, Signal)
+                if len(stmts) == 1 and isinstance(stmts[0], verilog._Assign):
+                    r += "assign " + verilog._print_node(ns, verilog._AT_BLOCKING, 0, stmts[0])
+                else:
+                    r += "always @(*) begin\n"
+                    # r += "\t" + ns.get_name(t) + " <= " + _print_expression(ns, t.reset)[0] + ";\n"
+                    # r += _print_node(ns, _AT_NONBLOCKING, 1, stmts, t)
+                    r += "\t" + ns.get_name(t) + " = " + verilog._print_expression(ns, t.reset)[0] + ";\n"
+                    r += verilog._print_node(ns, verilog._AT_BLOCKING, 1, stmts, t)
+                    r += "end\n"
+        r += "\n"
+        return r
+
+    verilog._print_combinatorial_logic_sim = _new_print_combinatorial_logic_sim
