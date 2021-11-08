@@ -1,19 +1,19 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Mon Nov  8 00:41:31 2021
+[*] Mon Nov  8 05:45:34 2021
 [*]
 [dumpfile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/sim/mgmt_soc_tb.vcd"
-[dumpfile_mtime] "Sun Nov  7 23:52:17 2021"
-[dumpfile_size] 10360149
+[dumpfile_mtime] "Mon Nov  8 05:44:58 2021"
+[dumpfile_size] 6005665
 [savefile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/sim/mgmt_soc_tb.vcd.gtkw"
-[timestart] 902220000
+[timestart] 930320000
 [size] 2067 1410
 [pos] -1 -1
-*-23.000000 4983310000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-23.000000 965680000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] mgmt_soc_tb.
 [treeopen] mgmt_soc_tb.muv.
-[sst_width] 370
-[signals_width] 202
+[sst_width] 241
+[signals_width] 264
 [sst_expanded] 1
 [sst_vpaned_height] 608
 @200
@@ -108,17 +108,18 @@ mgmt_soc_tb.muv.picorv32.dbg_reg_x12[31:0]
 mgmt_soc_tb.muv.picorv32.dbg_reg_x13[31:0]
 mgmt_soc_tb.muv.picorv32.dbg_reg_x14[31:0]
 mgmt_soc_tb.muv.picorv32.dbg_reg_x15[31:0]
-@23
 mgmt_soc_tb.muv.picorv32.dbg_reg_x16[31:0]
 @200
 -
 -GPIO
 @28
 mgmt_soc_tb.gpio_in_pad
+mgmt_soc_tb.gpio_out_pad
 mgmt_soc_tb.gpio_inenb_pad
+@29
+mgmt_soc_tb.gpio_outenb_pad
+@28
 mgmt_soc_tb.gpio_mode0_pad
 mgmt_soc_tb.gpio_mode1_pad
-mgmt_soc_tb.gpio_out_pad
-mgmt_soc_tb.gpio_outenb_pad
 [pattern_trace] 1
 [pattern_trace] 0

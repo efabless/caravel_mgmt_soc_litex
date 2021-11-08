@@ -7,23 +7,23 @@ Register Listing for USER_IRQ_2
 +------------------------------------------------------+-------------------------------------------+
 | Register                                             | Address                                   |
 +======================================================+===========================================+
-| :ref:`USER_IRQ_2_IN <USER_IRQ_2_IN>`                 | :ref:`0x82005800 <USER_IRQ_2_IN>`         |
+| :ref:`USER_IRQ_2_IN <USER_IRQ_2_IN>`                 | :ref:`0x82003800 <USER_IRQ_2_IN>`         |
 +------------------------------------------------------+-------------------------------------------+
-| :ref:`USER_IRQ_2_MODE <USER_IRQ_2_MODE>`             | :ref:`0x82005804 <USER_IRQ_2_MODE>`       |
+| :ref:`USER_IRQ_2_MODE <USER_IRQ_2_MODE>`             | :ref:`0x82003804 <USER_IRQ_2_MODE>`       |
 +------------------------------------------------------+-------------------------------------------+
-| :ref:`USER_IRQ_2_EDGE <USER_IRQ_2_EDGE>`             | :ref:`0x82005808 <USER_IRQ_2_EDGE>`       |
+| :ref:`USER_IRQ_2_EDGE <USER_IRQ_2_EDGE>`             | :ref:`0x82003808 <USER_IRQ_2_EDGE>`       |
 +------------------------------------------------------+-------------------------------------------+
-| :ref:`USER_IRQ_2_EV_STATUS <USER_IRQ_2_EV_STATUS>`   | :ref:`0x8200580c <USER_IRQ_2_EV_STATUS>`  |
+| :ref:`USER_IRQ_2_EV_STATUS <USER_IRQ_2_EV_STATUS>`   | :ref:`0x8200380c <USER_IRQ_2_EV_STATUS>`  |
 +------------------------------------------------------+-------------------------------------------+
-| :ref:`USER_IRQ_2_EV_PENDING <USER_IRQ_2_EV_PENDING>` | :ref:`0x82005810 <USER_IRQ_2_EV_PENDING>` |
+| :ref:`USER_IRQ_2_EV_PENDING <USER_IRQ_2_EV_PENDING>` | :ref:`0x82003810 <USER_IRQ_2_EV_PENDING>` |
 +------------------------------------------------------+-------------------------------------------+
-| :ref:`USER_IRQ_2_EV_ENABLE <USER_IRQ_2_EV_ENABLE>`   | :ref:`0x82005814 <USER_IRQ_2_EV_ENABLE>`  |
+| :ref:`USER_IRQ_2_EV_ENABLE <USER_IRQ_2_EV_ENABLE>`   | :ref:`0x82003814 <USER_IRQ_2_EV_ENABLE>`  |
 +------------------------------------------------------+-------------------------------------------+
 
 USER_IRQ_2_IN
 ^^^^^^^^^^^^^
 
-`Address: 0x82005800 + 0x0 = 0x82005800`
+`Address: 0x82003800 + 0x0 = 0x82003800`
 
     GPIO Input(s) Status.
 
@@ -41,7 +41,7 @@ USER_IRQ_2_IN
 USER_IRQ_2_MODE
 ^^^^^^^^^^^^^^^
 
-`Address: 0x82005800 + 0x4 = 0x82005804`
+`Address: 0x82003800 + 0x4 = 0x82003804`
 
     GPIO IRQ Mode: 0: Edge, 1: Change.
 
@@ -59,7 +59,7 @@ USER_IRQ_2_MODE
 USER_IRQ_2_EDGE
 ^^^^^^^^^^^^^^^
 
-`Address: 0x82005800 + 0x8 = 0x82005808`
+`Address: 0x82003800 + 0x8 = 0x82003808`
 
     GPIO IRQ Edge (when in Edge mode): 0: Rising Edge, 1: Falling Edge.
 
@@ -77,7 +77,7 @@ USER_IRQ_2_EDGE
 USER_IRQ_2_EV_STATUS
 ^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82005800 + 0xc = 0x8200580c`
+`Address: 0x82003800 + 0xc = 0x8200380c`
 
     This register contains the current raw level of the i0 event trigger.  Writes to
     this register have no effect.
@@ -102,7 +102,7 @@ USER_IRQ_2_EV_STATUS
 USER_IRQ_2_EV_PENDING
 ^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82005800 + 0x10 = 0x82005810`
+`Address: 0x82003800 + 0x10 = 0x82003810`
 
     When a  i0 event occurs, the corresponding bit will be set in this register.  To
     clear the Event, set the corresponding bit in this register.
@@ -127,7 +127,7 @@ USER_IRQ_2_EV_PENDING
 USER_IRQ_2_EV_ENABLE
 ^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82005800 + 0x14 = 0x82005814`
+`Address: 0x82003800 + 0x14 = 0x82003814`
 
     This register enables the corresponding i0 events.  Write a ``0`` to this
     register to disable individual events.

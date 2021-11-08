@@ -20,13 +20,9 @@ Register Groups
 
     ctrl
     gpio
-    la
     mprj_wb_iena
-    spi_master
     spiflash_core
     spiflash_phy
-    timer0
-    uart
     user_irq_0
     user_irq_1
     user_irq_2

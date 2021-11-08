@@ -7,21 +7,21 @@ Register Listing for SPIFLASH_CORE
 +------------------------------------------------------------------------+----------------------------------------------------+
 | Register                                                               | Address                                            |
 +========================================================================+====================================================+
-| :ref:`SPIFLASH_CORE_MMAP_DUMMY_BITS <SPIFLASH_CORE_MMAP_DUMMY_BITS>`   | :ref:`0x82002800 <SPIFLASH_CORE_MMAP_DUMMY_BITS>`  |
+| :ref:`SPIFLASH_CORE_MMAP_DUMMY_BITS <SPIFLASH_CORE_MMAP_DUMMY_BITS>`   | :ref:`0x82001800 <SPIFLASH_CORE_MMAP_DUMMY_BITS>`  |
 +------------------------------------------------------------------------+----------------------------------------------------+
-| :ref:`SPIFLASH_CORE_MASTER_CS <SPIFLASH_CORE_MASTER_CS>`               | :ref:`0x82002804 <SPIFLASH_CORE_MASTER_CS>`        |
+| :ref:`SPIFLASH_CORE_MASTER_CS <SPIFLASH_CORE_MASTER_CS>`               | :ref:`0x82001804 <SPIFLASH_CORE_MASTER_CS>`        |
 +------------------------------------------------------------------------+----------------------------------------------------+
-| :ref:`SPIFLASH_CORE_MASTER_PHYCONFIG <SPIFLASH_CORE_MASTER_PHYCONFIG>` | :ref:`0x82002808 <SPIFLASH_CORE_MASTER_PHYCONFIG>` |
+| :ref:`SPIFLASH_CORE_MASTER_PHYCONFIG <SPIFLASH_CORE_MASTER_PHYCONFIG>` | :ref:`0x82001808 <SPIFLASH_CORE_MASTER_PHYCONFIG>` |
 +------------------------------------------------------------------------+----------------------------------------------------+
-| :ref:`SPIFLASH_CORE_MASTER_RXTX <SPIFLASH_CORE_MASTER_RXTX>`           | :ref:`0x8200280c <SPIFLASH_CORE_MASTER_RXTX>`      |
+| :ref:`SPIFLASH_CORE_MASTER_RXTX <SPIFLASH_CORE_MASTER_RXTX>`           | :ref:`0x8200180c <SPIFLASH_CORE_MASTER_RXTX>`      |
 +------------------------------------------------------------------------+----------------------------------------------------+
-| :ref:`SPIFLASH_CORE_MASTER_STATUS <SPIFLASH_CORE_MASTER_STATUS>`       | :ref:`0x82002810 <SPIFLASH_CORE_MASTER_STATUS>`    |
+| :ref:`SPIFLASH_CORE_MASTER_STATUS <SPIFLASH_CORE_MASTER_STATUS>`       | :ref:`0x82001810 <SPIFLASH_CORE_MASTER_STATUS>`    |
 +------------------------------------------------------------------------+----------------------------------------------------+
 
 SPIFLASH_CORE_MMAP_DUMMY_BITS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002800 + 0x0 = 0x82002800`
+`Address: 0x82001800 + 0x0 = 0x82001800`
 
 
     .. wavedrom::
@@ -38,7 +38,7 @@ SPIFLASH_CORE_MMAP_DUMMY_BITS
 SPIFLASH_CORE_MASTER_CS
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002800 + 0x4 = 0x82002804`
+`Address: 0x82001800 + 0x4 = 0x82001804`
 
 
     .. wavedrom::
@@ -55,7 +55,7 @@ SPIFLASH_CORE_MASTER_CS
 SPIFLASH_CORE_MASTER_PHYCONFIG
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002800 + 0x8 = 0x82002808`
+`Address: 0x82001800 + 0x8 = 0x82001808`
 
     SPI PHY settings.
 
@@ -87,7 +87,7 @@ SPIFLASH_CORE_MASTER_PHYCONFIG
 SPIFLASH_CORE_MASTER_RXTX
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002800 + 0xc = 0x8200280c`
+`Address: 0x82001800 + 0xc = 0x8200180c`
 
 
     .. wavedrom::
@@ -103,7 +103,7 @@ SPIFLASH_CORE_MASTER_RXTX
 SPIFLASH_CORE_MASTER_STATUS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002800 + 0x10 = 0x82002810`
+`Address: 0x82001800 + 0x10 = 0x82001810`
 
 
     .. wavedrom::

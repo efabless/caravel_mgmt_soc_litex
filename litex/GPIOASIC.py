@@ -19,8 +19,8 @@ class GPIOASIC(GPIOTristate):
         # # #
         # Tristate inout IOs (For external tristate IO chips or simulation).
         for i in range(nbits):
-            self.comb += pads.mode0_pad[i].eq(~self._mode0.storage[i])
-            self.comb += pads.mode1_pad[i].eq(~self._mode1.storage[i])
+            self.comb += pads.mode0_pad[i].eq(self._mode0.storage[i])
+            self.comb += pads.mode1_pad[i].eq(self._mode1.storage[i])
             self.comb += pads.inenb_pad[i].eq(~self._ien.storage[i])
             self.comb += pads.outenb_pad[i].eq(~self._oe.storage[i])
             self.comb += pads.out_pad[i].eq(self._out.storage[i])
