@@ -18,7 +18,14 @@
 MEMORY {
 	FLASH (rx)	: ORIGIN = 0x00000000, LENGTH = 0x400000 	/* 4MB */
 	RAM(xrw)	: ORIGIN = 0x20000000, LENGTH = 0x0400		/* 256 words (1 KB) */
+	csr         : ORIGIN = 0x82000000, LENGTH = 0x00010000
 }
+
+/*
+#	sram : ORIGIN = 0x20000000, LENGTH = 0x00000800
+#	spiflash : ORIGIN = 0x00000000, LENGTH = 0x01000000
+#	rom : ORIGIN = 0x00000000, LENGTH = 0x00800000
+*/
 
 SECTIONS {
 	/* The program code and other data goes into FLASH */

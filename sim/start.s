@@ -19,6 +19,7 @@ start:
 
 # zero-initialize register file
 addi x1, zero, 0
+addi x2, zero, 0
 # x2 (sp) is initialized by reset
 addi x3, zero, 0
 addi x4, zero, 0
@@ -78,6 +79,9 @@ sw zero, 0(a0)
 addi a0, a0, 4
 blt a0, a1, loop_init_bss
 end_init_bss:
+
+# setup stack pointer
+la sp, _fstack
 
 # call main
 call main

@@ -32,7 +32,8 @@ class MGMTSoC(SoCMini):
     SoCMini.mem_map = {
         "sram":             0x20000000,
         "spiflash":         0x00000000,
-        "csr":              0xf0000000,
+        # "csr":              0xf0000000,
+        "csr":              0x82000000,
         "vexriscv_debug":   0xf00f0000,
     }
 

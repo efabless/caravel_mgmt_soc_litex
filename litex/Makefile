@@ -19,6 +19,7 @@ all: mgmt_soc
 mgmt_soc: caravel.py
 	python3 caravel.py
 	cp build/CaravelMgmtSoC/gateware/mgmt_soc.v ../sim/.
+	cp -R build/CaravelMgmtSoC/software/include/generated ../sim/.
 
 setup:
 	pip install -r requirements.txt
