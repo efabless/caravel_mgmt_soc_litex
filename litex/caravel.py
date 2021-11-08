@@ -30,10 +30,10 @@ from OpenRAM import *
 # MGMTSoC
 class MGMTSoC(SoCMini):
     SoCMini.mem_map = {
-        "sram":             0x20000000,
+        "sram":             0x10000000,
         "spiflash":         0x00000000,
-        # "csr":              0xf0000000,
-        "csr":              0x82000000,
+        "csr":              0xf0000000,
+        # "csr":              0x82000000,
         "vexriscv_debug":   0xf00f0000,
     }
 
@@ -43,20 +43,20 @@ class MGMTSoC(SoCMini):
 
         # CRG --------------------------------------------------------------------------------------
         self.submodules.crg = CRG(platform.request("sys_clk"), rst=platform.request("sys_rst"))
-        """
+
         SoCMini.__init__(self, platform,
                          clk_freq=sys_clk_freq,
                          cpu_type="vexriscv",
-                         cpu_variant="minimal+debug",
+                         # cpu_variant="minimal+debug",
+                         cpu_variant="minimal",
                          cpu_reset_address=self.mem_map["spiflash"],
                          csr_data_width=32,
                          integrated_sram_size=0,
                          integrated_rom_size=0,
-                         with_uart=True,
-                         with_timer=True,
+                         # with_uart=True,
+                         # with_timer=True,
                          **kwargs)
         """
-
         SoCMini.__init__(self, platform,
                          clk_freq=sys_clk_freq,
                          cpu_type="picorv32",
@@ -69,6 +69,7 @@ class MGMTSoC(SoCMini):
                          # with_timer=True,
                          **kwargs)
 
+        """
         """
         # Add a master SPI controller w/ a clock divider
         spi_master = SPIMaster(

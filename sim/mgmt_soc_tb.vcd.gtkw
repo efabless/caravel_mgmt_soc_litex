@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Mon Nov  8 05:45:34 2021
+[*] Mon Nov  8 06:04:15 2021
 [*]
 [dumpfile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/sim/mgmt_soc_tb.vcd"
-[dumpfile_mtime] "Mon Nov  8 05:44:58 2021"
+[dumpfile_mtime] "Mon Nov  8 06:03:31 2021"
 [dumpfile_size] 6005665
 [savefile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/sim/mgmt_soc_tb.vcd.gtkw"
-[timestart] 930320000
+[timestart] 933770000
 [size] 2067 1410
 [pos] -1 -1
-*-23.000000 965680000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-24.000000 965680000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] mgmt_soc_tb.
 [treeopen] mgmt_soc_tb.muv.
 [sst_width] 241

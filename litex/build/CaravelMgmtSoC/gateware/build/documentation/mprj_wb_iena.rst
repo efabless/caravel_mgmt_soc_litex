@@ -7,13 +7,13 @@ Register Listing for MPRJ_WB_IENA
 +--------------------------------------------+--------------------------------------+
 | Register                                   | Address                              |
 +============================================+======================================+
-| :ref:`MPRJ_WB_IENA_OUT <MPRJ_WB_IENA_OUT>` | :ref:`0x82001000 <MPRJ_WB_IENA_OUT>` |
+| :ref:`MPRJ_WB_IENA_OUT <MPRJ_WB_IENA_OUT>` | :ref:`0xf0001000 <MPRJ_WB_IENA_OUT>` |
 +--------------------------------------------+--------------------------------------+
 
 MPRJ_WB_IENA_OUT
 ^^^^^^^^^^^^^^^^
 
-`Address: 0x82001000 + 0x0 = 0x82001000`
+`Address: 0xf0001000 + 0x0 = 0xf0001000`
 
     GPIO Output(s) Control.
 

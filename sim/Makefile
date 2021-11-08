@@ -34,7 +34,7 @@ sim_cvc: test.hex mgmt_soc.v mgmt_soc_tb.v
 	
 
 test.elf: test.c start.s link.ld
-	riscv64-unknown-elf-gcc -O0 -I generated -I . -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,linker.ld,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__picorv32__ -o $@  crt0.S isr.c test.c
+	riscv64-unknown-elf-gcc -O0 -I generated -I . -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,linker.ld,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__vexriscv__ -o $@  crt0.S isr.c test.c
 	#riscv64-unknown-elf-gcc -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,link.ld,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__picorv32__ -o $@  start.s test.c
 
 test.bin: test.elf

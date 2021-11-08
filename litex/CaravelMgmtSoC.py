@@ -101,7 +101,8 @@ class Platform(GenericPlatform):
     def build(self, fragment, build_dir, **kwargs):
         os.makedirs(build_dir, exist_ok=True)
         os.chdir(build_dir)
-        top_output = self.get_verilog(fragment)
+        # top_output = self.get_verilog(fragment)
+        top_output = self.get_verilog(fragment, regular_comb=False) # forces sim vs synth for combinatorial logic
         top_output.write("mgmt_soc.v")
 
     # def get_verilog(self, *args, special_overrides=dict(), **kwargs):
@@ -115,8 +116,8 @@ class Platform(GenericPlatform):
     # def build(self, *args, **kwargs):
     #     return self.toolchain.build(self, *args, **kwargs)
 
-    def get_verilog(self, fragment, **kwargs):
-        return verilog.convert(fragment, platform=self, regular_comb=False, **kwargs)
+    # def get_verilog(self, fragment, **kwargs):
+    #     return verilog.convert(fragment, platform=self, regular_comb=False, **kwargs)
 
     def _new_print_combinatorial_logic_sim(f, ns):
         r = ""

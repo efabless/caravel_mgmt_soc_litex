@@ -7,13 +7,13 @@ Register Listing for SPIFLASH_PHY
 +------------------------------------------------------------+----------------------------------------------+
 | Register                                                   | Address                                      |
 +============================================================+==============================================+
-| :ref:`SPIFLASH_PHY_CLK_DIVISOR <SPIFLASH_PHY_CLK_DIVISOR>` | :ref:`0x82002000 <SPIFLASH_PHY_CLK_DIVISOR>` |
+| :ref:`SPIFLASH_PHY_CLK_DIVISOR <SPIFLASH_PHY_CLK_DIVISOR>` | :ref:`0xf0002000 <SPIFLASH_PHY_CLK_DIVISOR>` |
 +------------------------------------------------------------+----------------------------------------------+
 
 SPIFLASH_PHY_CLK_DIVISOR
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002000 + 0x0 = 0x82002000`
+`Address: 0xf0002000 + 0x0 = 0xf0002000`
 
 
     .. wavedrom::

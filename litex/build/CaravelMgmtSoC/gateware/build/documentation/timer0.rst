@@ -43,27 +43,27 @@ Register Listing for TIMER0
 +--------------------------------------------------+-----------------------------------------+
 | Register                                         | Address                                 |
 +==================================================+=========================================+
-| :ref:`TIMER0_LOAD <TIMER0_LOAD>`                 | :ref:`0x82003800 <TIMER0_LOAD>`         |
+| :ref:`TIMER0_LOAD <TIMER0_LOAD>`                 | :ref:`0xf0002800 <TIMER0_LOAD>`         |
 +--------------------------------------------------+-----------------------------------------+
-| :ref:`TIMER0_RELOAD <TIMER0_RELOAD>`             | :ref:`0x82003804 <TIMER0_RELOAD>`       |
+| :ref:`TIMER0_RELOAD <TIMER0_RELOAD>`             | :ref:`0xf0002804 <TIMER0_RELOAD>`       |
 +--------------------------------------------------+-----------------------------------------+
-| :ref:`TIMER0_EN <TIMER0_EN>`                     | :ref:`0x82003808 <TIMER0_EN>`           |
+| :ref:`TIMER0_EN <TIMER0_EN>`                     | :ref:`0xf0002808 <TIMER0_EN>`           |
 +--------------------------------------------------+-----------------------------------------+
-| :ref:`TIMER0_UPDATE_VALUE <TIMER0_UPDATE_VALUE>` | :ref:`0x8200380c <TIMER0_UPDATE_VALUE>` |
+| :ref:`TIMER0_UPDATE_VALUE <TIMER0_UPDATE_VALUE>` | :ref:`0xf000280c <TIMER0_UPDATE_VALUE>` |
 +--------------------------------------------------+-----------------------------------------+
-| :ref:`TIMER0_VALUE <TIMER0_VALUE>`               | :ref:`0x82003810 <TIMER0_VALUE>`        |
+| :ref:`TIMER0_VALUE <TIMER0_VALUE>`               | :ref:`0xf0002810 <TIMER0_VALUE>`        |
 +--------------------------------------------------+-----------------------------------------+
-| :ref:`TIMER0_EV_STATUS <TIMER0_EV_STATUS>`       | :ref:`0x82003814 <TIMER0_EV_STATUS>`    |
+| :ref:`TIMER0_EV_STATUS <TIMER0_EV_STATUS>`       | :ref:`0xf0002814 <TIMER0_EV_STATUS>`    |
 +--------------------------------------------------+-----------------------------------------+
-| :ref:`TIMER0_EV_PENDING <TIMER0_EV_PENDING>`     | :ref:`0x82003818 <TIMER0_EV_PENDING>`   |
+| :ref:`TIMER0_EV_PENDING <TIMER0_EV_PENDING>`     | :ref:`0xf0002818 <TIMER0_EV_PENDING>`   |
 +--------------------------------------------------+-----------------------------------------+
-| :ref:`TIMER0_EV_ENABLE <TIMER0_EV_ENABLE>`       | :ref:`0x8200381c <TIMER0_EV_ENABLE>`    |
+| :ref:`TIMER0_EV_ENABLE <TIMER0_EV_ENABLE>`       | :ref:`0xf000281c <TIMER0_EV_ENABLE>`    |
 +--------------------------------------------------+-----------------------------------------+
 
 TIMER0_LOAD
 ^^^^^^^^^^^
 
-`Address: 0x82003800 + 0x0 = 0x82003800`
+`Address: 0xf0002800 + 0x0 = 0xf0002800`
 
     Load value when Timer is (re-)enabled. In One-Shot mode, the value written to
     this register specifies the Timer's duration in clock cycles.
@@ -81,7 +81,7 @@ TIMER0_LOAD
 TIMER0_RELOAD
 ^^^^^^^^^^^^^
 
-`Address: 0x82003800 + 0x4 = 0x82003804`
+`Address: 0xf0002800 + 0x4 = 0xf0002804`
 
     Reload value when Timer reaches ``0``. In Periodic mode, the value written to
     this register specify the Timer's period in clock cycles.
@@ -99,7 +99,7 @@ TIMER0_RELOAD
 TIMER0_EN
 ^^^^^^^^^
 
-`Address: 0x82003800 + 0x8 = 0x82003808`
+`Address: 0xf0002800 + 0x8 = 0xf0002808`
 
     Enable flag of the Timer. Set this flag to ``1`` to enable/start the Timer.  Set
     to ``0`` to disable the Timer.
@@ -118,7 +118,7 @@ TIMER0_EN
 TIMER0_UPDATE_VALUE
 ^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82003800 + 0xc = 0x8200380c`
+`Address: 0xf0002800 + 0xc = 0xf000280c`
 
     Update trigger for the current countdown value. A write to this register latches
     the current countdown value to ``value`` register.
@@ -137,7 +137,7 @@ TIMER0_UPDATE_VALUE
 TIMER0_VALUE
 ^^^^^^^^^^^^
 
-`Address: 0x82003800 + 0x10 = 0x82003810`
+`Address: 0xf0002800 + 0x10 = 0xf0002810`
 
     Latched countdown value. This value is updated by writing to ``update_value``.
 
@@ -154,7 +154,7 @@ TIMER0_VALUE
 TIMER0_EV_STATUS
 ^^^^^^^^^^^^^^^^
 
-`Address: 0x82003800 + 0x14 = 0x82003814`
+`Address: 0xf0002800 + 0x14 = 0xf0002814`
 
     This register contains the current raw level of the zero event trigger.  Writes
     to this register have no effect.
@@ -179,7 +179,7 @@ TIMER0_EV_STATUS
 TIMER0_EV_PENDING
 ^^^^^^^^^^^^^^^^^
 
-`Address: 0x82003800 + 0x18 = 0x82003818`
+`Address: 0xf0002800 + 0x18 = 0xf0002818`
 
     When a  zero event occurs, the corresponding bit will be set in this register.
     To clear the Event, set the corresponding bit in this register.
@@ -204,7 +204,7 @@ TIMER0_EV_PENDING
 TIMER0_EV_ENABLE
 ^^^^^^^^^^^^^^^^
 
-`Address: 0x82003800 + 0x1c = 0x8200381c`
+`Address: 0xf0002800 + 0x1c = 0xf000281c`
 
     This register enables the corresponding zero events.  Write a ``0`` to this
     register to disable individual events.
