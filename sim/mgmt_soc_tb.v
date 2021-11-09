@@ -64,7 +64,7 @@ module mgmt_soc_tb;
 		$finish;
 	end
 
-    top muv (
+    mgmt_core muv (
         .core_clk(core_clk),
         .core_rst(core_rst),
 //        .serial_rx(serial_rx),

@@ -1,14 +1,14 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Tue Nov  9 03:28:06 2021
+[*] Tue Nov  9 05:09:28 2021
 [*]
 [dumpfile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/sim/mgmt_soc_tb.vcd"
-[dumpfile_mtime] "Tue Nov  9 00:37:31 2021"
-[dumpfile_size] 5928050
+[dumpfile_mtime] "Tue Nov  9 04:58:45 2021"
+[dumpfile_size] 5948679
 [savefile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/sim/mgmt_soc_tb.vcd.gtkw"
-[timestart] 117450000
+[timestart] 743760000
 [size] 2288 1376
-[pos] -1 -33
+[pos] -145 154
 *-24.105719 1301120000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] mgmt_soc_tb.
 [treeopen] mgmt_soc_tb.muv.
@@ -55,19 +55,6 @@ mgmt_soc_tb.core_rst
 -
 -WB BUS
 @28
-mgmt_soc_tb.muv.bus_we
-@22
-mgmt_soc_tb.muv.bus_dat_w[31:0]
-mgmt_soc_tb.muv.bus_dat_r[31:0]
-mgmt_soc_tb.muv.bus_adr[29:0]
-@28
-mgmt_soc_tb.muv.bus_cyc
-mgmt_soc_tb.muv.bus_stb
-@22
-mgmt_soc_tb.muv.bus_sel[3:0]
-@28
-mgmt_soc_tb.muv.bus_ack
-mgmt_soc_tb.muv.bus_err
 mgmt_soc_tb.muv.picorv32.trap
 mgmt_soc_tb.muv.picorv32.resetn
 @200

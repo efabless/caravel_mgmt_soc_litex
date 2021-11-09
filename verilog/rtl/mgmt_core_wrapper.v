@@ -33,8 +33,8 @@
 /* Wrapper module around management SoC core for pin compatibility	*/
 /* with the Caravel harness chip.					*/
 
-`include "DFFRAM.v"
-`include "DFFRAMBB.v"
+//`include "DFFRAM.v"
+//`include "DFFRAMBB.v"
 `include "mgmt_core.v"
 
 module mgmt_core_wrapper (
@@ -140,11 +140,11 @@ module mgmt_core_wrapper (
 	    .vdd(VPWR),	    /* 1.8V domain */
 	    .vss(VGND),
 	`endif
-    	.clk(core_clk),
-    	.resetn(core_rstn),
+    	.core_clk(core_clk),
+    	.core_rst(~core_rstn),
 
     	// Trap state from CPU
-    	.trap(trap),
+//    	.trap(trap),
 
     	// GPIO (one pin)
     	.gpio_out_pad(gpio_out_pad),		// Connect to out on gpio pad
@@ -160,11 +160,11 @@ module mgmt_core_wrapper (
         .la_iena(la_iena),			// Logic analyzer input enable
 
         // IRQ
-        .irq(irq),		// IRQ from SPI and user project
+        .user_irq(irq),		// IRQ from SPI and user project
 	    .user_irq_ena(user_irq_ena),
 
         // Flash memory control (SPI master)
-        .flash_csb(flash_csb),
+        .flash_cs_n(flash_csb),
         .flash_clk(flash_clk),
 
         .flash_io0_oeb(flash_io0_oeb),
@@ -184,67 +184,67 @@ module mgmt_core_wrapper (
 
         // Exported wishbone bus (User project)
 	    .mprj_wb_iena(mprj_wb_iena),
-        .mprj_ack_i(mprj_ack_i),
-        .mprj_dat_i(mprj_dat_i),
-        .mprj_cyc_o(mprj_cyc_o),
-        .mprj_stb_o(mprj_stb_o),
-        .mprj_we_o(mprj_we_o),
-        .mprj_sel_o(mprj_sel_o),
-        .mprj_adr_o(mprj_adr_o),
-        .mprj_dat_o(mprj_dat_o),
+//        .mprj_ack_i(mprj_ack_i),
+//        .mprj_dat_i(mprj_dat_i),
+//        .mprj_cyc_o(mprj_cyc_o),
+//        .mprj_stb_o(mprj_stb_o),
+//        .mprj_we_o(mprj_we_o),
+//        .mprj_sel_o(mprj_sel_o),
+//        .mprj_adr_o(mprj_adr_o),
+//        .mprj_dat_o(mprj_dat_o),
 
-        .hk_stb_o(hk_stb_o),
-        .hk_dat_i(hk_dat_i),
-        .hk_ack_i(hk_ack_i),
+//        .hk_stb_o(hk_stb_o),
+//        .hk_dat_i(hk_dat_i),
+//        .hk_ack_i(hk_ack_i),
 
     	// Module status
-    	.qspi_enabled(qspi_enabled),
-    	.uart_enabled(uart_enabled),
-    	.spi_enabled(spi_enabled),
-    	.debug_mode(debug_mode),
+//    	.qspi_enabled(qspi_enabled),
+//    	.uart_enabled(uart_enabled),
+//    	.spi_enabled(spi_enabled),
+//    	.debug_mode(debug_mode),
 
     	// Module I/O
     	.ser_tx(ser_tx),
     	.ser_rx(ser_rx),
-    	.spi_csb(spi_csb),
-    	.spi_sck(spi_sck),
-    	.spi_sdo(spi_sdo),
-    	.spi_sdoenb(spi_sdoenb),
-    	.spi_sdi(spi_sdi),
-    	.debug_in(debug_in),
-    	.debug_out(debug_out),
-    	.debug_oeb(debug_oeb),
+    	.spi_cs_n(spi_csb),
+    	.spi_clk(spi_sck),
+    	.spi_miso(spi_sdo),
+//    	.spi_sdoenb(spi_sdoenb),
+    	.spi_mosi(spi_sdi)
+//    	.debug_in(debug_in),
+//    	.debug_out(debug_out),
+//    	.debug_oeb(debug_oeb),
 
         // DFFRAM Interface 
-        .mem_wen(mem_wen),
-        .mem_ena(mem_ena),
-        .mem_wdata(mem_wdata),
-        .mem_rdata(mem_rdata),
-        .mem_addr(mem_addr),
+//        .mem_wen(mem_wen),
+//        .mem_ena(mem_ena),
+//        .mem_wdata(mem_wdata),
+//        .mem_rdata(mem_rdata),
+//        .mem_addr(mem_addr),
 
         // SRAM read-only access from housekeeping
-        .sram_ro_clk(sram_ro_clk),
-        .sram_ro_csb(sram_ro_csb),
-        .sram_ro_addr(sram_ro_addr),
-        .sram_ro_data(sram_ro_data)
+//        .sram_ro_clk(sram_ro_clk),
+//        .sram_ro_csb(sram_ro_csb),
+//        .sram_ro_addr(sram_ro_addr),
+//        .sram_ro_data(sram_ro_data)
     );
 
     // DFFRAM
-    DFFRAM #(
-        .WSIZE(`DFFRAM_WSIZE), 
-        .USE_LATCH(`DFFRAM_USE_LATCH)
-    ) DFFRAM (
-    `ifdef USE_POWER_PINS
-        .VPWR(VPWR),
-        .VGND(VGND),
-    `endif
-        .CLK(core_clk),
-        .WE(mem_wen),
-        .EN(mem_ena),
-        .Di(mem_wdata),
-        .Do(mem_rdata),
-        .A(mem_addr)   // 8-bit address if using the default custom DFF RAM
-    );
+//    DFFRAM #(
+//        .WSIZE(`DFFRAM_WSIZE),
+//        .USE_LATCH(`DFFRAM_USE_LATCH)
+//    ) DFFRAM (
+//    `ifdef USE_POWER_PINS
+//        .VPWR(VPWR),
+//        .VGND(VGND),
+//    `endif
+//        .CLK(core_clk),
+//        .WE(mem_wen),
+//        .EN(mem_ena),
+//        .Di(mem_wdata),
+//        .Do(mem_rdata),
+//        .A(mem_addr)   // 8-bit address if using the default custom DFF RAM
+//    );
 
 endmodule
 `default_nettype wire

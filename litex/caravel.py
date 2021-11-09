@@ -71,7 +71,7 @@ class MGMTSoC(SoCMini):
 
         # Add a master SPI controller w/ a clock divider
         spi_master = SPIMaster(
-            pads=platform.request("spi_master"),
+            pads=platform.request("spi"),
             data_width=8,
             sys_clk_freq=sys_clk_freq,
             spi_clk_freq=1e5,
@@ -111,6 +111,8 @@ class MGMTSoC(SoCMini):
         # Add Debug Interface (UART)
         self.submodules.uart_bridge = UARTWishboneBridge(platform.request("serial_dbg"), sys_clk_freq, baudrate=115200)
         self.add_wb_master(self.uart_bridge.wishbone)
+
+        self.submodules.uart_bridge = UARTWishboneBridge(platform.request("ser"), sys_clk_freq, baudrate=115200)
 
         # Add a GPIO Pin
         # self.submodules.gpio = GPIOTristate(platform.request("gpio"))

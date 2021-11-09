@@ -22,7 +22,7 @@ _io = [
         Subsignal("tx", Pins("1")),
     ),
 
-    ("serial", 0,
+    ("ser", 0,
         Subsignal("rx", Pins("1")),
         Subsignal("tx", Pins("1")),
     ),
@@ -59,7 +59,7 @@ _io = [
     ),
 
     # SPI master Controller
-    ("spi_master", 0,
+    ("spi", 0,
         Subsignal("clk",  Pins(1)),
         Subsignal("cs_n", Pins(1)),
         Subsignal("mosi", Pins(1)),
@@ -114,8 +114,8 @@ class Platform(GenericPlatform):
     def build(self, fragment, build_dir, **kwargs):
         os.makedirs(build_dir, exist_ok=True)
         os.chdir(build_dir)
-        top_output = self.get_verilog(fragment)
-        top_output.write("mgmt_soc.v")
+        top_output = self.get_verilog(fragment, name="mgmt_core")
+        top_output.write("mgmt_core.v")
 
     # def get_verilog(self, *args, special_overrides=dict(), **kwargs):
     #     so = dict(common.altera_special_overrides)
