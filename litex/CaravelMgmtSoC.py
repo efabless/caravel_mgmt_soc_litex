@@ -10,10 +10,10 @@ from litex.build.lattice import LatticePlatform
 
 # IOs ----------------------------------------------------------------------------------------------
 _io = [
-    # ("core_clk", 0, Pins(1)),
-    # ("core_rst", 0, Pins(1)),
-    ("sys_clk", 0, Pins(1)),
-    ("sys_rst", 0, Pins(1)),
+    ("core_clk", 0, Pins(1)),
+    ("core_rst", 0, Pins(1)),
+    # ("sys_clk", 0, Pins(1)),
+    # ("sys_rst", 0, Pins(1)),
 
         # Serial
  
@@ -29,20 +29,33 @@ _io = [
 
     # SPIFlash
     # SPI Mode
-    ("spiflash", 0,
-        Subsignal("cs_n", Pins("1")),
-        Subsignal("clk",  Pins("1")),
-        Subsignal("miso", Pins("1")),
-        Subsignal("mosi", Pins("1")),
-        Subsignal("wp",   Pins("1")),
-        Subsignal("hold", Pins("1")),
-    ),
+    # ("flash", 0,
+    #     Subsignal("cs_n", Pins("1")),
+    #     Subsignal("clk",  Pins("1")),
+    #     Subsignal("miso", Pins("1")),
+    #     Subsignal("mosi", Pins("1")),
+    #     Subsignal("wp",   Pins("1")),
+    #     Subsignal("hold", Pins("1")),
+    # ),
     # QSPI mode
     # ("spiflash4x", 0,
-    ("flash4x", 0,
+    ("flash", 0,
         Subsignal("cs_n", Pins(1)),
+        # Subsignal("csb", Pins(1)),
         Subsignal("clk",  Pins(1)),
-        Subsignal("dq",   Pins(4)),
+        # Subsignal("dq",   Pins(4)),
+        Subsignal("io0_oeb", Pins(1)),
+        Subsignal("io1_oeb", Pins(1)),
+        Subsignal("io2_oeb", Pins(1)),
+        Subsignal("io3_oeb", Pins(1)),
+        Subsignal("io0_do", Pins(1)),
+        Subsignal("io1_do", Pins(1)),
+        Subsignal("io2_do", Pins(1)),
+        Subsignal("io3_do", Pins(1)),
+        Subsignal("io0_di",   Pins(1)),
+        Subsignal("io1_di",   Pins(1)),
+        Subsignal("io2_di",   Pins(1)),
+        Subsignal("io3_di",   Pins(1)),
     ),
 
     # SPI master Controller
@@ -147,3 +160,4 @@ class Platform(GenericPlatform):
         return r
 
     verilog._print_combinatorial_logic_sim = _new_print_combinatorial_logic_sim
+

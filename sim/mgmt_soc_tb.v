@@ -1,7 +1,7 @@
 `timescale 1 ns / 1 ps
 module mgmt_soc_tb;
-    reg sys_clk;
-	reg sys_rst;
+    reg core_clk;
+	reg core_rst;
 
 //	wire serial_rx;
 //	wire serial_tx;
@@ -17,7 +17,10 @@ module mgmt_soc_tb;
 	wire spiflash_mosi;
 	wire spiflash_wp;
 	wire spiflash_hold;
-	
+//	wire spiflash_oeb = 1'b1;
+//	wire spiflash_oeb = 1'b0;
+	wire spiflash_oeb;
+
 //	wire serial_dbg_rx = 1'b0;
 //	wire serial_dbg_tx;
 	
@@ -36,16 +39,16 @@ module mgmt_soc_tb;
 	wire [2:0] user_irq_ena;
 
     // The Clock
-    initial sys_clk <= 0;
-    always #50 sys_clk <= (sys_clk === 1'b0);     // 10MHz Clock
+    initial core_clk <= 0;
+    always #50 core_clk <= (core_clk === 1'b0);     // 10MHz Clock
 
     // PoR
     initial begin
-        sys_rst <= 1'b0;
+        core_rst <= 1'b0;
         #500;
-        sys_rst <= 1'b1;
+        core_rst <= 1'b1;
 		#5000;
-		sys_rst <= 1'b0;
+		core_rst <= 1'b0;
 	end
 
     initial begin
@@ -53,8 +56,8 @@ module mgmt_soc_tb;
 		$dumpvars(0, mgmt_soc_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (50) begin
-			repeat (1000) @(posedge sys_clk);
+		repeat (25) begin
+			repeat (1000) @(posedge core_clk);
 			$display("+1000 cycles");
 		end
 		$display ("Monitor: Timeout, Test Failed");
@@ -62,22 +65,36 @@ module mgmt_soc_tb;
 	end
 
     top muv (
-        .sys_clk(sys_clk),
-        .sys_rst(sys_rst),
+        .core_clk(core_clk),
+        .core_rst(core_rst),
 //        .serial_rx(serial_rx),
 //        .serial_tx(serial_tx),
 //        .spi_master_clk(spi_master_clk),
 //        .spi_master_cs_n(spi_master_cs_n),
 //        .spi_master_mosi(spi_master_mosi),
 //        .spi_master_miso(spi_master_miso),
-        .spiflash_cs_n(spiflash_cs_n),
-        .spiflash_clk(spiflash_clk),
-        .spiflash_miso(spiflash_miso),
-        .spiflash_mosi(spiflash_mosi),
+//        .spiflash_cs_n(spiflash_cs_n),
+//        .spiflash_clk(spiflash_clk),
+//        .spiflash_miso(spiflash_miso),
+//        .spiflash_mosi(spiflash_mosi),
+        .flash_cs_n(spiflash_cs_n),
+	    .flash_clk(spiflash_clk),
+	    .flash_io0_oeb(spiflash_oeb),
+        .flash_io1_oeb(),
+        .flash_io2_oeb(),
+        .flash_io3_oeb(),
+        .flash_io0_do(spiflash_mosi),
+        .flash_io1_do(),
+        .flash_io2_do(),
+        .flash_io3_do(),
+        .flash_io0_di(),
+        .flash_io1_di(spiflash_miso),
+        .flash_io2_di(),
+        .flash_io3_di(),
 //        .serial_dbg_rx(serial_dbg_rx),
 //        .serial_dbg_tx(),
-        .spiflash_wp(),
-        .spiflash_hold(),
+//        .spiflash_wp(),
+//        .spiflash_hold(),
         .gpio_out_pad(gpio_out_pad),
         .gpio_in_pad(gpio_in_pad),
         .gpio_outenb_pad(gpio_outenb_pad),

@@ -19,10 +19,12 @@ Register Groups
     :maxdepth: 1
 
     ctrl
+    flash_core
+    flash_phy
     gpio
+    la
     mprj_wb_iena
-    spiflash_core
-    spiflash_phy
+    spi_master
     user_irq_0
     user_irq_1
     user_irq_2

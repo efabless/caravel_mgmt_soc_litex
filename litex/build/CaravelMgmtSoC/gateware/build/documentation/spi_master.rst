@@ -7,25 +7,25 @@ Register Listing for SPI_MASTER
 +--------------------------------------------------------+--------------------------------------------+
 | Register                                               | Address                                    |
 +========================================================+============================================+
-| :ref:`SPI_MASTER_CONTROL <SPI_MASTER_CONTROL>`         | :ref:`0x82002000 <SPI_MASTER_CONTROL>`     |
+| :ref:`SPI_MASTER_CONTROL <SPI_MASTER_CONTROL>`         | :ref:`0x82003000 <SPI_MASTER_CONTROL>`     |
 +--------------------------------------------------------+--------------------------------------------+
-| :ref:`SPI_MASTER_STATUS <SPI_MASTER_STATUS>`           | :ref:`0x82002004 <SPI_MASTER_STATUS>`      |
+| :ref:`SPI_MASTER_STATUS <SPI_MASTER_STATUS>`           | :ref:`0x82003004 <SPI_MASTER_STATUS>`      |
 +--------------------------------------------------------+--------------------------------------------+
-| :ref:`SPI_MASTER_MOSI <SPI_MASTER_MOSI>`               | :ref:`0x82002008 <SPI_MASTER_MOSI>`        |
+| :ref:`SPI_MASTER_MOSI <SPI_MASTER_MOSI>`               | :ref:`0x82003008 <SPI_MASTER_MOSI>`        |
 +--------------------------------------------------------+--------------------------------------------+
-| :ref:`SPI_MASTER_MISO <SPI_MASTER_MISO>`               | :ref:`0x8200200c <SPI_MASTER_MISO>`        |
+| :ref:`SPI_MASTER_MISO <SPI_MASTER_MISO>`               | :ref:`0x8200300c <SPI_MASTER_MISO>`        |
 +--------------------------------------------------------+--------------------------------------------+
-| :ref:`SPI_MASTER_CS <SPI_MASTER_CS>`                   | :ref:`0x82002010 <SPI_MASTER_CS>`          |
+| :ref:`SPI_MASTER_CS <SPI_MASTER_CS>`                   | :ref:`0x82003010 <SPI_MASTER_CS>`          |
 +--------------------------------------------------------+--------------------------------------------+
-| :ref:`SPI_MASTER_LOOPBACK <SPI_MASTER_LOOPBACK>`       | :ref:`0x82002014 <SPI_MASTER_LOOPBACK>`    |
+| :ref:`SPI_MASTER_LOOPBACK <SPI_MASTER_LOOPBACK>`       | :ref:`0x82003014 <SPI_MASTER_LOOPBACK>`    |
 +--------------------------------------------------------+--------------------------------------------+
-| :ref:`SPI_MASTER_CLK_DIVIDER <SPI_MASTER_CLK_DIVIDER>` | :ref:`0x82002018 <SPI_MASTER_CLK_DIVIDER>` |
+| :ref:`SPI_MASTER_CLK_DIVIDER <SPI_MASTER_CLK_DIVIDER>` | :ref:`0x82003018 <SPI_MASTER_CLK_DIVIDER>` |
 +--------------------------------------------------------+--------------------------------------------+
 
 SPI_MASTER_CONTROL
 ^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002000 + 0x0 = 0x82002000`
+`Address: 0x82003000 + 0x0 = 0x82003000`
 
     SPI Control.
 
@@ -53,7 +53,7 @@ SPI_MASTER_CONTROL
 SPI_MASTER_STATUS
 ^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002000 + 0x4 = 0x82002004`
+`Address: 0x82003000 + 0x4 = 0x82003004`
 
     SPI Status.
 
@@ -77,7 +77,7 @@ SPI_MASTER_STATUS
 SPI_MASTER_MOSI
 ^^^^^^^^^^^^^^^
 
-`Address: 0x82002000 + 0x8 = 0x82002008`
+`Address: 0x82003000 + 0x8 = 0x82003008`
 
     SPI MOSI data (MSB-first serialization).
 
@@ -95,7 +95,7 @@ SPI_MASTER_MOSI
 SPI_MASTER_MISO
 ^^^^^^^^^^^^^^^
 
-`Address: 0x82002000 + 0xc = 0x8200200c`
+`Address: 0x82003000 + 0xc = 0x8200300c`
 
     SPI MISO data (MSB-first de-serialization).
 
@@ -113,7 +113,7 @@ SPI_MASTER_MISO
 SPI_MASTER_CS
 ^^^^^^^^^^^^^
 
-`Address: 0x82002000 + 0x10 = 0x82002010`
+`Address: 0x82003000 + 0x10 = 0x82003010`
 
     SPI CS Chip-Select and Mode.
 
@@ -157,7 +157,7 @@ SPI_MASTER_CS
 SPI_MASTER_LOOPBACK
 ^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002000 + 0x14 = 0x82002014`
+`Address: 0x82003000 + 0x14 = 0x82003014`
 
     SPI Loopback Mode.
 
@@ -189,7 +189,7 @@ SPI_MASTER_LOOPBACK
 SPI_MASTER_CLK_DIVIDER
 ^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002000 + 0x18 = 0x82002018`
+`Address: 0x82003000 + 0x18 = 0x82003018`
 
     SPI Clk Divider.
 
