@@ -48,15 +48,15 @@ void main()
 		reg_gpio_out = 1;
 		reg_gpio_out = 0;
 	}
-
-	while (1) {
-		/* Slow blink for demonstration board */
-		for (i = 0; i < 30000; i++) {
-			reg_gpio_out = 1;
-		}
-		for (i = 0; i < 30000; i++) {
-			reg_gpio_out = 0;
-		}
-	}
+//
+//	while (1) {
+//		/* Slow blink for demonstration board */
+//		for (i = 0; i < 30000; i++) {
+//			reg_gpio_out = 1;
+//		}
+//		for (i = 0; i < 30000; i++) {
+//			reg_gpio_out = 0;
+//		}
+//	}
 }
 

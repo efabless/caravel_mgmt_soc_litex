@@ -147,7 +147,7 @@ Disassembly of section .text:
  21c:	20000317          	auipc	t1,0x20000
  220:	26830313          	addi	t1,t1,616 # 20000484 <_irq_mask>
  224:	00532023          	sw	t0,0(t1)
- 228:	50000293          	li	t0,1280
+ 228:	4b000293          	li	t0,1200
  22c:	20000317          	auipc	t1,0x20000
  230:	dd430313          	addi	t1,t1,-556 # 20000000 <_edata>
  234:	20000397          	auipc	t2,0x20000
@@ -325,32 +325,17 @@ Disassembly of section .text:
  48c:	fec42703          	lw	a4,-20(s0)
  490:	00900793          	li	a5,9
  494:	fce7d8e3          	bge	a5,a4,464 <main+0x98>
- 498:	fe042623          	sw	zero,-20(s0)
- 49c:	0200006f          	j	4bc <main+0xf0>
- 4a0:	820027b7          	lui	a5,0x82002
- 4a4:	81478793          	addi	a5,a5,-2028 # 82001814 <_fstack+0x62001014>
- 4a8:	00100713          	li	a4,1
- 4ac:	00e7a023          	sw	a4,0(a5)
- 4b0:	fec42783          	lw	a5,-20(s0)
- 4b4:	00178793          	addi	a5,a5,1
- 4b8:	fef42623          	sw	a5,-20(s0)
- 4bc:	fec42703          	lw	a4,-20(s0)
- 4c0:	000077b7          	lui	a5,0x7
- 4c4:	52f78793          	addi	a5,a5,1327 # 752f <_etext+0x702f>
- 4c8:	fce7dce3          	bge	a5,a4,4a0 <main+0xd4>
- 4cc:	fe042623          	sw	zero,-20(s0)
- 4d0:	01c0006f          	j	4ec <main+0x120>
- 4d4:	820027b7          	lui	a5,0x82002
- 4d8:	81478793          	addi	a5,a5,-2028 # 82001814 <_fstack+0x62001014>
- 4dc:	0007a023          	sw	zero,0(a5)
- 4e0:	fec42783          	lw	a5,-20(s0)
- 4e4:	00178793          	addi	a5,a5,1
- 4e8:	fef42623          	sw	a5,-20(s0)
- 4ec:	fec42703          	lw	a4,-20(s0)
- 4f0:	000077b7          	lui	a5,0x7
- 4f4:	52f78793          	addi	a5,a5,1327 # 752f <_etext+0x702f>
- 4f8:	fce7dee3          	bge	a5,a4,4d4 <main+0x108>
- 4fc:	f9dff06f          	j	498 <main+0xcc>
+ 498:	00000013          	nop
+ 49c:	00000013          	nop
+ 4a0:	01c12403          	lw	s0,28(sp)
+ 4a4:	02010113          	addi	sp,sp,32
+ 4a8:	00008067          	ret
+
+Disassembly of section .rodata:
+
+000004ac <_erodata-0x4>:
+ 4ac:	0000                	unimp
+	...
 
 Disassembly of section .bss:
 

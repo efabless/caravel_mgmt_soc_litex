@@ -27,7 +27,8 @@
 //`include "__uprj_netlists.v"
 //`include "caravel_netlists.v"
 `include "defines.v"
-`include "sram_1rw1r_32_256_8_sky130.v"
+//`include "sram_1rw1r_32_256_8_sky130.v"
+`include "sky130_sram_2kbyte_1rw1r_32x512_8.v"
 `include "picorv32.v"
 `include "spiflash.v"
 `include "mgmt_core_wrapper.v"
@@ -49,7 +50,7 @@ module gpio_mgmt_tb;
 		$dumpvars(0, gpio_mgmt_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (25) begin
+		repeat (100) begin
 			repeat (1000) @(posedge clock);
 			$display("+1000 cycles");
 		end

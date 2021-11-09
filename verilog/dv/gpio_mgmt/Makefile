@@ -53,7 +53,7 @@ endif
 	vvp $<
 
 %.elf: %.c $(FIRMWARE_PATH)/sections.lds $(FIRMWARE_PATH)/start.S check-env
-	${GCC_PATH}/${GCC_PREFIX}-gcc -I ../ -I ../generated -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__picorv32__ -o $@ $(FIRMWARE_PATH)/start.S $(FIRMWARE_PATH)/isr.c $<
+	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__picorv32__ -o $@ $(FIRMWARE_PATH)/start.S $(FIRMWARE_PATH)/isr.c $<
 
 %.hex: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@

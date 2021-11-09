@@ -32,9 +32,11 @@ class MGMTSoC(SoCMini):
     SoCMini.mem_map = {
         "sram":             0x20000000,
         "flash":            0x00000000,
+        # "sram":             0x00000000,
+        # "flash":            0x10000000,
         # "csr":              0xf0000000,
         "csr":              0x82000000,
-        "vexriscv_debug":   0xf00f0000,
+        # "vexriscv_debug":   0xf00f0000,
     }
 
     def __init__(self, sys_clk_freq=int(10e6), **kwargs ):
@@ -101,13 +103,13 @@ class MGMTSoC(SoCMini):
         self.new_add_spi_flash(name="flash", mode="1x", module=W25Q128JV(Codes.READ_1_1_1), with_master=True)
         # self.new_add_spi_flash(name="flash", mode="4x", module=W25Q128JV(Codes.READ_1_1_4), with_master=True)
 
-
         # Add ROM linker region --------------------------------------------------------------------
         self.bus.add_region("rom", SoCRegion(
             origin = self.mem_map["flash"],
             size   = 8*1024*1024,
             linker = True)
         )
+
         # Add Debug Interface (UART)
         self.submodules.uart_bridge = UARTWishboneBridge(platform.request("serial_dbg"), sys_clk_freq, baudrate=115200)
         self.add_wb_master(self.uart_bridge.wishbone)

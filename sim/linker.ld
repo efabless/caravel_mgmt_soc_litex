@@ -18,7 +18,7 @@ SECTIONS
 
 		*(.text .stub .text.* .gnu.linkonce.t.*)
 		_etext = .;
-	} > main_ram
+	} > flash
 
 	.rodata :
 	{
@@ -28,7 +28,7 @@ SECTIONS
 		*(.rodata1)
 		. = ALIGN(8);
 		_erodata = .;
-	} > main_ram
+	} > flash
 
 	.data :
 	{
@@ -40,7 +40,7 @@ SECTIONS
 		*(.sdata .sdata.* .gnu.linkonce.s.*)
 		. = ALIGN(8);
 		_edata = .;
-	} > sram AT > main_ram
+	} > sram
 
 	.bss :
 	{
