@@ -30,13 +30,11 @@ from OpenRAM import *
 # MGMTSoC
 class MGMTSoC(SoCMini):
     SoCMini.mem_map = {
-        "sram":             0x20000000,
+        "sram":             0x10000000,
         "flash":            0x00000000,
-        # "sram":             0x00000000,
-        # "flash":            0x10000000,
-        # "csr":              0xf0000000,
-        "csr":              0x82000000,
-        # "vexriscv_debug":   0xf00f0000,
+        "mprj":             0x30000000,
+        "hk":               0x26000000,
+        "csr":              0x20000000,
     }
 
     def __init__(self, sys_clk_freq=int(10e6), **kwargs ):
@@ -71,6 +69,17 @@ class MGMTSoC(SoCMini):
                          # with_timer=True,
                          **kwargs)
 
+        #Use OpenRAM
+        spram_size = 2 * 1024
+        self.submodules.spram = OpenRAM(size=spram_size)
+        self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
+
+        # SPI Flash --------------------------------------------------------------------------------
+        from litespi.modules import W25Q128JV
+        from litespi.opcodes import SpiNorFlashOpCodes as Codes
+        self.new_add_spi_flash(name="flash", mode="1x", module=W25Q128JV(Codes.READ_1_1_1), with_master=True)
+        # self.new_add_spi_flash(name="flash", mode="4x", module=W25Q128JV(Codes.READ_1_1_4), with_master=True)
+
         # Add a master SPI controller w/ a clock divider
         spi_master = SPIMaster(
             pads=platform.request("spi"),
@@ -82,60 +91,71 @@ class MGMTSoC(SoCMini):
         self.submodules.spi_master = spi_master
         #self.add_interrupt(interrupt_name="spi_master")
 
-        """
-        # Add a wb port for external slaves
-        wb_bus = wishbone.Interface()
-        self.bus.add_slave(name="extern_slave", slave=wb_bus, region=SoCRegion(origin=0x30000000, size=8192))
-        platform.add_extension(wb_bus.get_ios("wb"))
-        wb_pads = platform.request("wb")
-        self.comb += wb_bus.connect_to_pads(wb_pads, mode="master")
-        """
+        # Add a wb port for external slaves user_project
+        mprj_ports = platform.request("mprj")
+        mprj = wishbone.Interface()
+        # self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x0100000))
+        self.submodules.mprj_wb_iena = GPIOOut(mprj_ports.wb_iena)
+        self.comb += mprj_ports.cyc_o.eq(mprj.cyc)
+        self.comb += mprj_ports.stb_o.eq(mprj.stb)
+        self.comb += mprj_ports.we_o.eq(mprj.we)
+        self.comb += mprj_ports.sel_o.eq(mprj.sel)
+        self.comb += mprj_ports.adr_o.eq(mprj.adr)
+        self.specials += MultiReg(mprj_ports.dat_i, mprj.dat_r)
+        self.comb += mprj_ports.dat_o.eq(mprj.dat_w)
+        self.specials += MultiReg(mprj_ports.ack_i, mprj.ack)
+        # self.comb += mprj.connect_to_pads(mprj_ports, mode="master")
 
-        #Use OpenRAM
-        spram_size = 2 * 1024
-        self.submodules.spram = OpenRAM(size=spram_size)
-        self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
+        # Add a wb port for external slaves housekeeping
+        hk = wishbone.Interface()
+        # self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
+        hk_ports = platform.request("hk")
+        # self.comb += wb_bus.connect_to_pads(wb_pads, mode="master")
+        self.comb += hk_ports.stb_o.eq(hk.stb)
+        self.comb += hk_ports.dat_i.eq(hk.dat_r)
+        self.specials += MultiReg(hk_ports.ack_i, hk.ack)
 
-        # SPI Flash --------------------------------------------------------------------------------
-        from litespi.modules import W25Q128JV
-        from litespi.opcodes import SpiNorFlashOpCodes as Codes
-        # self.add_spi_flash(name="spiflash", mode="1x", module=W25Q128JV(Codes.READ_1_1_1), with_master=False)
-        self.new_add_spi_flash(name="flash", mode="1x", module=W25Q128JV(Codes.READ_1_1_1), with_master=True)
-        # self.new_add_spi_flash(name="flash", mode="4x", module=W25Q128JV(Codes.READ_1_1_4), with_master=True)
 
         # Add ROM linker region --------------------------------------------------------------------
-        self.bus.add_region("rom", SoCRegion(
-            origin = self.mem_map["flash"],
-            size   = 8*1024*1024,
-            linker = True)
-        )
+        # self.bus.add_region("rom", SoCRegion(
+        #     origin = self.mem_map["flash"],
+        #     size   = 8*1024*1024,
+        #     linker = True)
+        # )
 
         # Add Debug Interface (UART)
-        self.submodules.uart_bridge = UARTWishboneBridge(platform.request("serial_dbg"), sys_clk_freq, baudrate=115200)
+        self.submodules.uart_bridge = UARTWishboneBridge(platform.request("debug"), sys_clk_freq, baudrate=115200)
         self.add_wb_master(self.uart_bridge.wishbone)
 
         self.submodules.uart_bridge = UARTWishboneBridge(platform.request("ser"), sys_clk_freq, baudrate=115200)
 
         # Add a GPIO Pin
-        # self.submodules.gpio = GPIOTristate(platform.request("gpio"))
         self.submodules.gpio = GPIOASIC(platform.request("gpio"))
-        # self.add_csr("gpio")
 
         # Add the logic Analyzer
         self.submodules.la = LogicAnalyzer(platform.request("la"))
         # self.submodules.la_ien = GPIOOut(platform.request("la_ien"))
 
         # Add the user's input control
-        self.submodules.mprj_wb_iena = GPIOOut(platform.request("mprj_wb_iena"))
-        # self.add_csr("mprj_wb_iena")
+        self.submodules.qspi_enabled = GPIOOut(platform.request("qspi_enabled"))
+        self.submodules.uart_enabled = GPIOOut(platform.request("uart_enabled"))
+        self.submodules.spi_enabled = GPIOOut(platform.request("spi_enabled"))
+        self.submodules.debug_mode = GPIOOut(platform.request("debug_mode"))
+
+        self.submodules.sdo_oenb_state = GPIOOut(platform.request("sdo_oenb_state"))
+        self.submodules.jtag_oenb_state = GPIOOut(platform.request("jtag_oenb_state"))
+        self.submodules.flash_io2_oenb_state = GPIOOut(platform.request("flash_io2_oenb_state"))
+        self.submodules.flash_io3_oenb_state = GPIOOut(platform.request("flash_io3_oenb_state"))
+
         self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
-        # self.add_csr("user_irq_ena")
 
         # Add 6 IRQ lines
         user_irq = platform.request("user_irq")
         for i in range(len(user_irq)):
             setattr(self.submodules,"user_irq_"+str(i),GPIOIn(user_irq[i], with_irq=True))
             self.irq.add("user_irq_"+str(i), use_loc_if_exists=True)
+
+    #####################
 
     def new_add_spi_flash(self, name="flash", mode="4x", dummy_cycles=None, clk_freq=None, module=None, phy=None, rate="1:1", **kwargs):
         if module is None:

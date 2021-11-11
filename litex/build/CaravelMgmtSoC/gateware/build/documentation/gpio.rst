@@ -7,23 +7,23 @@ Register Listing for GPIO
 +--------------------------------+--------------------------------+
 | Register                       | Address                        |
 +================================+================================+
-| :ref:`GPIO_MODE1 <GPIO_MODE1>` | :ref:`0x82001800 <GPIO_MODE1>` |
+| :ref:`GPIO_MODE1 <GPIO_MODE1>` | :ref:`0x82003000 <GPIO_MODE1>` |
 +--------------------------------+--------------------------------+
-| :ref:`GPIO_MODE0 <GPIO_MODE0>` | :ref:`0x82001804 <GPIO_MODE0>` |
+| :ref:`GPIO_MODE0 <GPIO_MODE0>` | :ref:`0x82003004 <GPIO_MODE0>` |
 +--------------------------------+--------------------------------+
-| :ref:`GPIO_IEN <GPIO_IEN>`     | :ref:`0x82001808 <GPIO_IEN>`   |
+| :ref:`GPIO_IEN <GPIO_IEN>`     | :ref:`0x82003008 <GPIO_IEN>`   |
 +--------------------------------+--------------------------------+
-| :ref:`GPIO_OE <GPIO_OE>`       | :ref:`0x8200180c <GPIO_OE>`    |
+| :ref:`GPIO_OE <GPIO_OE>`       | :ref:`0x8200300c <GPIO_OE>`    |
 +--------------------------------+--------------------------------+
-| :ref:`GPIO_IN <GPIO_IN>`       | :ref:`0x82001810 <GPIO_IN>`    |
+| :ref:`GPIO_IN <GPIO_IN>`       | :ref:`0x82003010 <GPIO_IN>`    |
 +--------------------------------+--------------------------------+
-| :ref:`GPIO_OUT <GPIO_OUT>`     | :ref:`0x82001814 <GPIO_OUT>`   |
+| :ref:`GPIO_OUT <GPIO_OUT>`     | :ref:`0x82003014 <GPIO_OUT>`   |
 +--------------------------------+--------------------------------+
 
 GPIO_MODE1
 ^^^^^^^^^^
 
-`Address: 0x82001800 + 0x0 = 0x82001800`
+`Address: 0x82003000 + 0x0 = 0x82003000`
 
     GPIO Tristate(s) Control.
 
@@ -41,7 +41,7 @@ GPIO_MODE1
 GPIO_MODE0
 ^^^^^^^^^^
 
-`Address: 0x82001800 + 0x4 = 0x82001804`
+`Address: 0x82003000 + 0x4 = 0x82003004`
 
     GPIO Tristate(s) Control.
 
@@ -59,7 +59,7 @@ GPIO_MODE0
 GPIO_IEN
 ^^^^^^^^
 
-`Address: 0x82001800 + 0x8 = 0x82001808`
+`Address: 0x82003000 + 0x8 = 0x82003008`
 
     GPIO Tristate(s) Control.
 
@@ -77,7 +77,7 @@ GPIO_IEN
 GPIO_OE
 ^^^^^^^
 
-`Address: 0x82001800 + 0xc = 0x8200180c`
+`Address: 0x82003000 + 0xc = 0x8200300c`
 
     GPIO Tristate(s) Control.
 
@@ -95,7 +95,7 @@ GPIO_OE
 GPIO_IN
 ^^^^^^^
 
-`Address: 0x82001800 + 0x10 = 0x82001810`
+`Address: 0x82003000 + 0x10 = 0x82003010`
 
     GPIO Input(s) Status.
 
@@ -113,7 +113,7 @@ GPIO_IN
 GPIO_OUT
 ^^^^^^^^
 
-`Address: 0x82001800 + 0x14 = 0x82001814`
+`Address: 0x82003000 + 0x14 = 0x82003014`
 
     GPIO Ouptut(s) Control.
 

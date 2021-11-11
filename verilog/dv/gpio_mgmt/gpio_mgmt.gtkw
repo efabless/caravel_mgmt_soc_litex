@@ -1,12 +1,12 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Tue Nov  9 06:27:44 2021
+[*] Wed Nov 10 20:02:07 2021
 [*]
 [dumpfile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/verilog/dv/gpio_mgmt/gpio_mgmt.vcd"
-[dumpfile_mtime] "Tue Nov  9 06:26:30 2021"
-[dumpfile_size] 5935902
+[dumpfile_mtime] "Wed Nov 10 20:01:22 2021"
+[dumpfile_size] 9523426
 [savefile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/verilog/dv/gpio_mgmt/gpio_mgmt.gtkw"
-[timestart] 21130000
+[timestart] 0
 [size] 1766 1138
 [pos] -1 -1
 *-21.147789 287370000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
@@ -17,6 +17,8 @@
 [signals_width] 202
 [sst_expanded] 1
 [sst_vpaned_height] 356
+@200
+-
 @28
 gpio_mgmt_tb.spiflash.csb
 gpio_mgmt_tb.spiflash.clk
@@ -48,8 +50,6 @@ gpio_mgmt_tb.uut.core.main_bus_dat_r[31:0]
 @28
 gpio_mgmt_tb.uut.core.main_bus_stb
 gpio_mgmt_tb.uut.core.main_bus_we
-@23
-gpio_mgmt_tb.uut.core.picorv32.pcpi_rd[31:0]
 @200
 -
 @22

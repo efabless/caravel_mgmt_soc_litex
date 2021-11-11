@@ -26,10 +26,10 @@
 /* verilator lint_off CASEINCOMPLETE */
 
 `timescale 1 ns / 1 ps
-// `define DEBUGNETS
-// `define DEBUGREGS
-// `define DEBUGASM
-// `define DEBUG
+ `define DEBUGNETS
+ `define DEBUGREGS
+ `define DEBUGASM
+ `define DEBUG
 
 `ifdef DEBUG
   `define debug(debug_command) debug_command

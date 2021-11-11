@@ -25,10 +25,10 @@ Disassembly of section .text:
 00000040 <_irq>:
   40:	0200a10b          	0x200a10b
   44:	0201218b          	0x201218b
-  48:	200000b7          	lui	ra,0x20000
+  48:	100000b7          	lui	ra,0x10000
   4c:	00008093          	mv	ra,ra
   50:	0000410b          	0x410b
-  54:	0020a023          	sw	sp,0(ra) # 20000000 <_edata>
+  54:	0020a023          	sw	sp,0(ra) # 10000000 <_edata>
   58:	0001410b          	0x1410b
   5c:	0020a223          	sw	sp,4(ra)
   60:	0001c10b          	0x1c10b
@@ -63,15 +63,15 @@ Disassembly of section .text:
   d4:	07e0ac23          	sw	t5,120(ra)
   d8:	07f0ae23          	sw	t6,124(ra)
   dc:	0000c28b          	0xc28b
-  e0:	20000317          	auipc	t1,0x20000
-  e4:	3a030313          	addi	t1,t1,928 # 20000480 <_irq_pending>
+  e0:	10000317          	auipc	t1,0x10000
+  e4:	3a030313          	addi	t1,t1,928 # 10000480 <_irq_pending>
   e8:	00532023          	sw	t0,0(t1)
-  ec:	20000137          	lui	sp,0x20000
-  f0:	48010113          	addi	sp,sp,1152 # 20000480 <_irq_pending>
+  ec:	10000137          	lui	sp,0x10000
+  f0:	48010113          	addi	sp,sp,1152 # 10000480 <_irq_pending>
   f4:	25c000ef          	jal	ra,350 <isr>
-  f8:	200000b7          	lui	ra,0x20000
+  f8:	100000b7          	lui	ra,0x10000
   fc:	00008093          	mv	ra,ra
- 100:	0000a103          	lw	sp,0(ra) # 20000000 <_edata>
+ 100:	0000a103          	lw	sp,0(ra) # 10000000 <_edata>
  104:	0201200b          	0x201200b
  108:	0040a103          	lw	sp,4(ra)
  10c:	0201208b          	0x201208b
@@ -144,21 +144,21 @@ Disassembly of section .text:
  210:	00000f93          	li	t6,0
  214:	fff00293          	li	t0,-1
  218:	0602e00b          	0x602e00b
- 21c:	20000317          	auipc	t1,0x20000
- 220:	26830313          	addi	t1,t1,616 # 20000484 <_irq_mask>
+ 21c:	10000317          	auipc	t1,0x10000
+ 220:	26830313          	addi	t1,t1,616 # 10000484 <_irq_mask>
  224:	00532023          	sw	t0,0(t1)
- 228:	4b000293          	li	t0,1200
- 22c:	20000317          	auipc	t1,0x20000
- 230:	dd430313          	addi	t1,t1,-556 # 20000000 <_edata>
- 234:	20000397          	auipc	t2,0x20000
- 238:	dcc38393          	addi	t2,t2,-564 # 20000000 <_edata>
+ 228:	4a800293          	li	t0,1192
+ 22c:	10000317          	auipc	t1,0x10000
+ 230:	dd430313          	addi	t1,t1,-556 # 10000000 <_edata>
+ 234:	10000397          	auipc	t2,0x10000
+ 238:	dcc38393          	addi	t2,t2,-564 # 10000000 <_edata>
  23c:	0002ae03          	lw	t3,0(t0)
  240:	01c32023          	sw	t3,0(t1)
  244:	00428293          	addi	t0,t0,4
  248:	00430313          	addi	t1,t1,4
  24c:	fe7368e3          	bltu	t1,t2,23c <_crt0+0xa4>
- 250:	20000117          	auipc	sp,0x20000
- 254:	5b010113          	addi	sp,sp,1456 # 20000800 <_fstack>
+ 250:	10000117          	auipc	sp,0x10000
+ 254:	5b010113          	addi	sp,sp,1456 # 10000800 <_fstack>
  258:	00000297          	auipc	t0,0x0
  25c:	de828293          	addi	t0,t0,-536 # 40 <_irq>
  260:	0202a10b          	0x202a10b
@@ -166,12 +166,12 @@ Disassembly of section .text:
  268:	0000006f          	j	268 <_crt0+0xd0>
 
 0000026c <_irq_enable>:
- 26c:	20000297          	auipc	t0,0x20000
- 270:	21c28293          	addi	t0,t0,540 # 20000488 <_irq_enabled>
+ 26c:	10000297          	auipc	t0,0x10000
+ 270:	21c28293          	addi	t0,t0,540 # 10000488 <_irq_enabled>
  274:	00100313          	li	t1,1
  278:	0062a023          	sw	t1,0(t0)
- 27c:	20000297          	auipc	t0,0x20000
- 280:	20828293          	addi	t0,t0,520 # 20000484 <_irq_mask>
+ 27c:	10000297          	auipc	t0,0x10000
+ 280:	20828293          	addi	t0,t0,520 # 10000484 <_irq_mask>
  284:	0002a283          	lw	t0,0(t0)
  288:	0602e00b          	0x602e00b
  28c:	00008067          	ret
@@ -179,17 +179,17 @@ Disassembly of section .text:
 00000290 <_irq_disable>:
  290:	fff00293          	li	t0,-1
  294:	0602e00b          	0x602e00b
- 298:	20000297          	auipc	t0,0x20000
- 29c:	1f028293          	addi	t0,t0,496 # 20000488 <_irq_enabled>
+ 298:	10000297          	auipc	t0,0x10000
+ 29c:	1f028293          	addi	t0,t0,496 # 10000488 <_irq_enabled>
  2a0:	0002a023          	sw	zero,0(t0)
  2a4:	00008067          	ret
 
 000002a8 <_irq_setmask>:
- 2a8:	20000297          	auipc	t0,0x20000
- 2ac:	1dc28293          	addi	t0,t0,476 # 20000484 <_irq_mask>
+ 2a8:	10000297          	auipc	t0,0x10000
+ 2ac:	1dc28293          	addi	t0,t0,476 # 10000484 <_irq_mask>
  2b0:	00a2a023          	sw	a0,0(t0)
- 2b4:	20000297          	auipc	t0,0x20000
- 2b8:	1d428293          	addi	t0,t0,468 # 20000488 <_irq_enabled>
+ 2b4:	10000297          	auipc	t0,0x10000
+ 2b8:	1d428293          	addi	t0,t0,468 # 10000488 <_irq_enabled>
  2bc:	0002a283          	lw	t0,0(t0)
  2c0:	00028463          	beqz	t0,2c8 <_irq_setmask+0x20>
  2c4:	0605600b          	0x605600b
@@ -217,8 +217,8 @@ Disassembly of section .text:
  304:	ff010113          	addi	sp,sp,-16
  308:	00812623          	sw	s0,12(sp)
  30c:	01010413          	addi	s0,sp,16
- 310:	200007b7          	lui	a5,0x20000
- 314:	4847a783          	lw	a5,1156(a5) # 20000484 <_irq_mask>
+ 310:	100007b7          	lui	a5,0x10000
+ 314:	4847a783          	lw	a5,1156(a5) # 10000484 <_irq_mask>
  318:	fff7c793          	not	a5,a5
  31c:	00078513          	mv	a0,a5
  320:	00c12403          	lw	s0,12(sp)
@@ -229,8 +229,8 @@ Disassembly of section .text:
  32c:	ff010113          	addi	sp,sp,-16
  330:	00812623          	sw	s0,12(sp)
  334:	01010413          	addi	s0,sp,16
- 338:	200007b7          	lui	a5,0x20000
- 33c:	4807a783          	lw	a5,1152(a5) # 20000480 <_irq_pending>
+ 338:	100007b7          	lui	a5,0x10000
+ 33c:	4807a783          	lw	a5,1152(a5) # 10000480 <_irq_pending>
  340:	00078513          	mv	a0,a5
  344:	00c12403          	lw	s0,12(sp)
  348:	01010113          	addi	sp,sp,16
@@ -277,80 +277,73 @@ Disassembly of section .text:
  3cc:	fe010113          	addi	sp,sp,-32
  3d0:	00812e23          	sw	s0,28(sp)
  3d4:	02010413          	addi	s0,sp,32
- 3d8:	820027b7          	lui	a5,0x82002
- 3dc:	80078793          	addi	a5,a5,-2048 # 82001800 <_fstack+0x62001000>
- 3e0:	00100713          	li	a4,1
- 3e4:	00e7a023          	sw	a4,0(a5)
- 3e8:	820027b7          	lui	a5,0x82002
- 3ec:	80478793          	addi	a5,a5,-2044 # 82001804 <_fstack+0x62001004>
- 3f0:	00100713          	li	a4,1
- 3f4:	00e7a023          	sw	a4,0(a5)
- 3f8:	820027b7          	lui	a5,0x82002
- 3fc:	80878793          	addi	a5,a5,-2040 # 82001808 <_fstack+0x62001008>
- 400:	00100713          	li	a4,1
- 404:	00e7a023          	sw	a4,0(a5)
- 408:	820027b7          	lui	a5,0x82002
- 40c:	80c78793          	addi	a5,a5,-2036 # 8200180c <_fstack+0x6200100c>
- 410:	00100713          	li	a4,1
- 414:	00e7a023          	sw	a4,0(a5)
- 418:	820027b7          	lui	a5,0x82002
- 41c:	81478793          	addi	a5,a5,-2028 # 82001814 <_fstack+0x62001014>
- 420:	00100713          	li	a4,1
- 424:	00e7a023          	sw	a4,0(a5)
- 428:	820027b7          	lui	a5,0x82002
- 42c:	81478793          	addi	a5,a5,-2028 # 82001814 <_fstack+0x62001014>
- 430:	0007a023          	sw	zero,0(a5)
- 434:	820027b7          	lui	a5,0x82002
- 438:	81478793          	addi	a5,a5,-2028 # 82001814 <_fstack+0x62001014>
- 43c:	0007a023          	sw	zero,0(a5)
- 440:	820027b7          	lui	a5,0x82002
- 444:	80878793          	addi	a5,a5,-2040 # 82001808 <_fstack+0x62001008>
- 448:	00100713          	li	a4,1
- 44c:	00e7a023          	sw	a4,0(a5)
- 450:	820027b7          	lui	a5,0x82002
- 454:	80c78793          	addi	a5,a5,-2036 # 8200180c <_fstack+0x6200100c>
- 458:	0007a023          	sw	zero,0(a5)
- 45c:	fe042623          	sw	zero,-20(s0)
- 460:	02c0006f          	j	48c <main+0xc0>
- 464:	820027b7          	lui	a5,0x82002
- 468:	81478793          	addi	a5,a5,-2028 # 82001814 <_fstack+0x62001014>
- 46c:	00100713          	li	a4,1
- 470:	00e7a023          	sw	a4,0(a5)
- 474:	820027b7          	lui	a5,0x82002
- 478:	81478793          	addi	a5,a5,-2028 # 82001814 <_fstack+0x62001014>
- 47c:	0007a023          	sw	zero,0(a5)
- 480:	fec42783          	lw	a5,-20(s0)
- 484:	00178793          	addi	a5,a5,1
- 488:	fef42623          	sw	a5,-20(s0)
- 48c:	fec42703          	lw	a4,-20(s0)
- 490:	00900793          	li	a5,9
- 494:	fce7d8e3          	bge	a5,a4,464 <main+0x98>
+ 3d8:	820037b7          	lui	a5,0x82003
+ 3dc:	00100713          	li	a4,1
+ 3e0:	00e7a023          	sw	a4,0(a5) # 82003000 <_fstack+0x72002800>
+ 3e4:	820037b7          	lui	a5,0x82003
+ 3e8:	00478793          	addi	a5,a5,4 # 82003004 <_fstack+0x72002804>
+ 3ec:	00100713          	li	a4,1
+ 3f0:	00e7a023          	sw	a4,0(a5)
+ 3f4:	820037b7          	lui	a5,0x82003
+ 3f8:	00878793          	addi	a5,a5,8 # 82003008 <_fstack+0x72002808>
+ 3fc:	00100713          	li	a4,1
+ 400:	00e7a023          	sw	a4,0(a5)
+ 404:	820037b7          	lui	a5,0x82003
+ 408:	00c78793          	addi	a5,a5,12 # 8200300c <_fstack+0x7200280c>
+ 40c:	00100713          	li	a4,1
+ 410:	00e7a023          	sw	a4,0(a5)
+ 414:	820037b7          	lui	a5,0x82003
+ 418:	01478793          	addi	a5,a5,20 # 82003014 <_fstack+0x72002814>
+ 41c:	00100713          	li	a4,1
+ 420:	00e7a023          	sw	a4,0(a5)
+ 424:	820037b7          	lui	a5,0x82003
+ 428:	01478793          	addi	a5,a5,20 # 82003014 <_fstack+0x72002814>
+ 42c:	0007a023          	sw	zero,0(a5)
+ 430:	820037b7          	lui	a5,0x82003
+ 434:	01478793          	addi	a5,a5,20 # 82003014 <_fstack+0x72002814>
+ 438:	0007a023          	sw	zero,0(a5)
+ 43c:	820037b7          	lui	a5,0x82003
+ 440:	00878793          	addi	a5,a5,8 # 82003008 <_fstack+0x72002808>
+ 444:	00100713          	li	a4,1
+ 448:	00e7a023          	sw	a4,0(a5)
+ 44c:	820037b7          	lui	a5,0x82003
+ 450:	00c78793          	addi	a5,a5,12 # 8200300c <_fstack+0x7200280c>
+ 454:	0007a023          	sw	zero,0(a5)
+ 458:	fe042623          	sw	zero,-20(s0)
+ 45c:	02c0006f          	j	488 <main+0xbc>
+ 460:	820037b7          	lui	a5,0x82003
+ 464:	01478793          	addi	a5,a5,20 # 82003014 <_fstack+0x72002814>
+ 468:	00100713          	li	a4,1
+ 46c:	00e7a023          	sw	a4,0(a5)
+ 470:	820037b7          	lui	a5,0x82003
+ 474:	01478793          	addi	a5,a5,20 # 82003014 <_fstack+0x72002814>
+ 478:	0007a023          	sw	zero,0(a5)
+ 47c:	fec42783          	lw	a5,-20(s0)
+ 480:	00178793          	addi	a5,a5,1
+ 484:	fef42623          	sw	a5,-20(s0)
+ 488:	fec42703          	lw	a4,-20(s0)
+ 48c:	00900793          	li	a5,9
+ 490:	fce7d8e3          	bge	a5,a4,460 <main+0x94>
+ 494:	00000013          	nop
  498:	00000013          	nop
- 49c:	00000013          	nop
- 4a0:	01c12403          	lw	s0,28(sp)
- 4a4:	02010113          	addi	sp,sp,32
- 4a8:	00008067          	ret
-
-Disassembly of section .rodata:
-
-000004ac <_erodata-0x4>:
- 4ac:	0000                	unimp
-	...
+ 49c:	01c12403          	lw	s0,28(sp)
+ 4a0:	02010113          	addi	sp,sp,32
+ 4a4:	00008067          	ret
 
 Disassembly of section .bss:
 
-20000000 <_fbss>:
+10000000 <_fbss>:
 	...
 
-20000480 <_irq_pending>:
-20000480:	0000                	unimp
+10000480 <_irq_pending>:
+10000480:	0000                	unimp
 	...
 
-20000484 <_irq_mask>:
-20000484:	0000                	unimp
+10000484 <_irq_mask>:
+10000484:	0000                	unimp
 	...
 
-20000488 <_irq_enabled>:
+10000488 <_irq_enabled>:
 	...
 
 Disassembly of section .riscv.attributes:

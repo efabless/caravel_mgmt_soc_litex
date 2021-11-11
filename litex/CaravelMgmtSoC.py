@@ -12,50 +12,78 @@ from litex.build.lattice import LatticePlatform
 _io = [
     ("core_clk", 0, Pins(1)),
     ("core_rst", 0, Pins(1)),
-    # ("sys_clk", 0, Pins(1)),
-    # ("sys_rst", 0, Pins(1)),
 
-        # Serial
- 
-    ("serial_dbg", 0,
-        Subsignal("rx", Pins("1")),
-        Subsignal("tx", Pins("1")),
-    ),
+    # GPIO mgmt
+    ("gpio", 0,
+     Subsignal("out_pad", Pins(1)),
+     Subsignal("in_pad", Pins(1)),
+     Subsignal("outenb_pad", Pins(1)),
+     Subsignal("inenb_pad", Pins(1)),
+     Subsignal("mode0_pad", Pins(1)),
+     Subsignal("mode1_pad", Pins(1)),
+     ),
 
+    # Logic analyzer
+    ("la", 0,
+     Subsignal("output", Pins(128)),
+     Subsignal("input", Pins(128)),
+     Subsignal("oenb", Pins(128)),
+     Subsignal("iena", Pins(128)),
+     ),
+
+    # Flash memory controller (SPI master)
+    ("flash", 0,
+     Subsignal("cs_n", Pins(1)),
+     # Subsignal("csb", Pins(1)),
+     Subsignal("clk", Pins(1)),
+     Subsignal("io0_oeb", Pins(1)),
+     Subsignal("io1_oeb", Pins(1)),
+     Subsignal("io2_oeb", Pins(1)),
+     Subsignal("io3_oeb", Pins(1)),
+     Subsignal("io0_do", Pins(1)),
+     Subsignal("io1_do", Pins(1)),
+     Subsignal("io2_do", Pins(1)),
+     Subsignal("io3_do", Pins(1)),
+     Subsignal("io0_di", Pins(1)),
+     Subsignal("io1_di", Pins(1)),
+     Subsignal("io2_di", Pins(1)),
+     Subsignal("io3_di", Pins(1)),
+     ),
+
+    # Exported wishbone bus
+    ("mprj", 0,
+     Subsignal("wb_iena", Pins(1)),  # enable for the user wishbone return signals
+     Subsignal("cyc_o", Pins(1)),
+     Subsignal("stb_o", Pins(1)),
+     Subsignal("we_o", Pins(1)),
+     Subsignal("sel_o", Pins(4)),
+     Subsignal("adr_o", Pins(32)),
+     Subsignal("dat_o", Pins(32)),
+     Subsignal("dat_i", Pins(32)),
+     Subsignal("ack_i", Pins(1)),
+     ),
+
+    # Housekeeping
+    ("hk", 0,
+     Subsignal("dat_i", Pins(32)),
+     Subsignal("stb_o", Pins(1)),
+     Subsignal("ack_i", Pins(1)),
+     ),
+
+    # IRQ
+    ("user_irq", 0, Pins(6)),
+    ("user_irq_ena", 0, Pins(3)),
+
+    # Module status
+    ("qspi_enabled", 0, Pins(1)),
+    ("uart_enabled", 0, Pins(1)),
+    ("spi_enabled", 0, Pins(1)),
+    ("debug_mode", 0, Pins(1)),
+
+    # Serial UART
     ("ser", 0,
         Subsignal("rx", Pins("1")),
         Subsignal("tx", Pins("1")),
-    ),
-
-    # SPIFlash
-    # SPI Mode
-    # ("flash", 0,
-    #     Subsignal("cs_n", Pins("1")),
-    #     Subsignal("clk",  Pins("1")),
-    #     Subsignal("miso", Pins("1")),
-    #     Subsignal("mosi", Pins("1")),
-    #     Subsignal("wp",   Pins("1")),
-    #     Subsignal("hold", Pins("1")),
-    # ),
-    # QSPI mode
-    # ("spiflash4x", 0,
-    ("flash", 0,
-        Subsignal("cs_n", Pins(1)),
-        # Subsignal("csb", Pins(1)),
-        Subsignal("clk",  Pins(1)),
-        # Subsignal("dq",   Pins(4)),
-        Subsignal("io0_oeb", Pins(1)),
-        Subsignal("io1_oeb", Pins(1)),
-        Subsignal("io2_oeb", Pins(1)),
-        Subsignal("io3_oeb", Pins(1)),
-        Subsignal("io0_do", Pins(1)),
-        Subsignal("io1_do", Pins(1)),
-        Subsignal("io2_do", Pins(1)),
-        Subsignal("io3_do", Pins(1)),
-        Subsignal("io0_di",   Pins(1)),
-        Subsignal("io1_di",   Pins(1)),
-        Subsignal("io2_di",   Pins(1)),
-        Subsignal("io3_di",   Pins(1)),
     ),
 
     # SPI master Controller
@@ -64,42 +92,38 @@ _io = [
         Subsignal("cs_n", Pins(1)),
         Subsignal("mosi", Pins(1)),
         Subsignal("miso", Pins(1)),
+        Subsignal("sdoenb", Pins(1)),
     ),
 
-    # GPIO Pin
-    ("gpio", 0,
-        Subsignal("out_pad",  Pins(1)),
-        Subsignal("in_pad", Pins(1)),
-        Subsignal("outenb_pad", Pins(1)),
-        Subsignal("inenb_pad", Pins(1)),
-        Subsignal("mode0_pad", Pins(1)),
-        Subsignal("mode1_pad", Pins(1)),
-    ),
+    ("debug", 0,
+     Subsignal("rx", Pins("1")),
+     Subsignal("tx", Pins("1")),
+     Subsignal("oeb", Pins("1")),
+     ),
 
-    # Logic Analyzer
-    ("la", 0,
-     Subsignal("output", Pins(128)),
-     Subsignal("input", Pins(128)),
-     Subsignal("oenb", Pins(128)),
-     Subsignal("iena", Pins(128)),
-    ),
+    # SRAM read-only access from housekeeping
+    ("sram_ro", 0,
+     Subsignal("clk", Pins(1)),
+     Subsignal("csb", Pins(1)),
+     Subsignal("addr", Pins(8)),
+     Subsignal("data", Pins(32)),
+     ),
 
-    # User's input control
-    ("mprj_wb_iena", 0,
-     Pins(1)
-     # Subsignal("o", Pins(1)),
-    ),
+    ("trap", 0, Pins(1)),
 
-    ("user_irq_ena", 0,
-     Pins(3)
-     # Subsignal("o", Pins(3)),
-    ),
+    # Memory Interface
+    ("mem", 0,
+     Subsignal("ena", Pins(1)),
+     Subsignal("wen", Pins(4)),
+     Subsignal("addr", Pins(8)),
+     Subsignal("wdata", Pins(32)),
+     Subsignal("rdata", Pins(32)),
+     ),
 
-     # 6 IRQ lines
-    ("user_irq", 0,
-     Pins(6)
-     # Subsignal("i", Pins(6)),
-    ),
+    ("sdo_oenb_state", 0, Pins(1)),
+    ("jtag_oenb_state", 0, Pins(1)),
+    ("flash_io2_oenb_state", 0, Pins(1)),
+    ("flash_io3_oenb_state", 0, Pins(1)),
 
 ]
 
