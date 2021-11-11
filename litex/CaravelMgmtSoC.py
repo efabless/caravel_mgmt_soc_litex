@@ -92,7 +92,7 @@ _io = [
         Subsignal("cs_n", Pins(1)),
         Subsignal("mosi", Pins(1)),
         Subsignal("miso", Pins(1)),
-        Subsignal("sdoenb", Pins(1)), # TODO:
+        Subsignal("sdoenb", Pins(1)),
     ),
 
     ("debug", 0,
@@ -111,7 +111,7 @@ _io = [
 
     ("trap", 0, Pins(1)),
 
-    # Memory Interface  TODO:
+    # Memory Interface
     ("mem", 0,
      Subsignal("ena", Pins(1)),
      Subsignal("wen", Pins(4)),
@@ -119,11 +119,6 @@ _io = [
      Subsignal("wdata", Pins(32)),
      Subsignal("rdata", Pins(32)),
      ),
-
-    ("sdo_oenb_state", 0, Pins(1)),
-    ("jtag_oenb_state", 0, Pins(1)),
-    ("flash_io2_oenb_state", 0, Pins(1)),
-    ("flash_io3_oenb_state", 0, Pins(1)),
 
 ]
 

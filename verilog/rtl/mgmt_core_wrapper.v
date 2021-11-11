@@ -209,11 +209,11 @@ module mgmt_core_wrapper (
     	.spi_cs_n(spi_csb),
     	.spi_clk(spi_sck),
     	.spi_miso(spi_sdo),
-//    	.spi_sdoenb(spi_sdoenb),
-    	.spi_mosi(spi_sdi)
-//    	.debug_in(debug_in),
-//    	.debug_out(debug_out),
-//    	.debug_oeb(debug_oeb),
+    	.spi_sdoenb(spi_sdoenb),
+    	.spi_mosi(spi_sdi),
+    	.debug_rx(debug_in),
+    	.debug_tx(debug_out),
+    	.debug_oeb(debug_oeb),
 
         // DFFRAM Interface 
 //        .mem_wen(mem_wen),
@@ -223,10 +223,10 @@ module mgmt_core_wrapper (
 //        .mem_addr(mem_addr),
 
         // SRAM read-only access from housekeeping
-//        .sram_ro_clk(sram_ro_clk),
-//        .sram_ro_csb(sram_ro_csb),
-//        .sram_ro_addr(sram_ro_addr),
-//        .sram_ro_data(sram_ro_data)
+        .sram_ro_clk(sram_ro_clk),
+        .sram_ro_csb(sram_ro_csb),
+        .sram_ro_addr(sram_ro_addr),
+        .sram_ro_data(sram_ro_data)
     );
 
     // DFFRAM

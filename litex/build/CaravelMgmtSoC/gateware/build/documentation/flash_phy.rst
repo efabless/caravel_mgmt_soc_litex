@@ -7,13 +7,13 @@ Register Listing for FLASH_PHY
 +------------------------------------------------------+-------------------------------------------+
 | Register                                             | Address                                   |
 +======================================================+===========================================+
-| :ref:`FLASH_PHY_CLK_DIVISOR <FLASH_PHY_CLK_DIVISOR>` | :ref:`0x82002800 <FLASH_PHY_CLK_DIVISOR>` |
+| :ref:`FLASH_PHY_CLK_DIVISOR <FLASH_PHY_CLK_DIVISOR>` | :ref:`0x82002000 <FLASH_PHY_CLK_DIVISOR>` |
 +------------------------------------------------------+-------------------------------------------+
 
 FLASH_PHY_CLK_DIVISOR
 ^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82002800 + 0x0 = 0x82002800`
+`Address: 0x82002000 + 0x0 = 0x82002000`
 
 
     .. wavedrom::

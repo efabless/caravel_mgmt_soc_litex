@@ -30,7 +30,8 @@ from OpenRAM import *
 # MGMTSoC
 class MGMTSoC(SoCMini):
     SoCMini.mem_map = {
-        "sram":             0x10000000,
+        "mem":              0x10000000,
+        "sram":             0x11000000,
         "flash":            0x00000000,
         "mprj":             0x30000000,
         "hk":               0x26000000,
@@ -69,7 +70,22 @@ class MGMTSoC(SoCMini):
                          # with_timer=True,
                          **kwargs)
 
-        #Use OpenRAM
+        #DFFRAM
+        dff_size = 1 * 1024
+        mem = self.submodules.mem = DFFRAM(size=dff_size)
+        self.register_mem("mem", self.mem_map["mem"], self.mem.bus, dff_size)
+        mem_ports = platform.request("mem")
+        # self.comb += mem_ports.cyc_o.eq(mem.cyc)
+        # self.comb += mem_ports.stb_o.eq(mem.stb)
+        self.comb += mem_ports.wen.eq(mem.wren_b)
+        # self.comb += mem_ports.sel_o.eq(mem.sel)
+        self.comb += mem_ports.addr.eq(mem.bus.adr)
+        self.comb += mem.datain.eq(mem_ports.rdata)
+        self.comb += mem_ports.wdata.eq(mem.dataout)
+        # self.comb += mem.ack.eq(mem_ports.ack_i)
+        self.comb += mem.ena.eq(mem_ports.ena)
+
+        #OpenRAM
         spram_size = 2 * 1024
         sram = self.submodules.spram = OpenRAM(size=spram_size)
         self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
@@ -95,6 +111,7 @@ class MGMTSoC(SoCMini):
         spi_master.add_clk_divider()
         self.submodules.spi_master = spi_master
         #self.add_interrupt(interrupt_name="spi_master")
+        self.comb += spi_master.pads.sdoenb.eq(~spi_master.pads.cs_n)
 
         # Add a wb port for external slaves user_project
         mprj_ports = platform.request("mprj")
@@ -119,7 +136,6 @@ class MGMTSoC(SoCMini):
         self.comb += hk.ack.eq(hk_ports.ack_i)
 
 
-
         # Add ROM linker region --------------------------------------------------------------------
         # self.bus.add_region("rom", SoCRegion(
         #     origin = self.mem_map["flash"],
@@ -128,8 +144,10 @@ class MGMTSoC(SoCMini):
         # )
 
         # Add Debug Interface (UART)
-        self.submodules.uart_bridge = UARTWishboneBridge(platform.request("debug"), sys_clk_freq, baudrate=115200)
+        debug_ports = platform.request("debug")
+        self.submodules.uart_bridge = UARTWishboneBridge(debug_ports, sys_clk_freq, baudrate=115200)
         self.add_wb_master(self.uart_bridge.wishbone)
+        self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)
 
         self.submodules.uart_bridge = UARTWishboneBridge(platform.request("ser"), sys_clk_freq, baudrate=115200)
 
@@ -145,11 +163,6 @@ class MGMTSoC(SoCMini):
         self.submodules.uart_enabled = GPIOOut(platform.request("uart_enabled"))
         self.submodules.spi_enabled = GPIOOut(platform.request("spi_enabled"))
         self.submodules.debug_mode = GPIOOut(platform.request("debug_mode"))
-
-        self.submodules.sdo_oenb_state = GPIOOut(platform.request("sdo_oenb_state"))
-        self.submodules.jtag_oenb_state = GPIOOut(platform.request("jtag_oenb_state"))
-        self.submodules.flash_io2_oenb_state = GPIOOut(platform.request("flash_io2_oenb_state"))
-        self.submodules.flash_io3_oenb_state = GPIOOut(platform.request("flash_io3_oenb_state"))
 
         trap = platform.request("trap")
         self.comb += trap.eq(self.cpu.trap)
