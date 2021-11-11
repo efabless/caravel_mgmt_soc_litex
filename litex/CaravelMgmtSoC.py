@@ -92,13 +92,13 @@ _io = [
         Subsignal("cs_n", Pins(1)),
         Subsignal("mosi", Pins(1)),
         Subsignal("miso", Pins(1)),
-        Subsignal("sdoenb", Pins(1)),
+        Subsignal("sdoenb", Pins(1)), # TODO:
     ),
 
     ("debug", 0,
      Subsignal("rx", Pins("1")),
      Subsignal("tx", Pins("1")),
-     Subsignal("oeb", Pins("1")),
+     Subsignal("oeb", Pins("1")), # TODO:
      ),
 
     # SRAM read-only access from housekeeping
@@ -111,7 +111,7 @@ _io = [
 
     ("trap", 0, Pins(1)),
 
-    # Memory Interface
+    # Memory Interface  TODO:
     ("mem", 0,
      Subsignal("ena", Pins(1)),
      Subsignal("wen", Pins(4)),

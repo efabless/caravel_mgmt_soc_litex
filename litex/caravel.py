@@ -71,8 +71,13 @@ class MGMTSoC(SoCMini):
 
         #Use OpenRAM
         spram_size = 2 * 1024
-        self.submodules.spram = OpenRAM(size=spram_size)
+        sram = self.submodules.spram = OpenRAM(size=spram_size)
         self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
+        sram_ro_ports = platform.request("sram_ro")
+        self.comb += sram_ro_ports.clk.eq(sram.clk1)
+        self.comb += sram_ro_ports.csb.eq(sram.cs_b1)
+        self.comb += sram_ro_ports.addr.eq(sram.adr1)
+        self.comb += sram_ro_ports.data.eq(sram.dataout1)
 
         # SPI Flash --------------------------------------------------------------------------------
         from litespi.modules import W25Q128JV
@@ -146,6 +151,9 @@ class MGMTSoC(SoCMini):
         self.submodules.jtag_oenb_state = GPIOOut(platform.request("jtag_oenb_state"))
         self.submodules.flash_io2_oenb_state = GPIOOut(platform.request("flash_io2_oenb_state"))
         self.submodules.flash_io3_oenb_state = GPIOOut(platform.request("flash_io3_oenb_state"))
+
+        trap = platform.request("trap")
+        self.comb += trap.eq(self.cpu.trap)
 
         self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
 

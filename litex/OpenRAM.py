@@ -22,6 +22,13 @@ class OpenRAM(Module):
         maskwren = Signal(4)
         wren_b   = Signal()
         cs_b     = Signal()
+
+        # ro port signals
+        self.clk1     = Signal()
+        self.cs_b1    = Signal()
+        self.adr1     = Signal(32)
+        self.dataout1 = Signal(32)
+
         self.comb += [
             datain.eq(self.bus.dat_w[0:32]),
             # If(self.bus.adr[9:8+log2_int(depth_cascading)+1] == d,
@@ -47,7 +54,13 @@ class OpenRAM(Module):
             i_wmask0  = maskwren,
             i_web0    = wren_b,
             i_csb0    = cs_b,
-            o_dout0   = dataout
+            o_dout0   = dataout,
+
+            # ro port
+            i_clk1    = self.clk1,
+            i_addr1   = self.adr1,
+            i_csb1    = self.cs_b1,
+            o_dout1   = self.dataout1
         )
 
         self.sync += self.bus.ack.eq(self.bus.stb & self.bus.cyc & ~self.bus.ack)
