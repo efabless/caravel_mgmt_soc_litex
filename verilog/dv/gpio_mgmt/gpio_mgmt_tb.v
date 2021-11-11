@@ -174,7 +174,11 @@ module gpio_mgmt_tb;
 		.flash_clk(flash_clk),
 		.flash_io0_oeb(),
 		.flash_io0_do(flash_io0),
-		.flash_io1_di(flash_io1)
+		.flash_io1_di(flash_io1),
+		.mprj_dat_i(32'b0),
+		.mprj_ack_i(1'b0),
+        .hk_dat_i(32'b0),
+		.hk_ack_i(1'b0)
 	);
 
 	spiflash #(

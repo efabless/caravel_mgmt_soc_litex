@@ -184,24 +184,24 @@ module mgmt_core_wrapper (
 
         // Exported wishbone bus (User project)
 	    .mprj_wb_iena(mprj_wb_iena),
-//        .mprj_ack_i(mprj_ack_i),
-//        .mprj_dat_i(mprj_dat_i),
-//        .mprj_cyc_o(mprj_cyc_o),
-//        .mprj_stb_o(mprj_stb_o),
-//        .mprj_we_o(mprj_we_o),
-//        .mprj_sel_o(mprj_sel_o),
-//        .mprj_adr_o(mprj_adr_o),
-//        .mprj_dat_o(mprj_dat_o),
+        .mprj_ack_i(mprj_ack_i),
+        .mprj_dat_i(mprj_dat_i),
+        .mprj_cyc_o(mprj_cyc_o),
+        .mprj_stb_o(mprj_stb_o),
+        .mprj_we_o(mprj_we_o),
+        .mprj_sel_o(mprj_sel_o),
+        .mprj_adr_o(mprj_adr_o),
+        .mprj_dat_o(mprj_dat_o),
 
-//        .hk_stb_o(hk_stb_o),
-//        .hk_dat_i(hk_dat_i),
-//        .hk_ack_i(hk_ack_i),
+        .hk_stb_o(hk_stb_o),
+        .hk_dat_i(hk_dat_i),
+        .hk_ack_i(hk_ack_i),
 
     	// Module status
-//    	.qspi_enabled(qspi_enabled),
-//    	.uart_enabled(uart_enabled),
-//    	.spi_enabled(spi_enabled),
-//    	.debug_mode(debug_mode),
+    	.qspi_enabled(qspi_enabled),
+    	.uart_enabled(uart_enabled),
+    	.spi_enabled(spi_enabled),
+    	.debug_mode(debug_mode),
 
     	// Module I/O
     	.ser_tx(ser_tx),

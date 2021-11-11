@@ -99,26 +99,25 @@ class MGMTSoC(SoCMini):
         # Add a wb port for external slaves user_project
         mprj_ports = platform.request("mprj")
         mprj = wishbone.Interface()
-        # self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x0100000))
+        self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x0100000))
         self.submodules.mprj_wb_iena = GPIOOut(mprj_ports.wb_iena)
         self.comb += mprj_ports.cyc_o.eq(mprj.cyc)
         self.comb += mprj_ports.stb_o.eq(mprj.stb)
         self.comb += mprj_ports.we_o.eq(mprj.we)
         self.comb += mprj_ports.sel_o.eq(mprj.sel)
         self.comb += mprj_ports.adr_o.eq(mprj.adr)
-        self.specials += MultiReg(mprj_ports.dat_i, mprj.dat_r)
+        self.comb += mprj.dat_r.eq(mprj_ports.dat_i)
         self.comb += mprj_ports.dat_o.eq(mprj.dat_w)
-        self.specials += MultiReg(mprj_ports.ack_i, mprj.ack)
-        # self.comb += mprj.connect_to_pads(mprj_ports, mode="master")
+        self.comb += mprj.ack.eq(mprj_ports.ack_i)
 
         # Add a wb port for external slaves housekeeping
         hk = wishbone.Interface()
-        # self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
+        self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
         hk_ports = platform.request("hk")
-        # self.comb += wb_bus.connect_to_pads(wb_pads, mode="master")
         self.comb += hk_ports.stb_o.eq(hk.stb)
-        self.comb += hk_ports.dat_i.eq(hk.dat_r)
-        self.specials += MultiReg(hk_ports.ack_i, hk.ack)
+        self.comb += hk.dat_r.eq(hk_ports.dat_i)
+        self.comb += hk.ack.eq(hk_ports.ack_i)
+
 
 
         # Add ROM linker region --------------------------------------------------------------------
