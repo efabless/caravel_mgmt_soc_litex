@@ -24,10 +24,7 @@
 
 `timescale 1 ns / 1 ps
 
-//`include "__uprj_netlists.v"
-//`include "caravel_netlists.v"
 `include "defines.v"
-//`include "sram_1rw1r_32_256_8_sky130.v"
 `include "sky130_sram_2kbyte_1rw1r_32x512_8.v"
 `include "picorv32.v"
 `include "spiflash.v"
@@ -64,15 +61,15 @@ module gpio_mgmt_tb;
 		$finish;
 	end
 
-	wire [37:0] mprj_io;	// Most of these are no-connects
+	wire [37:0] la_output;	// Most of these are no-connects
 	wire [15:0] checkbits;
 	reg  [7:0] checkbits_lo;
 	wire [7:0] checkbits_hi;
 
-	assign mprj_io[23:16] = checkbits_lo;
-	assign checkbits = mprj_io[31:16];
+	assign la_output[23:16] = checkbits_lo;
+	assign checkbits = la_output[31:16];
 	assign checkbits_hi = checkbits[15:8];
-	assign mprj_io[3] = 1'b1;       // Force CSB high.
+	assign la_output[3] = 1'b1;       // Force CSB high.
 
 	wire flash_csb;
 	wire flash_clk;
@@ -170,6 +167,7 @@ module gpio_mgmt_tb;
 		.core_rstn	  (RSTB),
 		.gpio_out_pad     (gpio),
 //		.mprj_io  (mprj_io),
+		.la_output (la_output),
 		.flash_csb(flash_csb),
 		.flash_clk(flash_clk),
 		.flash_io0_oeb(),

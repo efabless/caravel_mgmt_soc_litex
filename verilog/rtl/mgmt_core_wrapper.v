@@ -33,6 +33,7 @@
 /* Wrapper module around management SoC core for pin compatibility	*/
 /* with the Caravel harness chip.					*/
 
+`include "DFFRAM_beh.v"
 //`include "DFFRAM.v"
 //`include "DFFRAMBB.v"
 `include "mgmt_core.v"
@@ -127,11 +128,11 @@ module mgmt_core_wrapper (
 );
 
     // Memory Interface 
-    wire mem_ena;
-    wire [3:0] mem_wen;
-    wire [7:0] mem_addr;
-    wire [31:0] mem_wdata;
-    wire [31:0] mem_rdata; 
+    wire mgmt_soc_dff_EN;
+    wire [3:0] mgmt_soc_dff_WE;
+    wire [7:0] mgmt_soc_dff_A;
+    wire [31:0] mgmt_soc_dff_Di;
+    wire [31:0] mgmt_soc_dff_Do;
 
     /* Implement the PicoSoC core */
 
@@ -216,11 +217,11 @@ module mgmt_core_wrapper (
     	.debug_oeb(debug_oeb),
 
         // DFFRAM Interface 
-//        .mem_wen(mem_wen),
-//        .mem_ena(mem_ena),
-//        .mem_wdata(mem_wdata),
-//        .mem_rdata(mem_rdata),
-//        .mem_addr(mem_addr),
+        .mgmt_soc_dff_WE(mgmt_soc_dff_WE),
+        .mgmt_soc_dff_EN(mgmt_soc_dff_EN),
+        .mgmt_soc_dff_Do(mgmt_soc_dff_Do),
+        .mgmt_soc_dff_Di(mgmt_soc_dff_Di),
+        .mgmt_soc_dff_A(mgmt_soc_dff_A),
 
         // SRAM read-only access from housekeeping
         .sram_ro_clk(sram_ro_clk),
@@ -230,21 +231,21 @@ module mgmt_core_wrapper (
     );
 
     // DFFRAM
-//    DFFRAM #(
-//        .WSIZE(`DFFRAM_WSIZE),
-//        .USE_LATCH(`DFFRAM_USE_LATCH)
-//    ) DFFRAM (
-//    `ifdef USE_POWER_PINS
-//        .VPWR(VPWR),
-//        .VGND(VGND),
-//    `endif
-//        .CLK(core_clk),
-//        .WE(mem_wen),
-//        .EN(mem_ena),
-//        .Di(mem_wdata),
-//        .Do(mem_rdata),
-//        .A(mem_addr)   // 8-bit address if using the default custom DFF RAM
-//    );
+    DFFRAM_beh #(
+        .WSIZE(`DFFRAM_WSIZE),
+        .USE_LATCH(`DFFRAM_USE_LATCH)
+    ) DFFRAM (
+    `ifdef USE_POWER_PINS
+        .VPWR(VPWR),
+        .VGND(VGND),
+    `endif
+        .CLK(core_clk),
+        .WE(mgmt_soc_dff_WE),
+        .EN(mgmt_soc_dff_EN),
+        .Di(mgmt_soc_dff_Di),
+        .Do(mgmt_soc_dff_Do),
+        .A(mgmt_soc_dff_A)   // 8-bit address if using the default custom DFF RAM
+    );
 
 endmodule
 `default_nettype wire

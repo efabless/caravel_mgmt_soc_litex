@@ -30,7 +30,7 @@ from OpenRAM import *
 # MGMTSoC
 class MGMTSoC(SoCMini):
     SoCMini.mem_map = {
-        "mem":              0x10000000,
+        "dff":              0x10000000,
         "sram":             0x11000000,
         "flash":            0x00000000,
         "mprj":             0x30000000,
@@ -72,18 +72,14 @@ class MGMTSoC(SoCMini):
 
         #DFFRAM
         dff_size = 1 * 1024
-        mem = self.submodules.mem = DFFRAM(size=dff_size)
-        self.register_mem("mem", self.mem_map["mem"], self.mem.bus, dff_size)
-        mem_ports = platform.request("mem")
-        # self.comb += mem_ports.cyc_o.eq(mem.cyc)
-        # self.comb += mem_ports.stb_o.eq(mem.stb)
-        self.comb += mem_ports.wen.eq(mem.wren_b)
-        # self.comb += mem_ports.sel_o.eq(mem.sel)
-        self.comb += mem_ports.addr.eq(mem.bus.adr)
-        self.comb += mem.datain.eq(mem_ports.rdata)
-        self.comb += mem_ports.wdata.eq(mem.dataout)
-        # self.comb += mem.ack.eq(mem_ports.ack_i)
-        self.comb += mem.ena.eq(mem_ports.ena)
+        dff = self.submodules.mem = DFFRAM(size=dff_size)
+        self.register_mem("dff", self.mem_map["dff"], self.mem.bus, dff_size)
+        mgmt_soc_dff = platform.request("mgmt_soc_dff")
+        self.comb += mgmt_soc_dff.WE.eq(dff.we)
+        self.comb += mgmt_soc_dff.A.eq(dff.a)
+        self.comb += dff.do.eq(mgmt_soc_dff.Do)
+        self.comb += mgmt_soc_dff.Di.eq(dff.di)
+        self.comb += dff.en.eq(mgmt_soc_dff.EN)
 
         #OpenRAM
         spram_size = 2 * 1024

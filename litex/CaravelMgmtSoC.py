@@ -112,12 +112,19 @@ _io = [
     ("trap", 0, Pins(1)),
 
     # Memory Interface
-    ("mem", 0,
-     Subsignal("ena", Pins(1)),
-     Subsignal("wen", Pins(4)),
-     Subsignal("addr", Pins(8)),
-     Subsignal("wdata", Pins(32)),
-     Subsignal("rdata", Pins(32)),
+    # ("mem", 0,
+    #  Subsignal("ena", Pins(1)),
+    #  Subsignal("wen", Pins(4)),
+    #  Subsignal("addr", Pins(8)),
+    #  Subsignal("wdata", Pins(32)),
+    #  Subsignal("rdata", Pins(32)),
+    #  ),
+    ("mgmt_soc_dff", 0,
+     Subsignal("EN", Pins(1)),
+     Subsignal("WE", Pins(4)),
+     Subsignal("A", Pins(8)),
+     Subsignal("Di", Pins(32)),
+     Subsignal("Do", Pins(32)),
      ),
 
 ]
