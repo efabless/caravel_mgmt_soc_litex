@@ -37,7 +37,7 @@ module mem_tb;
 
 	wire gpio;
     wire [15:0] checkbits;
-	wire [37:0] la_output;
+	wire [127:0] la_output;
 	wire flash_csb;
 	wire flash_clk;
 	wire flash_io0;
@@ -60,7 +60,7 @@ module mem_tb;
 		$dumpvars(0, mem_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (100) begin
+		repeat (300) begin
 			repeat (1000) @(posedge core_clk);
 			//$display("+1000 cycles");
 		end

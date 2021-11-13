@@ -26,17 +26,16 @@ class OpenRAM(Module):
         # ro port signals
         self.clk1     = Signal()
         self.cs_b1    = Signal()
-        self.adr1     = Signal(32)
+        self.adr1     = Signal(9)
         self.dataout1 = Signal(32)
 
         self.comb += [
             datain.eq(self.bus.dat_w[0:32]),
             # If(self.bus.adr[9:8+log2_int(depth_cascading)+1] == d,
-            If(self.bus.adr[9:9+log2_int(depth_cascading)+1] == 1,
-                wren_b.eq(~(self.bus.we & self.bus.stb & self.bus.cyc)),
-                self.bus.dat_r[0:32].eq(dataout),
-                cs_b.eq(0)
-            ),
+            wren_b.eq(~(self.bus.we & self.bus.stb & self.bus.cyc)),
+            self.bus.dat_r[0:32].eq(dataout),
+            cs_b.eq(0),
+            # ),
             # maskwren is nibble based
             maskwren[0].eq(self.bus.sel[0]),
             maskwren[1].eq(self.bus.sel[1]),
@@ -76,13 +75,11 @@ class DFFRAM(Module):
 
         self.di   = Signal(32)
         self.do  = Signal(32)
-        self.a  = Signal(32)
         self.we   = Signal()
         self.en     = Signal()
 
         self.comb += [
             self.di.eq(self.bus.dat_w[0:32]),
-            self.bus.adr.eq(self.a[0:32]),
             self.we.eq((self.bus.we & self.bus.stb & self.bus.cyc)),
             self.bus.dat_r[0:32].eq(self.do),
             self.en.eq(self.bus.stb & self.bus.cyc),

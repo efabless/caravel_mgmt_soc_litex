@@ -76,10 +76,10 @@ class MGMTSoC(SoCMini):
         self.register_mem("dff", self.mem_map["dff"], self.mem.bus, dff_size)
         mgmt_soc_dff = platform.request("mgmt_soc_dff")
         self.comb += mgmt_soc_dff.WE.eq(dff.we)
-        self.comb += mgmt_soc_dff.A.eq(dff.a)
+        self.comb += mgmt_soc_dff.A.eq(dff.bus.adr)
         self.comb += dff.do.eq(mgmt_soc_dff.Do)
         self.comb += mgmt_soc_dff.Di.eq(dff.di)
-        self.comb += dff.en.eq(mgmt_soc_dff.EN)
+        self.comb += mgmt_soc_dff.EN.eq(dff.en)
 
         #OpenRAM
         spram_size = 2 * 1024
