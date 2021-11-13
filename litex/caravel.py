@@ -29,10 +29,11 @@ from OpenRAM import *
 
 # MGMTSoC
 class MGMTSoC(SoCMini):
+
     SoCMini.mem_map = {
-        "dff":              0x10000000,
-        "sram":             0x11000000,
-        "flash":            0x00000000,
+        "dff":              0x00000000,
+        "sram":             0x01000000,
+        "flash":            0x10000000,
         "mprj":             0x30000000,
         "hk":               0x26000000,
         "csr":              0x20000000,
