@@ -7,13 +7,13 @@ Register Listing for USER_IRQ_ENA
 +--------------------------------------------+--------------------------------------+
 | Register                                   | Address                              |
 +============================================+======================================+
-| :ref:`USER_IRQ_ENA_OUT <USER_IRQ_ENA_OUT>` | :ref:`0x82009000 <USER_IRQ_ENA_OUT>` |
+| :ref:`USER_IRQ_ENA_OUT <USER_IRQ_ENA_OUT>` | :ref:`0x82009800 <USER_IRQ_ENA_OUT>` |
 +--------------------------------------------+--------------------------------------+
 
 USER_IRQ_ENA_OUT
 ^^^^^^^^^^^^^^^^
 
-`Address: 0x82009000 + 0x0 = 0x82009000`
+`Address: 0x82009800 + 0x0 = 0x82009800`
 
     GPIO Output(s) Control.
 

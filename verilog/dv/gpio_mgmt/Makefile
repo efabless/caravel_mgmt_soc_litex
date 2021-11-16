@@ -58,7 +58,7 @@ endif
 %.hex: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@
 	# to fix flash base address
-	#sed -i 's/@10000000/@00000000/g' $@
+	sed -ie 's/@10000000/@00000000/g' $@
 
 %.lst: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objdump -D $< > $@

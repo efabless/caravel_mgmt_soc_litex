@@ -132,7 +132,6 @@ class MGMTSoC(SoCMini):
         self.comb += hk.dat_r.eq(hk_ports.dat_i)
         self.comb += hk.ack.eq(hk_ports.ack_i)
 
-
         # Add ROM linker region --------------------------------------------------------------------
         # self.bus.add_region("rom", SoCRegion(
         #     origin = self.mem_map["flash"],
@@ -142,11 +141,12 @@ class MGMTSoC(SoCMini):
 
         # Add Debug Interface (UART)
         debug_ports = platform.request("debug")
-        self.submodules.uart_bridge = UARTWishboneBridge(debug_ports, sys_clk_freq, baudrate=115200)
-        self.add_wb_master(self.uart_bridge.wishbone)
-        self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)
+        self.submodules.debug = UARTWishboneBridge(debug_ports, sys_clk_freq, baudrate=115200)
+        self.add_wb_master(self.debug.wishbone)
+        self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)  #TODO add logic for this
 
-        self.submodules.uart_bridge = UARTWishboneBridge(platform.request("ser"), sys_clk_freq, baudrate=115200)
+        self.submodules.uart = UARTWishboneBridge(platform.request("ser"), sys_clk_freq, baudrate=115200)
+        self.add_csr("ser")
 
         # Add a GPIO Pin
         self.submodules.gpio = GPIOASIC(platform.request("gpio"))

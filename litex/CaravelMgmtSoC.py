@@ -187,3 +187,50 @@ class Platform(GenericPlatform):
 
     verilog._print_combinatorial_logic_sim = _new_print_combinatorial_logic_sim
 
+    def _new_print_module(f, ios, name, ns, attr_translate):
+        sigs = verilog.list_signals(f) | verilog.list_special_ios(f, ins=True, outs=True, inouts=True)
+        special_outs = verilog.list_special_ios(f, ins=False, outs=True, inouts=True)
+        inouts = verilog.list_special_ios(f, ins=False, outs=False, inouts=True)
+        targets = verilog.list_targets(f) | special_outs
+        wires = verilog._list_comb_wires(f) | special_outs
+        r = "module " + name + "(\n"
+        r += "`ifdef USE_POWER_PINS\n"
+        r += "    inout vdd,	    /* 1.8V domain */\n"
+        r += "    inout vss,\n"
+        r += "`endif\n"
+        firstp = True
+        for sig in sorted(ios, key=lambda x: x.duid):
+            if not firstp:
+                r += ",\n"
+            firstp = False
+            attr = verilog._print_attribute(sig.attr, attr_translate)
+            if attr:
+                r += "\t" + attr
+            sig.type = "wire"
+            sig.name = ns.get_name(sig)
+            if sig in inouts:
+                sig.direction = "inout"
+                r += "\tinout wire " + verilog._print_signal(ns, sig)
+            elif sig in targets:
+                sig.direction = "output"
+                if sig in wires:
+                    r += "\toutput wire " + verilog._print_signal(ns, sig)
+                else:
+                    sig.type = "reg"
+                    r += "\toutput reg " + verilog._print_signal(ns, sig)
+            else:
+                sig.direction = "input"
+                r += "\tinput wire " + verilog._print_signal(ns, sig)
+        r += "\n);\n\n"
+        for sig in sorted(sigs - ios, key=lambda x: x.duid):
+            attr = verilog._print_attribute(sig.attr, attr_translate)
+            if attr:
+                r += attr + " "
+            if sig in wires:
+                r += "wire " + verilog._print_signal(ns, sig) + ";\n"
+            else:
+                r += "reg " + verilog._print_signal(ns, sig) + " = " + verilog._print_expression(ns, sig.reset)[0] + ";\n"
+        r += "\n"
+        return r
+
+    verilog._print_module = _new_print_module
