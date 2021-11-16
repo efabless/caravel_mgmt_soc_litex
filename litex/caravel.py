@@ -67,7 +67,7 @@ class MGMTSoC(SoCMini):
                          csr_data_width=32,
                          integrated_sram_size=0,
                          integrated_rom_size=0,
-                         # with_uart=True,
+                         with_uart=True,
                          # with_timer=True,
                          **kwargs)
 
@@ -145,7 +145,7 @@ class MGMTSoC(SoCMini):
         self.add_wb_master(self.debug.wishbone)
         self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)  #TODO add logic for this
 
-        self.submodules.uart = UARTWishboneBridge(platform.request("ser"), sys_clk_freq, baudrate=115200)
+        self.submodules.wb_uart = UARTWishboneBridge(platform.request("ser"), sys_clk_freq, baudrate=115200)
         self.add_csr("ser")
 
         # Add a GPIO Pin

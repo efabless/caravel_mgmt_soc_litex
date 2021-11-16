@@ -13,6 +13,10 @@ _io = [
     ("core_clk", 0, Pins(1)),
     ("core_rst", 0, Pins(1)),
 
+    ("serial", 0,
+     Subsignal("tx", Pins(1)),
+     Subsignal("rx", Pins(1)),
+     ),
     # GPIO mgmt
     ("gpio", 0,
      Subsignal("out_pad", Pins(1)),
