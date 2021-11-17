@@ -1,19 +1,3 @@
-// SPDX-FileCopyrightText: 2020 lowRISC contributors
-// Copyright 2018 ETH Zurich and University of Bologna
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
-
-
 module ibex_fetch_fifo (
 	clk_i,
 	rst_ni,
@@ -32,6 +16,7 @@ module ibex_fetch_fifo (
 	out_err_plus2_o
 );
 	parameter [31:0] NUM_REQS = 2;
+	parameter [0:0] ResetAll = 1'b0;
 	input wire clk_i;
 	input wire rst_ni;
 	input wire clear_i;
@@ -103,19 +88,27 @@ module ibex_fetch_fifo (
 	assign addr_incr_two = (instr_addr_q[1] ? unaligned_is_compressed : aligned_is_compressed);
 	assign instr_addr_next = instr_addr_q[31:1] + {29'd0, ~addr_incr_two, addr_incr_two};
 	assign instr_addr_d = (clear_i ? in_addr_i[31:1] : instr_addr_next);
-	always @(posedge clk_i)
-		if (instr_addr_en)
-			instr_addr_q <= instr_addr_d;
-		else
-			instr_addr_q <= instr_addr_q;
-			
+	generate
+		if (ResetAll) begin : g_instr_addr_ra
+			always @(posedge clk_i or negedge rst_ni)
+				if (!rst_ni)
+					instr_addr_q <= 1'sb0;
+				else if (instr_addr_en)
+					instr_addr_q <= instr_addr_d;
+		end
+		else begin : g_instr_addr_nr
+			always @(posedge clk_i)
+				if (instr_addr_en)
+					instr_addr_q <= instr_addr_d;
+		end
+	endgenerate
 	assign out_addr_next_o = {instr_addr_next, 1'b0};
 	assign out_addr_o = {instr_addr_q, 1'b0};
 	assign unused_addr_in = in_addr_i[0];
 	assign busy_o = valid_q[DEPTH - 1:DEPTH - NUM_REQS];
 	assign pop_fifo = (out_ready_i & out_valid_o) & (~aligned_is_compressed | out_addr_o[1]);
+	genvar i;
 	generate
-		genvar i;
 		for (i = 0; i < (DEPTH - 1); i = i + 1) begin : g_fifo_next
 			if (i == 0) begin : g_ent0
 				assign lowest_free_entry[i] = ~valid_q[i];
@@ -140,25 +133,29 @@ module ibex_fetch_fifo (
 	assign err_d[DEPTH - 1] = in_err_i;
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni)
-			valid_q <= {DEPTH {1'sb0}};
+			valid_q <= 1'sb0;
 		else
 			valid_q <= valid_d;
 	generate
 		for (i = 0; i < DEPTH; i = i + 1) begin : g_fifo_regs
-			always @(posedge clk_i)
-				if (!rst_ni) begin
-					rdata_q[i * 32+:32] <=0;
-					err_q[i] <= 0;
-				end else begin
+			if (ResetAll) begin : g_rdata_ra
+				always @(posedge clk_i or negedge rst_ni)
+					if (!rst_ni) begin
+						rdata_q[i * 32+:32] <= 1'sb0;
+						err_q[i] <= 1'sb0;
+					end
+					else if (entry_en[i]) begin
+						rdata_q[i * 32+:32] <= rdata_d[i * 32+:32];
+						err_q[i] <= err_d[i];
+					end
+			end
+			else begin : g_rdata_nr
+				always @(posedge clk_i)
 					if (entry_en[i]) begin
 						rdata_q[i * 32+:32] <= rdata_d[i * 32+:32];
 						err_q[i] <= err_d[i];
 					end
-					else begin
-						rdata_q[i * 32+:32] <= rdata_q[i * 32+:32];
-						err_q[i] <= err_q[i];
-					end
-				end
+			end
 		end
 	endgenerate
 endmodule

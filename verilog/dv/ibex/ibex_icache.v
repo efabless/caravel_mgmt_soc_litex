@@ -1,25 +1,11 @@
-// SPDX-FileCopyrightText: 2020 lowRISC contributors
-// Copyright 2018 ETH Zurich and University of Bologna
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
-
-
 module ibex_icache (
 	clk_i,
 	rst_ni,
 	req_i,
 	branch_i,
 	branch_spec_i,
+	predicted_branch_i,
+	branch_mispredict_i,
 	addr_i,
 	ready_i,
 	valid_o,
@@ -34,22 +20,44 @@ module ibex_icache (
 	instr_err_i,
 	instr_pmp_err_i,
 	instr_rvalid_i,
+	ic_tag_req_o,
+	ic_tag_write_o,
+	ic_tag_addr_o,
+	ic_tag_wdata_o,
+	ic_tag_rdata_i,
+	ic_data_req_o,
+	ic_data_write_o,
+	ic_data_addr_o,
+	ic_data_wdata_o,
+	ic_data_rdata_i,
 	icache_enable_i,
 	icache_inval_i,
 	busy_o
 );
-	parameter [31:0] BusWidth = 32;
-	parameter [31:0] CacheSizeBytes = 4096;
+	parameter [0:0] BranchPredictor = 1'b0;
 	parameter [0:0] ICacheECC = 1'b0;
-	parameter [31:0] LineSize = 64;
-	parameter [31:0] NumWays = 2;
-	parameter [0:0] SpecRequest = 1'b0;
+	parameter [0:0] ResetAll = 1'b0;
+	localparam [31:0] ibex_pkg_BUS_SIZE = 32;
+	parameter [31:0] BusSizeECC = ibex_pkg_BUS_SIZE;
+	localparam [31:0] ibex_pkg_ADDR_W = 32;
+	localparam [31:0] ibex_pkg_IC_LINE_SIZE = 64;
+	localparam [31:0] ibex_pkg_IC_LINE_BYTES = 8;
+	localparam [31:0] ibex_pkg_IC_NUM_WAYS = 2;
+	localparam [31:0] ibex_pkg_IC_SIZE_BYTES = 4096;
+	localparam [31:0] ibex_pkg_IC_NUM_LINES = (ibex_pkg_IC_SIZE_BYTES / ibex_pkg_IC_NUM_WAYS) / ibex_pkg_IC_LINE_BYTES;
+	localparam [31:0] ibex_pkg_IC_INDEX_W = $clog2(ibex_pkg_IC_NUM_LINES);
+	localparam [31:0] ibex_pkg_IC_LINE_W = 3;
+	localparam [31:0] ibex_pkg_IC_TAG_SIZE = ((ibex_pkg_ADDR_W - ibex_pkg_IC_INDEX_W) - ibex_pkg_IC_LINE_W) + 1;
+	parameter [31:0] TagSizeECC = ibex_pkg_IC_TAG_SIZE;
+	parameter [31:0] LineSizeECC = ibex_pkg_IC_LINE_SIZE;
 	parameter [0:0] BranchCache = 1'b0;
 	input wire clk_i;
 	input wire rst_ni;
 	input wire req_i;
 	input wire branch_i;
 	input wire branch_spec_i;
+	input wire predicted_branch_i;
+	input wire branch_mispredict_i;
 	input wire [31:0] addr_i;
 	input wire ready_i;
 	output wire valid_o;
@@ -60,71 +68,71 @@ module ibex_icache (
 	output wire instr_req_o;
 	input wire instr_gnt_i;
 	output wire [31:0] instr_addr_o;
-	input wire [BusWidth - 1:0] instr_rdata_i;
+	input wire [31:0] instr_rdata_i;
 	input wire instr_err_i;
 	input wire instr_pmp_err_i;
 	input wire instr_rvalid_i;
+	output wire [1:0] ic_tag_req_o;
+	output wire ic_tag_write_o;
+	output wire [ibex_pkg_IC_INDEX_W - 1:0] ic_tag_addr_o;
+	output wire [TagSizeECC - 1:0] ic_tag_wdata_o;
+	input wire [(ibex_pkg_IC_NUM_WAYS * TagSizeECC) - 1:0] ic_tag_rdata_i;
+	output wire [1:0] ic_data_req_o;
+	output wire ic_data_write_o;
+	output wire [ibex_pkg_IC_INDEX_W - 1:0] ic_data_addr_o;
+	output wire [LineSizeECC - 1:0] ic_data_wdata_o;
+	input wire [(ibex_pkg_IC_NUM_WAYS * LineSizeECC) - 1:0] ic_data_rdata_i;
 	input wire icache_enable_i;
 	input wire icache_inval_i;
 	output wire busy_o;
-	localparam [31:0] ADDR_W = 32;
 	localparam [31:0] NUM_FB = 4;
-	localparam [31:0] FB_THRESHOLD = NUM_FB - 2;
-	localparam [31:0] LINE_SIZE_ECC = (ICacheECC ? LineSize + 8 : LineSize);
-	localparam [31:0] LINE_SIZE_BYTES = LineSize / 8;
-	localparam [31:0] LINE_W = $clog2(LINE_SIZE_BYTES);
-	localparam [31:0] BUS_BYTES = BusWidth / 8;
-	localparam [31:0] BUS_W = $clog2(BUS_BYTES);
-	localparam [31:0] LINE_BEATS = LINE_SIZE_BYTES / BUS_BYTES;
-	localparam [31:0] LINE_BEATS_W = $clog2(LINE_BEATS);
-	localparam [31:0] NUM_LINES = (CacheSizeBytes / NumWays) / LINE_SIZE_BYTES;
-	localparam [31:0] INDEX_W = $clog2(NUM_LINES);
-	localparam [31:0] INDEX_HI = (INDEX_W + LINE_W) - 1;
-	localparam [31:0] TAG_SIZE = ((ADDR_W - INDEX_W) - LINE_W) + 1;
-	localparam [31:0] TAG_SIZE_ECC = (ICacheECC ? TAG_SIZE + 6 : TAG_SIZE);
-	localparam [31:0] OUTPUT_BEATS = BUS_BYTES / 2;
-	wire [ADDR_W - 1:0] lookup_addr_aligned;
-	wire [ADDR_W - 1:0] prefetch_addr_d;
-	reg [ADDR_W - 1:0] prefetch_addr_q;
+	localparam [31:0] FB_THRESHOLD = 2;
+	wire [31:0] lookup_addr_aligned;
+	wire [31:0] branch_mispredict_addr;
+	wire [31:0] prefetch_addr_d;
+	reg [31:0] prefetch_addr_q;
 	wire prefetch_addr_en;
+	wire branch_or_mispredict;
 	wire branch_suppress;
 	wire lookup_throttle;
 	wire lookup_req_ic0;
-	wire [ADDR_W - 1:0] lookup_addr_ic0;
-	wire [INDEX_W - 1:0] lookup_index_ic0;
+	wire [31:0] lookup_addr_ic0;
+	wire [ibex_pkg_IC_INDEX_W - 1:0] lookup_index_ic0;
 	wire fill_req_ic0;
-	wire [INDEX_W - 1:0] fill_index_ic0;
-	wire [TAG_SIZE - 1:0] fill_tag_ic0;
-	wire [LineSize - 1:0] fill_wdata_ic0;
+	wire [ibex_pkg_IC_INDEX_W - 1:0] fill_index_ic0;
+	wire [ibex_pkg_IC_TAG_SIZE - 1:0] fill_tag_ic0;
+	wire [63:0] fill_wdata_ic0;
 	wire lookup_grant_ic0;
 	wire lookup_actual_ic0;
 	wire fill_grant_ic0;
 	wire tag_req_ic0;
-	wire [INDEX_W - 1:0] tag_index_ic0;
-	wire [NumWays - 1:0] tag_banks_ic0;
+	wire [ibex_pkg_IC_INDEX_W - 1:0] tag_index_ic0;
+	wire [1:0] tag_banks_ic0;
 	wire tag_write_ic0;
-	wire [TAG_SIZE_ECC - 1:0] tag_wdata_ic0;
+	wire [TagSizeECC - 1:0] tag_wdata_ic0;
 	wire data_req_ic0;
-	wire [INDEX_W - 1:0] data_index_ic0;
-	wire [NumWays - 1:0] data_banks_ic0;
+	wire [ibex_pkg_IC_INDEX_W - 1:0] data_index_ic0;
+	wire [1:0] data_banks_ic0;
 	wire data_write_ic0;
-	wire [LINE_SIZE_ECC - 1:0] data_wdata_ic0;
-	wire [TAG_SIZE_ECC - 1:0] tag_rdata_ic1 [0:NumWays - 1];
-	wire [LINE_SIZE_ECC - 1:0] data_rdata_ic1 [0:NumWays - 1];
-	reg [LINE_SIZE_ECC - 1:0] hit_data_ic1;
+	wire [LineSizeECC - 1:0] data_wdata_ic0;
+	wire [(ibex_pkg_IC_NUM_WAYS * TagSizeECC) - 1:0] tag_rdata_ic1;
+	wire [(ibex_pkg_IC_NUM_WAYS * LineSizeECC) - 1:0] data_rdata_ic1;
+	reg [LineSizeECC - 1:0] hit_data_ecc_ic1;
+	wire [63:0] hit_data_ic1;
 	reg lookup_valid_ic1;
-	reg [ADDR_W - 1:INDEX_HI + 1] lookup_addr_ic1;
-	wire [NumWays - 1:0] tag_match_ic1;
+	localparam [31:0] ibex_pkg_IC_INDEX_HI = (ibex_pkg_IC_INDEX_W + ibex_pkg_IC_LINE_W) - 1;
+	reg [31:ibex_pkg_IC_INDEX_HI + 1] lookup_addr_ic1;
+	wire [1:0] tag_match_ic1;
 	wire tag_hit_ic1;
-	wire [NumWays - 1:0] tag_invalid_ic1;
-	wire [NumWays - 1:0] lowest_invalid_way_ic1;
-	wire [NumWays - 1:0] round_robin_way_ic1;
-	reg [NumWays - 1:0] round_robin_way_q;
-	wire [NumWays - 1:0] sel_way_ic1;
+	wire [1:0] tag_invalid_ic1;
+	wire [1:0] lowest_invalid_way_ic1;
+	wire [1:0] round_robin_way_ic1;
+	reg [1:0] round_robin_way_q;
+	wire [1:0] sel_way_ic1;
 	wire ecc_err_ic1;
 	wire ecc_write_req;
-	wire [NumWays - 1:0] ecc_write_ways;
-	wire [INDEX_W - 1:0] ecc_write_index;
+	wire [1:0] ecc_write_ways;
+	wire [ibex_pkg_IC_INDEX_W - 1:0] ecc_write_index;
 	wire gnt_or_pmp_err;
 	wire gnt_not_pmp_err;
 	reg [1:0] fb_fill_level;
@@ -135,66 +143,72 @@ module ibex_icache (
 	wire fill_spec_hold;
 	wire [(NUM_FB * NUM_FB) - 1:0] fill_older_d;
 	reg [(NUM_FB * NUM_FB) - 1:0] fill_older_q;
-	wire [NUM_FB - 1:0] fill_alloc_sel;
-	wire [NUM_FB - 1:0] fill_alloc;
-	wire [NUM_FB - 1:0] fill_busy_d;
-	reg [NUM_FB - 1:0] fill_busy_q;
-	wire [NUM_FB - 1:0] fill_done;
-	reg [NUM_FB - 1:0] fill_in_ic1;
-	wire [NUM_FB - 1:0] fill_stale_d;
-	reg [NUM_FB - 1:0] fill_stale_q;
-	wire [NUM_FB - 1:0] fill_cache_d;
-	reg [NUM_FB - 1:0] fill_cache_q;
-	wire [NUM_FB - 1:0] fill_hit_ic1;
-	wire [NUM_FB - 1:0] fill_hit_d;
-	reg [NUM_FB - 1:0] fill_hit_q;
-	wire [(LINE_BEATS_W >= 0 ? (NUM_FB * (LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - LINE_BEATS_W)) + (LINE_BEATS_W - 1)):(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W)] fill_ext_cnt_d;
-	reg [(LINE_BEATS_W >= 0 ? (NUM_FB * (LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - LINE_BEATS_W)) + (LINE_BEATS_W - 1)):(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W)] fill_ext_cnt_q;
-	wire [NUM_FB - 1:0] fill_ext_hold_d;
-	reg [NUM_FB - 1:0] fill_ext_hold_q;
-	wire [NUM_FB - 1:0] fill_ext_done;
-	wire [(LINE_BEATS_W >= 0 ? (NUM_FB * (LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - LINE_BEATS_W)) + (LINE_BEATS_W - 1)):(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W)] fill_rvd_cnt_d;
-	reg [(LINE_BEATS_W >= 0 ? (NUM_FB * (LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - LINE_BEATS_W)) + (LINE_BEATS_W - 1)):(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W)] fill_rvd_cnt_q;
-	wire [NUM_FB - 1:0] fill_rvd_done;
-	wire [NUM_FB - 1:0] fill_ram_done_d;
-	reg [NUM_FB - 1:0] fill_ram_done_q;
-	wire [NUM_FB - 1:0] fill_out_grant;
-	wire [(LINE_BEATS_W >= 0 ? (NUM_FB * (LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - LINE_BEATS_W)) + (LINE_BEATS_W - 1)):(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W)] fill_out_cnt_d;
-	reg [(LINE_BEATS_W >= 0 ? (NUM_FB * (LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - LINE_BEATS_W)) + (LINE_BEATS_W - 1)):(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W)] fill_out_cnt_q;
-	wire [NUM_FB - 1:0] fill_out_done;
-	wire [NUM_FB - 1:0] fill_ext_req;
-	wire [NUM_FB - 1:0] fill_rvd_exp;
-	wire [NUM_FB - 1:0] fill_ram_req;
-	wire [NUM_FB - 1:0] fill_out_req;
-	wire [NUM_FB - 1:0] fill_data_sel;
-	wire [NUM_FB - 1:0] fill_data_reg;
-	wire [NUM_FB - 1:0] fill_data_hit;
-	wire [NUM_FB - 1:0] fill_data_rvd;
-	wire [(NUM_FB * LINE_BEATS_W) - 1:0] fill_ext_off;
-	wire [(NUM_FB * LINE_BEATS_W) - 1:0] fill_rvd_off;
-	wire [(LINE_BEATS_W >= 0 ? (NUM_FB * (LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - LINE_BEATS_W)) + (LINE_BEATS_W - 1)):(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W)] fill_rvd_beat;
-	wire [NUM_FB - 1:0] fill_ext_arb;
-	wire [NUM_FB - 1:0] fill_ram_arb;
-	wire [NUM_FB - 1:0] fill_out_arb;
-	wire [NUM_FB - 1:0] fill_rvd_arb;
-	wire [NUM_FB - 1:0] fill_entry_en;
-	wire [NUM_FB - 1:0] fill_addr_en;
-	wire [NUM_FB - 1:0] fill_way_en;
-	wire [(NUM_FB * LINE_BEATS) - 1:0] fill_data_en;
-	wire [(NUM_FB * LINE_BEATS) - 1:0] fill_err_d;
-	reg [(NUM_FB * LINE_BEATS) - 1:0] fill_err_q;
-	reg [ADDR_W - 1:0] fill_addr_q [0:NUM_FB - 1];
-	reg [NumWays - 1:0] fill_way_q [0:NUM_FB - 1];
-	wire [LineSize - 1:0] fill_data_d [0:NUM_FB - 1];
-	reg [LineSize - 1:0] fill_data_q [0:NUM_FB - 1];
-	reg [ADDR_W - 1:BUS_W] fill_ext_req_addr;
-	reg [ADDR_W - 1:0] fill_ram_req_addr;
-	reg [NumWays - 1:0] fill_ram_req_way;
-	reg [LineSize - 1:0] fill_ram_req_data;
-	reg [LineSize - 1:0] fill_out_data;
-	reg [LINE_BEATS - 1:0] fill_out_err;
+	wire [3:0] fill_alloc_sel;
+	wire [3:0] fill_alloc;
+	wire [3:0] fill_busy_d;
+	reg [3:0] fill_busy_q;
+	wire [3:0] fill_done;
+	reg [3:0] fill_in_ic1;
+	wire [3:0] fill_stale_d;
+	reg [3:0] fill_stale_q;
+	wire [3:0] fill_cache_d;
+	reg [3:0] fill_cache_q;
+	wire [3:0] fill_hit_ic1;
+	wire [3:0] fill_hit_d;
+	reg [3:0] fill_hit_q;
+	localparam [31:0] ibex_pkg_BUS_BYTES = 4;
+	localparam [31:0] ibex_pkg_IC_LINE_BEATS = ibex_pkg_IC_LINE_BYTES / ibex_pkg_BUS_BYTES;
+	localparam [31:0] ibex_pkg_IC_LINE_BEATS_W = $clog2(ibex_pkg_IC_LINE_BEATS);
+	wire [(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (NUM_FB * (ibex_pkg_IC_LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W - 1)):(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W)] fill_ext_cnt_d;
+	reg [(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (NUM_FB * (ibex_pkg_IC_LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W - 1)):(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W)] fill_ext_cnt_q;
+	wire [3:0] fill_ext_hold_d;
+	reg [3:0] fill_ext_hold_q;
+	wire [3:0] fill_ext_done_d;
+	reg [3:0] fill_ext_done_q;
+	wire [(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (NUM_FB * (ibex_pkg_IC_LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W - 1)):(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W)] fill_rvd_cnt_d;
+	reg [(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (NUM_FB * (ibex_pkg_IC_LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W - 1)):(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W)] fill_rvd_cnt_q;
+	wire [3:0] fill_rvd_done;
+	wire [3:0] fill_ram_done_d;
+	reg [3:0] fill_ram_done_q;
+	wire [3:0] fill_out_grant;
+	wire [(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (NUM_FB * (ibex_pkg_IC_LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W - 1)):(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W)] fill_out_cnt_d;
+	reg [(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (NUM_FB * (ibex_pkg_IC_LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W - 1)):(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W)] fill_out_cnt_q;
+	wire [3:0] fill_out_done;
+	wire [3:0] fill_ext_req;
+	wire [3:0] fill_rvd_exp;
+	wire [3:0] fill_ram_req;
+	wire [3:0] fill_out_req;
+	wire [3:0] fill_data_sel;
+	wire [3:0] fill_data_reg;
+	wire [3:0] fill_data_hit;
+	wire [3:0] fill_data_rvd;
+	wire [(NUM_FB * ibex_pkg_IC_LINE_BEATS_W) - 1:0] fill_ext_off;
+	wire [(NUM_FB * ibex_pkg_IC_LINE_BEATS_W) - 1:0] fill_rvd_off;
+	wire [(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (NUM_FB * (ibex_pkg_IC_LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W - 1)):(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W)] fill_ext_beat;
+	wire [(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (NUM_FB * (ibex_pkg_IC_LINE_BEATS_W + 1)) - 1 : (NUM_FB * (1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W - 1)):(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W)] fill_rvd_beat;
+	wire [3:0] fill_ext_arb;
+	wire [3:0] fill_ram_arb;
+	wire [3:0] fill_out_arb;
+	wire [3:0] fill_rvd_arb;
+	wire [3:0] fill_entry_en;
+	wire [3:0] fill_addr_en;
+	wire [3:0] fill_way_en;
+	wire [(NUM_FB * ibex_pkg_IC_LINE_BEATS) - 1:0] fill_data_en;
+	wire [(NUM_FB * ibex_pkg_IC_LINE_BEATS) - 1:0] fill_err_d;
+	reg [(NUM_FB * ibex_pkg_IC_LINE_BEATS) - 1:0] fill_err_q;
+	reg [31:0] fill_addr_q [0:3];
+	reg [1:0] fill_way_q [0:3];
+	wire [63:0] fill_data_d [0:3];
+	reg [63:0] fill_data_q [0:3];
+	localparam [31:0] ibex_pkg_BUS_W = 2;
+	reg [31:ibex_pkg_BUS_W] fill_ext_req_addr;
+	reg [31:0] fill_ram_req_addr;
+	reg [1:0] fill_ram_req_way;
+	reg [63:0] fill_ram_req_data;
+	reg [63:0] fill_out_data;
+	reg [ibex_pkg_IC_LINE_BEATS - 1:0] fill_out_err;
 	wire instr_req;
-	wire [ADDR_W - 1:BUS_W] instr_addr;
+	wire [31:ibex_pkg_BUS_W] instr_addr;
 	wire skid_complete_instr;
 	wire skid_ready;
 	wire output_compressed;
@@ -207,14 +221,15 @@ module ibex_icache (
 	wire output_valid;
 	wire addr_incr_two;
 	wire output_addr_en;
-	wire [ADDR_W - 1:1] output_addr_d;
-	reg [ADDR_W - 1:1] output_addr_q;
+	wire [31:1] output_addr_incr;
+	wire [31:1] output_addr_d;
+	reg [31:1] output_addr_q;
 	reg [15:0] output_data_lo;
 	reg [15:0] output_data_hi;
 	wire data_valid;
 	wire output_ready;
-	wire [LineSize - 1:0] line_data;
-	wire [LINE_BEATS - 1:0] line_err;
+	wire [63:0] line_data;
+	wire [ibex_pkg_IC_LINE_BEATS - 1:0] line_err;
 	reg [31:0] line_data_muxed;
 	reg line_err_muxed;
 	wire [31:0] output_data;
@@ -224,21 +239,58 @@ module ibex_icache (
 	reg reset_inval_q;
 	wire inval_prog_d;
 	reg inval_prog_q;
-	wire [INDEX_W - 1:0] inval_index_d;
-	reg [INDEX_W - 1:0] inval_index_q;
-	assign lookup_addr_aligned = {lookup_addr_ic0[ADDR_W - 1:LINE_W], {LINE_W {1'b0}}};
-	assign prefetch_addr_d = (lookup_grant_ic0 ? lookup_addr_aligned + {{(ADDR_W - LINE_W) - 1 {1'b0}}, 1'b1, {LINE_W {1'b0}}} : addr_i);
-	assign prefetch_addr_en = branch_i | lookup_grant_ic0;
-	always @(posedge clk_i)
-		if (prefetch_addr_en)
-			prefetch_addr_q <= prefetch_addr_d;
+	wire [ibex_pkg_IC_INDEX_W - 1:0] inval_index_d;
+	reg [ibex_pkg_IC_INDEX_W - 1:0] inval_index_q;
+	generate
+		if (BranchPredictor) begin : g_branch_predictor
+			reg [31:0] branch_mispredict_addr_q;
+			wire branch_mispredict_addr_en;
+			assign branch_mispredict_addr_en = branch_i & predicted_branch_i;
+			if (ResetAll) begin : g_branch_misp_ra
+				always @(posedge clk_i or negedge rst_ni)
+					if (!rst_ni)
+						branch_mispredict_addr_q <= 1'sb0;
+					else if (branch_mispredict_addr_en)
+						branch_mispredict_addr_q <= {output_addr_incr, 1'b0};
+			end
+			else begin : g_branch_misp_nr
+				always @(posedge clk_i)
+					if (branch_mispredict_addr_en)
+						branch_mispredict_addr_q <= {output_addr_incr, 1'b0};
+			end
+			assign branch_mispredict_addr = branch_mispredict_addr_q;
+		end
+		else begin : g_no_branch_predictor
+			wire unused_predicted_branch;
+			assign unused_predicted_branch = predicted_branch_i;
+			assign branch_mispredict_addr = 1'sb0;
+		end
+	endgenerate
+	assign branch_or_mispredict = branch_i | branch_mispredict_i;
+	assign lookup_addr_aligned = {lookup_addr_ic0[31:ibex_pkg_IC_LINE_W], {ibex_pkg_IC_LINE_W {1'b0}}};
+	assign prefetch_addr_d = (lookup_grant_ic0 ? lookup_addr_aligned + {{(ibex_pkg_ADDR_W - ibex_pkg_IC_LINE_W) - 1 {1'b0}}, 1'b1, {ibex_pkg_IC_LINE_W {1'b0}}} : (branch_i ? addr_i : branch_mispredict_addr));
+	assign prefetch_addr_en = branch_or_mispredict | lookup_grant_ic0;
+	generate
+		if (ResetAll) begin : g_prefetch_addr_ra
+			always @(posedge clk_i or negedge rst_ni)
+				if (!rst_ni)
+					prefetch_addr_q <= 1'sb0;
+				else if (prefetch_addr_en)
+					prefetch_addr_q <= prefetch_addr_d;
+		end
+		else begin : g_prefetch_addr_nr
+			always @(posedge clk_i)
+				if (prefetch_addr_en)
+					prefetch_addr_q <= prefetch_addr_d;
+		end
+	endgenerate
 	assign lookup_throttle = fb_fill_level > FB_THRESHOLD[1:0];
-	assign lookup_req_ic0 = ((req_i & ~&fill_busy_q) & (branch_i | ~lookup_throttle)) & ~ecc_write_req;
-	assign lookup_addr_ic0 = (branch_spec_i ? addr_i : prefetch_addr_q);
-	assign lookup_index_ic0 = lookup_addr_ic0[INDEX_HI:LINE_W];
+	assign lookup_req_ic0 = ((req_i & ~&fill_busy_q) & (branch_or_mispredict | ~lookup_throttle)) & ~ecc_write_req;
+	assign lookup_addr_ic0 = (branch_spec_i ? addr_i : (branch_mispredict_i ? branch_mispredict_addr : prefetch_addr_q));
+	assign lookup_index_ic0 = lookup_addr_ic0[ibex_pkg_IC_INDEX_HI:ibex_pkg_IC_LINE_W];
 	assign fill_req_ic0 = |fill_ram_req;
-	assign fill_index_ic0 = fill_ram_req_addr[INDEX_HI:LINE_W];
-	assign fill_tag_ic0 = {~inval_prog_q & ~ecc_write_req, fill_ram_req_addr[ADDR_W - 1:INDEX_HI + 1]};
+	assign fill_index_ic0 = fill_ram_req_addr[ibex_pkg_IC_INDEX_HI:ibex_pkg_IC_LINE_W];
+	assign fill_tag_ic0 = {~inval_prog_q & ~ecc_write_req, fill_ram_req_addr[31:ibex_pkg_IC_INDEX_HI + 1]};
 	assign fill_wdata_ic0 = fill_ram_req_data;
 	assign branch_suppress = branch_spec_i & ~branch_i;
 	assign lookup_grant_ic0 = lookup_req_ic0 & ~branch_suppress;
@@ -246,7 +298,7 @@ module ibex_icache (
 	assign lookup_actual_ic0 = ((lookup_grant_ic0 & icache_enable_i) & ~inval_prog_q) & ~start_inval;
 	assign tag_req_ic0 = ((lookup_req_ic0 | fill_req_ic0) | inval_prog_q) | ecc_write_req;
 	assign tag_index_ic0 = (inval_prog_q ? inval_index_q : (ecc_write_req ? ecc_write_index : (fill_grant_ic0 ? fill_index_ic0 : lookup_index_ic0)));
-	assign tag_banks_ic0 = (ecc_write_req ? ecc_write_ways : (fill_grant_ic0 ? fill_ram_req_way : {NumWays {1'b1}}));
+	assign tag_banks_ic0 = (ecc_write_req ? ecc_write_ways : (fill_grant_ic0 ? fill_ram_req_way : {ibex_pkg_IC_NUM_WAYS {1'b1}}));
 	assign tag_write_ic0 = (fill_grant_ic0 | inval_prog_q) | ecc_write_req;
 	assign data_req_ic0 = lookup_req_ic0 | fill_req_ic0;
 	assign data_index_ic0 = tag_index_ic0;
@@ -256,139 +308,164 @@ module ibex_icache (
 		if (ICacheECC) begin : gen_ecc_wdata
 			wire [21:0] tag_ecc_input_padded;
 			wire [27:0] tag_ecc_output_padded;
-			wire [22 - TAG_SIZE:0] tag_ecc_output_unused;
-			assign tag_ecc_input_padded = {{22 - TAG_SIZE {1'b0}}, fill_tag_ic0};
-			assign tag_ecc_output_unused = tag_ecc_output_padded[21:TAG_SIZE - 1];
+			wire [22 - ibex_pkg_IC_TAG_SIZE:0] tag_ecc_output_unused;
+			assign tag_ecc_input_padded = {{22 - ibex_pkg_IC_TAG_SIZE {1'b0}}, fill_tag_ic0};
+			assign tag_ecc_output_unused = tag_ecc_output_padded[21:ibex_pkg_IC_TAG_SIZE - 1];
 			prim_secded_28_22_enc tag_ecc_enc(
-				.in(tag_ecc_input_padded),
-				.out(tag_ecc_output_padded)
+				.data_i(tag_ecc_input_padded),
+				.data_o(tag_ecc_output_padded)
 			);
-			assign tag_wdata_ic0 = {tag_ecc_output_padded[27:22], tag_ecc_output_padded[TAG_SIZE - 1:0]};
-			prim_secded_72_64_enc data_ecc_enc(
-				.in(fill_wdata_ic0),
-				.out(data_wdata_ic0)
-			);
+			assign tag_wdata_ic0 = {tag_ecc_output_padded[27:22], tag_ecc_output_padded[ibex_pkg_IC_TAG_SIZE - 1:0]};
+			genvar bank;
+			for (bank = 0; bank < ibex_pkg_IC_LINE_BEATS; bank = bank + 1) begin : gen_ecc_banks
+				prim_secded_39_32_enc data_ecc_enc(
+					.data_i(fill_wdata_ic0[bank * ibex_pkg_BUS_SIZE+:ibex_pkg_BUS_SIZE]),
+					.data_o(data_wdata_ic0[bank * BusSizeECC+:BusSizeECC])
+				);
+			end
 		end
 		else begin : gen_noecc_wdata
 			assign tag_wdata_ic0 = fill_tag_ic0;
 			assign data_wdata_ic0 = fill_wdata_ic0;
 		end
 	endgenerate
-	generate
-		genvar way;
-		for (way = 0; way < NumWays; way = way + 1) begin : gen_rams
-			prim_ram_1p #(
-				.Width(TAG_SIZE_ECC),
-				.Depth(NUM_LINES),
-				.DataBitsPerMask(TAG_SIZE_ECC)
-			) tag_bank(
-				.clk_i(clk_i),
-				.req_i(tag_req_ic0 & tag_banks_ic0[way]),
-				.write_i(tag_write_ic0),
-				.wmask_i({TAG_SIZE_ECC {1'b1}}),
-				.addr_i(tag_index_ic0),
-				.wdata_i(tag_wdata_ic0),
-				.rdata_o(tag_rdata_ic1[way])
-			);
-			prim_ram_1p #(
-				.Width(LINE_SIZE_ECC),
-				.Depth(NUM_LINES),
-				.DataBitsPerMask(LINE_SIZE_ECC)
-			) data_bank(
-				.clk_i(clk_i),
-				.req_i(data_req_ic0 & data_banks_ic0[way]),
-				.write_i(data_write_ic0),
-				.wmask_i({LINE_SIZE_ECC {1'b1}}),
-				.addr_i(data_index_ic0),
-				.wdata_i(data_wdata_ic0),
-				.rdata_o(data_rdata_ic1[way])
-			);
-		end
-	endgenerate
+	assign ic_tag_req_o = {ibex_pkg_IC_NUM_WAYS {tag_req_ic0}} & tag_banks_ic0;
+	assign ic_tag_write_o = tag_write_ic0;
+	assign ic_tag_addr_o = tag_index_ic0;
+	assign ic_tag_wdata_o = tag_wdata_ic0;
+	assign tag_rdata_ic1 = ic_tag_rdata_i;
+	assign ic_data_req_o = {ibex_pkg_IC_NUM_WAYS {data_req_ic0}} & data_banks_ic0;
+	assign ic_data_write_o = data_write_ic0;
+	assign ic_data_addr_o = data_index_ic0;
+	assign ic_data_wdata_o = data_wdata_ic0;
+	assign data_rdata_ic1 = ic_data_rdata_i;
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni)
 			lookup_valid_ic1 <= 1'b0;
 		else
 			lookup_valid_ic1 <= lookup_actual_ic0;
-	always @(posedge clk_i)
-		if (lookup_grant_ic0) begin
-			lookup_addr_ic1 <= lookup_addr_ic0[ADDR_W - 1:INDEX_HI + 1];
-			fill_in_ic1 <= fill_alloc_sel;
-		end
 	generate
-		for (way = 0; way < NumWays; way = way + 1) begin : gen_tag_match
-			assign tag_match_ic1[way] = tag_rdata_ic1[way][TAG_SIZE - 1:0] == {1'b1, lookup_addr_ic1[ADDR_W - 1:INDEX_HI + 1]};
-			assign tag_invalid_ic1[way] = ~tag_rdata_ic1[way][TAG_SIZE - 1];
+		if (ResetAll) begin : g_lookup_addr_ra
+			always @(posedge clk_i or negedge rst_ni)
+				if (!rst_ni) begin
+					lookup_addr_ic1 <= 1'sb0;
+					fill_in_ic1 <= 1'sb0;
+				end
+				else if (lookup_grant_ic0) begin
+					lookup_addr_ic1 <= lookup_addr_ic0[31:ibex_pkg_IC_INDEX_HI + 1];
+					fill_in_ic1 <= fill_alloc_sel;
+				end
+		end
+		else begin : g_lookup_addr_nr
+			always @(posedge clk_i)
+				if (lookup_grant_ic0) begin
+					lookup_addr_ic1 <= lookup_addr_ic0[31:ibex_pkg_IC_INDEX_HI + 1];
+					fill_in_ic1 <= fill_alloc_sel;
+				end
+		end
+	endgenerate
+	genvar way;
+	generate
+		for (way = 0; way < ibex_pkg_IC_NUM_WAYS; way = way + 1) begin : gen_tag_match
+			assign tag_match_ic1[way] = tag_rdata_ic1[((1 - way) * TagSizeECC) + (ibex_pkg_IC_TAG_SIZE - 1)-:ibex_pkg_IC_TAG_SIZE] == {1'b1, lookup_addr_ic1[31:ibex_pkg_IC_INDEX_HI + 1]};
+			assign tag_invalid_ic1[way] = ~tag_rdata_ic1[((1 - way) * TagSizeECC) + (ibex_pkg_IC_TAG_SIZE - 1)];
 		end
 	endgenerate
 	assign tag_hit_ic1 = |tag_match_ic1;
 	always @(*) begin
-		hit_data_ic1 = 'b0;
+		hit_data_ecc_ic1 = 'b0;
 		begin : sv2v_autoblock_1
 			reg signed [31:0] way;
-			for (way = 0; way < NumWays; way = way + 1)
+			for (way = 0; way < ibex_pkg_IC_NUM_WAYS; way = way + 1)
 				if (tag_match_ic1[way])
-					hit_data_ic1 = hit_data_ic1 | data_rdata_ic1[way];
+					hit_data_ecc_ic1 = hit_data_ecc_ic1 | data_rdata_ic1[(1 - way) * LineSizeECC+:LineSizeECC];
 		end
 	end
 	assign lowest_invalid_way_ic1[0] = tag_invalid_ic1[0];
-	assign round_robin_way_ic1[0] = round_robin_way_q[NumWays - 1];
+	assign round_robin_way_ic1[0] = round_robin_way_q[1];
 	generate
-		for (way = 1; way < NumWays; way = way + 1) begin : gen_lowest_way
+		for (way = 1; way < ibex_pkg_IC_NUM_WAYS; way = way + 1) begin : gen_lowest_way
 			assign lowest_invalid_way_ic1[way] = tag_invalid_ic1[way] & ~|tag_invalid_ic1[way - 1:0];
 			assign round_robin_way_ic1[way] = round_robin_way_q[way - 1];
 		end
 	endgenerate
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni)
-			round_robin_way_q <= {{NumWays - 1 {1'b0}}, 1'b1};
+			round_robin_way_q <= 2'b01;
 		else if (lookup_valid_ic1)
 			round_robin_way_q <= round_robin_way_ic1;
 	assign sel_way_ic1 = (|tag_invalid_ic1 ? lowest_invalid_way_ic1 : round_robin_way_q);
 	generate
 		if (ICacheECC) begin : gen_data_ecc_checking
-			wire [NumWays - 1:0] tag_err_ic1;
-			wire [1:0] data_err_ic1;
+			wire [1:0] tag_err_ic1;
+			wire [(ibex_pkg_IC_LINE_BEATS * 2) - 1:0] data_err_ic1;
 			wire ecc_correction_write_d;
 			reg ecc_correction_write_q;
-			wire [NumWays - 1:0] ecc_correction_ways_d;
-			reg [NumWays - 1:0] ecc_correction_ways_q;
-			reg [INDEX_W - 1:0] lookup_index_ic1;
-			reg [INDEX_W - 1:0] ecc_correction_index_q;
-			for (way = 0; way < NumWays; way = way + 1) begin : gen_tag_ecc
+			wire [1:0] ecc_correction_ways_d;
+			reg [1:0] ecc_correction_ways_q;
+			reg [ibex_pkg_IC_INDEX_W - 1:0] lookup_index_ic1;
+			reg [ibex_pkg_IC_INDEX_W - 1:0] ecc_correction_index_q;
+			genvar way;
+			for (way = 0; way < ibex_pkg_IC_NUM_WAYS; way = way + 1) begin : gen_tag_ecc
 				wire [1:0] tag_err_bank_ic1;
 				wire [27:0] tag_rdata_padded_ic1;
-				assign tag_rdata_padded_ic1 = {tag_rdata_ic1[way][TAG_SIZE_ECC - 1-:6], {22 - TAG_SIZE {1'b0}}, tag_rdata_ic1[way][TAG_SIZE - 1:0]};
+				assign tag_rdata_padded_ic1 = {tag_rdata_ic1[((1 - way) * TagSizeECC) + (TagSizeECC - 1)-:6], {22 - ibex_pkg_IC_TAG_SIZE {1'b0}}, tag_rdata_ic1[((1 - way) * TagSizeECC) + (ibex_pkg_IC_TAG_SIZE - 1)-:ibex_pkg_IC_TAG_SIZE]};
 				prim_secded_28_22_dec data_ecc_dec(
-					.in(tag_rdata_padded_ic1),
-					.d_o(),
+					.data_i(tag_rdata_padded_ic1),
+					.data_o(),
 					.syndrome_o(),
 					.err_o(tag_err_bank_ic1)
 				);
 				assign tag_err_ic1[way] = |tag_err_bank_ic1;
 			end
-			prim_secded_72_64_dec data_ecc_dec(
-				.in(hit_data_ic1),
-				.d_o(),
-				.syndrome_o(),
-				.err_o(data_err_ic1)
-			);
+			genvar bank;
+			for (bank = 0; bank < ibex_pkg_IC_LINE_BEATS; bank = bank + 1) begin : gen_ecc_banks
+				prim_secded_39_32_dec data_ecc_dec(
+					.data_i(hit_data_ecc_ic1[bank * BusSizeECC+:BusSizeECC]),
+					.data_o(),
+					.syndrome_o(),
+					.err_o(data_err_ic1[bank * 2+:2])
+				);
+				assign hit_data_ic1[bank * ibex_pkg_BUS_SIZE+:ibex_pkg_BUS_SIZE] = hit_data_ecc_ic1[bank * BusSizeECC+:ibex_pkg_BUS_SIZE];
+			end
 			assign ecc_err_ic1 = lookup_valid_ic1 & (|data_err_ic1 | |tag_err_ic1);
-			assign ecc_correction_ways_d = {NumWays {|tag_err_ic1}} | (tag_match_ic1 & {NumWays {|data_err_ic1}});
+			assign ecc_correction_ways_d = {ibex_pkg_IC_NUM_WAYS {|tag_err_ic1}} | (tag_match_ic1 & {ibex_pkg_IC_NUM_WAYS {|data_err_ic1}});
 			assign ecc_correction_write_d = ecc_err_ic1;
 			always @(posedge clk_i or negedge rst_ni)
 				if (!rst_ni)
 					ecc_correction_write_q <= 1'b0;
 				else
 					ecc_correction_write_q <= ecc_correction_write_d;
-			always @(posedge clk_i)
-				if (lookup_grant_ic0)
-					lookup_index_ic1 <= lookup_addr_ic0[INDEX_HI-:INDEX_W];
-			always @(posedge clk_i)
-				if (ecc_err_ic1) begin
-					ecc_correction_ways_q <= ecc_correction_ways_d;
-					ecc_correction_index_q <= lookup_index_ic1;
-				end
+			if (ResetAll) begin : g_lookup_ind_ra
+				always @(posedge clk_i or negedge rst_ni)
+					if (!rst_ni)
+						lookup_index_ic1 <= 1'sb0;
+					else if (lookup_grant_ic0)
+						lookup_index_ic1 <= lookup_addr_ic0[ibex_pkg_IC_INDEX_HI-:ibex_pkg_IC_INDEX_W];
+			end
+			else begin : g_lookup_ind_nr
+				always @(posedge clk_i)
+					if (lookup_grant_ic0)
+						lookup_index_ic1 <= lookup_addr_ic0[ibex_pkg_IC_INDEX_HI-:ibex_pkg_IC_INDEX_W];
+			end
+			if (ResetAll) begin : g_ecc_correction_ra
+				always @(posedge clk_i or negedge rst_ni)
+					if (!rst_ni) begin
+						ecc_correction_ways_q <= 1'sb0;
+						ecc_correction_index_q <= 1'sb0;
+					end
+					else if (ecc_err_ic1) begin
+						ecc_correction_ways_q <= ecc_correction_ways_d;
+						ecc_correction_index_q <= lookup_index_ic1;
+					end
+			end
+			else begin : g_ecc_correction_nr
+				always @(posedge clk_i)
+					if (ecc_err_ic1) begin
+						ecc_correction_ways_q <= ecc_correction_ways_d;
+						ecc_correction_index_q <= lookup_index_ic1;
+					end
+			end
 			assign ecc_write_req = ecc_correction_write_q;
 			assign ecc_write_ways = ecc_correction_ways_q;
 			assign ecc_write_index = ecc_correction_index_q;
@@ -396,22 +473,21 @@ module ibex_icache (
 		else begin : gen_no_data_ecc
 			assign ecc_err_ic1 = 1'b0;
 			assign ecc_write_req = 1'b0;
-			assign ecc_write_ways = {NumWays {1'sb0}};
-			assign ecc_write_index = {INDEX_W {1'sb0}};
+			assign ecc_write_ways = 1'sb0;
+			assign ecc_write_index = 1'sb0;
+			assign hit_data_ic1 = hit_data_ecc_ic1;
 		end
-	endgenerate
-	generate
 		if (BranchCache) begin : gen_caching_logic
 			localparam [31:0] CACHE_AHEAD = 2;
 			localparam [31:0] CACHE_CNT_W = 2;
 			wire cache_cnt_dec;
-			wire [CACHE_CNT_W - 1:0] cache_cnt_d;
-			reg [CACHE_CNT_W - 1:0] cache_cnt_q;
+			wire [1:0] cache_cnt_d;
+			reg [1:0] cache_cnt_q;
 			assign cache_cnt_dec = lookup_grant_ic0 & |cache_cnt_q;
-			assign cache_cnt_d = (branch_i ? CACHE_AHEAD[CACHE_CNT_W - 1:0] : cache_cnt_q - {{CACHE_CNT_W - 1 {1'b0}}, cache_cnt_dec});
+			assign cache_cnt_d = (branch_i ? CACHE_AHEAD[1:0] : cache_cnt_q - {1'b0, cache_cnt_dec});
 			always @(posedge clk_i or negedge rst_ni)
 				if (!rst_ni)
-					cache_cnt_q <= {CACHE_CNT_W {1'sb0}};
+					cache_cnt_q <= 1'sb0;
 				else
 					cache_cnt_q <= cache_cnt_d;
 			assign fill_cache_new = (((branch_i | |cache_cnt_q) & icache_enable_i) & ~icache_inval_i) & ~inval_prog_q;
@@ -421,22 +497,22 @@ module ibex_icache (
 		end
 	endgenerate
 	always @(*) begin
-		fb_fill_level = {2 {1'sb0}};
+		fb_fill_level = 1'sb0;
 		begin : sv2v_autoblock_2
 			reg signed [31:0] i;
 			for (i = 0; i < NUM_FB; i = i + 1)
 				if (fill_busy_q[i] & ~fill_stale_q[i])
-					fb_fill_level = fb_fill_level + {1'b0, 1'b1};
+					fb_fill_level = fb_fill_level + 2'b01;
 		end
 	end
 	assign gnt_or_pmp_err = instr_gnt_i | instr_pmp_err_i;
 	assign gnt_not_pmp_err = instr_gnt_i & ~instr_pmp_err_i;
 	assign fill_new_alloc = lookup_grant_ic0;
-	assign fill_spec_req = (SpecRequest | branch_i) & ~|fill_ext_req;
+	assign fill_spec_req = (~icache_enable_i | branch_or_mispredict) & ~|fill_ext_req;
 	assign fill_spec_done = fill_spec_req & gnt_not_pmp_err;
 	assign fill_spec_hold = fill_spec_req & ~gnt_or_pmp_err;
+	genvar fb;
 	generate
-		genvar fb;
 		for (fb = 0; fb < NUM_FB; fb = fb + 1) begin : gen_fbs
 			if (fb == 0) begin : gen_fb_zero
 				assign fill_alloc_sel[fb] = ~fill_busy_q[fb];
@@ -447,48 +523,50 @@ module ibex_icache (
 			assign fill_alloc[fb] = fill_alloc_sel[fb] & fill_new_alloc;
 			assign fill_busy_d[fb] = fill_alloc[fb] | (fill_busy_q[fb] & ~fill_done[fb]);
 			assign fill_older_d[fb * NUM_FB+:NUM_FB] = (fill_alloc[fb] ? fill_busy_q : fill_older_q[fb * NUM_FB+:NUM_FB]) & ~fill_done;
-			assign fill_done[fb] = ((((fill_ram_done_q[fb] | fill_hit_q[fb]) | ~fill_cache_q[fb]) | |fill_err_q[fb * LINE_BEATS+:LINE_BEATS]) & ((fill_out_done[fb] | fill_stale_q[fb]) | branch_i)) & fill_rvd_done[fb];
-			assign fill_stale_d[fb] = fill_busy_q[fb] & (branch_i | fill_stale_q[fb]);
+			assign fill_done[fb] = ((((fill_ram_done_q[fb] | fill_hit_q[fb]) | ~fill_cache_q[fb]) | |fill_err_q[fb * ibex_pkg_IC_LINE_BEATS+:ibex_pkg_IC_LINE_BEATS]) & ((fill_out_done[fb] | fill_stale_q[fb]) | branch_or_mispredict)) & fill_rvd_done[fb];
+			assign fill_stale_d[fb] = fill_busy_q[fb] & (branch_or_mispredict | fill_stale_q[fb]);
 			assign fill_cache_d[fb] = (fill_alloc[fb] & fill_cache_new) | (((fill_cache_q[fb] & fill_busy_q[fb]) & icache_enable_i) & ~icache_inval_i);
 			assign fill_hit_ic1[fb] = ((lookup_valid_ic1 & fill_in_ic1[fb]) & tag_hit_ic1) & ~ecc_err_ic1;
 			assign fill_hit_d[fb] = fill_hit_ic1[fb] | (fill_hit_q[fb] & fill_busy_q[fb]);
-			assign fill_ext_req[fb] = fill_busy_q[fb] & ~fill_ext_done[fb];
-			assign fill_ext_cnt_d[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] = (fill_alloc[fb] ? {{LINE_BEATS_W {1'b0}}, fill_spec_done} : fill_ext_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] + {{LINE_BEATS_W {1'b0}}, fill_ext_arb[fb] & gnt_not_pmp_err});
+			assign fill_ext_req[fb] = fill_busy_q[fb] & ~fill_ext_done_d[fb];
+			assign fill_ext_cnt_d[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] = (fill_alloc[fb] ? {{ibex_pkg_IC_LINE_BEATS_W {1'b0}}, fill_spec_done} : fill_ext_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] + {{ibex_pkg_IC_LINE_BEATS_W {1'b0}}, fill_ext_arb[fb] & gnt_not_pmp_err});
 			assign fill_ext_hold_d[fb] = (fill_alloc[fb] & fill_spec_hold) | (fill_ext_arb[fb] & ~gnt_or_pmp_err);
-			assign fill_ext_done[fb] = ((((fill_ext_cnt_q[(fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? LINE_BEATS_W : LINE_BEATS_W - LINE_BEATS_W)] | fill_hit_ic1[fb]) | fill_hit_q[fb]) | fill_err_q[(fb * LINE_BEATS) + fill_ext_off[fb * LINE_BEATS_W+:LINE_BEATS_W]]) | (~fill_cache_q[fb] & (branch_i | fill_stale_q[fb]))) & ~fill_ext_hold_q[fb];
+			assign fill_ext_done_d[fb] = (((((fill_ext_cnt_q[(fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : ibex_pkg_IC_LINE_BEATS_W - ibex_pkg_IC_LINE_BEATS_W)] | fill_hit_ic1[fb]) | fill_hit_q[fb]) | fill_err_q[(fb * ibex_pkg_IC_LINE_BEATS) + fill_ext_off[fb * ibex_pkg_IC_LINE_BEATS_W+:ibex_pkg_IC_LINE_BEATS_W]]) | (~fill_cache_q[fb] & ((branch_or_mispredict | fill_stale_q[fb]) | fill_ext_beat[(fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : ibex_pkg_IC_LINE_BEATS_W - ibex_pkg_IC_LINE_BEATS_W)]))) & ~fill_ext_hold_q[fb]) & fill_busy_q[fb];
 			assign fill_rvd_exp[fb] = fill_busy_q[fb] & ~fill_rvd_done[fb];
-			assign fill_rvd_cnt_d[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] = (fill_alloc[fb] ? {(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W) {1'sb0}} : fill_rvd_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] + {{LINE_BEATS_W {1'b0}}, fill_rvd_arb[fb]});
-			assign fill_rvd_done[fb] = fill_ext_done[fb] & (fill_rvd_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] == fill_ext_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)]);
-			assign fill_out_req[fb] = ((fill_busy_q[fb] & ~fill_stale_q[fb]) & ~fill_out_done[fb]) & ((((fill_hit_ic1[fb] | fill_hit_q[fb]) | fill_err_q[(fb * LINE_BEATS) + fill_out_cnt_q[(LINE_BEATS_W >= 0 ? (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? LINE_BEATS_W - 1 : LINE_BEATS_W - (LINE_BEATS_W - 1)) : (((fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? LINE_BEATS_W - 1 : LINE_BEATS_W - (LINE_BEATS_W - 1))) + LINE_BEATS_W) - 1)-:LINE_BEATS_W]]) | (fill_rvd_beat[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] > fill_out_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)])) | fill_rvd_arb[fb]);
+			assign fill_rvd_cnt_d[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] = (fill_alloc[fb] ? {(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W) {1'sb0}} : fill_rvd_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] + {{ibex_pkg_IC_LINE_BEATS_W {1'b0}}, fill_rvd_arb[fb]});
+			assign fill_rvd_done[fb] = (fill_ext_done_q[fb] & ~fill_ext_hold_q[fb]) & (fill_rvd_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] == fill_ext_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)]);
+			assign fill_out_req[fb] = ((fill_busy_q[fb] & ~fill_stale_q[fb]) & ~fill_out_done[fb]) & ((((fill_hit_ic1[fb] | fill_hit_q[fb]) | fill_err_q[(fb * ibex_pkg_IC_LINE_BEATS) + fill_out_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W - 1 : ibex_pkg_IC_LINE_BEATS_W - (ibex_pkg_IC_LINE_BEATS_W - 1)) : (((fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W - 1 : ibex_pkg_IC_LINE_BEATS_W - (ibex_pkg_IC_LINE_BEATS_W - 1))) + ibex_pkg_IC_LINE_BEATS_W) - 1)-:ibex_pkg_IC_LINE_BEATS_W]]) | (fill_rvd_beat[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] > fill_out_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)])) | fill_rvd_arb[fb]);
 			assign fill_out_grant[fb] = fill_out_arb[fb] & output_ready;
-			assign fill_out_cnt_d[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] = (fill_alloc[fb] ? {1'b0, lookup_addr_ic0[LINE_W - 1:BUS_W]} : fill_out_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] + {{LINE_BEATS_W {1'b0}}, fill_out_grant[fb]});
-			assign fill_out_done[fb] = fill_out_cnt_q[(fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? LINE_BEATS_W : LINE_BEATS_W - LINE_BEATS_W)];
-			assign fill_ram_req[fb] = ((((fill_busy_q[fb] & fill_rvd_cnt_q[(fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? LINE_BEATS_W : LINE_BEATS_W - LINE_BEATS_W)]) & ~fill_hit_q[fb]) & fill_cache_q[fb]) & ~|fill_err_q[fb * LINE_BEATS+:LINE_BEATS]) & ~fill_ram_done_q[fb];
+			assign fill_out_cnt_d[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] = (fill_alloc[fb] ? {1'b0, lookup_addr_ic0[2:ibex_pkg_BUS_W]} : fill_out_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] + {{ibex_pkg_IC_LINE_BEATS_W {1'b0}}, fill_out_grant[fb]});
+			assign fill_out_done[fb] = fill_out_cnt_q[(fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : ibex_pkg_IC_LINE_BEATS_W - ibex_pkg_IC_LINE_BEATS_W)];
+			assign fill_ram_req[fb] = ((((fill_busy_q[fb] & fill_rvd_cnt_q[(fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : ibex_pkg_IC_LINE_BEATS_W - ibex_pkg_IC_LINE_BEATS_W)]) & ~fill_hit_q[fb]) & fill_cache_q[fb]) & ~|fill_err_q[fb * ibex_pkg_IC_LINE_BEATS+:ibex_pkg_IC_LINE_BEATS]) & ~fill_ram_done_q[fb];
 			assign fill_ram_done_d[fb] = fill_ram_arb[fb] | (fill_ram_done_q[fb] & fill_busy_q[fb]);
-			assign fill_rvd_beat[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] = {1'b0, fill_addr_q[fb][LINE_W - 1:BUS_W]} + fill_rvd_cnt_q[(LINE_BEATS_W >= 0 ? (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? (LINE_BEATS_W >= 0 ? LINE_BEATS_W : (LINE_BEATS_W + (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) - 1) : LINE_BEATS_W - (LINE_BEATS_W >= 0 ? LINE_BEATS_W : (LINE_BEATS_W + (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) - 1)) : (((fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? (LINE_BEATS_W >= 0 ? LINE_BEATS_W : (LINE_BEATS_W + (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) - 1) : LINE_BEATS_W - (LINE_BEATS_W >= 0 ? LINE_BEATS_W : (LINE_BEATS_W + (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) - 1))) + (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) - 1)-:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)];
-			assign fill_ext_off[fb * LINE_BEATS_W+:LINE_BEATS_W] = fill_addr_q[fb][LINE_W - 1:BUS_W] + fill_ext_cnt_q[(LINE_BEATS_W >= 0 ? (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? LINE_BEATS_W - 1 : LINE_BEATS_W - (LINE_BEATS_W - 1)) : (((fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? LINE_BEATS_W - 1 : LINE_BEATS_W - (LINE_BEATS_W - 1))) + LINE_BEATS_W) - 1)-:LINE_BEATS_W];
-			assign fill_rvd_off[fb * LINE_BEATS_W+:LINE_BEATS_W] = fill_rvd_beat[(LINE_BEATS_W >= 0 ? (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? LINE_BEATS_W - 1 : LINE_BEATS_W - (LINE_BEATS_W - 1)) : (((fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)) + (LINE_BEATS_W >= 0 ? LINE_BEATS_W - 1 : LINE_BEATS_W - (LINE_BEATS_W - 1))) + LINE_BEATS_W) - 1)-:LINE_BEATS_W];
+			assign fill_ext_beat[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] = {1'b0, fill_addr_q[fb][2:ibex_pkg_BUS_W]} + fill_ext_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : (ibex_pkg_IC_LINE_BEATS_W + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) - 1) : ibex_pkg_IC_LINE_BEATS_W - (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : (ibex_pkg_IC_LINE_BEATS_W + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) - 1)) : (((fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : (ibex_pkg_IC_LINE_BEATS_W + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) - 1) : ibex_pkg_IC_LINE_BEATS_W - (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : (ibex_pkg_IC_LINE_BEATS_W + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) - 1))) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) - 1)-:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)];
+			assign fill_ext_off[fb * ibex_pkg_IC_LINE_BEATS_W+:ibex_pkg_IC_LINE_BEATS_W] = fill_ext_beat[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W - 1 : ibex_pkg_IC_LINE_BEATS_W - (ibex_pkg_IC_LINE_BEATS_W - 1)) : (((fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W - 1 : ibex_pkg_IC_LINE_BEATS_W - (ibex_pkg_IC_LINE_BEATS_W - 1))) + ibex_pkg_IC_LINE_BEATS_W) - 1)-:ibex_pkg_IC_LINE_BEATS_W];
+			assign fill_rvd_beat[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] = {1'b0, fill_addr_q[fb][2:ibex_pkg_BUS_W]} + fill_rvd_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : (ibex_pkg_IC_LINE_BEATS_W + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) - 1) : ibex_pkg_IC_LINE_BEATS_W - (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : (ibex_pkg_IC_LINE_BEATS_W + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) - 1)) : (((fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : (ibex_pkg_IC_LINE_BEATS_W + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) - 1) : ibex_pkg_IC_LINE_BEATS_W - (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W : (ibex_pkg_IC_LINE_BEATS_W + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) - 1))) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) - 1)-:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)];
+			assign fill_rvd_off[fb * ibex_pkg_IC_LINE_BEATS_W+:ibex_pkg_IC_LINE_BEATS_W] = fill_rvd_beat[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W - 1 : ibex_pkg_IC_LINE_BEATS_W - (ibex_pkg_IC_LINE_BEATS_W - 1)) : (((fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)) + (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W - 1 : ibex_pkg_IC_LINE_BEATS_W - (ibex_pkg_IC_LINE_BEATS_W - 1))) + ibex_pkg_IC_LINE_BEATS_W) - 1)-:ibex_pkg_IC_LINE_BEATS_W];
 			assign fill_ext_arb[fb] = fill_ext_req[fb] & ~|(fill_ext_req & fill_older_q[fb * NUM_FB+:NUM_FB]);
 			assign fill_ram_arb[fb] = (fill_ram_req[fb] & fill_grant_ic0) & ~|(fill_ram_req & fill_older_q[fb * NUM_FB+:NUM_FB]);
 			assign fill_data_sel[fb] = ~|(((fill_busy_q & ~fill_out_done) & ~fill_stale_q) & fill_older_q[fb * NUM_FB+:NUM_FB]);
 			assign fill_out_arb[fb] = fill_out_req[fb] & fill_data_sel[fb];
 			assign fill_rvd_arb[fb] = (instr_rvalid_i & fill_rvd_exp[fb]) & ~|(fill_rvd_exp & fill_older_q[fb * NUM_FB+:NUM_FB]);
-			assign fill_data_reg[fb] = (((fill_busy_q[fb] & ~fill_stale_q[fb]) & ~fill_out_done[fb]) & fill_data_sel[fb]) & (((fill_rvd_beat[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] > fill_out_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)]) | fill_hit_q[fb]) | |fill_err_q[fb * LINE_BEATS+:LINE_BEATS]);
+			assign fill_data_reg[fb] = (((fill_busy_q[fb] & ~fill_stale_q[fb]) & ~fill_out_done[fb]) & fill_data_sel[fb]) & (((fill_rvd_beat[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] > fill_out_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)]) | fill_hit_q[fb]) | |fill_err_q[fb * ibex_pkg_IC_LINE_BEATS+:ibex_pkg_IC_LINE_BEATS]);
 			assign fill_data_hit[fb] = (fill_busy_q[fb] & fill_hit_ic1[fb]) & fill_data_sel[fb];
-			assign fill_data_rvd[fb] = ((((((fill_busy_q[fb] & fill_rvd_arb[fb]) & ~fill_hit_q[fb]) & ~fill_hit_ic1[fb]) & ~fill_stale_q[fb]) & ~fill_out_done[fb]) & (fill_rvd_beat[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] == fill_out_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)])) & fill_data_sel[fb];
+			assign fill_data_rvd[fb] = ((((((fill_busy_q[fb] & fill_rvd_arb[fb]) & ~fill_hit_q[fb]) & ~fill_hit_ic1[fb]) & ~fill_stale_q[fb]) & ~fill_out_done[fb]) & (fill_rvd_beat[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] == fill_out_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)])) & fill_data_sel[fb];
 			assign fill_entry_en[fb] = fill_alloc[fb] | fill_busy_q[fb];
 			always @(posedge clk_i or negedge rst_ni)
 				if (!rst_ni) begin
 					fill_busy_q[fb] <= 1'b0;
-					fill_older_q[fb * NUM_FB+:NUM_FB] <= {NUM_FB {1'sb0}};
+					fill_older_q[fb * NUM_FB+:NUM_FB] <= 1'sb0;
 					fill_stale_q[fb] <= 1'b0;
 					fill_cache_q[fb] <= 1'b0;
 					fill_hit_q[fb] <= 1'b0;
-					fill_ext_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] <= {(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W) {1'sb0}};
+					fill_ext_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] <= 1'sb0;
 					fill_ext_hold_q[fb] <= 1'b0;
-					fill_rvd_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] <= {(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W) {1'sb0}};
+					fill_ext_done_q[fb] <= 1'b0;
+					fill_rvd_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] <= 1'sb0;
 					fill_ram_done_q[fb] <= 1'b0;
-					fill_out_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] <= {(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W) {1'sb0}};
+					fill_out_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] <= 1'sb0;
 				end
 				else if (fill_entry_en[fb]) begin
 					fill_busy_q[fb] <= fill_busy_d[fb];
@@ -496,49 +574,77 @@ module ibex_icache (
 					fill_stale_q[fb] <= fill_stale_d[fb];
 					fill_cache_q[fb] <= fill_cache_d[fb];
 					fill_hit_q[fb] <= fill_hit_d[fb];
-					fill_ext_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] <= fill_ext_cnt_d[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)];
+					fill_ext_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] <= fill_ext_cnt_d[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)];
 					fill_ext_hold_q[fb] <= fill_ext_hold_d[fb];
-					fill_rvd_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] <= fill_rvd_cnt_d[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)];
+					fill_ext_done_q[fb] <= fill_ext_done_d[fb];
+					fill_rvd_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] <= fill_rvd_cnt_d[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)];
 					fill_ram_done_q[fb] <= fill_ram_done_d[fb];
-					fill_out_cnt_q[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)] <= fill_out_cnt_d[(LINE_BEATS_W >= 0 ? 0 : LINE_BEATS_W) + (fb * (LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W))+:(LINE_BEATS_W >= 0 ? LINE_BEATS_W + 1 : 1 - LINE_BEATS_W)];
+					fill_out_cnt_q[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)] <= fill_out_cnt_d[(ibex_pkg_IC_LINE_BEATS_W >= 0 ? 0 : ibex_pkg_IC_LINE_BEATS_W) + (fb * (ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W))+:(ibex_pkg_IC_LINE_BEATS_W >= 0 ? ibex_pkg_IC_LINE_BEATS_W + 1 : 1 - ibex_pkg_IC_LINE_BEATS_W)];
 				end
 			assign fill_addr_en[fb] = fill_alloc[fb];
 			assign fill_way_en[fb] = lookup_valid_ic1 & fill_in_ic1[fb];
-			always @(posedge clk_i)
-				if (fill_addr_en[fb])
-					fill_addr_q[fb] <= lookup_addr_ic0;
-			always @(posedge clk_i)
-				if (fill_way_en[fb])
-					fill_way_q[fb] <= sel_way_ic1;
-			assign fill_data_d[fb] = (fill_hit_ic1[fb] ? hit_data_ic1[LineSize - 1:0] : {LINE_BEATS {instr_rdata_i}});
-			genvar b;
-			for (b = 0; b < LINE_BEATS; b = b + 1) begin : gen_data_buf
-				assign fill_err_d[(fb * LINE_BEATS) + b] = (((((instr_pmp_err_i & fill_alloc[fb]) & fill_spec_req) & (lookup_addr_ic0[LINE_W - 1:BUS_W] == b[LINE_BEATS_W - 1:0])) | ((instr_pmp_err_i & fill_ext_arb[fb]) & (fill_ext_off[fb * LINE_BEATS_W+:LINE_BEATS_W] == b[LINE_BEATS_W - 1:0]))) | ((fill_rvd_arb[fb] & instr_err_i) & (fill_rvd_off[fb * LINE_BEATS_W+:LINE_BEATS_W] == b[LINE_BEATS_W - 1:0]))) | (fill_busy_q[fb] & fill_err_q[(fb * LINE_BEATS) + b]);
+			if (ResetAll) begin : g_fill_addr_ra
 				always @(posedge clk_i or negedge rst_ni)
 					if (!rst_ni)
-						fill_err_q[(fb * LINE_BEATS) + b] <= 1'sb0;
-					else if (fill_entry_en[fb])
-						fill_err_q[(fb * LINE_BEATS) + b] <= fill_err_d[(fb * LINE_BEATS) + b];
-				assign fill_data_en[(fb * LINE_BEATS) + b] = fill_hit_ic1[fb] | ((fill_rvd_arb[fb] & ~fill_hit_q[fb]) & (fill_rvd_off[fb * LINE_BEATS_W+:LINE_BEATS_W] == b[LINE_BEATS_W - 1:0]));
+						fill_addr_q[fb] <= 1'sb0;
+					else if (fill_addr_en[fb])
+						fill_addr_q[fb] <= lookup_addr_ic0;
+			end
+			else begin : g_fill_addr_nr
 				always @(posedge clk_i)
-					if (fill_data_en[(fb * LINE_BEATS) + b])
-						fill_data_q[fb][b * BusWidth+:BusWidth] <= fill_data_d[fb][b * BusWidth+:BusWidth];
+					if (fill_addr_en[fb])
+						fill_addr_q[fb] <= lookup_addr_ic0;
+			end
+			if (ResetAll) begin : g_fill_way_ra
+				always @(posedge clk_i or negedge rst_ni)
+					if (!rst_ni)
+						fill_way_q[fb] <= 1'sb0;
+					else if (fill_way_en[fb])
+						fill_way_q[fb] <= sel_way_ic1;
+			end
+			else begin : g_fill_way_nr
+				always @(posedge clk_i)
+					if (fill_way_en[fb])
+						fill_way_q[fb] <= sel_way_ic1;
+			end
+			assign fill_data_d[fb] = (fill_hit_ic1[fb] ? hit_data_ic1 : {ibex_pkg_IC_LINE_BEATS {instr_rdata_i}});
+			genvar b;
+			for (b = 0; b < ibex_pkg_IC_LINE_BEATS; b = b + 1) begin : gen_data_buf
+				assign fill_err_d[(fb * ibex_pkg_IC_LINE_BEATS) + b] = (((((instr_pmp_err_i & fill_alloc[fb]) & fill_spec_req) & (lookup_addr_ic0[2:ibex_pkg_BUS_W] == b[ibex_pkg_IC_LINE_BEATS_W - 1:0])) | ((instr_pmp_err_i & fill_ext_arb[fb]) & (fill_ext_off[fb * ibex_pkg_IC_LINE_BEATS_W+:ibex_pkg_IC_LINE_BEATS_W] == b[ibex_pkg_IC_LINE_BEATS_W - 1:0]))) | ((fill_rvd_arb[fb] & instr_err_i) & (fill_rvd_off[fb * ibex_pkg_IC_LINE_BEATS_W+:ibex_pkg_IC_LINE_BEATS_W] == b[ibex_pkg_IC_LINE_BEATS_W - 1:0]))) | (fill_busy_q[fb] & fill_err_q[(fb * ibex_pkg_IC_LINE_BEATS) + b]);
+				always @(posedge clk_i or negedge rst_ni)
+					if (!rst_ni)
+						fill_err_q[(fb * ibex_pkg_IC_LINE_BEATS) + b] <= 1'sb0;
+					else if (fill_entry_en[fb])
+						fill_err_q[(fb * ibex_pkg_IC_LINE_BEATS) + b] <= fill_err_d[(fb * ibex_pkg_IC_LINE_BEATS) + b];
+				assign fill_data_en[(fb * ibex_pkg_IC_LINE_BEATS) + b] = fill_hit_ic1[fb] | ((fill_rvd_arb[fb] & ~fill_hit_q[fb]) & (fill_rvd_off[fb * ibex_pkg_IC_LINE_BEATS_W+:ibex_pkg_IC_LINE_BEATS_W] == b[ibex_pkg_IC_LINE_BEATS_W - 1:0]));
+				if (ResetAll) begin : g_fill_data_ra
+					always @(posedge clk_i or negedge rst_ni)
+						if (!rst_ni)
+							fill_data_q[fb][b * ibex_pkg_BUS_SIZE+:ibex_pkg_BUS_SIZE] <= 1'sb0;
+						else if (fill_data_en[(fb * ibex_pkg_IC_LINE_BEATS) + b])
+							fill_data_q[fb][b * ibex_pkg_BUS_SIZE+:ibex_pkg_BUS_SIZE] <= fill_data_d[fb][b * ibex_pkg_BUS_SIZE+:ibex_pkg_BUS_SIZE];
+				end
+				else begin : g_fill_data_nr
+					always @(posedge clk_i)
+						if (fill_data_en[(fb * ibex_pkg_IC_LINE_BEATS) + b])
+							fill_data_q[fb][b * ibex_pkg_BUS_SIZE+:ibex_pkg_BUS_SIZE] <= fill_data_d[fb][b * ibex_pkg_BUS_SIZE+:ibex_pkg_BUS_SIZE];
+				end
 			end
 		end
 	endgenerate
 	always @(*) begin
-		fill_ext_req_addr = {(31 >= BUS_W ? ((ADDR_W - 1) - BUS_W) + 1 : (BUS_W - (ADDR_W - 1)) + 1) {1'sb0}};
+		fill_ext_req_addr = 1'sb0;
 		begin : sv2v_autoblock_3
 			reg signed [31:0] i;
 			for (i = 0; i < NUM_FB; i = i + 1)
 				if (fill_ext_arb[i])
-					fill_ext_req_addr = fill_ext_req_addr | {fill_addr_q[i][ADDR_W - 1:LINE_W], fill_ext_off[i * LINE_BEATS_W+:LINE_BEATS_W]};
+					fill_ext_req_addr = fill_ext_req_addr | {fill_addr_q[i][31:ibex_pkg_IC_LINE_W], fill_ext_off[i * ibex_pkg_IC_LINE_BEATS_W+:ibex_pkg_IC_LINE_BEATS_W]};
 		end
 	end
 	always @(*) begin
-		fill_ram_req_addr = {ADDR_W {1'sb0}};
-		fill_ram_req_way = {NumWays {1'sb0}};
-		fill_ram_req_data = {LineSize {1'sb0}};
+		fill_ram_req_addr = 1'sb0;
+		fill_ram_req_way = 1'sb0;
+		fill_ram_req_data = 1'sb0;
 		begin : sv2v_autoblock_4
 			reg signed [31:0] i;
 			for (i = 0; i < NUM_FB; i = i + 1)
@@ -550,30 +656,30 @@ module ibex_icache (
 		end
 	end
 	always @(*) begin
-		fill_out_data = {LineSize {1'sb0}};
-		fill_out_err = {LINE_BEATS {1'sb0}};
+		fill_out_data = 1'sb0;
+		fill_out_err = 1'sb0;
 		begin : sv2v_autoblock_5
 			reg signed [31:0] i;
 			for (i = 0; i < NUM_FB; i = i + 1)
 				if (fill_data_reg[i]) begin
 					fill_out_data = fill_out_data | fill_data_q[i];
-					fill_out_err = fill_out_err | (fill_err_q[i * LINE_BEATS+:LINE_BEATS] & ~{LINE_BEATS {fill_hit_q[i]}});
+					fill_out_err = fill_out_err | (fill_err_q[i * ibex_pkg_IC_LINE_BEATS+:ibex_pkg_IC_LINE_BEATS] & ~{ibex_pkg_IC_LINE_BEATS {fill_hit_q[i]}});
 				end
 		end
 	end
-	assign instr_req = ((SpecRequest | branch_i) & lookup_grant_ic0) | |fill_ext_req;
-	assign instr_addr = (|fill_ext_req ? fill_ext_req_addr : lookup_addr_ic0[ADDR_W - 1:BUS_W]);
+	assign instr_req = ((~icache_enable_i | branch_or_mispredict) & lookup_grant_ic0) | |fill_ext_req;
+	assign instr_addr = (|fill_ext_req ? fill_ext_req_addr : lookup_addr_ic0[31:ibex_pkg_BUS_W]);
 	assign instr_req_o = instr_req;
-	assign instr_addr_o = {instr_addr[ADDR_W - 1:BUS_W], {BUS_W {1'b0}}};
-	assign line_data = (|fill_data_hit ? hit_data_ic1[LineSize - 1:0] : fill_out_data);
-	assign line_err = (|fill_data_hit ? {LINE_BEATS {1'b0}} : fill_out_err);
+	assign instr_addr_o = {instr_addr[31:ibex_pkg_BUS_W], {ibex_pkg_BUS_W {1'b0}}};
+	assign line_data = (|fill_data_hit ? hit_data_ic1 : fill_out_data);
+	assign line_err = (|fill_data_hit ? {ibex_pkg_IC_LINE_BEATS {1'b0}} : fill_out_err);
 	always @(*) begin
-		line_data_muxed = {32 {1'sb0}};
+		line_data_muxed = 1'sb0;
 		line_err_muxed = 1'b0;
 		begin : sv2v_autoblock_6
 			reg signed [31:0] i;
-			for (i = 0; i < LINE_BEATS; i = i + 1)
-				if ((output_addr_q[LINE_W - 1:BUS_W] + {{LINE_BEATS_W - 1 {1'b0}}, skid_valid_q}) == i[LINE_BEATS_W - 1:0]) begin
+			for (i = 0; i < ibex_pkg_IC_LINE_BEATS; i = i + 1)
+				if ((output_addr_q[2:ibex_pkg_BUS_W] + {{ibex_pkg_IC_LINE_BEATS_W - 1 {1'b0}}, skid_valid_q}) == i[ibex_pkg_IC_LINE_BEATS_W - 1:0]) begin
 					line_data_muxed = line_data_muxed | line_data[i * 32+:32];
 					line_err_muxed = line_err_muxed | line_err[i];
 				end
@@ -584,49 +690,77 @@ module ibex_icache (
 	assign data_valid = |fill_out_arb;
 	assign skid_data_d = output_data[31:16];
 	assign skid_en = data_valid & (ready_i | skid_ready);
-	always @(posedge clk_i)
-		if (skid_en) begin
-			skid_data_q <= skid_data_d;
-			skid_err_q <= output_err;
+	generate
+		if (ResetAll) begin : g_skid_data_ra
+			always @(posedge clk_i or negedge rst_ni)
+				if (!rst_ni) begin
+					skid_data_q <= 1'sb0;
+					skid_err_q <= 1'sb0;
+				end
+				else if (skid_en) begin
+					skid_data_q <= skid_data_d;
+					skid_err_q <= output_err;
+				end
 		end
+		else begin : g_skid_data_nr
+			always @(posedge clk_i)
+				if (skid_en) begin
+					skid_data_q <= skid_data_d;
+					skid_err_q <= output_err;
+				end
+		end
+	endgenerate
 	assign skid_complete_instr = skid_valid_q & ((skid_data_q[1:0] != 2'b11) | skid_err_q);
 	assign skid_ready = (output_addr_q[1] & ~skid_valid_q) & (~output_compressed | output_err);
 	assign output_ready = (ready_i | skid_ready) & ~skid_complete_instr;
 	assign output_compressed = rdata_o[1:0] != 2'b11;
-	assign skid_valid_d = (branch_i ? 1'b0 : (skid_valid_q ? ~(ready_i & ((skid_data_q[1:0] != 2'b11) | skid_err_q)) : ((output_addr_q[1] & (~output_compressed | output_err)) | (((~output_addr_q[1] & output_compressed) & ~output_err) & ready_i)) & data_valid));
+	assign skid_valid_d = (branch_or_mispredict ? 1'b0 : (skid_valid_q ? ~(ready_i & ((skid_data_q[1:0] != 2'b11) | skid_err_q)) : data_valid & ((output_addr_q[1] & (~output_compressed | output_err)) | (((~output_addr_q[1] & output_compressed) & ~output_err) & ready_i))));
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni)
 			skid_valid_q <= 1'b0;
 		else
 			skid_valid_q <= skid_valid_d;
 	assign output_valid = skid_complete_instr | (data_valid & (((~output_addr_q[1] | skid_valid_q) | output_err) | (output_data[17:16] != 2'b11)));
-	assign output_addr_en = branch_i | (ready_i & valid_o);
+	assign output_addr_en = branch_or_mispredict | (ready_i & valid_o);
 	assign addr_incr_two = output_compressed & ~err_o;
-	assign output_addr_d = (branch_i ? addr_i[31:1] : output_addr_q[31:1] + {29'd0, ~addr_incr_two, addr_incr_two});
-	always @(posedge clk_i)
-		if (output_addr_en)
-			output_addr_q <= output_addr_d;
+	assign output_addr_incr = output_addr_q[31:1] + {29'd0, ~addr_incr_two, addr_incr_two};
+	assign output_addr_d = (branch_i ? addr_i[31:1] : (branch_mispredict_i ? branch_mispredict_addr[31:1] : output_addr_incr));
+	generate
+		if (ResetAll) begin : g_output_addr_ra
+			always @(posedge clk_i or negedge rst_ni)
+				if (!rst_ni)
+					output_addr_q <= 1'sb0;
+				else if (output_addr_en)
+					output_addr_q <= output_addr_d;
+		end
+		else begin : g_output_addr_nr
+			always @(posedge clk_i)
+				if (output_addr_en)
+					output_addr_q <= output_addr_d;
+		end
+	endgenerate
+	localparam [31:0] ibex_pkg_IC_OUTPUT_BEATS = 2;
 	always @(*) begin
-		output_data_lo = {16 {1'sb0}};
+		output_data_lo = 1'sb0;
 		begin : sv2v_autoblock_7
 			reg signed [31:0] i;
-			for (i = 0; i < OUTPUT_BEATS; i = i + 1)
-				if (output_addr_q[BUS_W - 1:1] == i[BUS_W - 2:0])
+			for (i = 0; i < ibex_pkg_IC_OUTPUT_BEATS; i = i + 1)
+				if (output_addr_q[1:1] == i[0:0])
 					output_data_lo = output_data_lo | output_data[i * 16+:16];
 		end
 	end
 	always @(*) begin
-		output_data_hi = {16 {1'sb0}};
+		output_data_hi = 1'sb0;
 		begin : sv2v_autoblock_8
 			reg signed [31:0] i;
-			for (i = 0; i < (OUTPUT_BEATS - 1); i = i + 1)
-				if (output_addr_q[BUS_W - 1:1] == i[BUS_W - 2:0])
+			for (i = 0; i < 1; i = i + 1)
+				if (output_addr_q[1:1] == i[0:0])
 					output_data_hi = output_data_hi | output_data[(i + 1) * 16+:16];
 		end
-		if (&output_addr_q[BUS_W - 1:1])
+		if (&output_addr_q[1:1])
 			output_data_hi = output_data_hi | output_data[15:0];
 	end
-	assign valid_o = output_valid;
+	assign valid_o = output_valid & ~branch_mispredict_i;
 	assign rdata_o = {output_data_hi, (skid_valid_q ? skid_data_q : output_data_lo)};
 	assign addr_o = {output_addr_q, 1'b0};
 	assign err_o = (skid_valid_q & skid_err_q) | (~skid_complete_instr & output_err);
@@ -634,7 +768,7 @@ module ibex_icache (
 	assign start_inval = (~reset_inval_q | icache_inval_i) & ~inval_prog_q;
 	assign inval_prog_d = start_inval | (inval_prog_q & ~inval_done);
 	assign inval_done = &inval_index_q;
-	assign inval_index_d = (start_inval ? {INDEX_W {1'sb0}} : inval_index_q + {{INDEX_W - 1 {1'b0}}, 1'b1});
+	assign inval_index_d = (start_inval ? {ibex_pkg_IC_INDEX_W {1'sb0}} : inval_index_q + {{ibex_pkg_IC_INDEX_W - 1 {1'b0}}, 1'b1});
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni) begin
 			inval_prog_q <= 1'b0;
@@ -644,8 +778,19 @@ module ibex_icache (
 			inval_prog_q <= inval_prog_d;
 			reset_inval_q <= 1'b1;
 		end
-	always @(posedge clk_i)
-		if (inval_prog_d)
-			inval_index_q <= inval_index_d;
+	generate
+		if (ResetAll) begin : g_inval_index_ra
+			always @(posedge clk_i or negedge rst_ni)
+				if (!rst_ni)
+					inval_index_q <= 1'sb0;
+				else if (inval_prog_d)
+					inval_index_q <= inval_index_d;
+		end
+		else begin : g_inval_index_nr
+			always @(posedge clk_i)
+				if (inval_prog_d)
+					inval_index_q <= inval_index_d;
+		end
+	endgenerate
 	assign busy_o = inval_prog_q | |(fill_busy_q & ~fill_rvd_done);
 endmodule

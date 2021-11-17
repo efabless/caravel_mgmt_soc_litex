@@ -1,18 +1,3 @@
-// SPDX-FileCopyrightText: 2020 lowRISC contributors
-// Copyright 2018 ETH Zurich and University of Bologna
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
-
 module ibex_register_file_ff (
 	clk_i,
 	rst_ni,
@@ -45,35 +30,33 @@ module ibex_register_file_ff (
 	wire [(NUM_WORDS * DataWidth) - 1:0] rf_reg;
 	reg [((NUM_WORDS - 1) >= 1 ? ((NUM_WORDS - 1) * DataWidth) + (DataWidth - 1) : ((3 - NUM_WORDS) * DataWidth) + (((NUM_WORDS - 1) * DataWidth) - 1)):((NUM_WORDS - 1) >= 1 ? DataWidth : (NUM_WORDS - 1) * DataWidth)] rf_reg_q;
 	reg [NUM_WORDS - 1:1] we_a_dec;
-	function automatic [4:0] sv2v_cast_5_unsigned;
+	function automatic [4:0] sv2v_cast_5;
 		input reg [4:0] inp;
-		sv2v_cast_5_unsigned = inp;
+		sv2v_cast_5 = inp;
 	endfunction
 	always @(*) begin : we_a_decoder
-		begin : sv2v_autoblock_2
+		begin : sv2v_autoblock_1
 			reg [31:0] i;
 			for (i = 1; i < NUM_WORDS; i = i + 1)
-				we_a_dec[i] = (waddr_a_i == sv2v_cast_5_unsigned(i) ? we_a_i : 1'b0);
+				we_a_dec[i] = (waddr_a_i == sv2v_cast_5(i) ? we_a_i : 1'b0);
 		end
 	end
+	genvar i;
 	generate
-		genvar i;
 		for (i = 1; i < NUM_WORDS; i = i + 1) begin : g_rf_flops
 			always @(posedge clk_i or negedge rst_ni)
 				if (!rst_ni)
-					rf_reg_q[((NUM_WORDS - 1) >= 1 ? i : 1 - (i - (NUM_WORDS - 1))) * DataWidth+:DataWidth] <= {DataWidth {1'sb0}};
+					rf_reg_q[((NUM_WORDS - 1) >= 1 ? i : 1 - (i - (NUM_WORDS - 1))) * DataWidth+:DataWidth] <= 1'sb0;
 				else if (we_a_dec[i])
 					rf_reg_q[((NUM_WORDS - 1) >= 1 ? i : 1 - (i - (NUM_WORDS - 1))) * DataWidth+:DataWidth] <= wdata_a_i;
 		end
-	endgenerate
-	generate
 		if (DummyInstructions) begin : g_dummy_r0
 			wire we_r0_dummy;
 			reg [DataWidth - 1:0] rf_r0_q;
 			assign we_r0_dummy = we_a_i & dummy_instr_id_i;
 			always @(posedge clk_i or negedge rst_ni)
 				if (!rst_ni)
-					rf_r0_q <= {DataWidth {1'sb0}};
+					rf_r0_q <= 1'sb0;
 				else if (we_r0_dummy)
 					rf_r0_q <= wdata_a_i;
 			assign rf_reg[0+:DataWidth] = (dummy_instr_id_i ? rf_r0_q : {DataWidth {1'sb0}});
@@ -81,7 +64,7 @@ module ibex_register_file_ff (
 		else begin : g_normal_r0
 			wire unused_dummy_instr_id;
 			assign unused_dummy_instr_id = dummy_instr_id_i;
-			assign rf_reg[0+:DataWidth] = {DataWidth {1'sb0}};
+			assign rf_reg[0+:DataWidth] = 1'sb0;
 		end
 	endgenerate
 	assign rf_reg[DataWidth * (((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : ((NUM_WORDS - 1) + ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : 3 - NUM_WORDS)) - 1) - (((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : 3 - NUM_WORDS) - 1))+:DataWidth * ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : 3 - NUM_WORDS)] = rf_reg_q[DataWidth * ((NUM_WORDS - 1) >= 1 ? ((NUM_WORDS - 1) >= 1 ? ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : ((NUM_WORDS - 1) + ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : 3 - NUM_WORDS)) - 1) - (((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : 3 - NUM_WORDS) - 1) : ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : ((NUM_WORDS - 1) + ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : 3 - NUM_WORDS)) - 1)) : 1 - (((NUM_WORDS - 1) >= 1 ? ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : ((NUM_WORDS - 1) + ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : 3 - NUM_WORDS)) - 1) - (((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : 3 - NUM_WORDS) - 1) : ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : ((NUM_WORDS - 1) + ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : 3 - NUM_WORDS)) - 1)) - (NUM_WORDS - 1)))+:DataWidth * ((NUM_WORDS - 1) >= 1 ? NUM_WORDS - 1 : 3 - NUM_WORDS)];

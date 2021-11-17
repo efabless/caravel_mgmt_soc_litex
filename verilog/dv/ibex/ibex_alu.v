@@ -1,19 +1,3 @@
-// SPDX-FileCopyrightText: 2020 lowRISC contributors
-// Copyright 2018 ETH Zurich and University of Bologna
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
-
-
 module ibex_alu (
 	operator_i,
 	operand_a_i,
@@ -31,8 +15,7 @@ module ibex_alu (
 	comparison_result_o,
 	is_equal_result_o
 );
-	localparam integer ibex_pkg_RV32BNone = 0;
-	parameter integer RV32B = ibex_pkg_RV32BNone;
+	parameter integer RV32B = 32'sd0;
 	input wire [5:0] operator_i;
 	input wire [31:0] operand_a_i;
 	input wire [31:0] operand_b_i;
@@ -48,311 +31,10 @@ module ibex_alu (
 	output reg [31:0] result_o;
 	output wire comparison_result_o;
 	output wire is_equal_result_o;
-	localparam integer RegFileFF = 0;
-	localparam integer RegFileFPGA = 1;
-	localparam integer RegFileLatch = 2;
-	localparam integer RV32MNone = 0;
-	localparam integer RV32MSlow = 1;
-	localparam integer RV32MFast = 2;
-	localparam integer RV32MSingleCycle = 3;
-	localparam integer RV32BNone = 0;
-	localparam integer RV32BBalanced = 1;
-	localparam integer RV32BFull = 2;
-	localparam [6:0] OPCODE_LOAD = 7'h03;
-	localparam [6:0] OPCODE_MISC_MEM = 7'h0f;
-	localparam [6:0] OPCODE_OP_IMM = 7'h13;
-	localparam [6:0] OPCODE_AUIPC = 7'h17;
-	localparam [6:0] OPCODE_STORE = 7'h23;
-	localparam [6:0] OPCODE_OP = 7'h33;
-	localparam [6:0] OPCODE_LUI = 7'h37;
-	localparam [6:0] OPCODE_BRANCH = 7'h63;
-	localparam [6:0] OPCODE_JALR = 7'h67;
-	localparam [6:0] OPCODE_JAL = 7'h6f;
-	localparam [6:0] OPCODE_SYSTEM = 7'h73;
-	localparam [5:0] ALU_ADD = 0;
-	localparam [5:0] ALU_SUB = 1;
-	localparam [5:0] ALU_XOR = 2;
-	localparam [5:0] ALU_OR = 3;
-	localparam [5:0] ALU_AND = 4;
-	localparam [5:0] ALU_XNOR = 5;
-	localparam [5:0] ALU_ORN = 6;
-	localparam [5:0] ALU_ANDN = 7;
-	localparam [5:0] ALU_SRA = 8;
-	localparam [5:0] ALU_SRL = 9;
-	localparam [5:0] ALU_SLL = 10;
-	localparam [5:0] ALU_SRO = 11;
-	localparam [5:0] ALU_SLO = 12;
-	localparam [5:0] ALU_ROR = 13;
-	localparam [5:0] ALU_ROL = 14;
-	localparam [5:0] ALU_GREV = 15;
-	localparam [5:0] ALU_GORC = 16;
-	localparam [5:0] ALU_SHFL = 17;
-	localparam [5:0] ALU_UNSHFL = 18;
-	localparam [5:0] ALU_LT = 19;
-	localparam [5:0] ALU_LTU = 20;
-	localparam [5:0] ALU_GE = 21;
-	localparam [5:0] ALU_GEU = 22;
-	localparam [5:0] ALU_EQ = 23;
-	localparam [5:0] ALU_NE = 24;
-	localparam [5:0] ALU_MIN = 25;
-	localparam [5:0] ALU_MINU = 26;
-	localparam [5:0] ALU_MAX = 27;
-	localparam [5:0] ALU_MAXU = 28;
-	localparam [5:0] ALU_PACK = 29;
-	localparam [5:0] ALU_PACKU = 30;
-	localparam [5:0] ALU_PACKH = 31;
-	localparam [5:0] ALU_SEXTB = 32;
-	localparam [5:0] ALU_SEXTH = 33;
-	localparam [5:0] ALU_CLZ = 34;
-	localparam [5:0] ALU_CTZ = 35;
-	localparam [5:0] ALU_PCNT = 36;
-	localparam [5:0] ALU_SLT = 37;
-	localparam [5:0] ALU_SLTU = 38;
-	localparam [5:0] ALU_CMOV = 39;
-	localparam [5:0] ALU_CMIX = 40;
-	localparam [5:0] ALU_FSL = 41;
-	localparam [5:0] ALU_FSR = 42;
-	localparam [5:0] ALU_SBSET = 43;
-	localparam [5:0] ALU_SBCLR = 44;
-	localparam [5:0] ALU_SBINV = 45;
-	localparam [5:0] ALU_SBEXT = 46;
-	localparam [5:0] ALU_BEXT = 47;
-	localparam [5:0] ALU_BDEP = 48;
-	localparam [5:0] ALU_BFP = 49;
-	localparam [5:0] ALU_CLMUL = 50;
-	localparam [5:0] ALU_CLMULR = 51;
-	localparam [5:0] ALU_CLMULH = 52;
-	localparam [5:0] ALU_CRC32_B = 53;
-	localparam [5:0] ALU_CRC32C_B = 54;
-	localparam [5:0] ALU_CRC32_H = 55;
-	localparam [5:0] ALU_CRC32C_H = 56;
-	localparam [5:0] ALU_CRC32_W = 57;
-	localparam [5:0] ALU_CRC32C_W = 58;
-	localparam [1:0] MD_OP_MULL = 0;
-	localparam [1:0] MD_OP_MULH = 1;
-	localparam [1:0] MD_OP_DIV = 2;
-	localparam [1:0] MD_OP_REM = 3;
-	localparam [1:0] CSR_OP_READ = 0;
-	localparam [1:0] CSR_OP_WRITE = 1;
-	localparam [1:0] CSR_OP_SET = 2;
-	localparam [1:0] CSR_OP_CLEAR = 3;
-	localparam [1:0] PRIV_LVL_M = 2'b11;
-	localparam [1:0] PRIV_LVL_H = 2'b10;
-	localparam [1:0] PRIV_LVL_S = 2'b01;
-	localparam [1:0] PRIV_LVL_U = 2'b00;
-	localparam [3:0] XDEBUGVER_NO = 4'd0;
-	localparam [3:0] XDEBUGVER_STD = 4'd4;
-	localparam [3:0] XDEBUGVER_NONSTD = 4'd15;
-	localparam [1:0] WB_INSTR_LOAD = 0;
-	localparam [1:0] WB_INSTR_STORE = 1;
-	localparam [1:0] WB_INSTR_OTHER = 2;
-	localparam [1:0] OP_A_REG_A = 0;
-	localparam [1:0] OP_A_FWD = 1;
-	localparam [1:0] OP_A_CURRPC = 2;
-	localparam [1:0] OP_A_IMM = 3;
-	localparam [0:0] IMM_A_Z = 0;
-	localparam [0:0] IMM_A_ZERO = 1;
-	localparam [0:0] OP_B_REG_B = 0;
-	localparam [0:0] OP_B_IMM = 1;
-	localparam [2:0] IMM_B_I = 0;
-	localparam [2:0] IMM_B_S = 1;
-	localparam [2:0] IMM_B_B = 2;
-	localparam [2:0] IMM_B_U = 3;
-	localparam [2:0] IMM_B_J = 4;
-	localparam [2:0] IMM_B_INCR_PC = 5;
-	localparam [2:0] IMM_B_INCR_ADDR = 6;
-	localparam [0:0] RF_WD_EX = 0;
-	localparam [0:0] RF_WD_CSR = 1;
-	localparam [2:0] PC_BOOT = 0;
-	localparam [2:0] PC_JUMP = 1;
-	localparam [2:0] PC_EXC = 2;
-	localparam [2:0] PC_ERET = 3;
-	localparam [2:0] PC_DRET = 4;
-	localparam [2:0] PC_BP = 5;
-	localparam [1:0] EXC_PC_EXC = 0;
-	localparam [1:0] EXC_PC_IRQ = 1;
-	localparam [1:0] EXC_PC_DBD = 2;
-	localparam [1:0] EXC_PC_DBG_EXC = 3;
-	localparam [5:0] EXC_CAUSE_IRQ_SOFTWARE_M = {1'b1, 5'd3};
-	localparam [5:0] EXC_CAUSE_IRQ_TIMER_M = {1'b1, 5'd7};
-	localparam [5:0] EXC_CAUSE_IRQ_EXTERNAL_M = {1'b1, 5'd11};
-	localparam [5:0] EXC_CAUSE_IRQ_NM = {1'b1, 5'd31};
-	localparam [5:0] EXC_CAUSE_INSN_ADDR_MISA = {1'b0, 5'd0};
-	localparam [5:0] EXC_CAUSE_INSTR_ACCESS_FAULT = {1'b0, 5'd1};
-	localparam [5:0] EXC_CAUSE_ILLEGAL_INSN = {1'b0, 5'd2};
-	localparam [5:0] EXC_CAUSE_BREAKPOINT = {1'b0, 5'd3};
-	localparam [5:0] EXC_CAUSE_LOAD_ACCESS_FAULT = {1'b0, 5'd5};
-	localparam [5:0] EXC_CAUSE_STORE_ACCESS_FAULT = {1'b0, 5'd7};
-	localparam [5:0] EXC_CAUSE_ECALL_UMODE = {1'b0, 5'd8};
-	localparam [5:0] EXC_CAUSE_ECALL_MMODE = {1'b0, 5'd11};
-	localparam [2:0] DBG_CAUSE_NONE = 3'h0;
-	localparam [2:0] DBG_CAUSE_EBREAK = 3'h1;
-	localparam [2:0] DBG_CAUSE_TRIGGER = 3'h2;
-	localparam [2:0] DBG_CAUSE_HALTREQ = 3'h3;
-	localparam [2:0] DBG_CAUSE_STEP = 3'h4;
-	localparam [31:0] PMP_MAX_REGIONS = 16;
-	localparam [31:0] PMP_CFG_W = 8;
-	localparam [31:0] PMP_I = 0;
-	localparam [31:0] PMP_D = 1;
-	localparam [1:0] PMP_ACC_EXEC = 2'b00;
-	localparam [1:0] PMP_ACC_WRITE = 2'b01;
-	localparam [1:0] PMP_ACC_READ = 2'b10;
-	localparam [1:0] PMP_MODE_OFF = 2'b00;
-	localparam [1:0] PMP_MODE_TOR = 2'b01;
-	localparam [1:0] PMP_MODE_NA4 = 2'b10;
-	localparam [1:0] PMP_MODE_NAPOT = 2'b11;
-	localparam [11:0] CSR_MHARTID = 12'hf14;
-	localparam [11:0] CSR_MSTATUS = 12'h300;
-	localparam [11:0] CSR_MISA = 12'h301;
-	localparam [11:0] CSR_MIE = 12'h304;
-	localparam [11:0] CSR_MTVEC = 12'h305;
-	localparam [11:0] CSR_MSCRATCH = 12'h340;
-	localparam [11:0] CSR_MEPC = 12'h341;
-	localparam [11:0] CSR_MCAUSE = 12'h342;
-	localparam [11:0] CSR_MTVAL = 12'h343;
-	localparam [11:0] CSR_MIP = 12'h344;
-	localparam [11:0] CSR_PMPCFG0 = 12'h3a0;
-	localparam [11:0] CSR_PMPCFG1 = 12'h3a1;
-	localparam [11:0] CSR_PMPCFG2 = 12'h3a2;
-	localparam [11:0] CSR_PMPCFG3 = 12'h3a3;
-	localparam [11:0] CSR_PMPADDR0 = 12'h3b0;
-	localparam [11:0] CSR_PMPADDR1 = 12'h3b1;
-	localparam [11:0] CSR_PMPADDR2 = 12'h3b2;
-	localparam [11:0] CSR_PMPADDR3 = 12'h3b3;
-	localparam [11:0] CSR_PMPADDR4 = 12'h3b4;
-	localparam [11:0] CSR_PMPADDR5 = 12'h3b5;
-	localparam [11:0] CSR_PMPADDR6 = 12'h3b6;
-	localparam [11:0] CSR_PMPADDR7 = 12'h3b7;
-	localparam [11:0] CSR_PMPADDR8 = 12'h3b8;
-	localparam [11:0] CSR_PMPADDR9 = 12'h3b9;
-	localparam [11:0] CSR_PMPADDR10 = 12'h3ba;
-	localparam [11:0] CSR_PMPADDR11 = 12'h3bb;
-	localparam [11:0] CSR_PMPADDR12 = 12'h3bc;
-	localparam [11:0] CSR_PMPADDR13 = 12'h3bd;
-	localparam [11:0] CSR_PMPADDR14 = 12'h3be;
-	localparam [11:0] CSR_PMPADDR15 = 12'h3bf;
-	localparam [11:0] CSR_TSELECT = 12'h7a0;
-	localparam [11:0] CSR_TDATA1 = 12'h7a1;
-	localparam [11:0] CSR_TDATA2 = 12'h7a2;
-	localparam [11:0] CSR_TDATA3 = 12'h7a3;
-	localparam [11:0] CSR_MCONTEXT = 12'h7a8;
-	localparam [11:0] CSR_SCONTEXT = 12'h7aa;
-	localparam [11:0] CSR_DCSR = 12'h7b0;
-	localparam [11:0] CSR_DPC = 12'h7b1;
-	localparam [11:0] CSR_DSCRATCH0 = 12'h7b2;
-	localparam [11:0] CSR_DSCRATCH1 = 12'h7b3;
-	localparam [11:0] CSR_MCOUNTINHIBIT = 12'h320;
-	localparam [11:0] CSR_MHPMEVENT3 = 12'h323;
-	localparam [11:0] CSR_MHPMEVENT4 = 12'h324;
-	localparam [11:0] CSR_MHPMEVENT5 = 12'h325;
-	localparam [11:0] CSR_MHPMEVENT6 = 12'h326;
-	localparam [11:0] CSR_MHPMEVENT7 = 12'h327;
-	localparam [11:0] CSR_MHPMEVENT8 = 12'h328;
-	localparam [11:0] CSR_MHPMEVENT9 = 12'h329;
-	localparam [11:0] CSR_MHPMEVENT10 = 12'h32a;
-	localparam [11:0] CSR_MHPMEVENT11 = 12'h32b;
-	localparam [11:0] CSR_MHPMEVENT12 = 12'h32c;
-	localparam [11:0] CSR_MHPMEVENT13 = 12'h32d;
-	localparam [11:0] CSR_MHPMEVENT14 = 12'h32e;
-	localparam [11:0] CSR_MHPMEVENT15 = 12'h32f;
-	localparam [11:0] CSR_MHPMEVENT16 = 12'h330;
-	localparam [11:0] CSR_MHPMEVENT17 = 12'h331;
-	localparam [11:0] CSR_MHPMEVENT18 = 12'h332;
-	localparam [11:0] CSR_MHPMEVENT19 = 12'h333;
-	localparam [11:0] CSR_MHPMEVENT20 = 12'h334;
-	localparam [11:0] CSR_MHPMEVENT21 = 12'h335;
-	localparam [11:0] CSR_MHPMEVENT22 = 12'h336;
-	localparam [11:0] CSR_MHPMEVENT23 = 12'h337;
-	localparam [11:0] CSR_MHPMEVENT24 = 12'h338;
-	localparam [11:0] CSR_MHPMEVENT25 = 12'h339;
-	localparam [11:0] CSR_MHPMEVENT26 = 12'h33a;
-	localparam [11:0] CSR_MHPMEVENT27 = 12'h33b;
-	localparam [11:0] CSR_MHPMEVENT28 = 12'h33c;
-	localparam [11:0] CSR_MHPMEVENT29 = 12'h33d;
-	localparam [11:0] CSR_MHPMEVENT30 = 12'h33e;
-	localparam [11:0] CSR_MHPMEVENT31 = 12'h33f;
-	localparam [11:0] CSR_MCYCLE = 12'hb00;
-	localparam [11:0] CSR_MINSTRET = 12'hb02;
-	localparam [11:0] CSR_MHPMCOUNTER3 = 12'hb03;
-	localparam [11:0] CSR_MHPMCOUNTER4 = 12'hb04;
-	localparam [11:0] CSR_MHPMCOUNTER5 = 12'hb05;
-	localparam [11:0] CSR_MHPMCOUNTER6 = 12'hb06;
-	localparam [11:0] CSR_MHPMCOUNTER7 = 12'hb07;
-	localparam [11:0] CSR_MHPMCOUNTER8 = 12'hb08;
-	localparam [11:0] CSR_MHPMCOUNTER9 = 12'hb09;
-	localparam [11:0] CSR_MHPMCOUNTER10 = 12'hb0a;
-	localparam [11:0] CSR_MHPMCOUNTER11 = 12'hb0b;
-	localparam [11:0] CSR_MHPMCOUNTER12 = 12'hb0c;
-	localparam [11:0] CSR_MHPMCOUNTER13 = 12'hb0d;
-	localparam [11:0] CSR_MHPMCOUNTER14 = 12'hb0e;
-	localparam [11:0] CSR_MHPMCOUNTER15 = 12'hb0f;
-	localparam [11:0] CSR_MHPMCOUNTER16 = 12'hb10;
-	localparam [11:0] CSR_MHPMCOUNTER17 = 12'hb11;
-	localparam [11:0] CSR_MHPMCOUNTER18 = 12'hb12;
-	localparam [11:0] CSR_MHPMCOUNTER19 = 12'hb13;
-	localparam [11:0] CSR_MHPMCOUNTER20 = 12'hb14;
-	localparam [11:0] CSR_MHPMCOUNTER21 = 12'hb15;
-	localparam [11:0] CSR_MHPMCOUNTER22 = 12'hb16;
-	localparam [11:0] CSR_MHPMCOUNTER23 = 12'hb17;
-	localparam [11:0] CSR_MHPMCOUNTER24 = 12'hb18;
-	localparam [11:0] CSR_MHPMCOUNTER25 = 12'hb19;
-	localparam [11:0] CSR_MHPMCOUNTER26 = 12'hb1a;
-	localparam [11:0] CSR_MHPMCOUNTER27 = 12'hb1b;
-	localparam [11:0] CSR_MHPMCOUNTER28 = 12'hb1c;
-	localparam [11:0] CSR_MHPMCOUNTER29 = 12'hb1d;
-	localparam [11:0] CSR_MHPMCOUNTER30 = 12'hb1e;
-	localparam [11:0] CSR_MHPMCOUNTER31 = 12'hb1f;
-	localparam [11:0] CSR_MCYCLEH = 12'hb80;
-	localparam [11:0] CSR_MINSTRETH = 12'hb82;
-	localparam [11:0] CSR_MHPMCOUNTER3H = 12'hb83;
-	localparam [11:0] CSR_MHPMCOUNTER4H = 12'hb84;
-	localparam [11:0] CSR_MHPMCOUNTER5H = 12'hb85;
-	localparam [11:0] CSR_MHPMCOUNTER6H = 12'hb86;
-	localparam [11:0] CSR_MHPMCOUNTER7H = 12'hb87;
-	localparam [11:0] CSR_MHPMCOUNTER8H = 12'hb88;
-	localparam [11:0] CSR_MHPMCOUNTER9H = 12'hb89;
-	localparam [11:0] CSR_MHPMCOUNTER10H = 12'hb8a;
-	localparam [11:0] CSR_MHPMCOUNTER11H = 12'hb8b;
-	localparam [11:0] CSR_MHPMCOUNTER12H = 12'hb8c;
-	localparam [11:0] CSR_MHPMCOUNTER13H = 12'hb8d;
-	localparam [11:0] CSR_MHPMCOUNTER14H = 12'hb8e;
-	localparam [11:0] CSR_MHPMCOUNTER15H = 12'hb8f;
-	localparam [11:0] CSR_MHPMCOUNTER16H = 12'hb90;
-	localparam [11:0] CSR_MHPMCOUNTER17H = 12'hb91;
-	localparam [11:0] CSR_MHPMCOUNTER18H = 12'hb92;
-	localparam [11:0] CSR_MHPMCOUNTER19H = 12'hb93;
-	localparam [11:0] CSR_MHPMCOUNTER20H = 12'hb94;
-	localparam [11:0] CSR_MHPMCOUNTER21H = 12'hb95;
-	localparam [11:0] CSR_MHPMCOUNTER22H = 12'hb96;
-	localparam [11:0] CSR_MHPMCOUNTER23H = 12'hb97;
-	localparam [11:0] CSR_MHPMCOUNTER24H = 12'hb98;
-	localparam [11:0] CSR_MHPMCOUNTER25H = 12'hb99;
-	localparam [11:0] CSR_MHPMCOUNTER26H = 12'hb9a;
-	localparam [11:0] CSR_MHPMCOUNTER27H = 12'hb9b;
-	localparam [11:0] CSR_MHPMCOUNTER28H = 12'hb9c;
-	localparam [11:0] CSR_MHPMCOUNTER29H = 12'hb9d;
-	localparam [11:0] CSR_MHPMCOUNTER30H = 12'hb9e;
-	localparam [11:0] CSR_MHPMCOUNTER31H = 12'hb9f;
-	localparam [11:0] CSR_CPUCTRL = 12'h7c0;
-	localparam [11:0] CSR_SECURESEED = 12'h7c1;
-	localparam [11:0] CSR_OFF_PMP_CFG = 12'h3a0;
-	localparam [11:0] CSR_OFF_PMP_ADDR = 12'h3b0;
-	localparam [31:0] CSR_MSTATUS_MIE_BIT = 3;
-	localparam [31:0] CSR_MSTATUS_MPIE_BIT = 7;
-	localparam [31:0] CSR_MSTATUS_MPP_BIT_LOW = 11;
-	localparam [31:0] CSR_MSTATUS_MPP_BIT_HIGH = 12;
-	localparam [31:0] CSR_MSTATUS_MPRV_BIT = 17;
-	localparam [31:0] CSR_MSTATUS_TW_BIT = 21;
-	localparam [1:0] CSR_MISA_MXL = 2'd1;
-	localparam [31:0] CSR_MSIX_BIT = 3;
-	localparam [31:0] CSR_MTIX_BIT = 7;
-	localparam [31:0] CSR_MEIX_BIT = 11;
-	localparam [31:0] CSR_MFIX_BIT_LOW = 16;
-	localparam [31:0] CSR_MFIX_BIT_HIGH = 30;
 	wire [31:0] operand_a_rev;
 	wire [32:0] operand_b_neg;
+	genvar k;
 	generate
-		genvar k;
 		for (k = 0; k < 32; k = k + 1) begin : gen_rev_operand_a
 			assign operand_a_rev[k] = operand_a_i[31 - k];
 		end
@@ -364,7 +46,7 @@ module ibex_alu (
 	always @(*) begin
 		adder_op_b_negate = 1'b0;
 		case (operator_i)
-			ALU_SUB, ALU_EQ, ALU_NE, ALU_GE, ALU_GEU, ALU_LT, ALU_LTU, ALU_SLT, ALU_SLTU, ALU_MIN, ALU_MINU, ALU_MAX, ALU_MAXU: adder_op_b_negate = 1'b1;
+			6'd1, 6'd23, 6'd24, 6'd21, 6'd22, 6'd19, 6'd20, 6'd37, 6'd38, 6'd25, 6'd26, 6'd27, 6'd28: adder_op_b_negate = 1'b1;
 			default:
 				;
 		endcase
@@ -385,7 +67,7 @@ module ibex_alu (
 	reg cmp_signed;
 	always @(*)
 		case (operator_i)
-			ALU_GE, ALU_LT, ALU_SLT, ALU_MIN, ALU_MAX: cmp_signed = 1'b1;
+			6'd21, 6'd19, 6'd37, 6'd25, 6'd27: cmp_signed = 1'b1;
 			default: cmp_signed = 1'b0;
 		endcase
 	assign is_equal = adder_result == 32'b00000000000000000000000000000000;
@@ -398,10 +80,10 @@ module ibex_alu (
 	reg cmp_result;
 	always @(*)
 		case (operator_i)
-			ALU_EQ: cmp_result = is_equal;
-			ALU_NE: cmp_result = ~is_equal;
-			ALU_GE, ALU_GEU, ALU_MAX, ALU_MAXU: cmp_result = is_greater_equal;
-			ALU_LT, ALU_LTU, ALU_MIN, ALU_MINU, ALU_SLT, ALU_SLTU: cmp_result = ~is_greater_equal;
+			6'd23: cmp_result = is_equal;
+			6'd24: cmp_result = ~is_equal;
+			6'd21, 6'd22, 6'd27, 6'd28: cmp_result = is_greater_equal;
+			6'd19, 6'd20, 6'd25, 6'd26, 6'd37, 6'd38: cmp_result = ~is_greater_equal;
 			default: cmp_result = is_equal;
 		endcase
 	assign comparison_result_o = cmp_result;
@@ -413,6 +95,7 @@ module ibex_alu (
 	reg [5:0] shift_amt;
 	wire [5:0] shift_amt_compl;
 	reg [31:0] shift_operand;
+	reg signed [32:0] shift_result_ext_signed;
 	reg [32:0] shift_result_ext;
 	reg unused_shift_result_ext;
 	reg [31:0] shift_result;
@@ -423,43 +106,45 @@ module ibex_alu (
 	wire [31:0] bfp_mask;
 	wire [31:0] bfp_mask_rev;
 	wire [31:0] bfp_result;
-	assign bfp_op = (RV32B != RV32BNone ? operator_i == ALU_BFP : 1'b0);
+	assign bfp_op = (RV32B != 32'sd0 ? operator_i == 6'd49 : 1'b0);
 	assign bfp_len = {~(|operand_b_i[27:24]), operand_b_i[27:24]};
 	assign bfp_off = operand_b_i[20:16];
-	assign bfp_mask = (RV32B != RV32BNone ? ~(32'hffffffff << bfp_len) : {32 {1'sb0}});
+	assign bfp_mask = (RV32B != 32'sd0 ? ~(32'hffffffff << bfp_len) : {32 {1'sb0}});
+	genvar i;
 	generate
-		genvar i;
 		for (i = 0; i < 32; i = i + 1) begin : gen_rev_bfp_mask
 			assign bfp_mask_rev[i] = bfp_mask[31 - i];
 		end
 	endgenerate
-	assign bfp_result = (RV32B != RV32BNone ? (~shift_result & operand_a_i) | ((operand_b_i & bfp_mask) << bfp_off) : {32 {1'sb0}});
-	always @(*) shift_amt[5] = operand_b_i[5] & shift_funnel;
+	assign bfp_result = (RV32B != 32'sd0 ? (~shift_result & operand_a_i) | ((operand_b_i & bfp_mask) << bfp_off) : {32 {1'sb0}});
+	wire [1:1] sv2v_tmp_3EBA5;
+	assign sv2v_tmp_3EBA5 = operand_b_i[5] & shift_funnel;
+	always @(*) shift_amt[5] = sv2v_tmp_3EBA5;
 	assign shift_amt_compl = 32 - operand_b_i[4:0];
 	always @(*)
 		if (bfp_op)
 			shift_amt[4:0] = bfp_off;
 		else
 			shift_amt[4:0] = (instr_first_cycle_i ? (operand_b_i[5] && shift_funnel ? shift_amt_compl[4:0] : operand_b_i[4:0]) : (operand_b_i[5] && shift_funnel ? operand_b_i[4:0] : shift_amt_compl[4:0]));
-	assign shift_sbmode = (RV32B != RV32BNone ? ((operator_i == ALU_SBSET) | (operator_i == ALU_SBCLR)) | (operator_i == ALU_SBINV) : 1'b0);
+	assign shift_sbmode = (RV32B != 32'sd0 ? ((operator_i == 6'd43) | (operator_i == 6'd44)) | (operator_i == 6'd45) : 1'b0);
 	always @(*) begin
 		case (operator_i)
-			ALU_SLL: shift_left = 1'b1;
-			ALU_SLO, ALU_BFP: shift_left = (RV32B != RV32BNone ? 1'b1 : 1'b0);
-			ALU_ROL: shift_left = (RV32B != RV32BNone ? instr_first_cycle_i : 0);
-			ALU_ROR: shift_left = (RV32B != RV32BNone ? ~instr_first_cycle_i : 0);
-			ALU_FSL: shift_left = (RV32B != RV32BNone ? (shift_amt[5] ? ~instr_first_cycle_i : instr_first_cycle_i) : 1'b0);
-			ALU_FSR: shift_left = (RV32B != RV32BNone ? (shift_amt[5] ? instr_first_cycle_i : ~instr_first_cycle_i) : 1'b0);
+			6'd10: shift_left = 1'b1;
+			6'd12, 6'd49: shift_left = (RV32B != 32'sd0 ? 1'b1 : 1'b0);
+			6'd14: shift_left = (RV32B != 32'sd0 ? instr_first_cycle_i : 0);
+			6'd13: shift_left = (RV32B != 32'sd0 ? ~instr_first_cycle_i : 0);
+			6'd41: shift_left = (RV32B != 32'sd0 ? (shift_amt[5] ? ~instr_first_cycle_i : instr_first_cycle_i) : 1'b0);
+			6'd42: shift_left = (RV32B != 32'sd0 ? (shift_amt[5] ? instr_first_cycle_i : ~instr_first_cycle_i) : 1'b0);
 			default: shift_left = 1'b0;
 		endcase
 		if (shift_sbmode)
 			shift_left = 1'b1;
 	end
-	assign shift_arith = operator_i == ALU_SRA;
-	assign shift_ones = (RV32B != RV32BNone ? (operator_i == ALU_SLO) | (operator_i == ALU_SRO) : 1'b0);
-	assign shift_funnel = (RV32B != RV32BNone ? (operator_i == ALU_FSL) | (operator_i == ALU_FSR) : 1'b0);
+	assign shift_arith = operator_i == 6'd8;
+	assign shift_ones = (RV32B != 32'sd0 ? (operator_i == 6'd12) | (operator_i == 6'd11) : 1'b0);
+	assign shift_funnel = (RV32B != 32'sd0 ? (operator_i == 6'd41) | (operator_i == 6'd42) : 1'b0);
 	always @(*) begin
-		if (RV32B == RV32BNone)
+		if (RV32B == 32'sd0)
 			shift_operand = (shift_left ? operand_a_rev : operand_a_i);
 		else
 			case (1'b1)
@@ -467,10 +152,11 @@ module ibex_alu (
 				shift_sbmode: shift_operand = 32'h80000000;
 				default: shift_operand = (shift_left ? operand_a_rev : operand_a_i);
 			endcase
-		shift_result_ext = $unsigned($signed({shift_ones | (shift_arith & shift_operand[31]), shift_operand}) >>> shift_amt[4:0]);
+		shift_result_ext_signed = $signed({shift_ones | (shift_arith & shift_operand[31]), shift_operand}) >>> shift_amt[4:0];
+		shift_result_ext = $unsigned(shift_result_ext_signed);
 		shift_result = shift_result_ext[31:0];
 		unused_shift_result_ext = shift_result_ext[32];
-		begin : sv2v_autoblock_6
+		begin : sv2v_autoblock_1
 			reg [31:0] i;
 			for (i = 0; i < 32; i = i + 1)
 				shift_result_rev[i] = shift_result[31 - i];
@@ -487,16 +173,16 @@ module ibex_alu (
 	reg bwlogic_op_b_negate;
 	always @(*)
 		case (operator_i)
-			ALU_XNOR, ALU_ORN, ALU_ANDN: bwlogic_op_b_negate = (RV32B != RV32BNone ? 1'b1 : 1'b0);
-			ALU_CMIX: bwlogic_op_b_negate = (RV32B != RV32BNone ? ~instr_first_cycle_i : 1'b0);
+			6'd5, 6'd6, 6'd7: bwlogic_op_b_negate = (RV32B != 32'sd0 ? 1'b1 : 1'b0);
+			6'd40: bwlogic_op_b_negate = (RV32B != 32'sd0 ? ~instr_first_cycle_i : 1'b0);
 			default: bwlogic_op_b_negate = 1'b0;
 		endcase
 	assign bwlogic_operand_b = (bwlogic_op_b_negate ? operand_b_neg[32:1] : operand_b_i);
 	assign bwlogic_or_result = operand_a_i | bwlogic_operand_b;
 	assign bwlogic_and_result = operand_a_i & bwlogic_operand_b;
 	assign bwlogic_xor_result = operand_a_i ^ bwlogic_operand_b;
-	assign bwlogic_or = (operator_i == ALU_OR) | (operator_i == ALU_ORN);
-	assign bwlogic_and = (operator_i == ALU_AND) | (operator_i == ALU_ANDN);
+	assign bwlogic_or = (operator_i == 6'd3) | (operator_i == 6'd6);
+	assign bwlogic_and = (operator_i == 6'd4) | (operator_i == 6'd7);
 	always @(*)
 		case (1'b1)
 			bwlogic_or: bwlogic_result = bwlogic_or_result;
@@ -515,7 +201,7 @@ module ibex_alu (
 	reg [31:0] clmul_result;
 	reg [31:0] multicycle_result;
 	generate
-		if (RV32B != RV32BNone) begin : g_alu_rvb
+		if (RV32B != 32'sd0) begin : g_alu_rvb
 			wire zbe_op;
 			wire bitcnt_ctz;
 			wire bitcnt_clz;
@@ -526,8 +212,8 @@ module ibex_alu (
 			reg [191:0] bitcnt_partial;
 			wire [31:0] bitcnt_partial_lsb_d;
 			wire [31:0] bitcnt_partial_msb_d;
-			assign bitcnt_ctz = operator_i == ALU_CTZ;
-			assign bitcnt_clz = operator_i == ALU_CLZ;
+			assign bitcnt_ctz = operator_i == 6'd35;
+			assign bitcnt_clz = operator_i == 6'd34;
 			assign bitcnt_cz = bitcnt_ctz | bitcnt_clz;
 			assign bitcnt_result = bitcnt_partial[0+:6];
 			assign bitcnt_mask_op = (bitcnt_clz ? operand_a_rev : operand_a_i);
@@ -540,7 +226,7 @@ module ibex_alu (
 				bitcnt_bit_mask = bitcnt_bit_mask | (bitcnt_bit_mask << 16);
 				bitcnt_bit_mask = ~bitcnt_bit_mask;
 			end
-			assign zbe_op = (operator_i == ALU_BEXT) | (operator_i == ALU_BDEP);
+			assign zbe_op = (operator_i == 6'd47) | (operator_i == 6'd48);
 			always @(*)
 				case (1'b1)
 					zbe_op: bitcnt_bits = operand_b_i;
@@ -549,40 +235,40 @@ module ibex_alu (
 				endcase
 			always @(*) begin
 				bitcnt_partial = {32 {6'b000000}};
-				begin : sv2v_autoblock_7
+				begin : sv2v_autoblock_2
 					reg [31:0] i;
 					for (i = 1; i < 32; i = i + 2)
 						bitcnt_partial[(31 - i) * 6+:6] = {5'h00, bitcnt_bits[i]} + {5'h00, bitcnt_bits[i - 1]};
 				end
-				begin : sv2v_autoblock_8
+				begin : sv2v_autoblock_3
 					reg [31:0] i;
 					for (i = 3; i < 32; i = i + 4)
 						bitcnt_partial[(31 - i) * 6+:6] = bitcnt_partial[(33 - i) * 6+:6] + bitcnt_partial[(31 - i) * 6+:6];
 				end
-				begin : sv2v_autoblock_9
+				begin : sv2v_autoblock_4
 					reg [31:0] i;
 					for (i = 7; i < 32; i = i + 8)
 						bitcnt_partial[(31 - i) * 6+:6] = bitcnt_partial[(35 - i) * 6+:6] + bitcnt_partial[(31 - i) * 6+:6];
 				end
-				begin : sv2v_autoblock_10
+				begin : sv2v_autoblock_5
 					reg [31:0] i;
 					for (i = 15; i < 32; i = i + 16)
 						bitcnt_partial[(31 - i) * 6+:6] = bitcnt_partial[(39 - i) * 6+:6] + bitcnt_partial[(31 - i) * 6+:6];
 				end
 				bitcnt_partial[0+:6] = bitcnt_partial[96+:6] + bitcnt_partial[0+:6];
 				bitcnt_partial[48+:6] = bitcnt_partial[96+:6] + bitcnt_partial[48+:6];
-				begin : sv2v_autoblock_11
+				begin : sv2v_autoblock_6
 					reg [31:0] i;
 					for (i = 11; i < 32; i = i + 8)
 						bitcnt_partial[(31 - i) * 6+:6] = bitcnt_partial[(35 - i) * 6+:6] + bitcnt_partial[(31 - i) * 6+:6];
 				end
-				begin : sv2v_autoblock_12
+				begin : sv2v_autoblock_7
 					reg [31:0] i;
 					for (i = 5; i < 32; i = i + 4)
 						bitcnt_partial[(31 - i) * 6+:6] = bitcnt_partial[(33 - i) * 6+:6] + bitcnt_partial[(31 - i) * 6+:6];
 				end
 				bitcnt_partial[186+:6] = {5'h00, bitcnt_bits[0]};
-				begin : sv2v_autoblock_13
+				begin : sv2v_autoblock_8
 					reg [31:0] i;
 					for (i = 2; i < 32; i = i + 2)
 						bitcnt_partial[(31 - i) * 6+:6] = bitcnt_partial[(32 - i) * 6+:6] + {5'h00, bitcnt_bits[i]};
@@ -591,27 +277,27 @@ module ibex_alu (
 			assign minmax_result = (cmp_result ? operand_a_i : operand_b_i);
 			wire packu;
 			wire packh;
-			assign packu = operator_i == ALU_PACKU;
-			assign packh = operator_i == ALU_PACKH;
+			assign packu = operator_i == 6'd30;
+			assign packh = operator_i == 6'd31;
 			always @(*)
 				case (1'b1)
 					packu: pack_result = {operand_b_i[31:16], operand_a_i[31:16]};
 					packh: pack_result = {16'h0000, operand_b_i[7:0], operand_a_i[7:0]};
 					default: pack_result = {operand_b_i[15:0], operand_a_i[15:0]};
 				endcase
-			assign sext_result = (operator_i == ALU_SEXTB ? {{24 {operand_a_i[7]}}, operand_a_i[7:0]} : {{16 {operand_a_i[15]}}, operand_a_i[15:0]});
+			assign sext_result = (operator_i == 6'd32 ? {{24 {operand_a_i[7]}}, operand_a_i[7:0]} : {{16 {operand_a_i[15]}}, operand_a_i[15:0]});
 			always @(*)
 				case (operator_i)
-					ALU_SBSET: singlebit_result = operand_a_i | shift_result;
-					ALU_SBCLR: singlebit_result = operand_a_i & ~shift_result;
-					ALU_SBINV: singlebit_result = operand_a_i ^ shift_result;
+					6'd43: singlebit_result = operand_a_i | shift_result;
+					6'd44: singlebit_result = operand_a_i & ~shift_result;
+					6'd45: singlebit_result = operand_a_i ^ shift_result;
 					default: singlebit_result = {31'h00000000, shift_result[0]};
 				endcase
 			wire [4:0] zbp_shift_amt;
 			wire gorc_op;
-			assign gorc_op = operator_i == ALU_GORC;
-			assign zbp_shift_amt[2:0] = (RV32B == RV32BFull ? shift_amt[2:0] : {3 {&shift_amt[2:0]}});
-			assign zbp_shift_amt[4:3] = (RV32B == RV32BFull ? shift_amt[4:3] : {2 {&shift_amt[4:3]}});
+			assign gorc_op = operator_i == 6'd16;
+			assign zbp_shift_amt[2:0] = (RV32B == 32'sd2 ? shift_amt[2:0] : {3 {&shift_amt[2:0]}});
+			assign zbp_shift_amt[4:3] = (RV32B == 32'sd2 ? shift_amt[4:3] : {2 {&shift_amt[4:3]}});
 			always @(*) begin
 				rev_result = operand_a_i;
 				if (zbp_shift_amt[0])
@@ -621,24 +307,25 @@ module ibex_alu (
 				if (zbp_shift_amt[2])
 					rev_result = ((gorc_op ? rev_result : 32'h00000000) | ((rev_result & 32'h0f0f0f0f) << 4)) | ((rev_result & 32'hf0f0f0f0) >> 4);
 				if (zbp_shift_amt[3])
-					rev_result = ((gorc_op & (RV32B == RV32BFull) ? rev_result : 32'h00000000) | ((rev_result & 32'h00ff00ff) << 8)) | ((rev_result & 32'hff00ff00) >> 8);
+					rev_result = ((gorc_op & (RV32B == 32'sd2) ? rev_result : 32'h00000000) | ((rev_result & 32'h00ff00ff) << 8)) | ((rev_result & 32'hff00ff00) >> 8);
 				if (zbp_shift_amt[4])
-					rev_result = ((gorc_op & (RV32B == RV32BFull) ? rev_result : 32'h00000000) | ((rev_result & 32'h0000ffff) << 16)) | ((rev_result & 32'hffff0000) >> 16);
+					rev_result = ((gorc_op & (RV32B == 32'sd2) ? rev_result : 32'h00000000) | ((rev_result & 32'h0000ffff) << 16)) | ((rev_result & 32'hffff0000) >> 16);
 			end
 			wire crc_hmode;
 			wire crc_bmode;
 			wire [31:0] clmul_result_rev;
-			if (RV32B == RV32BFull) begin : gen_alu_rvb_full
-				localparam [127:0] SHUFFLE_MASK_L = {32'h00ff0000, 32'h0f000f00, 32'h30303030, 32'h44444444};
-				localparam [127:0] SHUFFLE_MASK_R = {32'h0000ff00, 32'h00f000f0, 32'h0c0c0c0c, 32'h22222222};
-				localparam [127:0] FLIP_MASK_L = {32'h22001100, 32'h00440000, 32'h44110000, 32'h11000000};
-				localparam [127:0] FLIP_MASK_R = {32'h00880044, 32'h00002200, 32'h00008822, 32'h00000088};
+			if (RV32B == 32'sd2) begin : gen_alu_rvb_full
+				localparam [127:0] SHUFFLE_MASK_L = 128'h00ff00000f000f003030303044444444;
+				localparam [127:0] SHUFFLE_MASK_R = 128'h0000ff0000f000f00c0c0c0c22222222;
+				localparam [127:0] FLIP_MASK_L = 128'h22001100004400004411000011000000;
+				localparam [127:0] FLIP_MASK_R = 128'h00880044000022000000882200000088;
 				wire [31:0] SHUFFLE_MASK_NOT [0:3];
+				genvar i;
 				for (i = 0; i < 4; i = i + 1) begin : gen_shuffle_mask_not
 					assign SHUFFLE_MASK_NOT[i] = ~(SHUFFLE_MASK_L[(3 - i) * 32+:32] | SHUFFLE_MASK_R[(3 - i) * 32+:32]);
 				end
 				wire shuffle_flip;
-				assign shuffle_flip = operator_i == ALU_UNSHFL;
+				assign shuffle_flip = operator_i == 6'd18;
 				reg [3:0] shuffle_mode;
 				always @(*) begin
 					shuffle_result = operand_a_i;
@@ -683,35 +370,35 @@ module ibex_alu (
 				assign bitcnt_partial_msb_d[31] = 1'b0;
 				always @(*) begin
 					bitcnt_partial_q = {32 {6'b000000}};
-					begin : sv2v_autoblock_14
+					begin : sv2v_autoblock_9
 						reg [31:0] i;
 						for (i = 0; i < 32; i = i + 1)
 							begin : gen_bitcnt_reg_out_lsb
 								bitcnt_partial_q[(31 - i) * 6] = imd_val_q_i[32 + i];
 							end
 					end
-					begin : sv2v_autoblock_15
+					begin : sv2v_autoblock_10
 						reg [31:0] i;
 						for (i = 0; i < 16; i = i + 1)
 							begin : gen_bitcnt_reg_out_b1
 								bitcnt_partial_q[((31 - ((2 * i) + 1)) * 6) + 1] = imd_val_q_i[i];
 							end
 					end
-					begin : sv2v_autoblock_16
+					begin : sv2v_autoblock_11
 						reg [31:0] i;
 						for (i = 0; i < 8; i = i + 1)
 							begin : gen_bitcnt_reg_out_b2
 								bitcnt_partial_q[((31 - ((4 * i) + 3)) * 6) + 2] = imd_val_q_i[16 + i];
 							end
 					end
-					begin : sv2v_autoblock_17
+					begin : sv2v_autoblock_12
 						reg [31:0] i;
 						for (i = 0; i < 4; i = i + 1)
 							begin : gen_bitcnt_reg_out_b3
 								bitcnt_partial_q[((31 - ((8 * i) + 7)) * 6) + 3] = imd_val_q_i[24 + i];
 							end
 					end
-					begin : sv2v_autoblock_18
+					begin : sv2v_autoblock_13
 						reg [31:0] i;
 						for (i = 0; i < 2; i = i + 1)
 							begin : gen_bitcnt_reg_out_b4
@@ -731,8 +418,8 @@ module ibex_alu (
 						assign lrotc_stage[stg][((2 * (16 >> stg)) * (seg + 1)) - 1:(2 * (16 >> stg)) * seg] = {{16 >> stg {1'b0}}, {16 >> stg {1'b1}}} << bitcnt_partial_q[((32 - ((16 >> stg) * ((2 * seg) + 1))) * 6) + ($clog2(16 >> stg) >= 0 ? $clog2(16 >> stg) : ($clog2(16 >> stg) + ($clog2(16 >> stg) >= 0 ? $clog2(16 >> stg) + 1 : 1 - $clog2(16 >> stg))) - 1)-:($clog2(16 >> stg) >= 0 ? $clog2(16 >> stg) + 1 : 1 - $clog2(16 >> stg))];
 						assign butterfly_mask_l[stg][((16 >> stg) * ((2 * seg) + 2)) - 1:(16 >> stg) * ((2 * seg) + 1)] = ~lrotc_stage[stg][((16 >> stg) * ((2 * seg) + 2)) - 1:(16 >> stg) * ((2 * seg) + 1)];
 						assign butterfly_mask_r[stg][((16 >> stg) * ((2 * seg) + 1)) - 1:(16 >> stg) * (2 * seg)] = ~lrotc_stage[stg][((16 >> stg) * ((2 * seg) + 2)) - 1:(16 >> stg) * ((2 * seg) + 1)];
-						assign butterfly_mask_l[stg][((16 >> stg) * ((2 * seg) + 1)) - 1:(16 >> stg) * (2 * seg)] = {((((16 >> stg) * ((2 * seg) + 1)) - 1) >= ((16 >> stg) * (2 * seg)) ? ((((16 >> stg) * ((2 * seg) + 1)) - 1) - ((16 >> stg) * (2 * seg))) + 1 : (((16 >> stg) * (2 * seg)) - (((16 >> stg) * ((2 * seg) + 1)) - 1)) + 1) {1'sb0}};
-						assign butterfly_mask_r[stg][((16 >> stg) * ((2 * seg) + 2)) - 1:(16 >> stg) * ((2 * seg) + 1)] = {((((16 >> stg) * ((2 * seg) + 2)) - 1) >= ((16 >> stg) * ((2 * seg) + 1)) ? ((((16 >> stg) * ((2 * seg) + 2)) - 1) - ((16 >> stg) * ((2 * seg) + 1))) + 1 : (((16 >> stg) * ((2 * seg) + 1)) - (((16 >> stg) * ((2 * seg) + 2)) - 1)) + 1) {1'sb0}};
+						assign butterfly_mask_l[stg][((16 >> stg) * ((2 * seg) + 1)) - 1:(16 >> stg) * (2 * seg)] = 1'sb0;
+						assign butterfly_mask_r[stg][((16 >> stg) * ((2 * seg) + 2)) - 1:(16 >> stg) * ((2 * seg) + 1)] = 1'sb0;
 					end
 				end
 				for (stg = 0; stg < 5; stg = stg + 1) begin : gen_butterfly_not
@@ -769,8 +456,8 @@ module ibex_alu (
 				for (i = 0; i < 32; i = i + 1) begin : gen_rev_operand_b
 					assign operand_b_rev[i] = operand_b_i[31 - i];
 				end
-				assign clmul_rmode = operator_i == ALU_CLMULR;
-				assign clmul_hmode = operator_i == ALU_CLMULH;
+				assign clmul_rmode = operator_i == 6'd51;
+				assign clmul_hmode = operator_i == 6'd52;
 				localparam [31:0] CRC32_POLYNOMIAL = 32'h04c11db7;
 				localparam [31:0] CRC32_MU_REV = 32'hf7011641;
 				localparam [31:0] CRC32C_POLYNOMIAL = 32'h1edc6f41;
@@ -780,10 +467,10 @@ module ibex_alu (
 				reg [31:0] crc_operand;
 				wire [31:0] crc_poly;
 				wire [31:0] crc_mu_rev;
-				assign crc_op = (((((operator_i == ALU_CRC32C_W) | (operator_i == ALU_CRC32_W)) | (operator_i == ALU_CRC32C_H)) | (operator_i == ALU_CRC32_H)) | (operator_i == ALU_CRC32C_B)) | (operator_i == ALU_CRC32_B);
-				assign crc_cpoly = ((operator_i == ALU_CRC32C_W) | (operator_i == ALU_CRC32C_H)) | (operator_i == ALU_CRC32C_B);
-				assign crc_hmode = (operator_i == ALU_CRC32_H) | (operator_i == ALU_CRC32C_H);
-				assign crc_bmode = (operator_i == ALU_CRC32_B) | (operator_i == ALU_CRC32C_B);
+				assign crc_op = (((((operator_i == 6'd58) | (operator_i == 6'd57)) | (operator_i == 6'd56)) | (operator_i == 6'd55)) | (operator_i == 6'd54)) | (operator_i == 6'd53);
+				assign crc_cpoly = ((operator_i == 6'd58) | (operator_i == 6'd56)) | (operator_i == 6'd54);
+				assign crc_hmode = (operator_i == 6'd55) | (operator_i == 6'd56);
+				assign crc_bmode = (operator_i == 6'd53) | (operator_i == 6'd54);
 				assign crc_poly = (crc_cpoly ? CRC32C_POLYNOMIAL : CRC32_POLYNOMIAL);
 				assign crc_mu_rev = (crc_cpoly ? CRC32C_MU_REV : CRC32_MU_REV);
 				always @(*)
@@ -830,19 +517,27 @@ module ibex_alu (
 			else begin : gen_alu_rvb_notfull
 				wire [31:0] unused_imd_val_q_1;
 				assign unused_imd_val_q_1 = imd_val_q_i[0+:32];
-				initial shuffle_result = {32 {1'sb0}};
-				initial butterfly_result = {32 {1'sb0}};
-				initial invbutterfly_result = {32 {1'sb0}};
-				initial clmul_result = {32 {1'sb0}};
-				assign bitcnt_partial_lsb_d = {32 {1'sb0}};
-				assign bitcnt_partial_msb_d = {32 {1'sb0}};
-				assign clmul_result_rev = {32 {1'sb0}};
+				wire [32:1] sv2v_tmp_F189D;
+				assign sv2v_tmp_F189D = 1'sb0;
+				always @(*) shuffle_result = sv2v_tmp_F189D;
+				wire [32:1] sv2v_tmp_F770D;
+				assign sv2v_tmp_F770D = 1'sb0;
+				always @(*) butterfly_result = sv2v_tmp_F770D;
+				wire [32:1] sv2v_tmp_02B8B;
+				assign sv2v_tmp_02B8B = 1'sb0;
+				always @(*) invbutterfly_result = sv2v_tmp_02B8B;
+				wire [32:1] sv2v_tmp_B9A55;
+				assign sv2v_tmp_B9A55 = 1'sb0;
+				always @(*) clmul_result = sv2v_tmp_B9A55;
+				assign bitcnt_partial_lsb_d = 1'sb0;
+				assign bitcnt_partial_msb_d = 1'sb0;
+				assign clmul_result_rev = 1'sb0;
 				assign crc_bmode = 1'sb0;
 				assign crc_hmode = 1'sb0;
 			end
 			always @(*)
 				case (operator_i)
-					ALU_CMOV: begin
+					6'd39: begin
 						multicycle_result = (operand_b_i == 32'h00000000 ? operand_a_i : imd_val_q_i[32+:32]);
 						imd_val_d_o = {operand_a_i, 32'h00000000};
 						if (instr_first_cycle_i)
@@ -850,7 +545,7 @@ module ibex_alu (
 						else
 							imd_val_we_o = 2'b00;
 					end
-					ALU_CMIX: begin
+					6'd40: begin
 						multicycle_result = imd_val_q_i[32+:32] | bwlogic_and_result;
 						imd_val_d_o = {bwlogic_and_result, 32'h00000000};
 						if (instr_first_cycle_i)
@@ -858,7 +553,7 @@ module ibex_alu (
 						else
 							imd_val_we_o = 2'b00;
 					end
-					ALU_FSR, ALU_FSL, ALU_ROL, ALU_ROR: begin
+					6'd42, 6'd41, 6'd14, 6'd13: begin
 						if (shift_amt[4:0] == 5'h00)
 							multicycle_result = (shift_amt[5] ? operand_a_i : imd_val_q_i[32+:32]);
 						else
@@ -869,8 +564,8 @@ module ibex_alu (
 						else
 							imd_val_we_o = 2'b00;
 					end
-					ALU_CRC32_W, ALU_CRC32C_W, ALU_CRC32_H, ALU_CRC32C_H, ALU_CRC32_B, ALU_CRC32C_B:
-						if (RV32B == RV32BFull) begin
+					6'd57, 6'd58, 6'd55, 6'd56, 6'd53, 6'd54:
+						if (RV32B == 32'sd2) begin
 							case (1'b1)
 								crc_bmode: multicycle_result = clmul_result_rev ^ (operand_a_i >> 8);
 								crc_hmode: multicycle_result = clmul_result_rev ^ (operand_a_i >> 16);
@@ -885,11 +580,11 @@ module ibex_alu (
 						else begin
 							imd_val_d_o = {operand_a_i, 32'h00000000};
 							imd_val_we_o = 2'b00;
-							multicycle_result = {32 {1'sb0}};
+							multicycle_result = 1'sb0;
 						end
-					ALU_BEXT, ALU_BDEP:
-						if (RV32B == RV32BFull) begin
-							multicycle_result = (operator_i == ALU_BDEP ? butterfly_result : invbutterfly_result);
+					6'd47, 6'd48:
+						if (RV32B == 32'sd2) begin
+							multicycle_result = (operator_i == 6'd48 ? butterfly_result : invbutterfly_result);
 							imd_val_d_o = {bitcnt_partial_lsb_d, bitcnt_partial_msb_d};
 							if (instr_first_cycle_i)
 								imd_val_we_o = 2'b11;
@@ -899,12 +594,12 @@ module ibex_alu (
 						else begin
 							imd_val_d_o = {operand_a_i, 32'h00000000};
 							imd_val_we_o = 2'b00;
-							multicycle_result = {32 {1'sb0}};
+							multicycle_result = 1'sb0;
 						end
 					default: begin
 						imd_val_d_o = {operand_a_i, 32'h00000000};
 						imd_val_we_o = 2'b00;
-						multicycle_result = {32 {1'sb0}};
+						multicycle_result = 1'sb0;
 					end
 				endcase
 		end
@@ -915,38 +610,58 @@ module ibex_alu (
 			assign unused_butterfly_result = butterfly_result;
 			wire [31:0] unused_invbutterfly_result;
 			assign unused_invbutterfly_result = invbutterfly_result;
-			assign bitcnt_result = {6 {1'sb0}};
-			assign minmax_result = {32 {1'sb0}};
-			initial pack_result = {32 {1'sb0}};
-			assign sext_result = {32 {1'sb0}};
-			initial singlebit_result = {32 {1'sb0}};
-			initial rev_result = {32 {1'sb0}};
-			initial shuffle_result = {32 {1'sb0}};
-			initial butterfly_result = {32 {1'sb0}};
-			initial invbutterfly_result = {32 {1'sb0}};
-			initial clmul_result = {32 {1'sb0}};
-			initial multicycle_result = {32 {1'sb0}};
-			initial imd_val_d_o = {2 {32'b00000000000000000000000000000000}};
-			initial imd_val_we_o = {2 {1'sb0}};
+			assign bitcnt_result = 1'sb0;
+			assign minmax_result = 1'sb0;
+			wire [32:1] sv2v_tmp_B3EA0;
+			assign sv2v_tmp_B3EA0 = 1'sb0;
+			always @(*) pack_result = sv2v_tmp_B3EA0;
+			assign sext_result = 1'sb0;
+			wire [32:1] sv2v_tmp_C8829;
+			assign sv2v_tmp_C8829 = 1'sb0;
+			always @(*) singlebit_result = sv2v_tmp_C8829;
+			wire [32:1] sv2v_tmp_F744D;
+			assign sv2v_tmp_F744D = 1'sb0;
+			always @(*) rev_result = sv2v_tmp_F744D;
+			wire [32:1] sv2v_tmp_F189D;
+			assign sv2v_tmp_F189D = 1'sb0;
+			always @(*) shuffle_result = sv2v_tmp_F189D;
+			wire [32:1] sv2v_tmp_F770D;
+			assign sv2v_tmp_F770D = 1'sb0;
+			always @(*) butterfly_result = sv2v_tmp_F770D;
+			wire [32:1] sv2v_tmp_02B8B;
+			assign sv2v_tmp_02B8B = 1'sb0;
+			always @(*) invbutterfly_result = sv2v_tmp_02B8B;
+			wire [32:1] sv2v_tmp_B9A55;
+			assign sv2v_tmp_B9A55 = 1'sb0;
+			always @(*) clmul_result = sv2v_tmp_B9A55;
+			wire [32:1] sv2v_tmp_8750A;
+			assign sv2v_tmp_8750A = 1'sb0;
+			always @(*) multicycle_result = sv2v_tmp_8750A;
+			wire [64:1] sv2v_tmp_78BC2;
+			assign sv2v_tmp_78BC2 = {2 {32'b00000000000000000000000000000000}};
+			always @(*) imd_val_d_o = sv2v_tmp_78BC2;
+			wire [2:1] sv2v_tmp_02FDF;
+			assign sv2v_tmp_02FDF = {2 {1'b0}};
+			always @(*) imd_val_we_o = sv2v_tmp_02FDF;
 		end
 	endgenerate
 	always @(*) begin
-		result_o = {32 {1'sb0}};
+		result_o = 1'sb0;
 		case (operator_i)
-			ALU_XOR, ALU_XNOR, ALU_OR, ALU_ORN, ALU_AND, ALU_ANDN: result_o = bwlogic_result;
-			ALU_ADD, ALU_SUB: result_o = adder_result;
-			ALU_SLL, ALU_SRL, ALU_SRA, ALU_SLO, ALU_SRO: result_o = shift_result;
-			ALU_SHFL, ALU_UNSHFL: result_o = shuffle_result;
-			ALU_EQ, ALU_NE, ALU_GE, ALU_GEU, ALU_LT, ALU_LTU, ALU_SLT, ALU_SLTU: result_o = {31'h00000000, cmp_result};
-			ALU_MIN, ALU_MAX, ALU_MINU, ALU_MAXU: result_o = minmax_result;
-			ALU_CLZ, ALU_CTZ, ALU_PCNT: result_o = {26'h0000000, bitcnt_result};
-			ALU_PACK, ALU_PACKH, ALU_PACKU: result_o = pack_result;
-			ALU_SEXTB, ALU_SEXTH: result_o = sext_result;
-			ALU_CMIX, ALU_CMOV, ALU_FSL, ALU_FSR, ALU_ROL, ALU_ROR, ALU_CRC32_W, ALU_CRC32C_W, ALU_CRC32_H, ALU_CRC32C_H, ALU_CRC32_B, ALU_CRC32C_B, ALU_BEXT, ALU_BDEP: result_o = multicycle_result;
-			ALU_SBSET, ALU_SBCLR, ALU_SBINV, ALU_SBEXT: result_o = singlebit_result;
-			ALU_GREV, ALU_GORC: result_o = rev_result;
-			ALU_BFP: result_o = bfp_result;
-			ALU_CLMUL, ALU_CLMULR, ALU_CLMULH: result_o = clmul_result;
+			6'd2, 6'd5, 6'd3, 6'd6, 6'd4, 6'd7: result_o = bwlogic_result;
+			6'd0, 6'd1: result_o = adder_result;
+			6'd10, 6'd9, 6'd8, 6'd12, 6'd11: result_o = shift_result;
+			6'd17, 6'd18: result_o = shuffle_result;
+			6'd23, 6'd24, 6'd21, 6'd22, 6'd19, 6'd20, 6'd37, 6'd38: result_o = {31'h00000000, cmp_result};
+			6'd25, 6'd27, 6'd26, 6'd28: result_o = minmax_result;
+			6'd34, 6'd35, 6'd36: result_o = {26'h0000000, bitcnt_result};
+			6'd29, 6'd31, 6'd30: result_o = pack_result;
+			6'd32, 6'd33: result_o = sext_result;
+			6'd40, 6'd39, 6'd41, 6'd42, 6'd14, 6'd13, 6'd57, 6'd58, 6'd55, 6'd56, 6'd53, 6'd54, 6'd47, 6'd48: result_o = multicycle_result;
+			6'd43, 6'd44, 6'd45, 6'd46: result_o = singlebit_result;
+			6'd15, 6'd16: result_o = rev_result;
+			6'd49: result_o = bfp_result;
+			6'd50, 6'd51, 6'd52: result_o = clmul_result;
 			default:
 				;
 		endcase

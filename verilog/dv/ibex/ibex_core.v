@@ -1,22 +1,6 @@
-// SPDX-FileCopyrightText: 2020 lowRISC contributors
-// Copyright 2018 ETH Zurich and University of Bologna
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
-
 module ibex_core (
 	clk_i,
 	rst_ni,
-	test_en_i,
 	hart_id_i,
 	boot_addr_i,
 	instr_req_o,
@@ -34,16 +18,36 @@ module ibex_core (
 	data_wdata_o,
 	data_rdata_i,
 	data_err_i,
+	dummy_instr_id_o,
+	rf_raddr_a_o,
+	rf_raddr_b_o,
+	rf_waddr_wb_o,
+	rf_we_wb_o,
+	rf_wdata_wb_ecc_o,
+	rf_rdata_a_ecc_i,
+	rf_rdata_b_ecc_i,
+	ic_tag_req_o,
+	ic_tag_write_o,
+	ic_tag_addr_o,
+	ic_tag_wdata_o,
+	ic_tag_rdata_i,
+	ic_data_req_o,
+	ic_data_write_o,
+	ic_data_addr_o,
+	ic_data_wdata_o,
+	ic_data_rdata_i,
 	irq_software_i,
 	irq_timer_i,
 	irq_external_i,
 	irq_fast_i,
 	irq_nm_i,
+	irq_pending_o,
 	debug_req_i,
+	crash_dump_o,
 	fetch_enable_i,
 	alert_minor_o,
 	alert_major_o,
-	core_sleep_o
+	core_busy_o
 );
 	parameter [0:0] PMPEnable = 1'b0;
 	parameter [31:0] PMPGranularity = 0;
@@ -51,25 +55,42 @@ module ibex_core (
 	parameter [31:0] MHPMCounterNum = 0;
 	parameter [31:0] MHPMCounterWidth = 40;
 	parameter [0:0] RV32E = 1'b0;
-	localparam integer ibex_pkg_RV32MFast = 2;
-	parameter integer RV32M = ibex_pkg_RV32MFast;
-	localparam integer ibex_pkg_RV32BNone = 0;
-	parameter integer RV32B = ibex_pkg_RV32BNone;
-	localparam integer ibex_pkg_RegFileFF = 0;
-	parameter integer RegFile = ibex_pkg_RegFileFF;
+	parameter integer RV32M = 32'sd2;
+	parameter integer RV32B = 32'sd0;
 	parameter [0:0] BranchTargetALU = 1'b0;
 	parameter [0:0] WritebackStage = 1'b0;
 	parameter [0:0] ICache = 1'b0;
 	parameter [0:0] ICacheECC = 1'b0;
+	localparam [31:0] ibex_pkg_BUS_SIZE = 32;
+	parameter [31:0] BusSizeECC = ibex_pkg_BUS_SIZE;
+	localparam [31:0] ibex_pkg_ADDR_W = 32;
+	localparam [31:0] ibex_pkg_IC_LINE_SIZE = 64;
+	localparam [31:0] ibex_pkg_IC_LINE_BYTES = 8;
+	localparam [31:0] ibex_pkg_IC_NUM_WAYS = 2;
+	localparam [31:0] ibex_pkg_IC_SIZE_BYTES = 4096;
+	localparam [31:0] ibex_pkg_IC_NUM_LINES = (ibex_pkg_IC_SIZE_BYTES / ibex_pkg_IC_NUM_WAYS) / ibex_pkg_IC_LINE_BYTES;
+	localparam [31:0] ibex_pkg_IC_INDEX_W = $clog2(ibex_pkg_IC_NUM_LINES);
+	localparam [31:0] ibex_pkg_IC_LINE_W = 3;
+	localparam [31:0] ibex_pkg_IC_TAG_SIZE = ((ibex_pkg_ADDR_W - ibex_pkg_IC_INDEX_W) - ibex_pkg_IC_LINE_W) + 1;
+	parameter [31:0] TagSizeECC = ibex_pkg_IC_TAG_SIZE;
+	parameter [31:0] LineSizeECC = ibex_pkg_IC_LINE_SIZE;
 	parameter [0:0] BranchPredictor = 1'b0;
 	parameter [0:0] DbgTriggerEn = 1'b0;
 	parameter [31:0] DbgHwBreakNum = 1;
+	parameter [0:0] ResetAll = 1'b0;
+	localparam signed [31:0] ibex_pkg_LfsrWidth = 32;
+	localparam [31:0] ibex_pkg_RndCnstLfsrSeedDefault = 32'hac533bf4;
+	parameter [31:0] RndCnstLfsrSeed = ibex_pkg_RndCnstLfsrSeedDefault;
+	localparam [159:0] ibex_pkg_RndCnstLfsrPermDefault = 160'h1e35ecba467fd1b12e958152c04fa43878a8daed;
+	parameter [159:0] RndCnstLfsrPerm = ibex_pkg_RndCnstLfsrPermDefault;
 	parameter [0:0] SecureIbex = 1'b0;
+	parameter [0:0] DummyInstructions = 1'b0;
+	parameter [0:0] RegFileECC = 1'b0;
+	parameter [31:0] RegFileDataWidth = 32;
 	parameter [31:0] DmHaltAddr = 32'h1a110800;
 	parameter [31:0] DmExceptionAddr = 32'h1a110808;
 	input wire clk_i;
 	input wire rst_ni;
-	input wire test_en_i;
 	input wire [31:0] hart_id_i;
 	input wire [31:0] boot_addr_i;
 	output wire instr_req_o;
@@ -87,325 +108,41 @@ module ibex_core (
 	output wire [31:0] data_wdata_o;
 	input wire [31:0] data_rdata_i;
 	input wire data_err_i;
+	output wire dummy_instr_id_o;
+	output wire [4:0] rf_raddr_a_o;
+	output wire [4:0] rf_raddr_b_o;
+	output wire [4:0] rf_waddr_wb_o;
+	output wire rf_we_wb_o;
+	output wire [RegFileDataWidth - 1:0] rf_wdata_wb_ecc_o;
+	input wire [RegFileDataWidth - 1:0] rf_rdata_a_ecc_i;
+	input wire [RegFileDataWidth - 1:0] rf_rdata_b_ecc_i;
+	output wire [1:0] ic_tag_req_o;
+	output wire ic_tag_write_o;
+	output wire [ibex_pkg_IC_INDEX_W - 1:0] ic_tag_addr_o;
+	output wire [TagSizeECC - 1:0] ic_tag_wdata_o;
+	input wire [(ibex_pkg_IC_NUM_WAYS * TagSizeECC) - 1:0] ic_tag_rdata_i;
+	output wire [1:0] ic_data_req_o;
+	output wire ic_data_write_o;
+	output wire [ibex_pkg_IC_INDEX_W - 1:0] ic_data_addr_o;
+	output wire [LineSizeECC - 1:0] ic_data_wdata_o;
+	input wire [(ibex_pkg_IC_NUM_WAYS * LineSizeECC) - 1:0] ic_data_rdata_i;
 	input wire irq_software_i;
 	input wire irq_timer_i;
 	input wire irq_external_i;
 	input wire [14:0] irq_fast_i;
 	input wire irq_nm_i;
+	output wire irq_pending_o;
 	input wire debug_req_i;
+	output wire [127:0] crash_dump_o;
 	input wire fetch_enable_i;
 	output wire alert_minor_o;
 	output wire alert_major_o;
-	output wire core_sleep_o;
-	localparam integer RegFileFF = 0;
-	localparam integer RegFileFPGA = 1;
-	localparam integer RegFileLatch = 2;
-	localparam integer RV32MNone = 0;
-	localparam integer RV32MSlow = 1;
-	localparam integer RV32MFast = 2;
-	localparam integer RV32MSingleCycle = 3;
-	localparam integer RV32BNone = 0;
-	localparam integer RV32BBalanced = 1;
-	localparam integer RV32BFull = 2;
-	localparam [6:0] OPCODE_LOAD = 7'h03;
-	localparam [6:0] OPCODE_MISC_MEM = 7'h0f;
-	localparam [6:0] OPCODE_OP_IMM = 7'h13;
-	localparam [6:0] OPCODE_AUIPC = 7'h17;
-	localparam [6:0] OPCODE_STORE = 7'h23;
-	localparam [6:0] OPCODE_OP = 7'h33;
-	localparam [6:0] OPCODE_LUI = 7'h37;
-	localparam [6:0] OPCODE_BRANCH = 7'h63;
-	localparam [6:0] OPCODE_JALR = 7'h67;
-	localparam [6:0] OPCODE_JAL = 7'h6f;
-	localparam [6:0] OPCODE_SYSTEM = 7'h73;
-	localparam [5:0] ALU_ADD = 0;
-	localparam [5:0] ALU_SUB = 1;
-	localparam [5:0] ALU_XOR = 2;
-	localparam [5:0] ALU_OR = 3;
-	localparam [5:0] ALU_AND = 4;
-	localparam [5:0] ALU_XNOR = 5;
-	localparam [5:0] ALU_ORN = 6;
-	localparam [5:0] ALU_ANDN = 7;
-	localparam [5:0] ALU_SRA = 8;
-	localparam [5:0] ALU_SRL = 9;
-	localparam [5:0] ALU_SLL = 10;
-	localparam [5:0] ALU_SRO = 11;
-	localparam [5:0] ALU_SLO = 12;
-	localparam [5:0] ALU_ROR = 13;
-	localparam [5:0] ALU_ROL = 14;
-	localparam [5:0] ALU_GREV = 15;
-	localparam [5:0] ALU_GORC = 16;
-	localparam [5:0] ALU_SHFL = 17;
-	localparam [5:0] ALU_UNSHFL = 18;
-	localparam [5:0] ALU_LT = 19;
-	localparam [5:0] ALU_LTU = 20;
-	localparam [5:0] ALU_GE = 21;
-	localparam [5:0] ALU_GEU = 22;
-	localparam [5:0] ALU_EQ = 23;
-	localparam [5:0] ALU_NE = 24;
-	localparam [5:0] ALU_MIN = 25;
-	localparam [5:0] ALU_MINU = 26;
-	localparam [5:0] ALU_MAX = 27;
-	localparam [5:0] ALU_MAXU = 28;
-	localparam [5:0] ALU_PACK = 29;
-	localparam [5:0] ALU_PACKU = 30;
-	localparam [5:0] ALU_PACKH = 31;
-	localparam [5:0] ALU_SEXTB = 32;
-	localparam [5:0] ALU_SEXTH = 33;
-	localparam [5:0] ALU_CLZ = 34;
-	localparam [5:0] ALU_CTZ = 35;
-	localparam [5:0] ALU_PCNT = 36;
-	localparam [5:0] ALU_SLT = 37;
-	localparam [5:0] ALU_SLTU = 38;
-	localparam [5:0] ALU_CMOV = 39;
-	localparam [5:0] ALU_CMIX = 40;
-	localparam [5:0] ALU_FSL = 41;
-	localparam [5:0] ALU_FSR = 42;
-	localparam [5:0] ALU_SBSET = 43;
-	localparam [5:0] ALU_SBCLR = 44;
-	localparam [5:0] ALU_SBINV = 45;
-	localparam [5:0] ALU_SBEXT = 46;
-	localparam [5:0] ALU_BEXT = 47;
-	localparam [5:0] ALU_BDEP = 48;
-	localparam [5:0] ALU_BFP = 49;
-	localparam [5:0] ALU_CLMUL = 50;
-	localparam [5:0] ALU_CLMULR = 51;
-	localparam [5:0] ALU_CLMULH = 52;
-	localparam [5:0] ALU_CRC32_B = 53;
-	localparam [5:0] ALU_CRC32C_B = 54;
-	localparam [5:0] ALU_CRC32_H = 55;
-	localparam [5:0] ALU_CRC32C_H = 56;
-	localparam [5:0] ALU_CRC32_W = 57;
-	localparam [5:0] ALU_CRC32C_W = 58;
-	localparam [1:0] MD_OP_MULL = 0;
-	localparam [1:0] MD_OP_MULH = 1;
-	localparam [1:0] MD_OP_DIV = 2;
-	localparam [1:0] MD_OP_REM = 3;
-	localparam [1:0] CSR_OP_READ = 0;
-	localparam [1:0] CSR_OP_WRITE = 1;
-	localparam [1:0] CSR_OP_SET = 2;
-	localparam [1:0] CSR_OP_CLEAR = 3;
-	localparam [1:0] PRIV_LVL_M = 2'b11;
-	localparam [1:0] PRIV_LVL_H = 2'b10;
-	localparam [1:0] PRIV_LVL_S = 2'b01;
-	localparam [1:0] PRIV_LVL_U = 2'b00;
-	localparam [3:0] XDEBUGVER_NO = 4'd0;
-	localparam [3:0] XDEBUGVER_STD = 4'd4;
-	localparam [3:0] XDEBUGVER_NONSTD = 4'd15;
-	localparam [1:0] WB_INSTR_LOAD = 0;
-	localparam [1:0] WB_INSTR_STORE = 1;
-	localparam [1:0] WB_INSTR_OTHER = 2;
-	localparam [1:0] OP_A_REG_A = 0;
-	localparam [1:0] OP_A_FWD = 1;
-	localparam [1:0] OP_A_CURRPC = 2;
-	localparam [1:0] OP_A_IMM = 3;
-	localparam [0:0] IMM_A_Z = 0;
-	localparam [0:0] IMM_A_ZERO = 1;
-	localparam [0:0] OP_B_REG_B = 0;
-	localparam [0:0] OP_B_IMM = 1;
-	localparam [2:0] IMM_B_I = 0;
-	localparam [2:0] IMM_B_S = 1;
-	localparam [2:0] IMM_B_B = 2;
-	localparam [2:0] IMM_B_U = 3;
-	localparam [2:0] IMM_B_J = 4;
-	localparam [2:0] IMM_B_INCR_PC = 5;
-	localparam [2:0] IMM_B_INCR_ADDR = 6;
-	localparam [0:0] RF_WD_EX = 0;
-	localparam [0:0] RF_WD_CSR = 1;
-	localparam [2:0] PC_BOOT = 0;
-	localparam [2:0] PC_JUMP = 1;
-	localparam [2:0] PC_EXC = 2;
-	localparam [2:0] PC_ERET = 3;
-	localparam [2:0] PC_DRET = 4;
-	localparam [2:0] PC_BP = 5;
-	localparam [1:0] EXC_PC_EXC = 0;
-	localparam [1:0] EXC_PC_IRQ = 1;
-	localparam [1:0] EXC_PC_DBD = 2;
-	localparam [1:0] EXC_PC_DBG_EXC = 3;
-	localparam [5:0] EXC_CAUSE_IRQ_SOFTWARE_M = {1'b1, 5'd3};
-	localparam [5:0] EXC_CAUSE_IRQ_TIMER_M = {1'b1, 5'd7};
-	localparam [5:0] EXC_CAUSE_IRQ_EXTERNAL_M = {1'b1, 5'd11};
-	localparam [5:0] EXC_CAUSE_IRQ_NM = {1'b1, 5'd31};
-	localparam [5:0] EXC_CAUSE_INSN_ADDR_MISA = {1'b0, 5'd0};
-	localparam [5:0] EXC_CAUSE_INSTR_ACCESS_FAULT = {1'b0, 5'd1};
-	localparam [5:0] EXC_CAUSE_ILLEGAL_INSN = {1'b0, 5'd2};
-	localparam [5:0] EXC_CAUSE_BREAKPOINT = {1'b0, 5'd3};
-	localparam [5:0] EXC_CAUSE_LOAD_ACCESS_FAULT = {1'b0, 5'd5};
-	localparam [5:0] EXC_CAUSE_STORE_ACCESS_FAULT = {1'b0, 5'd7};
-	localparam [5:0] EXC_CAUSE_ECALL_UMODE = {1'b0, 5'd8};
-	localparam [5:0] EXC_CAUSE_ECALL_MMODE = {1'b0, 5'd11};
-	localparam [2:0] DBG_CAUSE_NONE = 3'h0;
-	localparam [2:0] DBG_CAUSE_EBREAK = 3'h1;
-	localparam [2:0] DBG_CAUSE_TRIGGER = 3'h2;
-	localparam [2:0] DBG_CAUSE_HALTREQ = 3'h3;
-	localparam [2:0] DBG_CAUSE_STEP = 3'h4;
-	localparam [31:0] PMP_MAX_REGIONS = 16;
-	localparam [31:0] PMP_CFG_W = 8;
-	localparam [31:0] PMP_I = 0;
-	localparam [31:0] PMP_D = 1;
-	localparam [1:0] PMP_ACC_EXEC = 2'b00;
-	localparam [1:0] PMP_ACC_WRITE = 2'b01;
-	localparam [1:0] PMP_ACC_READ = 2'b10;
-	localparam [1:0] PMP_MODE_OFF = 2'b00;
-	localparam [1:0] PMP_MODE_TOR = 2'b01;
-	localparam [1:0] PMP_MODE_NA4 = 2'b10;
-	localparam [1:0] PMP_MODE_NAPOT = 2'b11;
-	localparam [11:0] CSR_MHARTID = 12'hf14;
-	localparam [11:0] CSR_MSTATUS = 12'h300;
-	localparam [11:0] CSR_MISA = 12'h301;
-	localparam [11:0] CSR_MIE = 12'h304;
-	localparam [11:0] CSR_MTVEC = 12'h305;
-	localparam [11:0] CSR_MSCRATCH = 12'h340;
-	localparam [11:0] CSR_MEPC = 12'h341;
-	localparam [11:0] CSR_MCAUSE = 12'h342;
-	localparam [11:0] CSR_MTVAL = 12'h343;
-	localparam [11:0] CSR_MIP = 12'h344;
-	localparam [11:0] CSR_PMPCFG0 = 12'h3a0;
-	localparam [11:0] CSR_PMPCFG1 = 12'h3a1;
-	localparam [11:0] CSR_PMPCFG2 = 12'h3a2;
-	localparam [11:0] CSR_PMPCFG3 = 12'h3a3;
-	localparam [11:0] CSR_PMPADDR0 = 12'h3b0;
-	localparam [11:0] CSR_PMPADDR1 = 12'h3b1;
-	localparam [11:0] CSR_PMPADDR2 = 12'h3b2;
-	localparam [11:0] CSR_PMPADDR3 = 12'h3b3;
-	localparam [11:0] CSR_PMPADDR4 = 12'h3b4;
-	localparam [11:0] CSR_PMPADDR5 = 12'h3b5;
-	localparam [11:0] CSR_PMPADDR6 = 12'h3b6;
-	localparam [11:0] CSR_PMPADDR7 = 12'h3b7;
-	localparam [11:0] CSR_PMPADDR8 = 12'h3b8;
-	localparam [11:0] CSR_PMPADDR9 = 12'h3b9;
-	localparam [11:0] CSR_PMPADDR10 = 12'h3ba;
-	localparam [11:0] CSR_PMPADDR11 = 12'h3bb;
-	localparam [11:0] CSR_PMPADDR12 = 12'h3bc;
-	localparam [11:0] CSR_PMPADDR13 = 12'h3bd;
-	localparam [11:0] CSR_PMPADDR14 = 12'h3be;
-	localparam [11:0] CSR_PMPADDR15 = 12'h3bf;
-	localparam [11:0] CSR_TSELECT = 12'h7a0;
-	localparam [11:0] CSR_TDATA1 = 12'h7a1;
-	localparam [11:0] CSR_TDATA2 = 12'h7a2;
-	localparam [11:0] CSR_TDATA3 = 12'h7a3;
-	localparam [11:0] CSR_MCONTEXT = 12'h7a8;
-	localparam [11:0] CSR_SCONTEXT = 12'h7aa;
-	localparam [11:0] CSR_DCSR = 12'h7b0;
-	localparam [11:0] CSR_DPC = 12'h7b1;
-	localparam [11:0] CSR_DSCRATCH0 = 12'h7b2;
-	localparam [11:0] CSR_DSCRATCH1 = 12'h7b3;
-	localparam [11:0] CSR_MCOUNTINHIBIT = 12'h320;
-	localparam [11:0] CSR_MHPMEVENT3 = 12'h323;
-	localparam [11:0] CSR_MHPMEVENT4 = 12'h324;
-	localparam [11:0] CSR_MHPMEVENT5 = 12'h325;
-	localparam [11:0] CSR_MHPMEVENT6 = 12'h326;
-	localparam [11:0] CSR_MHPMEVENT7 = 12'h327;
-	localparam [11:0] CSR_MHPMEVENT8 = 12'h328;
-	localparam [11:0] CSR_MHPMEVENT9 = 12'h329;
-	localparam [11:0] CSR_MHPMEVENT10 = 12'h32a;
-	localparam [11:0] CSR_MHPMEVENT11 = 12'h32b;
-	localparam [11:0] CSR_MHPMEVENT12 = 12'h32c;
-	localparam [11:0] CSR_MHPMEVENT13 = 12'h32d;
-	localparam [11:0] CSR_MHPMEVENT14 = 12'h32e;
-	localparam [11:0] CSR_MHPMEVENT15 = 12'h32f;
-	localparam [11:0] CSR_MHPMEVENT16 = 12'h330;
-	localparam [11:0] CSR_MHPMEVENT17 = 12'h331;
-	localparam [11:0] CSR_MHPMEVENT18 = 12'h332;
-	localparam [11:0] CSR_MHPMEVENT19 = 12'h333;
-	localparam [11:0] CSR_MHPMEVENT20 = 12'h334;
-	localparam [11:0] CSR_MHPMEVENT21 = 12'h335;
-	localparam [11:0] CSR_MHPMEVENT22 = 12'h336;
-	localparam [11:0] CSR_MHPMEVENT23 = 12'h337;
-	localparam [11:0] CSR_MHPMEVENT24 = 12'h338;
-	localparam [11:0] CSR_MHPMEVENT25 = 12'h339;
-	localparam [11:0] CSR_MHPMEVENT26 = 12'h33a;
-	localparam [11:0] CSR_MHPMEVENT27 = 12'h33b;
-	localparam [11:0] CSR_MHPMEVENT28 = 12'h33c;
-	localparam [11:0] CSR_MHPMEVENT29 = 12'h33d;
-	localparam [11:0] CSR_MHPMEVENT30 = 12'h33e;
-	localparam [11:0] CSR_MHPMEVENT31 = 12'h33f;
-	localparam [11:0] CSR_MCYCLE = 12'hb00;
-	localparam [11:0] CSR_MINSTRET = 12'hb02;
-	localparam [11:0] CSR_MHPMCOUNTER3 = 12'hb03;
-	localparam [11:0] CSR_MHPMCOUNTER4 = 12'hb04;
-	localparam [11:0] CSR_MHPMCOUNTER5 = 12'hb05;
-	localparam [11:0] CSR_MHPMCOUNTER6 = 12'hb06;
-	localparam [11:0] CSR_MHPMCOUNTER7 = 12'hb07;
-	localparam [11:0] CSR_MHPMCOUNTER8 = 12'hb08;
-	localparam [11:0] CSR_MHPMCOUNTER9 = 12'hb09;
-	localparam [11:0] CSR_MHPMCOUNTER10 = 12'hb0a;
-	localparam [11:0] CSR_MHPMCOUNTER11 = 12'hb0b;
-	localparam [11:0] CSR_MHPMCOUNTER12 = 12'hb0c;
-	localparam [11:0] CSR_MHPMCOUNTER13 = 12'hb0d;
-	localparam [11:0] CSR_MHPMCOUNTER14 = 12'hb0e;
-	localparam [11:0] CSR_MHPMCOUNTER15 = 12'hb0f;
-	localparam [11:0] CSR_MHPMCOUNTER16 = 12'hb10;
-	localparam [11:0] CSR_MHPMCOUNTER17 = 12'hb11;
-	localparam [11:0] CSR_MHPMCOUNTER18 = 12'hb12;
-	localparam [11:0] CSR_MHPMCOUNTER19 = 12'hb13;
-	localparam [11:0] CSR_MHPMCOUNTER20 = 12'hb14;
-	localparam [11:0] CSR_MHPMCOUNTER21 = 12'hb15;
-	localparam [11:0] CSR_MHPMCOUNTER22 = 12'hb16;
-	localparam [11:0] CSR_MHPMCOUNTER23 = 12'hb17;
-	localparam [11:0] CSR_MHPMCOUNTER24 = 12'hb18;
-	localparam [11:0] CSR_MHPMCOUNTER25 = 12'hb19;
-	localparam [11:0] CSR_MHPMCOUNTER26 = 12'hb1a;
-	localparam [11:0] CSR_MHPMCOUNTER27 = 12'hb1b;
-	localparam [11:0] CSR_MHPMCOUNTER28 = 12'hb1c;
-	localparam [11:0] CSR_MHPMCOUNTER29 = 12'hb1d;
-	localparam [11:0] CSR_MHPMCOUNTER30 = 12'hb1e;
-	localparam [11:0] CSR_MHPMCOUNTER31 = 12'hb1f;
-	localparam [11:0] CSR_MCYCLEH = 12'hb80;
-	localparam [11:0] CSR_MINSTRETH = 12'hb82;
-	localparam [11:0] CSR_MHPMCOUNTER3H = 12'hb83;
-	localparam [11:0] CSR_MHPMCOUNTER4H = 12'hb84;
-	localparam [11:0] CSR_MHPMCOUNTER5H = 12'hb85;
-	localparam [11:0] CSR_MHPMCOUNTER6H = 12'hb86;
-	localparam [11:0] CSR_MHPMCOUNTER7H = 12'hb87;
-	localparam [11:0] CSR_MHPMCOUNTER8H = 12'hb88;
-	localparam [11:0] CSR_MHPMCOUNTER9H = 12'hb89;
-	localparam [11:0] CSR_MHPMCOUNTER10H = 12'hb8a;
-	localparam [11:0] CSR_MHPMCOUNTER11H = 12'hb8b;
-	localparam [11:0] CSR_MHPMCOUNTER12H = 12'hb8c;
-	localparam [11:0] CSR_MHPMCOUNTER13H = 12'hb8d;
-	localparam [11:0] CSR_MHPMCOUNTER14H = 12'hb8e;
-	localparam [11:0] CSR_MHPMCOUNTER15H = 12'hb8f;
-	localparam [11:0] CSR_MHPMCOUNTER16H = 12'hb90;
-	localparam [11:0] CSR_MHPMCOUNTER17H = 12'hb91;
-	localparam [11:0] CSR_MHPMCOUNTER18H = 12'hb92;
-	localparam [11:0] CSR_MHPMCOUNTER19H = 12'hb93;
-	localparam [11:0] CSR_MHPMCOUNTER20H = 12'hb94;
-	localparam [11:0] CSR_MHPMCOUNTER21H = 12'hb95;
-	localparam [11:0] CSR_MHPMCOUNTER22H = 12'hb96;
-	localparam [11:0] CSR_MHPMCOUNTER23H = 12'hb97;
-	localparam [11:0] CSR_MHPMCOUNTER24H = 12'hb98;
-	localparam [11:0] CSR_MHPMCOUNTER25H = 12'hb99;
-	localparam [11:0] CSR_MHPMCOUNTER26H = 12'hb9a;
-	localparam [11:0] CSR_MHPMCOUNTER27H = 12'hb9b;
-	localparam [11:0] CSR_MHPMCOUNTER28H = 12'hb9c;
-	localparam [11:0] CSR_MHPMCOUNTER29H = 12'hb9d;
-	localparam [11:0] CSR_MHPMCOUNTER30H = 12'hb9e;
-	localparam [11:0] CSR_MHPMCOUNTER31H = 12'hb9f;
-	localparam [11:0] CSR_CPUCTRL = 12'h7c0;
-	localparam [11:0] CSR_SECURESEED = 12'h7c1;
-	localparam [11:0] CSR_OFF_PMP_CFG = 12'h3a0;
-	localparam [11:0] CSR_OFF_PMP_ADDR = 12'h3b0;
-	localparam [31:0] CSR_MSTATUS_MIE_BIT = 3;
-	localparam [31:0] CSR_MSTATUS_MPIE_BIT = 7;
-	localparam [31:0] CSR_MSTATUS_MPP_BIT_LOW = 11;
-	localparam [31:0] CSR_MSTATUS_MPP_BIT_HIGH = 12;
-	localparam [31:0] CSR_MSTATUS_MPRV_BIT = 17;
-	localparam [31:0] CSR_MSTATUS_TW_BIT = 21;
-	localparam [1:0] CSR_MISA_MXL = 2'd1;
-	localparam [31:0] CSR_MSIX_BIT = 3;
-	localparam [31:0] CSR_MTIX_BIT = 7;
-	localparam [31:0] CSR_MEIX_BIT = 11;
-	localparam [31:0] CSR_MFIX_BIT_LOW = 16;
-	localparam [31:0] CSR_MFIX_BIT_HIGH = 30;
+	output wire core_busy_o;
 	localparam [31:0] PMP_NUM_CHAN = 2;
 	localparam [0:0] DataIndTiming = SecureIbex;
-	localparam [0:0] DummyInstructions = SecureIbex;
 	localparam [0:0] PCIncrCheck = SecureIbex;
-	localparam [0:0] ShadowCSR = SecureIbex;
+	localparam [0:0] ShadowCSR = 1'b0;
 	localparam [0:0] SpecBranch = PMPEnable & (PMPNumRegions == 16);
-	localparam [0:0] RegFileECC = SecureIbex;
-	localparam [31:0] RegFileDataWidth = (RegFileECC ? 39 : 32);
 	wire dummy_instr_id;
 	wire instr_valid_id;
 	wire instr_new_id;
@@ -450,8 +187,6 @@ module ibex_core (
 	wire ctrl_busy;
 	wire if_busy;
 	wire lsu_busy;
-	wire core_busy_d;
-	reg core_busy_q;
 	wire [4:0] rf_raddr_a;
 	wire [31:0] rf_rdata_a;
 	wire [4:0] rf_raddr_b;
@@ -464,6 +199,7 @@ module ibex_core (
 	wire [31:0] rf_wdata_lsu;
 	wire rf_we_wb;
 	wire rf_we_lsu;
+	wire rf_ecc_err_comb;
 	wire [4:0] rf_waddr_id;
 	wire [31:0] rf_wdata_id;
 	wire rf_we_id;
@@ -503,21 +239,22 @@ module ibex_core (
 	wire lsu_resp_valid;
 	wire lsu_resp_err;
 	wire instr_req_int;
+	wire instr_req_gated;
 	wire en_wb;
 	wire [1:0] instr_type_wb;
 	wire ready_wb;
 	wire rf_write_wb;
 	wire outstanding_load_wb;
 	wire outstanding_store_wb;
-	wire irq_pending;
 	wire nmi_mode;
 	wire [17:0] irqs;
 	wire csr_mstatus_mie;
 	wire [31:0] csr_mepc;
 	wire [31:0] csr_depc;
-	wire [(0 >= (PMPNumRegions - 1) ? ((2 - PMPNumRegions) * 34) + (((PMPNumRegions - 1) * 34) - 1) : (PMPNumRegions * 34) - 1):(0 >= (PMPNumRegions - 1) ? (PMPNumRegions - 1) * 34 : 0)] csr_pmp_addr;
-	wire [(0 >= (PMPNumRegions - 1) ? ((2 - PMPNumRegions) * 6) + (((PMPNumRegions - 1) * 6) - 1) : (PMPNumRegions * 6) - 1):(0 >= (PMPNumRegions - 1) ? (PMPNumRegions - 1) * 6 : 0)] csr_pmp_cfg;
-	wire [0:PMP_NUM_CHAN - 1] pmp_req_err;
+	wire [(PMPNumRegions * 34) - 1:0] csr_pmp_addr;
+	wire [(PMPNumRegions * 6) - 1:0] csr_pmp_cfg;
+	wire [2:0] csr_pmp_mseccfg;
+	wire [0:1] pmp_req_err;
 	wire instr_req_out;
 	wire data_req_out;
 	wire csr_save_if;
@@ -544,6 +281,8 @@ module ibex_core (
 	wire instr_done_wb;
 	wire perf_instr_ret_wb;
 	wire perf_instr_ret_compressed_wb;
+	wire perf_instr_ret_wb_spec;
+	wire perf_instr_ret_compressed_wb_spec;
 	wire perf_iside_wait;
 	wire perf_dside_wait;
 	wire perf_mul_wait;
@@ -555,48 +294,44 @@ module ibex_core (
 	wire perf_store;
 	wire illegal_insn_id;
 	wire unused_illegal_insn_id;
-	wire clk;
-	wire clock_en;
-	assign core_busy_d = (ctrl_busy | if_busy) | lsu_busy;
-	always @(posedge clk_i or negedge rst_ni)
-		if (!rst_ni)
-			core_busy_q <= 1'b0;
-		else
-			core_busy_q <= core_busy_d;
-	reg fetch_enable_q;
-	always @(posedge clk_i or negedge rst_ni)
-		if (!rst_ni)
-			fetch_enable_q <= 1'b0;
-		else if (fetch_enable_i)
-			fetch_enable_q <= 1'b1;
-	assign clock_en = fetch_enable_q & (((core_busy_q | debug_req_i) | irq_pending) | irq_nm_i);
-	assign core_sleep_o = ~clock_en;
-	prim_clock_gating core_clock_gate_i(
-		.clk_i(clk_i),
-		.en_i(clock_en),
-		.test_en_i(test_en_i),
-		.clk_o(clk)
-	);
+	assign core_busy_o = (ctrl_busy | if_busy) | lsu_busy;
+	localparam [31:0] ibex_pkg_PMP_I = 0;
 	ibex_if_stage #(
 		.DmHaltAddr(DmHaltAddr),
 		.DmExceptionAddr(DmExceptionAddr),
 		.DummyInstructions(DummyInstructions),
 		.ICache(ICache),
 		.ICacheECC(ICacheECC),
+		.BusSizeECC(BusSizeECC),
+		.TagSizeECC(TagSizeECC),
+		.LineSizeECC(LineSizeECC),
 		.PCIncrCheck(PCIncrCheck),
+		.ResetAll(ResetAll),
+		.RndCnstLfsrSeed(RndCnstLfsrSeed),
+		.RndCnstLfsrPerm(RndCnstLfsrPerm),
 		.BranchPredictor(BranchPredictor)
 	) if_stage_i(
-		.clk_i(clk),
+		.clk_i(clk_i),
 		.rst_ni(rst_ni),
 		.boot_addr_i(boot_addr_i),
-		.req_i(instr_req_int),
+		.req_i(instr_req_gated),
 		.instr_req_o(instr_req_out),
 		.instr_addr_o(instr_addr_o),
 		.instr_gnt_i(instr_gnt_i),
 		.instr_rvalid_i(instr_rvalid_i),
 		.instr_rdata_i(instr_rdata_i),
 		.instr_err_i(instr_err_i),
-		.instr_pmp_err_i(pmp_req_err[PMP_I]),
+		.instr_pmp_err_i(pmp_req_err[ibex_pkg_PMP_I]),
+		.ic_tag_req_o(ic_tag_req_o),
+		.ic_tag_write_o(ic_tag_write_o),
+		.ic_tag_addr_o(ic_tag_addr_o),
+		.ic_tag_wdata_o(ic_tag_wdata_o),
+		.ic_tag_rdata_i(ic_tag_rdata_i),
+		.ic_data_req_o(ic_data_req_o),
+		.ic_data_write_o(ic_data_write_o),
+		.ic_data_addr_o(ic_data_addr_o),
+		.ic_data_wdata_o(ic_data_wdata_o),
+		.ic_data_rdata_i(ic_data_rdata_i),
 		.instr_valid_id_o(instr_valid_id),
 		.instr_new_id_o(instr_new_id),
 		.instr_rdata_id_o(instr_rdata_id),
@@ -633,7 +368,8 @@ module ibex_core (
 		.if_busy_o(if_busy)
 	);
 	assign perf_iside_wait = id_in_ready & ~instr_valid_id;
-	assign instr_req_o = instr_req_out & ~pmp_req_err[PMP_I];
+	assign instr_req_o = instr_req_out & ~pmp_req_err[ibex_pkg_PMP_I];
+	assign instr_req_gated = instr_req_int & fetch_enable_i;
 	ibex_id_stage #(
 		.RV32E(RV32E),
 		.RV32M(RV32M),
@@ -644,7 +380,7 @@ module ibex_core (
 		.WritebackStage(WritebackStage),
 		.BranchPredictor(BranchPredictor)
 	) id_stage_i(
-		.clk_i(clk),
+		.clk_i(clk_i),
 		.rst_ni(rst_ni),
 		.ctrl_busy_o(ctrl_busy),
 		.illegal_insn_o(illegal_insn_id),
@@ -714,7 +450,7 @@ module ibex_core (
 		.lsu_load_err_i(lsu_load_err),
 		.lsu_store_err_i(lsu_store_err),
 		.csr_mstatus_mie_i(csr_mstatus_mie),
-		.irq_pending_i(irq_pending),
+		.irq_pending_i(irq_pending_o),
 		.irqs_i(irqs),
 		.irq_nm_i(irq_nm_i),
 		.nmi_mode_o(nmi_mode),
@@ -762,7 +498,7 @@ module ibex_core (
 		.RV32B(RV32B),
 		.BranchTargetALU(BranchTargetALU)
 	) ex_block_i(
-		.clk_i(clk),
+		.clk_i(clk_i),
 		.rst_ni(rst_ni),
 		.alu_operator_i(alu_operator_ex),
 		.alu_operand_a_i(alu_operand_a_ex),
@@ -789,16 +525,17 @@ module ibex_core (
 		.branch_decision_o(branch_decision),
 		.ex_valid_o(ex_valid)
 	);
-	assign data_req_o = data_req_out & ~pmp_req_err[PMP_D];
+	localparam [31:0] ibex_pkg_PMP_D = 1;
+	assign data_req_o = data_req_out & ~pmp_req_err[ibex_pkg_PMP_D];
 	assign lsu_resp_err = lsu_load_err | lsu_store_err;
 	ibex_load_store_unit load_store_unit_i(
-		.clk_i(clk),
+		.clk_i(clk_i),
 		.rst_ni(rst_ni),
 		.data_req_o(data_req_out),
 		.data_gnt_i(data_gnt_i),
 		.data_rvalid_i(data_rvalid_i),
 		.data_err_i(data_err_i),
-		.data_pmp_err_i(pmp_req_err[PMP_D]),
+		.data_pmp_err_i(pmp_req_err[ibex_pkg_PMP_D]),
 		.data_addr_o(data_addr_o),
 		.data_we_o(data_we_o),
 		.data_be_o(data_be_o),
@@ -822,8 +559,11 @@ module ibex_core (
 		.perf_load_o(perf_load),
 		.perf_store_o(perf_store)
 	);
-	ibex_wb_stage #(.WritebackStage(WritebackStage)) wb_stage_i(
-		.clk_i(clk),
+	ibex_wb_stage #(
+		.ResetAll(ResetAll),
+		.WritebackStage(WritebackStage)
+	) wb_stage_i(
+		.clk_i(clk_i),
 		.rst_ni(rst_ni),
 		.en_wb_i(en_wb),
 		.instr_type_wb_i(instr_type_wb),
@@ -837,6 +577,8 @@ module ibex_core (
 		.pc_wb_o(pc_wb),
 		.perf_instr_ret_wb_o(perf_instr_ret_wb),
 		.perf_instr_ret_compressed_wb_o(perf_instr_ret_compressed_wb),
+		.perf_instr_ret_wb_spec_o(perf_instr_ret_wb_spec),
+		.perf_instr_ret_compressed_wb_spec_o(perf_instr_ret_compressed_wb_spec),
 		.rf_waddr_id_i(rf_waddr_id),
 		.rf_wdata_id_i(rf_wdata_id),
 		.rf_we_id_i(rf_we_id),
@@ -850,10 +592,11 @@ module ibex_core (
 		.lsu_resp_err_i(lsu_resp_err),
 		.instr_done_wb_o(instr_done_wb)
 	);
-	wire [RegFileDataWidth - 1:0] rf_wdata_wb_ecc;
-	wire [RegFileDataWidth - 1:0] rf_rdata_a_ecc;
-	wire [RegFileDataWidth - 1:0] rf_rdata_b_ecc;
-	wire rf_ecc_err_comb;
+	assign dummy_instr_id_o = dummy_instr_id;
+	assign rf_raddr_a_o = rf_raddr_a;
+	assign rf_waddr_wb_o = rf_waddr_wb;
+	assign rf_we_wb_o = rf_we_wb;
+	assign rf_raddr_b_o = rf_raddr_b;
 	generate
 		if (RegFileECC) begin : gen_regfile_ecc
 			wire [1:0] rf_ecc_err_a;
@@ -861,23 +604,23 @@ module ibex_core (
 			wire rf_ecc_err_a_id;
 			wire rf_ecc_err_b_id;
 			prim_secded_39_32_enc regfile_ecc_enc(
-				.in(rf_wdata_wb),
-				.out(rf_wdata_wb_ecc)
+				.data_i(rf_wdata_wb),
+				.data_o(rf_wdata_wb_ecc_o)
 			);
 			prim_secded_39_32_dec regfile_ecc_dec_a(
-				.in(rf_rdata_a_ecc),
-				.d_o(),
+				.data_i(rf_rdata_a_ecc_i),
+				.data_o(),
 				.syndrome_o(),
 				.err_o(rf_ecc_err_a)
 			);
 			prim_secded_39_32_dec regfile_ecc_dec_b(
-				.in(rf_rdata_b_ecc),
-				.d_o(),
+				.data_i(rf_rdata_b_ecc_i),
+				.data_o(),
 				.syndrome_o(),
 				.err_o(rf_ecc_err_b)
 			);
-			assign rf_rdata_a = rf_rdata_a_ecc[31:0];
-			assign rf_rdata_b = rf_rdata_b_ecc[31:0];
+			assign rf_rdata_a = rf_rdata_a_ecc_i[31:0];
+			assign rf_rdata_b = rf_rdata_b_ecc_i[31:0];
 			assign rf_ecc_err_a_id = (|rf_ecc_err_a & rf_ren_a) & ~rf_rd_a_wb_match;
 			assign rf_ecc_err_b_id = (|rf_ecc_err_b & rf_ren_b) & ~rf_rd_b_wb_match;
 			assign rf_ecc_err_comb = instr_valid_id & (rf_ecc_err_a_id | rf_ecc_err_b_id);
@@ -891,71 +634,16 @@ module ibex_core (
 			assign unused_rf_ren_b = rf_ren_b;
 			assign unused_rf_rd_a_wb_match = rf_rd_a_wb_match;
 			assign unused_rf_rd_b_wb_match = rf_rd_b_wb_match;
-			assign rf_wdata_wb_ecc = rf_wdata_wb;
-			assign rf_rdata_a = rf_rdata_a_ecc;
-			assign rf_rdata_b = rf_rdata_b_ecc;
+			assign rf_wdata_wb_ecc_o = rf_wdata_wb;
+			assign rf_rdata_a = rf_rdata_a_ecc_i;
+			assign rf_rdata_b = rf_rdata_b_ecc_i;
 			assign rf_ecc_err_comb = 1'b0;
 		end
 	endgenerate
-	generate
-		if (RegFile == RegFileFF) begin : gen_regfile_ff
-			ibex_register_file_ff #(
-				.RV32E(RV32E),
-				.DataWidth(RegFileDataWidth),
-				.DummyInstructions(DummyInstructions)
-			) register_file_i(
-				.clk_i(clk_i),
-				.rst_ni(rst_ni),
-				.test_en_i(test_en_i),
-				.dummy_instr_id_i(dummy_instr_id),
-				.raddr_a_i(rf_raddr_a),
-				.rdata_a_o(rf_rdata_a_ecc),
-				.raddr_b_i(rf_raddr_b),
-				.rdata_b_o(rf_rdata_b_ecc),
-				.waddr_a_i(rf_waddr_wb),
-				.wdata_a_i(rf_wdata_wb_ecc),
-				.we_a_i(rf_we_wb)
-			);
-		end
-		else if (RegFile == RegFileFPGA) begin : gen_regfile_fpga
-			ibex_register_file_fpga #(
-				.RV32E(RV32E),
-				.DataWidth(RegFileDataWidth),
-				.DummyInstructions(DummyInstructions)
-			) register_file_i(
-				.clk_i(clk_i),
-				.rst_ni(rst_ni),
-				.test_en_i(test_en_i),
-				.dummy_instr_id_i(dummy_instr_id),
-				.raddr_a_i(rf_raddr_a),
-				.rdata_a_o(rf_rdata_a_ecc),
-				.raddr_b_i(rf_raddr_b),
-				.rdata_b_o(rf_rdata_b_ecc),
-				.waddr_a_i(rf_waddr_wb),
-				.wdata_a_i(rf_wdata_wb_ecc),
-				.we_a_i(rf_we_wb)
-			);
-		end
-		else if (RegFile == RegFileLatch) begin : gen_regfile_latch
-			ibex_register_file_latch #(
-				.RV32E(RV32E),
-				.DataWidth(RegFileDataWidth),
-				.DummyInstructions(DummyInstructions)
-			) register_file_i(
-				.clk_i(clk_i),
-				.rst_ni(rst_ni),
-				.test_en_i(test_en_i),
-				.dummy_instr_id_i(dummy_instr_id),
-				.raddr_a_i(rf_raddr_a),
-				.rdata_a_o(rf_rdata_a_ecc),
-				.raddr_b_i(rf_raddr_b),
-				.rdata_b_o(rf_rdata_b_ecc),
-				.waddr_a_i(rf_waddr_wb),
-				.wdata_a_i(rf_wdata_wb_ecc),
-				.we_a_i(rf_we_wb)
-			);
-		end
-	endgenerate
+	assign crash_dump_o[127-:32] = pc_id;
+	assign crash_dump_o[95-:32] = pc_if;
+	assign crash_dump_o[63-:32] = lsu_addr_last;
+	assign crash_dump_o[31-:32] = csr_mepc;
 	assign alert_minor_o = 1'b0;
 	assign alert_major_o = (rf_ecc_err_comb | pc_mismatch_alert) | csr_shadow_err;
 	assign csr_wdata = alu_operand_a_ex;
@@ -977,9 +665,10 @@ module ibex_core (
 		.PMPGranularity(PMPGranularity),
 		.PMPNumRegions(PMPNumRegions),
 		.RV32E(RV32E),
-		.RV32M(RV32M)
+		.RV32M(RV32M),
+		.RV32B(RV32B)
 	) cs_registers_i(
-		.clk_i(clk),
+		.clk_i(clk_i),
 		.rst_ni(rst_ni),
 		.hart_id_i(hart_id_i),
 		.priv_mode_id_o(priv_mode_id),
@@ -999,13 +688,14 @@ module ibex_core (
 		.irq_external_i(irq_external_i),
 		.irq_fast_i(irq_fast_i),
 		.nmi_mode_i(nmi_mode),
-		.irq_pending_o(irq_pending),
+		.irq_pending_o(irq_pending_o),
 		.irqs_o(irqs),
 		.csr_mstatus_mie_o(csr_mstatus_mie),
 		.csr_mstatus_tw_o(csr_mstatus_tw),
 		.csr_mepc_o(csr_mepc),
 		.csr_pmp_cfg_o(csr_pmp_cfg),
 		.csr_pmp_addr_o(csr_pmp_addr),
+		.csr_pmp_mseccfg_o(csr_pmp_mseccfg),
 		.csr_depc_o(csr_depc),
 		.debug_mode_i(debug_mode),
 		.debug_cause_i(debug_cause),
@@ -1035,6 +725,8 @@ module ibex_core (
 		.illegal_csr_insn_o(illegal_csr_insn_id),
 		.instr_ret_i(perf_instr_ret_wb),
 		.instr_ret_compressed_i(perf_instr_ret_compressed_wb),
+		.instr_ret_spec_i(perf_instr_ret_wb_spec),
+		.instr_ret_compressed_spec_i(perf_instr_ret_compressed_wb_spec),
 		.iside_wait_i(perf_iside_wait),
 		.jump_i(perf_jump),
 		.branch_i(perf_branch),
@@ -1047,24 +739,25 @@ module ibex_core (
 	);
 	generate
 		if (PMPEnable) begin : g_pmp
-			wire [(PMP_NUM_CHAN * 34) - 1:0] pmp_req_addr;
-			wire [(PMP_NUM_CHAN * 2) - 1:0] pmp_req_type;
-			wire [(PMP_NUM_CHAN * 2) - 1:0] pmp_priv_lvl;
-			assign pmp_req_addr[((PMP_NUM_CHAN - 1) - PMP_I) * 34+:34] = {2'b00, instr_addr_o[31:0]};
-			assign pmp_req_type[((PMP_NUM_CHAN - 1) - PMP_I) * 2+:2] = PMP_ACC_EXEC;
-			assign pmp_priv_lvl[((PMP_NUM_CHAN - 1) - PMP_I) * 2+:2] = priv_mode_if;
-			assign pmp_req_addr[((PMP_NUM_CHAN - 1) - PMP_D) * 34+:34] = {2'b00, data_addr_o[31:0]};
-			assign pmp_req_type[((PMP_NUM_CHAN - 1) - PMP_D) * 2+:2] = (data_we_o ? PMP_ACC_WRITE : PMP_ACC_READ);
-			assign pmp_priv_lvl[((PMP_NUM_CHAN - 1) - PMP_D) * 2+:2] = priv_mode_lsu;
+			wire [67:0] pmp_req_addr;
+			wire [3:0] pmp_req_type;
+			wire [3:0] pmp_priv_lvl;
+			assign pmp_req_addr[34+:34] = {2'b00, instr_addr_o[31:0]};
+			assign pmp_req_type[2+:2] = 2'b00;
+			assign pmp_priv_lvl[2+:2] = priv_mode_if;
+			assign pmp_req_addr[0+:34] = {2'b00, data_addr_o[31:0]};
+			assign pmp_req_type[0+:2] = (data_we_o ? 2'b01 : 2'b10);
+			assign pmp_priv_lvl[0+:2] = priv_mode_lsu;
 			ibex_pmp #(
 				.PMPGranularity(PMPGranularity),
 				.PMPNumChan(PMP_NUM_CHAN),
 				.PMPNumRegions(PMPNumRegions)
 			) pmp_i(
-				.clk_i(clk),
+				.clk_i(clk_i),
 				.rst_ni(rst_ni),
 				.csr_pmp_cfg_i(csr_pmp_cfg),
 				.csr_pmp_addr_i(csr_pmp_addr),
+				.csr_pmp_mseccfg_i(csr_pmp_mseccfg),
 				.priv_mode_i(pmp_priv_lvl),
 				.pmp_req_addr_i(pmp_req_addr),
 				.pmp_req_type_i(pmp_req_type),
@@ -1074,18 +767,22 @@ module ibex_core (
 		else begin : g_no_pmp
 			wire [1:0] unused_priv_lvl_if;
 			wire [1:0] unused_priv_lvl_ls;
-			wire [(0 >= (PMPNumRegions - 1) ? ((2 - PMPNumRegions) * 34) + (((PMPNumRegions - 1) * 34) - 1) : (PMPNumRegions * 34) - 1):(0 >= (PMPNumRegions - 1) ? (PMPNumRegions - 1) * 34 : 0)] unused_csr_pmp_addr;
-			wire [(0 >= (PMPNumRegions - 1) ? ((2 - PMPNumRegions) * 6) + (((PMPNumRegions - 1) * 6) - 1) : (PMPNumRegions * 6) - 1):(0 >= (PMPNumRegions - 1) ? (PMPNumRegions - 1) * 6 : 0)] unused_csr_pmp_cfg;
+			wire [(PMPNumRegions * 34) - 1:0] unused_csr_pmp_addr;
+			wire [(PMPNumRegions * 6) - 1:0] unused_csr_pmp_cfg;
+			wire [2:0] unused_csr_pmp_mseccfg;
 			assign unused_priv_lvl_if = priv_mode_if;
 			assign unused_priv_lvl_ls = priv_mode_lsu;
 			assign unused_csr_pmp_addr = csr_pmp_addr;
 			assign unused_csr_pmp_cfg = csr_pmp_cfg;
-			assign pmp_req_err[PMP_I] = 1'b0;
-			assign pmp_req_err[PMP_D] = 1'b0;
+			assign unused_csr_pmp_mseccfg = csr_pmp_mseccfg;
+			assign pmp_req_err[ibex_pkg_PMP_I] = 1'b0;
+			assign pmp_req_err[ibex_pkg_PMP_D] = 1'b0;
 		end
 	endgenerate
 	wire unused_instr_new_id;
+	wire unused_instr_id_done;
 	wire unused_instr_done_wb;
+	assign unused_instr_id_done = instr_id_done;
 	assign unused_instr_new_id = instr_new_id;
 	assign unused_instr_done_wb = instr_done_wb;
 endmodule

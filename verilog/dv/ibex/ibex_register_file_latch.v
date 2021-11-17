@@ -1,18 +1,3 @@
-// SPDX-FileCopyrightText: 2020 lowRISC contributors
-// Copyright 2018 ETH Zurich and University of Bologna
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
-
 module ibex_register_file_latch (
 	clk_i,
 	rst_ni,
@@ -63,7 +48,7 @@ module ibex_register_file_latch (
 	);
 	always @(posedge clk_int or negedge rst_ni) begin : sample_wdata
 		if (!rst_ni)
-			wdata_a_q <= {DataWidth {1'sb0}};
+			wdata_a_q <= 1'sb0;
 		else if (we_a_i)
 			wdata_a_q <= wdata_a_i;
 	end
@@ -72,7 +57,7 @@ module ibex_register_file_latch (
 		sv2v_cast_5_signed = inp;
 	endfunction
 	always @(*) begin : wad
-		begin : sv2v_autoblock_5
+		begin : sv2v_autoblock_1
 			reg signed [31:0] i;
 			for (i = 1; i < NUM_WORDS; i = i + 1)
 				begin : wad_word_iter
@@ -83,8 +68,8 @@ module ibex_register_file_latch (
 				end
 		end
 	end
+	genvar x;
 	generate
-		genvar x;
 		for (x = 1; x < NUM_WORDS; x = x + 1) begin : gen_cg_word_iter
 			prim_clock_gating cg_i(
 				.clk_i(clk_int),
@@ -94,15 +79,13 @@ module ibex_register_file_latch (
 			);
 		end
 	endgenerate
+	genvar i;
 	generate
-		genvar i;
 		for (i = 1; i < NUM_WORDS; i = i + 1) begin : g_rf_latches
 			always @(*)
 				if (mem_clocks[i])
 					mem[i] = wdata_a_q;
 		end
-	endgenerate
-	generate
 		if (DummyInstructions) begin : g_dummy_r0
 			wire we_r0_dummy;
 			wire r0_clock;
@@ -118,12 +101,16 @@ module ibex_register_file_latch (
 				if (r0_clock)
 					mem_r0 = wdata_a_q;
 			end
-			always @(*) mem[0] = (dummy_instr_id_i ? mem_r0 : {DataWidth {1'sb0}});
+			wire [DataWidth:1] sv2v_tmp_35384;
+			assign sv2v_tmp_35384 = (dummy_instr_id_i ? mem_r0 : {DataWidth {1'sb0}});
+			always @(*) mem[0] = sv2v_tmp_35384;
 		end
 		else begin : g_normal_r0
 			wire unused_dummy_instr_id;
 			assign unused_dummy_instr_id = dummy_instr_id_i;
-			initial mem[0] = {DataWidth {1'sb0}};
+			wire [DataWidth:1] sv2v_tmp_450E3;
+			assign sv2v_tmp_450E3 = 1'sb0;
+			always @(*) mem[0] = sv2v_tmp_450E3;
 		end
 	endgenerate
 endmodule

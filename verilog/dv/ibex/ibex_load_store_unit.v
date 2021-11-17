@@ -1,18 +1,3 @@
-// SPDX-FileCopyrightText: 2020 lowRISC contributors
-// Copyright 2018 ETH Zurich and University of Bologna
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
-
 module ibex_load_store_unit (
 	clk_i,
 	rst_ni,
@@ -76,6 +61,7 @@ module ibex_load_store_unit (
 	wire [31:0] data_addr;
 	wire [31:0] data_addr_w_aligned;
 	reg [31:0] addr_last_q;
+	wire [31:0] addr_last_d;
 	reg addr_update;
 	reg ctrl_update;
 	reg rdata_update;
@@ -153,7 +139,7 @@ module ibex_load_store_unit (
 		endcase
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni)
-			rdata_q <= {24 {1'sb0}};
+			rdata_q <= 1'sb0;
 		else if (rdata_update)
 			rdata_q <= data_rdata_i[31:8];
 	always @(posedge clk_i or negedge rst_ni)
@@ -169,11 +155,12 @@ module ibex_load_store_unit (
 			data_sign_ext_q <= lsu_sign_ext_i;
 			data_we_q <= lsu_we_i;
 		end
+	assign addr_last_d = (addr_incr_req_o ? data_addr_w_aligned : data_addr);
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni)
-			addr_last_q <= {32 {1'sb0}};
+			addr_last_q <= 1'sb0;
 		else if (addr_update)
-			addr_last_q <= data_addr;
+			addr_last_q <= addr_last_d;
 	always @(*)
 		case (rdata_offset_q)
 			2'b00: rdata_w_ext = data_rdata_i[31:0];
@@ -238,11 +225,6 @@ module ibex_load_store_unit (
 			default: data_rdata_ext = rdata_w_ext;
 		endcase
 	assign split_misaligned_access = ((lsu_type_i == 2'b00) && (data_offset != 2'b00)) || ((lsu_type_i == 2'b01) && (data_offset == 2'b11));
-	localparam [2:0] IDLE = 0;
-	localparam [2:0] WAIT_GNT = 3;
-	localparam [2:0] WAIT_GNT_MIS = 1;
-	localparam [2:0] WAIT_RVALID_MIS = 2;
-	localparam [2:0] WAIT_RVALID_MIS_GNTS_DONE = 4;
 	always @(*) begin
 		ls_fsm_ns = ls_fsm_cs;
 		data_req_o = 1'b0;
@@ -256,7 +238,7 @@ module ibex_load_store_unit (
 		perf_load_o = 1'b0;
 		perf_store_o = 1'b0;
 		case (ls_fsm_cs)
-			IDLE: begin
+			3'd0: begin
 				pmp_err_d = 1'b0;
 				if (lsu_req_i) begin
 					data_req_o = 1'b1;
@@ -268,64 +250,64 @@ module ibex_load_store_unit (
 						ctrl_update = 1'b1;
 						addr_update = 1'b1;
 						handle_misaligned_d = split_misaligned_access;
-						ls_fsm_ns = (split_misaligned_access ? WAIT_RVALID_MIS : IDLE);
+						ls_fsm_ns = (split_misaligned_access ? 3'd2 : 3'd0);
 					end
 					else
-						ls_fsm_ns = (split_misaligned_access ? WAIT_GNT_MIS : WAIT_GNT);
+						ls_fsm_ns = (split_misaligned_access ? 3'd1 : 3'd3);
 				end
 			end
-			WAIT_GNT_MIS: begin
+			3'd1: begin
 				data_req_o = 1'b1;
 				if (data_gnt_i || pmp_err_q) begin
 					addr_update = 1'b1;
 					ctrl_update = 1'b1;
 					handle_misaligned_d = 1'b1;
-					ls_fsm_ns = WAIT_RVALID_MIS;
+					ls_fsm_ns = 3'd2;
 				end
 			end
-			WAIT_RVALID_MIS: begin
+			3'd2: begin
 				data_req_o = 1'b1;
 				addr_incr_req_o = 1'b1;
 				if (data_rvalid_i || pmp_err_q) begin
 					pmp_err_d = data_pmp_err_i;
 					lsu_err_d = data_err_i | pmp_err_q;
 					rdata_update = ~data_we_q;
-					ls_fsm_ns = (data_gnt_i ? IDLE : WAIT_GNT);
+					ls_fsm_ns = (data_gnt_i ? 3'd0 : 3'd3);
 					addr_update = data_gnt_i & ~(data_err_i | pmp_err_q);
 					handle_misaligned_d = ~data_gnt_i;
 				end
 				else if (data_gnt_i) begin
-					ls_fsm_ns = WAIT_RVALID_MIS_GNTS_DONE;
+					ls_fsm_ns = 3'd4;
 					handle_misaligned_d = 1'b0;
 				end
 			end
-			WAIT_GNT: begin
+			3'd3: begin
 				addr_incr_req_o = handle_misaligned_q;
 				data_req_o = 1'b1;
 				if (data_gnt_i || pmp_err_q) begin
 					ctrl_update = 1'b1;
 					addr_update = ~lsu_err_q;
-					ls_fsm_ns = IDLE;
+					ls_fsm_ns = 3'd0;
 					handle_misaligned_d = 1'b0;
 				end
 			end
-			WAIT_RVALID_MIS_GNTS_DONE: begin
+			3'd4: begin
 				addr_incr_req_o = 1'b1;
 				if (data_rvalid_i) begin
 					pmp_err_d = data_pmp_err_i;
 					lsu_err_d = data_err_i;
 					addr_update = ~data_err_i;
 					rdata_update = ~data_we_q;
-					ls_fsm_ns = IDLE;
+					ls_fsm_ns = 3'd0;
 				end
 			end
-			default: ls_fsm_ns = IDLE;
+			default: ls_fsm_ns = 3'd0;
 		endcase
 	end
-	assign lsu_req_done_o = (lsu_req_i | (ls_fsm_cs != IDLE)) & (ls_fsm_ns == IDLE);
+	assign lsu_req_done_o = (lsu_req_i | (ls_fsm_cs != 3'd0)) & (ls_fsm_ns == 3'd0);
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni) begin
-			ls_fsm_cs <= IDLE;
+			ls_fsm_cs <= 3'd0;
 			handle_misaligned_q <= 1'sb0;
 			pmp_err_q <= 1'sb0;
 			lsu_err_q <= 1'sb0;
@@ -337,8 +319,8 @@ module ibex_load_store_unit (
 			lsu_err_q <= lsu_err_d;
 		end
 	assign data_or_pmp_err = (lsu_err_q | data_err_i) | pmp_err_q;
-	assign lsu_resp_valid_o = (data_rvalid_i | pmp_err_q) & (ls_fsm_cs == IDLE);
-	assign lsu_rdata_valid_o = (((ls_fsm_cs == IDLE) & data_rvalid_i) & ~data_or_pmp_err) & ~data_we_q;
+	assign lsu_resp_valid_o = (data_rvalid_i | pmp_err_q) & (ls_fsm_cs == 3'd0);
+	assign lsu_rdata_valid_o = (((ls_fsm_cs == 3'd0) & data_rvalid_i) & ~data_or_pmp_err) & ~data_we_q;
 	assign lsu_rdata_o = data_rdata_ext;
 	assign data_addr_w_aligned = {data_addr[31:2], 2'b00};
 	assign data_addr_o = data_addr_w_aligned;
@@ -348,5 +330,5 @@ module ibex_load_store_unit (
 	assign addr_last_o = addr_last_q;
 	assign load_err_o = (data_or_pmp_err & ~data_we_q) & lsu_resp_valid_o;
 	assign store_err_o = (data_or_pmp_err & data_we_q) & lsu_resp_valid_o;
-	assign busy_o = ls_fsm_cs != IDLE;
+	assign busy_o = ls_fsm_cs != 3'd0;
 endmodule

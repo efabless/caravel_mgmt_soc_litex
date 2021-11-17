@@ -1,18 +1,3 @@
-// SPDX-FileCopyrightText: 2020 lowRISC contributors
-// Copyright 2018 ETH Zurich and University of Bologna
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
-
 module ibex_dummy_instr (
 	clk_i,
 	rst_ni,
@@ -25,6 +10,11 @@ module ibex_dummy_instr (
 	insert_dummy_instr_o,
 	dummy_instr_data_o
 );
+	localparam signed [31:0] ibex_pkg_LfsrWidth = 32;
+	localparam [31:0] ibex_pkg_RndCnstLfsrSeedDefault = 32'hac533bf4;
+	parameter [31:0] RndCnstLfsrSeed = ibex_pkg_RndCnstLfsrSeedDefault;
+	localparam [159:0] ibex_pkg_RndCnstLfsrPermDefault = 160'h1e35ecba467fd1b12e958152c04fa43878a8daed;
+	parameter [159:0] RndCnstLfsrPerm = ibex_pkg_RndCnstLfsrPermDefault;
 	input wire clk_i;
 	input wire rst_ni;
 	input wire dummy_instr_en_i;
@@ -37,15 +27,15 @@ module ibex_dummy_instr (
 	output wire [31:0] dummy_instr_data_o;
 	localparam [31:0] TIMEOUT_CNT_W = 5;
 	localparam [31:0] OP_W = 5;
-	localparam [31:0] LFSR_OUT_W = ((2 + OP_W) + OP_W) + TIMEOUT_CNT_W;
-	wire [(((2 + OP_W) + OP_W) + TIMEOUT_CNT_W) - 1:0] lfsr_data;
-	wire [TIMEOUT_CNT_W - 1:0] dummy_cnt_incr;
-	wire [TIMEOUT_CNT_W - 1:0] dummy_cnt_threshold;
-	wire [TIMEOUT_CNT_W - 1:0] dummy_cnt_d;
-	reg [TIMEOUT_CNT_W - 1:0] dummy_cnt_q;
+	localparam [31:0] LFSR_OUT_W = 17;
+	wire [16:0] lfsr_data;
+	wire [4:0] dummy_cnt_incr;
+	wire [4:0] dummy_cnt_threshold;
+	wire [4:0] dummy_cnt_d;
+	reg [4:0] dummy_cnt_q;
 	wire dummy_cnt_en;
 	wire lfsr_en;
-	wire [LFSR_OUT_W - 1:0] lfsr_state;
+	wire [16:0] lfsr_state;
 	wire insert_dummy_instr;
 	reg [6:0] dummy_set;
 	reg [2:0] dummy_opcode;
@@ -56,55 +46,54 @@ module ibex_dummy_instr (
 	assign dummy_instr_seed_d = dummy_instr_seed_q ^ dummy_instr_seed_i;
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni)
-			dummy_instr_seed_q <= {32 {1'sb0}};
+			dummy_instr_seed_q <= 1'sb0;
 		else if (dummy_instr_seed_en_i)
 			dummy_instr_seed_q <= dummy_instr_seed_d;
 	prim_lfsr #(
-		.LfsrDw(32),
-		.StateOutDw(LFSR_OUT_W)
+		.LfsrDw(ibex_pkg_LfsrWidth),
+		.StateOutDw(LFSR_OUT_W),
+		.DefaultSeed(RndCnstLfsrSeed),
+		.StatePermEn(1'b1),
+		.StatePerm(RndCnstLfsrPerm)
 	) lfsr_i(
 		.clk_i(clk_i),
 		.rst_ni(rst_ni),
 		.seed_en_i(dummy_instr_seed_en_i),
 		.seed_i(dummy_instr_seed_d),
 		.lfsr_en_i(lfsr_en),
-		.entropy_i('0),
+		.entropy_i(1'sb0),
 		.state_o(lfsr_state)
 	);
-	function automatic [(((2 + OP_W) + OP_W) + TIMEOUT_CNT_W) - 1:0] sv2v_cast_4AF33;
-		input reg [(((2 + OP_W) + OP_W) + TIMEOUT_CNT_W) - 1:0] inp;
-		sv2v_cast_4AF33 = inp;
+	function automatic [16:0] sv2v_cast_B5B52;
+		input reg [16:0] inp;
+		sv2v_cast_B5B52 = inp;
 	endfunction
-	assign lfsr_data = sv2v_cast_4AF33(lfsr_state);
-	assign dummy_cnt_threshold = lfsr_data[TIMEOUT_CNT_W - 1-:TIMEOUT_CNT_W] & {dummy_instr_mask_i, {TIMEOUT_CNT_W - 3 {1'b1}}};
-	assign dummy_cnt_incr = dummy_cnt_q + {{TIMEOUT_CNT_W - 1 {1'b0}}, 1'b1};
-	assign dummy_cnt_d = (insert_dummy_instr ? {TIMEOUT_CNT_W {1'sb0}} : dummy_cnt_incr);
+	assign lfsr_data = sv2v_cast_B5B52(lfsr_state);
+	assign dummy_cnt_threshold = lfsr_data[4-:TIMEOUT_CNT_W] & {dummy_instr_mask_i, {2 {1'b1}}};
+	assign dummy_cnt_incr = dummy_cnt_q + {{4 {1'b0}}, 1'b1};
+	assign dummy_cnt_d = (insert_dummy_instr ? {5 {1'sb0}} : dummy_cnt_incr);
 	assign dummy_cnt_en = (dummy_instr_en_i & id_in_ready_i) & (fetch_valid_i | insert_dummy_instr);
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni)
-			dummy_cnt_q <= {TIMEOUT_CNT_W {1'sb0}};
+			dummy_cnt_q <= 1'sb0;
 		else if (dummy_cnt_en)
 			dummy_cnt_q <= dummy_cnt_d;
 	assign insert_dummy_instr = dummy_instr_en_i & (dummy_cnt_q == dummy_cnt_threshold);
-	localparam [1:0] DUMMY_ADD = 2'b00;
-	localparam [1:0] DUMMY_AND = 2'b11;
-	localparam [1:0] DUMMY_DIV = 2'b10;
-	localparam [1:0] DUMMY_MUL = 2'b01;
 	always @(*)
-		case (lfsr_data[2 + (OP_W + (OP_W + (TIMEOUT_CNT_W - 1)))-:((2 + (OP_W + (OP_W + (TIMEOUT_CNT_W - 1)))) - (OP_W + (OP_W + TIMEOUT_CNT_W))) + 1])
-			DUMMY_ADD: begin
+		case (lfsr_data[16-:(16 >= ((32'd5 + 32'd5) + 32'd5) ? 17 - (OP_W + (OP_W + TIMEOUT_CNT_W)) : (OP_W + (OP_W + TIMEOUT_CNT_W)) - 15)])
+			2'b00: begin
 				dummy_set = 7'b0000000;
 				dummy_opcode = 3'b000;
 			end
-			DUMMY_MUL: begin
+			2'b01: begin
 				dummy_set = 7'b0000001;
 				dummy_opcode = 3'b000;
 			end
-			DUMMY_DIV: begin
+			2'b10: begin
 				dummy_set = 7'b0000001;
 				dummy_opcode = 3'b100;
 			end
-			DUMMY_AND: begin
+			2'b11: begin
 				dummy_set = 7'b0000000;
 				dummy_opcode = 3'b111;
 			end
@@ -113,7 +102,7 @@ module ibex_dummy_instr (
 				dummy_opcode = 3'b000;
 			end
 		endcase
-	assign dummy_instr = {dummy_set, lfsr_data[OP_W + (OP_W + (TIMEOUT_CNT_W - 1))-:((OP_W + (OP_W + (TIMEOUT_CNT_W - 1))) - (OP_W + TIMEOUT_CNT_W)) + 1], lfsr_data[OP_W + (TIMEOUT_CNT_W - 1)-:((OP_W + (TIMEOUT_CNT_W - 1)) - TIMEOUT_CNT_W) + 1], dummy_opcode, 5'h00, 7'h33};
+	assign dummy_instr = {dummy_set, lfsr_data[14-:(14 >= (OP_W + TIMEOUT_CNT_W) ? 15 - (OP_W + TIMEOUT_CNT_W) : (OP_W + TIMEOUT_CNT_W) - 13)], lfsr_data[9-:5], dummy_opcode, 5'h00, 7'h33};
 	assign insert_dummy_instr_o = insert_dummy_instr;
 	assign dummy_instr_data_o = dummy_instr;
 endmodule

@@ -1,18 +1,3 @@
-// SPDX-FileCopyrightText: 2020 lowRISC contributors
-// Copyright 2018 ETH Zurich and University of Bologna
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//      http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-// SPDX-License-Identifier: Apache-2.0
-
 module ibex_prefetch_buffer (
 	clk_i,
 	rst_ni,
@@ -38,6 +23,7 @@ module ibex_prefetch_buffer (
 	busy_o
 );
 	parameter [0:0] BranchPredictor = 1'b0;
+	parameter [0:0] ResetAll = 1'b0;
 	input wire clk_i;
 	input wire rst_ni;
 	input wire req_i;
@@ -70,16 +56,16 @@ module ibex_prefetch_buffer (
 	reg discard_req_q;
 	wire gnt_or_pmp_err;
 	wire rvalid_or_pmp_err;
-	wire [NUM_REQS - 1:0] rdata_outstanding_n;
-	wire [NUM_REQS - 1:0] rdata_outstanding_s;
-	reg [NUM_REQS - 1:0] rdata_outstanding_q;
-	wire [NUM_REQS - 1:0] branch_discard_n;
-	wire [NUM_REQS - 1:0] branch_discard_s;
-	reg [NUM_REQS - 1:0] branch_discard_q;
-	wire [NUM_REQS - 1:0] rdata_pmp_err_n;
-	wire [NUM_REQS - 1:0] rdata_pmp_err_s;
-	reg [NUM_REQS - 1:0] rdata_pmp_err_q;
-	wire [NUM_REQS - 1:0] rdata_outstanding_rev;
+	wire [1:0] rdata_outstanding_n;
+	wire [1:0] rdata_outstanding_s;
+	reg [1:0] rdata_outstanding_q;
+	wire [1:0] branch_discard_n;
+	wire [1:0] branch_discard_s;
+	reg [1:0] branch_discard_q;
+	wire [1:0] rdata_pmp_err_n;
+	wire [1:0] rdata_pmp_err_s;
+	reg [1:0] rdata_pmp_err_q;
+	wire [1:0] rdata_outstanding_rev;
 	wire [31:0] stored_addr_d;
 	reg [31:0] stored_addr_q;
 	wire stored_addr_en;
@@ -94,7 +80,7 @@ module ibex_prefetch_buffer (
 	wire [31:0] fifo_addr;
 	wire fifo_ready;
 	wire fifo_clear;
-	wire [NUM_REQS - 1:0] fifo_busy;
+	wire [1:0] fifo_busy;
 	wire valid_raw;
 	wire [31:0] addr_next;
 	wire branch_or_mispredict;
@@ -102,14 +88,17 @@ module ibex_prefetch_buffer (
 	assign branch_or_mispredict = branch_i | branch_mispredict_i;
 	assign instr_or_pmp_err = instr_err_i | rdata_pmp_err_q[0];
 	assign fifo_clear = branch_or_mispredict;
+	genvar i;
 	generate
-		genvar i;
 		for (i = 0; i < NUM_REQS; i = i + 1) begin : gen_rd_rev
-			assign rdata_outstanding_rev[i] = rdata_outstanding_q[(NUM_REQS - 1) - i];
+			assign rdata_outstanding_rev[i] = rdata_outstanding_q[1 - i];
 		end
 	endgenerate
 	assign fifo_ready = ~&(fifo_busy | rdata_outstanding_rev);
-	ibex_fetch_fifo #(.NUM_REQS(NUM_REQS)) fifo_i(
+	ibex_fetch_fifo #(
+		.NUM_REQS(NUM_REQS),
+		.ResetAll(ResetAll)
+	) fifo_i(
 		.clk_i(clk_i),
 		.rst_ni(rst_ni),
 		.clear_i(fifo_clear),
@@ -127,7 +116,7 @@ module ibex_prefetch_buffer (
 		.out_err_plus2_o(err_plus2_o)
 	);
 	assign branch_suppress = branch_spec_i & ~branch_i;
-	assign valid_new_req = ((~branch_suppress & req_i) & (fifo_ready | branch_or_mispredict)) & ~rdata_outstanding_q[NUM_REQS - 1];
+	assign valid_new_req = ((~branch_suppress & req_i) & (fifo_ready | branch_or_mispredict)) & ~rdata_outstanding_q[1];
 	assign valid_req = valid_req_q | valid_new_req;
 	assign gnt_or_pmp_err = instr_gnt_i | instr_pmp_err_i;
 	assign rvalid_or_pmp_err = rdata_outstanding_q[0] & (instr_rvalid_i | rdata_pmp_err_q[0]);
@@ -135,17 +124,35 @@ module ibex_prefetch_buffer (
 	assign discard_req_d = valid_req_q & (branch_or_mispredict | discard_req_q);
 	assign stored_addr_en = (valid_new_req & ~valid_req_q) & ~gnt_or_pmp_err;
 	assign stored_addr_d = instr_addr;
-	always @(posedge clk_i)
-		if (stored_addr_en)
-			stored_addr_q <= stored_addr_d;
 	generate
+		if (ResetAll) begin : g_stored_addr_ra
+			always @(posedge clk_i or negedge rst_ni)
+				if (!rst_ni)
+					stored_addr_q <= 1'sb0;
+				else if (stored_addr_en)
+					stored_addr_q <= stored_addr_d;
+		end
+		else begin : g_stored_addr_nr
+			always @(posedge clk_i)
+				if (stored_addr_en)
+					stored_addr_q <= stored_addr_d;
+		end
 		if (BranchPredictor) begin : g_branch_predictor
 			reg [31:0] branch_mispredict_addr_q;
 			wire branch_mispredict_addr_en;
 			assign branch_mispredict_addr_en = branch_i & predicted_branch_i;
-			always @(posedge clk_i)
-				if (branch_mispredict_addr_en)
-					branch_mispredict_addr_q <= addr_next;
+			if (ResetAll) begin : g_branch_misp_addr_ra
+				always @(posedge clk_i or negedge rst_ni)
+					if (!rst_ni)
+						branch_mispredict_addr_q <= 1'sb0;
+					else if (branch_mispredict_addr_en)
+						branch_mispredict_addr_q <= addr_next;
+			end
+			else begin : g_branch_misp_addr_nr
+				always @(posedge clk_i)
+					if (branch_mispredict_addr_en)
+						branch_mispredict_addr_q <= addr_next;
+			end
 			assign branch_mispredict_addr = branch_mispredict_addr_q;
 		end
 		else begin : g_no_branch_predictor
@@ -153,14 +160,25 @@ module ibex_prefetch_buffer (
 			wire [31:0] unused_addr_next;
 			assign unused_predicted_branch = predicted_branch_i;
 			assign unused_addr_next = addr_next;
-			assign branch_mispredict_addr = {32 {1'sb0}};
+			assign branch_mispredict_addr = 1'sb0;
 		end
 	endgenerate
 	assign fetch_addr_en = branch_or_mispredict | (valid_new_req & ~valid_req_q);
 	assign fetch_addr_d = (branch_i ? addr_i : (branch_mispredict_i ? {branch_mispredict_addr[31:2], 2'b00} : {fetch_addr_q[31:2], 2'b00})) + {{29 {1'b0}}, valid_new_req & ~valid_req_q, 2'b00};
-	always @(posedge clk_i)
-		if (fetch_addr_en)
-			fetch_addr_q <= fetch_addr_d;
+	generate
+		if (ResetAll) begin : g_fetch_addr_ra
+			always @(posedge clk_i or negedge rst_ni)
+				if (!rst_ni)
+					fetch_addr_q <= 1'sb0;
+				else if (fetch_addr_en)
+					fetch_addr_q <= fetch_addr_d;
+		end
+		else begin : g_fetch_addr_nr
+			always @(posedge clk_i)
+				if (fetch_addr_en)
+					fetch_addr_q <= fetch_addr_d;
+		end
+	endgenerate
 	assign instr_addr = (valid_req_q ? stored_addr_q : (branch_spec_i ? addr_i : (branch_mispredict_i ? branch_mispredict_addr : fetch_addr_q)));
 	assign instr_addr_w_aligned = {instr_addr[31:2], 2'b00};
 	generate
@@ -177,11 +195,11 @@ module ibex_prefetch_buffer (
 			end
 		end
 	endgenerate
-	assign rdata_outstanding_s = (rvalid_or_pmp_err ? {1'b0, rdata_outstanding_n[NUM_REQS - 1:1]} : rdata_outstanding_n);
-	assign branch_discard_s = (rvalid_or_pmp_err ? {1'b0, branch_discard_n[NUM_REQS - 1:1]} : branch_discard_n);
-	assign rdata_pmp_err_s = (rvalid_or_pmp_err ? {1'b0, rdata_pmp_err_n[NUM_REQS - 1:1]} : rdata_pmp_err_n);
+	assign rdata_outstanding_s = (rvalid_or_pmp_err ? {1'b0, rdata_outstanding_n[1:1]} : rdata_outstanding_n);
+	assign branch_discard_s = (rvalid_or_pmp_err ? {1'b0, branch_discard_n[1:1]} : branch_discard_n);
+	assign rdata_pmp_err_s = (rvalid_or_pmp_err ? {1'b0, rdata_pmp_err_n[1:1]} : rdata_pmp_err_n);
 	assign fifo_valid = rvalid_or_pmp_err & ~branch_discard_q[0];
-	assign fifo_addr = (branch_mispredict_i ? branch_mispredict_addr : addr_i);
+	assign fifo_addr = (branch_i ? addr_i : branch_mispredict_addr);
 	always @(posedge clk_i or negedge rst_ni)
 		if (!rst_ni) begin
 			valid_req_q <= 1'b0;
