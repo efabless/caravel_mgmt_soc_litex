@@ -37,8 +37,8 @@ extern uint32_t flashio_worker_end;
 #define reg_ro_block0  (*(volatile uint32_t*)0x02000000)
 
 // UART (0x2000_0000)
-#define reg_uart_clkdiv (*(volatile uint32_t*)0x20000000)
-#define reg_uart_data   (*(volatile uint32_t*)0x20000004)
+//#define reg_uart_clkdiv (*(volatile uint32_t*)0x20000000)
+#define reg_uart_data   (*(volatile uint32_t*) CSR_UART_RXTX_ADDR)
 #define reg_uart_enable (*(volatile uint32_t*) CSR_UART_ENABLED_OUT_ADDR)
 
 // GPIO (0x2100_0000)

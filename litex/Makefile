@@ -24,6 +24,6 @@ mgmt_soc: caravel.py
 	cp -R build/CaravelMgmtSoC/software/include/generated ../verilog/dv/.
 
 setup:
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 .PHONY: clean hex all

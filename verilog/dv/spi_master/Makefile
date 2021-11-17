@@ -15,16 +15,15 @@
 # SPDX-License-Identifier: Apache-2.0
 
 PDK_PATH = $(PDK_ROOT)/sky130A
-VERILOG_PATH = ../../../..
+VERILOG_PATH = ../..
 RTL_PATH = $(VERILOG_PATH)/rtl
-BEHAVIOURAL_MODELS = ../../ 
+BEHAVIOURAL_MODELS = ../
 
-# Temporary:  Path to management SoC wrapper repository
-MGMT_WRAPPER_PATH = ~/gits/caravel_pico/verilog/rtl
-
-FIRMWARE_PATH = ../..
-GCC_PATH?=/ef/apps/bin
-GCC_PREFIX?=riscv32-unknown-elf
+FIRMWARE_PATH = ..
+#GCC_PATH?=/ef/apps/bin
+GCC_PATH?=/usr/local/bin
+#GCC_PREFIX?=riscv32-unknown-elf
+GCC_PREFIX?=riscv64-unknown-elf
 
 SIM_DEFINES = -DFUNCTIONAL -DSIM
 
@@ -34,41 +33,45 @@ SIM?=RTL
 
 PATTERN = spi_master
 
-all:  ${PATTERN:=.vcd}
+all:  ${PATTERN:=.vcd} ${PATTERN:=.lst}
 
 hex:  ${PATTERN:=.hex}
 
 %.vvp: %_tb.v %.hex
 ifeq ($(SIM),RTL)
 	iverilog -Ttyp $(SIM_DEFINES) -I $(BEHAVIOURAL_MODELS) \
-	-I $(PDK_PATH) -I $(RTL_PATH) -I $(MGMT_WRAPPER_PATH) \
-	$< -o $@ 
+	-I $(PDK_PATH) -I $(RTL_PATH) \
+	-o $@ $<
 else  
 	iverilog -Ttyp $(SIM_DEFINES) -DGL -I $(BEHAVIOURAL_MODELS) \
 	-I $(PDK_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) \
-	$< -o $@ 
+	-o $@ $<
 endif
 
 %.vcd: %.vvp
 	vvp $<
 
-%.elf: %.c $(FIRMWARE_PATH)/sections.lds $(FIRMWARE_PATH)/start.s check-env
-	${GCC_PATH}/${GCC_PREFIX}-gcc -march=rv32imc -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -o $@ $(FIRMWARE_PATH)/start.s $<
+%.elf: %.c $(FIRMWARE_PATH)/sections.lds $(FIRMWARE_PATH)/start.S check-env
+	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__picorv32__ -o $@ $(FIRMWARE_PATH)/start.S $(FIRMWARE_PATH)/isr.c $<
 
 %.hex: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@ 
 	# to fix flash base address
-	sed -i 's/@10000000/@00000000/g' $@
+	#sed -i 's/@10000000/@00000000/g' $@
+	sed -ie 's/@10000000/@00000000/g' $@  # changed to support macOS
+
+%.lst: %.elf
+	${GCC_PATH}/${GCC_PREFIX}-objdump -D $< > $@
 
 %.bin: %.elf
-	${GCC_PATH}/${GCC_PREFIX}-objcopy -O binary $< /dev/stdout | tail -c +1048577 > $@
+	#${GCC_PATH}/${GCC_PREFIX}-objcopy -O binary $< /dev/stdout | tail -c +1048577 > $@
 
 check-env:
 ifndef PDK_ROOT
-	$(error PDK_ROOT is undefined, please export it before running make)
+#	$(error PDK_ROOT is undefined, please export it before running make)
 endif
 ifeq (,$(wildcard $(PDK_ROOT)/sky130A))
-	$(error $(PDK_ROOT)/sky130A not found, please install pdk before running make)
+#	$(error $(PDK_ROOT)/sky130A not found, please install pdk before running make)
 endif
 ifeq (,$(wildcard $(GCC_PATH)/$(GCC_PREFIX)-gcc ))
 	$(error $(GCC_PATH)/$(GCC_PREFIX)-gcc is not found, please export GCC_PATH and GCC_PREFIX before running make)

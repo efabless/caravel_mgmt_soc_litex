@@ -18,6 +18,7 @@ PDK_PATH = $(PDK_ROOT)/sky130A
 VERILOG_PATH = ../..
 RTL_PATH = $(VERILOG_PATH)/rtl
 BEHAVIOURAL_MODELS = ../
+IBEX_PATH = ../ibex
 
 FIRMWARE_PATH = ..
 #GCC_PATH?=/ef/apps/bin
@@ -40,7 +41,9 @@ hex:  ${PATTERN:=.hex}
 #%.vvp: %_tb.v %.hex $(RTL_PATH)/mgmt_soc.v $(BEHAVIOURAL_MODELS)picorv32.v $(BEHAVIOURAL_MODELS)spiflash.v $(BEHAVIOURAL_MODELS)sram_1rw1r_32_256_8_sky130.v
 %.vvp: %_tb.v %.hex
 ifeq ($(SIM),RTL)
-	iverilog -Ttyp $(SIM_DEFINES) -I $(BEHAVIOURAL_MODELS) \
+	iverilog -Ttyp $(SIM_DEFINES) \
+	-I $(IBEX_PATH) \
+	-I $(BEHAVIOURAL_MODELS) \
 	-I $(PDK_PATH) -I $(RTL_PATH) \
 	-o $@ $<
 else

@@ -17,42 +17,50 @@
 
 `timescale 1 ns / 1 ps
 
-`include "__uprj_netlists.v"
-`include "caravel_netlists.v"
+`include "defines.v"
+`include "sky130_sram_2kbyte_1rw1r_32x512_8.v"
+`include "picorv32.v"
 `include "spiflash.v"
+`include "mgmt_core_wrapper.v"
 
 module spi_master_tb;
-	reg clock;
-	reg RSTB;
+	reg core_clk;
+	reg core_rstn;
 	reg power1, power2;
 
 	wire gpio;
 	wire [15:0] checkbits;
 	wire [7:0] spivalue;
-	wire [37:0] mprj_io;
+	wire [127:0] la_output;
 	wire flash_csb;
 	wire flash_clk;
 	wire flash_io0;
 	wire flash_io1;
 
-	assign checkbits = mprj_io[31:16];
-	assign spivalue  = mprj_io[15:8];
+	wire spi_clk;
+	wire spi_cs_n;
+	wire spi_mosi;
+	wire spi_miso;
+	wire spi_sdoenb;
+
+	assign checkbits = la_output[31:16];
+	assign spivalue  = la_output[15:8];
 
 	// External clock is used by default.  Make this artificially fast for the
 	// simulation.  Normally this would be a slow clock and the digital PLL
 	// would be the fast clock.
 
-	always #10 clock <= (clock === 1'b0);
+	always #10 core_clk <= (core_clk === 1'b0);
 
 	initial begin
-		clock <= 0;
+		core_clk = 0;
 	end
 
 	initial begin
 		$dumpfile("spi_master.vcd");
 		$dumpvars(0, spi_master_tb);
 		repeat (25) begin
-			repeat (1000) @(posedge clock);
+			repeat (1000) @(posedge core_clk);
 			$display("+1000 cycles");
 		end
 		$display("%c[1;31m",27);
@@ -150,9 +158,9 @@ module spi_master_tb;
 	end
 
 	initial begin
-		RSTB <= 1'b0;
+		core_rstn <= 1'b0;
 		#1000;
-		RSTB <= 1'b1;	    // Release reset
+		core_rstn <= 1'b1;	    // Release reset
 		#2000;
 	end
 
@@ -177,35 +185,26 @@ module spi_master_tb;
 	assign VDD1V8 = power2;
 	assign VSS = 1'b0;
 
-	assign mprj_io[3] = 1'b1;	// Keep CSB high
+//	assign la_output[3] = 1'b1;       // Force CSB high.
 	
-	caravel uut (
-		.vddio	  (VDD3V3),
-		.vddio_2  (VDD3V3),
-		.vssio	  (VSS),
-		.vssio_2  (VSS),
-		.vdda	  (VDD3V3),
-		.vssa	  (VSS),
-		.vccd	  (VDD1V8),
-		.vssd	  (VSS),
-		.vdda1    (VDD3V3),
-		.vdda1_2  (VDD3V3),
-		.vdda2    (VDD3V3),
-		.vssa1	  (VSS),
-		.vssa1_2  (VSS),
-		.vssa2	  (VSS),
-		.vccd1	  (VDD1V8),
-		.vccd2	  (VDD1V8),
-		.vssd1	  (VSS),
-		.vssd2	  (VSS),
-		.clock    (clock),
-		.gpio     (gpio),
-		.mprj_io  (mprj_io),
+	mgmt_core_wrapper uut (
+		.core_clk	  (core_clk),
+		.gpio_out_pad     (gpio),
+		.la_output  (la_output),
 		.flash_csb(flash_csb),
 		.flash_clk(flash_clk),
 		.flash_io0(flash_io0),
 		.flash_io1(flash_io1),
-		.resetb	  (RSTB)
+        .core_rstn(core_rstn),
+        .mprj_dat_i(32'b0),
+		.mprj_ack_i(1'b0),
+        .hk_dat_i(32'b0),
+		.hk_ack_i(1'b0),
+		.spi_clk(spi_clk),
+	    .spi_cs_n(spi_cs_n),
+        .spi_mosi(spi_mosi),
+        .spi_miso(spi_miso),
+        .spi_sdoenb(spi_sdoenb),
 	);
 
 	spiflash #(
@@ -224,10 +223,10 @@ module spi_master_tb;
 	spiflash #(
 		.FILENAME("spi_master.hex")
 	) test_spi (
-		.csb(mprj_io[33]),
-		.clk(mprj_io[32]),
-		.io0(mprj_io[35]),
-		.io1(mprj_io[34]),
+		.csb(spi_cs_n),
+		.clk(spi_clk),
+		.io0(spi_mosi),
+		.io1(spi_miso),
 		.io2(),			// not used
 		.io3()			// not used
 	);

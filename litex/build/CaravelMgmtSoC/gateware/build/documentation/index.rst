@@ -29,6 +29,7 @@ Register Groups
     qspi_enabled
     spi_enabled
     spi_master
+    uart
     uart_enabled
     user_irq_0
     user_irq_1

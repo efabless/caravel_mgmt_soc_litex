@@ -34,6 +34,8 @@ void main()
     // Start test
     reg_la0_data = 0xa0000000;
 
+//    reg_uart_data = 0xab;
+
     // This should appear at the output, received by the testbench UART.
     // (Makes simulation time long.)
     print("Monitor: Test UART (RTL) passed\n");

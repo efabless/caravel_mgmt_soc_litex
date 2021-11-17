@@ -45,10 +45,11 @@ module uart_tb;
 	wire flash_io1;
 //	wire [37:0] mprj_io;
 	wire uart_tx;
+	wire uart_loopback;
 	wire SDO;
 
 	assign checkbits = la_output[31:16];
-	assign uart_tx = la_output[6];
+//	assign uart_tx = la_output[6];
 
 	always #12.5 core_clk <= (core_clk === 1'b0);
 
@@ -62,9 +63,16 @@ module uart_tb;
 
 		$display("Wait for UART o/p");
 		repeat (150) begin
-			repeat (10000) @(posedge core_clk);
+			repeat (1000) @(posedge core_clk);
 			// Diagnostic. . . interrupts output pattern.
 		end
+        $display("%c[1;31m",27);
+		`ifdef GL
+			$display ("Monitor: Timeout, Test UART (GL) Failed");
+		`else
+			$display ("Monitor: Timeout, Test UART (RTL) Failed");
+		`endif
+		$display("%c[0m",27);
 		$finish;
 	end
 
@@ -88,14 +96,14 @@ module uart_tb;
 		if(checkbits == 16'hA000) begin
 			$display("UART Test started");
 		end
-		else if(checkbits == 16'hAB00) begin
-			`ifdef GL
-				$display("UART Test (GL) passed");
-			`else
-				$display("UART Test (RTL) passed");
-			`endif
-			$finish;
-		end
+//		else if(checkbits == 16'hAB00) begin
+//			`ifdef GL
+//				$display("UART Test (GL) passed");
+//			`else
+//				$display("UART Test (RTL) passed");
+//			`endif
+//			$finish;
+//		end
 	end
 
 	wire VDD3V3;
@@ -121,7 +129,10 @@ module uart_tb;
         .mprj_dat_i(32'b0),
 		.mprj_ack_i(1'b0),
         .hk_dat_i(32'b0),
-		.hk_ack_i(1'b0)
+		.hk_ack_i(1'b0),
+		.ser_tx(uart_tx)
+//		.ser_tx(uart_loopback),
+//		.ser_rx(uart_loopback)
 	);
 
 	spiflash #(

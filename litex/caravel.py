@@ -45,31 +45,44 @@ class MGMTSoC(SoCMini):
 
         # CRG --------------------------------------------------------------------------------------
         self.submodules.crg = CRG(platform.request("core_clk"), rst=platform.request("core_rst"))
-        """
-        SoCMini.__init__(self, platform,
-                         clk_freq=sys_clk_freq,
-                         cpu_type="vexriscv",
-                         cpu_variant="minimal+debug",
-                         cpu_reset_address=self.mem_map["spiflash"],
-                         csr_data_width=32,
-                         integrated_sram_size=0,
-                         integrated_rom_size=0,
-                         with_uart=True,
-                         with_timer=True,
-                         **kwargs)
-        """
+
+        # SoCMini.__init__(self, platform,
+        #                  clk_freq=sys_clk_freq,
+        #                  cpu_type="vexriscv",
+        #                  cpu_variant="minimal+debug",
+        #                  cpu_reset_address=self.mem_map["flash"],
+        #                  csr_data_width=32,
+        #                  integrated_sram_size=0,
+        #                  integrated_rom_size=0,
+        #                  with_uart=True,
+        #                  with_timer=True,
+        #                  **kwargs)
 
         SoCMini.__init__(self, platform,
                          clk_freq=sys_clk_freq,
-                         cpu_type="picorv32",
-                         cpu_variant="minimal",
+                         cpu_type="ibex",
+                         cpu_variant="standard",
                          cpu_reset_address=self.mem_map["flash"],
                          csr_data_width=32,
                          integrated_sram_size=0,
                          integrated_rom_size=0,
                          with_uart=True,
+                         uart_name="serial",
                          # with_timer=True,
                          **kwargs)
+
+        # SoCMini.__init__(self, platform,
+        #                  clk_freq=sys_clk_freq,
+        #                  cpu_type="picorv32",
+        #                  cpu_variant="minimal",
+        #                  cpu_reset_address=self.mem_map["flash"],
+        #                  csr_data_width=32,
+        #                  integrated_sram_size=0,
+        #                  integrated_rom_size=0,
+        #                  with_uart=True,
+        #                  uart_name="serial",
+        #                  # with_timer=True,
+        #                  **kwargs)
 
         #DFFRAM
         dff_size = 1 * 1024
@@ -145,8 +158,9 @@ class MGMTSoC(SoCMini):
         self.add_wb_master(self.debug.wishbone)
         self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)  #TODO add logic for this
 
-        self.submodules.wb_uart = UARTWishboneBridge(platform.request("ser"), sys_clk_freq, baudrate=115200)
-        self.add_csr("ser")
+        # self.submodules.wb_uart = UARTWishboneBridge(platform.request("ser"), sys_clk_freq, baudrate=115200)
+        # self.add_csr("ser")
+        # self.add_uart("ser2")
 
         # Add a GPIO Pin
         self.submodules.gpio = GPIOASIC(platform.request("gpio"))
@@ -162,7 +176,7 @@ class MGMTSoC(SoCMini):
         self.submodules.debug_mode = GPIOOut(platform.request("debug_mode"))
 
         trap = platform.request("trap")
-        self.comb += trap.eq(self.cpu.trap)
+        # self.comb += trap.eq(self.cpu.trap)
 
         self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
 

@@ -205,8 +205,10 @@ module mgmt_core_wrapper (
     	.debug_mode(debug_mode),
 
     	// Module I/O
-    	.ser_tx(ser_tx),
-    	.ser_rx(ser_rx),
+//    	.ser_tx(ser_tx),
+//    	.ser_rx(ser_rx),
+        .serial_tx(ser_tx),
+    	.serial_rx(ser_rx),
     	.spi_cs_n(spi_csb),
     	.spi_clk(spi_sck),
     	.spi_miso(spi_sdo),
