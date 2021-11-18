@@ -1,0 +1,58 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Thu Nov 18 06:13:34 2021
+[*]
+[dumpfile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/verilog/dv/gpio_mgmt_ibex/gpio_mgmt.vcd"
+[dumpfile_mtime] "Thu Nov 18 06:09:51 2021"
+[dumpfile_size] 25911647
+[savefile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/verilog/dv/gpio_mgmt_ibex/gio_mgmt_ibex.gtkw"
+[timestart] 127900000
+[size] 2318 1113
+[pos] -1 -1
+*-22.265078 1186720000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] gpio_mgmt_tb.
+[treeopen] gpio_mgmt_tb.uut.
+[treeopen] gpio_mgmt_tb.uut.core.
+[treeopen] gpio_mgmt_tb.uut.core.ibex_top.
+[treeopen] gpio_mgmt_tb.uut.core.ibex_top.gen_regfile_ff.
+[treeopen] gpio_mgmt_tb.uut.core.ibex_top.gen_regfile_ff.register_file_i.
+[treeopen] gpio_mgmt_tb.uut.core.ibex_top.u_ibex_core.
+[sst_width] 247
+[signals_width] 176
+[sst_expanded] 1
+[sst_vpaned_height] 347
+@28
+gpio_mgmt_tb.spiflash.csb
+gpio_mgmt_tb.spiflash.clk
+gpio_mgmt_tb.spiflash.io0
+gpio_mgmt_tb.spiflash.io1
+@22
+gpio_mgmt_tb.spiflash.spi_addr[23:0]
+gpio_mgmt_tb.spiflash.spi_out[7:0]
+gpio_mgmt_tb.spiflash.spi_in[7:0]
+gpio_mgmt_tb.spiflash.spi_cmd[7:0]
+@200
+-
+@28
+gpio_mgmt_tb.uut.core.ibex_top.clk
+@200
+-
+@28
+gpio_mgmt_tb.gpio
+gpio_mgmt_tb.uut.gpio_in_pad
+gpio_mgmt_tb.uut.gpio_inenb_pad
+gpio_mgmt_tb.uut.gpio_mode0_pad
+gpio_mgmt_tb.uut.gpio_mode1_pad
+gpio_mgmt_tb.uut.gpio_out_pad
+gpio_mgmt_tb.uut.gpio_outenb_pad
+@200
+-
+@22
+gpio_mgmt_tb.uut.core.ibex_top.u_ibex_core.pc_id[31:0]
+gpio_mgmt_tb.uut.core.ibex_top.u_ibex_core.data_addr_o[31:0]
+gpio_mgmt_tb.uut.core.ibex_top.gen_regfile_ff.register_file_i.waddr_a_i[4:0]
+gpio_mgmt_tb.uut.core.ibex_top.gen_regfile_ff.register_file_i.wdata_a_i[31:0]
+gpio_mgmt_tb.uut.core.ibex_top.gen_regfile_ff.register_file_i.rdata_a_o[31:0]
+gpio_mgmt_tb.uut.core.ibex_top.gen_regfile_ff.register_file_i.raddr_a_i[4:0]
+[pattern_trace] 1
+[pattern_trace] 0
