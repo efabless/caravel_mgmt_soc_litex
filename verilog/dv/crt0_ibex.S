@@ -47,7 +47,8 @@ reset_handler:
   mv x31, x1
 
   /* stack initilization */
-  la   x2, _stack_start
+#  la   x2, _stack_start
+  la   x2, 0x01000800
 
 _start:
   .global _start

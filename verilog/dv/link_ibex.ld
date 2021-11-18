@@ -63,7 +63,7 @@ SECTIONS
         *(.sdata.*)
         *(.data);
         *(.data.*)
-    } > sram AT > flash
+    } > dff AT > flash
 
     .bss :
     {
@@ -76,7 +76,7 @@ SECTIONS
         *(.bss.*)
         *(COMMON)
         _bss_end = .;
-    } > sram
+    } > dff
 
 }
 

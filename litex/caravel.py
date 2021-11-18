@@ -71,6 +71,8 @@ class MGMTSoC(SoCMini):
                          # with_timer=True,
                          **kwargs)
 
+        self.cpu.cpu_params["p_RegFile"] = 0
+
         # SoCMini.__init__(self, platform,
         #                  clk_freq=sys_clk_freq,
         #                  cpu_type="picorv32",
