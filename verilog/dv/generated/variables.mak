@@ -2,12 +2,12 @@ PACKAGES=libc libcompiler_rt libbase libfatfs liblitespi liblitedram libliteeth 
 PACKAGE_DIRS=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/libc /Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/libcompiler_rt /Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/libbase /Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/libfatfs /Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/liblitespi /Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/liblitedram /Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/libliteeth /Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/liblitesdcard /Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/liblitesata /Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/bios
 LIBS=libc libcompiler_rt libbase libfatfs liblitespi liblitedram libliteeth liblitesdcard liblitesata
 TRIPLE=riscv64-unknown-elf
-CPU=ibex
+CPU=vexriscv
 CPUFAMILY=riscv
-CPUFLAGS=-march=rv32imc    -mabi=ilp32 -D__ibex__ 
+CPUFLAGS=-march=rv32i      -mabi=ilp32 -D__vexriscv__
 CPUENDIANNESS=little
 CLANG=0
-CPU_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/cores/cpu/ibex
+CPU_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/cores/cpu/vexriscv
 SOC_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc
 PICOLIBC_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/pythondata_software_picolibc/data
 COMPILER_RT_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/pythondata_software_compiler_rt/data

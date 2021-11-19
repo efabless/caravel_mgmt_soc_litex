@@ -27,17 +27,26 @@ import litex.soc.doc as lxsocdoc
 from CaravelMgmtSoC import Platform
 from OpenRAM import *
 
+# SoCMini.mem_map = {
+#     "dff": 0x00000000,
+#     "sram": 0x01000000,
+#     "flash": 0x10000000,
+#     "mprj": 0x30000000,
+#     "hk": 0x26000000,
+#     "csr": 0x20000000,
+# }
+
 # MGMTSoC
 class MGMTSoC(SoCMini):
 
-    SoCMini.mem_map = {
-        "dff":              0x00000000,
-        "sram":             0x01000000,
-        "flash":            0x10000000,
-        "mprj":             0x30000000,
-        "hk":               0x26000000,
-        "csr":              0x20000000,
-    }
+    # SoCMini.mem_map = {
+    #     "dff":              0x00000000,
+    #     "sram":             0x01000000,
+    #     "flash":            0x10000000,
+    #     "mprj":             0x30000000,
+    #     "hk":               0x26000000,
+    #     "csr":              0x20000000,
+    # }
 
     def __init__(self, sys_clk_freq=int(10e6), **kwargs ):
 
@@ -46,32 +55,54 @@ class MGMTSoC(SoCMini):
         # CRG --------------------------------------------------------------------------------------
         self.submodules.crg = CRG(platform.request("core_clk"), rst=platform.request("core_rst"))
 
+        # SoCMini.mem_map = {
+        #     "dff": 0x00000000,
+        #     "sram": 0x01000000,
+        #     "flash": 0x10000000,
+        #     "mprj": 0x30000000,
+        #     "hk": 0x26000000,
+        #     "csr": 0x20000000,
+        # }
+
+        SoCMini.__init__(self, platform,
+                         clk_freq=sys_clk_freq,
+                         cpu_type="vexriscv",
+                         cpu_variant="minimal+debug",
+                         # cpu_reset_address=self.mem_map["flash"],
+                         cpu_reset_address=0x10000000,
+                         # csr_data_width=32,
+                         integrated_sram_size=0,
+                         integrated_rom_size=0,
+                         with_uart=True,
+                         # with_timer=True,
+                         **kwargs)
+
+        self.mem_map = {
+            "dff": 0x00000000,
+            "sram": 0x01000000,
+            "flash": 0x10000000,
+            "mprj": 0x30000000,
+            "hk": 0x26000000,
+            # "csr": 0x20000000,
+            "csr": 0xf0000000,
+        }
+
+        # self.cpu.cpu_reset_address = self.mem_map["flash"]
+
         # SoCMini.__init__(self, platform,
         #                  clk_freq=sys_clk_freq,
-        #                  cpu_type="vexriscv",
-        #                  cpu_variant="minimal+debug",
+        #                  cpu_type="ibex",
+        #                  cpu_variant="standard",
         #                  cpu_reset_address=self.mem_map["flash"],
         #                  csr_data_width=32,
         #                  integrated_sram_size=0,
         #                  integrated_rom_size=0,
         #                  with_uart=True,
-        #                  with_timer=True,
+        #                  uart_name="serial",
+        #                  # with_timer=True,
         #                  **kwargs)
-
-        SoCMini.__init__(self, platform,
-                         clk_freq=sys_clk_freq,
-                         cpu_type="ibex",
-                         cpu_variant="standard",
-                         cpu_reset_address=self.mem_map["flash"],
-                         csr_data_width=32,
-                         integrated_sram_size=0,
-                         integrated_rom_size=0,
-                         with_uart=True,
-                         uart_name="serial",
-                         # with_timer=True,
-                         **kwargs)
-
-        self.cpu.cpu_params["p_RegFile"] = 0
+        #
+        # self.cpu.cpu_params["p_RegFile"] = 0  # Reg File = FlipFlop
 
         # SoCMini.__init__(self, platform,
         #                  clk_freq=sys_clk_freq,
@@ -128,7 +159,7 @@ class MGMTSoC(SoCMini):
         # Add a wb port for external slaves user_project
         mprj_ports = platform.request("mprj")
         mprj = wishbone.Interface()
-        self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x0100000))
+        # self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x0100000))
         self.submodules.mprj_wb_iena = GPIOOut(mprj_ports.wb_iena)
         self.comb += mprj_ports.cyc_o.eq(mprj.cyc)
         self.comb += mprj_ports.stb_o.eq(mprj.stb)
@@ -141,7 +172,7 @@ class MGMTSoC(SoCMini):
 
         # Add a wb port for external slaves housekeeping
         hk = wishbone.Interface()
-        self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
+        # self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
         hk_ports = platform.request("hk")
         self.comb += hk_ports.stb_o.eq(hk.stb)
         self.comb += hk.dat_r.eq(hk_ports.dat_i)

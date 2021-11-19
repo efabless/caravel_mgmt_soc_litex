@@ -7,17 +7,17 @@ Register Listing for CTRL
 +------------------------------------------+-------------------------------------+
 | Register                                 | Address                             |
 +==========================================+=====================================+
-| :ref:`CTRL_RESET <CTRL_RESET>`           | :ref:`0x82000000 <CTRL_RESET>`      |
+| :ref:`CTRL_RESET <CTRL_RESET>`           | :ref:`0xf0000000 <CTRL_RESET>`      |
 +------------------------------------------+-------------------------------------+
-| :ref:`CTRL_SCRATCH <CTRL_SCRATCH>`       | :ref:`0x82000004 <CTRL_SCRATCH>`    |
+| :ref:`CTRL_SCRATCH <CTRL_SCRATCH>`       | :ref:`0xf0000004 <CTRL_SCRATCH>`    |
 +------------------------------------------+-------------------------------------+
-| :ref:`CTRL_BUS_ERRORS <CTRL_BUS_ERRORS>` | :ref:`0x82000008 <CTRL_BUS_ERRORS>` |
+| :ref:`CTRL_BUS_ERRORS <CTRL_BUS_ERRORS>` | :ref:`0xf0000008 <CTRL_BUS_ERRORS>` |
 +------------------------------------------+-------------------------------------+
 
 CTRL_RESET
 ^^^^^^^^^^
 
-`Address: 0x82000000 + 0x0 = 0x82000000`
+`Address: 0xf0000000 + 0x0 = 0xf0000000`
 
 
     .. wavedrom::
@@ -43,7 +43,7 @@ CTRL_RESET
 CTRL_SCRATCH
 ^^^^^^^^^^^^
 
-`Address: 0x82000000 + 0x4 = 0x82000004`
+`Address: 0xf0000000 + 0x4 = 0xf0000004`
 
     Use this register as a scratch space to verify that software read/write accesses
     to the Wishbone/CSR bus are working correctly. The initial reset value of
@@ -62,7 +62,7 @@ CTRL_SCRATCH
 CTRL_BUS_ERRORS
 ^^^^^^^^^^^^^^^
 
-`Address: 0x82000000 + 0x8 = 0x82000008`
+`Address: 0xf0000000 + 0x8 = 0xf0000008`
 
     Total number of Wishbone bus errors (timeouts) since start.
 

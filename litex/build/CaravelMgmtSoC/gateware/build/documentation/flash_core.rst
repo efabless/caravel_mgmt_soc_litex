@@ -7,21 +7,21 @@ Register Listing for FLASH_CORE
 +------------------------------------------------------------------+-------------------------------------------------+
 | Register                                                         | Address                                         |
 +==================================================================+=================================================+
-| :ref:`FLASH_CORE_MMAP_DUMMY_BITS <FLASH_CORE_MMAP_DUMMY_BITS>`   | :ref:`0x82001800 <FLASH_CORE_MMAP_DUMMY_BITS>`  |
+| :ref:`FLASH_CORE_MMAP_DUMMY_BITS <FLASH_CORE_MMAP_DUMMY_BITS>`   | :ref:`0xf0001800 <FLASH_CORE_MMAP_DUMMY_BITS>`  |
 +------------------------------------------------------------------+-------------------------------------------------+
-| :ref:`FLASH_CORE_MASTER_CS <FLASH_CORE_MASTER_CS>`               | :ref:`0x82001804 <FLASH_CORE_MASTER_CS>`        |
+| :ref:`FLASH_CORE_MASTER_CS <FLASH_CORE_MASTER_CS>`               | :ref:`0xf0001804 <FLASH_CORE_MASTER_CS>`        |
 +------------------------------------------------------------------+-------------------------------------------------+
-| :ref:`FLASH_CORE_MASTER_PHYCONFIG <FLASH_CORE_MASTER_PHYCONFIG>` | :ref:`0x82001808 <FLASH_CORE_MASTER_PHYCONFIG>` |
+| :ref:`FLASH_CORE_MASTER_PHYCONFIG <FLASH_CORE_MASTER_PHYCONFIG>` | :ref:`0xf0001808 <FLASH_CORE_MASTER_PHYCONFIG>` |
 +------------------------------------------------------------------+-------------------------------------------------+
-| :ref:`FLASH_CORE_MASTER_RXTX <FLASH_CORE_MASTER_RXTX>`           | :ref:`0x8200180c <FLASH_CORE_MASTER_RXTX>`      |
+| :ref:`FLASH_CORE_MASTER_RXTX <FLASH_CORE_MASTER_RXTX>`           | :ref:`0xf000180c <FLASH_CORE_MASTER_RXTX>`      |
 +------------------------------------------------------------------+-------------------------------------------------+
-| :ref:`FLASH_CORE_MASTER_STATUS <FLASH_CORE_MASTER_STATUS>`       | :ref:`0x82001810 <FLASH_CORE_MASTER_STATUS>`    |
+| :ref:`FLASH_CORE_MASTER_STATUS <FLASH_CORE_MASTER_STATUS>`       | :ref:`0xf0001810 <FLASH_CORE_MASTER_STATUS>`    |
 +------------------------------------------------------------------+-------------------------------------------------+
 
 FLASH_CORE_MMAP_DUMMY_BITS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82001800 + 0x0 = 0x82001800`
+`Address: 0xf0001800 + 0x0 = 0xf0001800`
 
 
     .. wavedrom::
@@ -38,7 +38,7 @@ FLASH_CORE_MMAP_DUMMY_BITS
 FLASH_CORE_MASTER_CS
 ^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82001800 + 0x4 = 0x82001804`
+`Address: 0xf0001800 + 0x4 = 0xf0001804`
 
 
     .. wavedrom::
@@ -55,7 +55,7 @@ FLASH_CORE_MASTER_CS
 FLASH_CORE_MASTER_PHYCONFIG
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82001800 + 0x8 = 0x82001808`
+`Address: 0xf0001800 + 0x8 = 0xf0001808`
 
     SPI PHY settings.
 
@@ -87,7 +87,7 @@ FLASH_CORE_MASTER_PHYCONFIG
 FLASH_CORE_MASTER_RXTX
 ^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82001800 + 0xc = 0x8200180c`
+`Address: 0xf0001800 + 0xc = 0xf000180c`
 
 
     .. wavedrom::
@@ -103,7 +103,7 @@ FLASH_CORE_MASTER_RXTX
 FLASH_CORE_MASTER_STATUS
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-`Address: 0x82001800 + 0x10 = 0x82001810`
+`Address: 0xf0001800 + 0x10 = 0xf0001810`
 
 
     .. wavedrom::
