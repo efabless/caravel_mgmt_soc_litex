@@ -64,7 +64,8 @@ set ::env(DIODE_INSERTION_STRATEGY) 4
 
 set ::env(VERILOG_FILES) "\
 	$script_dir/../../verilog/rtl/defines.v\
-	$script_dir/../../verilog/rtl/mgmt_core.v"
+	$script_dir/../../verilog/rtl/mgmt_core.v"\
+	$script_dir/../../verilog/dv/VexRisc_MinDebug.v"
 
 set ::env(VERILOG_FILES_BLACKBOX) "\
 	$script_dir/../../verilog/rtl/defines.v\
