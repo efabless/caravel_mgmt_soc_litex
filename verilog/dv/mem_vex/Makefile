@@ -18,7 +18,6 @@ PDK_PATH = $(PDK_ROOT)/sky130A
 VERILOG_PATH = ../..
 RTL_PATH = $(VERILOG_PATH)/rtl
 BEHAVIOURAL_MODELS = ../
-IBEX_PATH = ../ibex
 
 FIRMWARE_PATH = ..
 #GCC_PATH?=/ef/apps/bin
@@ -32,21 +31,18 @@ SIM?=RTL
 
 .SUFFIXES:
 
-PATTERN = gpio_mgmt
+PATTERN = mem
 
 all:  ${PATTERN:=.vcd} ${PATTERN:=.lst}
 
 hex:  ${PATTERN:=.hex}
 
-#%.vvp: %_tb.v %.hex $(RTL_PATH)/mgmt_soc.v $(BEHAVIOURAL_MODELS)picorv32.v $(BEHAVIOURAL_MODELS)spiflash.v $(BEHAVIOURAL_MODELS)sram_1rw1r_32_256_8_sky130.v
 %.vvp: %_tb.v %.hex
 ifeq ($(SIM),RTL)
-	iverilog -Ttyp $(SIM_DEFINES) \
-	-I $(IBEX_PATH) \
-	-I $(BEHAVIOURAL_MODELS) \
+	iverilog -Ttyp $(SIM_DEFINES) -I $(BEHAVIOURAL_MODELS) \
 	-I $(PDK_PATH) -I $(RTL_PATH) \
 	-o $@ $<
-else
+else  
 	iverilog -Ttyp $(SIM_DEFINES) -DGL -I $(BEHAVIOURAL_MODELS) \
 	-I $(PDK_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) \
 	-o $@ $<
@@ -57,12 +53,14 @@ endif
 
 %.elf: %.c $(FIRMWARE_PATH)/sections.lds $(FIRMWARE_PATH)/start.S check-env
 	#${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated -march=rv32im -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__vexriscv__ -o $@ $(FIRMWARE_PATH)/start_orig_pico.s $(FIRMWARE_PATH)/isr.c $<
+	#${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated -march=rv32im -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections_orig_pico.lds,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__vexriscv__ -o $@ $(FIRMWARE_PATH)/start_orig_pico.s $<
 	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections_orig_pico.lds,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__vexriscv__ -o $@ $(FIRMWARE_PATH)/start_orig_pico.s $<
 
 %.hex: %.elf
-	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@
+	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@ 
 	# to fix flash base address
-	sed -ie 's/@10000000/@00000000/g' $@
+	#sed -i 's/@10000000/@00000000/g' $@
+	sed -ie 's/@10000000/@00000000/g' $@  # changed to support macOS
 
 %.lst: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objdump -D $< > $@
