@@ -19,7 +19,8 @@
 
 `include "defines.v"
 `include "sky130_sram_2kbyte_1rw1r_32x512_8.v"
-`include "picorv32.v"
+//`include "picorv32.v"
+`include "VexRiscv_MinDebug.v"
 `include "spiflash.v"
 `include "mgmt_core_wrapper.v"
 
@@ -59,9 +60,9 @@ module spi_master_tb;
 	initial begin
 		$dumpfile("spi_master.vcd");
 		$dumpvars(0, spi_master_tb);
-		repeat (25) begin
-			repeat (1000) @(posedge core_clk);
-			$display("+1000 cycles");
+		repeat (50) begin
+			repeat (5000) @(posedge core_clk);
+			$display("+5000 cycles");
 		end
 		$display("%c[1;31m",27);
 		`ifdef GL
@@ -193,18 +194,19 @@ module spi_master_tb;
 		.la_output  (la_output),
 		.flash_csb(flash_csb),
 		.flash_clk(flash_clk),
-		.flash_io0(flash_io0),
-		.flash_io1(flash_io1),
+		.flash_io0_oeb(),
+		.flash_io0_do(flash_io0),
+		.flash_io1_di(flash_io1),
         .core_rstn(core_rstn),
         .mprj_dat_i(32'b0),
 		.mprj_ack_i(1'b0),
         .hk_dat_i(32'b0),
 		.hk_ack_i(1'b0),
-		.spi_clk(spi_clk),
-	    .spi_cs_n(spi_cs_n),
-        .spi_mosi(spi_mosi),
-        .spi_miso(spi_miso),
-        .spi_sdoenb(spi_sdoenb),
+		.spi_sck(spi_clk),
+	    .spi_csb(spi_cs_n),
+        .spi_sdo(spi_miso),
+        .spi_sdi(spi_mosi),
+        .spi_sdoenb(spi_sdoenb)
 	);
 
 	spiflash #(
@@ -221,7 +223,7 @@ module spi_master_tb;
 	/* Instantiate a 2nd SPI flash so the SPI master can talk to it */
 
 	spiflash #(
-		.FILENAME("spi_master.hex")
+		.FILENAME("test_data.hex")
 	) test_spi (
 		.csb(spi_cs_n),
 		.clk(spi_clk),

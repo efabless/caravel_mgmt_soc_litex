@@ -52,7 +52,8 @@ endif
 	vvp $<
 
 %.elf: %.c $(FIRMWARE_PATH)/sections.lds $(FIRMWARE_PATH)/start.S check-env
-	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__picorv32__ -o $@ $(FIRMWARE_PATH)/start.S $(FIRMWARE_PATH)/isr.c $<
+#	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__picorv32__ -o $@ $(FIRMWARE_PATH)/start.S $(FIRMWARE_PATH)/isr.c $<
+	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections_orig_pico.lds,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__vexriscv__ -o $@ $(FIRMWARE_PATH)/start_orig_pico.s $<
 
 %.hex: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@ 
@@ -83,7 +84,7 @@ endif
 # ---- Clean ----
 
 clean:
-	rm -f *.elf *.hex *.bin *.vvp *.vcd *.log
+	rm -f *.elf spi_master.hex spi_master.hexe *.bin *.vvp *.vcd *.log
 
 .PHONY: clean hex all
 

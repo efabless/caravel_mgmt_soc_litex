@@ -16,6 +16,7 @@
  */
 
 #include <defs.h>
+#include <csr.h>
 
 // --------------------------------------------------------
 
@@ -24,18 +25,42 @@
  *	- Enables SPI master
  *	- Uses SPI master to talk to external SPI module
  */
+
+ void spi_write(char c)
+{
+    reg_spimaster_wdata = (unsigned long) c;
+//    reg_spimaster_wdata = c;
+//    spi_master_control_length_write(8);
+//    spi_master_control_start_write(1);
+//    reg_spimaster_control = 0x0800;
+    reg_spimaster_control = 0x0801;
+}
+ char spi_read()
+{
+//    reg_spimaster_wdata = c;
+//    spi_master_control_length_write(8);
+//    spi_master_control_start_write(1);
+//    reg_spimaster_control = 0x0800;
+//    spi_write(0x00);
+//    reg_spimaster_rdata = 0x00;
+//    reg_spimaster_control = 0x0801;
+    spi_write(0x00);
+    while (reg_spimaster_status != 1);
+    return reg_spimaster_rdata;
+}
+
 void main()
 {
     int i;
     uint32_t value;
 
-    reg_mprj_datal = 0;
+//    reg_mprj_datal = 0;
 
     // For SPI operation, GPIO 1 should be an input, and GPIOs 2 to 4
     // should be outputs.
 
     // Start test
-    reg_mprj_datal = 0xA0400000;
+    reg_la0_data = 0xA0400000;
 
     // Enable SPI master
     // SPI master configuration bits:
@@ -49,96 +74,122 @@ void main()
     // bit 14:		IRQ enable (1 = enabled)
     // bit 15:		(unused)
 
-    reg_spimaster_config = 0x2002;	// Enable, prescaler = 2,
+//    reg_spimaster_clk_divider = 2;
+//    spi_master_clk_divider_write(128);
+//    reg_spimaster_cs = 0;
+//    reg_spimaster_wdata = 0x0b;
+//    spi_master_mosi_write(0x0b);
 
-    // Apply stream read (0x40 + 0x03) and read back one byte 
+//    reg_spimaster_config = 0x0800;	// start xfer, 8 bits
+//    reg_spimaster_config = 0x0801;	// start xfer, 8 bits
+//    spi_master_control_length_write(8);
+//    spi_master_control_start_write(1);
 
-    reg_spimaster_config = 0x3002;	// Apply stream mode
+    // Apply stream read (0x40 + 0x03) and read back one byte
 
-    reg_spimaster_data = 0xff;		// Write 0xff (reset)
-    reg_spimaster_config = 0x2102;	// Release CSB (ends stream mode)
-    reg_spimaster_config = 0x3002;	// Apply stream mode
-    reg_spimaster_data = 0xab;		// Write 0xab (wakeup)
-    reg_spimaster_config = 0x2102;	// Release CSB (ends stream mode)
-    reg_spimaster_config = 0x3002;	// Apply stream mode
-    reg_spimaster_data = 0x03;		// Write 0x03 (read mode)
-    reg_spimaster_data = 0x00;		// Write 0x00 (start address high byte)
-    reg_spimaster_data = 0x00;		// Write 0x00 (start address middle byte)
-    reg_spimaster_data = 0x04;		// Write 0x00 (start address low byte)
+//    reg_spimaster_config = 0x3002;	// Apply stream mode
+//    reg_spimaster_cs = 0x0001;  // sel=0, auto-cs
+//    reg_spimaster_cs = 0x0101;  // sel=0, manual cs
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+//
+//    reg_spimaster_data = 0xff;		// Write 0xff (reset)
+//    spi_write(0xff);
+//    reg_spimaster_config = 0x2102;	// Release CSB (ends stream mode)
+//    reg_spimaster_config = 0x3002;	// Apply stream mode
+//    reg_spimaster_cs = 0x0000;
+//    reg_spimaster_cs = 0x0101;  // sel=0, manual CS
+
+//    reg_spimaster_data = 0xab;		// Write 0xab (wakeup)
+//    spi_write(0xab);  // Write 0xab (wakeup)
+//    reg_spimaster_cs = 0;
+//    reg_spimaster_cs = 1;
+//    reg_spimaster_config = 0x2102;	// Release CSB (ends stream mode)
+//    reg_spimaster_config = 0x3002;	// Apply stream mode
+//    reg_spimaster_cs = 0x0000;  // release CS
+    reg_spimaster_cs = 0x10001;  // sel=0, manual CS
+//    reg_spimaster_cs = 0x0001;  // sel=0, auto-cs
+
+    spi_write(0x03);        // Write 0x03 (read mode)
+    spi_write(0x00);        // Write 0x00 (start address high byte)
+    spi_write(0x00);        // Write 0x00 (start address middle byte)
+    spi_write(0x04);        // Write 0x04 (start address low byte)
+
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA0410000 | (value << 8);	// 0x93
+    reg_la0_data = 0xA0410000 | (value << 8);;
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA0420000 | (value << 8);	// 0x01
+    reg_la0_data = 0xA0420000 | (value << 8);	// 0x01;
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA0430000 | (value << 8);	// 0x00
+    reg_la0_data = 0xA0430000| (value << 8);	// 0x00
 
-    reg_spimaster_config = 0x2102;	// Release CSB (ends stream mode)
-    reg_spimaster_config = 0x3002;	// Apply stream mode
-    reg_spimaster_data = 0x03;		// Write 0x03 (read mode)
-    reg_spimaster_data = 0x00;		// Write 0x00 (start address low byte)
-    reg_spimaster_data = 0x00;		// Write 0x00 (start address middle byte)
-    reg_spimaster_data = 0x08;		// Write 0x08 (start address high byte)
+    reg_spimaster_cs = 0x0000;  // release CS
+    reg_spimaster_cs = 0x10001;  // sel=0, manual CS
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+    spi_write(0x03);        // Write 0x03 (read mode)
+    spi_write(0x00);        // Write 0x00 (start address high byte)
+    spi_write(0x00);        // Write 0x00 (start address middle byte)
+    spi_write(0x08);        // Write 0x08 (start address low byte)
+
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA0440000 | (value << 8);	// 0x13
+    reg_la0_data = 0xA0440000 | (value << 8);	// 0x13
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA0450000 | (value << 8);	// 0x02
+    reg_la0_data = 0xA0450000 | (value << 8);	// 0x02
 
-    reg_spimaster_config = 0x2102;	// Release CSB (ends stream mode)
-    reg_spimaster_config = 0x3002;	// Apply stream mode
-    reg_spimaster_data = 0x03;		// Write 0x03 (read mode)
-    reg_spimaster_data = 0x00;		// Write 0x00 (start address high byte)
-    reg_spimaster_data = 0x00;		// Write 0x00 (start address middle byte)
-    reg_spimaster_data = 0xa0;		// Write 0xa0 (start address low byte)
+    reg_spimaster_cs = 0x0000;  // release CS
+    reg_spimaster_cs = 0x10001;  // sel=0, manual CS
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+    spi_write(0x03);        // Write 0x03 (read mode)
+    spi_write(0x00);        // Write 0x00 (start address high byte)
+    spi_write(0x00);        // Write 0x00 (start address middle byte)
+    spi_write(0x0a);        // Write 0x0a (start address low byte)
+
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA0460000 | (value << 8);	// 0x63
+    reg_la0_data = 0xA0460000 | (value << 8);	// 0x63
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA0470000 | (value << 8);	// 0x57
+    reg_la0_data = 0xA0470000 | (value << 8);	// 0x57
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA0480000 | (value << 8);	// 0xb5
+    reg_la0_data = 0xA0480000 | (value << 8);	// 0xb5
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA0490000 | (value << 8);	// 0x00
+    reg_la0_data = 0xA0490000 | (value << 8);	// 0x00
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA04a0000 | (value << 8);	// 0x23
+    reg_la0_data = 0xA04a0000 | (value << 8);	// 0x23
 
-    reg_spimaster_data = 0x00;		// Write 0x00 for read
-    value = reg_spimaster_data;		// Read back byte
+    value = spi_read();
+
     // Write checkpoint
-    reg_mprj_datal = 0xA04b0000 | (value << 8);	// 0x20
+    reg_la0_data = 0xA04b0000 | (value << 8);	// 0x20
 
-    reg_spimaster_config = 0x2102;	// Release CSB (ends stream mode)
-    reg_spimaster_config = 0x0002;	// Disable the SPI master
+    reg_spimaster_cs = 0x0000;  // release CS
+    reg_spimaster_cs = 0x10001;  // sel=0, manual CS
 
     // End test
-    reg_mprj_datal = 0xA0900000;
+    reg_la0_data = 0xA0900000;
+
 }
 

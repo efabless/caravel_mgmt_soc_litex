@@ -155,19 +155,25 @@ extern uint32_t flashio_worker_end;
 #define TIMER_IRQ_ENABLE	0x10
 
 // SPI Master Configuration
-#define reg_spimaster_config (*(volatile uint32_t*)0x24000000)
-#define reg_spimaster_data   (*(volatile uint32_t*)0x24000004)
+//#define reg_spimaster_config (*(volatile uint32_t*) 0x24000000)
+#define reg_spimaster_control (*(volatile uint32_t*) CSR_SPI_MASTER_CONTROL_ADDR)
+#define reg_spimaster_status (*(volatile uint32_t*) CSR_SPI_MASTER_STATUS_ADDR)
+//#define reg_spimaster_data   (*(volatile uint32_t*) 0x24000004)
+#define reg_spimaster_wdata   (*(volatile uint32_t*) CSR_SPI_MASTER_MOSI_ADDR)
+#define reg_spimaster_rdata   (*(volatile uint32_t*) CSR_SPI_MASTER_MISO_ADDR)
+#define reg_spimaster_cs   (*(volatile uint32_t*) CSR_SPI_MASTER_CS_ADDR)
+#define reg_spimaster_clk_divider   (*(volatile uint32_t*) CSR_SPI_MASTER_CLK_DIVIDER_ADDR)
 
 // Bit fields for SPI master configuration
-#define SPI_MASTER_DIV_MASK	0x00ff
-#define SPI_MASTER_MLB		0x0100
-#define SPI_MASTER_INV_CSB	0x0200
-#define SPI_MASTER_INV_CLK	0x0400
-#define SPI_MASTER_MODE_1	0x0800
-#define SPI_MASTER_STREAM	0x1000
-#define SPI_MASTER_ENABLE	0x2000
-#define SPI_MASTER_IRQ_ENABLE	0x4000
-#define SPI_HOUSEKEEPING_CONN	0x8000
+//#define SPI_MASTER_DIV_MASK	0x00ff
+//#define SPI_MASTER_MLB		0x0100
+//#define SPI_MASTER_INV_CSB	0x0200
+//#define SPI_MASTER_INV_CLK	0x0400
+//#define SPI_MASTER_MODE_1	0x0800
+//#define SPI_MASTER_STREAM	0x1000
+//#define SPI_MASTER_ENABLE	0x2000
+//#define SPI_MASTER_IRQ_ENABLE	0x4000
+//#define SPI_HOUSEKEEPING_CONN	0x8000
 
 // System Area (0x2F00_0000)
 #define reg_power_good    (*(volatile uint32_t*)0x2F000000)
