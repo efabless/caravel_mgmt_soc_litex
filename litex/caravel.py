@@ -74,6 +74,7 @@ class MGMTSoC(SoCMini):
                          integrated_sram_size=0,
                          integrated_rom_size=0,
                          with_uart=True,
+                         uart_baudrate=9600,
                          # with_timer=True,
                          **kwargs)
 

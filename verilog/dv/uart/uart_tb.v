@@ -63,7 +63,7 @@ module uart_tb;
 		$dumpvars(0, uart_tb);
 
 		$display("Wait for UART o/p");
-		repeat (150) begin
+		repeat (450) begin
 			repeat (1000) @(posedge core_clk);
 			// Diagnostic. . . interrupts output pattern.
 		end
@@ -97,14 +97,14 @@ module uart_tb;
 		if(checkbits == 16'hA000) begin
 			$display("UART Test started");
 		end
-//		else if(checkbits == 16'hAB00) begin
-//			`ifdef GL
-//				$display("UART Test (GL) passed");
-//			`else
-//				$display("UART Test (RTL) passed");
-//			`endif
-//			$finish;
-//		end
+		else if(checkbits == 16'hAB00) begin
+			`ifdef GL
+				$display("UART Test (GL) passed");
+			`else
+				$display("UART Test (RTL) passed");
+			`endif
+			$finish;
+		end
 	end
 
 	wire VDD3V3;
