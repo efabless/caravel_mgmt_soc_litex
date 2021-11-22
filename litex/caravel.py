@@ -48,75 +48,98 @@ class MGMTSoC(SoCMini):
     #     "csr":              0x20000000,
     # }
 
+
     def __init__(self, sys_clk_freq=int(10e6), **kwargs ):
+
+        # cpu = 'picorv32'
+        # cpu = 'ibex'
+        cpu = 'vexrisc'
 
         platform = Platform("mgmt_soc")
 
         # CRG --------------------------------------------------------------------------------------
         self.submodules.crg = CRG(platform.request("core_clk"), rst=platform.request("core_rst"))
 
-        # SoCMini.mem_map = {
-        #     "dff": 0x00000000,
-        #     "sram": 0x01000000,
-        #     "flash": 0x10000000,
-        #     "mprj": 0x30000000,
-        #     "hk": 0x26000000,
-        #     "csr": 0x20000000,
-        # }
+        if cpu == 'vexrisc':
+            SoCMini.__init__(self, platform,
+                             clk_freq=sys_clk_freq,
+                             cpu_type="vexriscv",
+                             cpu_variant="minimal+debug",
+                             # cpu_reset_address=self.mem_map["flash"],
+                             cpu_reset_address=0x10000000,
+                             csr_data_width=32,
+                             integrated_sram_size=0,
+                             integrated_rom_size=0,
+                             with_uart=True,
+                             uart_baudrate=9600,
+                             uart_name="serial",
+                             with_timer=True,
+                             **kwargs)
 
-        SoCMini.__init__(self, platform,
-                         clk_freq=sys_clk_freq,
-                         cpu_type="vexriscv",
-                         cpu_variant="minimal+debug",
-                         # cpu_reset_address=self.mem_map["flash"],
-                         cpu_reset_address=0x10000000,
-                         # csr_data_width=32,
-                         integrated_sram_size=0,
-                         integrated_rom_size=0,
-                         with_uart=True,
-                         uart_baudrate=9600,
-                         # with_timer=True,
-                         **kwargs)
-
-        self.mem_map = {
-            "dff": 0x00000000,
-            "sram": 0x01000000,
-            "flash": 0x10000000,
-            "mprj": 0x30000000,
-            "hk": 0x26000000,
-            # "csr": 0x20000000,
-            "csr": 0xf0000000,
-        }
+            self.mem_map = {
+                "dff": 0x00000000,
+                "sram": 0x01000000,
+                "flash": 0x10000000,
+                "mprj": 0x30000000,
+                "hk": 0x26000000,
+                # "csr": 0x20000000,
+                "csr": 0xf0000000,
+            }
 
         # self.cpu.cpu_reset_address = self.mem_map["flash"]
+        elif cpu == 'ibex':
+            self.mem_map = {
+                "dff": 0x00000000,
+                "sram": 0x01000000,
+                "flash": 0x10000000,
+                "mprj": 0x30000000,
+                "hk": 0x26000000,
+                "csr": 0x20000000,
+                # "csr": 0xf0000000,
+            }
+            SoCMini.__init__(self, platform,
+                             clk_freq=sys_clk_freq,
+                             cpu_type="ibex",
+                             cpu_variant="standard",
+                             cpu_reset_address=self.mem_map["flash"],
+                             csr_data_width=32,
+                             integrated_sram_size=0,
+                             integrated_rom_size=0,
+                             with_uart=True,
+                             uart_baudrate=9600,
+                             uart_name="serial",
+                             with_timer=True,
+                             **kwargs)
 
-        # SoCMini.__init__(self, platform,
-        #                  clk_freq=sys_clk_freq,
-        #                  cpu_type="ibex",
-        #                  cpu_variant="standard",
-        #                  cpu_reset_address=self.mem_map["flash"],
-        #                  csr_data_width=32,
-        #                  integrated_sram_size=0,
-        #                  integrated_rom_size=0,
-        #                  with_uart=True,
-        #                  uart_name="serial",
-        #                  # with_timer=True,
-        #                  **kwargs)
-        #
-        # self.cpu.cpu_params["p_RegFile"] = 0  # Reg File = FlipFlop
+            self.cpu.cpu_params["p_RegFile"] = 0  # Reg File = FlipFlop
 
-        # SoCMini.__init__(self, platform,
-        #                  clk_freq=sys_clk_freq,
-        #                  cpu_type="picorv32",
-        #                  cpu_variant="minimal",
-        #                  cpu_reset_address=self.mem_map["flash"],
-        #                  csr_data_width=32,
-        #                  integrated_sram_size=0,
-        #                  integrated_rom_size=0,
-        #                  with_uart=True,
-        #                  uart_name="serial",
-        #                  # with_timer=True,
-        #                  **kwargs)
+        elif cpu == 'picorv32':
+            self.mem_map = {
+                "dff": 0x00000000,
+                "sram": 0x01000000,
+                "flash": 0x10000000,
+                "mprj": 0x30000000,
+                "hk": 0x26000000,
+                "csr": 0x20000000,
+                # "csr": 0xf0000000,
+            }
+            SoCMini.__init__(self, platform,
+                             clk_freq=sys_clk_freq,
+                             cpu_type="picorv32",
+                             cpu_variant="minimal",
+                             cpu_reset_address=self.mem_map["flash"],
+                             csr_data_width=32,
+                             integrated_sram_size=0,
+                             integrated_rom_size=0,
+                             with_uart=True,
+                             uart_baudrate=9600,
+                             uart_name="serial",
+                             with_timer=True,
+                             **kwargs)
+
+        else:
+            print("ERROR - cpu value not recognized")
+            exit()
 
         #DFFRAM
         dff_size = 1 * 1024
@@ -179,22 +202,12 @@ class MGMTSoC(SoCMini):
         self.comb += hk.dat_r.eq(hk_ports.dat_i)
         self.comb += hk.ack.eq(hk_ports.ack_i)
 
-        # Add ROM linker region --------------------------------------------------------------------
-        # self.bus.add_region("rom", SoCRegion(
-        #     origin = self.mem_map["flash"],
-        #     size   = 8*1024*1024,
-        #     linker = True)
-        # )
-
-        # Add Debug Interface (UART)
         debug_ports = platform.request("debug")
-        self.submodules.debug = UARTWishboneBridge(debug_ports, sys_clk_freq, baudrate=115200)
-        self.add_wb_master(self.debug.wishbone)
-        self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)  #TODO add logic for this
-
-        # self.submodules.wb_uart = UARTWishboneBridge(platform.request("ser"), sys_clk_freq, baudrate=115200)
-        # self.add_csr("ser")
-        # self.add_uart("ser2")
+        if cpu == 'picorv32' or cpu == 'ibex':
+            # Add Debug Interface (UART)
+            self.submodules.debug = UARTWishboneBridge(debug_ports, sys_clk_freq, baudrate=115200)
+            self.add_wb_master(self.debug.wishbone)
+            self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)  #TODO add logic for this
 
         # Add a GPIO Pin
         self.submodules.gpio = GPIOASIC(platform.request("gpio"))
@@ -210,7 +223,8 @@ class MGMTSoC(SoCMini):
         self.submodules.debug_mode = GPIOOut(platform.request("debug_mode"))
 
         trap = platform.request("trap")
-        # self.comb += trap.eq(self.cpu.trap)
+        if cpu == 'picorv32':
+            self.comb += trap.eq(self.cpu.trap)
 
         self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
 

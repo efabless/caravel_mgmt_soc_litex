@@ -24,18 +24,15 @@
 
 `timescale 1 ns / 1 ps
 
-`include "defines.v"
-`include "sky130_sram_2kbyte_1rw1r_32x512_8.v"
-//`include "picorv32.v"
-//`include "ibex_top.v"
+`include "__uprj_netlists.v"
+`include "caravel_netlists.v"
 `include "spiflash.v"
-`include "mgmt_core_wrapper.v"
 
-module gpio_mgmt_tb;
+module timer_tb;
 
+	reg RSTB;
 	reg clock;
-	reg power1;
-	reg power2;
+	reg power1, power2;
 
 	always #10 clock <= (clock === 1'b0);
 
@@ -44,33 +41,32 @@ module gpio_mgmt_tb;
 	end
 
 	initial begin
-		$dumpfile("gpio_mgmt.vcd");
-		$dumpvars(0, gpio_mgmt_tb);
+		$dumpfile("timer.vcd");
+		$dumpvars(0, timer_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (100) begin
+		repeat (50) begin
 			repeat (1000) @(posedge clock);
 			$display("+1000 cycles");
 		end
 		$display("%c[1;31m",27);
 		`ifdef GL
-			$display ("Monitor: Timeout, Test Mgmt GPIO (GL) Failed");
+			$display ("Monitor: Timeout, Test GPIO (GL) Failed");
 		`else
-			$display ("Monitor: Timeout, Test Mgmt GPIO (RTL) Failed");
+			$display ("Monitor: Timeout, Test GPIO (RTL) Failed");
 		`endif
-		$display("%c[0m",27);
+		 $display("%c[0m",27);
 		$finish;
 	end
 
-	wire [37:0] la_output;	// Most of these are no-connects
-	wire [15:0] checkbits;
-	reg  [7:0] checkbits_lo;
-	wire [7:0] checkbits_hi;
+	wire [37:0] mprj_io;	// Most of these are no-connects
+	wire [5:0] checkbits;
+	wire [31:0] countbits;
 
-	assign la_output[23:16] = checkbits_lo;
-	assign checkbits = la_output[31:16];
-	assign checkbits_hi = checkbits[15:8];
-	assign la_output[3] = 1'b1;       // Force CSB high.
+	assign checkbits = mprj_io[37:32];
+	assign countbits = mprj_io[31:0];
+
+	assign mprj_io[3] = 1'b1;  // Force CSB high.
 
 	wire flash_csb;
 	wire flash_clk;
@@ -78,57 +74,61 @@ module gpio_mgmt_tb;
 	wire flash_io1;
 	wire gpio;
 
-	reg RSTB;
-
 	// Monitor
 	initial begin
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
+		wait(checkbits == 6'h0a);
 		`ifdef GL
-			$display("Monitor: Test Mgmt GPIO (GL) Passed");
-		`else
-			$display("Monitor: Test Mgmt GPIO (RTL) Passed");
+			$display("Monitor: Test Timer (GL) Started");
+		`else 
+			$display("Monitor: Test Timer (RTL) Started");
 		`endif
-		#2000;
+		/* Add checks here */
+		wait(checkbits == 6'h01);
+		$display("   countbits = 0x%x (should be 0xdcba7cfb)", countbits);
+		if(countbits !== 32'hdcba7cfb) begin
+		    $display("Monitor: Test Timer Failed");
+		    $finish;
+		end
+		wait(checkbits == 6'h02);
+		$display("   countbits = 0x%x (should be 0x19)", countbits);
+		if(countbits !== 32'h19) begin
+		    $display("Monitor: Test Timer Failed");
+		    $finish;
+		end
+		wait(checkbits == 6'h03);
+		$display("   countbits = %x (should be 0x0f)", countbits);
+		if(countbits !== ((32'h0f) | (3'b100))) begin
+		    $display("Monitor: Test Timer Failed");
+		    $finish;
+		end
+		wait(checkbits == 6'h04);
+		$display("   countbits = %x (should be 0x0f)", countbits);
+		if(countbits !== ((32'h0f) | (3'b100))) begin
+		    $display("Monitor: Test Timer Failed");
+		    $finish;
+		end
+		wait(checkbits == 6'h05);
+		$display("   countbits = %x (should be 0x12bc)", countbits);
+		if(countbits !== 32'h12bc) begin
+		    $display("Monitor: Test Timer Failed");
+		    $finish;
+		end
+		
+		`ifdef GL
+			$display("Monitor: Test Timer (GL) Passed");
+		`else
+			$display("Monitor: Test Timer (RTL) Passed");
+		`endif
 		$finish;
 	end
 
 	initial begin
 		RSTB <= 1'b0;
-		
 		#1000;
 		RSTB <= 1'b1;	    // Release reset
-		#2000;
 	end
 
-	initial begin			// Power-up
+	initial begin		// Power-up sequence
 		power1 <= 1'b0;
 		power2 <= 1'b0;
 		#200;
@@ -136,11 +136,9 @@ module gpio_mgmt_tb;
 		#200;
 		power2 <= 1'b1;
 	end
-		
 
 	always @(checkbits) begin
-		#1 $display("Mgmt GPIO state = %b (%d - %d)", checkbits,
-				checkbits_hi, checkbits_lo);
+		#1 $display("Timer state = %b (%d)", countbits, countbits);
 	end
 
 	wire VDD3V3;
@@ -163,25 +161,33 @@ module gpio_mgmt_tb;
 	// ser_tx    = mgmt_gpio_io[6]              (output)
 	// irq       = mgmt_gpio_io[7]              (input)
 
-	mgmt_core_wrapper uut (
-		.core_clk	  (clock),
-		.core_rstn	  (RSTB),
-		.gpio_out_pad     (gpio),
-//		.mprj_io  (mprj_io),
-		.la_output (la_output),
+	caravel uut (
+		.vddio	  (VDD3V3),
+		.vssio	  (VSS),
+		.vdda	  (VDD3V3),
+		.vssa	  (VSS),
+		.vccd	  (VDD1V8),
+		.vssd	  (VSS),
+		.vdda1    (VDD3V3),
+		.vdda2    (VDD3V3),
+		.vssa1	  (VSS),
+		.vssa2	  (VSS),
+		.vccd1	  (VDD1V8),
+		.vccd2	  (VDD1V8),
+		.vssd1	  (VSS),
+		.vssd2	  (VSS),
+		.clock	  (clock),
+		.gpio     (gpio),
+		.mprj_io  (mprj_io),
 		.flash_csb(flash_csb),
 		.flash_clk(flash_clk),
-		.flash_io0_oeb(),
-		.flash_io0_do(flash_io0),
-		.flash_io1_di(flash_io1),
-		.mprj_dat_i(32'b0),
-		.mprj_ack_i(1'b0),
-        .hk_dat_i(32'b0),
-		.hk_ack_i(1'b0)
+		.flash_io0(flash_io0),
+		.flash_io1(flash_io1),
+		.resetb	  (RSTB)
 	);
 
 	spiflash #(
-		.FILENAME("gpio_mgmt.hex")
+		.FILENAME("timer.hex")
 	) spiflash (
 		.csb(flash_csb),
 		.clk(flash_clk),

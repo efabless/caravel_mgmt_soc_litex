@@ -20,7 +20,6 @@ Register Groups
 
     ctrl
     debug_mode
-    debug_oeb
     flash_core
     flash_phy
     gpio
@@ -29,6 +28,7 @@ Register Groups
     qspi_enabled
     spi_enabled
     spi_master
+    timer0
     uart
     uart_enabled
     user_irq_0
