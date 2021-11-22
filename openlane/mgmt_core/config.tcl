@@ -24,10 +24,14 @@ set ::env(DESIGN_IS_CORE) 1
 
 set ::env(RUN_KLAYOUT) 0
 
-set ::env(CLOCK_PORT) "clk"
-set ::env(CLOCK_NET) "clk"
+set ::env(CLOCK_PORT) "core_clk"
+set ::env(CLOCK_NET) "core_clk"
 set ::env(CLOCK_PERIOD) "25"
 
+## CTS
+set ::env(CTS_CLK_BUFFER_LIST) "sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_16"
+
+## SYNTH
 set ::env(SYNTH_STRATEGY) "DELAY 1"
 set ::env(SYNTH_MAX_FANOUT) 6
 set ::env(SYNTH_READ_BLACKBOX_LIB) 1
@@ -63,22 +67,35 @@ set ::env(GLB_RT_OVERFLOW_ITERS) 200
 set ::env(DIODE_INSERTION_STRATEGY) 4
 
 set ::env(VERILOG_FILES) "\
-	$script_dir/../../verilog/rtl/defines.v\
-	$script_dir/../../verilog/rtl/mgmt_core.v"\
-	$script_dir/../../verilog/dv/VexRisc_MinDebug.v"
+ 	$script_dir/../../verilog/rtl/defines.v \
+  	$script_dir/../../verilog/rtl/mgmt_core.v \
+	$script_dir/../../verilog/rtl/picorv32.v \
+	$script_dir/../../verilog/rtl/ibex_all.v \
+ 	$script_dir/../../verilog/rtl/VexRiscv_MinDebug.v"
+
+##	$script_dir/../../verilog/rtl/VexRiscv.v"
+
 
 set ::env(VERILOG_FILES_BLACKBOX) "\
-	$script_dir/../../verilog/rtl/defines.v\
-	$::env(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/verilog/sky130_sram_1kbyte_1rw1r_32x256_8.v"
+	$::env(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/verilog/sky130_sram_2kbyte_1rw1r_32x512_8.v"
 
 set ::env(EXTRA_LEFS) "\
-	$::env(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lef/sky130_sram_1kbyte_1rw1r_32x256_8.lef"
+	$::env(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lef/sky130_sram_2kbyte_1rw1r_32x512_8.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
-	$::env(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/gds/sky130_sram_1kbyte_1rw1r_32x256_8.gds"
+	$::env(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/gds/sky130_sram_2kbyte_1rw1r_32x512_8.gds"
 
 set ::env(EXTRA_LIBS) "\
-	$::env(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lib/sky130_sram_1kbyte_1rw1r_32x256_8.lib"
+	$::env(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib"
 
-set ::env(PL_RESIZER_MAX_SLEW_MARGIN) 0
-set ::env(PL_RESIZER_MAX_CAP_MARGIN) 0
+
+## SET BELOW TO 0 TO AVOID OR SEGFAULT
+set ::env(STA_REPORT_POWER) 0
+
+## DO NOT QUIT ON THESE UNTIL LATER
+set ::env(MAGIC_DRC_USE_GDS) 0
+set ::env(QUIT_ON_MAGIC_DRC) 0
+set ::env(QUIT_ON_TIMING_VIOLATIONS) 0
+set ::env(QUIT_ON_HOLD_VIOLATIONS) 0
+set ::env(QUIT_ON_SETUP_VIOLATIONS) 0
+set ::env(QUIT_ON_TR_DRC) 0
