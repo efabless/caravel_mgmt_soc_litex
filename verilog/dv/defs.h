@@ -42,6 +42,12 @@ extern uint32_t flashio_worker_end;
 #define reg_uart_txfull   (*(volatile uint32_t*) CSR_UART_TXFULL_ADDR)
 #define reg_uart_enable (*(volatile uint32_t*) CSR_UART_ENABLED_OUT_ADDR)
 
+// DEBUG (0x2000_0000)
+//#define reg_uart_clkdiv (*(volatile uint32_t*)0x20000000)
+#define reg_debug_data   (*(volatile uint32_t*) CSR_DEBUG_RXTX_ADDR)
+#define reg_debug_txfull   (*(volatile uint32_t*) CSR_DEBUG_TXFULL_ADDR)
+//#define reg_debug_enable (*(volatile uint32_t*) CSR_UART_ENABLED_OUT_ADDR)
+
 // GPIO (0x2100_0000)
 #define reg_gpio_mode1  (*(volatile uint32_t*) CSR_GPIO_MODE1_ADDR)
 #define reg_gpio_mode0  (*(volatile uint32_t*) CSR_GPIO_MODE0_ADDR)
@@ -143,6 +149,7 @@ extern uint32_t flashio_worker_end;
 #define reg_timer0_update  (*(volatile uint32_t*) CSR_TIMER0_UPDATE_VALUE_ADDR)
 #define reg_timer0_value  (*(volatile uint32_t*) CSR_TIMER0_VALUE_ADDR)
 #define reg_timer0_data   (*(volatile uint32_t*) CSR_TIMER0_LOAD_ADDR)
+#define reg_timer0_irq_en   (*(volatile uint32_t*) CSR_TIMER0_EV_ENABLE_ADDR)
 
 // Counter-Timer 1 Configuration
 #define reg_timer1_config (*(volatile uint32_t*)0x23000000)

@@ -18,7 +18,7 @@ from litex.soc.integration.doc import AutoDoc
 from litex.soc.integration.soc import SoCRegion
 from litex.soc.integration.soc_core import *
 from litex.build.generic_platform import *
-from litex.soc.cores.uart import UARTWishboneBridge
+from litex.soc.cores.uart import UARTWishboneBridge, UART, RS232PHY
 from litex.soc.cores.gpio import *
 from GPIOASIC import *
 from litex.soc.cores.spi import SPIMaster, SPISlave
@@ -53,14 +53,14 @@ class MGMTSoC(SoCMini):
 
         # cpu = 'picorv32'
         # cpu = 'ibex'
-        cpu = 'vexrisc'
+        cpu = 'vexriscv'
 
         platform = Platform("mgmt_soc")
 
         # CRG --------------------------------------------------------------------------------------
         self.submodules.crg = CRG(platform.request("core_clk"), rst=platform.request("core_rst"))
 
-        if cpu == 'vexrisc':
+        if cpu == 'vexriscv':
             SoCMini.__init__(self, platform,
                              clk_freq=sys_clk_freq,
                              cpu_type="vexriscv",
@@ -84,6 +84,7 @@ class MGMTSoC(SoCMini):
                 "hk": 0x26000000,
                 # "csr": 0x20000000,
                 "csr": 0xf0000000,
+                "vexriscv_debug": 0xf00f0000
             }
 
         # self.cpu.cpu_reset_address = self.mem_map["flash"]
@@ -202,12 +203,12 @@ class MGMTSoC(SoCMini):
         self.comb += hk.dat_r.eq(hk_ports.dat_i)
         self.comb += hk.ack.eq(hk_ports.ack_i)
 
+        # Add Debug Interface (UART)
         debug_ports = platform.request("debug")
-        if cpu == 'picorv32' or cpu == 'ibex':
-            # Add Debug Interface (UART)
-            self.submodules.debug = UARTWishboneBridge(debug_ports, sys_clk_freq, baudrate=115200)
-            self.add_wb_master(self.debug.wishbone)
-            self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)  #TODO add logic for this
+        self.submodules.debug = UARTWishboneBridge(debug_ports, sys_clk_freq, baudrate=115200)
+        self.add_wb_master(self.debug.wishbone)
+        self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)  #TODO add logic for this
+
 
         # Add a GPIO Pin
         self.submodules.gpio = GPIOASIC(platform.request("gpio"))

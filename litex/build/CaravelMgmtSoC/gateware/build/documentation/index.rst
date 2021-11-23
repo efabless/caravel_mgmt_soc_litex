@@ -20,6 +20,7 @@ Register Groups
 
     ctrl
     debug_mode
+    debug_oeb
     flash_core
     flash_phy
     gpio

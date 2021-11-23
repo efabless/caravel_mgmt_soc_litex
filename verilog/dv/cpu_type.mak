@@ -13,8 +13,10 @@ ifeq ($(CPU),ibex)
 endif
 
 ifeq ($(CPU),vexriscv)
-	LINK_SCRIPT=$(FIRMWARE_PATH)/sections_vexriscv.lds
-	SOURCE_FILES=$(FIRMWARE_PATH)/start_caravel_vexriscv.s
+# 	LINK_SCRIPT=$(FIRMWARE_PATH)/sections_vexriscv.lds
+	LINK_SCRIPT=$(FIRMWARE_PATH)/sections.lds
+# 	SOURCE_FILES=$(FIRMWARE_PATH)/start_caravel_vexriscv.s
+	SOURCE_FILES=$(FIRMWARE_PATH)/crt0_vex.S $(FIRMWARE_PATH)/isr.c
 	VERILOG_FILES=
 endif
 
