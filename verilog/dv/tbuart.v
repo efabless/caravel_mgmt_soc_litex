@@ -31,7 +31,8 @@
 /* pins on a Raspberry Pi, also running at 3.3V.			*/
 
 module tbuart (
-	input  ser_rx
+	input  ser_rx,
+	output  ser_tx
 );
 	reg [3:0] recv_state;
 	reg [2:0] recv_divcnt;

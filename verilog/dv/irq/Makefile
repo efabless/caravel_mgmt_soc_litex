@@ -33,7 +33,7 @@ SIM?=RTL
 
 .SUFFIXES:
 
-PATTERN = spi_master
+PATTERN = irq
 
 all:  ${PATTERN:=.vcd} ${PATTERN:=.lst}
 
@@ -83,10 +83,10 @@ endif
 ifeq (,$(wildcard $(PDK_ROOT)/sky130A/libs.ref/*/verilog))
 SIM_DEFINES := ${SIM_DEFINES} -DEF_STYLE
 endif
+
 # ---- Clean ----
 
 clean:
-	rm -f *.elf spi_master.hex spi_master.hexe *.bin *.vvp *.vcd *.log
+	rm -f *.elf *.hex *.bin *.vvp *.vcd *.log
 
 .PHONY: clean hex all
-

@@ -14,6 +14,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+include ../cpu_type.mak
+
 PDK_PATH = $(PDK_ROOT)/sky130A
 VERILOG_PATH = ../..
 RTL_PATH = $(VERILOG_PATH)/rtl
@@ -37,13 +39,12 @@ all:  ${PATTERN:=.vcd} ${PATTERN:=.lst}
 
 hex:  ${PATTERN:=.hex}
 
-#%.vvp: %_tb.v %.hex $(RTL_PATH)/mgmt_soc.v $(BEHAVIOURAL_MODELS)picorv32.v $(BEHAVIOURAL_MODELS)spiflash.v $(BEHAVIOURAL_MODELS)sram_1rw1r_32_256_8_sky130.v
 %.vvp: %_tb.v %.hex
 ifeq ($(SIM),RTL)
 	iverilog -Ttyp $(SIM_DEFINES) \
 	-I $(BEHAVIOURAL_MODELS) \
 	-I $(PDK_PATH) -I $(RTL_PATH) \
-	-o $@ $<
+	-o $@ $(VERILOG_FILES) $<
 else
 	iverilog -Ttyp $(SIM_DEFINES) -DGL -I $(BEHAVIOURAL_MODELS) \
 	-I $(PDK_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) \
@@ -53,8 +54,9 @@ endif
 %.vcd: %.vvp
 	vvp $<
 
-%.elf: %.c $(FIRMWARE_PATH)/sections.lds $(FIRMWARE_PATH)/start.S check-env
-	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated -march=rv32i -mabi=ilp32 -Wl,-Bstatic,-T,$(FIRMWARE_PATH)/sections.lds,--strip-debug -ffreestanding -nostdlib -mstrict-align -mno-save-restore -D__picorv32__ -o $@ $(FIRMWARE_PATH)/start.S $(FIRMWARE_PATH)/isr.c $<
+%.elf: %.c
+	@echo CPU=$(CPU)
+	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated $(CPUFLAGS) -Wl,-Bstatic,-T,$(LINK_SCRIPT),--strip-debug -ffreestanding -nostdlib -mstrict-align -o $@ $(SOURCE_FILES) $<
 
 %.hex: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@

@@ -2,10 +2,10 @@
 /*
  *  SPDX-FileCopyrightText: 2017  Clifford Wolf, 2018  Tim Edwards
  *
- *  StriVe - A full example SoC using PicoRV32 in SkyWater s8
+ *  Caravel - A full example SoC using PicoRV32 in SkyWater sky130
  *
  *  Copyright (C) 2017  Clifford Wolf <clifford@clifford.at>
- *  Copyright (C) 2018  Tim Edwards <tim@efabless.com>
+ *  Copyright (C) 2021  Tim Edwards <tim@efabless.com>
  *
  *  Permission to use, copy, modify, and/or distribute this software for any
  *  purpose with or without fee is hereby granted, provided that the above
@@ -27,12 +27,11 @@
 `include "defines.v"
 `include "sky130_sram_2kbyte_1rw1r_32x512_8.v"
 `include "picorv32.v"
-//`include "ibex_core.v"
 `include "VexRiscv_MinDebug.v"
 `include "spiflash.v"
 `include "mgmt_core_wrapper.v"
 
-module gpio_mgmt_tb;
+module irq_tb;
 
 	reg clock;
 	reg power1;
@@ -45,33 +44,31 @@ module gpio_mgmt_tb;
 	end
 
 	initial begin
-		$dumpfile("gpio_mgmt.vcd");
-		$dumpvars(0, gpio_mgmt_tb);
-
+		$dumpfile("irq.vcd");
+		$dumpvars(0, irq_tb);
+		
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (100) begin
+		repeat (50) begin
 			repeat (1000) @(posedge clock);
 			$display("+1000 cycles");
 		end
 		$display("%c[1;31m",27);
 		`ifdef GL
-			$display ("Monitor: Timeout, Test Mgmt GPIO (GL) Failed");
+			$display ("Monitor: Timeout, Test IRQ (GL) Failed");
 		`else
-			$display ("Monitor: Timeout, Test Mgmt GPIO (RTL) Failed");
+			$display ("Monitor: Timeout, Test IRQ (RTL) Failed");
 		`endif
 		$display("%c[0m",27);
 		$finish;
 	end
 
 	wire [37:0] la_output;	// Most of these are no-connects
-	wire [15:0] checkbits;
-	reg  [7:0] checkbits_lo;
-	wire [7:0] checkbits_hi;
+	wire [3:0]  status;
+	wire [3:0] checkbits;
 
-	assign la_output[23:16] = checkbits_lo;
-	assign checkbits = la_output[31:16];
-	assign checkbits_hi = checkbits[15:8];
-	assign la_output[3] = 1'b1;       // Force CSB high.
+	assign checkbits = la_output[19:16];
+	assign status = la_output[35:32];
+//	assign mprj_io[3] = 1'b1;	// Force CSB high.
 
 	wire flash_csb;
 	wire flash_clk;
@@ -83,49 +80,26 @@ module gpio_mgmt_tb;
 
 	// Monitor
 	initial begin
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
-		$display("Blink.");
-		wait(gpio == 1'b1);
-		wait(gpio == 1'b0);
+		wait(status == 4'h5);
 		`ifdef GL
-			$display("Monitor: Test Mgmt GPIO (GL) Passed");
+			$display("Monitor: Test IRQ (GL) Started");
 		`else
-			$display("Monitor: Test Mgmt GPIO (RTL) Passed");
+			$display("Monitor: Test IRQ (RTL) Started");
 		`endif
-		#2000;
+		wait(status == 4'ha);
+		wait(status == 4'hc);
+		`ifdef GL
+			$display("Monitor: Test IRQ (GL) Passed");
+		`else
+			$display("Monitor: Test IRQ (RTL) Passed");
+		`endif
 		$finish;
 	end
 
 	initial begin
 		RSTB <= 1'b0;
-		
 		#1000;
-		RSTB <= 1'b1;	    // Release reset
+		RSTB <= 1'b1;		// Release reset
 		#2000;
 	end
 
@@ -137,11 +111,9 @@ module gpio_mgmt_tb;
 		#200;
 		power2 <= 1'b1;
 	end
-		
-
-	always @(checkbits) begin
-		#1 $display("Mgmt GPIO state = %b (%d - %d)", checkbits,
-				checkbits_hi, checkbits_lo);
+               
+	always @(checkbits, status) begin
+		#1 $display("GPIO state = %b (%b)", checkbits, status);
 	end
 
 	wire VDD3V3;
@@ -172,17 +144,17 @@ module gpio_mgmt_tb;
 		.la_output (la_output),
 		.flash_csb(flash_csb),
 		.flash_clk(flash_clk),
-		.flash_io0_oeb(),
+        .flash_io0_oeb(),
 		.flash_io0_do(flash_io0),
 		.flash_io1_di(flash_io1),
-		.mprj_dat_i(32'b0),
+        .mprj_dat_i(32'b0),
 		.mprj_ack_i(1'b0),
         .hk_dat_i(32'b0),
 		.hk_ack_i(1'b0)
 	);
 
 	spiflash #(
-		.FILENAME("gpio_mgmt.hex")
+		.FILENAME("irq.hex")
 	) spiflash (
 		.csb(flash_csb),
 		.clk(flash_clk),

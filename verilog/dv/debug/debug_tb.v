@@ -26,12 +26,13 @@
 
 `include "defines.v"
 `include "sky130_sram_2kbyte_1rw1r_32x512_8.v"
-`include "picorv32.v"
+//`include "picorv32.v"
 `include "VexRiscv_MinDebug.v"
 `include "spiflash.v"
+`include "tbuart.v"
 `include "mgmt_core_wrapper.v"
 
-module mem_tb;
+module uart_tb;
 	reg core_clk;
 	reg core_rstn;
 	reg power1, power2;
@@ -43,33 +44,35 @@ module mem_tb;
 	wire flash_clk;
 	wire flash_io0;
 	wire flash_io1;
+//	wire [37:0] mprj_io;
+	wire debug_uart_tx;
+	wire debug_uart_rx;
+	wire uart_loopback;
+	wire SDO;
 
 	assign checkbits = la_output[31:16];
+//	assign uart_tx = la_output[6];
 
-	// External clock is used by default.  Make this artificially fast for the
-	// simulation.  Normally this would be a slow clock and the digital PLL
-	// would be the fast clock.
-
-	always #10 core_clk <= (core_clk === 1'b0);
+	always #12.5 core_clk <= (core_clk === 1'b0);
 
 	initial begin
 		core_clk = 0;
 	end
 
 	initial begin
-		$dumpfile("mem.vcd");
-		$dumpvars(0, mem_tb);
+		$dumpfile("uart.vcd");
+		$dumpvars(0, uart_tb);
 
-		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (300) begin
+		$display("Wait for UART o/p");
+		repeat (450) begin
 			repeat (1000) @(posedge core_clk);
-			//$display("+1000 cycles");
+			// Diagnostic. . . interrupts output pattern.
 		end
-		$display("%c[1;31m",27);
+        $display("%c[1;31m",27);
 		`ifdef GL
-			$display ("Monitor: Timeout, Test MEM (GL) Failed");
+			$display ("Monitor: Timeout, Test UART (GL) Failed");
 		`else
-			$display ("Monitor: Timeout, Test MEM (RTL) Failed");
+			$display ("Monitor: Timeout, Test UART (RTL) Failed");
 		`endif
 		$display("%c[0m",27);
 		$finish;
@@ -92,79 +95,28 @@ module mem_tb;
 	end
 
 	always @(checkbits) begin
-		if(checkbits == 16'hA040) begin
-			$display("Mem Test (word rw) started");
+		if(checkbits == 16'hA000) begin
+			$display("UART Test started");
 		end
-		else if(checkbits == 16'hAB40) begin
-			$display("%c[1;31m",27);
+		else if(checkbits == 16'hAB00) begin
 			`ifdef GL
-				$display("Monitor: Test MEM (GL) [word rw] failed");
+				$display("UART Test (GL) passed");
 			`else
-				$display("Monitor: Test MEM (RTL) [word rw] failed");
-			`endif
-			$display("%c[0m",27);
-			$finish;
-		end
-		else if(checkbits == 16'hAB41) begin
-			`ifdef GL
-				$display("Monitor: Test MEM (GL) [word rw]  passed");
-			`else
-				$display("Monitor: Test MEM (RTL) [word rw]  passed");
-			`endif
-		end
-		else if(checkbits == 16'hA020) begin
-			$display("Mem Test (short rw) started");
-		end
-		else if(checkbits == 16'hAB20) begin
-			$display("%c[1;31m",27);
-			`ifdef GL
-				$display("Monitor: Test MEM (GL) [short rw] failed");
-			`else
-				$display("Monitor: Test MEM (RTL) [short rw] failed");
-			`endif
-			$display("%c[0m",27);
-			$finish;
-		end
-		else if(checkbits == 16'hAB21) begin
-			`ifdef GL
-				$display("Monitor: Test MEM (GL) [short rw]  passed");
-			`else
-				$display("Monitor: Test MEM (RTL) [short rw]  passed");
-			`endif
-		end
-		else if(checkbits == 16'hA010) begin
-			$display("Mem Test (byte rw) started");
-		end
-		else if(checkbits == 16'hAB10) begin
-			$display("%c[1;31m",27);
-			`ifdef GL
-				$display("Monitor: Test MEM (GL) [byte rw] failed");
-			`else
-				$display("Monitor: Test MEM (RTL) [byte rw] failed");
-			`endif
-			$display("%c[0m",27);
-			$finish;
-		end
-		else if(checkbits == 16'hAB11) begin
-			`ifdef GL
-				$display("Monitor: Test MEM (GL) [byte rw] passed");
-			`else
-				$display("Monitor: Test MEM (RTL) [byte rw] passed");
+				$display("UART Test (RTL) passed");
 			`endif
 			$finish;
 		end
-
 	end
 
 	wire VDD3V3;
 	wire VDD1V8;
 	wire VSS;
 
-	assign VSS = 1'b0;
 	assign VDD3V3 = power1;
 	assign VDD1V8 = power2;
-
-//	assign la_output[3] = 1'b1;       // Force CSB high.
+	assign VSS = 1'b0;
+	
+//	assign la_output[3] = 1'b1;  // Force CSB high.
 
 	mgmt_core_wrapper uut (
 		.core_clk	  (core_clk),
@@ -179,11 +131,15 @@ module mem_tb;
         .mprj_dat_i(32'b0),
 		.mprj_ack_i(1'b0),
         .hk_dat_i(32'b0),
-		.hk_ack_i(1'b0)
+		.hk_ack_i(1'b0),
+		.debug_out(debug_uart_tx),
+		.debug_in(debug_uart_rx)
+//		.ser_tx(uart_loopback),
+//		.ser_rx(uart_loopback)
 	);
 
 	spiflash #(
-		.FILENAME("mem.hex")
+		.FILENAME("debug.hex")
 	) spiflash (
 		.csb(flash_csb),
 		.clk(flash_clk),
@@ -193,5 +149,11 @@ module mem_tb;
 		.io3()			// not used
 	);
 
+    // Testbench UART
+	tbuart debug_uart (
+		.ser_rx(debug_uart_tx),
+		.ser_tx(debug_uart_rx)
+	);
+		
 endmodule
 `default_nettype wire

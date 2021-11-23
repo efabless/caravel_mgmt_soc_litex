@@ -1,20 +1,20 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Sun Nov 21 02:18:01 2021
+[*] Tue Nov 23 00:00:41 2021
 [*]
 [dumpfile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/verilog/dv/uart/uart.vcd"
-[dumpfile_mtime] "Sun Nov 21 02:18:01 2021"
-[dumpfile_size] 59629568
+[dumpfile_mtime] "Mon Nov 22 19:52:54 2021"
+[dumpfile_size] 143469526
 [savefile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/verilog/dv/uart/uart.gtkw"
 [timestart] 0
 [size] 1629 900
-[pos] -1 -2
-*-30.940868 6910837500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] -1 -1
+*-31.297081 4827237500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] uart_tb.
 [treeopen] uart_tb.uut.
 [treeopen] uart_tb.uut.core.
 [sst_width] 243
-[signals_width] 485
+[signals_width] 576
 [sst_expanded] 1
 [sst_vpaned_height] 264
 @200

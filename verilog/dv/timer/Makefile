@@ -33,7 +33,7 @@ SIM?=RTL
 
 .SUFFIXES:
 
-PATTERN = spi_master
+PATTERN = timer
 
 all:  ${PATTERN:=.vcd} ${PATTERN:=.lst}
 
@@ -86,7 +86,7 @@ endif
 # ---- Clean ----
 
 clean:
-	rm -f *.elf spi_master.hex spi_master.hexe *.bin *.vvp *.vcd *.log
+	rm -f *.elf *.hex *.bin *.vvp *.vcd *.log
 
 .PHONY: clean hex all
 
