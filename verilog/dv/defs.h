@@ -139,9 +139,10 @@ extern uint32_t flashio_worker_end;
 #define FLASH_ENABLE		0x80000000
 
 // Counter-Timer 0 Configuration
-#define reg_timer0_config (*(volatile uint32_t*)0x22000000)
-#define reg_timer0_value  (*(volatile uint32_t*)0x22000004)
-#define reg_timer0_data   (*(volatile uint32_t*)0x22000008)
+#define reg_timer0_config (*(volatile uint32_t*) CSR_TIMER0_EN_ADDR)
+#define reg_timer0_update  (*(volatile uint32_t*) CSR_TIMER0_UPDATE_VALUE_ADDR)
+#define reg_timer0_value  (*(volatile uint32_t*) CSR_TIMER0_VALUE_ADDR)
+#define reg_timer0_data   (*(volatile uint32_t*) CSR_TIMER0_LOAD_ADDR)
 
 // Counter-Timer 1 Configuration
 #define reg_timer1_config (*(volatile uint32_t*)0x23000000)
