@@ -1,0 +1,24 @@
+OpenROAD b79f266fe41540eabc064bcaddfe19ed715ac5c2 
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ODB-0222] Reading LEF file: /project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/tmp/merged_unpadded.lef
+[WARNING ODB-0220] WARNING (LEFPARS-2036): SOURCE statement is obsolete in version 5.6 and later.
+The LEF parser will ignore this statement.
+To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/tmp/merged_unpadded.lef at line 922.
+
+[INFO ODB-0223]     Created 13 technology layers
+[INFO ODB-0224]     Created 25 technology vias
+[INFO ODB-0225]     Created 442 library cells
+[INFO ODB-0226] Finished LEF file:  /project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/tmp/merged_unpadded.lef
+[INFO ODB-0127] Reading DEF file: /project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/tmp/floorplan/4-ioPlacer.macro_placement.def
+[INFO ODB-0128] Design: mgmt_core
+[INFO ODB-0130]     Created 816 pins.
+[INFO ODB-0131]     Created 19109 components and 141722 component-terminals.
+[INFO ODB-0133]     Created 19421 nets and 65261 connections.
+[INFO ODB-0134] Finished DEF file: /project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/tmp/floorplan/4-ioPlacer.macro_placement.def
+[WARNING TAP-0014] endcap_cpp option is deprecated.
+[INFO TAP-0001] Found 1 macro blocks.
+[INFO TAP-0002] Original rows: 264
+[INFO TAP-0003] Created 161 rows for a total of 425 rows.
+[INFO TAP-0004] Inserted 850 endcaps.
+[INFO TAP-0005] Inserted 16074 tapcells.

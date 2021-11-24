@@ -1,0 +1,289 @@
+
+===========================================================================
+report_checks -path_delay max (Setup)
+============================================================================
+Startpoint: sky130_sram_2kbyte_1rw1r_32x512_8
+            (falling edge-triggered flip-flop clocked by core_clk)
+Endpoint: _29415_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.15   15.00   15.00   clock core_clk (fall edge)
+                          0.00   15.00   clock network delay (ideal)
+                  0.15    0.00   15.00 v sky130_sram_2kbyte_1rw1r_32x512_8/clk0 (sky130_sram_2kbyte_1rw1r_32x512_8)
+                  0.00    0.40   15.40 v sky130_sram_2kbyte_1rw1r_32x512_8/dout0[20] (sky130_sram_2kbyte_1rw1r_32x512_8)
+     1    0.00                           sram_bus_dat_r[20] (net)
+                  0.00    0.00   15.40 v _22814_/B2 (sky130_fd_sc_hd__a22o_2)
+                  0.04    0.21   15.62 v _22814_/X (sky130_fd_sc_hd__a22o_2)
+     1    0.00                           _11189_ (net)
+                  0.04    0.00   15.62 v _22817_/B1 (sky130_fd_sc_hd__a2111o_2)
+                  0.06    0.44   16.06 v _22817_/X (sky130_fd_sc_hd__a2111o_2)
+     1    0.00                           _11192_ (net)
+                  0.06    0.00   16.06 v _22818_/B1 (sky130_fd_sc_hd__a211o_2)
+                  0.06    0.34   16.39 v _22818_/X (sky130_fd_sc_hd__a211o_2)
+     4    0.01                           VexRiscv.IBusSimplePlugin_rspJoin_rspBuffer_c.io_push_payload_inst[20] (net)
+                  0.06    0.00   16.39 v _28148_/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.06    0.31   16.70 v _28148_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           _00323_ (net)
+                  0.06    0.00   16.70 v _25778_/A (sky130_fd_sc_hd__inv_2)
+                  0.02    0.04   16.75 ^ _25778_/Y (sky130_fd_sc_hd__inv_2)
+     1    0.00                           _00324_ (net)
+                  0.02    0.00   16.75 ^ _28147_/A0 (sky130_fd_sc_hd__mux2_1)
+                  9.06    6.82   23.57 ^ _28147_/X (sky130_fd_sc_hd__mux2_1)
+   257    1.05                           _00325_ (net)
+                  9.06    0.00   23.57 ^ _28990_/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.14    1.11   24.67 v _28990_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _00340_ (net)
+                  0.14    0.00   24.67 v _28993_/A1 (sky130_fd_sc_hd__mux4_1)
+                  0.08    0.54   25.21 v _28993_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _00343_ (net)
+                  0.08    0.00   25.21 v _27832_/A1 (sky130_fd_sc_hd__mux2_1)
+                  0.05    0.30   25.52 v _27832_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           VexRiscv.RegFilePlugin_regFile$rdreg[0]$d[0] (net)
+                  0.05    0.00   25.52 v _29415_/D (sky130_fd_sc_hd__dfxtp_2)
+                                 25.52   data arrival time
+
+                  0.15   30.00   30.00   clock core_clk (rise edge)
+                          0.00   30.00   clock network delay (ideal)
+                         -0.25   29.75   clock uncertainty
+                          0.00   29.75   clock reconvergence pessimism
+                                 29.75 ^ _29415_/CLK (sky130_fd_sc_hd__dfxtp_2)
+                         -0.09   29.66   library setup time
+                                 29.66   data required time
+-----------------------------------------------------------------------------
+                                 29.66   data required time
+                                -25.52   data arrival time
+-----------------------------------------------------------------------------
+                                  4.14   slack (MET)
+
+
+Startpoint: sky130_sram_2kbyte_1rw1r_32x512_8
+            (falling edge-triggered flip-flop clocked by core_clk)
+Endpoint: _29416_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.15   15.00   15.00   clock core_clk (fall edge)
+                          0.00   15.00   clock network delay (ideal)
+                  0.15    0.00   15.00 v sky130_sram_2kbyte_1rw1r_32x512_8/clk0 (sky130_sram_2kbyte_1rw1r_32x512_8)
+                  0.00    0.40   15.40 v sky130_sram_2kbyte_1rw1r_32x512_8/dout0[20] (sky130_sram_2kbyte_1rw1r_32x512_8)
+     1    0.00                           sram_bus_dat_r[20] (net)
+                  0.00    0.00   15.40 v _22814_/B2 (sky130_fd_sc_hd__a22o_2)
+                  0.04    0.21   15.62 v _22814_/X (sky130_fd_sc_hd__a22o_2)
+     1    0.00                           _11189_ (net)
+                  0.04    0.00   15.62 v _22817_/B1 (sky130_fd_sc_hd__a2111o_2)
+                  0.06    0.44   16.06 v _22817_/X (sky130_fd_sc_hd__a2111o_2)
+     1    0.00                           _11192_ (net)
+                  0.06    0.00   16.06 v _22818_/B1 (sky130_fd_sc_hd__a211o_2)
+                  0.06    0.34   16.39 v _22818_/X (sky130_fd_sc_hd__a211o_2)
+     4    0.01                           VexRiscv.IBusSimplePlugin_rspJoin_rspBuffer_c.io_push_payload_inst[20] (net)
+                  0.06    0.00   16.39 v _28148_/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.06    0.31   16.70 v _28148_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           _00323_ (net)
+                  0.06    0.00   16.70 v _25778_/A (sky130_fd_sc_hd__inv_2)
+                  0.02    0.04   16.75 ^ _25778_/Y (sky130_fd_sc_hd__inv_2)
+     1    0.00                           _00324_ (net)
+                  0.02    0.00   16.75 ^ _28147_/A0 (sky130_fd_sc_hd__mux2_1)
+                  9.06    6.82   23.57 ^ _28147_/X (sky130_fd_sc_hd__mux2_1)
+   257    1.05                           _00325_ (net)
+                  9.06    0.00   23.57 ^ _29000_/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.14    1.11   24.67 v _29000_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _00350_ (net)
+                  0.14    0.00   24.67 v _29003_/A1 (sky130_fd_sc_hd__mux4_1)
+                  0.08    0.54   25.21 v _29003_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _00353_ (net)
+                  0.08    0.00   25.21 v _27833_/A1 (sky130_fd_sc_hd__mux2_1)
+                  0.05    0.30   25.52 v _27833_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           VexRiscv.RegFilePlugin_regFile$rdreg[0]$d[1] (net)
+                  0.05    0.00   25.52 v _29416_/D (sky130_fd_sc_hd__dfxtp_2)
+                                 25.52   data arrival time
+
+                  0.15   30.00   30.00   clock core_clk (rise edge)
+                          0.00   30.00   clock network delay (ideal)
+                         -0.25   29.75   clock uncertainty
+                          0.00   29.75   clock reconvergence pessimism
+                                 29.75 ^ _29416_/CLK (sky130_fd_sc_hd__dfxtp_2)
+                         -0.09   29.66   library setup time
+                                 29.66   data required time
+-----------------------------------------------------------------------------
+                                 29.66   data required time
+                                -25.52   data arrival time
+-----------------------------------------------------------------------------
+                                  4.14   slack (MET)
+
+
+Startpoint: sky130_sram_2kbyte_1rw1r_32x512_8
+            (falling edge-triggered flip-flop clocked by core_clk)
+Endpoint: _29417_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.15   15.00   15.00   clock core_clk (fall edge)
+                          0.00   15.00   clock network delay (ideal)
+                  0.15    0.00   15.00 v sky130_sram_2kbyte_1rw1r_32x512_8/clk0 (sky130_sram_2kbyte_1rw1r_32x512_8)
+                  0.00    0.40   15.40 v sky130_sram_2kbyte_1rw1r_32x512_8/dout0[20] (sky130_sram_2kbyte_1rw1r_32x512_8)
+     1    0.00                           sram_bus_dat_r[20] (net)
+                  0.00    0.00   15.40 v _22814_/B2 (sky130_fd_sc_hd__a22o_2)
+                  0.04    0.21   15.62 v _22814_/X (sky130_fd_sc_hd__a22o_2)
+     1    0.00                           _11189_ (net)
+                  0.04    0.00   15.62 v _22817_/B1 (sky130_fd_sc_hd__a2111o_2)
+                  0.06    0.44   16.06 v _22817_/X (sky130_fd_sc_hd__a2111o_2)
+     1    0.00                           _11192_ (net)
+                  0.06    0.00   16.06 v _22818_/B1 (sky130_fd_sc_hd__a211o_2)
+                  0.06    0.34   16.39 v _22818_/X (sky130_fd_sc_hd__a211o_2)
+     4    0.01                           VexRiscv.IBusSimplePlugin_rspJoin_rspBuffer_c.io_push_payload_inst[20] (net)
+                  0.06    0.00   16.39 v _28148_/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.06    0.31   16.70 v _28148_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           _00323_ (net)
+                  0.06    0.00   16.70 v _25778_/A (sky130_fd_sc_hd__inv_2)
+                  0.02    0.04   16.75 ^ _25778_/Y (sky130_fd_sc_hd__inv_2)
+     1    0.00                           _00324_ (net)
+                  0.02    0.00   16.75 ^ _28147_/A0 (sky130_fd_sc_hd__mux2_1)
+                  9.06    6.82   23.57 ^ _28147_/X (sky130_fd_sc_hd__mux2_1)
+   257    1.05                           _00325_ (net)
+                  9.06    0.00   23.57 ^ _29010_/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.14    1.11   24.67 v _29010_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _00360_ (net)
+                  0.14    0.00   24.67 v _29013_/A1 (sky130_fd_sc_hd__mux4_1)
+                  0.08    0.54   25.21 v _29013_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _00363_ (net)
+                  0.08    0.00   25.21 v _27834_/A1 (sky130_fd_sc_hd__mux2_1)
+                  0.05    0.30   25.52 v _27834_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           VexRiscv.RegFilePlugin_regFile$rdreg[0]$d[2] (net)
+                  0.05    0.00   25.52 v _29417_/D (sky130_fd_sc_hd__dfxtp_2)
+                                 25.52   data arrival time
+
+                  0.15   30.00   30.00   clock core_clk (rise edge)
+                          0.00   30.00   clock network delay (ideal)
+                         -0.25   29.75   clock uncertainty
+                          0.00   29.75   clock reconvergence pessimism
+                                 29.75 ^ _29417_/CLK (sky130_fd_sc_hd__dfxtp_2)
+                         -0.09   29.66   library setup time
+                                 29.66   data required time
+-----------------------------------------------------------------------------
+                                 29.66   data required time
+                                -25.52   data arrival time
+-----------------------------------------------------------------------------
+                                  4.14   slack (MET)
+
+
+Startpoint: sky130_sram_2kbyte_1rw1r_32x512_8
+            (falling edge-triggered flip-flop clocked by core_clk)
+Endpoint: _29418_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.15   15.00   15.00   clock core_clk (fall edge)
+                          0.00   15.00   clock network delay (ideal)
+                  0.15    0.00   15.00 v sky130_sram_2kbyte_1rw1r_32x512_8/clk0 (sky130_sram_2kbyte_1rw1r_32x512_8)
+                  0.00    0.40   15.40 v sky130_sram_2kbyte_1rw1r_32x512_8/dout0[20] (sky130_sram_2kbyte_1rw1r_32x512_8)
+     1    0.00                           sram_bus_dat_r[20] (net)
+                  0.00    0.00   15.40 v _22814_/B2 (sky130_fd_sc_hd__a22o_2)
+                  0.04    0.21   15.62 v _22814_/X (sky130_fd_sc_hd__a22o_2)
+     1    0.00                           _11189_ (net)
+                  0.04    0.00   15.62 v _22817_/B1 (sky130_fd_sc_hd__a2111o_2)
+                  0.06    0.44   16.06 v _22817_/X (sky130_fd_sc_hd__a2111o_2)
+     1    0.00                           _11192_ (net)
+                  0.06    0.00   16.06 v _22818_/B1 (sky130_fd_sc_hd__a211o_2)
+                  0.06    0.34   16.39 v _22818_/X (sky130_fd_sc_hd__a211o_2)
+     4    0.01                           VexRiscv.IBusSimplePlugin_rspJoin_rspBuffer_c.io_push_payload_inst[20] (net)
+                  0.06    0.00   16.39 v _28148_/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.06    0.31   16.70 v _28148_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           _00323_ (net)
+                  0.06    0.00   16.70 v _25778_/A (sky130_fd_sc_hd__inv_2)
+                  0.02    0.04   16.75 ^ _25778_/Y (sky130_fd_sc_hd__inv_2)
+     1    0.00                           _00324_ (net)
+                  0.02    0.00   16.75 ^ _28147_/A0 (sky130_fd_sc_hd__mux2_1)
+                  9.06    6.82   23.57 ^ _28147_/X (sky130_fd_sc_hd__mux2_1)
+   257    1.05                           _00325_ (net)
+                  9.06    0.00   23.57 ^ _29020_/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.14    1.11   24.67 v _29020_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _00370_ (net)
+                  0.14    0.00   24.67 v _29023_/A1 (sky130_fd_sc_hd__mux4_1)
+                  0.08    0.54   25.21 v _29023_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _00373_ (net)
+                  0.08    0.00   25.21 v _27835_/A1 (sky130_fd_sc_hd__mux2_1)
+                  0.05    0.30   25.52 v _27835_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           VexRiscv.RegFilePlugin_regFile$rdreg[0]$d[3] (net)
+                  0.05    0.00   25.52 v _29418_/D (sky130_fd_sc_hd__dfxtp_2)
+                                 25.52   data arrival time
+
+                  0.15   30.00   30.00   clock core_clk (rise edge)
+                          0.00   30.00   clock network delay (ideal)
+                         -0.25   29.75   clock uncertainty
+                          0.00   29.75   clock reconvergence pessimism
+                                 29.75 ^ _29418_/CLK (sky130_fd_sc_hd__dfxtp_2)
+                         -0.09   29.66   library setup time
+                                 29.66   data required time
+-----------------------------------------------------------------------------
+                                 29.66   data required time
+                                -25.52   data arrival time
+-----------------------------------------------------------------------------
+                                  4.14   slack (MET)
+
+
+Startpoint: sky130_sram_2kbyte_1rw1r_32x512_8
+            (falling edge-triggered flip-flop clocked by core_clk)
+Endpoint: _29419_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: core_clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.15   15.00   15.00   clock core_clk (fall edge)
+                          0.00   15.00   clock network delay (ideal)
+                  0.15    0.00   15.00 v sky130_sram_2kbyte_1rw1r_32x512_8/clk0 (sky130_sram_2kbyte_1rw1r_32x512_8)
+                  0.00    0.40   15.40 v sky130_sram_2kbyte_1rw1r_32x512_8/dout0[20] (sky130_sram_2kbyte_1rw1r_32x512_8)
+     1    0.00                           sram_bus_dat_r[20] (net)
+                  0.00    0.00   15.40 v _22814_/B2 (sky130_fd_sc_hd__a22o_2)
+                  0.04    0.21   15.62 v _22814_/X (sky130_fd_sc_hd__a22o_2)
+     1    0.00                           _11189_ (net)
+                  0.04    0.00   15.62 v _22817_/B1 (sky130_fd_sc_hd__a2111o_2)
+                  0.06    0.44   16.06 v _22817_/X (sky130_fd_sc_hd__a2111o_2)
+     1    0.00                           _11192_ (net)
+                  0.06    0.00   16.06 v _22818_/B1 (sky130_fd_sc_hd__a211o_2)
+                  0.06    0.34   16.39 v _22818_/X (sky130_fd_sc_hd__a211o_2)
+     4    0.01                           VexRiscv.IBusSimplePlugin_rspJoin_rspBuffer_c.io_push_payload_inst[20] (net)
+                  0.06    0.00   16.39 v _28148_/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.06    0.31   16.70 v _28148_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           _00323_ (net)
+                  0.06    0.00   16.70 v _25778_/A (sky130_fd_sc_hd__inv_2)
+                  0.02    0.04   16.75 ^ _25778_/Y (sky130_fd_sc_hd__inv_2)
+     1    0.00                           _00324_ (net)
+                  0.02    0.00   16.75 ^ _28147_/A0 (sky130_fd_sc_hd__mux2_1)
+                  9.06    6.82   23.57 ^ _28147_/X (sky130_fd_sc_hd__mux2_1)
+   257    1.05                           _00325_ (net)
+                  9.06    0.00   23.57 ^ _29030_/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.14    1.11   24.67 v _29030_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _00380_ (net)
+                  0.14    0.00   24.67 v _29033_/A1 (sky130_fd_sc_hd__mux4_1)
+                  0.08    0.54   25.21 v _29033_/X (sky130_fd_sc_hd__mux4_1)
+     1    0.00                           _00383_ (net)
+                  0.08    0.00   25.21 v _27836_/A1 (sky130_fd_sc_hd__mux2_1)
+                  0.05    0.30   25.52 v _27836_/X (sky130_fd_sc_hd__mux2_1)
+     1    0.00                           VexRiscv.RegFilePlugin_regFile$rdreg[0]$d[4] (net)
+                  0.05    0.00   25.52 v _29419_/D (sky130_fd_sc_hd__dfxtp_2)
+                                 25.52   data arrival time
+
+                  0.15   30.00   30.00   clock core_clk (rise edge)
+                          0.00   30.00   clock network delay (ideal)
+                         -0.25   29.75   clock uncertainty
+                          0.00   29.75   clock reconvergence pessimism
+                                 29.75 ^ _29419_/CLK (sky130_fd_sc_hd__dfxtp_2)
+                         -0.09   29.66   library setup time
+                                 29.66   data required time
+-----------------------------------------------------------------------------
+                                 29.66   data required time
+                                -25.52   data arrival time
+-----------------------------------------------------------------------------
+                                  4.14   slack (MET)
+
+

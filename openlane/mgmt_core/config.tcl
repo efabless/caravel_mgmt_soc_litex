@@ -15,16 +15,16 @@
 
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(ROUTING_CORES) "6"
+set ::env(ROUTING_CORES) "64"
 
 set ::env(DESIGN_NAME) mgmt_core
 set ::env(DESIGN_IS_CORE) 1
 
-set ::env(RUN_KLAYOUT) 1
+set ::env(RUN_KLAYOUT) 0
 
 set ::env(CLOCK_PORT) "core_clk"
 set ::env(CLOCK_NET) "core_clk"
-set ::env(CLOCK_PERIOD) "30"
+set ::env(CLOCK_PERIOD) "25"
 
 ## Synthesis
 set ::env(SYNTH_STRATEGY) "DELAY 1"
@@ -60,7 +60,6 @@ set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 1
 set ::env(PL_RESIZER_MAX_SLEW_MARGIN) 2
 set ::env(PL_RESIZER_MAX_CAP_MARGIN) 2
 
-set ::env(PL_RESIZER_HOLD_SLACK_MARGIN) 0.25
 
 ## Routing
 set ::env(GLB_RT_ADJUSTMENT) 0
@@ -75,8 +74,9 @@ set ::env(GLB_RT_OVERFLOW_ITERS) 200
 set ::env(GLB_RT_MINLAYER) 2
 set ::env(GLB_RT_MAXLAYER) 6
 
+set ::env(PL_RESIZER_HOLD_SLACK_MARGIN) 0.15
 set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 1
-set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) 0.25
+set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) 0.3
 
 set ::env(GLB_RT_OBS) "\
 	li1 0 0 10.16500 740.00,\

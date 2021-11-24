@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<report-database>
+    <categories>
+        <category>
+            <name>Short</name>
+        </category>
+    </categories>
+    <cells>
+        <cell>
+            <name>mgmt_core</name>
+        </cell>
+    </cells>
+    <items>
+        <item>
+            <category>Short</category>
+            <cell>mgmt_core</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (783.08,527.44;783.22,527.58)</value>
+                <value>text: 'On layer met1'</value>
+                <value>text: 'Between net:net662 net:net663'</value>
+            </values>
+        </item>
+    </items>
+</report-database>
