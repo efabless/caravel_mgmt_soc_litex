@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-#include <system_vex.h>
+#include <system.h>
 #include <generated/csr.h>
 #include <generated/soc.h>
 

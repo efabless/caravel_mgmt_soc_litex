@@ -19,7 +19,7 @@ include ../cpu_type.mak
 PDK_PATH = $(PDK_ROOT)/sky130A
 VERILOG_PATH = ../..
 RTL_PATH = $(VERILOG_PATH)/rtl
-BEHAVIOURAL_MODELS = ../
+BEHAVIOURAL_MODELS = ../vip
 
 FIRMWARE_PATH = ..
 #GCC_PATH?=/ef/apps/bin

@@ -9,7 +9,8 @@ endif
 ifeq ($(CPU),ibex)
 	LINK_SCRIPT=$(FIRMWARE_PATH)/link_ibex.ld
 	SOURCE_FILES=$(FIRMWARE_PATH)/crt0_ibex.S $(FIRMWARE_PATH)/simple_system_common.c
-	VERILOG_FILES=../ibex/*
+# 	VERILOG_FILES=../ibex/*
+	VERILOG_FILES=
 endif
 
 ifeq ($(CPU),vexriscv)

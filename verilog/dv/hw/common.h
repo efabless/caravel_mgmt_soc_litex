@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 //#include <system.h>
-#include <system_vex.h>
+#include <system.h>
 
 /* To overwrite CSR subregister accessors, define extern, non-inlined versions
  * of csr_[read|write]_simple(), and define CSR_ACCESSORS_DEFINED.

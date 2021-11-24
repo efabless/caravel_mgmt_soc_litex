@@ -39,18 +39,11 @@ from OpenRAM import *
 # MGMTSoC
 class MGMTSoC(SoCMini):
 
-    # SoCMini.mem_map = {
-    #     "dff":              0x00000000,
-    #     "sram":             0x01000000,
-    #     "flash":            0x10000000,
-    #     "mprj":             0x30000000,
-    #     "hk":               0x26000000,
-    #     "csr":              0x20000000,
-    # }
-
-
     def __init__(self, sys_clk_freq=int(10e6), **kwargs ):
 
+        ##
+        ## Uncomment cpu selection for mgmt core below
+        ##
         # cpu = 'picorv32'
         # cpu = 'ibex'
         cpu = 'vexriscv'
