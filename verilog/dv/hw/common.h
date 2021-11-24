@@ -20,7 +20,7 @@
  * endianness), with the least significant slice at the lowest aligned
  * (base) address. */
 
-#include "soc.h"
+#include <soc.h>
 #if !defined(CONFIG_CSR_DATA_WIDTH)
 #error CSR_DATA_WIDTH MUST be set before including this file!
 #endif

@@ -50,7 +50,7 @@ endif
 
 %.elf: %.c
 	@echo CPU=$(CPU)
-	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../../ -I ../generated $(CPUFLAGS) -Wl,-Bstatic,-T,$(LINK_SCRIPT),--strip-debug -ffreestanding -nostdlib -mstrict-align -o $@ $(SOURCE_FILES) $<
+	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../.. -I ../../generated $(CPUFLAGS) -Wl,-Bstatic,-T,$(LINK_SCRIPT),--strip-debug -ffreestanding -nostdlib -mstrict-align -o $@ $(SOURCE_FILES) $<
 
 %.hex: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@

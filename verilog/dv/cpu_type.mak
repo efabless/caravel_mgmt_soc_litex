@@ -1,4 +1,4 @@
-include ../generated/variables.mak
+include ../../generated/variables.mak
 
 ifeq ($(CPU),picorv32)
 	LINK_SCRIPT=$(FIRMWARE_PATH)/sections.lds
