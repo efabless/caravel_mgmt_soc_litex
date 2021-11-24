@@ -26,33 +26,7 @@
 // Test IRQ callback
 // -------------------------------------------------------------------------
 
-uint16_t flag;
-
-void irq_callback()
-{
-    /* If this routine is called, then the test passes the 1st stage */
-    reg_la1_data = 0xa;	// Signal end of test 1st stage
-    reg_la0_data = 0x20000;
-    flag = 1;
-    return;
-}
-
-void isr(void)
-{
-	__attribute__((unused)) unsigned int irqs;
-
-	irqs = irq_pending() & irq_getmask();
-
-    reg_la1_data = 0xa;	// Signal end of test 1st stage
-    reg_la0_data = 0x20000;
-    flag = 1;
-    return;
-
-//#ifndef UART_POLLING
-//	if(irqs & (1 << UART_INTERRUPT))
-//		uart_isr();
-//#endif
-}
+extern uint16_t flag;
 
 void main()
 {
@@ -63,8 +37,11 @@ void main()
     reg_la0_data = 0;
     flag = 0;
 
-    irq_setie(TIMER0_INTERRUPT);
-    irq_setmask(TIMER0_INTERRUPT);
+    irq_setmask(0);
+	irq_setie(1);
+
+
+	irq_setmask(irq_getmask() | (1 << TIMER0_INTERRUPT));
 
     /* Configure timer for a single-shot countdown */
 	reg_timer0_config = 0;
