@@ -1,0 +1,6 @@
+<< properties >>
+string FIXED_BBOX 0 0 400000 148000
+string GDS_FILE /project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/results/magic/mgmt_core.gds
+string GDS_END 102542922
+string GDS_START 16606010
+<< end >>

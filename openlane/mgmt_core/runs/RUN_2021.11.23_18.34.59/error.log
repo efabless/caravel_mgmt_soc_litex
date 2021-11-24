@@ -1,0 +1,4 @@
+during executing: "netgen -batch source /project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/tmp/lvs/setup_file.lef.lvs |& tee >&@stdout /project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/logs/lvs/38-lvs.lef.log"
+Last 10 lines:
+child killed: segmentation violation
+
