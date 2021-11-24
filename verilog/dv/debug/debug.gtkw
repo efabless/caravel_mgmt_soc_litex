@@ -1,0 +1,110 @@
+[*]
+[*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
+[*] Wed Nov 24 09:24:22 2021
+[*]
+[dumpfile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/verilog/dv/debug/debug.vcd"
+[dumpfile_mtime] "Wed Nov 24 09:07:48 2021"
+[dumpfile_size] 11414327
+[savefile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/verilog/dv/debug/debug.gtkw"
+[timestart] 335700800
+[size] 2151 1251
+[pos] 100 8
+*-17.530529 336297100 39412500 37237500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] debug_tb.
+[treeopen] debug_tb.debug_uart.
+[treeopen] debug_tb.uut.
+[treeopen] debug_tb.uut.core.
+[sst_width] 457
+[signals_width] 565
+[sst_expanded] 1
+[sst_vpaned_height] 397
+@28
+debug_tb.spiflash.clk
+debug_tb.spiflash.csb
+debug_tb.spiflash.io1
+debug_tb.spiflash.io2
+@22
+debug_tb.spiflash.spi_addr[23:0]
+debug_tb.spiflash.spi_cmd[7:0]
+@200
+-
+-sram
+@22
+debug_tb.uut.core.sky130_sram_2kbyte_1rw1r_32x512_8.addr0[8:0]
+debug_tb.uut.core.sky130_sram_2kbyte_1rw1r_32x512_8.din0[31:0]
+debug_tb.uut.core.sky130_sram_2kbyte_1rw1r_32x512_8.dout0[31:0]
+@28
+debug_tb.uut.core.sky130_sram_2kbyte_1rw1r_32x512_8.web0
+@200
+-
+-
+-debug_uart
+@22
+debug_tb.debug_uart.wb_read.addr[31:0]
+debug_tb.debug_uart.wb_read.word[31:0]
+@28
+debug_tb.debug_uart.RX
+debug_tb.debug_uart.TX
+@22
+debug_tb.debug_uart.data[31:0]
+@28
+debug_tb.debug_uart.rx
+debug_tb.debug_uart.start
+debug_tb.debug_uart.tx
+@200
+-
+@28
+debug_tb.uut.core.mgmtsoc_vexriscv_debug_bus_ack
+@22
+debug_tb.uut.core.mgmtsoc_vexriscv_debug_bus_adr[29:0]
+@28
+debug_tb.uut.core.mgmtsoc_vexriscv_debug_bus_cyc
+@22
+debug_tb.uut.core.mgmtsoc_vexriscv_debug_bus_dat_r[31:0]
+debug_tb.uut.core.mgmtsoc_vexriscv_debug_bus_dat_w[31:0]
+@28
+debug_tb.uut.core.mgmtsoc_vexriscv_debug_bus_stb
+debug_tb.uut.core.mgmtsoc_vexriscv_debug_bus_we
+@200
+-
+@22
+debug_tb.uut.core.VexRiscv.execute_PC[31:0]
+@28
+debug_tb.uut.core_clk
+debug_tb.uut.core_rstn
+@22
+debug_tb.uut.core.mgmtsoc_dbus_dbus_adr[29:0]
+debug_tb.uut.core.mgmtsoc_ibus_ibus_adr[29:0]
+@28
+debug_tb.uut.debug_in
+debug_tb.uut.debug_out
+debug_tb.uut.core.debug_rx
+debug_tb.uut.core.debug_tx
+debug_tb.debug_uart_rx
+debug_tb.debug_uart_tx
+@22
+debug_tb.uut.core.debug_address[31:0]
+@28
+debug_tb.uut.core.debug_rx
+debug_tb.uut.core.debug_tx
+@22
+debug_tb.uut.core.debug_rx_data[7:0]
+debug_tb.uut.core.debug_tx_data[7:0]
+@28
+debug_tb.uut.core.uartwishbonebridge_state[2:0]
+debug_tb.uut.core.uartwishbonebridge_next_state[2:0]
+debug_tb.uut.core.uartwishbonebridge_rs232phyrx_state
+@22
+debug_tb.uut.core.debug_data_uartwishbonebridge_next_value6[31:0]
+@c00029
+debug_tb.uut.core.request[2:0]
+@29
+(0)debug_tb.uut.core.request[2:0]
+(1)debug_tb.uut.core.request[2:0]
+(2)debug_tb.uut.core.request[2:0]
+@1401201
+-group_end
+@28
+debug_tb.uut.core.grant[1:0]
+[pattern_trace] 1
+[pattern_trace] 0
