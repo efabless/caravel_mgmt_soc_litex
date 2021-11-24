@@ -14,14 +14,14 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-include ../cpu_type.mak
+include ../../cpu_type.mak
 
 PDK_PATH = $(PDK_ROOT)/sky130A
-VERILOG_PATH = ../..
+VERILOG_PATH = ../../..
 RTL_PATH = $(VERILOG_PATH)/rtl
-BEHAVIOURAL_MODELS = ../vip
+BEHAVIOURAL_MODELS = ../../vip
 
-FIRMWARE_PATH = ..
+FIRMWARE_PATH = ../..
 #GCC_PATH?=/ef/apps/bin
 GCC_PATH?=/usr/local/bin
 #GCC_PREFIX?=riscv32-unknown-elf
@@ -33,19 +33,13 @@ SIM?=RTL
 
 .SUFFIXES:
 
-PATTERN = uart
-
-all:  ${PATTERN:=.vcd} ${PATTERN:=.lst}
-
-hex:  ${PATTERN:=.hex}
-
 %.vvp: %_tb.v %.hex
 ifeq ($(SIM),RTL)
 	iverilog -Ttyp $(SIM_DEFINES) \
 	-I $(BEHAVIOURAL_MODELS) \
 	-I $(PDK_PATH) -I $(RTL_PATH) \
 	-o $@ $(VERILOG_FILES) $<
-else  
+else
 	iverilog -Ttyp $(SIM_DEFINES) -DGL -I $(BEHAVIOURAL_MODELS) \
 	-I $(PDK_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) \
 	-o $@ $<
@@ -56,12 +50,12 @@ endif
 
 %.elf: %.c
 	@echo CPU=$(CPU)
-	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../generated $(CPUFLAGS) -Wl,-Bstatic,-T,$(LINK_SCRIPT),--strip-debug -ffreestanding -nostdlib -mstrict-align -o $@ $(SOURCE_FILES) $<
+	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../ -I ../../ -I ../generated $(CPUFLAGS) -Wl,-Bstatic,-T,$(LINK_SCRIPT),--strip-debug -ffreestanding -nostdlib -mstrict-align -o $@ $(SOURCE_FILES) $<
 
 %.hex: %.elf
-	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@ 
+	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@
 	# to fix flash base address
-	sed -ie 's/@10/@00/g' $@
+	sed -ie 's/@10000000/@00000000/g' $@
 
 %.lst: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objdump -D $< > $@
