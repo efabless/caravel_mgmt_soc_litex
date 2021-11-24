@@ -44,6 +44,7 @@ extern uint32_t flashio_worker_end;
 
 // DEBUG (0x2000_0000)
 //#define reg_uart_clkdiv (*(volatile uint32_t*)0x20000000)
+#define reg_reset   (*(volatile uint32_t*) CSR_CTRL_RESET_ADDR)
 #define reg_debug_data   (*(volatile uint32_t*) CSR_DEBUG_RXTX_ADDR)
 #define reg_debug_txfull   (*(volatile uint32_t*) CSR_DEBUG_TXFULL_ADDR)
 //#define reg_debug_enable (*(volatile uint32_t*) CSR_UART_ENABLED_OUT_ADDR)

@@ -7114,7 +7114,7 @@ always @(posedge sys_clk) begin
 	end
 	state <= next_state;
 	case (grant)
-		1'd0: begin
+		2'd0: begin
 			if ((~request[0])) begin
 				if (request[1]) begin
 					grant <= 1'd1;
@@ -7125,7 +7125,7 @@ always @(posedge sys_clk) begin
 				end
 			end
 		end
-		1'd1: begin
+		2'd1: begin
 			if ((~request[1])) begin
 				if (request[2]) begin
 					grant <= 2'd2;

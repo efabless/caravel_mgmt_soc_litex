@@ -31,6 +31,9 @@ void main()
 //    reg_uart_clkdiv = 625;
 //    reg_uart_enable = 1;
 
+    reg_reset = 1;
+    while(1);
+
     // Start test
     reg_la0_data = 0xa0000000;
 

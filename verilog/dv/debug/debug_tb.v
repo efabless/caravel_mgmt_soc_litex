@@ -29,10 +29,10 @@
 //`include "picorv32.v"
 `include "VexRiscv_MinDebug.v"
 `include "spiflash.v"
-`include "tbuart.v"
+`include "wb_rw_test.v"
 `include "mgmt_core_wrapper.v"
 
-module uart_tb;
+module debug_tb;
 	reg core_clk;
 	reg core_rstn;
 	reg power1, power2;
@@ -60,19 +60,19 @@ module uart_tb;
 	end
 
 	initial begin
-		$dumpfile("uart.vcd");
-		$dumpvars(0, uart_tb);
+		$dumpfile("debug.vcd");
+		$dumpvars(0, debug_tb);
 
-		$display("Wait for UART o/p");
-		repeat (450) begin
+		$display("Wait for Debug o/p");
+		repeat (50) begin
 			repeat (1000) @(posedge core_clk);
 			// Diagnostic. . . interrupts output pattern.
 		end
         $display("%c[1;31m",27);
 		`ifdef GL
-			$display ("Monitor: Timeout, Test UART (GL) Failed");
+			$display ("Monitor: Timeout, Test Debug (GL) Failed");
 		`else
-			$display ("Monitor: Timeout, Test UART (RTL) Failed");
+			$display ("Monitor: Timeout, Test Debug (RTL) Failed");
 		`endif
 		$display("%c[0m",27);
 		$finish;
@@ -96,11 +96,11 @@ module uart_tb;
 
 	always @(checkbits) begin
 		if(checkbits == 16'hA000) begin
-			$display("UART Test started");
+			$display("Debug Test started");
 		end
 		else if(checkbits == 16'hAB00) begin
 			`ifdef GL
-				$display("UART Test (GL) passed");
+				$display("Debug Test (GL) passed");
 			`else
 				$display("UART Test (RTL) passed");
 			`endif
@@ -150,9 +150,9 @@ module uart_tb;
 	);
 
     // Testbench UART
-	tbuart debug_uart (
-		.ser_rx(debug_uart_tx),
-		.ser_tx(debug_uart_rx)
+	wb_rw_test debug_uart (
+		.rx(debug_uart_tx),
+		.tx(debug_uart_rx)
 	);
 		
 endmodule
