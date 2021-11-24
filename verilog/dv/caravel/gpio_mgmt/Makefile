@@ -16,7 +16,7 @@
 
 include ../common.mak
 
-PATTERN = debug
+PATTERN = gpio_mgmt
 
 all:  ${PATTERN:=.vcd} ${PATTERN:=.lst}
 
