@@ -74,40 +74,8 @@ void main()
     // bit 14:		IRQ enable (1 = enabled)
     // bit 15:		(unused)
 
-//    reg_spimaster_clk_divider = 2;
-//    spi_master_clk_divider_write(128);
-//    reg_spimaster_cs = 0;
-//    reg_spimaster_wdata = 0x0b;
-//    spi_master_mosi_write(0x0b);
 
-//    reg_spimaster_config = 0x0800;	// start xfer, 8 bits
-//    reg_spimaster_config = 0x0801;	// start xfer, 8 bits
-//    spi_master_control_length_write(8);
-//    spi_master_control_start_write(1);
-
-    // Apply stream read (0x40 + 0x03) and read back one byte
-
-//    reg_spimaster_config = 0x3002;	// Apply stream mode
-//    reg_spimaster_cs = 0x0001;  // sel=0, auto-cs
-//    reg_spimaster_cs = 0x0101;  // sel=0, manual cs
-
-//
-//    reg_spimaster_data = 0xff;		// Write 0xff (reset)
-//    spi_write(0xff);
-//    reg_spimaster_config = 0x2102;	// Release CSB (ends stream mode)
-//    reg_spimaster_config = 0x3002;	// Apply stream mode
-//    reg_spimaster_cs = 0x0000;
-//    reg_spimaster_cs = 0x0101;  // sel=0, manual CS
-
-//    reg_spimaster_data = 0xab;		// Write 0xab (wakeup)
-//    spi_write(0xab);  // Write 0xab (wakeup)
-//    reg_spimaster_cs = 0;
-//    reg_spimaster_cs = 1;
-//    reg_spimaster_config = 0x2102;	// Release CSB (ends stream mode)
-//    reg_spimaster_config = 0x3002;	// Apply stream mode
-//    reg_spimaster_cs = 0x0000;  // release CS
     reg_spimaster_cs = 0x10001;  // sel=0, manual CS
-//    reg_spimaster_cs = 0x0001;  // sel=0, auto-cs
 
     spi_write(0x03);        // Write 0x03 (read mode)
     spi_write(0x00);        // Write 0x00 (start address high byte)

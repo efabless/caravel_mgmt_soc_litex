@@ -223,7 +223,7 @@ module spi_master_tb;
 	/* Instantiate a 2nd SPI flash so the SPI master can talk to it */
 
 	spiflash #(
-		.FILENAME("test_data.hex")
+		.FILENAME("test_data")
 	) test_spi (
 		.csb(spi_cs_n),
 		.clk(spi_clk),
