@@ -33,9 +33,14 @@
 /* Wrapper module around management SoC core for pin compatibility	*/
 /* with the Caravel harness chip.					*/
 
-`include "DFFRAM_beh.v"
-//`include "DFFRAM.v"
-//`include "DFFRAMBB.v"
+`ifdef CARAVEL
+    `include "DFFRAM.v"
+    `include "DFFRAMBB.v"
+`else
+    `include "DFFRAM_beh.v"
+`endif
+
+
 `include "mgmt_core.v"
 
 module mgmt_core_wrapper (
@@ -233,7 +238,11 @@ module mgmt_core_wrapper (
     );
 
     // DFFRAM
+`ifdef CARAVEL
+    DFFRAM #(
+`else
     DFFRAM_beh #(
+`endif
         .WSIZE(`DFFRAM_WSIZE),
         .USE_LATCH(`DFFRAM_USE_LATCH)
     ) DFFRAM (

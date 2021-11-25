@@ -18,7 +18,9 @@ include ../../cpu_type.mak
 
 PDK_PATH = $(PDK_ROOT)/sky130A
 VERILOG_PATH = ../../..
+CARAVEL_VERILOG_PATH = ../../../../../verilog
 RTL_PATH = $(VERILOG_PATH)/rtl
+CARAVEL_RTL_PATH = $(CARAVEL_VERILOG_PATH)/rtl
 BEHAVIOURAL_MODELS = ../../vip
 
 FIRMWARE_PATH = ../..
@@ -27,7 +29,7 @@ GCC_PATH?=/usr/local/bin
 #GCC_PREFIX?=riscv32-unknown-elf
 GCC_PREFIX?=riscv64-unknown-elf
 
-SIM_DEFINES = -DFUNCTIONAL -DSIM
+SIM_DEFINES = -DFUNCTIONAL -DSIM  -DCARAVEL
 
 SIM?=RTL
 
@@ -38,10 +40,12 @@ ifeq ($(SIM),RTL)
 	iverilog -Ttyp $(SIM_DEFINES) \
 	-I $(BEHAVIOURAL_MODELS) \
 	-I $(PDK_PATH) -I $(RTL_PATH) \
+	-I $(CARAVEL_RTL_PATH) \
 	-o $@ $(VERILOG_FILES) $<
 else
 	iverilog -Ttyp $(SIM_DEFINES) -DGL -I $(BEHAVIOURAL_MODELS) \
 	-I $(PDK_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) \
+	-I $(CARAVEL_RTL_PATH) \
 	-o $@ $<
 endif
 
