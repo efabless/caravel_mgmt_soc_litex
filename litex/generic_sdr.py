@@ -121,9 +121,10 @@ class LiteSPISDRPHYCore(Module, AutoCSR, AutoDoc):
             dq_i  = Signal(2)
             dq_oe = Signal() # Unused.
             self.specials += SDROutput(
-                i = dq_oe,
+                i = ~dq_oe,
                 o = pads.io0_oeb
             )
+            self.comb += pads.io1_oeb.eq(1)
             self.specials += SDROutput(
                 i = dq_o,
                 o = pads.io0_do

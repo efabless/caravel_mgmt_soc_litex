@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Thu Nov 25 17:48:43 2021
+[*] Fri Nov 26 19:32:22 2021
 [*]
 [dumpfile] "/Users/jeffdi/Projects/caravel_openframe/mgmt_core_wrapper/verilog/dv/caravel/gpio_mgmt/gpio_mgmt.vcd"
-[dumpfile_mtime] "Thu Nov 25 16:38:39 2021"
-[dumpfile_size] 2006172157
+[dumpfile_mtime] "Fri Nov 26 19:15:38 2021"
+[dumpfile_size] 19511780
 [savefile] "/Users/jeffdi/Projects/caravel_openframe/mgmt_core_wrapper/verilog/dv/caravel/gpio_mgmt/gpio_mgmt.gtkw"
-[timestart] 431856000
-[size] 2151 1251
-[pos] -19 77
-*-20.901861 435710000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[timestart] 0
+[size] 2081 1255
+[pos] -2 -1
+*-21.013702 2620000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] gpio_mgmt_tb.
 [treeopen] gpio_mgmt_tb.uut.
 [treeopen] gpio_mgmt_tb.uut.soc.
@@ -18,7 +18,7 @@
 [sst_width] 298
 [signals_width] 325
 [sst_expanded] 1
-[sst_vpaned_height] 580
+[sst_vpaned_height] 675
 @200
 -
 -FLASH
@@ -27,6 +27,8 @@ gpio_mgmt_tb.spiflash.clk
 gpio_mgmt_tb.spiflash.csb
 gpio_mgmt_tb.spiflash.io0
 gpio_mgmt_tb.spiflash.io1
+gpio_mgmt_tb.spiflash.io0_oe
+gpio_mgmt_tb.spiflash.io1_oe
 @22
 gpio_mgmt_tb.spiflash.spi_addr[23:0]
 gpio_mgmt_tb.spiflash.spi_cmd[7:0]
@@ -48,6 +50,20 @@ gpio_mgmt_tb.uut.soc.core.sky130_sram_2kbyte_1rw1r_32x512_8.dout0[31:0]
 gpio_mgmt_tb.mprj_io[37:0]
 @28
 gpio_mgmt_tb.gpio
+@200
+-
+-DFFRAM
+@22
+gpio_mgmt_tb.uut.soc.DFFRAM.A[7:0]
+@28
+gpio_mgmt_tb.uut.soc.DFFRAM.CLK
+@22
+gpio_mgmt_tb.uut.soc.DFFRAM.Di[31:0]
+gpio_mgmt_tb.uut.soc.DFFRAM.Do[31:0]
+@28
+gpio_mgmt_tb.uut.soc.DFFRAM.EN
+@22
+gpio_mgmt_tb.uut.soc.DFFRAM.WE[3:0]
 @200
 -
 @22
