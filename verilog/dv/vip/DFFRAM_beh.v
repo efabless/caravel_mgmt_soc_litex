@@ -1,5 +1,9 @@
 module DFFRAM_beh #( parameter COLS=1)
 (
+`ifdef USE_POWER_PINS
+    input VPWR,
+    input VGND,
+`endif
     CLK,
     WE,
     EN,
