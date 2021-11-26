@@ -39,12 +39,13 @@ void main()
 
 	reg_gpio_out = 0;
     reg_gpio_ien = 1;
-	reg_gpio_oe = 0;
+	reg_gpio_oe = 1;
 //	reg_gpio_pu = 0;
 //	reg_gpio_pd = 0;
 
 	for (i = 0; i < 10; i++) {
 		/* Fast blink for simulation */
+		reg_gpio_out = 1;
 		reg_gpio_out = 1;
 		reg_gpio_out = 0;
 	}

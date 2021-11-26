@@ -53,7 +53,7 @@ module gpio_mgmt_tb;
 		$dumpvars(0, gpio_mgmt_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (25) begin
+		repeat (35) begin
 			repeat (1000) @(posedge clock);
 			$display("+1000 cycles");
 		end

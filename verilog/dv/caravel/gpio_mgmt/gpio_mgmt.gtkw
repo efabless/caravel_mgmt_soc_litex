@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Fri Nov 26 19:32:22 2021
+[*] Fri Nov 26 20:27:29 2021
 [*]
 [dumpfile] "/Users/jeffdi/Projects/caravel_openframe/mgmt_core_wrapper/verilog/dv/caravel/gpio_mgmt/gpio_mgmt.vcd"
-[dumpfile_mtime] "Fri Nov 26 19:15:38 2021"
-[dumpfile_size] 19511780
+[dumpfile_mtime] "Fri Nov 26 20:18:44 2021"
+[dumpfile_size] 71987995
 [savefile] "/Users/jeffdi/Projects/caravel_openframe/mgmt_core_wrapper/verilog/dv/caravel/gpio_mgmt/gpio_mgmt.gtkw"
 [timestart] 0
 [size] 2081 1255
-[pos] -2 -1
-*-21.013702 2620000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 43 113
+*-28.083820 645000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] gpio_mgmt_tb.
 [treeopen] gpio_mgmt_tb.uut.
 [treeopen] gpio_mgmt_tb.uut.soc.
@@ -80,13 +80,16 @@ gpio_mgmt_tb.uut.soc.core.mgmtsoc_ibus_ibus_dat_w[31:0]
 @200
 -
 @28
-gpio_mgmt_tb.uut.soc.gpio_in_pad
-gpio_mgmt_tb.uut.soc.gpio_inenb_pad
-gpio_mgmt_tb.uut.soc.gpio_mode0_pad
-gpio_mgmt_tb.uut.soc.gpio_mode1_pad
 gpio_mgmt_tb.uut.soc.gpio_out_pad
 gpio_mgmt_tb.uut.soc.gpio_outenb_pad
 gpio_mgmt_tb.uut.soc.gpio_in_pad
+gpio_mgmt_tb.uut.soc.gpio_inenb_pad
+@200
+-
+@28
+gpio_mgmt_tb.uut.soc.gpio_mode0_pad
+@29
+gpio_mgmt_tb.uut.soc.gpio_mode1_pad
 @200
 -
 @28
