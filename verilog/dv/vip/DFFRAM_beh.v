@@ -1,8 +1,8 @@
 module DFFRAM_beh #( parameter COLS=1)
 (
 `ifdef USE_POWER_PINS
-    input VPWR,
-    input VGND,
+    VPWR,
+    VGND,
 `endif
     CLK,
     WE,
@@ -13,6 +13,8 @@ module DFFRAM_beh #( parameter COLS=1)
 );
     localparam A_WIDTH = 8+$clog2(COLS);
 
+    input   wire            VPWR;
+    input   wire            VGND;
     input   wire            CLK;
     input   wire    [3:0]   WE;
     input   wire            EN;
