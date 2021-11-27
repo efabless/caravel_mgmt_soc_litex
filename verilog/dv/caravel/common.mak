@@ -21,9 +21,13 @@ VERILOG_PATH = ../../..
 CARAVEL_VERILOG_PATH = ../../../../../verilog
 RTL_PATH = $(VERILOG_PATH)/rtl
 CARAVEL_RTL_PATH = $(CARAVEL_VERILOG_PATH)/rtl
-BEHAVIOURAL_MODELS = ../../vip
+# BEHAVIOURAL_MODELS = ../../vip
+VIP_PATH = $(VERILOG_PATH)/dv/vip
+COMMON = $(VERILOG_PATH)/common
 
-FIRMWARE_PATH = ../..
+FIRMWARE_PATH = $(VERILOG_PATH)/dv/firmware
+
+# FIRMWARE_PATH = ../..
 #GCC_PATH?=/ef/apps/bin
 GCC_PATH?=/usr/local/bin
 #GCC_PREFIX?=riscv32-unknown-elf
@@ -39,12 +43,12 @@ SIM?=RTL
 %.vvp: %_tb.v %.hex
 ifeq ($(SIM),RTL)
 	iverilog -Ttyp $(SIM_DEFINES) \
-	-I $(BEHAVIOURAL_MODELS) \
+	-I $(VIP_PATH) \
 	-I $(PDK_PATH) -I $(RTL_PATH) \
 	-I $(CARAVEL_RTL_PATH) \
 	-o $@ $(VERILOG_FILES) $<
 else
-	iverilog -Ttyp $(SIM_DEFINES) -DGL -I $(BEHAVIOURAL_MODELS) \
+	iverilog -Ttyp $(SIM_DEFINES) -DGL -I $(VIP_PATH) \
 	-I $(PDK_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) \
 	-I $(CARAVEL_RTL_PATH) \
 	-o $@ $<
@@ -55,7 +59,7 @@ endif
 
 %.elf: %.c
 	@echo CPU=$(CPU)
-	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../.. -I ../../generated $(CPUFLAGS) -Wl,-Bstatic,-T,$(LINK_SCRIPT),--strip-debug -ffreestanding -nostdlib -mstrict-align -o $@ $(SOURCE_FILES) $<
+	${GCC_PATH}/${GCC_PREFIX}-gcc -O0 -I ../.. -I ../../generated -I $(FIRMWARE_PATH) $(CPUFLAGS) -Wl,-Bstatic,-T,$(LINK_SCRIPT),--strip-debug -ffreestanding -nostdlib -mstrict-align -o $@ $(SOURCE_FILES) $<
 
 %.hex: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@
