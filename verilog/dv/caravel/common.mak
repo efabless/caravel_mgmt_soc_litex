@@ -14,7 +14,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-include ../../cpu_type.mak
+include ../../firmware/cpu_type.mak
 
 PDK_PATH = $(PDK_ROOT)/sky130A
 VERILOG_PATH = ../../..
@@ -44,7 +44,7 @@ SIM?=RTL
 ifeq ($(SIM),RTL)
 	iverilog -Ttyp $(SIM_DEFINES) \
 	-I $(VIP_PATH) \
-	-I $(PDK_PATH) -I $(RTL_PATH) \
+	-I $(PDK_PATH) -I $(RTL_PATH) -I $(COMMON)\
 	-I $(CARAVEL_RTL_PATH) \
 	-o $@ $(VERILOG_FILES) $<
 else
