@@ -55,7 +55,7 @@ class MGMTSoC(SoCMini):
         core_rst = Signal()
         self.submodules.crg = CRG(platform.request("core_clk"), rst=core_rst)
         core_rstn = platform.request("core_rstn")
-        self.comb += core_rstn.eq(~core_rst)
+        self.comb += core_rst.eq(~core_rstn)
 
         if cpu == 'vexriscv':
             SoCMini.__init__(self, platform,
