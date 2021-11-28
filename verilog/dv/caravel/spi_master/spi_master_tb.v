@@ -30,13 +30,13 @@
 
 module spi_master_tb;
 	reg clock;
-	reg core_rstn;
+	reg RSTB;
 	reg power1, power2;
 
 	wire gpio;
 	wire [15:0] checkbits;
 	wire [7:0] spivalue;
-	wire [127:0] la_output;
+	wire [37:0] mprj_io;
 	wire flash_csb;
 	wire flash_clk;
 	wire flash_io0;
@@ -48,8 +48,8 @@ module spi_master_tb;
 	wire spi_miso;
 	wire spi_sdoenb;
 
-	assign checkbits = la_output[31:16];
-	assign spivalue  = la_output[15:8];
+	assign checkbits = mprj_io[31:16];
+	assign spivalue  = mprj_io[15:8];
 
 	// External clock is used by default.  Make this artificially fast for the
 	// simulation.  Normally this would be a slow clock and the digital PLL
@@ -163,9 +163,9 @@ module spi_master_tb;
 	end
 
 	initial begin
-		core_rstn <= 1'b0;
+		RSTB <= 1'b0;
 		#1000;
-		core_rstn <= 1'b1;	    // Release reset
+		RSTB <= 1'b1;	    // Release reset
 		#2000;
 	end
 
@@ -201,7 +201,7 @@ module spi_master_tb;
 //		.flash_io0_oeb(),
 //		.flash_io0_do(flash_io0),
 //		.flash_io1_di(flash_io1),
-//        .core_rstn(core_rstn),
+//        .core_rstn(RSTB),
 //        .mprj_dat_i(32'b0),
 //		.mprj_ack_i(1'b0),
 //        .hk_dat_i(32'b0),

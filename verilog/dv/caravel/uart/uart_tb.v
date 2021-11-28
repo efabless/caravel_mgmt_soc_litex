@@ -39,18 +39,17 @@ module uart_tb;
 
 	wire gpio;
     wire [15:0] checkbits;
-	wire [127:0] la_output;
+	wire [37:0] mprj_io;
 	wire flash_csb;
 	wire flash_clk;
 	wire flash_io0;
 	wire flash_io1;
-//	wire [37:0] mprj_io;
 	wire uart_tx;
 	wire uart_loopback;
 	wire SDO;
 
-	assign checkbits = la_output[31:16];
-//	assign uart_tx = la_output[6];
+	assign checkbits = mprj_io[31:16];
+	assign uart_tx = mprj_io[6];
 
 	always #12.5 core_clk <= (core_clk === 1'b0);
 
@@ -115,26 +114,51 @@ module uart_tb;
 	assign VDD1V8 = power2;
 	assign VSS = 1'b0;
 	
-//	assign la_output[3] = 1'b1;  // Force CSB high.
+	assign mprj_io[3] = 1'b1;  // Force CSB high.
 
-	mgmt_core_wrapper uut (
-		.core_clk	  (core_clk),
-		.gpio_out_pad     (gpio),
-		.la_output  (la_output),
+	caravel uut (
+		.vddio	  (VDD3V3),
+		.vssio	  (VSS),
+		.vdda	  (VDD3V3),
+		.vssa	  (VSS),
+		.vccd	  (VDD1V8),
+		.vssd	  (VSS),
+		.vdda1    (VDD3V3),
+		.vdda2    (VDD3V3),
+		.vssa1	  (VSS),
+		.vssa2	  (VSS),
+		.vccd1	  (VDD1V8),
+		.vccd2	  (VDD1V8),
+		.vssd1	  (VSS),
+		.vssd2	  (VSS),
+		.clock	  (clock),
+		.gpio     (gpio),
+		.mprj_io  (mprj_io),
 		.flash_csb(flash_csb),
 		.flash_clk(flash_clk),
-		.flash_io0_oeb(),
-		.flash_io0_do(flash_io0),
-		.flash_io1_di(flash_io1),
-		.core_rstn	  (core_rstn),
-        .mprj_dat_i(32'b0),
-		.mprj_ack_i(1'b0),
-        .hk_dat_i(32'b0),
-		.hk_ack_i(1'b0),
-		.ser_tx(uart_tx)
-//		.ser_tx(uart_loopback),
-//		.ser_rx(uart_loopback)
+		.flash_io0(flash_io0),
+		.flash_io1(flash_io1),
+		.resetb	  (RSTB)
 	);
+
+//	mgmt_core_wrapper uut (
+//		.core_clk	  (core_clk),
+//		.gpio_out_pad     (gpio),
+//		.la_output  (la_output),
+//		.flash_csb(flash_csb),
+//		.flash_clk(flash_clk),
+//		.flash_io0_oeb(),
+//		.flash_io0_do(flash_io0),
+//		.flash_io1_di(flash_io1),
+//		.core_rstn	  (core_rstn),
+//        .mprj_dat_i(32'b0),
+//		.mprj_ack_i(1'b0),
+//        .hk_dat_i(32'b0),
+//		.hk_ack_i(1'b0),
+//		.ser_tx(uart_tx)
+////		.ser_tx(uart_loopback),
+////		.ser_rx(uart_loopback)
+//	);
 
 	spiflash #(
 		.FILENAME("uart.hex")
