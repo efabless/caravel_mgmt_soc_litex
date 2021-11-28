@@ -61,9 +61,9 @@ module mem_tb;
 		$dumpvars(0, mem_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (300) begin
-			repeat (1000) @(posedge core_clk);
-			//$display("+1000 cycles");
+		repeat (10) begin
+			repeat (5000) @(posedge core_clk);
+			$display("+5000 cycles");
 		end
 		$display("%c[1;31m",27);
 		`ifdef GL

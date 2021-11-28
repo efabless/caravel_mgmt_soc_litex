@@ -177,7 +177,6 @@ class MGMTSoC(SoCMini):
         spi_master.add_clk_divider()
         self.submodules.spi_master = spi_master
         #self.add_interrupt(interrupt_name="spi_master")
-        self.comb += spi_master.pads.sdo.eq(~spi_master.pads.cs_n)
         self.comb += spi_master.pads.sdoenb.eq(~spi_master.pads.cs_n)
 
         # Add a wb port for external slaves user_project
@@ -189,7 +188,8 @@ class MGMTSoC(SoCMini):
         self.comb += mprj_ports.stb_o.eq(mprj.stb)
         self.comb += mprj_ports.we_o.eq(mprj.we)
         self.comb += mprj_ports.sel_o.eq(mprj.sel)
-        self.comb += mprj_ports.adr_o.eq(mprj.adr)
+        self.comb += mprj_ports.adr_o[2:32].eq(mprj.adr)
+        self.comb += mprj_ports.adr_o[0:2].eq(0)
         self.comb += mprj.dat_r.eq(mprj_ports.dat_i)
         self.comb += mprj_ports.dat_o.eq(mprj.dat_w)
         self.comb += mprj.ack.eq(mprj_ports.ack_i)
