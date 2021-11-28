@@ -227,8 +227,8 @@ module spi_master_tb;
 	) test_spi (
 		.csb(spi_cs_n),
 		.clk(spi_clk),
-		.io0(spi_mosi),
-		.io1(spi_miso),
+		.io0(spi_miso),
+		.io1(spi_mosi),
 		.io2(),			// not used
 		.io3()			// not used
 	);

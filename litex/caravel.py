@@ -177,6 +177,7 @@ class MGMTSoC(SoCMini):
         spi_master.add_clk_divider()
         self.submodules.spi_master = spi_master
         #self.add_interrupt(interrupt_name="spi_master")
+        self.comb += spi_master.pads.sdo.eq(~spi_master.pads.cs_n)
         self.comb += spi_master.pads.sdoenb.eq(~spi_master.pads.cs_n)
 
         # Add a wb port for external slaves user_project
@@ -224,6 +225,8 @@ class MGMTSoC(SoCMini):
         trap = platform.request("trap")
         if cpu == 'picorv32':
             self.comb += trap.eq(self.cpu.trap)
+        else:
+            self.comb += trap.eq(0)
 
         self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
 
