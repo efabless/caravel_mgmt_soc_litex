@@ -133,6 +133,13 @@ class LiteSPISDRPHYCore(Module, AutoCSR, AutoDoc):
                 i = pads.io1_di,
                 o = dq_i[1]
             )
+            self.comb += pads.io1_do.eq(0)
+            self.comb += pads.io2_do.eq(0)
+            self.comb += pads.io3_do.eq(0)
+            self.comb += pads.io2_oeb.eq(1)
+            self.comb += pads.io3_oeb.eq(1)
+
+
         else:
             dq_o  = Signal(bus_width)
             dq_i  = Signal(bus_width)
