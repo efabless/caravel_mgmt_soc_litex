@@ -199,8 +199,8 @@ class MGMTSoC(SoCMini):
         hk = wishbone.Interface()
         self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
         hk_ports = platform.request("hk")
-        self.comb += hk_ports.stb_o.eq(hk.stb)
-        # self.comb += hk_ports.stb_o.eq(hk.stb & self.bus.slave_sel[5])
+        # self.comb += hk_ports.stb_o.eq(hk.stb)
+        self.comb += hk_ports.stb_o.eq(hk.cyc)
         self.comb += hk.dat_r.eq(hk_ports.dat_i)
         self.comb += hk.ack.eq(hk_ports.ack_i)
 
