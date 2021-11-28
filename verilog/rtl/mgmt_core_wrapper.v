@@ -196,7 +196,7 @@ module mgmt_core_wrapper (
         .mprj_stb_o(mprj_stb_o),
         .mprj_we_o(mprj_we_o),
         .mprj_sel_o(mprj_sel_o),
-        .mprj_adr_o(mprj_adr_o),
+        .mprj_adr_o({mprj_adr_o, 2'b0}),
         .mprj_dat_o(mprj_dat_o),
 
         .hk_stb_o(hk_stb_o),

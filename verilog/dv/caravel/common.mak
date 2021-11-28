@@ -44,12 +44,12 @@ SIM?=RTL
 ifeq ($(SIM),RTL)
 	iverilog -Ttyp $(SIM_DEFINES) \
 	-I $(VIP_PATH) \
-	-I $(PDK_PATH) -I $(RTL_PATH) -I $(COMMON)\
+	-I $(PDK_PATH) -I $(RTL_PATH) -I $(COMMON) \
 	-I $(CARAVEL_RTL_PATH) \
 	-o $@ $(VERILOG_FILES) $<
 else
 	iverilog -Ttyp $(SIM_DEFINES) -DGL -I $(VIP_PATH) \
-	-I $(PDK_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) \
+	-I $(PDK_PATH) -I $(VERILOG_PATH) -I $(RTL_PATH) -I $(COMMON) \
 	-I $(CARAVEL_RTL_PATH) \
 	-o $@ $<
 endif
