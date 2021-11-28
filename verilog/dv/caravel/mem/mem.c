@@ -32,6 +32,30 @@ void main()
 {
     int i;
 
+    /* Upper 16 user area pins are configured to be GPIO output */
+
+    reg_mprj_io_31 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_30 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_29 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_28 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_27 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_26 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_25 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_24 = GPIO_MODE_MGMT_STD_OUTPUT;
+//
+//    reg_mprj_io_23 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_22 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_21 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_20 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_19 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_18 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_17 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_io_16 = GPIO_MODE_MGMT_STD_OUTPUT;
+//
+//    // Apply configuration
+//    reg_mprj_xfer = 1;
+//    while (reg_mprj_xfer == 1);
+
     // start test
     reg_la0_oenb = 0;
     reg_la0_data = 0xA0400000;

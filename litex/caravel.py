@@ -15,7 +15,7 @@ from litex.soc.integration.soc_core import SoCCore
 from litex.soc.integration.builder import Builder, builder_argdict, builder_args
 from litex.soc.integration.soc_core import soc_core_argdict, soc_core_args
 from litex.soc.integration.doc import AutoDoc
-from litex.soc.integration.soc import SoCRegion
+from litex.soc.integration.soc import SoCRegion, SoCIORegion
 from litex.soc.integration.soc_core import *
 from litex.build.generic_platform import *
 from litex.soc.cores.uart import UARTWishboneBridge, UART, RS232PHY
@@ -195,10 +195,12 @@ class MGMTSoC(SoCMini):
         self.comb += mprj.ack.eq(mprj_ports.ack_i)
 
         # Add a wb port for external slaves housekeeping
+        # self.add_csr_region(name="hk", origin=self.mem_map["hk"], busword=32, obj=0x0100000)
         hk = wishbone.Interface()
         self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
         hk_ports = platform.request("hk")
         self.comb += hk_ports.stb_o.eq(hk.stb)
+        # self.comb += hk_ports.stb_o.eq(hk.stb & self.bus.slave_sel[5])
         self.comb += hk.dat_r.eq(hk_ports.dat_i)
         self.comb += hk.ack.eq(hk_ports.ack_i)
 
