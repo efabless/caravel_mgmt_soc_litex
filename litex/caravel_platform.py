@@ -72,6 +72,7 @@ _io = [
     ("hk", 0,
      Subsignal("dat_i", Pins(32)),
      Subsignal("stb_o", Pins(1)),
+     Subsignal("cyc_o", Pins(1)),
      Subsignal("ack_i", Pins(1)),
      ),
 

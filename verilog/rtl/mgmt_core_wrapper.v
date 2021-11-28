@@ -200,7 +200,8 @@ module mgmt_core_wrapper (
         .mprj_adr_o(mprj_adr_o),
         .mprj_dat_o(mprj_dat_o),
 
-        .hk_stb_o(hk_stb_o),
+        .hk_cyc_o(hk_stb_o),
+        .hk_stb_o(),
         .hk_dat_i(hk_dat_i),
         .hk_ack_i(hk_ack_i),
 

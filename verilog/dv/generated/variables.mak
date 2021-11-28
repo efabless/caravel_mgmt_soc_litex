@@ -12,7 +12,7 @@ SOC_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/s
 PICOLIBC_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/pythondata_software_picolibc/data
 COMPILER_RT_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/pythondata_software_compiler_rt/data
 export BUILDINC_DIRECTORY
-BUILDINC_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/litex/build/CaravelMgmtSoC/software/include
+BUILDINC_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/litex/build/caravel_platform/software/include
 LIBC_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/libc
 LIBCOMPILER_RT_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/libcompiler_rt
 LIBBASE_DIRECTORY=/Users/jeffdi/Projects/caravel_mgmt_soc_litex/venv/lib/python3.9/site-packages/litex/soc/software/libbase

@@ -20,12 +20,12 @@ from litex.soc.integration.soc_core import *
 from litex.build.generic_platform import *
 from litex.soc.cores.uart import UARTWishboneBridge, UART, RS232PHY
 from litex.soc.cores.gpio import *
-from GPIOASIC import *
+from caravel_gpio import *
 from litex.soc.cores.spi import SPIMaster, SPISlave
 import litex.soc.doc as lxsocdoc
 
-from CaravelMgmtSoC import Platform
-from OpenRAM import *
+from caravel_platform import Platform
+from caravel_ram import *
 
 # SoCMini.mem_map = {
 #     "dff": 0x00000000,
@@ -184,7 +184,7 @@ class MGMTSoC(SoCMini):
         mprj = wishbone.Interface()
         self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x0100000))
         self.submodules.mprj_wb_iena = GPIOOut(mprj_ports.wb_iena)
-        self.comb += mprj_ports.cyc_o.eq(mprj.cyc)
+        # self.comb += mprj_ports.cyc_o.eq(mprj.cyc)
         self.comb += mprj_ports.stb_o.eq(mprj.stb)
         self.comb += mprj_ports.we_o.eq(mprj.we)
         self.comb += mprj_ports.sel_o.eq(mprj.sel)
@@ -199,10 +199,13 @@ class MGMTSoC(SoCMini):
         hk = wishbone.Interface()
         self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
         hk_ports = platform.request("hk")
-        # self.comb += hk_ports.stb_o.eq(hk.stb)
-        self.comb += hk_ports.stb_o.eq(hk.cyc)
+        self.comb += hk_ports.stb_o.eq(hk.stb)
+        self.comb += hk_ports.cyc_o.eq(hk.cyc)
         self.comb += hk.dat_r.eq(hk_ports.dat_i)
         self.comb += hk.ack.eq(hk_ports.ack_i)
+
+        # to match hk implementation, not sure this is going to work for generic wb slaves in the user area
+        self.comb += mprj_ports.cyc_o.eq(mprj.cyc | hk.cyc)
 
         # Add Debug Interface (UART)
         debug_ports = platform.request("debug")

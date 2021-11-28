@@ -18,8 +18,8 @@ all: mgmt_soc
 
 mgmt_soc: caravel.py
 	python3 caravel.py
-	cp build/CaravelMgmtSoC/gateware/mgmt_core.v ../verilog/rtl/.
-	cp -R build/CaravelMgmtSoC/software/include/generated ../verilog/dv/.
+	cp build/caravel_platform/gateware/mgmt_core.v ../verilog/rtl/.
+	cp -R build/caravel_platform/software/include/generated ../verilog/dv/.
 
 setup:
 	pip3 install -r requirements.txt
