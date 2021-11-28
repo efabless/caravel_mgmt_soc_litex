@@ -11,7 +11,8 @@ from litex.build.lattice import LatticePlatform
 # IOs ----------------------------------------------------------------------------------------------
 _io = [
     ("core_clk", 0, Pins(1)),
-    ("core_rst", 0, Pins(1)),
+    # ("core_rst", 0, Pins(1)),
+    ("core_rstn", 0, Pins(1)),
 
     ("serial", 0,
      Subsignal("tx", Pins(1)),

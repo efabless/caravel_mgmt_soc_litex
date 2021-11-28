@@ -147,7 +147,7 @@ module mgmt_core_wrapper (
 	    .vss(VGND),
 	`endif
     	.core_clk(core_clk),
-    	.core_rst(~core_rstn),
+    	.core_rstn(core_rstn),
 
     	// Trap state from CPU
 //    	.trap(trap),
@@ -196,7 +196,7 @@ module mgmt_core_wrapper (
         .mprj_stb_o(mprj_stb_o),
         .mprj_we_o(mprj_we_o),
         .mprj_sel_o(mprj_sel_o),
-        .mprj_adr_o({mprj_adr_o, 2'b0}),
+        .mprj_adr_o(mprj_adr_o),
         .mprj_dat_o(mprj_dat_o),
 
         .hk_stb_o(hk_stb_o),
