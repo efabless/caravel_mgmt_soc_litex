@@ -151,7 +151,7 @@ module mgmt_core_wrapper (
     	.core_rstn(core_rstn),
 
     	// Trap state from CPU
-//    	.trap(trap),
+    	.trap(trap),
 
     	// GPIO (one pin)
     	.gpio_out_pad(gpio_out_pad),		// Connect to out on gpio pad
