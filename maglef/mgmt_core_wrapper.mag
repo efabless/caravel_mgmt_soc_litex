@@ -3501,7 +3501,7 @@ port 741 nsew signal output
 string LEFclass BLOCK
 string FIXED_BBOX 0 0 580000 160000
 string LEFview TRUE
-string GDS_FILE /project/openlane/mgmt_core_wrapper/runs/mgmt_core_wrapper/results/magic/mgmt_core_wrapper.gds
+string GDS_FILE ../gds/mgmt_core_wrapper.gds
 string GDS_END 1299268
 string GDS_START 184026
 << end >>

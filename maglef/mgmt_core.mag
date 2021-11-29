@@ -3858,7 +3858,7 @@ port 819 nsew signal output
 string LEFclass BLOCK
 string FIXED_BBOX 0 0 400000 148000
 string LEFview TRUE
-string GDS_FILE /project/openlane/mgmt_core/runs/RUN_2021.11.29_05.54.12/results/magic/mgmt_core.gds
+string GDS_FILE ../gds/mgmt_core.gds
 string GDS_END 108153158
 string GDS_START 16753480
 << end >>
