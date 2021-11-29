@@ -26,17 +26,11 @@ set_voltage_domain -name CORE -power $::env(VDD_NET) -ground $::env(GND_NET)
 
 # Assesses whether the deisgn is the core of the chip or not based on the 
 # value of $::env(DESIGN_IS_CORE) and uses the appropriate stdcell section
-if { $::env(DESIGN_IS_CORE) == 1 } {
-    # Used if the design is the core of the chip
-    define_pdn_grid -name stdcell_grid -starts_with POWER -voltage_domain CORE -pins [subst {$::env(FP_PDN_LOWER_LAYER) $::env(FP_PDN_UPPER_LAYER)}]
-    add_pdn_stripe -grid stdcell_grid -layer $::env(FP_PDN_LOWER_LAYER) -width $::env(FP_PDN_VWIDTH) -pitch $::env(FP_PDN_VPITCH) -offset $::env(FP_PDN_VOFFSET) -starts_with POWER
-    add_pdn_stripe -grid stdcell_grid -layer $::env(FP_PDN_UPPER_LAYER) -width $::env(FP_PDN_HWIDTH) -pitch $::env(FP_PDN_HPITCH) -offset $::env(FP_PDN_HOFFSET) -starts_with POWER
-    add_pdn_connect -grid stdcell_grid -layers [subst {$::env(FP_PDN_LOWER_LAYER) $::env(FP_PDN_UPPER_LAYER)}]
-} else {
-    # Used if the design is a macro in the core
-    define_pdn_grid -name stdcell_grid -starts_with POWER -voltage_domain CORE -pins $::env(FP_PDN_LOWER_LAYER)
-    add_pdn_stripe -grid stdcell_grid -layer $::env(FP_PDN_LOWER_LAYER) -width $::env(FP_PDN_VWIDTH) -pitch $::env(FP_PDN_VPITCH) -offset $::env(FP_PDN_VOFFSET) -starts_with POWER
-}
+# Used if the design is the core of the chip
+define_pdn_grid -name stdcell_grid -starts_with POWER -voltage_domain CORE -pins [subst {$::env(FP_PDN_LOWER_LAYER) $::env(FP_PDN_UPPER_LAYER)}]
+add_pdn_stripe -grid stdcell_grid -layer $::env(FP_PDN_UPPER_LAYER) -width $::env(FP_PDN_HWIDTH) -pitch $::env(FP_PDN_HPITCH) -offset $::env(FP_PDN_HOFFSET) -starts_with POWER
+add_pdn_connect -grid stdcell_grid -layers [subst {$::env(FP_PDN_LOWER_LAYER) $::env(FP_PDN_UPPER_LAYER)}]
+
 
 # Adds the standard cell rails if enabled.
 if { $::env(FP_PDN_ENABLE_RAILS) == 1 } {
