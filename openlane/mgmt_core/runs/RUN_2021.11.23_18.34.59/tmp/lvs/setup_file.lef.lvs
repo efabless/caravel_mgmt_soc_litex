@@ -1,1 +1,0 @@
-lvs {/project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/results/magic/mgmt_core.spice mgmt_core} {/project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/results/lvs/mgmt_core.lvs.powered.v mgmt_core} /ciic/pdks/sky130A/libs.tech/netgen/sky130A_setup.tcl /project/openlane/mgmt_core/runs/RUN_2021.11.23_18.34.59/results/lvs/mgmt_core.lvs.lef.log -json
