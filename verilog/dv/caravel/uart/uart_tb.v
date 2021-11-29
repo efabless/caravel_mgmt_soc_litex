@@ -37,8 +37,8 @@
 `include "tbuart.v"
 
 module uart_tb;
-	reg core_clk;
-	reg core_rstn;
+	reg clock;
+	reg RSTB;
 	reg power1, power2;
 
 	wire gpio;
@@ -55,10 +55,10 @@ module uart_tb;
 	assign checkbits = mprj_io[31:16];
 	assign uart_tx = mprj_io[6];
 
-	always #12.5 core_clk <= (core_clk === 1'b0);
+	always #12.5 clock <= (clock === 1'b0);
 
 	initial begin
-		core_clk = 0;
+		clock = 0;
 	end
 
 	initial begin
@@ -67,7 +67,7 @@ module uart_tb;
 
 		$display("Wait for UART o/p");
 		repeat (450) begin
-			repeat (1000) @(posedge core_clk);
+			repeat (1000) @(posedge clock);
 			// Diagnostic. . . interrupts output pattern.
 		end
         $display("%c[1;31m",27);
@@ -81,9 +81,9 @@ module uart_tb;
 	end
 
 	initial begin
-		core_rstn <= 1'b0;
+		RSTB <= 1'b0;
 		#1000;
-		core_rstn <= 1'b1;	    // Release reset
+		RSTB <= 1'b1;	    // Release reset
 		#2000;
 	end
 
@@ -146,7 +146,7 @@ module uart_tb;
 	);
 
 //	mgmt_core_wrapper uut (
-//		.core_clk	  (core_clk),
+//		.core_clk	  (clock),
 //		.gpio_out_pad     (gpio),
 //		.la_output  (la_output),
 //		.flash_csb(flash_csb),
@@ -154,7 +154,7 @@ module uart_tb;
 //		.flash_io0_oeb(),
 //		.flash_io0_do(flash_io0),
 //		.flash_io1_di(flash_io1),
-//		.core_rstn	  (core_rstn),
+//		.core_rstn	  (RSTB),
 //        .mprj_dat_i(32'b0),
 //		.mprj_ack_i(1'b0),
 //        .hk_dat_i(32'b0),
