@@ -73,10 +73,23 @@ set ::env(FILL_INSERTION) 0
 set ::env(TAP_DECAP_INSERTION) 0
 set ::env(CLOCK_TREE_SYNTH) 0
 
+
+########## SET BELOW TO 0 TO AVOID OR SEGFAULT
+set ::env(STA_REPORT_POWER) 0
+
+########## DO NOT QUIT ON THE FOLLOWING
+set ::env(MAGIC_DRC_USE_GDS) 0
+set ::env(QUIT_ON_LVS_ERROR) "0"
+
+set ::env(QUIT_ON_MAGIC_DRC) 0
+set ::env(QUIT_ON_TIMING_VIOLATIONS) 0
+set ::env(QUIT_ON_HOLD_VIOLATIONS) 0
+set ::env(QUIT_ON_SETUP_VIOLATIONS) 0
+set ::env(QUIT_ON_TR_DRC) 0
+
 # magic drc checking on the sram block shows millions of false errors
 set ::env(MAGIC_DRC_USE_GDS) 0
 
-set ::env(QUIT_ON_LVS_ERROR) "0"
 
 set ::env(VERILOG_FILES) "\
 	$script_dir/../../verilog/rtl/defines.v\
