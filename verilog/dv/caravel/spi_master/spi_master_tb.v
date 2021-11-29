@@ -42,11 +42,11 @@ module spi_master_tb;
 	wire flash_io0;
 	wire flash_io1;
 
-	wire spi_clk;
-	wire spi_cs_n;
-	wire spi_mosi;
-	wire spi_miso;
-	wire spi_sdoenb;
+//	wire spi_clk;
+//	wire spi_cs_n;
+//	wire spi_mosi;
+//	wire spi_miso;
+//	wire spi_sdoenb;
 
 	assign checkbits = mprj_io[31:16];
 	assign spivalue  = mprj_io[15:8];
@@ -190,7 +190,7 @@ module spi_master_tb;
 	assign VDD1V8 = power2;
 	assign VSS = 1'b0;
 
-//	assign la_output[3] = 1'b1;       // Force CSB high.
+	assign mprj_io[3] = 1'b1;       // Force CSB high.
 	
 //	mgmt_core_wrapper uut (
 //		.core_clk	  (clock),
@@ -258,10 +258,10 @@ module spi_master_tb;
 	spiflash #(
 		.FILENAME("test_data")
 	) test_spi (
-		.csb(spi_cs_n),
-		.clk(spi_clk),
-		.io0(spi_mosi),
-		.io1(spi_miso),
+		.csb(mprj_io[33]),
+		.clk(mprj_io[32]),
+		.io0(mprj_io[35]),
+		.io1(mprj_io[34]),
 		.io2(),			// not used
 		.io3()			// not used
 	);
