@@ -15,7 +15,7 @@
 
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(ROUTING_CORES) "64"
+set ::env(ROUTING_CORES) "6"
 
 set ::env(DESIGN_NAME) mgmt_core
 set ::env(DESIGN_IS_CORE) 1
@@ -25,6 +25,10 @@ set ::env(RUN_KLAYOUT) 0
 set ::env(CLOCK_PORT) "core_clk"
 set ::env(CLOCK_NET) "core_clk"
 set ::env(CLOCK_PERIOD) "25"
+
+set ::env(RESET_PORT) "core_rstn"
+
+set ::env(BASE_SDC_FILE) $script_dir/base.sdc 
 
 ## Synthesis
 set ::env(SYNTH_STRATEGY) "DELAY 1"
