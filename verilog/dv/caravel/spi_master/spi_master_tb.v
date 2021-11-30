@@ -192,28 +192,7 @@ module spi_master_tb;
 
 	assign mprj_io[3] = 1'b1;       // Force CSB high.
 	
-//	mgmt_core_wrapper uut (
-//		.core_clk	  (clock),
-//		.gpio_out_pad     (gpio),
-//		.la_output  (la_output),
-//		.flash_csb(flash_csb),
-//		.flash_clk(flash_clk),
-//		.flash_io0_oeb(),
-//		.flash_io0_do(flash_io0),
-//		.flash_io1_di(flash_io1),
-//        .core_rstn(RSTB),
-//        .mprj_dat_i(32'b0),
-//		.mprj_ack_i(1'b0),
-//        .hk_dat_i(32'b0),
-//		.hk_ack_i(1'b0),
-//		.spi_sck(spi_clk),
-//	    .spi_csb(spi_cs_n),
-//        .spi_sdo(spi_miso),
-//        .spi_sdi(spi_mosi),
-//        .spi_sdoenb(spi_sdoenb)
-//	);
-//
-		caravel uut (
+    caravel uut (
 		.vddio	  (VDD3V3),
 		.vddio_2  (VDD3V3),
 		.vssio	  (VSS),

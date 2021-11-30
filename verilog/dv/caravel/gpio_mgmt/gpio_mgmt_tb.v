@@ -168,24 +168,7 @@ module gpio_mgmt_tb;
 	// ser_tx    = mgmt_gpio_io[6]              (output)
 	// irq       = mgmt_gpio_io[7]              (input)
 
-//	mgmt_core_wrapper uut (
-//		.core_clk	  (clock),
-//		.core_rstn	  (RSTB),
-//		.gpio_out_pad     (gpio),
-////		.mprj_io  (mprj_io),
-//		.la_output (la_output),
-//		.flash_csb(flash_csb),
-//		.flash_clk(flash_clk),
-//		.flash_io0_oeb(),
-//		.flash_io0_do(flash_io0),
-//		.flash_io1_di(flash_io1),
-//		.mprj_dat_i(32'b0),
-//		.mprj_ack_i(1'b0),
-//        .hk_dat_i(32'b0),
-//		.hk_ack_i(1'b0)
-//	);
-
-		caravel uut (
+    caravel uut (
 		.vddio	  (VDD3V3),
 		.vssio	  (VSS),
 		.vdda	  (VDD3V3),

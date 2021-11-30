@@ -222,8 +222,8 @@ module mgmt_core_wrapper (
     	.spi_miso(spi_sdi),
     	.spi_sdoenb(spi_sdoenb),
     	.spi_mosi(spi_sdo),
-    	.debug_rx(debug_in),
-    	.debug_tx(debug_out),
+    	.debug_in(debug_in),
+    	.debug_out(debug_out),
     	.debug_oeb(debug_oeb),
 
         // DFFRAM Interface 

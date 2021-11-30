@@ -18,7 +18,7 @@ from litex.soc.integration.doc import AutoDoc
 from litex.soc.integration.soc import SoCRegion, SoCIORegion
 from litex.soc.integration.soc_core import *
 from litex.build.generic_platform import *
-from litex.soc.cores.uart import UARTWishboneBridge, UART, RS232PHY
+from litex.soc.cores.uart import UARTWishboneBridge, UART, RS232PHY, UARTPHY
 from litex.soc.cores.gpio import *
 from caravel_gpio import *
 from litex.soc.cores.spi import SPIMaster, SPISlave
@@ -68,9 +68,10 @@ class MGMTSoC(SoCMini):
                              csr_data_width=32,
                              integrated_sram_size=0,
                              integrated_rom_size=0,
-                             with_uart=True,
-                             uart_baudrate=9600,
-                             uart_name="serial",
+                             with_uart=False,
+                             # with_uart=True,
+                             # uart_baudrate=9600,
+                             # uart_name="serial",
                              with_timer=True,
                              **kwargs)
 
@@ -203,17 +204,42 @@ class MGMTSoC(SoCMini):
         self.comb += hk.dat_r.eq(hk_ports.dat_i)
         self.comb += hk.ack.eq(hk_ports.ack_i)
 
+        # Add System UART
+        sys_uart = Record([('rx', 1), ('tx', 1)])
+        self.submodules.uart_phy = UARTPHY(sys_uart, sys_clk_freq, baudrate = 9600)
+        self.submodules.uart = UART(self.uart_phy, tx_fifo_depth = 16, rx_fifo_depth = 16)
+        self.irq.add("uart", use_loc_if_exists=True)
+
         # Add Debug Interface (UART)
+        dbg_uart = Record([('rx',1),('tx',1)])
+        self.submodules.dbg_uart = UARTWishboneBridge(dbg_uart, sys_clk_freq, baudrate=115200)
+        self.add_wb_master(self.dbg_uart.wishbone)
+
+        uart_ports = platform.request("serial")
         debug_ports = platform.request("debug")
-        self.submodules.debug = UARTWishboneBridge(debug_ports, sys_clk_freq, baudrate=115200)
-        self.add_wb_master(self.debug.wishbone)
         self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)
 
-        # mux system uart and debug uart to the current ports using debug_in as a select
-        # mux uart enabled to user controlled reg and debug_in (or logic)
-        # debug enabled will be register
-        # setup isr for interrupt irq[3] to halt processor (hk register)
-        # develop test bench to confirm functionality
+        self.submodules.debug_mode = GPIOOut(platform.request("debug_mode"))
+        self.comb += If(getattr(debug_ports, 'in') == 1,
+                            uart_ports.tx.eq(dbg_uart.tx),
+                            dbg_uart.rx.eq(uart_ports.rx)
+                        ).Else(
+                            uart_ports.tx.eq(sys_uart.tx),
+                            sys_uart.rx.eq(uart_ports.rx)
+                        )
+
+        uart_enabled_o = Signal()
+        self.submodules.uart_enabled = GPIOOut(uart_enabled_o)
+        uart_enabled_pad = platform.request("uart_enabled")
+        self.comb += uart_enabled_pad.eq(uart_enabled_o | getattr(debug_ports, 'in'))
+        # self.submodules.uart_enabled = GPIOOut(platform.request("uart_enabled"))
+
+        # NOTES RE DEBUG:
+        #   mux system uart and debug uart to the current ports using debug_in as a select
+        #   mux uart enabled to user controlled reg and debug_in (or logic)
+        #   debug enabled will be register
+        #   setup isr for interrupt irq[3] to halt processor (hk register)
+        #   develop test bench to confirm functionality
 
         # Add a GPIO Pin
         self.submodules.gpio = GPIOASIC(platform.request("gpio"))
@@ -225,9 +251,7 @@ class MGMTSoC(SoCMini):
         # Add the user's input control
         qspi_enabled = platform.request("qspi_enabled")
         self.comb += qspi_enabled.eq(0)
-        self.submodules.uart_enabled = GPIOOut(platform.request("uart_enabled"))
         self.submodules.spi_enabled = GPIOOut(platform.request("spi_enabled"))
-        self.submodules.debug_mode = GPIOOut(platform.request("debug_mode"))
 
         trap = platform.request("trap")
         if cpu == 'picorv32':
@@ -236,6 +260,7 @@ class MGMTSoC(SoCMini):
             self.comb += trap.eq(0)
 
         self.submodules.user_irq_ena = GPIOOut(platform.request("user_irq_ena"))
+        # NOTE - these are not connected
 
         # Add 6 IRQ lines
         user_irq = platform.request("user_irq")

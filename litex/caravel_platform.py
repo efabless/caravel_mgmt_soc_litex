@@ -14,10 +14,6 @@ _io = [
     # ("core_rst", 0, Pins(1)),
     ("core_rstn", 0, Pins(1)),
 
-    ("serial", 0,
-     Subsignal("tx", Pins(1)),
-     Subsignal("rx", Pins(1)),
-     ),
     # GPIO mgmt
     ("gpio", 0,
      Subsignal("out_pad", Pins(1)),
@@ -87,10 +83,18 @@ _io = [
     ("debug_mode", 0, Pins(1)),
 
     # Serial UART
-    ("ser", 0,
-        Subsignal("rx", Pins("1")),
-        Subsignal("tx", Pins("1")),
-    ),
+    # muxed output between system and debug uarts
+    ("serial", 0,
+     Subsignal("tx", Pins(1)),
+     Subsignal("rx", Pins(1)),
+     ),
+
+    # Debug interface -- only debug_in is used
+    ("debug", 0,
+     Subsignal("in", Pins("1")),
+     Subsignal("out", Pins("1")),
+     Subsignal("oeb", Pins("1")),
+     ),
 
     # SPI master Controller
     ("spi", 0,
@@ -100,12 +104,6 @@ _io = [
         Subsignal("miso", Pins(1)),
         Subsignal("sdoenb", Pins(1)),
     ),
-
-    ("debug", 0,
-     Subsignal("rx", Pins("1")),
-     Subsignal("tx", Pins("1")),
-     Subsignal("oeb", Pins("1")), # TODO:
-     ),
 
     # SRAM read-only access from housekeeping
     ("sram_ro", 0,

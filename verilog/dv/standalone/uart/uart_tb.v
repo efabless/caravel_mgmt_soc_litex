@@ -131,7 +131,8 @@ module uart_tb;
 		.mprj_ack_i(1'b0),
         .hk_dat_i(32'b0),
 		.hk_ack_i(1'b0),
-		.ser_tx(uart_tx)
+		.ser_tx(uart_tx),
+		.debug_in(1'b0)  // disable debug mode
 //		.ser_tx(uart_loopback),
 //		.ser_rx(uart_loopback)
 	);

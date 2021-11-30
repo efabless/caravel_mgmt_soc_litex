@@ -61,10 +61,10 @@ task wb_read (input [31:0] addr, output [31:0] word);
         uart_put(addr[23:16]);
         uart_put(addr[15:8]);
         uart_put(addr[7:0]);
-        uart_get(word[7:0]);
-        uart_get(word[15:8]);
-        uart_get(word[23:16]);
         uart_get(word[31:24]);
+        uart_get(word[23:16]);
+        uart_get(word[15:8]);
+        uart_get(word[7:0]);
     end
 endtask
 
@@ -76,10 +76,10 @@ task wb_write (input [31:0] addr, input [31:0] word);
         uart_put(addr[23:16]);
         uart_put(addr[15:8]);
         uart_put(addr[7:0]);
-        uart_put(word[7:0]);
-        uart_put(word[15:8]);
-        uart_put(word[23:16]);
         uart_put(word[31:24]);
+        uart_put(word[23:16]);
+        uart_put(word[15:8]);
+        uart_put(word[7:0]);
     end
 endtask
 

@@ -150,8 +150,8 @@ Disassembly of section .text:
 100001d0:	00050793          	mv	a5,a0
 100001d4:	00f4f7b3          	and	a5,s1,a5
 100001d8:	fef42623          	sw	a5,-20(s0)
-100001dc:	f00067b7          	lui	a5,0xf0006
-100001e0:	81c78793          	addi	a5,a5,-2020 # f000581c <_etext+0xe00054c4>
+100001dc:	f00057b7          	lui	a5,0xf0005
+100001e0:	01c78793          	addi	a5,a5,28 # f000501c <_etext+0xe0004cc4>
 100001e4:	0007a023          	sw	zero,0(a5)
 100001e8:	f00037b7          	lui	a5,0xf0003
 100001ec:	03878793          	addi	a5,a5,56 # f0003038 <_etext+0xe0002ce0>
