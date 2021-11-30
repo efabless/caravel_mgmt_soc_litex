@@ -100,7 +100,9 @@ void main()
     while (reg_mprj_xfer == 1);
 
 
-//    reg_mprj_datal = 0;
+    reg_mprj_datal = 0;
+    reg_spi_enable = 1;
+
 
     // For SPI operation, GPIO 1 should be an input, and GPIOs 2 to 4
     // should be outputs.
