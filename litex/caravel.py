@@ -213,6 +213,11 @@ class MGMTSoC(SoCMini):
         self.add_wb_master(self.debug.wishbone)
         self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)  #TODO add logic for this
 
+        # mux system uart and debug uart to the current ports using debug_in as a select
+        # mux uart enabled to user controlled reg and debug_in (or logic)
+        # debug enabled will be register
+        # setup isr for interrupt irq[3] to halt processor (hk register)
+        # develop test bench to confirm functionality
 
         # Add a GPIO Pin
         self.submodules.gpio = GPIOASIC(platform.request("gpio"))
@@ -222,7 +227,8 @@ class MGMTSoC(SoCMini):
         # self.submodules.la_ien = GPIOOut(platform.request("la_ien"))
 
         # Add the user's input control
-        self.submodules.qspi_enabled = GPIOOut(platform.request("qspi_enabled"))
+        qspi_enabled = platform.request("qspi_enabled")
+        self.comb += qspi_enabled.eq(0)
         self.submodules.uart_enabled = GPIOOut(platform.request("uart_enabled"))
         self.submodules.spi_enabled = GPIOOut(platform.request("spi_enabled"))
         self.submodules.debug_mode = GPIOOut(platform.request("debug_mode"))

@@ -173,6 +173,8 @@ extern uint32_t flashio_worker_end;
 #define reg_spimaster_rdata   (*(volatile uint32_t*) CSR_SPI_MASTER_MISO_ADDR)
 #define reg_spimaster_cs   (*(volatile uint32_t*) CSR_SPI_MASTER_CS_ADDR)
 #define reg_spimaster_clk_divider   (*(volatile uint32_t*) CSR_SPI_MASTER_CLK_DIVIDER_ADDR)
+#define reg_spi_enable (*(volatile uint32_t*) CSR_SPI_ENABLED_OUT_ADDR)
+
 
 // Bit fields for SPI master configuration
 //#define SPI_MASTER_DIV_MASK	0x00ff
