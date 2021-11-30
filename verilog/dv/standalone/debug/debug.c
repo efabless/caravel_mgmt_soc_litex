@@ -15,6 +15,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+#include <generated/csr.h>
+#include <generated/soc.h>
+#include <irq_vex.h>
+
 #include <defs.h>
 #include <stub.c>
 
@@ -28,14 +32,29 @@ void main()
     // before applying the configuration, or else the Tx line initializes as
     // zero, which indicates the start of a byte to the receiver.
 
-//    reg_uart_clkdiv = 625;
-//    reg_uart_enable = 1;
-
+    // these instruction work without using interrupt, they seem to be timing dependent
+    reg_uart_enable = 1;
+    reg_debug_irq_en = 1;
     reg_reset = 1;
-    while(1);
+
+
+    // alternate using EBREAK instruction
+//    reg_uart_enable = 1;
+//    reg_debug_irq_en = 1;
+//    asm volatile ("slli x0, x0, 0x1f");
+//    asm volatile ("ebreak");
+//    asm volatile ("srai x0, x0, 7");
+
+//  irq_setmask(0);
+//	irq_setie(1);
+//	irq_setmask(irq_getmask() | (1 << USER_IRQ_3_INTERRUPT));
+
+
 
     // Start test
-    reg_la0_data = 0xa0000000;
+//    reg_la0_data = 0xa0000000;
+
+    while(1);
 
 //    reg_uart_data = 0xab;
 

@@ -46,10 +46,13 @@ module debug_tb;
 	wire flash_io0;
 	wire flash_io1;
 //	wire [37:0] mprj_io;
-	wire debug_uart_tx;
-	wire debug_uart_rx;
+	wire uart_tx;
+	wire uart_rx;
 	wire uart_loopback;
 	wire SDO;
+
+	reg debug_in;
+	reg [5:0] irq;
 
 	assign checkbits = la_output[31:16];
 //	assign uart_tx = la_output[6];
@@ -95,6 +98,20 @@ module debug_tb;
 		power2 <= 1'b1;
 	end
 
+    initial begin
+        debug_in <= 1'b0;
+        irq <= 6'b0;
+        #1000
+		debug_in <= 1'b1;	    // Debug mode
+//		#350000;
+//		#250000;
+		#3000;
+//		irq[3] <= 1'b1;	    // Raise IRQ
+//		irq <= 6'b111111;	    // Raise IRQ
+//		#100
+//		irq <= 6'b0;
+	end
+
 	always @(checkbits) begin
 		if(checkbits == 16'hA000) begin
 			$display("Debug Test started");
@@ -128,13 +145,15 @@ module debug_tb;
 		.flash_io0_oeb(),
 		.flash_io0_do(flash_io0),
 		.flash_io1_di(flash_io1),
-		.core_rstn	  (core_rstn),
+		.core_rstn(core_rstn),
         .mprj_dat_i(32'b0),
 		.mprj_ack_i(1'b0),
         .hk_dat_i(32'b0),
 		.hk_ack_i(1'b0),
-		.debug_out(debug_uart_tx),
-		.debug_in(debug_uart_rx)
+		.ser_tx(uart_tx),
+		.ser_rx(uart_rx),
+        .debug_in(debug_in),  // disable debug mode
+        .irq(irq)
 //		.ser_tx(uart_loopback),
 //		.ser_rx(uart_loopback)
 	);
@@ -152,8 +171,8 @@ module debug_tb;
 
     // Testbench UART
 	wb_rw_test debug_uart (
-		.rx(debug_uart_tx),
-		.tx(debug_uart_rx)
+		.rx(uart_tx),
+		.tx(uart_rx)
 	);
 		
 endmodule

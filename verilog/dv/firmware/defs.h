@@ -47,6 +47,7 @@ extern uint32_t flashio_worker_end;
 #define reg_reset   (*(volatile uint32_t*) CSR_CTRL_RESET_ADDR)
 #define reg_debug_data   (*(volatile uint32_t*) CSR_DEBUG_RXTX_ADDR)
 #define reg_debug_txfull   (*(volatile uint32_t*) CSR_DEBUG_TXFULL_ADDR)
+#define reg_debug_irq_en   (*(volatile uint32_t*) CSR_USER_IRQ_3_EV_ENABLE_ADDR)
 //#define reg_debug_enable (*(volatile uint32_t*) CSR_UART_ENABLED_OUT_ADDR)
 
 // GPIO (0x2100_0000)
@@ -173,6 +174,8 @@ extern uint32_t flashio_worker_end;
 #define reg_spimaster_rdata   (*(volatile uint32_t*) CSR_SPI_MASTER_MISO_ADDR)
 #define reg_spimaster_cs   (*(volatile uint32_t*) CSR_SPI_MASTER_CS_ADDR)
 #define reg_spimaster_clk_divider   (*(volatile uint32_t*) CSR_SPI_MASTER_CLK_DIVIDER_ADDR)
+#define reg_spi_enable (*(volatile uint32_t*) CSR_SPI_ENABLED_OUT_ADDR)
+
 
 // Bit fields for SPI master configuration
 //#define SPI_MASTER_DIV_MASK	0x00ff

@@ -97,6 +97,7 @@ module mgmt_core_wrapper (
     input  	  mprj_ack_i,
     input  [31:0] mprj_dat_i,
 
+    output 	  hk_cyc_o,
     output 	  hk_stb_o,
     input  [31:0] hk_dat_i,
     input  	  hk_ack_i,
@@ -200,8 +201,8 @@ module mgmt_core_wrapper (
         .mprj_adr_o(mprj_adr_o),
         .mprj_dat_o(mprj_dat_o),
 
-        .hk_cyc_o(hk_stb_o),
-        .hk_stb_o(),
+        .hk_cyc_o(hk_cyc_o),
+        .hk_stb_o(hk_stb_o),
         .hk_dat_i(hk_dat_i),
         .hk_ack_i(hk_ack_i),
 
@@ -221,8 +222,8 @@ module mgmt_core_wrapper (
     	.spi_miso(spi_sdi),
     	.spi_sdoenb(spi_sdoenb),
     	.spi_mosi(spi_sdo),
-    	.debug_rx(debug_in),
-    	.debug_tx(debug_out),
+    	.debug_in(debug_in),
+    	.debug_out(debug_out),
     	.debug_oeb(debug_oeb),
 
         // DFFRAM Interface 

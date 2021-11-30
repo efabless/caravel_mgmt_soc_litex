@@ -119,6 +119,7 @@ module uart_tb;
 	assign VSS = 1'b0;
 	
 	assign mprj_io[3] = 1'b1;  // Force CSB high.
+	assign mprj_io[0] = 1'b0;  // Disable debug mode
 
 	caravel uut (
 		.vddio	  (VDD3V3),
@@ -144,25 +145,6 @@ module uart_tb;
 		.flash_io1(flash_io1),
 		.resetb	  (RSTB)
 	);
-
-//	mgmt_core_wrapper uut (
-//		.core_clk	  (clock),
-//		.gpio_out_pad     (gpio),
-//		.la_output  (la_output),
-//		.flash_csb(flash_csb),
-//		.flash_clk(flash_clk),
-//		.flash_io0_oeb(),
-//		.flash_io0_do(flash_io0),
-//		.flash_io1_di(flash_io1),
-//		.core_rstn	  (RSTB),
-//        .mprj_dat_i(32'b0),
-//		.mprj_ack_i(1'b0),
-//        .hk_dat_i(32'b0),
-//		.hk_ack_i(1'b0),
-//		.ser_tx(uart_tx)
-////		.ser_tx(uart_loopback),
-////		.ser_rx(uart_loopback)
-//	);
 
 	spiflash #(
 		.FILENAME("uart.hex")
