@@ -22,8 +22,10 @@ initial begin
     TX = 1'b1;
     #10000;
     wb_write (32'h01000094, 32'h775555ab);
-    wb_read (32'h01000094, data);
-    $display("output: %s", data);
+    #2000;
+    TX = 1'b0;
+//    wb_read (32'h01000094, data);
+//    $display("output: %s", data);
 end
 
 task uart_put(input [7:0] b);
