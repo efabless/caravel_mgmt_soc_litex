@@ -215,11 +215,14 @@ class MGMTSoC(SoCMini):
         self.submodules.dbg_uart = UARTWishboneBridge(dbg_uart, sys_clk_freq, baudrate=115200)
         self.add_wb_master(self.dbg_uart.wishbone)
 
+        # Instantiate ports for debug & serial i/f
         uart_ports = platform.request("serial")
         debug_ports = platform.request("debug")
         self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)
-
+        self.comb += debug_ports.out.eq(0)
         self.submodules.debug_mode = GPIOOut(platform.request("debug_mode"))
+
+        # Mux uart outputs to serial ports
         self.comb += If(getattr(debug_ports, 'in') == 1,
                             uart_ports.tx.eq(dbg_uart.tx),
                             dbg_uart.rx.eq(uart_ports.rx)
@@ -228,6 +231,7 @@ class MGMTSoC(SoCMini):
                             sys_uart.rx.eq(uart_ports.rx)
                         )
 
+        # Setup uart_enabled port to be uart_enabled reg OR debug_in
         uart_enabled_o = Signal()
         self.submodules.uart_enabled = GPIOOut(uart_enabled_o)
         uart_enabled_pad = platform.request("uart_enabled")
