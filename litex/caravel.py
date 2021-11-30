@@ -184,7 +184,7 @@ class MGMTSoC(SoCMini):
         mprj = wishbone.Interface()
         self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x0100000))
         self.submodules.mprj_wb_iena = GPIOOut(mprj_ports.wb_iena)
-        # self.comb += mprj_ports.cyc_o.eq(mprj.cyc)
+        self.comb += mprj_ports.cyc_o.eq(mprj.cyc)
         self.comb += mprj_ports.stb_o.eq(mprj.stb)
         self.comb += mprj_ports.we_o.eq(mprj.we)
         self.comb += mprj_ports.sel_o.eq(mprj.sel)
@@ -195,7 +195,6 @@ class MGMTSoC(SoCMini):
         self.comb += mprj.ack.eq(mprj_ports.ack_i)
 
         # Add a wb port for external slaves housekeeping
-        # self.add_csr_region(name="hk", origin=self.mem_map["hk"], busword=32, obj=0x0100000)
         hk = wishbone.Interface()
         self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
         hk_ports = platform.request("hk")
@@ -204,14 +203,11 @@ class MGMTSoC(SoCMini):
         self.comb += hk.dat_r.eq(hk_ports.dat_i)
         self.comb += hk.ack.eq(hk_ports.ack_i)
 
-        # to match hk implementation, not sure this is going to work for generic wb slaves in the user area
-        self.comb += mprj_ports.cyc_o.eq(mprj.cyc | hk.cyc)
-
         # Add Debug Interface (UART)
         debug_ports = platform.request("debug")
         self.submodules.debug = UARTWishboneBridge(debug_ports, sys_clk_freq, baudrate=115200)
         self.add_wb_master(self.debug.wishbone)
-        self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)  #TODO add logic for this
+        self.submodules.debug_oeb = GPIOOut(debug_ports.oeb)
 
         # mux system uart and debug uart to the current ports using debug_in as a select
         # mux uart enabled to user controlled reg and debug_in (or logic)
