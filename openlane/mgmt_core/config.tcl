@@ -43,7 +43,7 @@ set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 2000 740"
 
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
-set ::env(PL_TARGET_DENSITY) 0.214
+set ::env(PL_TARGET_DENSITY) 0.6
 set ::env(CELL_PAD) 0
 
 set ::env(LEFT_MARGIN_MULT) 22
@@ -122,6 +122,6 @@ set ::env(VERILOG_FILES) "\
   	$script_dir/../../verilog/rtl/mgmt_core.v \
 	$script_dir/../../verilog/rtl/picorv32.v \
 	$script_dir/../../verilog/rtl/ibex_all.v \
- 	$script_dir/../../verilog/rtl/VexRiscv_MinDebug.v"
+ 	$script_dir/../../verilog/rtl/VexRiscv_MinDebugCache.v"
 
 ##	$script_dir/../../verilog/rtl/VexRiscv.v"

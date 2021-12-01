@@ -27,6 +27,7 @@ module mgmt_core_wrapper (VGND,
     gpio_out_pad,
     gpio_outenb_pad,
     hk_ack_i,
+    hk_cyc_o,
     hk_stb_o,
     mprj_ack_i,
     mprj_cyc_o,
@@ -88,6 +89,7 @@ module mgmt_core_wrapper (VGND,
  output gpio_out_pad;
  output gpio_outenb_pad;
  input hk_ack_i;
+ output hk_cyc_o;
  output hk_stb_o;
  input mprj_ack_i;
  output mprj_cyc_o;
@@ -283,10 +285,10 @@ module mgmt_core_wrapper (VGND,
     .VPWR(VPWR),
     .core_clk(core_clk),
     .core_rstn(core_rstn),
+    .debug_in(debug_in),
     .debug_mode(debug_mode),
     .debug_oeb(debug_oeb),
-    .debug_rx(debug_in),
-    .debug_tx(debug_out),
+    .debug_out(debug_out),
     .flash_clk(flash_clk),
     .flash_cs_n(flash_csb),
     .flash_io0_di(flash_io0_di),
@@ -308,7 +310,8 @@ module mgmt_core_wrapper (VGND,
     .gpio_out_pad(gpio_out_pad),
     .gpio_outenb_pad(gpio_outenb_pad),
     .hk_ack_i(hk_ack_i),
-    .hk_cyc_o(hk_stb_o),
+    .hk_cyc_o(hk_cyc_o),
+    .hk_stb_o(hk_stb_o),
     .mgmt_soc_dff_EN(mgmt_soc_dff_EN),
     .mprj_ack_i(mprj_ack_i),
     .mprj_cyc_o(mprj_cyc_o),
