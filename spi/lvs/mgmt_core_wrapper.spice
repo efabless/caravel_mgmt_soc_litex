@@ -11,7 +11,7 @@
 .ends
 
 * Black-box entry subcircuit for mgmt_core abstract view
-.subckt mgmt_core VGND VPWR core_clk core_rstn debug_mode debug_oeb debug_rx debug_tx
+.subckt mgmt_core VGND VPWR core_clk core_rstn debug_in debug_mode debug_oeb debug_out
 + flash_clk flash_cs_n flash_io0_di flash_io0_do flash_io0_oeb flash_io1_di flash_io1_do
 + flash_io1_oeb flash_io2_di flash_io2_do flash_io2_oeb flash_io3_di flash_io3_do
 + flash_io3_oeb gpio_in_pad gpio_inenb_pad gpio_mode0_pad gpio_mode1_pad gpio_out_pad
@@ -144,7 +144,7 @@
 + user_irq[3] user_irq[4] user_irq[5] user_irq_ena[0] user_irq_ena[1] user_irq_ena[2]
 .ends
 
-.subckt mgmt_core_wrapper VGND VPWR core_clk core_rstn debug_in debug_mode debug_oeb
+.subckt mgmt_core_wrapper VGND_uq1 VPWR core_clk core_rstn debug_in debug_mode debug_oeb
 + debug_out flash_clk flash_csb flash_io0_di flash_io0_do flash_io0_oeb flash_io1_di
 + flash_io1_do flash_io1_oeb flash_io2_di flash_io2_do flash_io2_oeb flash_io3_di
 + flash_io3_do flash_io3_oeb gpio_in_pad gpio_inenb_pad gpio_mode0_pad gpio_mode1_pad
@@ -258,9 +258,9 @@
 + sram_ro_data[29] sram_ro_data[2] sram_ro_data[30] sram_ro_data[31] sram_ro_data[3]
 + sram_ro_data[4] sram_ro_data[5] sram_ro_data[6] sram_ro_data[7] sram_ro_data[8]
 + sram_ro_data[9] trap uart_enabled user_irq_ena[0] user_irq_ena[1] user_irq_ena[2]
-+
++ VGND_uq0
 XDFFRAM DFFRAM/A[0] DFFRAM/A[1] DFFRAM/A[2] DFFRAM/A[3] DFFRAM/A[4] DFFRAM/A[5] DFFRAM/A[6]
-+ DFFRAM/A[7] core_clk DFFRAM/Di[0] DFFRAM/Di[10] DFFRAM/Di[11] DFFRAM/Di[12] DFFRAM/Di[13]
++ DFFRAM/A[7] core_clk DFFRAM/Di[0] DFFRAM/Di[10] DFFRAM/Di[11] DFFRAM/Di[16] DFFRAM/Di[13]
 + DFFRAM/Di[14] DFFRAM/Di[15] DFFRAM/Di[16] DFFRAM/Di[17] DFFRAM/Di[18] DFFRAM/Di[19]
 + DFFRAM/Di[1] DFFRAM/Di[20] DFFRAM/Di[21] DFFRAM/Di[22] DFFRAM/Di[23] DFFRAM/Di[24]
 + DFFRAM/Di[25] DFFRAM/Di[26] DFFRAM/Di[27] DFFRAM/Di[28] DFFRAM/Di[29] DFFRAM/Di[2]
@@ -270,9 +270,9 @@ XDFFRAM DFFRAM/A[0] DFFRAM/A[1] DFFRAM/A[2] DFFRAM/A[3] DFFRAM/A[4] DFFRAM/A[5] 
 + DFFRAM/Do[18] DFFRAM/Do[19] DFFRAM/Do[1] DFFRAM/Do[20] DFFRAM/Do[21] DFFRAM/Do[22]
 + DFFRAM/Do[23] DFFRAM/Do[24] DFFRAM/Do[25] DFFRAM/Do[26] DFFRAM/Do[27] DFFRAM/Do[28]
 + DFFRAM/Do[29] DFFRAM/Do[2] DFFRAM/Do[30] DFFRAM/Do[31] DFFRAM/Do[3] DFFRAM/Do[4]
-+ DFFRAM/Do[5] DFFRAM/Do[6] DFFRAM/Do[7] DFFRAM/Do[8] DFFRAM/Do[9] DFFRAM/EN VGND
++ DFFRAM/Do[5] DFFRAM/Do[6] DFFRAM/Do[7] DFFRAM/Do[8] DFFRAM/Do[9] DFFRAM/EN VGND_uq1
 + VPWR DFFRAM/WE[0] DFFRAM/WE[1] DFFRAM/WE[2] DFFRAM/WE[3] DFFRAM
-Xcore VGND VPWR core_clk core_rstn debug_in debug_mode debug_oeb debug_out flash_clk
+Xcore VGND_uq1 VPWR core_clk core_rstn debug_in debug_mode debug_oeb debug_out flash_clk
 + flash_csb flash_io0_di flash_io0_do flash_io0_oeb flash_io1_di flash_io1_do flash_io1_oeb
 + flash_io2_di flash_io2_do flash_io2_oeb flash_io3_di flash_io3_do flash_io3_oeb
 + gpio_in_pad gpio_inenb_pad gpio_mode0_pad gpio_mode1_pad gpio_out_pad gpio_outenb_pad
@@ -359,7 +359,7 @@ Xcore VGND VPWR core_clk core_rstn debug_in debug_mode debug_oeb debug_out flash
 + la_output[90] la_output[91] la_output[92] la_output[93] la_output[94] la_output[95]
 + la_output[96] la_output[97] la_output[98] la_output[99] la_output[9] DFFRAM/A[0]
 + DFFRAM/A[1] DFFRAM/A[2] DFFRAM/A[3] DFFRAM/A[4] DFFRAM/A[5] DFFRAM/A[6] DFFRAM/A[7]
-+ DFFRAM/Di[0] DFFRAM/Di[10] DFFRAM/Di[11] DFFRAM/Di[12] DFFRAM/Di[13] DFFRAM/Di[14]
++ DFFRAM/Di[0] DFFRAM/Di[10] DFFRAM/Di[11] DFFRAM/Di[16] DFFRAM/Di[13] DFFRAM/Di[14]
 + DFFRAM/Di[15] DFFRAM/Di[16] DFFRAM/Di[17] DFFRAM/Di[18] DFFRAM/Di[19] DFFRAM/Di[1]
 + DFFRAM/Di[20] DFFRAM/Di[21] DFFRAM/Di[22] DFFRAM/Di[23] DFFRAM/Di[24] DFFRAM/Di[25]
 + DFFRAM/Di[26] DFFRAM/Di[27] DFFRAM/Di[28] DFFRAM/Di[29] DFFRAM/Di[2] DFFRAM/Di[30]

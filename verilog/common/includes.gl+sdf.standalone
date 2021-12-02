@@ -1,0 +1,19 @@
+-v ../../../common/defines-simulation.v
+
+-v ../../../dv/vip/tbuart.v
+-v ../../../dv/vip/spiflash.v
+
+-v ../../../rtl/defines.v
+-v ../../../gl/mgmt_core.v
+-v ../../../gl/mgmt_core_wrapper.v
+
+-v ../../../gl/DFFRAM.v
+
+
+-v ../../../cvc-pdk/primitives_hd.v
+-v ../../../cvc-pdk/primitives_hvl.v
+-v ../../../cvc-pdk/sky130_ef_io.v
+-v ../../../cvc-pdk/sky130_ef_io__analog_pad.v
+-v ../../../cvc-pdk/sky130_ef_io__gpiov2_pad_wrapped.v
+-v ../../../cvc-pdk/sky130_fd_sc_hd.v
+-v ../../../cvc-pdk/sky130_fd_sc_hvl.v

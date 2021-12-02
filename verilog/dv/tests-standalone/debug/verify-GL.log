@@ -1,0 +1,25 @@
+/ciic/tools/bin/riscv32-unknown-linux-gnu-gcc \
+-I../../../dv/firmware \
+-I../../../dv/generated \
+-I../../../common \
+  -march=rv32i      -mabi=ilp32 -D__vexriscv__ \
+-Wl,-Bstatic,-T,../../../dv/firmware/sections.lds,--strip-debug \
+-ffreestanding -nostdlib -o debug.elf ../../../dv/firmware/crt0_vex.S ../../../dv/firmware/isr.c debug.c
+/ciic/tools/bin/riscv32-unknown-linux-gnu-objcopy -O verilog debug.elf debug.hex 
+# to fix flash base address
+sed -i 's/@10/@00/g' debug.hex
+iverilog -Ttyp -DFUNCTIONAL -DSIM -DGL \
+-I/ciic/pdks/sky130A \
+        -f../../../common/includes.gl.standalone \
+debug_tb.v -o debug.vvp 
+vvp debug.vvp
+Reading debug.hex
+debug.hex loaded into memory
+Memory 5 bytes = 0x6f 0x00 0x00 0x0b 0x13
+VCD info: dumpfile debug.vcd opened for output.
+Wait for Debug o/p
+[1;31m
+Monitor: Timeout, Test Debug (GL) Failed
+[0m
+mv debug.vcd debug.vcd-GL.vcd 
+rm debug.elf debug.vvp

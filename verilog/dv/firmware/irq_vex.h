@@ -6,8 +6,8 @@ extern "C" {
 #endif
 
 #include <system.h>
-#include <generated/csr.h>
-#include <generated/soc.h>
+#include <csr.h>
+#include <soc.h>
 
 static inline unsigned int irq_getie(void)
 {
