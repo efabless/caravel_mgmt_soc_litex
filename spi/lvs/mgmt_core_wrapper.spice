@@ -260,7 +260,7 @@
 + sram_ro_data[9] trap uart_enabled user_irq_ena[0] user_irq_ena[1] user_irq_ena[2]
 + VGND_uq0
 XDFFRAM DFFRAM/A[0] DFFRAM/A[1] DFFRAM/A[2] DFFRAM/A[3] DFFRAM/A[4] DFFRAM/A[5] DFFRAM/A[6]
-+ DFFRAM/A[7] core_clk DFFRAM/Di[0] DFFRAM/Di[10] DFFRAM/Di[11] DFFRAM/Di[16] DFFRAM/Di[13]
++ DFFRAM/A[7] core_clk DFFRAM/Di[0] DFFRAM/Di[10] DFFRAM/Di[11] DFFRAM/Di[12] DFFRAM/Di[13]
 + DFFRAM/Di[14] DFFRAM/Di[15] DFFRAM/Di[16] DFFRAM/Di[17] DFFRAM/Di[18] DFFRAM/Di[19]
 + DFFRAM/Di[1] DFFRAM/Di[20] DFFRAM/Di[21] DFFRAM/Di[22] DFFRAM/Di[23] DFFRAM/Di[24]
 + DFFRAM/Di[25] DFFRAM/Di[26] DFFRAM/Di[27] DFFRAM/Di[28] DFFRAM/Di[29] DFFRAM/Di[2]
@@ -359,7 +359,7 @@ Xcore VGND_uq1 VPWR core_clk core_rstn debug_in debug_mode debug_oeb debug_out f
 + la_output[90] la_output[91] la_output[92] la_output[93] la_output[94] la_output[95]
 + la_output[96] la_output[97] la_output[98] la_output[99] la_output[9] DFFRAM/A[0]
 + DFFRAM/A[1] DFFRAM/A[2] DFFRAM/A[3] DFFRAM/A[4] DFFRAM/A[5] DFFRAM/A[6] DFFRAM/A[7]
-+ DFFRAM/Di[0] DFFRAM/Di[10] DFFRAM/Di[11] DFFRAM/Di[16] DFFRAM/Di[13] DFFRAM/Di[14]
++ DFFRAM/Di[0] DFFRAM/Di[10] DFFRAM/Di[11] DFFRAM/Di[12] DFFRAM/Di[13] DFFRAM/Di[14]
 + DFFRAM/Di[15] DFFRAM/Di[16] DFFRAM/Di[17] DFFRAM/Di[18] DFFRAM/Di[19] DFFRAM/Di[1]
 + DFFRAM/Di[20] DFFRAM/Di[21] DFFRAM/Di[22] DFFRAM/Di[23] DFFRAM/Di[24] DFFRAM/Di[25]
 + DFFRAM/Di[26] DFFRAM/Di[27] DFFRAM/Di[28] DFFRAM/Di[29] DFFRAM/Di[2] DFFRAM/Di[30]

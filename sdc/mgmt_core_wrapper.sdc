@@ -1,6 +1,6 @@
 ###############################################################################
 # Created by write_sdc
-# Mon Nov 29 19:15:42 2021
+# Thu Dec  2 19:39:41 2021
 ###############################################################################
 current_design mgmt_core_wrapper
 ###############################################################################
@@ -247,6 +247,7 @@ set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {gp
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_mode1_pad}]
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_out_pad}]
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_outenb_pad}]
+set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {hk_cyc_o}]
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {hk_stb_o}]
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {la_iena[0]}]
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {la_iena[100]}]
@@ -769,6 +770,7 @@ set_load -pin_load 0.0334 [get_ports {gpio_mode0_pad}]
 set_load -pin_load 0.0334 [get_ports {gpio_mode1_pad}]
 set_load -pin_load 0.0334 [get_ports {gpio_out_pad}]
 set_load -pin_load 0.0334 [get_ports {gpio_outenb_pad}]
+set_load -pin_load 0.0334 [get_ports {hk_cyc_o}]
 set_load -pin_load 0.0334 [get_ports {hk_stb_o}]
 set_load -pin_load 0.0334 [get_ports {mprj_cyc_o}]
 set_load -pin_load 0.0334 [get_ports {mprj_stb_o}]
