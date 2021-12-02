@@ -1,23 +1,23 @@
 [*]
 [*] GTKWave Analyzer v3.3.103 (w)1999-2019 BSI
-[*] Tue Nov 30 16:54:07 2021
+[*] Wed Dec  1 19:22:39 2021
 [*]
 [dumpfile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/verilog/dv/standalone/debug/debug.vcd"
-[dumpfile_mtime] "Tue Nov 30 16:53:37 2021"
-[dumpfile_size] 17360990
+[dumpfile_mtime] "Wed Dec  1 05:47:27 2021"
+[dumpfile_size] 344030119
 [savefile] "/Users/jeffdi/Projects/caravel_mgmt_soc_litex/verilog/dv/standalone/debug/debug.gtkw"
 [timestart] 0
-[size] 2305 1219
-[pos] -1 -1
-*-27.268799 168653000 363462500 478237500 573787500 191787500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[size] 2081 1233
+[pos] 150 -6
+*-27.656109 304787500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] debug_tb.
 [treeopen] debug_tb.debug_uart.
 [treeopen] debug_tb.uut.
 [treeopen] debug_tb.uut.core.
-[sst_width] 305
-[signals_width] 398
+[sst_width] 391
+[signals_width] 452
 [sst_expanded] 1
-[sst_vpaned_height] 397
+[sst_vpaned_height] 402
 @28
 debug_tb.spiflash.clk
 debug_tb.spiflash.csb
@@ -59,8 +59,20 @@ debug_tb.irq[5:0]
 -
 @1001200
 -group_end
-@22
+@23
 debug_tb.uut.la_output[127:0]
+@28
+debug_tb.uut.core.shared_ack
+@22
+debug_tb.uut.core.shared_adr[29:0]
+@28
+debug_tb.uut.core.shared_cyc
+@22
+debug_tb.uut.core.shared_dat_r[31:0]
+debug_tb.uut.core.shared_dat_w[31:0]
+@28
+debug_tb.uut.core.shared_stb
+debug_tb.uut.core.shared_we
 @200
 -
 -debug_uart
@@ -100,11 +112,23 @@ debug_tb.uut.debug_in
 debug_tb.uut.debug_out
 debug_tb.uut.core.uartwishbonebridge_next_state[2:0]
 debug_tb.uut.core.uartwishbonebridge_rs232phyrx_state
+@24
+debug_tb.uut.core.uartwishbonebridge_state[2:0]
+debug_tb.uut.core.uartwishbonebridge_next_state[2:0]
 @200
 -
+@22
+debug_tb.uut.core.dbg_uart_wishbone_adr[29:0]
+debug_tb.uut.core.dbg_uart_wishbone_dat_r[31:0]
+debug_tb.uut.core.dbg_uart_wishbone_dat_w[31:0]
+debug_tb.uut.core.dbg_uart_wishbone_sel[3:0]
 @28
+debug_tb.uut.core.dbg_uart_wishbone_stb
 debug_tb.uut.core.dbg_uart_wishbone_cyc
+debug_tb.uut.core.dbg_uart_wishbone_ack
+debug_tb.uut.core.dbg_uart_wishbone_we
 @200
+-
 -
 @800028
 debug_tb.uut.core.request[2:0]
@@ -114,7 +138,7 @@ debug_tb.uut.core.request[2:0]
 (2)debug_tb.uut.core.request[2:0]
 @1001200
 -group_end
-@28
+@24
 debug_tb.uut.core.grant[1:0]
 [pattern_trace] 1
 [pattern_trace] 0
