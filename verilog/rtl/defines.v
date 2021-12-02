@@ -13,6 +13,7 @@
 // limitations under the License.
 // SPDX-License-Identifier: Apache-2.0
 
+`define UNIT_DELAY #1
 
 `default_nettype none
 

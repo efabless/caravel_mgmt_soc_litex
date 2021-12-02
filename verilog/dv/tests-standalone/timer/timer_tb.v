@@ -56,7 +56,7 @@ module timer_tb;
 		$finish;
 	end
 
-	wire [37:0] la_output;	// Most of these are no-connects
+	wire [127:0] la_output;	// Most of these are no-connects
 	wire [5:0] checkbits;
 	wire [31:0] countbits;
 
@@ -159,6 +159,10 @@ module timer_tb;
 	// irq       = mgmt_gpio_io[7]              (input)
 
 	mgmt_core_wrapper uut (
+	`ifdef USE_POWER_PINS
+		.VPWR		  (VDD1V8),
+		.VGND		  (VSS),
+	`endif
 		.core_clk	  (clock),
 		.core_rstn	  (RSTB),
 		.gpio_out_pad     (gpio),

@@ -1,28 +1,20 @@
-## Simulation Defines
--v $(VERILOG_PATH)/common/defines-simulation.v
-
 ## VIP
 -v $(VERILOG_PATH)/dv/vip/tbuart.v
 -v $(VERILOG_PATH)/dv/vip/spiflash.v
 -v $(VERILOG_PATH)/dv/vip/wb_rw_test.v
+
+## DFFRAM Behavioral Model
+-v $(VERILOG_PATH)/dv/vip/DFFRAM.v
+
+## DFFRAM Full RTL
+#-v $(VERILOG_PATH)/rtl/DFFRAM.v
+#-v $(VERILOG_PATH)/rtl/DFFRAMBB.v
+
+## SRAM Behavioral Model
+-v $(VERILOG_PATH)/dv/vip/sky130_sram_2kbyte_1rw1r_32x512_8.v
 
 ## DESIGN
 -v $(VERILOG_PATH)/rtl/defines.v
 -v $(VERILOG_PATH)/rtl/VexRiscv_MinDebugCache.v
 -v $(VERILOG_PATH)/rtl/mgmt_core.v
 -v $(VERILOG_PATH)/rtl/mgmt_core_wrapper.v
-
-## DFFRAM Behavioral Model
--v $(VERILOG_PATH)/beh/DFFRAM.v
-
-## DFFRAM Full RTL
-#-v $(VERILOG_PATH)/rtl/DFFRAM.v
-#-v $(VERILOG_PATH)/rtl/DFFRAMBB.v
-
-## STD CELLS
--v $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_io/verilog/sky130_fd_io.v
--v $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v
--v $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v
--v $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hvl/verilog/primitives.v
--v $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hvl/verilog/sky130_fd_sc_hvl.v
--v $(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/verilog/sky130_sram_2kbyte_1rw1r_32x512_8.v

@@ -39,7 +39,7 @@ module irq_tb;
 
 	initial begin
 		$dumpfile("irq.vcd");
-		$dumpvars(0, irq_tb);
+		$dumpvars(3, irq_tb);
 		
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
 		repeat (50) begin
@@ -56,7 +56,7 @@ module irq_tb;
 		$finish;
 	end
 
-	wire [37:0] la_output;	// Most of these are no-connects
+	wire [127:0] la_output;	// Most of these are no-connects
 	wire [3:0]  status;
 	wire [3:0] checkbits;
 
@@ -131,6 +131,10 @@ module irq_tb;
 	// irq       = mgmt_gpio_io[7]              (input)
 
 	mgmt_core_wrapper uut (
+	`ifdef USE_POWER_PINS
+		.VPWR		  (VDD1V8),
+		.VGND		  (VSS),
+	`endif
 		.core_clk	  (clock),
 		.core_rstn	  (RSTB),
 		.gpio_out_pad     (gpio),

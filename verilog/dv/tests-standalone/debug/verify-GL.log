@@ -18,6 +18,8 @@ debug.hex loaded into memory
 Memory 5 bytes = 0x6f 0x00 0x00 0x0b 0x13
 VCD info: dumpfile debug.vcd opened for output.
 Wait for Debug o/p
+Executing SRAM write
+Executing SRAM read
 [1;31m
 Monitor: Timeout, Test Debug (GL) Failed
 [0m

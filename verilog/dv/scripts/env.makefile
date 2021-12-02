@@ -18,13 +18,9 @@
 
 export PDK_PATH = $(PDK_ROOT)/sky130A
 export VERILOG_PATH = ../../..
+
 VIP_PATH = $(VERILOG_PATH)/dv/vip
 FIRMWARE_PATH = $(VERILOG_PATH)/dv/firmware
-
-# ---- Caravel Integration Information ----
-
-CARAVEL_VERILOG_PATH = $(DESIGNS)/caravel_openframe/verilog
-
 
 # ---- Compiler Information ----
 

@@ -25,6 +25,7 @@
  *
  *  SPDX-License-Identifier: ISC
  */
+
  
  `default_nettype none
 
@@ -135,8 +136,8 @@ module mgmt_core_wrapper (
 
     mgmt_core core (
 	`ifdef USE_POWER_PINS
-	    .vdd(VPWR),	    /* 1.8V domain */
-	    .vss(VGND),
+	    .VPWR(VPWR),	    /* 1.8V domain */
+	    .VGND(VGND),
 	`endif
     	.core_clk(core_clk),
     	.core_rstn(core_rstn),
@@ -231,10 +232,7 @@ module mgmt_core_wrapper (
     );
 
     // DFFRAM
-    DFFRAM #(
-        .WSIZE(`DFFRAM_WSIZE),
-        .USE_LATCH(`DFFRAM_USE_LATCH)
-    ) DFFRAM (
+    DFFRAM DFFROM_0 (
     `ifdef USE_POWER_PINS
         .VPWR(VPWR),
         .VGND(VGND),

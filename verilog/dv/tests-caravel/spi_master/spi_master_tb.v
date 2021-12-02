@@ -17,16 +17,6 @@
 
 `timescale 1 ns / 1 ps
 
-//`include "defines.v"
-//`include "sky130_sram_2kbyte_1rw1r_32x512_8.v"
-////`include "picorv32.v"
-`include "VexRiscv_MinDebug.v"
-//`include "spiflash.v"
-//`include "mgmt_core_wrapper.v"
-
-`include "__uprj_netlists.v"
-`include "caravel_netlists.v"
-`include "spiflash.v"
 
 module spi_master_tb;
 	reg clock;

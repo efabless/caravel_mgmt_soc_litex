@@ -14,12 +14,15 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-include ../common.mak
 
-PATTERN = gpio_mgmt
+PWDD := $(shell pwd)
+BLOCKS := $(shell basename $(PWDD))
 
-all:  ${PATTERN:=.vcd} ${PATTERN:=.lst}
+# ---- Include Partitioned Makefiles ----
 
-hex:  ${PATTERN:=.hex}
+include ../../scripts/env.makefile
+include ../../scripts/var.makefile
+include ../../scripts/cpu.makefile
+include ../../scripts/sim.makefile
 
-
+CONFIG = caravel

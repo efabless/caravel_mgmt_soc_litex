@@ -14,22 +14,19 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-# ---- Test patterns for project striVe ----
 
 .SUFFIXES:
 .SILENT: clean all
 
-#PATTERNS = gpio_mgmt gpio mem uart perf hkspi sysctrl mprj_ctrl mprj_bitbang pass_thru timer timer2 pll storage qspi caravan irq user_pass_thru spi_master sram_exec hkspi_power
-PATTERNS = gpio_mgmt mem spi_master uart timer irq
+BLOCKS = gpio_mgmt mem spi_master uart timer irq
 
-all:  ${PATTERNS}
-	for i in ${PATTERNS}; do \
-		( cd $$i && echo "\n*** Running test: $$i ***" && SIM=RTL make -f Makefile $${i}.vcd &> verify.log && grep Monitor verify.log) ; \
-#		( cd $$i && SIM=GL make -f Makefile $${i}.vcd &> verify.log && grep Monitor verify.log) ; \
+all:  ${BLOCKS}
+	for i in ${BLOCKS}; do \
+		( cd $$i && echo "\n*** Running test: $$i ***" && SIM=RTL make &> verify.log && grep Monitor verify.log) ; \
 	done
 
-clean:  ${PATTERNS}
-	for i in ${PATTERNS}; do \
+clean:  ${BLOCKS}
+	for i in ${BLOCKS}; do \
 		( cd $$i && make clean ) ; \
 	done
 

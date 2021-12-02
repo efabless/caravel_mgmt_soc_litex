@@ -9,11 +9,10 @@
 
 -v ../../../gl/DFFRAM.v
 
-
--v ../../../cvc-pdk/primitives_hd.v
--v ../../../cvc-pdk/primitives_hvl.v
--v ../../../cvc-pdk/sky130_ef_io.v
--v ../../../cvc-pdk/sky130_ef_io__analog_pad.v
--v ../../../cvc-pdk/sky130_ef_io__gpiov2_pad_wrapped.v
--v ../../../cvc-pdk/sky130_fd_sc_hd.v
--v ../../../cvc-pdk/sky130_fd_sc_hvl.v
+-v ../../../cvcpdk/primitives_hd.v
+-v ../../../cvcpdk/primitives_hvl.v
+-v ../../../cvcpdk/sky130_ef_io.v
+-v ../../../cvcpdk/sky130_ef_io__analog_pad.v
+-v ../../../cvcpdk/sky130_ef_io__gpiov2_pad_wrapped.v
+-v ../../../cvcpdk/sky130_fd_sc_hd.v
+-v ../../../cvcpdk/sky130_fd_sc_hvl.v

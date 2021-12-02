@@ -111,6 +111,10 @@ module uart_tb;
 //	assign la_output[3] = 1'b1;  // Force CSB high.
 
 	mgmt_core_wrapper uut (
+	`ifdef USE_POWER_PINS
+		.VPWR		  (VDD1V8),
+		.VGND		  (VSS),
+	`endif
 		.core_clk	  (core_clk),
 		.gpio_out_pad     (gpio),
 		.la_output  (la_output),

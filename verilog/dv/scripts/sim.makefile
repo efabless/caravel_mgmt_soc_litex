@@ -15,13 +15,16 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
-
+IVERILOG_DUMPER = fst
 SIM_DEFINES = -DFUNCTIONAL -DSIM
 
 # RTL/GL/GL_SDF
 SIM?=RTL
 
-all:  ${BLOCKS:=.vcd}
+.SUFFIXES:
+
+
+all:  ${BLOCKS:=.vcd} ${BLOCKS:=.lst} 
 
 hex:  ${BLOCKS:=.hex}
 
@@ -62,15 +65,15 @@ hex:  ${BLOCKS:=.hex}
 ifeq ($(SIM),RTL)
 	iverilog -Ttyp $(SIM_DEFINES) \
 	-I$(PDK_PATH) \
-        -f$(VERILOG_PATH)/common/includes.rtl.standalone \
+        -f$(VERILOG_PATH)/common/includes.rtl.$(CONFIG) \
 	$< -o $@ 
 endif 
 
 ## GL
 ifeq ($(SIM),GL)
-	iverilog -Ttyp $(SIM_DEFINES) -DGL \
+	iverilog -Ttyp $(SIM_DEFINES) -DGL -DUSE_POWER_PINS \
 	-I$(PDK_PATH) \
-        -f$(VERILOG_PATH)/common/includes.gl.standalone \
+        -f$(VERILOG_PATH)/common/includes.gl.$(CONFIG) \
 	$< -o $@ 
 endif 
 
@@ -87,21 +90,25 @@ ifeq ($(SIM),GL_SDF)
 	cvc +interp +incdir+$(COMMON_ABSOLUTE_PATH)+$(VIP_PATH)+$(VERILOG_ABSOLUTE_PATH)+$(RTL_ABSOLUTE_PATH)+$(PDK_ABSOLUTE_PATH) \
 	    +define+FUNCTIONAL +define+SIM +define+GL +define+USE_POWER_PINS +define+ENABLE_SDF +change_port_type +dump2fst \
 	    -f $(VERILOG_PATH)/common/includes.gl+sdf.standalone  $<
+	    
+	    	cvc +interp +incdir+$(BEHAVIOURAL_MODELS_PATH)+$(RTL_ABSOLUTE_PATH)+$(VERILOG_ABSOLUTE_PATH)+$(PDK_ABSOLUTE_PATH)+$(CURRENT_DIRECTORY) \
+	 	+define+FUNCTIONAL +define+SIM +define+GL +define+USE_POWER_PINS +define+ENABLE_SDF +change_port_type +dump2fst $<
+
 endif
 
 %.vcd: %.vvp
 
 ifeq ($(SIM),RTL)
 	vvp $<
-	 mv $@ $@-RTL.vcd 
+	 mv $@ RTL-$@
 endif
 ifeq ($(SIM),GL)
 	vvp $<
-	 mv $@ $@-GL.vcd 
+	 mv $@ GL-$@
 endif
 ifeq ($(SIM),GL_SDF)
 	vvp $<
-	 mv $@ $@-GL+SDF.vcd 
+	 mv $@ GL_SDF-$@.vcd 
 endif
 
 

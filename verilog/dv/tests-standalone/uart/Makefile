@@ -24,3 +24,4 @@ include ../../scripts/var.makefile
 include ../../scripts/cpu.makefile
 include ../../scripts/sim.makefile
 
+CONFIG = standalone

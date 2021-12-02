@@ -24,18 +24,6 @@
 
 `timescale 1 ns / 1 ps
 
-//`include "defines.v"
-//`include "sky130_sram_2kbyte_1rw1r_32x512_8.v"
-//`include "picorv32.v"
-//`include "ibex_all.v"
-`include "VexRiscv_MinDebug.v"
-//`include "spiflash.v"
-//`include "mgmt_core_wrapper.v"
-
-`include "__uprj_netlists.v"
-`include "caravel_netlists.v"
-`include "spiflash.v"
-
 module gpio_mgmt_tb;
 
 	reg clock;
@@ -67,7 +55,7 @@ module gpio_mgmt_tb;
 		$finish;
 	end
 
-	wire [37:0] mprj_io;	// Most of these are no-connects
+	wire [127:0] mprj_io;	// Most of these are no-connects
 	wire [15:0] checkbits;
 	reg  [7:0] checkbits_lo;
 	wire [7:0] checkbits_hi;

@@ -3,8 +3,8 @@
 //--------------------------------------------------------------------------------
 module mgmt_core(
 `ifdef USE_POWER_PINS
-    inout vdd,	    /* 1.8V domain */
-    inout vss,
+    inout VPWR,	    /* 1.8V domain */
+    inout VGND,
 `endif
 	input wire core_clk,
 	input wire core_rstn,
