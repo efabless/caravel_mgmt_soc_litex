@@ -15,7 +15,7 @@
 
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(ROUTING_CORES) "6"
+set ::env(ROUTING_CORES) "32"
 
 set ::env(DESIGN_NAME) mgmt_core
 set ::env(DESIGN_IS_CORE) 1
@@ -24,7 +24,7 @@ set ::env(RUN_KLAYOUT) 0
 
 set ::env(CLOCK_PORT) "core_clk"
 set ::env(CLOCK_NET) "core_clk"
-set ::env(CLOCK_PERIOD) "25"
+set ::env(CLOCK_PERIOD) "30"
 
 set ::env(RESET_PORT) "core_rstn"
 
@@ -43,7 +43,7 @@ set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 2000 740"
 
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
-set ::env(PL_TARGET_DENSITY) 0.6
+set ::env(PL_TARGET_DENSITY) 0.25
 set ::env(CELL_PAD) 0
 
 set ::env(LEFT_MARGIN_MULT) 22
@@ -63,7 +63,6 @@ set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 1
 
 set ::env(PL_RESIZER_MAX_SLEW_MARGIN) 2
 set ::env(PL_RESIZER_MAX_CAP_MARGIN) 2
-
 
 ## Routing
 set ::env(GLB_RT_ADJUSTMENT) 0
@@ -92,17 +91,6 @@ set ::env(GLB_RT_OBS) "\
 ## Diode Insertion
 set ::env(DIODE_INSERTION_STRATEGY) 4
 
-########## SET BELOW TO 0 TO AVOID OR SEGFAULT
-set ::env(STA_REPORT_POWER) 0
-
-########## DO NOT QUIT ON THE FOLLOWING
-set ::env(MAGIC_DRC_USE_GDS) 0
-set ::env(QUIT_ON_MAGIC_DRC) 0
-set ::env(QUIT_ON_TIMING_VIOLATIONS) 0
-set ::env(QUIT_ON_HOLD_VIOLATIONS) 0
-set ::env(QUIT_ON_SETUP_VIOLATIONS) 0
-set ::env(QUIT_ON_TR_DRC) 0
-
 
 ## Internal Macros
 set ::env(VERILOG_FILES_BLACKBOX) "\
@@ -125,3 +113,15 @@ set ::env(VERILOG_FILES) "\
  	$script_dir/../../verilog/rtl/VexRiscv_MinDebugCache.v"
 
 ##	$script_dir/../../verilog/rtl/VexRiscv.v"
+
+
+########## SET BELOW TO 0 TO AVOID OR SEGFAULT
+set ::env(STA_REPORT_POWER) 0
+
+########## DO NOT QUIT ON THE FOLLOWING
+set ::env(MAGIC_DRC_USE_GDS) 0
+set ::env(QUIT_ON_MAGIC_DRC) 0
+set ::env(QUIT_ON_TIMING_VIOLATIONS) 0
+set ::env(QUIT_ON_HOLD_VIOLATIONS) 0
+set ::env(QUIT_ON_SETUP_VIOLATIONS) 0
+set ::env(QUIT_ON_TR_DRC) 0

@@ -1,4 +1,3 @@
-`default_nettype none
 /*
  *  SPDX-FileCopyrightText: 2015 Clifford Wolf
  *  PicoSoC - A simple example SoC using PicoRV32
@@ -26,23 +25,14 @@
  *
  *  SPDX-License-Identifier: ISC
  */
+ 
+ `default_nettype none
 
 `ifndef _MGMT_CORE_WRAPPER_
 `define _MGMT_CORE_WRAPPER_
 
 /* Wrapper module around management SoC core for pin compatibility	*/
-/* with the Caravel harness chip.					*/
-
-`ifdef SIM
-    `include "mgmt_core.v"
-    `ifdef CARAVEL
-        `include "DFFRAM.v"
-        `include "DFFRAMBB.v"
-    `else
-        `include "DFFRAM_beh.v"
-    `endif
-`endif
-
+/* with the Caravel harness chip. */	
 
 module mgmt_core_wrapper (
 `ifdef USE_POWER_PINS
@@ -241,11 +231,7 @@ module mgmt_core_wrapper (
     );
 
     // DFFRAM
-`ifdef SIM
-    DFFRAM_beh #(
-`else
     DFFRAM #(
-`endif
         .WSIZE(`DFFRAM_WSIZE),
         .USE_LATCH(`DFFRAM_USE_LATCH)
     ) DFFRAM (

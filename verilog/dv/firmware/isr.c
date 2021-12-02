@@ -1,8 +1,8 @@
 // This file is Copyright (c) 2020 Florent Kermarrec <florent@enjoy-digital.fr>
 // License: BSD
 
-#include <generated/csr.h>
-#include <generated/soc.h>
+#include <csr.h>
+#include <soc.h>
 #include <irq_vex.h>
 #include <uart.h>
 #include <defs.h>

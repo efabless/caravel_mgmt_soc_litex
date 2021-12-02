@@ -18,12 +18,8 @@ set script_dir [file dirname [file normalize [info script]]]
 set ::env(DESIGN_NAME) mgmt_core_wrapper
 set ::env(DESIGN_IS_CORE) 1
 
-set ::env(ROUTING_CORES) "6"
+set ::env(ROUTING_CORES) "16"
 set ::env(RUN_KLAYOUT) 0
-
-set ::env(VERILOG_FILES) "\
-	$script_dir/../../verilog/rtl/defines.v\
-	$script_dir/../../verilog/rtl/mgmt_core_wrapper.v"
 
 set ::env(CLOCK_PORT) "core_clk"
 set ::env(CLOCK_NET) ""
@@ -105,6 +101,10 @@ set ::env(DIODE_INSERTION_STRATEGY) 0
 ## Internal Macros
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
 
+set ::env(VERILOG_FILES) "\
+	$script_dir/../../verilog/rtl/defines.v\
+	$script_dir/../../verilog/rtl/mgmt_core_wrapper.v"
+
 set ::env(VERILOG_FILES_BLACKBOX) "\
 	$script_dir/../../verilog/rtl/defines.v\
 	$script_dir/../../verilog/rtl/mgmt_core.v\
@@ -117,4 +117,17 @@ set ::env(EXTRA_LEFS) "\
 set ::env(EXTRA_GDS_FILES) "\
 	$script_dir/../../gds/mgmt_core.gds
 	$script_dir/../../gds/DFFRAM.gds"
+	
+	
+########## SET BELOW TO 0 TO AVOID OR SEGFAULT
+set ::env(STA_REPORT_POWER) 0
+
+########## DO NOT QUIT ON THE FOLLOWING
+set ::env(MAGIC_DRC_USE_GDS) 0
+set ::env(QUIT_ON_MAGIC_DRC) 0
+set ::env(QUIT_ON_TIMING_VIOLATIONS) 0
+set ::env(QUIT_ON_HOLD_VIOLATIONS) 0
+set ::env(QUIT_ON_SETUP_VIOLATIONS) 0
+set ::env(QUIT_ON_TR_DRC) 0
+
 
