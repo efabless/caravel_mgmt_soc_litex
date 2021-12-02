@@ -33,8 +33,8 @@ void main()
     // zero, which indicates the start of a byte to the receiver.
 
     // these instruction work without using interrupt, they seem to be timing dependent
-    reg_uart_enable = 1;
-    reg_debug_irq_en = 1;
+//    reg_uart_enable = 1;
+//    reg_debug_irq_en = 1;
 //    reg_reset = 1;
 
 
@@ -47,14 +47,9 @@ void main()
     // Start test
     reg_la0_data = 0xa0000000;
 
-    while(1);
+    for (j = 0; j < 500; j++);
 
 //    reg_uart_data = 0xab;
-
-    // This should appear at the output, received by the testbench UART.
-    // (Makes simulation time long.)
-//    print("test msg\n");
-    print("Monitor: Test UART (RTL) passed\n");
 
     // Allow transmission to complete before signalling that the program
     // has ended.

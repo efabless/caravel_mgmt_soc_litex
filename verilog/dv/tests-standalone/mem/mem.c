@@ -24,13 +24,15 @@
 	Memory Test
 	It uses GPIO to flag the success or failure of the test
 */
-unsigned int ints[10];
+//unsigned int ints[10];
 unsigned short shorts[10];
 unsigned char bytes[10];
 
 void main()
 {
     int i;
+
+    int *ints = (volatile int*) 0x01000000;
 
     // start test
     reg_la0_oenb = 0;
