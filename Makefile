@@ -496,7 +496,7 @@ $(RCX_BLOCKS): rcx-% : ./def/%.def
 			puts stderr \$$errmsg;\
 			exit 1;\
 		};\
-		read_sdc -echo ./spef/$*.sdc;\
+		read_sdc -echo ./sdc/$*.sdc;\
 		set_propagated_clock [all_clocks];\
 		set rc_values \"mcon 9.249146E-3,via 4.5E-3,via2 3.368786E-3,via3 0.376635E-3,via4 0.00580E-3\";\
 		set vias_rc [split \$$rc_values ","];\
