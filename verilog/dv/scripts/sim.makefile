@@ -15,7 +15,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
-IVERILOG_DUMPER = fst
+export IVERILOG_DUMPER = fst
 SIM_DEFINES = -DFUNCTIONAL -DSIM
 
 # RTL/GL/GL_SDF
@@ -24,7 +24,7 @@ SIM?=RTL
 .SUFFIXES:
 
 
-all:  ${BLOCKS:=.vcd} ${BLOCKS:=.lst} 
+all:  ${BLOCKS:=.vcd} ${BLOCKS:=.lst}
 
 hex:  ${BLOCKS:=.hex}
 
@@ -34,7 +34,7 @@ hex:  ${BLOCKS:=.hex}
 # Comiple firmeware
 ##############################################################################
 
-%.elf: %.c $(LINKER_SCRIPT) $(SOURCE_FILES) check-env
+%.elf: %.c $(LINKER_SCRIPT) $(SOURCE_FILES)
 	${GCC_PATH}/${GCC_PREFIX}-gcc \
 	-I$(FIRMWARE_PATH) \
 	-I$(VERILOG_PATH)/dv/generated \
@@ -49,7 +49,7 @@ hex:  ${BLOCKS:=.hex}
 %.hex: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@ 
 	# to fix flash base address
-	sed -i 's/@10/@00/g' $@
+	sed -ie 's/@10/@00/g' $@
 
 %.bin: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O binary $< /dev/stdout | tail -c +1048577 > $@
@@ -63,10 +63,7 @@ hex:  ${BLOCKS:=.hex}
 
 ## RTL
 ifeq ($(SIM),RTL)
-	iverilog -Ttyp $(SIM_DEFINES) \
-	-I$(PDK_PATH) \
-        -f$(VERILOG_PATH)/common/includes.rtl.$(CONFIG) \
-	$< -o $@ 
+	iverilog -Ttyp $(SIM_DEFINES) -f$(VERILOG_PATH)/common/includes.rtl.$(CONFIG) -o $@ $<
 endif 
 
 ## GL
@@ -74,7 +71,7 @@ ifeq ($(SIM),GL)
 	iverilog -Ttyp $(SIM_DEFINES) -DGL -DUSE_POWER_PINS \
 	-I$(PDK_PATH) \
         -f$(VERILOG_PATH)/common/includes.gl.$(CONFIG) \
-	$< -o $@ 
+	-o $@ $<
 endif 
 
 ## GL+SDF
@@ -108,9 +105,11 @@ ifeq ($(SIM),GL)
 endif
 ifeq ($(SIM),GL_SDF)
 	vvp $<
-	 mv $@ GL_SDF-$@.vcd 
+	 mv $@ GL_SDF-$@
 endif
 
+# twinwave: RTL-%.vcd GL-%.vcd
+#     twinwave RTL-$@ * + GL-$@ *
 
 check-env:
 ifndef PDK_ROOT
@@ -131,7 +130,8 @@ endif
 # ---- Clean ----
 
 clean:
-	rm -f *.elf *.hex *.bin *.vvp *.vcd *.log
+# 	rm -f *.elf *.hex *.bin *.vvp *.vcd *.log
+	rm -f *.elf *.hex *.bin *.vvp *.log
 
 .PHONY: clean hex all
 
