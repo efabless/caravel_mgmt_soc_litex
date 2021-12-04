@@ -232,7 +232,7 @@ module mgmt_core_wrapper (
     );
 
     // DFFRAM
-    DFFRAM DFFROM_0 (
+    DFFRAM DFFRAM_0 (
     `ifdef USE_POWER_PINS
         .VPWR(VPWR),
         .VGND(VGND),

@@ -61,11 +61,11 @@ Disassembly of section .text:
 
 100000c4 <data_init>:
 100000c4:	f1000517          	auipc	a0,0xf1000
-100000c8:	f3c50513          	addi	a0,a0,-196 # 1000000 <_edata>
+100000c8:	f3c50513          	addi	a0,a0,-196 # 1000000 <flag>
 100000cc:	f1000597          	auipc	a1,0xf1000
-100000d0:	f3458593          	addi	a1,a1,-204 # 1000000 <_edata>
+100000d0:	f3458593          	addi	a1,a1,-204 # 1000000 <flag>
 100000d4:	00000617          	auipc	a2,0x0
-100000d8:	2b460613          	addi	a2,a2,692 # 10000388 <_fdata_rom>
+100000d8:	2b460613          	addi	a2,a2,692 # 10000388 <_erodata>
 
 100000dc <data_loop>:
 100000dc:	00b50c63          	beq	a0,a1,100000f4 <bss_init>
@@ -77,7 +77,7 @@ Disassembly of section .text:
 
 100000f4 <bss_init>:
 100000f4:	f1000517          	auipc	a0,0xf1000
-100000f8:	f0c50513          	addi	a0,a0,-244 # 1000000 <_edata>
+100000f8:	f0c50513          	addi	a0,a0,-244 # 1000000 <flag>
 100000fc:	f1000597          	auipc	a1,0xf1000
 10000100:	f0c58593          	addi	a1,a1,-244 # 1000008 <_ebss>
 
@@ -134,16 +134,16 @@ Disassembly of section .text:
 10000198:	00000513          	li	a0,0
 1000019c:	fc5ff0ef          	jal	ra,10000160 <irq_setmask>
 100001a0:	f00037b7          	lui	a5,0xf0003
-100001a4:	03878793          	addi	a5,a5,56 # f0003038 <_fdata_rom+0xe0002cb0>
+100001a4:	03878793          	addi	a5,a5,56 # f0003038 <_erodata+0xe0002cb0>
 100001a8:	00a00713          	li	a4,10
 100001ac:	00e7a023          	sw	a4,0(a5)
 100001b0:	f00037b7          	lui	a5,0xf0003
-100001b4:	03c78793          	addi	a5,a5,60 # f000303c <_fdata_rom+0xe0002cb4>
+100001b4:	03c78793          	addi	a5,a5,60 # f000303c <_erodata+0xe0002cb4>
 100001b8:	00020737          	lui	a4,0x20
 100001bc:	00e7a023          	sw	a4,0(a5)
 100001c0:	010007b7          	lui	a5,0x1000
 100001c4:	00100713          	li	a4,1
-100001c8:	00e79023          	sh	a4,0(a5) # 1000000 <_edata>
+100001c8:	00e79023          	sh	a4,0(a5) # 1000000 <flag>
 100001cc:	00000013          	nop
 100001d0:	00c12083          	lw	ra,12(sp)
 100001d4:	00812403          	lw	s0,8(sp)
@@ -213,14 +213,14 @@ Disassembly of section .text:
 100002a4:	00812423          	sw	s0,8(sp)
 100002a8:	01010413          	addi	s0,sp,16
 100002ac:	f00037b7          	lui	a5,0xf0003
-100002b0:	03878793          	addi	a5,a5,56 # f0003038 <_fdata_rom+0xe0002cb0>
+100002b0:	03878793          	addi	a5,a5,56 # f0003038 <_erodata+0xe0002cb0>
 100002b4:	00500713          	li	a4,5
 100002b8:	00e7a023          	sw	a4,0(a5)
 100002bc:	f00037b7          	lui	a5,0xf0003
-100002c0:	03c78793          	addi	a5,a5,60 # f000303c <_fdata_rom+0xe0002cb4>
+100002c0:	03c78793          	addi	a5,a5,60 # f000303c <_erodata+0xe0002cb4>
 100002c4:	0007a023          	sw	zero,0(a5)
 100002c8:	010007b7          	lui	a5,0x1000
-100002cc:	00079023          	sh	zero,0(a5) # 1000000 <_edata>
+100002cc:	00079023          	sh	zero,0(a5) # 1000000 <flag>
 100002d0:	00000513          	li	a0,0
 100002d4:	fa1ff0ef          	jal	ra,10000274 <irq_setmask>
 100002d8:	00100513          	li	a0,1
@@ -231,34 +231,34 @@ Disassembly of section .text:
 100002ec:	00078513          	mv	a0,a5
 100002f0:	f85ff0ef          	jal	ra,10000274 <irq_setmask>
 100002f4:	f00057b7          	lui	a5,0xf0005
-100002f8:	00878793          	addi	a5,a5,8 # f0005008 <_fdata_rom+0xe0004c80>
+100002f8:	00878793          	addi	a5,a5,8 # f0005008 <_erodata+0xe0004c80>
 100002fc:	0007a023          	sw	zero,0(a5)
 10000300:	f00057b7          	lui	a5,0xf0005
 10000304:	00001737          	lui	a4,0x1
 10000308:	bb870713          	addi	a4,a4,-1096 # bb8 <__DYNAMIC+0xbb8>
-1000030c:	00e7a023          	sw	a4,0(a5) # f0005000 <_fdata_rom+0xe0004c78>
+1000030c:	00e7a023          	sw	a4,0(a5) # f0005000 <_erodata+0xe0004c78>
 10000310:	f00057b7          	lui	a5,0xf0005
-10000314:	01c78793          	addi	a5,a5,28 # f000501c <_fdata_rom+0xe0004c94>
+10000314:	01c78793          	addi	a5,a5,28 # f000501c <_erodata+0xe0004c94>
 10000318:	00100713          	li	a4,1
 1000031c:	00e7a023          	sw	a4,0(a5)
 10000320:	f00057b7          	lui	a5,0xf0005
-10000324:	00878793          	addi	a5,a5,8 # f0005008 <_fdata_rom+0xe0004c80>
+10000324:	00878793          	addi	a5,a5,8 # f0005008 <_erodata+0xe0004c80>
 10000328:	00100713          	li	a4,1
 1000032c:	00e7a023          	sw	a4,0(a5)
 10000330:	0140006f          	j	10000344 <main+0xa8>
 10000334:	f00037b7          	lui	a5,0xf0003
-10000338:	03c78793          	addi	a5,a5,60 # f000303c <_fdata_rom+0xe0002cb4>
+10000338:	03c78793          	addi	a5,a5,60 # f000303c <_erodata+0xe0002cb4>
 1000033c:	00010737          	lui	a4,0x10
 10000340:	00e7a023          	sw	a4,0(a5)
 10000344:	010007b7          	lui	a5,0x1000
-10000348:	0007d783          	lhu	a5,0(a5) # 1000000 <_edata>
+10000348:	0007d783          	lhu	a5,0(a5) # 1000000 <flag>
 1000034c:	fe0784e3          	beqz	a5,10000334 <main+0x98>
 10000350:	f00037b7          	lui	a5,0xf0003
-10000354:	03c78793          	addi	a5,a5,60 # f000303c <_fdata_rom+0xe0002cb4>
+10000354:	03c78793          	addi	a5,a5,60 # f000303c <_erodata+0xe0002cb4>
 10000358:	00040737          	lui	a4,0x40
 1000035c:	00e7a023          	sw	a4,0(a5)
 10000360:	f00037b7          	lui	a5,0xf0003
-10000364:	03878793          	addi	a5,a5,56 # f0003038 <_fdata_rom+0xe0002cb0>
+10000364:	03878793          	addi	a5,a5,56 # f0003038 <_erodata+0xe0002cb0>
 10000368:	00c00713          	li	a4,12
 1000036c:	00e7a023          	sw	a4,0(a5)
 10000370:	00000013          	nop
@@ -278,13 +278,30 @@ Disassembly of section .bss:
 01000000 <flag>:
 	...
 
+Disassembly of section .riscv.attributes:
+
+00000000 <.riscv.attributes>:
+   0:	1b41                	addi	s6,s6,-16
+   2:	0000                	unimp
+   4:	7200                	flw	fs0,32(a2)
+   6:	7369                	lui	t1,0xffffa
+   8:	01007663          	bgeu	zero,a6,14 <__DYNAMIC+0x14>
+   c:	0011                	c.nop	4
+   e:	0000                	unimp
+  10:	1004                	addi	s1,sp,32
+  12:	7205                	lui	tp,0xfffe1
+  14:	3376                	fld	ft6,376(sp)
+  16:	6932                	flw	fs2,12(sp)
+  18:	7032                	flw	ft0,44(sp)
+  1a:	0030                	addi	a2,sp,8
+
 Disassembly of section .comment:
 
 00000000 <.comment>:
    0:	3a434347          	fmsub.d	ft6,ft6,ft4,ft7,rmm
    4:	2820                	fld	fs0,80(s0)
    6:	29554e47          	fmsub.s	ft8,fa0,fs5,ft5,rmm
-   a:	3820                	fld	fs0,112(s0)
+   a:	3920                	fld	fs0,112(a0)
    c:	322e                	fld	ft4,232(sp)
    e:	302e                	fld	ft0,232(sp)
 	...

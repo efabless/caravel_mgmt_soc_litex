@@ -39,10 +39,11 @@ void main()
     // This should appear at the output, received by the testbench UART.
     // (Makes simulation time long.)
 //    print("test msg\n");
-    print("Monitor: Test UART (RTL) passed\n");
+//    print("Monitor: Test UART (RTL) passed\n");
+    print("Monitor: Pass\n");
 
     // Allow transmission to complete before signalling that the program
     // has ended.
-    for (j = 0; j < 160; j++);
+    for (j = 0; j < 1000; j++);
     reg_la0_data = 0xab000000;
 }

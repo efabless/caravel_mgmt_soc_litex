@@ -15,7 +15,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
-export IVERILOG_DUMPER = fst
+# export IVERILOG_DUMPER = fst
 SIM_DEFINES = -DFUNCTIONAL -DSIM
 
 # RTL/GL/GL_SDF
