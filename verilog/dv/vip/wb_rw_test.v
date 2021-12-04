@@ -20,7 +20,7 @@ assign RX = rx;
 assign tx = TX;
 
 initial begin
-    TX = 1'b1;
+    TX <= 1'b1;
     #10000;
     $display("Executing SRAM write");
     wb_write(30'h00400024, 32'h775555ab);

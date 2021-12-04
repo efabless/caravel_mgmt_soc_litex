@@ -24,17 +24,6 @@
 
 `timescale 1 ns / 1 ps
 
-//`include "defines.v"
-//`include "sky130_sram_2kbyte_1rw1r_32x512_8.v"
-//`include "picorv32.v"
-`include "VexRiscv_MinDebug.v"
-//`include "spiflash.v"
-//`include "mgmt_core_wrapper.v"
-
-`include "__uprj_netlists.v"
-`include "caravel_netlists.v"
-`include "spiflash.v"
-
 module mem_tb;
 	reg clock;
 	reg RSTB;
@@ -65,7 +54,7 @@ module mem_tb;
 		$dumpvars(0, mem_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (60) begin
+		repeat (100) begin
 			repeat (5000) @(posedge clock);
 			$display("+5000 cycles");
 		end

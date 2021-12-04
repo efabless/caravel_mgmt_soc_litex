@@ -43,6 +43,7 @@ module debug_tb;
 	wire SDO;
 
 	reg debug_in;
+//	wire debug_in;
 	reg [5:0] irq;
 
 	assign checkbits = la_output[31:16];
@@ -57,10 +58,11 @@ module debug_tb;
 
 	initial begin
 		$dumpfile("debug.vcd");
-		$dumpvars(0, debug_tb);
+		$dumpvars(4, debug_tb);
 
 		$display("Wait for Debug o/p");
-		repeat (60) begin
+//		repeat (70) begin
+		repeat (15) begin
 			repeat (1000) @(posedge clock);
 			// Diagnostic. . . interrupts output pattern.
 		end
@@ -91,10 +93,10 @@ module debug_tb;
 	end
 
     initial begin
-//        debug_in <= 1'b0;
+        debug_in = 1'b0;
 //        irq <= 6'b0;
         #1000
-//		debug_in <= 1'b1;	    // Debug mode
+		debug_in = 1'b1;	    // Debug mode
 //		#350000;
 //		#250000;
 		#3000;
@@ -135,7 +137,8 @@ module debug_tb;
 	`endif
 		.core_clk	  (clock),
 		.core_rstn	  (RSTB),
-        .debug_in(1'b0),
+//        .debug_in(1'b1),
+        .debug_in(debug_in),
         .debug_mode(),
         .debug_oeb(),
         .debug_out(),
