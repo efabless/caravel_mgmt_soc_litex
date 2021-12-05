@@ -201,7 +201,7 @@ module mgmt_core_wrapper (VGND,
  wire \mgmt_soc_dff_WE[2] ;
  wire \mgmt_soc_dff_WE[3] ;
 
- DFFRAM DFFRAM (.CLK(core_clk),
+ DFFRAM DFFRAM_0 (.CLK(core_clk),
     .EN(mgmt_soc_dff_EN),
     .VGND(VGND),
     .VPWR(VPWR),

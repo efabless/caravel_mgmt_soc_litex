@@ -11,7 +11,6 @@ puts "\[INFO\]: Setting output delay to: $output_delay_value"
 puts "\[INFO\]: Setting input delay to: $input_delay_value"
 
 ## DFFRAM INPUTS
-set skew 0.22
 set mem_rdata_0_delay 2.99 
 set mem_rdata_1_delay 3.03
 set mem_rdata_2_delay 3.02
@@ -106,7 +105,58 @@ set padframe_input_delay 1
 set_input_delay $padframe_input_delay  -clock [get_clocks $::env(CLOCK_PORT)] [get_ports gpio_in_pad]
 
 ## OUTPUT DELAYS
-set_output_delay $output_delay_value  -clock [get_clocks $::env(CLOCK_PORT)] [all_outputs]
+#set_output_delay $output_delay_value  -clock [get_clocks $::env(CLOCK_PORT)] [all_outputs]
+
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {debug_mode}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {debug_oeb}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {debug_out}]
+
+set flash_output_delay 15 
+set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_clk}]
+set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_cs_n}]
+set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io0_do}]
+set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io0_oeb}]
+set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io1_do}]
+set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io1_oeb}]
+set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io2_do}]
+set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io2_oeb}]
+set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io3_do}]
+set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io3_oeb}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_inenb_pad}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_mode0_pad}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_mode1_pad}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_out_pad}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_outenb_pad}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {hk_cyc_o}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {hk_stb_o}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {la_iena[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {la_oenb[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {la_output[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mgmt_soc_dff_A[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mgmt_soc_dff_Di[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mgmt_soc_dff_EN}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mgmt_soc_dff_WE[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mprj_adr_o[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mprj_cyc_o}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mprj_dat_o[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mprj_sel_o[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mprj_stb_o}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mprj_wb_iena}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {mprj_we_o}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {qspi_enabled}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {serial_tx}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {spi_clk}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {spi_cs_n}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {spi_enabled}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {spi_mosi}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {spi_sdoenb}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {sram_ro_addr[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {sram_ro_clk}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {sram_ro_csb}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {sram_ro_data[*]}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {trap}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {uart_enabled}]
+set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {user_irq_ena[*]}]
 
 ## INPUT DRIVER
 set_driving_cell -lib_cell $::env(SYNTH_DRIVING_CELL) -pin $::env(SYNTH_DRIVING_CELL_PIN) [all_inputs]

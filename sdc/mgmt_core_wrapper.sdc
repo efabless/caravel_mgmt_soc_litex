@@ -1,15 +1,15 @@
 ###############################################################################
 # Created by write_sdc
-# Thu Dec  2 19:39:41 2021
+# Sun Dec  5 18:24:19 2021
 ###############################################################################
 current_design mgmt_core_wrapper
 ###############################################################################
 # Timing Constraints
 ###############################################################################
 create_clock -name core_clk -period 25.0000 [get_ports {core_clk}]
+set_propagated_clock [get_clocks {core_clk}]
 set_clock_transition 0.1500 [get_clocks {core_clk}]
 set_clock_uncertainty 0.2500 core_clk
-set_propagated_clock [get_clocks {core_clk}]
 set_input_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {core_rstn}]
 set_input_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {debug_in}]
 set_input_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io0_di}]

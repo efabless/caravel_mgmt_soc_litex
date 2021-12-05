@@ -24,7 +24,7 @@ set ::env(RUN_KLAYOUT) 0
 
 set ::env(CLOCK_PORT) "core_clk"
 set ::env(CLOCK_NET) "core_clk"
-set ::env(CLOCK_PERIOD) "30"
+set ::env(CLOCK_PERIOD) "25"
 
 set ::env(RESET_PORT) "core_rstn"
 
@@ -43,7 +43,7 @@ set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 2000 740"
 
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
-set ::env(PL_TARGET_DENSITY) 0.25
+set ::env(PL_TARGET_DENSITY) 0.23
 set ::env(CELL_PAD) 0
 
 set ::env(LEFT_MARGIN_MULT) 22
@@ -56,6 +56,8 @@ set ::env(FP_PDN_HPITCH) 130
 
 ## CTS
 set ::env(CTS_CLK_BUFFER_LIST) "sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_16"
+set ::env(CTS_SINK_CLUSTERING_MAX_DIAMETER) 50
+set ::env(CTS_SINK_CLUSTERING_SIZE) 20
 
 ## Placement
 set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 1
@@ -86,7 +88,7 @@ set ::env(GLB_RT_OBS) "\
 	li1 0 0 2000 10.74000,\
 	li1 0 728.20000 2000.06000 740,\
 	li1 1988.99000 0 2000 740,\
-	li1 89.61500 100.78500 793.48000 538.37000"
+	li1 75.19000 79.12500 778.05000 519.26500"
 	
 ## Diode Insertion
 set ::env(DIODE_INSERTION_STRATEGY) 4
@@ -124,4 +126,3 @@ set ::env(QUIT_ON_MAGIC_DRC) 0
 set ::env(QUIT_ON_TIMING_VIOLATIONS) 0
 set ::env(QUIT_ON_HOLD_VIOLATIONS) 0
 set ::env(QUIT_ON_SETUP_VIOLATIONS) 0
-set ::env(QUIT_ON_TR_DRC) 0
