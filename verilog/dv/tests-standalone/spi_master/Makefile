@@ -19,9 +19,10 @@ BLOCKS := $(shell basename $(PWDD))
 
 # ---- Include Partitioned Makefiles ----
 
+CONFIG = standalone
+
 include ../../scripts/env.makefile
 include ../../scripts/var.makefile
 include ../../scripts/cpu.makefile
 include ../../scripts/sim.makefile
 
-CONFIG = standalone
