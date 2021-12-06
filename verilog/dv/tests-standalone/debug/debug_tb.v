@@ -58,11 +58,10 @@ module debug_tb;
 
 	initial begin
 		$dumpfile("debug.vcd");
-		$dumpvars(4, debug_tb);
+		$dumpvars(3, debug_tb);
 
 		$display("Wait for Debug o/p");
-//		repeat (70) begin
-		repeat (15) begin
+		repeat (60) begin
 			repeat (1000) @(posedge clock);
 			// Diagnostic. . . interrupts output pattern.
 		end
