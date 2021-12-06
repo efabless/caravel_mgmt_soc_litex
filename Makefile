@@ -534,10 +534,11 @@ $(RCX_BLOCKS): rcx-% : ./def/%.def
 		set_cmd_units -time ns -capacitance pF -current mA -voltage V -resistance kOhm -distance um;\
 		read_liberty $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__tt_025C_1v80.lib;\
 		read_liberty $(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib;\
-		read_def ./def/$*.def;\
+		read_verilog ./verilog/gl/$*.v;\
+		link_design $*;\
 		read_spef ./spef/$*.spef;\
 		read_sdc -echo ./sdc/$*.sdc;\
-		write_sdf ./sdf/$*.sdf;\
+		write_sdf ./sdf/$*.sdf -divider .;\
 		report_checks -fields {capacitance slew input_pins nets fanout} -path_delay min_max -group_count 5;\
 		report_check_types -max_slew -max_capacitance -max_fanout -violators;\
 		report_checks -to [all_outputs] -group_count 1000;\
