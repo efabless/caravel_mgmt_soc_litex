@@ -1,10 +1,16 @@
-../../../rtl/defines.v
-../../../gl/mgmt_core.v
-../../../gl/DFFRAM.v
-../../../gl/mgmt_core_wrapper.v
-../../../cvc-pdk/sky130_fd_io.v
-../../../cvc-pdk/primitives_hd.v
-../../../cvc-pdk/sky130_fd_sc_hd.v
-../../../beh/sky130_sram_2kbyte_1rw1r_32x512_8.v
-../../../dv/vip/spiflash.v
+// VIP
+$VERILOG_PATH/dv/vip/spiflash.v
+$VERILOG_PATH/dv/vip/tbuart.v
+
+// Mgmt Core Wrapper
+$VERILOG_PATH/rtl/defines.v
+$VERILOG_PATH/gl/mgmt_core.v
+$VERILOG_PATH/gl/DFFRAM.v
+$VERILOG_PATH/gl/mgmt_core_wrapper.v
+
+// STD CELLS - they need to be below the defines.v files 
+$VERILOG_PATH/cvc-pdk/sky130_fd_io.v
+$VERILOG_PATH/cvc-pdk/primitives_hd.v
+$VERILOG_PATH/cvc-pdk/sky130_fd_sc_hd.v
+$VERILOG_PATH/beh/sky130_sram_2kbyte_1rw1r_32x512_8.v
 

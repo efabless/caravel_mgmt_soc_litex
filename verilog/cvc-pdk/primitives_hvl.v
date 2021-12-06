@@ -58,7 +58,7 @@ primitive sky130_fd_sc_hvl__udp_dff$P (
 endprimitive
 `endif // NO_PRIMITIVES
 
-`default_wire
+`default_nettype wire
 `endif  // SKY130_FD_SC_HVL__UDP_DFF_P_V
 
 

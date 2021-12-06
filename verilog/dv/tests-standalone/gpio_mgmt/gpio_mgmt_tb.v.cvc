@@ -23,7 +23,6 @@
  */
 
 
-
 module gpio_mgmt_tb;
 
 	reg clock;
