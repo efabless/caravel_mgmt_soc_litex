@@ -15,8 +15,6 @@
 
 `define UNIT_DELAY #1
 
-`default_nettype none
-
 `ifndef __GLOBAL_DEFINE_H
 // Global parameters
 `define __GLOBAL_DEFINE_H

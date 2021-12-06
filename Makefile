@@ -467,7 +467,7 @@ help:
 # RCX Extraction
 BLOCKS = $(shell cd openlane && find * -maxdepth 0 -type d)
 RCX_BLOCKS = $(foreach block, $(BLOCKS), rcx-$(block))
-OPENLANE_IMAGE_NAME=efabless/openlane:2021.11.23_01.42.34
+OPENLANE_IMAGE_NAME=efabless/openlane:2021.11.25_01.26.14
 $(RCX_BLOCKS): rcx-% : ./def/%.def 
 	echo "Running RC Extraction on $*"
 	mkdir -p ./def/tmp 
@@ -534,10 +534,11 @@ $(RCX_BLOCKS): rcx-% : ./def/%.def
 		set_cmd_units -time ns -capacitance pF -current mA -voltage V -resistance kOhm -distance um;\
 		read_liberty $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__tt_025C_1v80.lib;\
 		read_liberty $(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib;\
-		read_def ./def/$*.def;\
+		read_verilog ./verilog/gl/$*.v;\
+		link_design $*;\
 		read_spef ./spef/$*.spef;\
 		read_sdc -echo ./sdc/$*.sdc;\
-		write_sdf ./sdf/$*.sdf;\
+		write_sdf ./sdf/$*.sdf -divider . -include_typ;\
 		report_checks -fields {capacitance slew input_pins nets fanout} -path_delay min_max -group_count 5;\
 		report_check_types -max_slew -max_capacitance -max_fanout -violators;\
 		report_checks -to [all_outputs] -group_count 1000;\

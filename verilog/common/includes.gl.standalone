@@ -11,13 +11,13 @@
 #-v $(VERILOG_PATH)/rtl/VexRiscv_MinDebugCache.v
 
 ## DFFRAM Full GL
-#-v $(VERILOG_PATH)/gl/DFFRAM.v
+-v $(VERILOG_PATH)/gl/DFFRAM.v
 
 ## DFFRAM Behavioral Model
--v $(VERILOG_PATH)/dv/vip/DFFRAM.v
+#-v $(VERILOG_PATH)/dv/vip/DFFRAM.v
 
 ## STD CELLS
--v $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_io/verilog/sky130_fd_io.v
+##-v $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_io/verilog/sky130_fd_io.v
 -v $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v
 -v $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v
 -v $(PDK_ROOT)/sky130A/libs.ref/sky130_fd_sc_hvl/verilog/primitives.v
