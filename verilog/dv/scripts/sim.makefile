@@ -112,7 +112,7 @@ ifeq ($(SIM),GL)
 	 mv $@ GL-$@
 endif
 ifeq ($(SIM),GL_SDF)
-	vvp -sdf-info $<
+	vvp $<
 	 mv $@ GL_SDF-$@
 endif
 
