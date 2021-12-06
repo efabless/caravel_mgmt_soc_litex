@@ -15,12 +15,14 @@
 # SPDX-License-Identifier: Apache-2.0
 
 
+export IVERILOG_DUMPER = fst
+
 # export IVERILOG_DUMPER = fst
-ifeq ($(CONFIG),caravel)
-SIM_DEFINES = -DFUNCTIONAL -DSIM -DUSE_POWER_PINS
-else
+##ifeq ($(CONFIG),caravel)
+##SIM_DEFINES = -DFUNCTIONAL -DSIM -DUSE_POWER_PINS
+##else
 SIM_DEFINES = -DFUNCTIONAL -DSIM
-endif
+##endif
 
 # RTL/GL/GL_SDF
 SIM?=RTL
@@ -89,26 +91,28 @@ ifeq ($(SIM),GL_SDF)
 	$(eval CURRENT_DIRECTORY := $(shell pwd))
 	
 	cvc +interp +incdir+$(COMMON_ABSOLUTE_PATH)+$(VIP_PATH)+$(VERILOG_ABSOLUTE_PATH)+$(RTL_ABSOLUTE_PATH)+$(PDK_ABSOLUTE_PATH) \
-	    +define+FUNCTIONAL +define+SIM +define+GL +define+USE_POWER_PINS +define+ENABLE_SDF +change_port_type +dump2fst \
-	    -f $(VERILOG_PATH)/common/includes.gl+sdf.standalone  $<
-	    
-	    	cvc +interp +incdir+$(BEHAVIOURAL_MODELS_PATH)+$(RTL_ABSOLUTE_PATH)+$(VERILOG_ABSOLUTE_PATH)+$(PDK_ABSOLUTE_PATH)+$(CURRENT_DIRECTORY) \
-	 	+define+FUNCTIONAL +define+SIM +define+GL +define+USE_POWER_PINS +define+ENABLE_SDF +change_port_type +dump2fst $<
+	    +define+FUNCTIONAL +define+SIM +define+GL +define+USE_POWER_PINS +define+ENABLE_SDF +change_port_type +dump2fst  \
+	    -f $(VERILOG_PATH)/common/includes.gl+sdf.$(CONFIG) $<
 
+#	iverilog -Ttyp -DSIM -DENABLE_SDF -DGL_SDF -DUSE_POWER_PINS \
+#	-I$(PDK_PATH) \
+#       -f$(VERILOG_PATH)/common/includes.gl.$(CONFIG) \
+#	-o $@ $<
+	    
 endif
 
 %.vcd: %.vvp
 
 ifeq ($(SIM),RTL)
-	vvp $<
+	vvp  $<
 	 mv $@ RTL-$@
 endif
 ifeq ($(SIM),GL)
-	vvp $<
+	vvp  $<
 	 mv $@ GL-$@
 endif
 ifeq ($(SIM),GL_SDF)
-	vvp $<
+	vvp -sdf-info $<
 	 mv $@ GL_SDF-$@
 endif
 

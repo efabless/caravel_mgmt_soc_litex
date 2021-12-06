@@ -26,8 +26,8 @@
  *  SPDX-License-Identifier: ISC
  */
 
- 
- `default_nettype none
+
+`default_nettype none
 
 `ifndef _MGMT_CORE_WRAPPER_
 `define _MGMT_CORE_WRAPPER_
