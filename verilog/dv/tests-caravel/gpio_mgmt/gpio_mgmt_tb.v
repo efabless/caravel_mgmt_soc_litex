@@ -1,4 +1,3 @@
-`default_nettype none
 /*
  *  SPDX-FileCopyrightText: 2017  Clifford Wolf, 2018  Tim Edwards
  *
@@ -22,6 +21,7 @@
  *  SPDX-License-Identifier: ISC
  */
 
+
 `timescale 1 ns / 1 ps
 
 module gpio_mgmt_tb;
@@ -35,6 +35,16 @@ module gpio_mgmt_tb;
 	initial begin
 		clock <= 0;
 	end
+
+	`ifdef ENABLE_SDF
+		initial begin
+			$sdf_annotate("../../../../sdf/DFFRAM.sdf", uut.soc.DFFRAM_0 );
+			$sdf_annotate("../../../../sdf/mgmt_core.sdf", uut.soc.core);
+			$sdf_annotate("../../../../sdf/mgmt_core_wrapper.sdf", uut.soc);
+
+		end
+	`endif 
+
 
 	initial begin
 		$dumpfile("gpio_mgmt.vcd");
@@ -193,4 +203,3 @@ module gpio_mgmt_tb;
 	);
 
 endmodule
-`default_nettype wire

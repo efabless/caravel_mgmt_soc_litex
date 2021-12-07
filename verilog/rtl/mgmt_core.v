@@ -7840,6 +7840,9 @@ always @(posedge sys_clk) begin
 	end
 	user_irq_ena_re <= csrbank19_out0_re;
 	if (sys_rst) begin
+	    // ****** manually added to correct GL testbench failure
+	    dbg_uart_words_count <= 8'd0;
+	    // ******
 		mgmtsoc_reset_storage <= 2'd0;
 		mgmtsoc_reset_re <= 1'd0;
 		mgmtsoc_scratch_storage <= 32'd305419896;
