@@ -37,6 +37,7 @@ hex:  ${BLOCKS:=.hex}
 	${GCC_PATH}/${GCC_PREFIX}-gcc \
 	-I$(FIRMWARE_PATH) \
 	-I$(VERILOG_PATH)/dv/generated \
+	-I$(VERILOG_PATH)/dv/ \
 	-I$(VERILOG_PATH)/common \
 	  $(CPUFLAGS) \
 	-Wl,-Bstatic,-T,$(LINKER_SCRIPT),--strip-debug \

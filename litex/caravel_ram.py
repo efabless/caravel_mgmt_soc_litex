@@ -75,12 +75,16 @@ class DFFRAM(Module):
 
         self.di   = Signal(32)
         self.do  = Signal(32)
-        self.we   = Signal()
+        self.we   = Signal(4)
         self.en     = Signal()
 
         self.comb += [
             self.di.eq(self.bus.dat_w[0:32]),
-            self.we.eq((self.bus.we & self.bus.stb & self.bus.cyc)),
+            # self.we.eq((self.bus.we & self.bus.stb & self.bus.cyc)),
+            self.we[0].eq(self.bus.sel[0] & self.bus.we & self.bus.stb & self.bus.cyc),
+            self.we[1].eq(self.bus.sel[1] & self.bus.we & self.bus.stb & self.bus.cyc),
+            self.we[2].eq(self.bus.sel[2] & self.bus.we & self.bus.stb & self.bus.cyc),
+            self.we[3].eq(self.bus.sel[3] & self.bus.we & self.bus.stb & self.bus.cyc),
             self.bus.dat_r[0:32].eq(self.do),
             self.en.eq(self.bus.stb & self.bus.cyc),
         ]

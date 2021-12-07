@@ -25,16 +25,19 @@
 	It uses GPIO to flag the success or failure of the test
 */
 
-#define COUNT 3
+#define COUNT 5
+
+// DFFRAM
+//unsigned int ints[10];
+//unsigned short shorts[10];
+//unsigned char bytes[10];
+unsigned long *ints    = (unsigned long *)  0x00000100;
+unsigned short *shorts = (unsigned short *) 0x00000200;
+unsigned char *bytes   = (unsigned char *)  0x0000300;
 
 void main()
 {
     int i, v;
-
-    // DFFRAM
-    unsigned int ints[10];
-    unsigned short shorts[10];
-    unsigned char bytes[10];
 
     // SRAM
     unsigned long *sr_ints    = (unsigned long *)  0x01000000;
@@ -48,12 +51,12 @@ void main()
     // Test Word R/W
     for (i=0; i<COUNT; i++) {
 	     *(sr_ints+i) = i*5000 + 10000;
-	     ints[i] = i*5000 + 10000;
+	     *(ints+i) = i*5000 + 10000;
      }
 
     for (i=0; i<COUNT; i++) {
         v = i*5000+10000;
-        if ( v != ints[i] || v != *(sr_ints+i) )
+        if ( v != *(ints+i) || v != *(sr_ints+i) )
             reg_la0_data = 0xAB400000;
     }
 
@@ -63,12 +66,12 @@ void main()
     reg_la0_data = 0xA0200000;
     for (i=0; i<COUNT; i++) {
 	    *(sr_shorts+i) = i*500 + 100;
-	    shorts[i] = i*500 + 100;
+	    *(shorts+i) = i*500 + 100;
     }
 
     for(i=0; i<COUNT; i++) {
         v = i*500+100;
-        if(v != shorts[i] || v != *(sr_shorts+i))
+        if(v != *(shorts+i) || v != *(sr_shorts+i))
             reg_la0_data = 0xAB200000;
     }
 
@@ -76,12 +79,14 @@ void main()
 
     // Test byte R/W
     reg_la0_data = 0xA0100000;
-    for(i=0; i<COUNT; i++)
-        *(sr_bytes+i) = bytes[i] = i*5 + 10;
+    for(i=0; i<COUNT; i++) {
+        *(sr_bytes+i) = i*5 + 10;
+        *(bytes+i) = i*5 + 10;
+    }
 
     for(i=0; i<COUNT; i++) {
         v = i*5+10;
-        if(v != bytes[i] && v != *(sr_bytes+i))
+        if(v != *(bytes+i) && v != *(sr_bytes+i))
             reg_la0_data = 0xAB100000;
     }
 

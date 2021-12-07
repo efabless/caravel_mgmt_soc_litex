@@ -40,7 +40,7 @@ SECTIONS
 		*(.sdata .sdata.* .gnu.linkonce.s.*)
 		. = ALIGN(8);
 		_edata = .;
-	} > sram AT > flash
+	} > dff AT > flash
 
 	.bss :
 	{
@@ -55,7 +55,7 @@ SECTIONS
 		. = ALIGN(8);
 		_ebss = .;
 		_end = .;
-	} > sram
+	} > dff
 }
 
 PROVIDE(_fstack = ORIGIN(sram) + LENGTH(sram));
