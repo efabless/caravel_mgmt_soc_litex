@@ -54,7 +54,8 @@ set ::env(FP_PDN_CORE_RING) 1
 set ::env(FP_PDN_VPITCH) 50
 set ::env(FP_PDN_HPITCH) 130
 
-set ::env(FP_PDN_VWIDTH) 2.6
+set ::env(FP_PDN_VWIDTH) 1.6
+set ::env(FP_PDN_CORE_RING_VWIDTH) 1.6
 
 ## CTS
 set ::env(CTS_CLK_BUFFER_LIST) "sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_16"
