@@ -78,7 +78,9 @@ bss_loop:
   beq a0,a1,bss_done
   sw zero,0(a0)
   add a0,a0,4
+#ifndef SIM
   j bss_loop
+#endif
 bss_done:
 
   li a0, 0x880  //880 enable timer + external interrupt sources (until mstatus.MIE is set, they will never trigger an interrupt)
