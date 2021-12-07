@@ -15,7 +15,7 @@
 
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(ROUTING_CORES) "6"
+set ::env(ROUTING_CORES) "32"
 
 set ::env(DESIGN_NAME) mgmt_core
 set ::env(DESIGN_IS_CORE) 1
@@ -24,7 +24,7 @@ set ::env(RUN_KLAYOUT) 0
 
 set ::env(CLOCK_PORT) "core_clk"
 set ::env(CLOCK_NET) "core_clk"
-set ::env(CLOCK_PERIOD) "25"
+set ::env(CLOCK_PERIOD) "20"
 
 set ::env(RESET_PORT) "core_rstn"
 
@@ -43,7 +43,7 @@ set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 2000 740"
 
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
-set ::env(PL_TARGET_DENSITY) 0.23
+set ::env(PL_TARGET_DENSITY) 0.4
 set ::env(CELL_PAD) 0
 
 set ::env(LEFT_MARGIN_MULT) 22

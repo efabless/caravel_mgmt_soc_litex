@@ -50,6 +50,16 @@ module uart_tb;
 	initial begin
 		clock = 0;
 	end
+	
+	
+	`ifdef ENABLE_SDF
+		initial begin
+			$sdf_annotate("../../../../sdf/DFFRAM.sdf", uut.DFFRAM_0 );
+			$sdf_annotate("../../../../sdf/mgmt_core.sdf", uut.core);
+			$sdf_annotate("../../../../sdf/mgmt_core_wrapper.sdf", uut);
+		end
+	`endif 
+
 
 	initial begin
 		$dumpfile("uart.vcd");

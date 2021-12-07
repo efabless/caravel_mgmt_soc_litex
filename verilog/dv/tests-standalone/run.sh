@@ -10,7 +10,7 @@
 #for x in `ls -d */` ; do cd $x ; SIM=GL_SDF  make  2>&1 | tee -a verify-gl-sdf.log  ; grep Monitor verify-gl-sdf.log  ; cd ..   ; done
 
 cd $2
-SIM=$1 make  2>&1 | tee -a $1-verify.log  ; grep Monitor $1-verify.log 
+SIM=$1 make  >  $1-verify.log  ; grep Monitor $1-verify.log 
 cd ..
 
 

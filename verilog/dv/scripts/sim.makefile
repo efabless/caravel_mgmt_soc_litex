@@ -17,13 +17,6 @@
 
 export IVERILOG_DUMPER = fst
 
-# export IVERILOG_DUMPER = fst
-##ifeq ($(CONFIG),caravel)
-##SIM_DEFINES = -DFUNCTIONAL -DSIM -DUSE_POWER_PINS
-##else
-SIM_DEFINES = -DFUNCTIONAL -DSIM
-##endif
-
 # RTL/GL/GL_SDF
 SIM?=RTL
 
@@ -69,36 +62,22 @@ hex:  ${BLOCKS:=.hex}
 
 ## RTL
 ifeq ($(SIM),RTL)
-	iverilog -Ttyp $(SIM_DEFINES) -f$(VERILOG_PATH)/common/includes.rtl.$(CONFIG) -o $@ $<
+	iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS \
+	-f$(VERILOG_PATH)/common/includes.rtl.$(CONFIG) -o $@ $<
 endif 
 
 ## GL
 ifeq ($(SIM),GL)
-	iverilog -Ttyp $(SIM_DEFINES) -DGL -DUSE_POWER_PINS \
-	-I$(PDK_PATH) \
-        -f$(VERILOG_PATH)/common/includes.gl.$(CONFIG) \
-	-o $@ $<
+	iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS \
+        -f$(VERILOG_PATH)/common/includes.gl.$(CONFIG) -o $@ $<
 endif 
 
 ## GL+SDF
 ifeq ($(SIM),GL_SDF)
-	$(eval VIP_PATH := $(shell realpath --relative-to=$(shell pwd) $(VIP_PATH)))
-	$(eval COMMON_ABSOLUTE_PATH := $(shell realpath --relative-to=$(shell pwd) $(VERILOG_PATH)/common))
-	$(eval PDK_ABSOLUTE_PATH := $(shell realpath --relative-to=$(shell pwd) $(PDK_PATH)))
-	$(eval RTL_ABSOLUTE_PATH := $(shell realpath --relative-to=$(shell pwd) $(VERILOG_PATH)/rtl))
-	$(eval VERILOG_ABSOLUTE_PATH := $(shell realpath --relative-to=$(shell pwd) $(VERILOG_PATH)))
-	$(eval CARAVEL_VERILOG_ABSOLUTE_PATH := $(shell realpath --relative-to=$(shell pwd) $(CARAVEL_VERILOG_PATH)))
-	$(eval CURRENT_DIRECTORY := $(shell pwd))
-	
-	cvc +interp +incdir+$(COMMON_ABSOLUTE_PATH)+$(VIP_PATH)+$(VERILOG_ABSOLUTE_PATH)+$(RTL_ABSOLUTE_PATH)+$(PDK_ABSOLUTE_PATH) \
-	    +define+FUNCTIONAL +define+SIM +define+GL +define+USE_POWER_PINS +define+ENABLE_SDF +change_port_type +dump2fst  \
-	    -f $(VERILOG_PATH)/common/includes.gl+sdf.$(CONFIG) $<
-
-#	iverilog -Ttyp -DSIM -DENABLE_SDF -DGL_SDF -DUSE_POWER_PINS \
-#	-I$(PDK_PATH) \
-#       -f$(VERILOG_PATH)/common/includes.gl.$(CONFIG) \
-#	-o $@ $<
-	    
+	cvc  +interp \
+	+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+ENABLE_SDF \
+	+change_port_type +dump2fst +fst+parallel2=on  \
+	 -f $(VERILOG_PATH)/common/includes.gl+sdf.$(CONFIG) $<
 endif
 
 %.vcd: %.vvp

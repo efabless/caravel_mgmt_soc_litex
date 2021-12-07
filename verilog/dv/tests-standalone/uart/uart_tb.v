@@ -92,9 +92,9 @@ module uart_tb;
 		end
 		else if(checkbits == 16'hAB00) begin
 			`ifdef GL
-				$display("UART Test (GL) passed");
+				$display("Monitor: Test UART (GL) passed");
 			`else
-				$display("UART Test (RTL) passed");
+				$display("Monitor: Test UART (RTL) passed");
 			`endif
 			$finish;
 		end

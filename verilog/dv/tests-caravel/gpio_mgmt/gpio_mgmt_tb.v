@@ -20,8 +20,6 @@
  *
  *  SPDX-License-Identifier: ISC
  */
-
-
 `timescale 1 ns / 1 ps
 
 module gpio_mgmt_tb;
@@ -65,7 +63,7 @@ module gpio_mgmt_tb;
 		$finish;
 	end
 
-	wire [127:0] mprj_io;	// Most of these are no-connects
+	wire [37:0] mprj_io;	// Most of these are no-connects
 	wire [15:0] checkbits;
 	reg  [7:0] checkbits_lo;
 	wire [7:0] checkbits_hi;

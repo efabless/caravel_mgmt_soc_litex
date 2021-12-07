@@ -111,9 +111,9 @@ module debug_tb;
 		end
 		else if(checkbits == 16'hAB00) begin
 			`ifdef GL
-				$display("Debug Test (GL) passed");
+				$display("Monitor: Test Debug (GL) passed");
 			`else
-				$display("UART Test (RTL) passed");
+				$display("Monitor: Test Debug (GL) passed");
 			`endif
 			$finish;
 		end
