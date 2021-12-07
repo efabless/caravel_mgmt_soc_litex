@@ -15,7 +15,7 @@
 
 set script_dir [file dirname [file normalize [info script]]]
 
-set ::env(ROUTING_CORES) "32"
+set ::env(ROUTING_CORES) "6"
 
 set ::env(DESIGN_NAME) mgmt_core
 set ::env(DESIGN_IS_CORE) 1
@@ -24,7 +24,7 @@ set ::env(RUN_KLAYOUT) 0
 
 set ::env(CLOCK_PORT) "core_clk"
 set ::env(CLOCK_NET) "core_clk"
-set ::env(CLOCK_PERIOD) "20"
+set ::env(CLOCK_PERIOD) "25"
 
 set ::env(RESET_PORT) "core_rstn"
 
@@ -43,7 +43,7 @@ set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 2000 740"
 
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
-set ::env(PL_TARGET_DENSITY) 0.4
+set ::env(PL_TARGET_DENSITY) 0.23
 set ::env(CELL_PAD) 0
 
 set ::env(LEFT_MARGIN_MULT) 22
@@ -53,6 +53,8 @@ set ::env(RIGHT_MARGIN_MULT) 22
 set ::env(FP_PDN_CORE_RING) 1
 set ::env(FP_PDN_VPITCH) 50
 set ::env(FP_PDN_HPITCH) 130
+
+set ::env(FP_PDN_VWIDTH) 2.6
 
 ## CTS
 set ::env(CTS_CLK_BUFFER_LIST) "sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_16"
@@ -88,6 +90,7 @@ set ::env(GLB_RT_OBS) "\
 	li1 0 0 2000 10.74000,\
 	li1 0 728.20000 2000.06000 740,\
 	li1 1988.99000 0 2000 740,\
+	met5 84.46000 88.23500 555.01500 94.50000,\
 	li1 75.19000 79.12500 778.05000 519.26500"
 	
 ## Diode Insertion
