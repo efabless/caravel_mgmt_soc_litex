@@ -113,7 +113,7 @@ module debug_tb;
 			`ifdef GL
 				$display("Monitor: Test Debug (GL) passed");
 			`else
-				$display("Monitor: Test Debug (GL) passed");
+				$display("Monitor: Test Debug (RTL) passed");
 			`endif
 			$finish;
 		end
