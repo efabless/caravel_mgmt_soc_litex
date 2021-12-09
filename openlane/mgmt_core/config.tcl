@@ -31,7 +31,7 @@ set ::env(RESET_PORT) "core_rstn"
 set ::env(BASE_SDC_FILE) $script_dir/base.sdc 
 
 ## Synthesis
-set ::env(SYNTH_STRATEGY) "DELAY 1"
+set ::env(SYNTH_STRATEGY) "DELAY 0"
 set ::env(SYNTH_MAX_FANOUT) 8
 set ::env(SYNTH_READ_BLACKBOX_LIB) 1
 
@@ -43,7 +43,7 @@ set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 2000 740"
 
 set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
-set ::env(PL_TARGET_DENSITY) 0.23
+set ::env(PL_TARGET_DENSITY) 0.25
 set ::env(CELL_PAD) 0
 
 set ::env(LEFT_MARGIN_MULT) 22
