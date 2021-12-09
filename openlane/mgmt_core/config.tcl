@@ -30,6 +30,8 @@ set ::env(RESET_PORT) "core_rstn"
 
 set ::env(BASE_SDC_FILE) $script_dir/base.sdc 
 
+set ::env(DRC_EXCLUDE_CELL_LIST) $script_dir/drc_exclude.cells
+
 ## Synthesis
 set ::env(SYNTH_STRATEGY) "DELAY 0"
 set ::env(SYNTH_MAX_FANOUT) 8
