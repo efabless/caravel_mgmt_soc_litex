@@ -1,0 +1,26 @@
+OpenROAD 4f4d3cd8c2cc3871d1c04ac2c8572e38cff43645 
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ODB-0222] Reading LEF file: /project/openlane/mgmt_core/runs/mgmt_core/tmp/merged.lef
+[WARNING ODB-0220] WARNING (LEFPARS-2036): SOURCE statement is obsolete in version 5.6 and later.
+The LEF parser will ignore this statement.
+To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /project/openlane/mgmt_core/runs/mgmt_core/tmp/merged.lef at line 922.
+
+[INFO ODB-0223]     Created 13 technology layers
+[INFO ODB-0224]     Created 25 technology vias
+[INFO ODB-0225]     Created 442 library cells
+[INFO ODB-0226] Finished LEF file:  /project/openlane/mgmt_core/runs/mgmt_core/tmp/merged.lef
+[INFO ODB-0127] Reading DEF file: /project/openlane/mgmt_core/runs/mgmt_core/results/routing/mgmt_core.def
+[INFO ODB-0128] Design: mgmt_core
+[INFO ODB-0094] 		Created 100000 Insts
+[INFO ODB-0130]     Created 819 pins.
+[INFO ODB-0131]     Created 148311 components and 680712 component-terminals.
+[INFO ODB-0132]     Created 2 special nets and 561308 connections.
+[INFO ODB-0133]     Created 28991 nets and 119369 connections.
+[INFO ODB-0134] Finished DEF file: /project/openlane/mgmt_core/runs/mgmt_core/results/routing/mgmt_core.def
+Top-level design name: mgmt_core
+Default power net:  VPWR
+Default ground net: VGND
+Found a total of 1 power ports.
+Found a total of 1 ground ports.
+Modified power connections of 148311 cells (Remaining: 0 ).
