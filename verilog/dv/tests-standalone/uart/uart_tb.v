@@ -24,7 +24,6 @@
 
 `timescale 1 ns / 1 ps
 
-
 module uart_tb;
 	reg clock;
 	reg RSTB;
@@ -50,6 +49,13 @@ module uart_tb;
 	initial begin
 		clock = 0;
 	end
+
+	`ifdef ENABLE_SDF
+		initial begin
+			$sdf_annotate("../../../../sdf/DFFRAM.sdf", uut.DFFRAM_0 );
+			$sdf_annotate("../../../../sdf/mgmt_core.sdf", uut.core);
+		end
+	`endif 
 
 	initial begin
 		$dumpfile("uart.vcd");

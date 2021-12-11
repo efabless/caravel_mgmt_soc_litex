@@ -395,6 +395,33 @@ module sky130_fd_sc_hvl__a21o_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A1 +=> X) = (0:0:0,0:0:0);
+(A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&!A2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2)) (B1 +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -428,6 +455,33 @@ module sky130_fd_sc_hvl__a21o_1 (
         .B1(B1)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A1 +=> X) = (0:0:0,0:0:0);
+(A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&!A2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2)) (B1 +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -837,6 +891,33 @@ module sky130_fd_sc_hvl__a21oi_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A1 -=> Y) = (0:0:0,0:0:0);
+(A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&!A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -870,6 +951,33 @@ module sky130_fd_sc_hvl__a21oi_1 (
         .B1(B1)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A1 -=> Y) = (0:0:0,0:0:0);
+(A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&!A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -1298,6 +1406,40 @@ module sky130_fd_sc_hvl__a22o_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((A2&!B1&!B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A2&!B1&B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A2&B1&!B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A1&!B1&!B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A1&!B1&B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A1&B1&!B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&!A2&B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((!A1&!A2&B1)) (B2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&B1)) (B2 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&B1)) (B2 +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -1334,6 +1476,40 @@ module sky130_fd_sc_hvl__a22o_1 (
         .B2(B2)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((A2&!B1&!B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A2&!B1&B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A2&B1&!B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A1&!B1&!B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A1&!B1&B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A1&B1&!B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&!A2&B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((!A1&!A2&B1)) (B2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&B1)) (B2 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&B1)) (B2 +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -1762,6 +1938,40 @@ module sky130_fd_sc_hvl__a22oi_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((A2&!B1&!B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((A2&!B1&B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((A2&B1&!B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!B1&!B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!B1&B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((A1&B1&!B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&!A2&B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2&B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2&B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&!A2&B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2&B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2&B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -1798,6 +2008,40 @@ module sky130_fd_sc_hvl__a22oi_1 (
         .B2(B2)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((A2&!B1&!B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((A2&!B1&B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((A2&B1&!B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!B1&!B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!B1&B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((A1&B1&!B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&!A2&B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2&B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2&B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&!A2&B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2&B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2&B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -2176,6 +2420,32 @@ module sky130_fd_sc_hvl__and2_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((B)) (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A)) (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -2206,6 +2476,32 @@ module sky130_fd_sc_hvl__and2_1 (
         .B(B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((B)) (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A)) (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -2595,6 +2891,34 @@ module sky130_fd_sc_hvl__and3_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((B&C)) (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A&C)) (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A&B)) (C +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (C +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -2628,6 +2952,34 @@ module sky130_fd_sc_hvl__and3_1 (
         .C(C)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((B&C)) (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A&C)) (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A&B)) (C +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (C +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -2995,6 +3347,29 @@ module sky130_fd_sc_hvl__buf_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3022,6 +3397,29 @@ module sky130_fd_sc_hvl__buf_1 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3095,6 +3493,29 @@ module sky130_fd_sc_hvl__buf_2 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3122,6 +3543,29 @@ module sky130_fd_sc_hvl__buf_2 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3195,6 +3639,29 @@ module sky130_fd_sc_hvl__buf_4 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3222,6 +3689,29 @@ module sky130_fd_sc_hvl__buf_4 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3295,6 +3785,29 @@ module sky130_fd_sc_hvl__buf_8 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3322,6 +3835,29 @@ module sky130_fd_sc_hvl__buf_8 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3395,6 +3931,29 @@ module sky130_fd_sc_hvl__buf_16 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3422,6 +3981,29 @@ module sky130_fd_sc_hvl__buf_16 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3495,6 +4077,29 @@ module sky130_fd_sc_hvl__buf_32 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -3522,6 +4127,29 @@ module sky130_fd_sc_hvl__buf_32 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -4748,6 +5376,41 @@ module sky130_fd_sc_hvl__dfrbp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire RESETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(negedge RESET_B => (Q +: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(negedge RESET_B => (Q_N -: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge RESET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge RESET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , RESETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -4784,6 +5447,41 @@ module sky130_fd_sc_hvl__dfrbp_1 (
         .RESET_B(RESET_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire RESETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(negedge RESET_B => (Q +: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(negedge RESET_B => (Q_N -: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge RESET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge RESET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , RESETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -5197,6 +5895,39 @@ module sky130_fd_sc_hvl__dfrtp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire RESETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(negedge RESET_B => (Q +: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge RESET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge RESET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , RESETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -5230,6 +5961,39 @@ module sky130_fd_sc_hvl__dfrtp_1 (
         .RESET_B(RESET_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire RESETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(negedge RESET_B => (Q +: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge RESET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge RESET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , RESETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -5662,6 +6426,41 @@ module sky130_fd_sc_hvl__dfsbp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(negedge SET_B => (Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(negedge SET_B => (Q_N +: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge SET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge SET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , SETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -5698,6 +6497,41 @@ module sky130_fd_sc_hvl__dfsbp_1 (
         .SET_B(SET_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(negedge SET_B => (Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(negedge SET_B => (Q_N +: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge SET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge SET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , SETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -6111,6 +6945,39 @@ module sky130_fd_sc_hvl__dfstp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(negedge SET_B => (Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge SET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge SET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , SETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -6144,6 +7011,39 @@ module sky130_fd_sc_hvl__dfstp_1 (
         .SET_B(SET_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(negedge SET_B => (Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge SET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge SET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , SETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -6551,6 +7451,37 @@ module sky130_fd_sc_hvl__dfxbp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK , 0:0:0, 0, notifier);
+$width (negedge CLK , 0:0:0, 0, notifier);
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -6584,6 +7515,37 @@ module sky130_fd_sc_hvl__dfxbp_1 (
         .D(D)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK , 0:0:0, 0, notifier);
+$width (negedge CLK , 0:0:0, 0, notifier);
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -6972,6 +7934,36 @@ module sky130_fd_sc_hvl__dfxtp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK , 0:0:0, 0, notifier);
+$width (negedge CLK , 0:0:0, 0, notifier);
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -7002,6 +7994,36 @@ module sky130_fd_sc_hvl__dfxtp_1 (
         .D(D)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, D_delayed, COND0; 
+reg notifier; 
+
+specify
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK , 0:0:0, 0, notifier);
+$width (negedge CLK , 0:0:0, 0, notifier);
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , , CLK_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -7748,6 +8770,35 @@ module sky130_fd_sc_hvl__dlclkp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, GATE_delayed, AWAKE; 
+reg notifier; 
+
+specify
+( CLK +=> GCLK ) = ( 0:0:0 , 0:0:0 ) ;                         // delays are tris , tfall
+$width ( negedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
+$setuphold ( posedge CLK , posedge GATE , 0:0:0 , 0:0:0 , notifier , AWAKE , AWAKE , CLK_delayed , GATE_delayed ) ;
+$setuphold ( posedge CLK , negedge GATE , 0:0:0 , 0:0:0 , notifier , AWAKE , AWAKE , CLK_delayed , GATE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -7778,6 +8829,35 @@ module sky130_fd_sc_hvl__dlclkp_1 (
         .CLK(CLK)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, GATE_delayed, AWAKE; 
+reg notifier; 
+
+specify
+( CLK +=> GCLK ) = ( 0:0:0 , 0:0:0 ) ;                         // delays are tris , tfall
+$width ( negedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
+$setuphold ( posedge CLK , posedge GATE , 0:0:0 , 0:0:0 , notifier , AWAKE , AWAKE , CLK_delayed , GATE_delayed ) ;
+$setuphold ( posedge CLK , negedge GATE , 0:0:0 , 0:0:0 , notifier , AWAKE , AWAKE , CLK_delayed , GATE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -8199,6 +9279,39 @@ module sky130_fd_sc_hvl__dlrtp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, GATE_delayed, D_delayed,COND0, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(negedge RESET_B => (Q +: RESET_B ) ) = (0:0:0,0:0:0);  // delay is tfall
+(D +=> Q ) = (0:0:0,0:0:0);  // delays are tris,tfall
+(posedge GATE => (Q : GATE ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width ( posedge GATE &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge RESET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge RESET_B , negedge GATE , 0:0:0, 0:0:0, notifier , , , RESETB_delayed , GATE_delayed ) ;
+$setuphold ( negedge GATE , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , GATE_delayed , D_delayed ) ;
+$setuphold ( negedge GATE , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , GATE_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -8232,6 +9345,39 @@ module sky130_fd_sc_hvl__dlrtp_1 (
         .GATE(GATE)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, GATE_delayed, D_delayed,COND0, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(negedge RESET_B => (Q +: RESET_B ) ) = (0:0:0,0:0:0);  // delay is tfall
+(D +=> Q ) = (0:0:0,0:0:0);  // delays are tris,tfall
+(posedge GATE => (Q : GATE ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width ( posedge GATE &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge RESET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge RESET_B , negedge GATE , 0:0:0, 0:0:0, notifier , , , RESETB_delayed , GATE_delayed ) ;
+$setuphold ( negedge GATE , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , GATE_delayed , D_delayed ) ;
+$setuphold ( negedge GATE , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , GATE_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -8620,6 +9766,36 @@ module sky130_fd_sc_hvl__dlxtp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, GATE_delayed, D_delayed,COND0, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(D +=> Q ) = (0:0:0,0:0:0);  // delays are tris,tfall
+(posedge GATE => (Q +: D ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge GATE , 0:0:0, 0, notifier);
+$setuphold ( negedge GATE , posedge D , 0:0:0, 0:0:0, notifier , , , GATE_delayed , D_delayed ) ;
+$setuphold ( negedge GATE , negedge D , 0:0:0, 0:0:0, notifier , , , GATE_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -8650,6 +9826,36 @@ module sky130_fd_sc_hvl__dlxtp_1 (
         .GATE(GATE)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, CLK_delayed, GATE_delayed, D_delayed,COND0, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(D +=> Q ) = (0:0:0,0:0:0);  // delays are tris,tfall
+(posedge GATE => (Q +: D ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge GATE , 0:0:0, 0, notifier);
+$setuphold ( negedge GATE , posedge D , 0:0:0, 0:0:0, notifier , , , GATE_delayed , D_delayed ) ;
+$setuphold ( negedge GATE , negedge D , 0:0:0, 0:0:0, notifier , , , GATE_delayed , D_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -9020,6 +10226,30 @@ module sky130_fd_sc_hvl__einvn_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if (~TE_B ) (A -=> Z ) = (0:0:0,0:0:0);  // delays are tris,tfall
+(TE_B => Z ) = (0:0:0,0:0:0,0:0:0,0:0:0,0:0:0,0:0:0);  // delays are t01,t10,t0Z,tZ1,t1Z,tZ0
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -9050,6 +10280,30 @@ module sky130_fd_sc_hvl__einvn_1 (
         .TE_B(TE_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if (~TE_B ) (A -=> Z ) = (0:0:0,0:0:0);  // delays are tris,tfall
+(TE_B => Z ) = (0:0:0,0:0:0,0:0:0,0:0:0,0:0:0,0:0:0);  // delays are t01,t10,t0Z,tZ1,t1Z,tZ0
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -9420,6 +10674,30 @@ module sky130_fd_sc_hvl__einvp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if (TE ) (A -=> Z ) = (0:0:0,0:0:0);  // delays are tris,tfall
+(TE => Z ) = (0:0:0,0:0:0,0:0:0,0:0:0,0:0:0,0:0:0);  // delays are t01,t10,t0Z,tZ1,t1Z,tZ0
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -9450,6 +10728,30 @@ module sky130_fd_sc_hvl__einvp_1 (
         .TE(TE)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if (TE ) (A -=> Z ) = (0:0:0,0:0:0);  // delays are tris,tfall
+(TE => Z ) = (0:0:0,0:0:0,0:0:0,0:0:0,0:0:0,0:0:0);  // delays are t01,t10,t0Z,tZ1,t1Z,tZ0
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -10395,6 +11697,29 @@ module sky130_fd_sc_hvl__inv_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -10422,6 +11747,29 @@ module sky130_fd_sc_hvl__inv_1 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -10495,6 +11843,29 @@ module sky130_fd_sc_hvl__inv_2 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -10522,6 +11893,29 @@ module sky130_fd_sc_hvl__inv_2 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -10595,6 +11989,29 @@ module sky130_fd_sc_hvl__inv_4 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -10622,6 +12039,29 @@ module sky130_fd_sc_hvl__inv_4 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -10695,6 +12135,29 @@ module sky130_fd_sc_hvl__inv_8 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -10722,6 +12185,29 @@ module sky130_fd_sc_hvl__inv_8 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -10795,6 +12281,29 @@ module sky130_fd_sc_hvl__inv_16 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -10822,6 +12331,29 @@ module sky130_fd_sc_hvl__inv_16 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -11195,6 +12727,29 @@ module sky130_fd_sc_hvl__lsbufhv2hv_hl_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -11223,6 +12778,29 @@ module sky130_fd_sc_hvl__lsbufhv2hv_hl_1 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -11596,6 +13174,29 @@ module sky130_fd_sc_hvl__lsbufhv2hv_lh_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -11624,6 +13225,29 @@ module sky130_fd_sc_hvl__lsbufhv2hv_lh_1 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -11991,6 +13615,29 @@ module sky130_fd_sc_hvl__lsbufhv2lv_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -12019,6 +13666,29 @@ module sky130_fd_sc_hvl__lsbufhv2lv_1 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -12398,6 +14068,29 @@ module sky130_fd_sc_hvl__lsbufhv2lv_simple_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -12426,6 +14119,29 @@ module sky130_fd_sc_hvl__lsbufhv2lv_simple_1 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -12799,6 +14515,29 @@ module sky130_fd_sc_hvl__lsbuflv2hv_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -12827,6 +14566,29 @@ module sky130_fd_sc_hvl__lsbuflv2hv_1 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -13240,6 +15002,30 @@ module sky130_fd_sc_hvl__lsbuflv2hv_clkiso_hlkg_3 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(SLEEP_B +=> X) = (0:0:0,0:0:0);
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -13271,6 +15057,30 @@ module sky130_fd_sc_hvl__lsbuflv2hv_clkiso_hlkg_3 (
         .SLEEP_B(SLEEP_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(SLEEP_B +=> X) = (0:0:0,0:0:0);
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -13683,6 +15493,30 @@ module sky130_fd_sc_hvl__lsbuflv2hv_isosrchvaon_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(SLEEP_B +=> X) = (0:0:0,0:0:0);
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -13714,6 +15548,30 @@ module sky130_fd_sc_hvl__lsbuflv2hv_isosrchvaon_1 (
         .SLEEP_B(SLEEP_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(SLEEP_B +=> X) = (0:0:0,0:0:0);
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -14087,6 +15945,29 @@ module sky130_fd_sc_hvl__lsbuflv2hv_symmetric_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -14115,6 +15996,29 @@ module sky130_fd_sc_hvl__lsbuflv2hv_symmetric_1 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -14508,6 +16412,34 @@ module sky130_fd_sc_hvl__mux2_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!A1&!S)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((A1&!S)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&S)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A0&S)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1)) (S +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1)) (S -=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -14541,6 +16473,34 @@ module sky130_fd_sc_hvl__mux2_1 (
         .S(S)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!A1&!S)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((A1&!S)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&S)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A0&S)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1)) (S +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1)) (S -=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -14967,6 +16927,92 @@ module sky130_fd_sc_hvl__mux4_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!A1&!A2&!A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((!A1&!A2&A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&!A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&!A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((A1&A2&!A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((A1&A2&A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A2&!A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A2&A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A2&!A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A2&A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A2&!A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A2&A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A0&A2&!A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A0&A2&A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&!A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&!A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&!A2&A3&S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A2&!A3&S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A2&!A3&!S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A2&A3&!S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A2&A3&S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&!A3&!S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&!A3&S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&A3&!S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&!A3&!S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&A3&!S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&A3&S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A2&!A3&!S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A2&!A3&S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A2&A3&!S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A2&A3&S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&A2&!A3&S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&!A2&A3&S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A2&!A3&!S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A2&A3&!S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A2&A3&S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A2&!A3&S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&!A3&!S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&!A3&S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&A3&!S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&!A3&!S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&A3&!S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&A3&S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A2&A3&S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A2&!A3&!S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A2&!A3&S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A2&A3&!S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((A0&A1&A2&!A3&S0)) (S1 -=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -15009,6 +17055,92 @@ module sky130_fd_sc_hvl__mux4_1 (
         .S1(S1)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!A1&!A2&!A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((!A1&!A2&A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&!A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&!A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((A1&A2&!A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((A1&A2&A3&!S0&!S1)) (A0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A2&!A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A2&A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A2&!A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A2&A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A2&!A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A2&A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A0&A2&!A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((A0&A2&A3&S0&!S1)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&!A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&A3&!S0&S1)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&!A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&A2&S0&S1)) (A3 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&!A2&A3&S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A2&!A3&S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A2&!A3&!S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A2&A3&!S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A2&A3&S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&!A3&!S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&!A3&S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&A3&!S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&!A3&!S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&A3&!S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&A3&S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A2&!A3&!S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A2&!A3&S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A2&A3&!S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A2&A3&S1)) (S0 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&A2&!A3&S1)) (S0 -=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&!A2&A3&S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A2&!A3&!S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A2&A3&!S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&!A1&A2&A3&S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&!A2&!A3&S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&!A3&!S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&!A3&S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((!A0&A1&A2&A3&!S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&!A3&!S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&A3&!S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&!A2&A3&S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((A0&!A1&A2&A3&S0)) (S1 +=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A2&!A3&!S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A2&!A3&S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((A0&A1&!A2&A3&!S0)) (S1 -=> X) = (0:0:0,0:0:0);
+if ((A0&A1&A2&!A3&S0)) (S1 -=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -15387,6 +17519,32 @@ module sky130_fd_sc_hvl__nand2_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((B)) (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A)) (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -15417,6 +17575,32 @@ module sky130_fd_sc_hvl__nand2_1 (
         .B(B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((B)) (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A)) (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -15806,6 +17990,34 @@ module sky130_fd_sc_hvl__nand3_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((B&C)) (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A&C)) (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A&B)) (C -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (C -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -15839,6 +18051,34 @@ module sky130_fd_sc_hvl__nand3_1 (
         .C(C)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((B&C)) (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A&C)) (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A&B)) (C -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (C -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -16217,6 +18457,32 @@ module sky130_fd_sc_hvl__nor2_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!B)) (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A)) (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -16247,6 +18513,32 @@ module sky130_fd_sc_hvl__nor2_1 (
         .B(B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!B)) (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A)) (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -16648,6 +18940,34 @@ module sky130_fd_sc_hvl__nor3_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!B&!C)) (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A&!C)) (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A&!B)) (C -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (C -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -16681,6 +19001,34 @@ module sky130_fd_sc_hvl__nor3_1 (
         .C(C)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!B&!C)) (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A&!C)) (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A&!B)) (C -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (C -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -17090,6 +19438,33 @@ module sky130_fd_sc_hvl__o21a_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A1 +=> X) = (0:0:0,0:0:0);
+(A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&A2)) (B1 +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -17123,6 +19498,33 @@ module sky130_fd_sc_hvl__o21a_1 (
         .B1(B1)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A1 +=> X) = (0:0:0,0:0:0);
+(A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&A2)) (B1 +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -17532,6 +19934,33 @@ module sky130_fd_sc_hvl__o21ai_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A1 -=> Y) = (0:0:0,0:0:0);
+(A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -17565,6 +19994,33 @@ module sky130_fd_sc_hvl__o21ai_1 (
         .B1(B1)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A1 -=> Y) = (0:0:0,0:0:0);
+(A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&A2)) (B1 -=> Y) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -17993,6 +20449,40 @@ module sky130_fd_sc_hvl__o22a_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!A2&!B1&B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A2&B1&!B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A2&B1&B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A1&!B1&B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&B1&!B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&B1&B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&!B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&!B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&A2&!B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&!B1)) (B2 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&!B1)) (B2 +=> X) = (0:0:0,0:0:0);
+if ((A1&A2&!B1)) (B2 +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -18029,6 +20519,40 @@ module sky130_fd_sc_hvl__o22a_1 (
         .B2(B2)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!A2&!B1&B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A2&B1&!B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A2&B1&B2)) (A1 +=> X) = (0:0:0,0:0:0);
+if ((!A1&!B1&B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&B1&!B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&B1&B2)) (A2 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&!B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&!B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((A1&A2&!B2)) (B1 +=> X) = (0:0:0,0:0:0);
+if ((!A1&A2&!B1)) (B2 +=> X) = (0:0:0,0:0:0);
+if ((A1&!A2&!B1)) (B2 +=> X) = (0:0:0,0:0:0);
+if ((A1&A2&!B1)) (B2 +=> X) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -18457,6 +20981,40 @@ module sky130_fd_sc_hvl__o22ai_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!A2&!B1&B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((!A2&B1&!B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((!A2&B1&B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&!B1&B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&B1&!B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&B1&B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2&!B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2&!B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&A2&!B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2&!B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2&!B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+if ((A1&A2&!B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -18493,6 +21051,40 @@ module sky130_fd_sc_hvl__o22ai_1 (
         .B2(B2)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!A2&!B1&B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((!A2&B1&!B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((!A2&B1&B2)) (A1 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&!B1&B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&B1&!B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&B1&B2)) (A2 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2&!B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2&!B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((A1&A2&!B2)) (B1 -=> Y) = (0:0:0,0:0:0);
+if ((!A1&A2&!B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+if ((A1&!A2&!B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+if ((A1&A2&!B1)) (B2 -=> Y) = (0:0:0,0:0:0);
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -18871,6 +21463,32 @@ module sky130_fd_sc_hvl__or2_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!B)) (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A)) (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -18901,6 +21519,32 @@ module sky130_fd_sc_hvl__or2_1 (
         .B(B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!B)) (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A)) (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -19290,6 +21934,34 @@ module sky130_fd_sc_hvl__or3_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!B&!C)) (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A&!C)) (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A&!B)) (C +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (C +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -19323,6 +21995,34 @@ module sky130_fd_sc_hvl__or3_1 (
         .C(C)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!B&!C)) (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A&!C)) (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A&!B)) (C +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+ifnone (C +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -19690,6 +22390,29 @@ module sky130_fd_sc_hvl__probe_p_8 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -19717,6 +22440,29 @@ module sky130_fd_sc_hvl__probe_p_8 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -20084,6 +22830,29 @@ module sky130_fd_sc_hvl__probec_p_8 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -20111,6 +22880,29 @@ module sky130_fd_sc_hvl__probec_p_8 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -20478,6 +23270,29 @@ module sky130_fd_sc_hvl__schmittbuf_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -20505,6 +23320,29 @@ module sky130_fd_sc_hvl__schmittbuf_1 (
         .A(A)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+(A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -20989,6 +23827,45 @@ module sky130_fd_sc_hvl__sdfrbp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(negedge RESET_B => (Q +: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(negedge RESET_B => (Q_N -: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge RESET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge RESET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , RESETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -21031,6 +23908,46 @@ module sky130_fd_sc_hvl__sdfrbp_1 (
         .RESET_B(RESET_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(negedge RESET_B => (Q +: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(negedge RESET_B => (Q_N -: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge RESET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge RESET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , RESETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -21496,6 +24413,44 @@ module sky130_fd_sc_hvl__sdfrtp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(negedge RESET_B => (Q +: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge RESET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge RESET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , RESETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -21535,6 +24490,43 @@ module sky130_fd_sc_hvl__sdfrtp_1 (
         .RESET_B(RESET_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(negedge RESET_B => (Q +: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (RESET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge RESET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge RESET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , RESETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -22019,6 +25011,45 @@ module sky130_fd_sc_hvl__sdfsbp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(negedge SET_B => (Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(negedge SET_B => (Q_N +: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge SET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge SET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , SETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -22061,6 +25092,45 @@ module sky130_fd_sc_hvl__sdfsbp_1 (
         .SET_B(SET_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(negedge SET_B => (Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(negedge SET_B => (Q_N +: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge SET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge SET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , SETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -22526,6 +25596,43 @@ module sky130_fd_sc_hvl__sdfstp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(negedge SET_B => (Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge SET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge SET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , SETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -22565,6 +25672,43 @@ module sky130_fd_sc_hvl__sdfstp_1 (
         .SET_B(SET_B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(negedge SET_B => (Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge CLK &&& (SET_B===1'b1) , 0:0:0, 0, notifier);
+$width (negedge SET_B , 0:0:0 , 0 , notifier ) ;
+$recrem ( posedge SET_B , posedge CLK , 0:0:0, 0:0:0, notifier , , , SETB_delayed , CLK_delayed ) ;
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -23018,6 +26162,41 @@ module sky130_fd_sc_hvl__sdfxbp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK , 0:0:0, 0, notifier);
+$width (negedge CLK , 0:0:0, 0, notifier);
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -23057,6 +26236,41 @@ module sky130_fd_sc_hvl__sdfxbp_1 (
         .SCE(SCE)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+(posedge CLK => (Q_N : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK , 0:0:0, 0, notifier);
+$width (negedge CLK , 0:0:0, 0, notifier);
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -23491,6 +26705,40 @@ module sky130_fd_sc_hvl__sdfxtp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed,COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK , 0:0:0, 0, notifier);
+$width (negedge CLK , 0:0:0, 0, notifier);
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -23527,6 +26775,40 @@ module sky130_fd_sc_hvl__sdfxtp_1 (
         .SCE(SCE)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, D_delayed, COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(posedge CLK => (Q : CLK ) ) = (0:0:0,0:0:0); // delays are tris,tfall
+$width (posedge CLK , 0:0:0, 0, notifier);
+$width (negedge CLK , 0:0:0, 0, notifier);
+$setuphold ( posedge CLK , posedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , negedge D , 0:0:0, 0:0:0, notifier , , COND1 , CLK_delayed , D_delayed ) ;
+$setuphold ( posedge CLK , posedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , negedge SCD , 0:0:0, 0:0:0, notifier , , COND2 , CLK_delayed , SCD_delayed ) ;
+$setuphold ( posedge CLK , posedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0, 0:0:0, notifier , , COND3 , CLK_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -23966,6 +27248,37 @@ module sky130_fd_sc_hvl__sdlclkp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, GATE_AWAKE, SCE_AWAKE, COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+( CLK +=> GCLK ) = ( 0:0:0 , 0:0:0 ) ;                         // delays are tris , tfall
+$setuphold ( posedge CLK , posedge SCE , 0:0:0 , 0:0:0 , notifier , SCE_AWAKE , SCE_AWAKE , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0 , 0:0:0 , notifier , SCE_AWAKE , SCE_AWAKE , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , posedge GATE , 0:0:0 , 0:0:0 , notifier , GATE_AWAKE , GATE_AWAKE , CLK_delayed , GATE_delayed ) ;
+$setuphold ( posedge CLK , negedge GATE , 0:0:0 , 0:0:0 , notifier , GATE_AWAKE , GATE_AWAKE , CLK_delayed , GATE_delayed ) ;
+$width ( negedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -23999,6 +27312,37 @@ module sky130_fd_sc_hvl__sdlclkp_1 (
         .CLK(CLK)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, GATE_AWAKE, SCE_AWAKE, COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+( CLK +=> GCLK ) = ( 0:0:0 , 0:0:0 ) ;                         // delays are tris , tfall
+$setuphold ( posedge CLK , posedge SCE , 0:0:0 , 0:0:0 , notifier , SCE_AWAKE , SCE_AWAKE , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , negedge SCE , 0:0:0 , 0:0:0 , notifier , SCE_AWAKE , SCE_AWAKE , CLK_delayed , SCE_delayed ) ;
+$setuphold ( posedge CLK , posedge GATE , 0:0:0 , 0:0:0 , notifier , GATE_AWAKE , GATE_AWAKE , CLK_delayed , GATE_delayed ) ;
+$setuphold ( posedge CLK , negedge GATE , 0:0:0 , 0:0:0 , notifier , GATE_AWAKE , GATE_AWAKE , CLK_delayed , GATE_delayed ) ;
+$width ( negedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -24431,6 +27775,42 @@ module sky130_fd_sc_hvl__sdlxtp_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, GATE_AWAKE, D_delayed, SCE_AWAKE, COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(D +=> Q ) = (0:0:0,0:0:0);                     // delays are tris,tfall
+(SCD +=> Q ) = (0:0:0,0:0:0);      // adding as per CDT 106221
+(SCE => Q ) = (0:0:0,0:0:0);       // adding as per CDT 106221
+(posedge GATE => (Q +: D ) ) = (0:0:0,0:0:0);  // delays are tris,tfall
+$width (posedge GATE , 0:0:0, 0, notifier);
+$setuphold ( negedge GATE , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , GATE_delayed , D_delayed ) ;
+$setuphold ( negedge GATE , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , GATE_delayed , D_delayed ) ;
+$setuphold ( negedge GATE , posedge SCD , 0:0:0, 0:0:0, notifier , , COND1 , GATE_delayed , SCD_delayed ) ;
+$setuphold ( negedge GATE , negedge SCD , 0:0:0, 0:0:0, notifier , , COND1 , GATE_delayed , SCD_delayed ) ;
+$setuphold ( negedge GATE , posedge SCE , 0:0:0, 0:0:0, notifier , , , GATE_delayed , SCE_delayed ) ;
+$setuphold ( negedge GATE , negedge SCE , 0:0:0, 0:0:0, notifier , , , GATE_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -24467,6 +27847,42 @@ module sky130_fd_sc_hvl__sdlxtp_1 (
         .GATE(GATE)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+wire SETB_delayed, COND1, COND2, COND3, CLK_delayed, GATE_delayed, GATE_AWAKE, D_delayed, SCE_AWAKE, COND0, SCD_delayed, SCE_delayed, RESETB_delayed, AWAKE; 
+reg notifier; 
+
+specify
+(D +=> Q ) = (0:0:0,0:0:0);                     // delays are tris,tfall
+(SCD +=> Q ) = (0:0:0,0:0:0);      // adding as per CDT 106221
+(SCE => Q ) = (0:0:0,0:0:0);       // adding as per CDT 106221
+(posedge GATE => (Q +: D ) ) = (0:0:0,0:0:0);  // delays are tris,tfall
+$width (posedge GATE , 0:0:0, 0, notifier);
+$setuphold ( negedge GATE , posedge D , 0:0:0, 0:0:0, notifier , , COND0 , GATE_delayed , D_delayed ) ;
+$setuphold ( negedge GATE , negedge D , 0:0:0, 0:0:0, notifier , , COND0 , GATE_delayed , D_delayed ) ;
+$setuphold ( negedge GATE , posedge SCD , 0:0:0, 0:0:0, notifier , , COND1 , GATE_delayed , SCD_delayed ) ;
+$setuphold ( negedge GATE , negedge SCD , 0:0:0, 0:0:0, notifier , , COND1 , GATE_delayed , SCD_delayed ) ;
+$setuphold ( negedge GATE , posedge SCE , 0:0:0, 0:0:0, notifier , , , GATE_delayed , SCE_delayed ) ;
+$setuphold ( negedge GATE , negedge SCE , 0:0:0, 0:0:0, notifier , , , GATE_delayed , SCE_delayed ) ;
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -24857,6 +28273,32 @@ module sky130_fd_sc_hvl__xnor2_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((B)) (A +=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!B)) (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A)) (B +=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A)) (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -24887,6 +28329,32 @@ module sky130_fd_sc_hvl__xnor2_1 (
         .B(B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((B)) (A +=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!B)) (A -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A)) (B +=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A)) (B -=> Y ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -25277,6 +28745,32 @@ module sky130_fd_sc_hvl__xor2_1 (
         .VNB(VNB)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!B)) (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((B)) (A -=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A)) (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A)) (B -=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -25307,6 +28801,32 @@ module sky130_fd_sc_hvl__xor2_1 (
         .B(B)
     );
 
+`ifdef FUNCTIONAL
+/*
+ * Copyright 2020 The SkyWater PDK Authors
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * SPDX-License-Identifier: Apache-2.0
+*/
+
+specify
+if ((!B)) (A +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((B)) (A -=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((!A)) (B +=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+if ((A)) (B -=> X ) = (0:0:0,0:0:0);  // delays are tris,tfall
+endspecify
+`endif
 endmodule
 `endcelldefine
 
@@ -25318,4 +28838,3 @@ endmodule
 
 
 //--------EOF---------
-

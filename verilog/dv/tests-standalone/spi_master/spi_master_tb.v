@@ -50,6 +50,13 @@ module spi_master_tb;
 		clock = 0;
 	end
 
+	`ifdef ENABLE_SDF
+		initial begin
+			$sdf_annotate("../../../../sdf/DFFRAM.sdf", uut.DFFRAM_0 );
+			$sdf_annotate("../../../../sdf/mgmt_core.sdf", uut.core);
+		end
+	`endif 
+
 	initial begin
 		$dumpfile("spi_master.vcd");
 		$dumpvars(0, spi_master_tb);
@@ -74,7 +81,7 @@ module spi_master_tb;
             	$display("Monitor: Test SPI Master (GL) Started");
 			`else
 			    $display("Monitor: Test SPI Master (RTL) Started");
-			`endif
+			`endif		
 	    wait(checkbits == 16'hA041);
             $display("   SPI value = 0x%x (should be 0x93)", spivalue);
             if(spivalue !== 32'h93) begin

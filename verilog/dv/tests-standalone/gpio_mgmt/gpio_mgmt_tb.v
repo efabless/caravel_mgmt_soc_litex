@@ -29,7 +29,7 @@ module gpio_mgmt_tb;
 	reg power1;
 	reg power2;
 
-	always #50 clock <= (clock === 1'b0);
+	always #12.5 clock <= (clock === 1'b0);
 
 	initial begin
 		clock <= 0;
@@ -39,7 +39,6 @@ module gpio_mgmt_tb;
 		initial begin
 			$sdf_annotate("../../../../sdf/DFFRAM.sdf", uut.DFFRAM_0 );
 			$sdf_annotate("../../../../sdf/mgmt_core.sdf", uut.core);
-			$sdf_annotate("../../../../sdf/mgmt_core_wrapper.sdf", uut);
 		end
 	`endif 
 

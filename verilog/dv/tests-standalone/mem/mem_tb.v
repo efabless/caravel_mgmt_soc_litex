@@ -44,11 +44,18 @@ module mem_tb;
 	// simulation.  Normally this would be a slow clock and the digital PLL
 	// would be the fast clock.
 
-	always #10 clock <= (clock === 1'b0);
+	always #12.5 clock <= (clock === 1'b0);
 
 	initial begin
 		clock = 0;
 	end
+
+	`ifdef ENABLE_SDF
+		initial begin
+			$sdf_annotate("../../../../sdf/DFFRAM.sdf", uut.DFFRAM_0 );
+			$sdf_annotate("../../../../sdf/mgmt_core.sdf", uut.core);
+		end
+	`endif 
 
 	initial begin
 		$dumpfile("mem.vcd");

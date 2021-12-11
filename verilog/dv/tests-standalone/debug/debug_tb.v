@@ -56,6 +56,13 @@ module debug_tb;
 		clock = 0;
 	end
 
+	`ifdef ENABLE_SDF
+		initial begin
+			$sdf_annotate("../../../../sdf/DFFRAM.sdf", uut.DFFRAM_0 );
+			$sdf_annotate("../../../../sdf/mgmt_core.sdf", uut.core);
+		end
+	`endif 
+
 	initial begin
 		$dumpfile("debug.vcd");
 		$dumpvars(3, debug_tb);
