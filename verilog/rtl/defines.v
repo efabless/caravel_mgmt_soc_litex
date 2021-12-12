@@ -13,7 +13,6 @@
 // limitations under the License.
 // SPDX-License-Identifier: Apache-2.0
 
-`define UNIT_DELAY #1
 
 `ifndef __GLOBAL_DEFINE_H
 // Global parameters

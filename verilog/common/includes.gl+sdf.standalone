@@ -1,6 +1,7 @@
 // VIP
 $VERILOG_PATH/dv/vip/spiflash.v
 $VERILOG_PATH/dv/vip/tbuart.v
+$VERILOG_PATH/dv/vip/wb_rw_test.v
 
 // Mgmt Core Wrapper
 $VERILOG_PATH/rtl/defines.v

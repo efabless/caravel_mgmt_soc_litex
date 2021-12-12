@@ -76,7 +76,7 @@ endif
 ## GL+SDF
 ifeq ($(SIM),GL_SDF)
 	cvc  +interp \
-	+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+ENABLE_SDF \
+	+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+ENABLE_SDF +define+UNIT_DELAY \
 	+change_port_type +dump2fst +fst+parallel2=on  \
 	 -f $(VERILOG_PATH)/common/includes.gl+sdf.$(CONFIG) $<
 endif
@@ -92,7 +92,6 @@ ifeq ($(SIM),GL)
 	 mv $@ GL-$@
 endif
 ifeq ($(SIM),GL_SDF)
-	vvp $<
 	 mv $@ GL_SDF-$@
 endif
 
