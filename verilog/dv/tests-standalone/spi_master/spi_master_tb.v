@@ -44,7 +44,7 @@ module spi_master_tb;
 	// simulation.  Normally this would be a slow clock and the digital PLL
 	// would be the fast clock.
 
-	always #10 clock <= (clock === 1'b0);
+	always #12.5 clock <= (clock === 1'b0);
 
 	initial begin
 		clock = 0;
@@ -76,80 +76,101 @@ module spi_master_tb;
 
 	// Monitor
 	initial begin
-	    wait(checkbits == 16'hA040);
+	    wait(checkbits === 16'hA040);
 			`ifdef GL
             	$display("Monitor: Test SPI Master (GL) Started");
 			`else
 			    $display("Monitor: Test SPI Master (RTL) Started");
 			`endif		
-	    wait(checkbits == 16'hA041);
-            $display("   SPI value = 0x%x (should be 0x93)", spivalue);
-            if(spivalue !== 32'h93) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-	    wait(checkbits == 16'hA042);
-            $display("   SPI value = 0x%x (should be 0x01)", spivalue);
-            if(spivalue !== 32'h01) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-	    wait(checkbits == 16'hA043);
-            $display("   SPI value = 0x%x (should be 0x00)", spivalue);
-            if(spivalue !== 32'h00) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-	    wait(checkbits == 16'hA044);
-            $display("   SPI value = 0x%x (should be 0x13)", spivalue);
-            if(spivalue !== 32'h13) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-	    wait(checkbits == 16'hA045);
-            $display("   SPI value = 0x%x (should be 0x02)", spivalue);
-            if(spivalue !== 32'h02) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-	    wait(checkbits == 16'hA046);
-            $display("   SPI value = 0x%x (should be 0x63)", spivalue);
-            if(spivalue !== 32'h63) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-	    wait(checkbits == 16'hA047);
-            $display("   SPI value = 0x%x (should be 0x57)", spivalue);
-            if(spivalue !== 32'h57) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-	    wait(checkbits == 16'hA048);
-            $display("   SPI value = 0x%x (should be 0xb5)", spivalue);
-            if(spivalue !== 32'hb5) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-	    wait(checkbits == 16'hA049);
-            $display("   SPI value = 0x%x (should be 0x00)", spivalue);
-            if(spivalue !== 32'h00) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-	    wait(checkbits == 16'hA04a);
-            $display("   SPI value = 0x%x (should be 0x23)", spivalue);
-            if(spivalue !== 32'h23) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-	    wait(checkbits == 16'hA04b);
-            $display("   SPI value = 0x%x (should be 0x20)", spivalue);
-            if(spivalue !== 32'h20) begin
-                $display("Monitor: Test SPI Master Failed");
-                $finish;
-            end
-
-	    wait(checkbits == 16'hA090);
+	    wait(checkbits === 16'hA041);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0x93)", spivalue);
+				if(spivalue !== 32'h93) begin
+					$display("Monitor: Test SPI Master Failed");
+					#1000 $finish;
+				end
+			end
+	    wait(checkbits === 16'hA042);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0x01)", spivalue);
+				if(spivalue !== 32'h01) begin
+					$display("Monitor: Test SPI Master Failed");
+					#1000 $finish;
+				end
+			end
+	    wait(checkbits === 16'hA043);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0x00)", spivalue);
+				if(spivalue !== 32'h00) begin
+					$display("Monitor: Test SPI Master Failed");
+					$finish;
+            	end
+			end
+	    wait(checkbits === 16'hA044);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0x13)", spivalue);
+				if(spivalue !== 32'h13) begin
+					$display("Monitor: Test SPI Master Failed");
+					$finish;
+				end
+			end 
+	    wait(checkbits === 16'hA045);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0x02)", spivalue);
+				if(spivalue !== 32'h02) begin
+					$display("Monitor: Test SPI Master Failed");
+					$finish;
+				end
+			end
+	    wait(checkbits === 16'hA046);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0x63)", spivalue);
+				if(spivalue !== 32'h63) begin
+					$display("Monitor: Test SPI Master Failed");
+					$finish;
+				end
+			end
+	    wait(checkbits === 16'hA047);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0x57)", spivalue);
+				if(spivalue !== 32'h57) begin
+					$display("Monitor: Test SPI Master Failed");
+					$finish;
+				end
+			end
+	    wait(checkbits === 16'hA048);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0xb5)", spivalue);
+				if(spivalue !== 32'hb5) begin
+					$display("Monitor: Test SPI Master Failed");
+					$finish;
+				end
+			end
+	    wait(checkbits === 16'hA049);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0x00)", spivalue);
+				if(spivalue !== 32'h00) begin
+					$display("Monitor: Test SPI Master Failed");
+					$finish;
+				end
+			end
+	    wait(checkbits === 16'hA04a);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0x23)", spivalue);
+				if(spivalue !== 32'h23) begin
+					$display("Monitor: Test SPI Master Failed");
+					$finish;
+				end
+			end
+	    wait(checkbits === 16'hA04b);
+			@(posedge clock) begin
+				$display("   SPI value = 0x%x (should be 0x20)", spivalue);
+				if(spivalue !== 32'h20) begin
+					$display("Monitor: Test SPI Master Failed");
+					$finish;
+				end
+			end
+	    wait(checkbits === 16'hA090);
 		 	`ifdef GL
             	$display("Monitor: Test SPI Master (GL) Passed");
 			`else
