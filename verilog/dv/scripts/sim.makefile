@@ -34,7 +34,7 @@ hex:  ${BLOCKS:=.hex}
 ##############################################################################
 
 %.elf: %.c $(LINKER_SCRIPT) $(SOURCE_FILES)
-	${GCC_PATH}/${GCC_PREFIX}-gcc \
+	${GCC_PATH}/${GCC_PREFIX}-gcc -g \
 	-I$(FIRMWARE_PATH) \
 	-I$(VERILOG_PATH)/dv/generated \
 	-I$(VERILOG_PATH)/dv/ \
@@ -44,7 +44,7 @@ hex:  ${BLOCKS:=.hex}
 	-ffreestanding -nostdlib -o $@ $(SOURCE_FILES) $<
 
 %.lst: %.elf
-	${GCC_PATH}/${GCC_PREFIX}-objdump -D $< > $@
+	${GCC_PATH}/${GCC_PREFIX}-objdump -d -S $< > $@
 
 %.hex: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O verilog $< $@ 
@@ -63,13 +63,13 @@ hex:  ${BLOCKS:=.hex}
 
 ## RTL
 ifeq ($(SIM),RTL)
-	iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS \
+	iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
 	-f$(VERILOG_PATH)/common/includes.rtl.$(CONFIG) -o $@ $<
 endif 
 
 ## GL
 ifeq ($(SIM),GL)
-	iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS \
+	iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
         -f$(VERILOG_PATH)/common/includes.gl.$(CONFIG) -o $@ $<
 endif 
 
