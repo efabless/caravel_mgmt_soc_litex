@@ -11,6 +11,9 @@ $VERILOG_PATH/gl/mgmt_core_wrapper.v
 // DFFRAM Behavioral Model
 //$VERILOG_PATH/dv/vip/DFFRAM.v
 
+// SDF Annotation
+//$VERILOG_PATH/common/sdf_annotate.caravel.v
+
 // STD CELLS - they need to be below the defines.v files 
 $VERILOG_PATH/cvc-pdk/sky130_fd_io.v
 $VERILOG_PATH/cvc-pdk/sky130_ef_io.v

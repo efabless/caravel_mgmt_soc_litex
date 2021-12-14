@@ -36107,6 +36107,11 @@ $width ( negedge CLK_N &&& CONDB , 1.0:1.0:1.0 , 0 , notifier ) ;
 $width ( posedge CLK_N &&& CONDB , 1.0:1.0:1.0 , 0 , notifier ) ;
 $width ( negedge SET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 $width ( negedge RESET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
+$removal (negedge RESET_B, negedge CLK_N,  0:0:0, notifier);
+$removal (negedge SET_B, negedge CLK_N,  0:0:0, notifier);
+$recovery (negedge RESET_B, negedge CLK_N,  0:0:0, notifier);
+$recovery (negedge SET_B, negedge CLK_N,  0:0:0, notifier);
+
 endspecify
 `endif
 endmodule
@@ -36187,6 +36192,11 @@ $width ( negedge CLK_N &&& CONDB , 1.0:1.0:1.0 , 0 , notifier ) ;
 $width ( posedge CLK_N &&& CONDB , 1.0:1.0:1.0 , 0 , notifier ) ;
 $width ( negedge SET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 $width ( negedge RESET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
+$removal (negedge RESET_B, negedge CLK_N,  0:0:0, notifier);
+$removal (negedge SET_B, negedge CLK_N,  0:0:0, notifier);
+$recovery (negedge RESET_B, negedge CLK_N,  0:0:0, notifier);
+$recovery (negedge SET_B, negedge CLK_N,  0:0:0, notifier);
+
 endspecify
 `endif
 endmodule
@@ -40298,6 +40308,8 @@ $setuphold ( posedge CLK , negedge D , 0:0:0 , 0:0:0 , notifier , COND0 , COND0 
 $width ( posedge CLK &&& COND1 , 1.0:1.0:1.0 , 0 , notifier ) ;
 $width ( negedge CLK &&& COND1 , 1.0:1.0:1.0 , 0 , notifier ) ;
 $width ( negedge SET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
+$removal (negedge SET_B, posedge CLK,  0:0:0, notifier);
+$recovery (negedge SET_B, posedge CLK,  0:0:0, notifier);
 endspecify
 `endif
 endmodule
@@ -40361,6 +40373,8 @@ $setuphold ( posedge CLK , negedge D , 0:0:0 , 0:0:0 , notifier , COND0 , COND0 
 $width ( posedge CLK &&& COND1 , 1.0:1.0:1.0 , 0 , notifier ) ;
 $width ( negedge CLK &&& COND1 , 1.0:1.0:1.0 , 0 , notifier ) ;
 $width ( negedge SET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
+$removal (negedge SET_B, posedge CLK,  0:0:0, notifier);
+$recovery (negedge SET_B, posedge CLK,  0:0:0, notifier);
 endspecify
 `endif
 endmodule
