@@ -575,8 +575,6 @@ mgmt_core_wrapper_timing: ./verilog/gl/mgmt_core_wrapper.v ./spef/mgmt_core_wrap
 		report_worst_slack -max ;\
 		report_worst_slack -min ;\
 		report_clock_skew;\
-		report_checks -from [get_ports core_clk] -to [get_pins core/core_clk] -fields {slew cap input nets fanout} -format full_clock_expanded;\
-		report_checks -from [get_ports core_clk] -to [get_pins DFFRAM/CLK] -fields {slew cap input nets fanout} -format full_clock_expanded;\
 		" > ./def/tmp/mgmt_core_wrapper_timing.tcl 
 	sta -exit ./def/tmp/mgmt_core_wrapper_timing.tcl | tee ./signoff/mgmt_core_wrapper/mgmt_core_wrapper_timing.log 
 
