@@ -499,6 +499,14 @@ $(RCX_BLOCKS): rcx-% : ./def/%.def
 		read_sdc -echo ./sdc/$*.sdc;\
 		set_propagated_clock [all_clocks];\
 		set rc_values \"mcon 9.249146E-3,via 4.5E-3,via2 3.368786E-3,via3 0.376635E-3,via4 0.00580E-3\";\
+		set l_rc \"li1 1.499e-04 7.176e-02,met1 1.449e-04 8.929e-04,met2 1.331e-04 8.929e-04,met3 1.464e-04 1.567e-04,met4 1.297e-04 1.567e-04,met5 1.501e-04 1.781e-05\";\
+		set layers_rc [split \$$l_rc ","];\
+		foreach layer_rc \$$layers_rc {\
+			set layer_name [lindex \$$layer_rc 0];\
+			set capacitance [lindex \$$layer_rc 1];\
+			set resistance [lindex \$$layer_rc 2];\
+			set_layer_rc -layer \$$layer_name -capacitance \$$capacitance -resistance \$$resistance;\
+		};\
 		set vias_rc [split \$$rc_values ","];\
     	foreach via_rc \$$vias_rc {\
         		set layer_name [lindex \$$via_rc 0];\
@@ -548,6 +556,7 @@ $(RCX_BLOCKS): rcx-% : ./def/%.def
 
 
 mgmt_core_wrapper_timing: ./verilog/gl/mgmt_core_wrapper.v ./spef/mgmt_core_wrapper.spef ./verilog/gl/mgmt_core.v ./verilog/gl/DFFRAM.v ./sdc/mgmt_core_wrapper.sdc  
+	mkdir -p ./def/tmp
 ## Run OpenSTA
 	echo "\
 		read_liberty $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__tt_025C_1v80.lib;\
@@ -556,7 +565,7 @@ mgmt_core_wrapper_timing: ./verilog/gl/mgmt_core_wrapper.v ./spef/mgmt_core_wrap
 		read_verilog ./verilog/gl/DFFRAM.v;\
 		read_verilog ./verilog/gl/mgmt_core_wrapper.v;\
 		link_design mgmt_core_wrapper;\
-		read_spef -path DFFRAM ./spef/DFFRAM.spef;\
+		read_spef -path DFFRAM_0 ./spef/DFFRAM.spef;\
 		read_spef -path core ./spef/mgmt_core.spef;\
 		read_spef ./spef/mgmt_core_wrapper.spef;\
 		read_sdc -echo ./sdc/mgmt_core_wrapper.sdc;\
