@@ -3611,9 +3611,12 @@ bufif1 (highz1, strong0) #slow_delay dm4 (PAD, out_final, x_on_pad===1 ? 1'bx : 
 bufif1 (strong1, highz0) #slow_delay dm5 (PAD, out_final, x_on_pad===1 ? 1'bx : (pad_tristate===0 && dm_final===3'b101));
 bufif1 (strong1, strong0) #slow_delay dm6 (PAD, out_final, x_on_pad===1 ? 1'bx : (pad_tristate===0 && dm_final===3'b110));
 bufif1 (pull1, pull0)  #slow_delay dm7 (PAD, out_final, x_on_pad===1 ? 1'bx : (pad_tristate===0 && dm_final===3'b111));
-tran pad_esd_1 (PAD,PAD_A_NOESD_H);
-tran pad_esd_2 (PAD,PAD_A_ESD_0_H);
-tran pad_esd_3 (PAD,PAD_A_ESD_1_H);
+// tran pad_esd_1 (PAD,PAD_A_NOESD_H);
+//assign PAD = PAD_A_NOESD_H;
+// tran pad_esd_2 (PAD,PAD_A_ESD_0_H);
+//assign PAD_A_ESD_0_H = PAD;
+// tran pad_esd_3 (PAD,PAD_A_ESD_1_H);
+//assign PAD_A_ESD_1_H = PAD ; 
 wire x_on_in_hv  =  (ENABLE_H===0  && ^ENABLE_INP_H===1'bx)
      || (inp_dis_final===1'bx  && ^dm_final[2:0]!==1'bx && dm_final !== 3'b000)
      || (^ENABLE_H===1'bx)
@@ -7235,7 +7238,7 @@ inout VSSA;
 inout VSSD;
 inout VSSIO_Q;
 inout VSSIO;
-tran p1 (P_CORE, P_PAD);
+assign P_CORE = P_PAD;
 endmodule
 `else  // FUNCTIONAL
 /*
@@ -7276,7 +7279,7 @@ inout VSSA;
 inout VSSD;
 inout VSSIO_Q;
 inout VSSIO;
-tran p1 (P_CORE, P_PAD);
+assign P_CORE = P_PAD;
 endmodule
 `endif // FUNCTIONAL
 
@@ -7322,7 +7325,7 @@ supply0 vssd;
 supply0 vssio;
 supply0 vssio_q;
 supply0 vssa;
-tran p1 (p_core, P_PAD);
+assign p_core = P_PAD;
 endmodule
 `else  // FUNCTIONAL
 /*
@@ -7364,7 +7367,7 @@ supply0 vssd;
 supply0 vssio;
 supply0 vssio_q;
 supply0 vssa;
-tran p1 (p_core, P_PAD);
+assign p_core = P_PAD;
 endmodule
 `endif // FUNCTIONAL
 
@@ -11348,7 +11351,8 @@ tran p2 (PAD, PAD_A_ESD_H);
 buf p4 (TIE_HI_ESD, VDDIO);
 buf p5 (TIE_LO_ESD, VSSIO);
 wire tmp;
-pullup (pull1) p3 (tmp); tranif0 x_pull (PULLUP_H, tmp, pwr_good_pullup===0 || ^DISABLE_PULLUP_H===1'bx ? 1'bx : DISABLE_PULLUP_H);
+//pullup (pull1) p3 (tmp); tranif0 x_pull (PULLUP_H, tmp, pwr_good_pullup===0 || ^DISABLE_PULLUP_H===1'bx ? 1'bx : DISABLE_PULLUP_H);
+pullup (pull1) p3 (tmp); assign tmp = ~(pwr_good_pullup===0 || ^DISABLE_PULLUP_H===1'bx ? 1'bx : DISABLE_PULLUP_H) ? PULLUP_H : tmp;
 parameter MAX_WARNING_COUNT = 100;
 `ifdef SKY130_FD_IO_TOP_XRES4V2_DISABLE_DELAY
 parameter MIN_DELAY = 0;
@@ -11551,7 +11555,9 @@ tran p2 (PAD, PAD_A_ESD_H);
 buf p4 (TIE_HI_ESD, VDDIO);
 buf p5 (TIE_LO_ESD, VSSIO);
 wire tmp;
-pullup (pull1) p3 (tmp); tranif0 x_pull (PULLUP_H, tmp, pwr_good_pullup===0 || ^DISABLE_PULLUP_H===1'bx ? 1'bx : DISABLE_PULLUP_H);
+//pullup (pull1) p3 (tmp); tranif0 x_pull (PULLUP_H, tmp, pwr_good_pullup===0 || ^DISABLE_PULLUP_H===1'bx ? 1'bx : DISABLE_PULLUP_H);
+pullup (pull1) p3 (tmp); assign tmp = ~(pwr_good_pullup===0 || ^DISABLE_PULLUP_H===1'bx ? 1'bx : DISABLE_PULLUP_H) ? PULLUP_H : tmp;
+
 parameter MAX_WARNING_COUNT = 100;
 `ifdef SKY130_FD_IO_TOP_XRES4V2_DISABLE_DELAY
 parameter MIN_DELAY = 0;
