@@ -3882,8 +3882,12 @@ wire enable_pad_amuxbus_a = invalid_controls_amux  ? 1'bx : (amux_select===3'b00
 wire enable_pad_amuxbus_b = invalid_controls_amux  ? 1'bx : (amux_select===3'b101 || amux_select===3'b110) && (analog_en_final===1);
 wire enable_pad_vssio_q   = invalid_controls_amux  ? 1'bx : (amux_select===3'b100 || amux_select===3'b000) && (analog_en_final===1);
 wire enable_pad_vddio_q   = invalid_controls_amux  ? 1'bx : (amux_select===3'b011 || amux_select===3'b111) && (analog_en_final===1);
-tranif1 pad_amuxbus_a 	(PAD, AMUXBUS_A, enable_pad_amuxbus_a);
-tranif1 pad_amuxbus_b 	(PAD, AMUXBUS_B, enable_pad_amuxbus_b);
+// tranif1 pad_amuxbus_a 	(PAD, AMUXBUS_A, enable_pad_amuxbus_a);
+// tranif1 pad_amuxbus_b 	(PAD, AMUXBUS_B, enable_pad_amuxbus_b);
+
+assign AMUXBUS_A = enable_pad_amuxbus_a ? PAD : AMUXBUS_A ;
+assign AMUXBUS_B = enable_pad_amuxbus_b ? PAD : AMUXBUS_B ;
+
 bufif1 pad_vddio_q	(PAD, VDDIO_Q,   enable_pad_vddio_q);
 bufif1 pad_vssio_q   	(PAD, VSSIO_Q,   enable_pad_vssio_q);
 reg dis_err_msgs;
@@ -4412,9 +4416,9 @@ bufif1 (highz1, strong0) #slow_delay dm4 (PAD, out_final, x_on_pad===1 ? 1'bx : 
 bufif1 (strong1, highz0) #slow_delay dm5 (PAD, out_final, x_on_pad===1 ? 1'bx : (pad_tristate===0 && dm_final===3'b101));
 bufif1 (strong1, strong0) #slow_delay dm6 (PAD, out_final, x_on_pad===1 ? 1'bx : (pad_tristate===0 && dm_final===3'b110));
 bufif1 (pull1, pull0)  #slow_delay dm7 (PAD, out_final, x_on_pad===1 ? 1'bx : (pad_tristate===0 && dm_final===3'b111));
-tran pad_esd_1 (PAD,PAD_A_NOESD_H);
-tran pad_esd_2 (PAD,PAD_A_ESD_0_H);
-tran pad_esd_3 (PAD,PAD_A_ESD_1_H);
+// tran pad_esd_1 (PAD,PAD_A_NOESD_H);
+// tran pad_esd_2 (PAD,PAD_A_ESD_0_H);
+// tran pad_esd_3 (PAD,PAD_A_ESD_1_H);
 wire x_on_in_hv  =  (ENABLE_H===0  && ^ENABLE_INP_H===1'bx)
      || (inp_dis_final===1'bx  && ^dm_final[2:0]!==1'bx && dm_final !== 3'b000)
      || (^ENABLE_H===1'bx)
@@ -4680,8 +4684,12 @@ wire enable_pad_amuxbus_a = invalid_controls_amux  ? 1'bx : (amux_select===3'b00
 wire enable_pad_amuxbus_b = invalid_controls_amux  ? 1'bx : (amux_select===3'b101 || amux_select===3'b110) && (analog_en_final===1);
 wire enable_pad_vssio_q   = invalid_controls_amux  ? 1'bx : (amux_select===3'b100 || amux_select===3'b000) && (analog_en_final===1);
 wire enable_pad_vddio_q   = invalid_controls_amux  ? 1'bx : (amux_select===3'b011 || amux_select===3'b111) && (analog_en_final===1);
-tranif1 pad_amuxbus_a 	(PAD, AMUXBUS_A, enable_pad_amuxbus_a);
-tranif1 pad_amuxbus_b 	(PAD, AMUXBUS_B, enable_pad_amuxbus_b);
+// tranif1 pad_amuxbus_a 	(PAD, AMUXBUS_A, enable_pad_amuxbus_a);
+// tranif1 pad_amuxbus_b 	(PAD, AMUXBUS_B, enable_pad_amuxbus_b);
+
+assign AMUXBUS_A = enable_pad_amuxbus_a ? PAD : AMUXBUS_A;
+assign AMUXBUS_B = enable_pad_amuxbus_b ? PAD : AMUXBUS_B;
+
 bufif1 pad_vddio_q	(PAD, VDDIO_Q,   enable_pad_vddio_q);
 bufif1 pad_vssio_q   	(PAD, VSSIO_Q,   enable_pad_vssio_q);
 reg dis_err_msgs;
@@ -11346,8 +11354,13 @@ output TIE_HI_ESD;
 output TIE_LO_ESD;
 inout TIE_WEAK_HI_H;
 wire tmp1;
-pullup (pull1) p1 (tmp1); tranif1 x_pull_1 (TIE_WEAK_HI_H, tmp1, pwr_good_pullup===0  ? 1'bx : 1);
-tran p2 (PAD, PAD_A_ESD_H);
+pullup (pull1) p1 (tmp1); 
+// tranif1 x_pull_1 (TIE_WEAK_HI_H, tmp1, pwr_good_pullup===0  ? 1'bx : 1);
+assign TIE_WEAK_HI_H = (pwr_good_pullup===0  ? 1'bx : 1) ? tmp1 : TIE_WEAK_HI_H;
+
+// tran p2 (PAD, PAD_A_ESD_H);
+assign PAD_A_ESD_H = PAD ;
+
 buf p4 (TIE_HI_ESD, VDDIO);
 buf p5 (TIE_LO_ESD, VSSIO);
 wire tmp;
