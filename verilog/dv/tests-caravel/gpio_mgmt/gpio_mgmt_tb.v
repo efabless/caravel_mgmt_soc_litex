@@ -129,7 +129,7 @@ module gpio_mgmt_tb;
 
 	initial begin
 		$dumpfile("gpio_mgmt.vcd");
-		$dumpvars(0, gpio_mgmt_tb);
+		$dumpvars(3, gpio_mgmt_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
 		repeat (100) begin
@@ -247,16 +247,20 @@ module gpio_mgmt_tb;
 	// ser_tx    = mgmt_gpio_io[6]              (output)
 	// irq       = mgmt_gpio_io[7]              (input)
 
-    caravel uut (
+ 	caravel uut (
 		.vddio	  (VDD3V3),
+		.vddio_2  (VDD3V3),		
 		.vssio	  (VSS),
+		.vssio_2  (VSS),
 		.vdda	  (VDD3V3),
 		.vssa	  (VSS),
 		.vccd	  (VDD1V8),
 		.vssd	  (VSS),
 		.vdda1    (VDD3V3),
+		.vdda1_2  (VDD3V3),
 		.vdda2    (VDD3V3),
 		.vssa1	  (VSS),
+		.vssa1_2  (VSS),
 		.vssa2	  (VSS),
 		.vccd1	  (VDD1V8),
 		.vccd2	  (VDD1V8),

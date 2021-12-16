@@ -559,7 +559,7 @@ mgmt_core_wrapper_timing: ./verilog/gl/mgmt_core_wrapper.v ./spef/mgmt_core_wrap
 	mkdir -p ./def/tmp
 ## Run OpenSTA
 	echo "\
-		read_liberty $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__tt_025C_1v80.lib;\
+		read_liberty $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__ss_100C_1v60.lib;\
 		read_liberty $(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib;\
 		read_verilog ./verilog/gl/mgmt_core.v;\
 		read_verilog ./verilog/gl/DFFRAM.v;\

@@ -54,9 +54,9 @@ module uart_tb;
 	
 	`ifdef ENABLE_SDF
 		initial begin
-			$sdf_annotate("../../../../sdf/DFFRAM.sdf", uut.DFFRAM_0 );
-			$sdf_annotate("../../../../sdf/mgmt_core.sdf", uut.core);
-			$sdf_annotate("../../../../sdf/mgmt_core_wrapper.sdf", uut);
+			$sdf_annotate("../../../../sdf/DFFRAM.sdf", uut.soc.DFFRAM_0 );
+			$sdf_annotate("../../../../sdf/mgmt_core.sdf", uut.soc.core);
+			$sdf_annotate("../../../../sdf/mgmt_core_wrapper.sdf", uut.soc);
 		end
 	`endif 
 
@@ -123,14 +123,18 @@ module uart_tb;
 
 	caravel uut (
 		.vddio	  (VDD3V3),
+		.vddio_2  (VDD3V3),		
 		.vssio	  (VSS),
+		.vssio_2  (VSS),
 		.vdda	  (VDD3V3),
 		.vssa	  (VSS),
 		.vccd	  (VDD1V8),
 		.vssd	  (VSS),
 		.vdda1    (VDD3V3),
+		.vdda1_2  (VDD3V3),
 		.vdda2    (VDD3V3),
 		.vssa1	  (VSS),
+		.vssa1_2  (VSS),
 		.vssa2	  (VSS),
 		.vccd1	  (VDD1V8),
 		.vccd2	  (VDD1V8),
