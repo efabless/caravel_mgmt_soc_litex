@@ -1,0 +1,34 @@
+
+32. Executing CHECK pass (checking for obvious problems).
+Checking module mgmt_core_wrapper...
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_csb:
+    port sram_ro_csb[0] of cell core (mgmt_core)
+    module input sram_ro_csb[0]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_clk:
+    port sram_ro_clk[0] of cell core (mgmt_core)
+    module input sram_ro_clk[0]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [7]:
+    port sram_ro_addr[7] of cell core (mgmt_core)
+    module input sram_ro_addr[7]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [6]:
+    port sram_ro_addr[6] of cell core (mgmt_core)
+    module input sram_ro_addr[6]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [5]:
+    port sram_ro_addr[5] of cell core (mgmt_core)
+    module input sram_ro_addr[5]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [4]:
+    port sram_ro_addr[4] of cell core (mgmt_core)
+    module input sram_ro_addr[4]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [3]:
+    port sram_ro_addr[3] of cell core (mgmt_core)
+    module input sram_ro_addr[3]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [2]:
+    port sram_ro_addr[2] of cell core (mgmt_core)
+    module input sram_ro_addr[2]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [1]:
+    port sram_ro_addr[1] of cell core (mgmt_core)
+    module input sram_ro_addr[1]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [0]:
+    port sram_ro_addr[0] of cell core (mgmt_core)
+    module input sram_ro_addr[0]
+Found and reported 10 problems.
