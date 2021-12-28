@@ -1,0 +1,1 @@
+lvs {/project/openlane/DFFRAM/runs/RUN_2021.12.27_21.29.28/results/finishing/DFFRAM.spice DFFRAM} {/project/openlane/DFFRAM/runs/RUN_2021.12.27_21.29.28/tmp/finishing/30-powered_netlist.v DFFRAM} /ciic/pdks/openlane/sky130A/libs.tech/netgen/sky130A_setup.tcl /project/openlane/DFFRAM/runs/RUN_2021.12.27_21.29.28/logs/finishing/33-DFFRAM.lef.log -json

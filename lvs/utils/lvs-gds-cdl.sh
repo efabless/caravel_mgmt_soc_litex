@@ -1,14 +1,14 @@
 #!/bin/bash
 #
 
-if [ -f  ./reports/${1%.gds}-gds-vs-spice.out ]; then
-\mv ./reports/${1%.gds}-gds-vs-spice.out ./reports/${1%.gds}-gds-vs-spice.out.last
+if [ -f  ./reports/gds-vs-spice-${1%.gds}.out ]; then
+\mv ./reports/gds-vs-spice-${1%.gds}.out ./reports/gds-vs-spice-${1%.gds}.out.last
 fi
 if [ -f  ./netlists/${1%.gds}-source.spice ]; then
 \mv ./netlists/${1%.gds}-source.spice ./netlists/${1%.gds}-source.spice.last
 fi
 if [ -f  ${1%.gds}-gds-extracted.spice ]; then
-\mv ./netlists/${1%.gds}-gds-extracted.spice ./netlists/${1%.gds}-gds-extracted.spice.last
+\mv ./netlists/gds-extracted-${1%.gds}.spice ./netlists/$gds-extracted-${1%.gds}.spice.last
 fi
 if [ -f  core ]; then
 \rm core
@@ -41,7 +41,7 @@ select top cell
 extract do local
 extract all
 ext2spice lvs
-ext2spice -o ./netlists/${1%.gds}-gds-extracted.spice
+ext2spice -o ./netlists/gds-extracted-${1%.gds}.spice
 EOF
 
 \rm ./*.ext
@@ -52,8 +52,8 @@ EOF
 ####### convert vlog to gate-level and include 
 ########################################################
 
-./utils/vlog2Spice ../verilog/gl/${1%.gds}.v -o ./netlists/${1%.gds}-source.spice \
--l ./pdk/sky130_fd_sc_hd.spice   -i 
+./utils/vlog2Spice ../verilog/gl/${1%.gds}.v -o ./netlists/gds-vs-${1%.gds}-spice \
+-l ./pdk/sky130_fd_sc_hd.spice  -l ./pdk/sky130_fd_sc_hd.spice -i 
 
 ### -l ./sky130_fd_pr__base.spice
 
@@ -63,7 +63,7 @@ EOF
 ####### starting with +)
 ########################################################
 
-./utils/unfold ./netlists/${1%.gds}-source.spice > 	./netlists/${1%.gds}-source.spice.unfolded
+./utils/unfold ./netlists/gds-vs-${1%.gds}.spice > 	./netlists/${1%.gds}-source.spice.unfolded
 \mv ./netlists/${1%.gds}-source.spice 		./netlists/${1%.gds}-source.spice.folded
 \mv ./netlists/${1%.gds}-source.spice.unfolded 	./netlists/${1%.gds}-source.spice
 \rm ./netlists/${1%.gds}-source.spice.folded 
@@ -76,10 +76,10 @@ export NETGEN_COLUMNS=60
 export MAGIC_EXT_USE_GDS=1
 
 netgen -batch lvs \
-        "./netlists/${1%.gds}-gds-extracted.spice ${1%.gds}" \
+        "./netlists/gds-extracted-${1%.gds}.spice ${1%.gds}" \
 		"./netlists/${1%.gds}-source.spice ${1%.gds}" \
 			     ./pdk/sky130A_setup.tcl \
-			         ./reports/${1%.gds}-gds-vs-spice.out
+			         ./reports/gds-vs-spice-${1%.gds}.out
 				 
 ########################################################
 

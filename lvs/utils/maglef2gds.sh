@@ -1,14 +1,12 @@
 #!/bin/sh
-export MAGIC=magic
+#export MAGIC=/ef/apps/ocd/magic/8.3.179-202106141345/bin/magic
+export MAGIC=/magic
 
 export MAGTYPE=maglef; 
 
 $MAGIC -dnull -noconsole -rcfile $PDK_ROOT/sky130A/libs.tech/magic/sky130A.magicrc  <<EOF
-addpath ${PDKPATH}/libs.ref/sky130_ml_xx_hd/mag
-addpath ../mag/hexdigits
-addpath ../mag/
-
 drc off
+gds readonly true
 gds rescale false
 load ../mag/$1 -dereference
 select top cell
