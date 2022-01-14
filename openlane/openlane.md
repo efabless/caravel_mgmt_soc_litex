@@ -201,5 +201,4 @@ make mgmt_core_wrapper
 
 - Increase the PDN width to avoid having IR drop. 
 - Further optimize the timing for the mgmt_core.
-- Remove the wrapper heirarchy and insert the DFFRAM inside the mgmt_core. This will give more space and will remove the uncessary top level routing at the wrapper level. 
 - Update the delays in the DFFRAM macro to match the actual delays coming from the mgmt_core.  
