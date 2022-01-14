@@ -18,7 +18,7 @@ This heirarchy is flexible to change between the different versions of the manag
 
 ---
 
-# Managemnt Core Wrapper 
+# Management Core Wrapper 
 
 This is the top level block. It encapsulates the `mgmt_core` and the `DFFRAM` and it has no standard cells on the top level. 
 
