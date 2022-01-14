@@ -98,6 +98,10 @@ The PDN is planned on metal 4 vertically and metal 5 horizontally. The block als
 report_checks -to Do[*]
 ```
 
+- The input delays coming from the `housekeeping` were also manually computed from openSTA like the `DFFRAM` . 
+
+- The input delays coming from the user project area are set to `1ns`. This is to prevent having any hold violations on these input ports. 
+ 
 - The reset signal is set as a false path. 
 
 ## DFFRAM 
