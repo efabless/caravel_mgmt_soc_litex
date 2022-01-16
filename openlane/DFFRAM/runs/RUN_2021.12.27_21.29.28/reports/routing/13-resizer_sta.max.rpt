@@ -1,0 +1,199 @@
+
+===========================================================================
+report_checks -path_delay max (Setup)
+============================================================================
+Startpoint: A[5] (input port clocked by CLK)
+Endpoint: Do[31] (output port clocked by CLK)
+Path Group: CLK
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          5.00    5.00 ^ input external delay
+                  0.19    0.14    5.14 ^ A[5] (in)
+     2    0.04                           A[5] (net)
+                  0.19    0.00    5.14 ^ BLOCK[0].RAM128.ABUF[5]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.51    0.46    5.60 ^ BLOCK[0].RAM128.ABUF[5]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.09                           BLOCK[0].RAM128.A_buf[5] (net)
+                  0.52    0.04    5.64 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[3]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.26    0.36    6.00 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[3]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.05                           BLOCK[0].RAM128.DoMUX.SEL0[3] (net)
+                  0.26    0.02    6.02 ^ BLOCK[0].RAM128.DoMUX.M[3].MUX[7]/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.36    0.93    6.95 v BLOCK[0].RAM128.DoMUX.M[3].MUX[7]/X (sky130_fd_sc_hd__mux4_1)
+     1    0.06                           BLOCK[0].RAM128.Do[31] (net)
+                  0.36    0.01    6.96 v DoMUX.M[3].MUX[7]/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.37    0.71    7.67 v DoMUX.M[3].MUX[7]/X (sky130_fd_sc_hd__mux2_1)
+     1    0.03                           Do[31] (net)
+                  0.37    0.04    7.71 v Do[31] (out)
+                                  7.71   data arrival time
+
+                         25.00   25.00   clock CLK (rise edge)
+                          0.00   25.00   clock network delay (propagated)
+                          0.00   25.00   clock reconvergence pessimism
+                         -5.00   20.00   output external delay
+                                 20.00   data required time
+-----------------------------------------------------------------------------
+                                 20.00   data required time
+                                 -7.71   data arrival time
+-----------------------------------------------------------------------------
+                                 12.29   slack (MET)
+
+
+Startpoint: A[5] (input port clocked by CLK)
+Endpoint: Do[30] (output port clocked by CLK)
+Path Group: CLK
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          5.00    5.00 ^ input external delay
+                  0.19    0.14    5.14 ^ A[5] (in)
+     2    0.04                           A[5] (net)
+                  0.19    0.00    5.14 ^ BLOCK[0].RAM128.ABUF[5]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.51    0.46    5.60 ^ BLOCK[0].RAM128.ABUF[5]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.09                           BLOCK[0].RAM128.A_buf[5] (net)
+                  0.52    0.04    5.64 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[3]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.26    0.36    6.00 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[3]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.05                           BLOCK[0].RAM128.DoMUX.SEL0[3] (net)
+                  0.26    0.02    6.02 ^ BLOCK[0].RAM128.DoMUX.M[3].MUX[6]/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.35    0.89    6.91 v BLOCK[0].RAM128.DoMUX.M[3].MUX[6]/X (sky130_fd_sc_hd__mux4_1)
+     1    0.06                           BLOCK[0].RAM128.Do[30] (net)
+                  0.35    0.03    6.94 v DoMUX.M[3].MUX[6]/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.37    0.70    7.64 v DoMUX.M[3].MUX[6]/X (sky130_fd_sc_hd__mux2_1)
+     1    0.03                           Do[30] (net)
+                  0.37    0.05    7.69 v Do[30] (out)
+                                  7.69   data arrival time
+
+                         25.00   25.00   clock CLK (rise edge)
+                          0.00   25.00   clock network delay (propagated)
+                          0.00   25.00   clock reconvergence pessimism
+                         -5.00   20.00   output external delay
+                                 20.00   data required time
+-----------------------------------------------------------------------------
+                                 20.00   data required time
+                                 -7.69   data arrival time
+-----------------------------------------------------------------------------
+                                 12.31   slack (MET)
+
+
+Startpoint: A[5] (input port clocked by CLK)
+Endpoint: Do[29] (output port clocked by CLK)
+Path Group: CLK
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          5.00    5.00 ^ input external delay
+                  0.19    0.14    5.14 ^ A[5] (in)
+     2    0.04                           A[5] (net)
+                  0.19    0.00    5.14 ^ BLOCK[0].RAM128.ABUF[5]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.51    0.46    5.60 ^ BLOCK[0].RAM128.ABUF[5]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.09                           BLOCK[0].RAM128.A_buf[5] (net)
+                  0.52    0.04    5.64 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[3]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.26    0.36    6.00 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[3]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.05                           BLOCK[0].RAM128.DoMUX.SEL0[3] (net)
+                  0.26    0.02    6.02 ^ BLOCK[0].RAM128.DoMUX.M[3].MUX[5]/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.36    0.89    6.91 v BLOCK[0].RAM128.DoMUX.M[3].MUX[5]/X (sky130_fd_sc_hd__mux4_1)
+     1    0.06                           BLOCK[0].RAM128.Do[29] (net)
+                  0.36    0.04    6.95 v DoMUX.M[3].MUX[5]/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.35    0.72    7.67 v DoMUX.M[3].MUX[5]/X (sky130_fd_sc_hd__mux2_1)
+     1    0.03                           Do[29] (net)
+                  0.35    0.01    7.69 v Do[29] (out)
+                                  7.69   data arrival time
+
+                         25.00   25.00   clock CLK (rise edge)
+                          0.00   25.00   clock network delay (propagated)
+                          0.00   25.00   clock reconvergence pessimism
+                         -5.00   20.00   output external delay
+                                 20.00   data required time
+-----------------------------------------------------------------------------
+                                 20.00   data required time
+                                 -7.69   data arrival time
+-----------------------------------------------------------------------------
+                                 12.31   slack (MET)
+
+
+Startpoint: A[5] (input port clocked by CLK)
+Endpoint: Do[8] (output port clocked by CLK)
+Path Group: CLK
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          5.00    5.00 ^ input external delay
+                  0.19    0.14    5.14 ^ A[5] (in)
+     2    0.04                           A[5] (net)
+                  0.19    0.00    5.14 ^ BLOCK[0].RAM128.ABUF[5]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.51    0.46    5.60 ^ BLOCK[0].RAM128.ABUF[5]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.09                           BLOCK[0].RAM128.A_buf[5] (net)
+                  0.52    0.05    5.65 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[1]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.25    0.36    6.01 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[1]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.04                           BLOCK[0].RAM128.DoMUX.SEL0[1] (net)
+                  0.25    0.02    6.02 ^ BLOCK[0].RAM128.DoMUX.M[1].MUX[0]/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.40    0.95    6.97 v BLOCK[0].RAM128.DoMUX.M[1].MUX[0]/X (sky130_fd_sc_hd__mux4_1)
+     1    0.07                           BLOCK[0].RAM128.Do[8] (net)
+                  0.40    0.04    7.01 v DoMUX.M[1].MUX[0]/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.27    0.66    7.67 v DoMUX.M[1].MUX[0]/X (sky130_fd_sc_hd__mux2_1)
+     1    0.03                           Do[8] (net)
+                  0.27    0.02    7.69 v Do[8] (out)
+                                  7.69   data arrival time
+
+                         25.00   25.00   clock CLK (rise edge)
+                          0.00   25.00   clock network delay (propagated)
+                          0.00   25.00   clock reconvergence pessimism
+                         -5.00   20.00   output external delay
+                                 20.00   data required time
+-----------------------------------------------------------------------------
+                                 20.00   data required time
+                                 -7.69   data arrival time
+-----------------------------------------------------------------------------
+                                 12.31   slack (MET)
+
+
+Startpoint: A[5] (input port clocked by CLK)
+Endpoint: Do[9] (output port clocked by CLK)
+Path Group: CLK
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          5.00    5.00 ^ input external delay
+                  0.19    0.14    5.14 ^ A[5] (in)
+     2    0.04                           A[5] (net)
+                  0.19    0.00    5.14 ^ BLOCK[0].RAM128.ABUF[5]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.51    0.46    5.60 ^ BLOCK[0].RAM128.ABUF[5]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.09                           BLOCK[0].RAM128.A_buf[5] (net)
+                  0.52    0.05    5.65 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[1]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.25    0.36    6.01 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[1]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.04                           BLOCK[0].RAM128.DoMUX.SEL0[1] (net)
+                  0.25    0.01    6.02 ^ BLOCK[0].RAM128.DoMUX.M[1].MUX[1]/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.40    0.97    6.99 v BLOCK[0].RAM128.DoMUX.M[1].MUX[1]/X (sky130_fd_sc_hd__mux4_1)
+     1    0.07                           BLOCK[0].RAM128.Do[9] (net)
+                  0.41    0.03    7.01 v DoMUX.M[1].MUX[1]/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.26    0.65    7.66 v DoMUX.M[1].MUX[1]/X (sky130_fd_sc_hd__mux2_1)
+     1    0.03                           Do[9] (net)
+                  0.26    0.02    7.68 v Do[9] (out)
+                                  7.68   data arrival time
+
+                         25.00   25.00   clock CLK (rise edge)
+                          0.00   25.00   clock network delay (propagated)
+                          0.00   25.00   clock reconvergence pessimism
+                         -5.00   20.00   output external delay
+                                 20.00   data required time
+-----------------------------------------------------------------------------
+                                 20.00   data required time
+                                 -7.68   data arrival time
+-----------------------------------------------------------------------------
+                                 12.32   slack (MET)
+
+

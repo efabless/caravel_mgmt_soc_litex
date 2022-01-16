@@ -21,8 +21,8 @@ BLOCKS := $(shell basename $(PWDD))
 
 CONFIG = standalone
 
-include ../../scripts/env.makefile
-include ../../scripts/var.makefile
-include ../../scripts/cpu.makefile
-include ../../scripts/sim.makefile
+include ../../make/env.makefile
+include ../../make/var.makefile
+include ../../make/cpu.makefile
+include ../../make/sim.makefile
 

@@ -132,6 +132,14 @@ module mgmt_core_wrapper (
     wire [31:0] mgmt_soc_dff_Di;
     wire [31:0] mgmt_soc_dff_Do;
 
+// Signals below are sram_ro ports that left no_connect
+// as they are tied down inside mgmt_core
+
+    wire no_connect1 ;
+    wire no_connect2 ;
+    wire [7:0] no_connect3 ;
+
+
     /* Implement the PicoSoC core */
 
     mgmt_core core (
@@ -225,9 +233,9 @@ module mgmt_core_wrapper (
         .mgmt_soc_dff_A(mgmt_soc_dff_A),
 
         // SRAM read-only access from housekeeping
-        .sram_ro_clk(sram_ro_clk),
-        .sram_ro_csb(sram_ro_csb),
-        .sram_ro_addr(sram_ro_addr),
+        .sram_ro_clk(no_connect1),
+        .sram_ro_csb(no_connect2),
+        .sram_ro_addr(no_connect3),
         .sram_ro_data(sram_ro_data)
     );
 

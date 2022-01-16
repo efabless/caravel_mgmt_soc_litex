@@ -10,7 +10,7 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
-# limitations under the License.
+# limitations under the License.ser_pass_thru
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -18,11 +18,11 @@
 .SUFFIXES:
 .SILENT: clean all
 
-BLOCKS = gpio_mgmt mem spi_master uart timer irq
+BLOCKS = $(shell find * -maxdepth 0 -type d)
 
 all:  ${BLOCKS}
-	for i in ${BLOCKS}; do \
-		( cd $$i && echo "\n*** Running test: $$i ***" && SIM=RTL make &> verify.log && grep Monitor verify.log) ; \
+	for i in ${BLOCKS}; do  \
+		( echo "\n*** Running test: $$i ***" && ./run.sh $(SIM) $$i ) ; \
 	done
 
 clean:  ${BLOCKS}

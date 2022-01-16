@@ -14,6 +14,8 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
+ 
 PWDD := $(shell pwd)
 BLOCKS := $(shell basename $(PWDD))
 
@@ -21,7 +23,9 @@ BLOCKS := $(shell basename $(PWDD))
 
 CONFIG = caravel
 
-include ../../scripts/env.makefile
-include ../../scripts/var.makefile
-include ../../scripts/cpu.makefile
-include ../../scripts/sim.makefile
+include ../../make/env.makefile
+include ../../make/var.makefile
+include ../../make/cpu.makefile
+include ../../make/sim.makefile
+
+

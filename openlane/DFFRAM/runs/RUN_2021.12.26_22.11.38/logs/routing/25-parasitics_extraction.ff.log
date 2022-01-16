@@ -1,0 +1,34 @@
+OpenROAD e9d88df58cd6e61dec17d0cd7d355f7d6ec25778 
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ODB-0222] Reading LEF file: /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/tmp/merged_unpadded.lef
+[INFO ODB-0223]     Created 13 technology layers
+[INFO ODB-0224]     Created 25 technology vias
+[INFO ODB-0225]     Created 441 library cells
+[INFO ODB-0226] Finished LEF file:  /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/tmp/merged_unpadded.lef
+[WARNING ORD-0033] -order_wires is deprecated.
+[INFO ODB-0127] Reading DEF file: /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/routing/DFFRAM.def
+[INFO ODB-0128] Design: DFFRAM
+[INFO ODB-0130]     Created 80 pins.
+[INFO ODB-0131]     Created 50877 components and 269451 component-terminals.
+[INFO ODB-0132]     Created 2 special nets and 192868 connections.
+[INFO ODB-0133]     Created 13534 nets and 76551 connections.
+[INFO ODB-0134] Finished DEF file: /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/routing/DFFRAM.def
+[INFO]: Setting RC values...
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[INFO RCX-0008] extracting parasitics of DFFRAM ...
+Notice 0: Split top of 8853 T shapes.
+[INFO RCX-0435] Reading extraction model file /ciic/pdks/openlane/sky130A/libs.tech/openlane/rcx_rules.info ...
+[INFO RCX-0436] RC segment generation DFFRAM (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 116499 rc segments
+[INFO RCX-0439] Coupling Cap extraction DFFRAM ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0043] 189458 wires to be extracted
+[INFO RCX-0442] 51% completion -- 98117 wires have been extracted
+[INFO RCX-0442] 100% completion -- 189458 wires have been extracted
+[INFO RCX-0045] Extract 13534 nets, 130009 rsegs, 130009 caps, 234136 ccs
+[INFO RCX-0015] Finished extracting DFFRAM.
+[INFO RCX-0016] Writing SPEF ...
+[INFO RCX-0443] 13534 nets finished
+[INFO RCX-0017] Finished writing SPEF ...

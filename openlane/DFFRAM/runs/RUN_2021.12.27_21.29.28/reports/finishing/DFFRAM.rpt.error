@@ -1,0 +1,118 @@
+! Switch shorts
+
+! Finished
+
+! Resistor Errors
+
+! Finished
+
+! Power/Ground path through fuse
+
+! Finished
+
+! ... voltage already set
+
+! Finished
+
+! Checking forward bias diode errors: 
+
+! Checking forward bias diode errors: 
+
+! Finished
+
+! Checking nmos source/drain vs bias errors: 
+
+! Checking nmos source/drain vs bias errors: 
+
+! Finished
+
+! Checking nmos gate vs source errors: 
+
+! Checking nmos gate vs source errors: 
+
+! Finished
+
+! Checking pmos source/drain vs bias errors: 
+
+! Checking pmos source/drain vs bias errors: 
+
+! Finished
+
+! Checking pmos gate vs source errors: 
+
+! Checking pmos gate vs source errors: 
+
+! Finished
+
+! Logic shorts 1
+
+! Finished
+
+! Logic shorts 2
+
+! Finished
+
+! Checking LDD errors for model: 
+
+! Finished
+
+! Power/Ground path through fuse
+
+! Finished
+
+! ... voltage already set
+
+! Finished
+
+! Checking Vbg overvoltage errors
+
+! Checking Vbg overvoltage errors
+
+! Finished
+
+! Checking Vbs overvoltage errors
+
+! Checking Vbs overvoltage errors
+
+! Finished
+
+! Checking Vds overvoltage errors
+
+! Checking Vds overvoltage errors
+
+! Finished
+
+! Checking Vgs overvoltage errors
+
+! Checking Vgs overvoltage errors
+
+! Finished
+
+! Checking Model errors
+
+! Checking Model errors
+
+! Finished
+
+! Checking nmos possible leak errors: 
+
+! Checking nmos possible leak errors: 
+
+! Finished
+
+! Checking pmos possible leak errors: 
+
+! Checking pmos possible leak errors: 
+
+! Finished
+
+! Checking mos floating input errors:
+
+! Checking mos floating input errors:
+
+! Finished
+
+! Checking expected values:
+
+! Finished
+

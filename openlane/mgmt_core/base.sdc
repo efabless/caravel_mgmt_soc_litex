@@ -79,7 +79,7 @@ set_input_delay $mem_rdata_31_delay -clock [get_clocks $::env(CLOCK_PORT)] [get_
 
 ## HK INPUTS 
 set hk_min_input_delay 1 
-set_input_delay $hk_min_input_delay -clock [get_clocks $::env(CLOCK_PORT)] [get_ports irq[*]]
+set_input_delay $hk_min_input_delay -clock [get_clocks $::env(CLOCK_PORT)] [get_ports user_irq[*]]
 set_input_delay 5.60 -clock [get_clocks $::env(CLOCK_PORT)] [get_ports flash_io0_di]
 set_input_delay 5.80 -clock [get_clocks $::env(CLOCK_PORT)] [get_ports flash_io1_di]
 set_input_delay 5.60 -clock [get_clocks $::env(CLOCK_PORT)] [get_ports flash_io2_di]

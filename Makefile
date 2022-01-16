@@ -36,6 +36,7 @@ ARCHIVE_SOURCES := $(basename $(ARCHIVES))
 
 # Needed to compress and split files/archives that are too large
 LARGE_FILES := $(shell find ./gds -type f -name "*.gds")
+LARGE_FILES += $(shell find ./openlane/*/runs/*/*/fin* -type f -name "*.gds")
 LARGE_FILES += $(shell find . -type f -size +$(FILE_SIZE_LIMIT_MB)M -not -path "./.git/*" -not -path "./gds/*" -not -path "./openlane/*")
 LARGE_FILES_GZ := $(addsuffix .$(ARCHIVE_EXT), $(LARGE_FILES))
 LARGE_FILES_GZ_SPLIT := $(addsuffix .$(ARCHIVE_EXT).00.split, $(LARGE_FILES))
@@ -559,7 +560,7 @@ mgmt_core_wrapper_timing: ./verilog/gl/mgmt_core_wrapper.v ./spef/mgmt_core_wrap
 	mkdir -p ./def/tmp
 ## Run OpenSTA
 	echo "\
-		read_liberty $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__tt_025C_1v80.lib;\
+		read_liberty $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__ss_100C_1v60.lib;\
 		read_liberty $(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib;\
 		read_verilog ./verilog/gl/mgmt_core.v;\
 		read_verilog ./verilog/gl/DFFRAM.v;\
