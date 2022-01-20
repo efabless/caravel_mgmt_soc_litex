@@ -157,9 +157,9 @@ class MGMTSoC(SoCMini):
         sram = self.submodules.spram = OpenRAM(size=spram_size)
         self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
         sram_ro_ports = platform.request("sram_ro")
-        self.comb += sram_ro_ports.clk.eq(sram.clk1)
-        self.comb += sram_ro_ports.csb.eq(sram.cs_b1)
-        self.comb += sram_ro_ports.addr.eq(sram.adr1)
+        self.comb += sram.clk1.eq(sram_ro_ports.clk)
+        self.comb += sram.cs_b1.eq(sram_ro_ports.csb)
+        self.comb += sram.adr1.eq(sram_ro_ports.addr)
         self.comb += sram_ro_ports.data.eq(sram.dataout1)
 
         # SPI Flash --------------------------------------------------------------------------------
