@@ -20,6 +20,7 @@ export IVERILOG_DUMPER = fst
 # RTL/GL/GL_SDF
 SIM?=RTL
 
+
 .SUFFIXES:
 
 
@@ -32,7 +33,6 @@ hex:  ${BLOCKS:=.hex}
 ##############################################################################
 # Comiple firmeware
 ##############################################################################
-
 %.elf: %.c $(LINKER_SCRIPT) $(SOURCE_FILES)
 	${GCC_PATH}/${GCC_PREFIX}-gcc -g \
 	-I$(FIRMWARE_PATH) \
