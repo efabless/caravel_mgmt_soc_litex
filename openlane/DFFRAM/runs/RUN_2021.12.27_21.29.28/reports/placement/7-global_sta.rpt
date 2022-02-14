@@ -1,0 +1,48 @@
+
+===========================================================================
+report_checks -unconstrained
+============================================================================
+Startpoint: A[5] (input port clocked by CLK)
+Endpoint: Do[31] (output port clocked by CLK)
+Path Group: CLK
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          5.00    5.00 ^ input external delay
+                  0.18    0.14    5.14 ^ A[5] (in)
+     2    0.04                           A[5] (net)
+                  0.18    0.00    5.14 ^ BLOCK[0].RAM128.ABUF[5]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.48    0.47    5.60 ^ BLOCK[0].RAM128.ABUF[5]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.09                           BLOCK[0].RAM128.A_buf[5] (net)
+                  0.48    0.00    5.61 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[3]/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.21    0.34    5.95 ^ BLOCK[0].RAM128.DoMUX.SEL0BUF[3]/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.04                           BLOCK[0].RAM128.DoMUX.SEL0[3] (net)
+                  0.21    0.00    5.95 ^ BLOCK[0].RAM128.DoMUX.M[3].MUX[7]/S0 (sky130_fd_sc_hd__mux4_1)
+                  0.35    0.93    6.88 v BLOCK[0].RAM128.DoMUX.M[3].MUX[7]/X (sky130_fd_sc_hd__mux4_1)
+     1    0.06                           BLOCK[0].RAM128.Do[31] (net)
+                  0.35    0.01    6.89 v DoMUX.M[3].MUX[7]/A0 (sky130_fd_sc_hd__mux2_1)
+                  0.37    0.74    7.63 v DoMUX.M[3].MUX[7]/X (sky130_fd_sc_hd__mux2_1)
+     1    0.03                           Do[31] (net)
+                  0.37    0.02    7.65 v Do[31] (out)
+                                  7.65   data arrival time
+
+                         25.00   25.00   clock CLK (rise edge)
+                          0.00   25.00   clock network delay (propagated)
+                          0.00   25.00   clock reconvergence pessimism
+                         -5.00   20.00   output external delay
+                                 20.00   data required time
+-----------------------------------------------------------------------------
+                                 20.00   data required time
+                                 -7.65   data arrival time
+-----------------------------------------------------------------------------
+                                 12.35   slack (MET)
+
+
+
+===========================================================================
+report_checks --slack_max -0.01
+============================================================================
+No paths found.

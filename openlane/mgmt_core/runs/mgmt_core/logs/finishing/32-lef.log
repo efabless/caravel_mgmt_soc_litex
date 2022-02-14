@@ -1,0 +1,951 @@
+
+Magic 8.3 revision 209 - Compiled on Thu Oct 21 08:30:54 UTC 2021.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Processing system .magicrc file
+Sourcing design .magicrc for technology sky130A ...
+2 Magic internal units = 1 Lambda
+Input style sky130(vendor): scaleFactor=2, multiplier=2
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading sky130A Device Generator Menu ...
+Loading "/openlane/scripts/magic/lef.tcl" from command line.
+Reading LEF data from file /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd.tlef.
+This action cannot be undone.
+LEF read, Line 77 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 78 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 110 (Message): Unknown keyword "MINENCLOSEDAREA" in LEF file; ignoring.
+LEF read, Line 112 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 113 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 119 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 120 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 121 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 153 (Message): Unknown keyword "MINENCLOSEDAREA" in LEF file; ignoring.
+LEF read, Line 161 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 162 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 164 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 165 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 166 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 202 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 203 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 205 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 206 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 207 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 243 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 244 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 246 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 247 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 248 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 284 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 285 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read: Processed 791 lines.
+Reading LEF data from file /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_sram_macros/lef/sky130_sram_2kbyte_1rw1r_32x512_8.lef.
+This action cannot be undone.
+LEF read: Processed 1116 lines.
+mgmt_core: 10000 rects
+mgmt_core: 20000 rects
+mgmt_core: 30000 rects
+mgmt_core: 40000 rects
+mgmt_core: 50000 rects
+mgmt_core: 60000 rects
+mgmt_core: 70000 rects
+mgmt_core: 80000 rects
+mgmt_core: 90000 rects
+mgmt_core: 100000 rects
+mgmt_core: 110000 rects
+mgmt_core: 120000 rects
+mgmt_core: 130000 rects
+mgmt_core: 140000 rects
+mgmt_core: 150000 rects
+mgmt_core: 160000 rects
+mgmt_core: 170000 rects
+mgmt_core: 180000 rects
+mgmt_core: 190000 rects
+mgmt_core: 200000 rects
+mgmt_core: 210000 rects
+mgmt_core: 220000 rects
+mgmt_core: 230000 rects
+mgmt_core: 240000 rects
+mgmt_core: 250000 rects
+mgmt_core: 260000 rects
+mgmt_core: 270000 rects
+mgmt_core: 280000 rects
+mgmt_core: 290000 rects
+mgmt_core: 300000 rects
+mgmt_core: 310000 rects
+mgmt_core: 320000 rects
+mgmt_core: 330000 rects
+mgmt_core: 340000 rects
+mgmt_core: 350000 rects
+mgmt_core: 360000 rects
+mgmt_core: 370000 rects
+mgmt_core: 380000 rects
+mgmt_core: 390000 rects
+mgmt_core: 400000 rects
+mgmt_core: 410000 rects
+mgmt_core: 420000 rects
+mgmt_core: 430000 rects
+mgmt_core: 440000 rects
+mgmt_core: 450000 rects
+mgmt_core: 460000 rects
+mgmt_core: 470000 rects
+mgmt_core: 480000 rects
+mgmt_core: 490000 rects
+mgmt_core: 500000 rects
+mgmt_core: 510000 rects
+mgmt_core: 520000 rects
+mgmt_core: 530000 rects
+mgmt_core: 540000 rects
+mgmt_core: 550000 rects
+mgmt_core: 560000 rects
+mgmt_core: 570000 rects
+mgmt_core: 580000 rects
+mgmt_core: 590000 rects
+mgmt_core: 600000 rects
+mgmt_core: 610000 rects
+mgmt_core: 620000 rects
+mgmt_core: 630000 rects
+mgmt_core: 640000 rects
+mgmt_core: 650000 rects
+mgmt_core: 660000 rects
+mgmt_core: 670000 rects
+mgmt_core: 680000 rects
+mgmt_core: 690000 rects
+mgmt_core: 700000 rects
+mgmt_core: 710000 rects
+mgmt_core: 720000 rects
+mgmt_core: 730000 rects
+mgmt_core: 740000 rects
+mgmt_core: 750000 rects
+mgmt_core: 760000 rects
+mgmt_core: 770000 rects
+mgmt_core: 780000 rects
+mgmt_core: 790000 rects
+mgmt_core: 800000 rects
+mgmt_core: 810000 rects
+mgmt_core: 820000 rects
+mgmt_core: 830000 rects
+mgmt_core: 840000 rects
+mgmt_core: 850000 rects
+mgmt_core: 860000 rects
+mgmt_core: 870000 rects
+mgmt_core: 880000 rects
+mgmt_core: 890000 rects
+mgmt_core: 900000 rects
+mgmt_core: 910000 rects
+mgmt_core: 920000 rects
+mgmt_core: 930000 rects
+mgmt_core: 940000 rects
+mgmt_core: 950000 rects
+mgmt_core: 960000 rects
+mgmt_core: 970000 rects
+mgmt_core: 980000 rects
+mgmt_core: 990000 rects
+mgmt_core: 1000000 rects
+mgmt_core: 1010000 rects
+mgmt_core: 1020000 rects
+mgmt_core: 1030000 rects
+mgmt_core: 1040000 rects
+mgmt_core: 1050000 rects
+mgmt_core: 1060000 rects
+mgmt_core: 1070000 rects
+mgmt_core: 1080000 rects
+mgmt_core: 1090000 rects
+mgmt_core: 1100000 rects
+mgmt_core: 1110000 rects
+mgmt_core: 1120000 rects
+mgmt_core: 1130000 rects
+mgmt_core: 1140000 rects
+mgmt_core: 1150000 rects
+mgmt_core: 1160000 rects
+mgmt_core: 1170000 rects
+mgmt_core: 1180000 rects
+mgmt_core: 1190000 rects
+mgmt_core: 1200000 rects
+mgmt_core: 1210000 rects
+mgmt_core: 1220000 rects
+mgmt_core: 1230000 rects
+mgmt_core: 1240000 rects
+mgmt_core: 1250000 rects
+mgmt_core: 1260000 rects
+mgmt_core: 1270000 rects
+mgmt_core: 1280000 rects
+mgmt_core: 1290000 rects
+mgmt_core: 1300000 rects
+mgmt_core: 1310000 rects
+mgmt_core: 1320000 rects
+mgmt_core: 1330000 rects
+mgmt_core: 1340000 rects
+mgmt_core: 1350000 rects
+mgmt_core: 1360000 rects
+mgmt_core: 1370000 rects
+mgmt_core: 1380000 rects
+mgmt_core: 1390000 rects
+mgmt_core: 1400000 rects
+mgmt_core: 1410000 rects
+mgmt_core: 1420000 rects
+mgmt_core: 1430000 rects
+mgmt_core: 1440000 rects
+mgmt_core: 1450000 rects
+mgmt_core: 1460000 rects
+mgmt_core: 1470000 rects
+mgmt_core: 1480000 rects
+mgmt_core: 1490000 rects
+mgmt_core: 1500000 rects
+mgmt_core: 1510000 rects
+mgmt_core: 1520000 rects
+mgmt_core: 1530000 rects
+mgmt_core: 1540000 rects
+mgmt_core: 1550000 rects
+mgmt_core: 1560000 rects
+mgmt_core: 1570000 rects
+mgmt_core: 1580000 rects
+mgmt_core: 1590000 rects
+mgmt_core: 1600000 rects
+mgmt_core: 1610000 rects
+mgmt_core: 1620000 rects
+mgmt_core: 1630000 rects
+mgmt_core: 1640000 rects
+mgmt_core: 1650000 rects
+mgmt_core: 1660000 rects
+mgmt_core: 1670000 rects
+mgmt_core: 1680000 rects
+mgmt_core: 1690000 rects
+mgmt_core: 1700000 rects
+mgmt_core: 1710000 rects
+mgmt_core: 1720000 rects
+mgmt_core: 1730000 rects
+mgmt_core: 1740000 rects
+mgmt_core: 1750000 rects
+mgmt_core: 1760000 rects
+mgmt_core: 1770000 rects
+mgmt_core: 1780000 rects
+mgmt_core: 1790000 rects
+mgmt_core: 1800000 rects
+mgmt_core: 1810000 rects
+mgmt_core: 1820000 rects
+mgmt_core: 1830000 rects
+mgmt_core: 1840000 rects
+mgmt_core: 1850000 rects
+mgmt_core: 1860000 rects
+mgmt_core: 1870000 rects
+mgmt_core: 1880000 rects
+mgmt_core: 1890000 rects
+mgmt_core: 1900000 rects
+mgmt_core: 1910000 rects
+mgmt_core: 1920000 rects
+mgmt_core: 1930000 rects
+mgmt_core: 1940000 rects
+mgmt_core: 1950000 rects
+mgmt_core: 1960000 rects
+mgmt_core: 1970000 rects
+mgmt_core: 1980000 rects
+mgmt_core: 1990000 rects
+mgmt_core: 2000000 rects
+mgmt_core: 2010000 rects
+mgmt_core: 2020000 rects
+mgmt_core: 2030000 rects
+mgmt_core: 2040000 rects
+mgmt_core: 2050000 rects
+mgmt_core: 2060000 rects
+mgmt_core: 2070000 rects
+mgmt_core: 2080000 rects
+mgmt_core: 2090000 rects
+mgmt_core: 2100000 rects
+mgmt_core: 2110000 rects
+mgmt_core: 2120000 rects
+mgmt_core: 2130000 rects
+mgmt_core: 2140000 rects
+mgmt_core: 2150000 rects
+mgmt_core: 2160000 rects
+mgmt_core: 2170000 rects
+mgmt_core: 2180000 rects
+mgmt_core: 2190000 rects
+mgmt_core: 2200000 rects
+mgmt_core: 2210000 rects
+mgmt_core: 2220000 rects
+mgmt_core: 2230000 rects
+mgmt_core: 2240000 rects
+mgmt_core: 2250000 rects
+mgmt_core: 2260000 rects
+mgmt_core: 2270000 rects
+mgmt_core: 2280000 rects
+mgmt_core: 2290000 rects
+mgmt_core: 2300000 rects
+mgmt_core: 2310000 rects
+mgmt_core: 2320000 rects
+mgmt_core: 2330000 rects
+mgmt_core: 2340000 rects
+mgmt_core: 2350000 rects
+mgmt_core: 2360000 rects
+mgmt_core: 2370000 rects
+mgmt_core: 2380000 rects
+mgmt_core: 2390000 rects
+mgmt_core: 2400000 rects
+mgmt_core: 2410000 rects
+mgmt_core: 2420000 rects
+mgmt_core: 2430000 rects
+mgmt_core: 2440000 rects
+mgmt_core: 2450000 rects
+mgmt_core: 2460000 rects
+mgmt_core: 2470000 rects
+mgmt_core: 2480000 rects
+mgmt_core: 2490000 rects
+mgmt_core: 2500000 rects
+mgmt_core: 2510000 rects
+mgmt_core: 2520000 rects
+mgmt_core: 2530000 rects
+mgmt_core: 2540000 rects
+mgmt_core: 2550000 rects
+mgmt_core: 2560000 rects
+mgmt_core: 2570000 rects
+mgmt_core: 2580000 rects
+mgmt_core: 2590000 rects
+mgmt_core: 2600000 rects
+mgmt_core: 2610000 rects
+mgmt_core: 2620000 rects
+mgmt_core: 2630000 rects
+mgmt_core: 2640000 rects
+mgmt_core: 2650000 rects
+Processing timestamp mismatches: sky130_sram_2kbyte_1rw1r_32x512_8.
+[INFO]: Writing abstract LEF
+Generating LEF output /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/mgmt_core.lef for cell mgmt_core:
+Diagnostic:  Write LEF header for cell mgmt_core
+Diagnostic:  Writing LEF output for cell mgmt_core
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__fill_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__fill_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__fill_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__decap_3" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__decap_3.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__decap_3.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkbuf_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__clkbuf_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkbuf_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__diode_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__diode_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__diode_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__tapvpwrvgnd_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__tapvpwrvgnd_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__tapvpwrvgnd_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__dlygate4sd3_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__dlygate4sd3_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__dlygate4sd3_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__buf_8" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__buf_8.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__buf_8.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__fill_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__fill_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__fill_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__decap_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__decap_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__decap_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__buf_6" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__buf_6.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__buf_6.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkbuf_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__clkbuf_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkbuf_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__mux2_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__mux2_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__mux2_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__conb_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__conb_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__conb_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkbuf_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__clkbuf_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkbuf_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__dfxtp_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__dfxtp_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__dfxtp_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__decap_6" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__decap_6.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__decap_6.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__dfxtp_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__dfxtp_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__dfxtp_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__decap_8" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__decap_8.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__decap_8.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__decap_12" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__decap_12.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__decap_12.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkbuf_16" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__clkbuf_16.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkbuf_16.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a221o_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a221o_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a221o_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__buf_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__buf_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__buf_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a22o_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a22o_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a22o_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__dfxtp_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__dfxtp_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__dfxtp_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand3_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand3_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand3_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a221o_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a221o_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a221o_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__dlymetal6s2s_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__dlymetal6s2s_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__dlymetal6s2s_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__buf_12" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__buf_12.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__buf_12.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a2111o_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a2111o_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a2111o_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and4_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and4_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and4_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a2111o_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a2111o_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a2111o_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o211a_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o211a_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o211a_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and3_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and3_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and3_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__inv_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__inv_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__inv_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and2b_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and2b_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and2b_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand3b_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand3b_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand3b_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a2111oi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a2111oi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a2111oi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a22o_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a22o_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a22o_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a221o_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a221o_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a221o_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and2b_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and2b_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and2b_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor3b_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor3b_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor3b_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor3_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor3_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor3_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor3b_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor3b_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor3b_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkinv_8" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__clkinv_8.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkinv_8.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__inv_12" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__inv_12.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__inv_12.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and3b_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and3b_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and3b_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor3b_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor3b_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor3b_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or2_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or2_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or2_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__buf_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__buf_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__buf_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a211oi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a211oi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a211oi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__inv_6" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__inv_6.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__inv_6.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and2_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and2_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and2_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand2_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand2_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand2_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand3b_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand3b_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand3b_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand3_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand3_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand3_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__inv_16" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__inv_16.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__inv_16.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and2_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and2_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and2_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o2111a_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o2111a_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o2111a_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21oi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21oi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21oi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21ai_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21ai_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21ai_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__mux2_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__mux2_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__mux2_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__inv_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__inv_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__inv_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkinv_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__clkinv_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkinv_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21bo_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21bo_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21bo_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21a_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21a_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21a_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a211o_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a211o_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a211o_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or2b_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or2b_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or2b_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21oi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21oi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21oi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21ai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21ai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21ai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21boi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21boi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21boi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor3_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor3_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor3_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor2_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor2_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor2_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a31oi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a31oi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a31oi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21o_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21o_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21o_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21a_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21a_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21a_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21bai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21bai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21bai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o211ai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o211ai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o211ai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o31ai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o31ai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o31ai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor2_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor2_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor2_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__xor2_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__xor2_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__xor2_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand3_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand3_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand3_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21ba_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21ba_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21ba_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a41oi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a41oi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a41oi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor3_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor3_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor3_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o41ai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o41ai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o41ai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21bai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21bai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21bai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__xnor2_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__xnor2_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__xnor2_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkbuf_8" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__clkbuf_8.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkbuf_8.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a41oi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a41oi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a41oi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__xnor2_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__xnor2_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__xnor2_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or3b_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or3b_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or3b_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand2_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand2_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand2_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__xnor2_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__xnor2_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__xnor2_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand2_8" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand2_8.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand2_8.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__xor2_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__xor2_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__xor2_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor2b_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor2b_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor2b_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o211a_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o211a_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o211a_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o31a_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o31a_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o31a_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__mux2_8" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__mux2_8.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__mux2_8.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__mux2_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__mux2_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__mux2_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21oi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21oi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21oi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21o_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21o_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21o_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21bai_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21bai_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21bai_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a211o_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a211o_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a211o_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a311o_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a311o_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a311o_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a22oi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a22oi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a22oi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o2111a_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o2111a_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o2111a_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o22a_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o22a_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o22a_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a31o_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a31o_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a31o_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and4_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and4_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and4_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a22oi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a22oi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a22oi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o41a_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o41a_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o41a_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand2_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand2_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand2_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor2_8" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor2_8.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor2_8.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a32oi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a32oi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a32oi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a221oi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a221oi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a221oi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor2b_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor2b_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor2b_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or4_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or4_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or4_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a211oi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a211oi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a211oi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkinv_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__clkinv_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkinv_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a2bb2oi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a2bb2oi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a2bb2oi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a31oi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a31oi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a31oi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand3b_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand3b_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand3b_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21boi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21boi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21boi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and4_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and4_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and4_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor2_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nor2_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor2_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o311ai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o311ai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o311ai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a41oi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a41oi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a41oi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or3b_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or3b_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or3b_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkinv_16" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__clkinv_16.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkinv_16.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o211ai_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o211ai_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o211ai_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21ba_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21ba_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21ba_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o2111ai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o2111ai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o2111ai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o2111ai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o2111ai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o2111ai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a32o_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a32o_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a32o_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a311oi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a311oi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a311oi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a2111o_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a2111o_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a2111o_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or4_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or4_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or4_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21ai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21ai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21ai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a2111oi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a2111oi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a2111oi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a211oi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a211oi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a211oi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o311ai_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o311ai_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o311ai_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and3_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and3_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and3_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a2111oi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a2111oi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a2111oi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__mux4_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__mux4_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__mux4_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__mux4_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__mux4_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__mux4_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or2b_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or2b_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or2b_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21a_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21a_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21a_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and4b_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and4b_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and4b_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o2111ai_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o2111ai_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o2111ai_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or2_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or2_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or2_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o22ai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o22ai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o22ai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o2bb2ai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o2bb2ai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o2bb2ai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a32oi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a32oi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a32oi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__inv_8" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__inv_8.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__inv_8.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21boi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21boi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21boi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or4_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or4_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or4_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o32ai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o32ai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o32ai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a41o_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a41o_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a41o_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__xor2_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__xor2_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__xor2_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and4b_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and4b_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and4b_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o221ai_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o221ai_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o221ai_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o32a_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o32a_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o32a_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o41a_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o41a_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o41a_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a22oi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a22oi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a22oi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and3_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and3_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and3_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o221a_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o221a_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o221a_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o221a_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o221a_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o221a_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and2_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and2_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and2_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or3_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or3_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or3_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o22ai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o22ai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o22ai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a221oi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a221oi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a221oi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a221oi_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a221oi_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a221oi_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o211ai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o211ai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o211ai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o311ai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o311ai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o311ai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o31ai_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o31ai_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o31ai_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a311oi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a311oi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a311oi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a31oi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a31oi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a31oi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o311a_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o311a_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o311a_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o41ai_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o41ai_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o41ai_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or3_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or3_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or3_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o31a_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o31a_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o31a_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o21ba_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o21ba_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o21ba_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a311oi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a311oi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a311oi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and2b_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and2b_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and2b_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o2bb2ai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o2bb2ai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o2bb2ai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o2bb2ai_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o2bb2ai_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o2bb2ai_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o22a_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o22a_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o22a_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and4b_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and4b_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and4b_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nand2b_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__nand2b_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nand2b_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o2111a_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o2111a_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o2111a_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a2bb2oi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a2bb2oi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a2bb2oi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a2bb2oi_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a2bb2oi_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a2bb2oi_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__dlymetal6s4s_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__dlymetal6s4s_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__dlymetal6s4s_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or3_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or3_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or3_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a22o_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a22o_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a22o_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a32oi_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a32oi_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a32oi_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o311a_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o311a_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o311a_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21o_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21o_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21o_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or4b_1" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or4b_1.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or4b_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a32o_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a32o_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a32o_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and3b_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__and3b_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and3b_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o32ai_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o32ai_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o32ai_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__or2b_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__or2b_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__or2b_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o221ai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o221ai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o221ai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a31o_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a31o_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a31o_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o32ai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o32ai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o32ai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__a21bo_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__a21bo_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__a21bo_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o31ai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o31ai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o31ai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o41ai_2" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o41ai_2.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o41ai_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__o211a_4" at bad file path /project/openlane/mgmt_core/runs/mgmt_core/results/finishing/sky130_fd_sc_hd__o211a_4.mag.
+The cell exists in the search paths at /home/ma/ef/OpenLane/pdks//sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__o211a_4.mag.
+The discovered version will be used.
+Diagnostic:  Scale value is 0.005000
+Processing timestamp mismatches: sky130_fd_sc_hd__o211a_4, sky130_fd_sc_hd__o41ai_2, sky130_fd_sc_hd__o31ai_2, sky130_fd_sc_hd__a21bo_2, sky130_fd_sc_hd__o32ai_2, sky130_fd_sc_hd__a31o_4, sky130_fd_sc_hd__o221ai_2, sky130_fd_sc_hd__or2b_2, sky130_fd_sc_hd__o32ai_4, sky130_fd_sc_hd__and3b_2, sky130_fd_sc_hd__a32o_4, sky130_fd_sc_hd__or4b_1, sky130_fd_sc_hd__a21o_4, sky130_fd_sc_hd__o311a_1, sky130_fd_sc_hd__a32oi_4, sky130_fd_sc_hd__a22o_4, sky130_fd_sc_hd__or3_4, sky130_fd_sc_hd__dlymetal6s4s_1, sky130_fd_sc_hd__a2bb2oi_2, sky130_fd_sc_hd__a2bb2oi_4, sky130_fd_sc_hd__o2111a_2, sky130_fd_sc_hd__nand2b_1, sky130_fd_sc_hd__and4b_1, sky130_fd_sc_hd__o22a_2, sky130_fd_sc_hd__o2bb2ai_4, sky130_fd_sc_hd__o2bb2ai_2, sky130_fd_sc_hd__and2b_4, sky130_fd_sc_hd__a311oi_4, sky130_fd_sc_hd__o21ba_2, sky130_fd_sc_hd__o31a_4, sky130_fd_sc_hd__or3_2, sky130_fd_sc_hd__o41ai_4, sky130_fd_sc_hd__o311a_2, sky130_fd_sc_hd__a31oi_2, sky130_fd_sc_hd__a311oi_2, sky130_fd_sc_hd__o31ai_4, sky130_fd_sc_hd__o311ai_2, sky130_fd_sc_hd__o211ai_2, sky130_fd_sc_hd__a221oi_1, sky130_fd_sc_hd__a221oi_2, sky130_fd_sc_hd__o22ai_2, sky130_fd_sc_hd__or3_1, sky130_fd_sc_hd__and2_4, sky130_fd_sc_hd__o221a_1, sky130_fd_sc_hd__o221a_2, sky130_fd_sc_hd__and3_2, sky130_fd_sc_hd__a22oi_1, sky130_fd_sc_hd__o41a_1, sky130_fd_sc_hd__o32a_1, sky130_fd_sc_hd__o221ai_1, sky130_fd_sc_hd__and4b_2, sky130_fd_sc_hd__xor2_2, sky130_fd_sc_hd__a41o_1, sky130_fd_sc_hd__o32ai_1, sky130_fd_sc_hd__or4_1, sky130_fd_sc_hd__a21boi_4, sky130_fd_sc_hd__inv_8, sky130_fd_sc_hd__a32oi_1, sky130_fd_sc_hd__o2bb2ai_1, sky130_fd_sc_hd__o22ai_1, sky130_fd_sc_hd__or2_2, sky130_fd_sc_hd__o2111ai_4, sky130_fd_sc_hd__and4b_4, sky130_fd_sc_hd__o21a_4, sky130_fd_sc_hd__or2b_4, sky130_fd_sc_hd__mux4_1, sky130_fd_sc_hd__mux4_2, sky130_fd_sc_hd__a2111oi_4, sky130_fd_sc_hd__and3_4, sky130_fd_sc_hd__o311ai_4, sky130_fd_sc_hd__a211oi_4, sky130_fd_sc_hd__a2111oi_1, sky130_fd_sc_hd__o21ai_2, sky130_fd_sc_hd__or4_4, sky130_fd_sc_hd__a2111o_4, sky130_fd_sc_hd__a311oi_1, sky130_fd_sc_hd__a32o_1, sky130_fd_sc_hd__o2111ai_1, sky130_fd_sc_hd__o2111ai_2, sky130_fd_sc_hd__o21ba_4, sky130_fd_sc_hd__o211ai_4, sky130_fd_sc_hd__clkinv_16, sky130_fd_sc_hd__or3b_4, sky130_fd_sc_hd__a41oi_2, sky130_fd_sc_hd__o311ai_1, sky130_fd_sc_hd__nor2_4, sky130_fd_sc_hd__and4_2, sky130_fd_sc_hd__a21boi_2, sky130_fd_sc_hd__nand3b_2, sky130_fd_sc_hd__a31oi_4, sky130_fd_sc_hd__a2bb2oi_1, sky130_fd_sc_hd__clkinv_4, sky130_fd_sc_hd__a211oi_2, sky130_fd_sc_hd__or4_2, sky130_fd_sc_hd__nor2b_4, sky130_fd_sc_hd__a221oi_4, sky130_fd_sc_hd__a32oi_2, sky130_fd_sc_hd__nor2_8, sky130_fd_sc_hd__nand2_2, sky130_fd_sc_hd__o41a_2, sky130_fd_sc_hd__a22oi_2, sky130_fd_sc_hd__and4_4, sky130_fd_sc_hd__a31o_1, sky130_fd_sc_hd__o22a_1, sky130_fd_sc_hd__o2111a_4, sky130_fd_sc_hd__a22oi_4, sky130_fd_sc_hd__a311o_1, sky130_fd_sc_hd__a211o_1, sky130_fd_sc_hd__o21bai_4, sky130_fd_sc_hd__a21o_2, sky130_fd_sc_hd__a21oi_2, sky130_fd_sc_hd__mux2_4, sky130_fd_sc_hd__mux2_8, sky130_fd_sc_hd__o31a_1, sky130_fd_sc_hd__o211a_2, sky130_fd_sc_hd__nor2b_2, sky130_fd_sc_hd__xor2_1, sky130_fd_sc_hd__nand2_8, sky130_fd_sc_hd__xnor2_1, sky130_fd_sc_hd__nand2_4, sky130_fd_sc_hd__or3b_1, sky130_fd_sc_hd__xnor2_2, sky130_fd_sc_hd__a41oi_4, sky130_fd_sc_hd__clkbuf_8, sky130_fd_sc_hd__xnor2_4, sky130_fd_sc_hd__o21bai_2, sky130_fd_sc_hd__o41ai_1, sky130_fd_sc_hd__nor3_2, sky130_fd_sc_hd__a41oi_1, sky130_fd_sc_hd__o21ba_1, sky130_fd_sc_hd__nand3_2, sky130_fd_sc_hd__xor2_4, sky130_fd_sc_hd__nor2_1, sky130_fd_sc_hd__o31ai_1, sky130_fd_sc_hd__o211ai_1, sky130_fd_sc_hd__o21bai_1, sky130_fd_sc_hd__o21a_2, sky130_fd_sc_hd__a21o_1, sky130_fd_sc_hd__a31oi_1, sky130_fd_sc_hd__nor2_2, sky130_fd_sc_hd__nor3_1, sky130_fd_sc_hd__a21boi_1, sky130_fd_sc_hd__o21ai_1, sky130_fd_sc_hd__a21oi_4, sky130_fd_sc_hd__or2b_1, sky130_fd_sc_hd__a211o_2, sky130_fd_sc_hd__o21a_1, sky130_fd_sc_hd__a21bo_1, sky130_fd_sc_hd__clkinv_2, sky130_fd_sc_hd__inv_4, sky130_fd_sc_hd__mux2_2, sky130_fd_sc_hd__o21ai_4, sky130_fd_sc_hd__a21oi_1, sky130_fd_sc_hd__o2111a_1, sky130_fd_sc_hd__and2_2, sky130_fd_sc_hd__inv_16, sky130_fd_sc_hd__nand3_1, sky130_fd_sc_hd__nand3b_4, sky130_fd_sc_hd__nand2_1, sky130_fd_sc_hd__and2_1, sky130_fd_sc_hd__inv_6, sky130_fd_sc_hd__a211oi_1, sky130_fd_sc_hd__buf_4, sky130_fd_sc_hd__or2_1, sky130_fd_sc_hd__nor3b_2, sky130_fd_sc_hd__and3b_1, sky130_fd_sc_hd__inv_12, sky130_fd_sc_hd__clkinv_8, sky130_fd_sc_hd__nor3b_4, sky130_fd_sc_hd__nor3_4, sky130_fd_sc_hd__nor3b_1, sky130_fd_sc_hd__and2b_2, sky130_fd_sc_hd__a221o_4, sky130_fd_sc_hd__a22o_2, sky130_fd_sc_hd__a2111oi_2, sky130_fd_sc_hd__nand3b_1, sky130_fd_sc_hd__and2b_1, sky130_fd_sc_hd__inv_2, sky130_fd_sc_hd__and3_1, sky130_fd_sc_hd__o211a_1, sky130_fd_sc_hd__a2111o_2, sky130_fd_sc_hd__and4_1, sky130_fd_sc_hd__a2111o_1, sky130_fd_sc_hd__buf_12, sky130_fd_sc_hd__dlymetal6s2s_1, sky130_fd_sc_hd__a221o_2, sky130_fd_sc_hd__nand3_4, sky130_fd_sc_hd__dfxtp_4, sky130_fd_sc_hd__a22o_1, sky130_fd_sc_hd__buf_2, sky130_fd_sc_hd__a221o_1, sky130_fd_sc_hd__clkbuf_16, sky130_fd_sc_hd__decap_12, sky130_fd_sc_hd__decap_8, sky130_fd_sc_hd__dfxtp_2, sky130_fd_sc_hd__decap_6, sky130_fd_sc_hd__dfxtp_1, sky130_fd_sc_hd__clkbuf_2, sky130_fd_sc_hd__conb_1, sky130_fd_sc_hd__mux2_1, sky130_fd_sc_hd__clkbuf_1, sky130_fd_sc_hd__buf_6, sky130_fd_sc_hd__decap_4, sky130_fd_sc_hd__fill_2, sky130_fd_sc_hd__buf_8, sky130_fd_sc_hd__dlygate4sd3_1, sky130_fd_sc_hd__tapvpwrvgnd_1, sky130_fd_sc_hd__diode_2, sky130_fd_sc_hd__clkbuf_4, sky130_fd_sc_hd__decap_3, sky130_fd_sc_hd__fill_1.
+[INFO]: LEF Write Complete
+Using technology "sky130A", version 1.0.237-1-gc5730b5

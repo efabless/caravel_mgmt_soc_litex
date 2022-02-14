@@ -1,0 +1,103 @@
+Sun Dec 26 22:44:57 UTC 2021 - Executing "/openlane/scripts/mergeLef.py -i /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd.tlef /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef -o /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/merged_unpadded.lef |& tee >&@stdout"
+
+Sun Dec 26 22:44:57 UTC 2021 - Executing "/openlane/scripts/mergeLef.py -i /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/merged_unpadded.lef /project/openlane/mgmt_core_wrapper/../../lef/DFFRAM.lef /project/openlane/mgmt_core_wrapper/../../lef/mgmt_core.lef -o /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/merged_unpadded.lef |& tee >&@stdout"
+
+Sun Dec 26 22:44:57 UTC 2021 - Executing "/openlane/scripts/libtrim.pl /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/synthesis/trimmed.lib.exclude.list > /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/synthesis/trimmed.lib"
+
+Sun Dec 26 22:44:57 UTC 2021 - Executing "echo {openlane 2021.12.23_01.41.11-2-gc677161} > /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/OPENLANE_VERSION"
+
+Sun Dec 26 22:44:57 UTC 2021 - Executing "openroad -python /openlane/scripts/new_tracks.py -i /ciic/pdks/openlane/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tracks.info -o /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/routing/config.tracks"
+
+Sun Dec 26 22:44:58 UTC 2021 - Executing "sed -E {s/^([[:space:]]+)pg_pin(.*)/\1pin\2\n\1    direction : "inout";/g} /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib > /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/synthesis/1-sky130_fd_sc_hd__tt_025C_1v80.no_pg.lib"
+
+Sun Dec 26 22:44:58 UTC 2021 - Executing "yosys -c /openlane/scripts/yosys/synth.tcl -l /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/synthesis/1-synthesis.log |& tee >&@stdout"
+
+Sun Dec 26 22:44:59 UTC 2021 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/project\/openlane\/mgmt_core_wrapper\/runs\/RUN_2021.12.26_22.44.57\/results\/synthesis\/mgmt_core_wrapper.v/} /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/config.tcl"
+
+Sun Dec 26 22:44:59 UTC 2021 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 0/} /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/config.tcl"
+
+Sun Dec 26 22:44:59 UTC 2021 - Executing "sed -i /defparam/d /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/results/synthesis/mgmt_core_wrapper.v"
+
+Sun Dec 26 22:44:59 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/sta.tcl"
+
+Sun Dec 26 22:45:00 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/floorplan.tcl"
+
+Sun Dec 26 22:45:01 UTC 2021 - Executing "openroad -python /openlane/scripts/io_place.py --input-lef /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/merged.lef --config /project/openlane/mgmt_core_wrapper/pin_order.cfg --hor-layer met3 --ver-layer met2 --ver-width-mult 2 --hor-width-mult 2 --hor-extension 2 --ver-extension 2 --length 4 -o /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/floorplan/4-io.def /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/floorplan/3-initial_fp.def |& tee /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/floorplan/4-place_io_ol.log >&@stdout"
+
+Sun Dec 26 22:45:01 UTC 2021 - Executing "openroad -python /openlane/scripts/manual_macro_place.py -l /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/merged.lef -id /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/floorplan/4-io.def -o /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/floorplan/4-io.macro_placement.def -c /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/placement/macro_placement.cfg -f |& tee >&@stdout /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/placement/5-macro_placement.log"
+
+Sun Dec 26 22:45:02 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/pdn.tcl"
+
+Sun Dec 26 22:45:02 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/replace.tcl"
+
+Sun Dec 26 22:45:03 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/opendp.tcl"
+
+Sun Dec 26 22:45:03 UTC 2021 - Executing "openroad -python /openlane/scripts/add_def_obstructions.py --input-def /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/results/placement/mgmt_core_wrapper.def --lef /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/merged.lef --obstructions { li1 0 0 2620 820,
+   met1 5 10 555 750,  met5 5 10 555 750,  met4 5 10 555 750} --output /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/results/placement/mgmt_core_wrapper.obs.def |& tee >&@stdout /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/routing/obs.log"
+
+Sun Dec 26 22:45:04 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/opendp.tcl"
+
+Sun Dec 26 22:45:04 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/groute.tcl"
+
+Sun Dec 26 22:45:06 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/write_verilog.tcl"
+
+Sun Dec 26 22:45:06 UTC 2021 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/project\/openlane\/mgmt_core_wrapper\/runs\/RUN_2021.12.26_22.44.57\/tmp\/routing\/12-global.v/} /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/config.tcl"
+
+Sun Dec 26 22:45:06 UTC 2021 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 \/project\/openlane\/mgmt_core_wrapper\/runs\/RUN_2021.12.26_22.44.57\/results\/synthesis\/mgmt_core_wrapper.v/} /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/config.tcl"
+
+Sun Dec 26 22:45:06 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/droute.tcl"
+
+Sun Dec 26 22:45:25 UTC 2021 - Executing "openroad -python /openlane/scripts/tr_drc_to_klayout_drc.py -i /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/routing/detailed.drc -o /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/routing/detailed.klayout.xml --design-name mgmt_core_wrapper"
+
+Sun Dec 26 22:45:25 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/write_verilog.tcl"
+
+Sun Dec 26 22:45:26 UTC 2021 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/project\/openlane\/mgmt_core_wrapper\/runs\/RUN_2021.12.26_22.44.57\/tmp\/routing\/14-detailed.v/} /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/config.tcl"
+
+Sun Dec 26 22:45:26 UTC 2021 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 \/project\/openlane\/mgmt_core_wrapper\/runs\/RUN_2021.12.26_22.44.57\/tmp\/routing\/12-global.v/} /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/config.tcl"
+
+Sun Dec 26 22:45:26 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/rcx.tcl"
+
+Sun Dec 26 22:45:27 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/rcx.tcl"
+
+Sun Dec 26 22:45:28 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/rcx.tcl"
+
+Sun Dec 26 22:45:30 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/sta.tcl"
+
+Sun Dec 26 22:45:31 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/sta_multi_corner.tcl"
+
+Sun Dec 26 22:45:33 UTC 2021 - Executing "magic -noconsole -dnull -rcfile /ciic/pdks/openlane/sky130A/libs.tech/magic/sky130A.magicrc /openlane/scripts/magic/mag_gds.tcl </dev/null |& tee >&@stdout /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/finishing/21-gdsii.log"
+
+Sun Dec 26 22:47:05 UTC 2021 - Executing "magic -noconsole -dnull -rcfile /ciic/pdks/openlane/sky130A/libs.tech/magic/sky130A.magicrc /openlane/scripts/magic/gds_pointers.tcl </dev/null |& tee >&@stdout /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/finishing/21-gds_ptrs.log"
+
+Sun Dec 26 22:48:57 UTC 2021 - Executing "sed -i -n {/^<< properties >>/,/^<< end >>/p} /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/finishing/gds_ptrs.mag"
+
+Sun Dec 26 22:48:57 UTC 2021 - Executing "magic -noconsole -dnull -rcfile /ciic/pdks/openlane/sky130A/libs.tech/magic/sky130A.magicrc /openlane/scripts/magic/lef.tcl </dev/null |& tee >&@stdout /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/finishing/21-lef.log"
+
+Sun Dec 26 22:48:57 UTC 2021 - Executing "magic -noconsole -dnull -rcfile /ciic/pdks/openlane/sky130A/libs.tech/magic/sky130A.magicrc /openlane/scripts/magic/maglef.tcl </dev/null |& tee >&@stdout /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/finishing/21-maglef.log"
+
+Sun Dec 26 22:48:58 UTC 2021 - Executing "magic -noconsole -dnull -rcfile /ciic/pdks/openlane/sky130A/libs.tech/magic/sky130A.magicrc /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/finishing/spice.tcl </dev/null |& tee >&@stdout /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/finishing/23-spice.log"
+
+Sun Dec 26 22:49:03 UTC 2021 - Executing "openroad -python /openlane/scripts/write_powered_def.py -d /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/results/routing/mgmt_core_wrapper.def -l /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/merged.lef --power-port VPWR --ground-port VGND --powered-netlist {} -o /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/finishing/23-powered_def.def |& tee >&@stdout /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/finishing/24-write_powered_def.log"
+
+Sun Dec 26 22:49:03 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/write_verilog.tcl"
+
+Sun Dec 26 22:49:04 UTC 2021 - Executing "sed -i -e {s/\(set ::env(CURRENT_NETLIST)\).*/\1 \/project\/openlane\/mgmt_core_wrapper\/runs\/RUN_2021.12.26_22.44.57\/tmp\/finishing\/23-powered_netlist.v/} /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/config.tcl"
+
+Sun Dec 26 22:49:04 UTC 2021 - Executing "sed -i -e {s/\(set ::env(PREV_NETLIST)\).*/\1 \/project\/openlane\/mgmt_core_wrapper\/runs\/RUN_2021.12.26_22.44.57\/tmp\/routing\/14-detailed.v/} /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/config.tcl"
+
+Sun Dec 26 22:49:04 UTC 2021 - Executing "netgen -batch source /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/finishing/26-setup_file.lef.lvs |& tee >&@stdout /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/finishing/26-lef.log"
+
+Sun Dec 26 22:49:04 UTC 2021 - Executing "magic -noconsole -dnull -rcfile /ciic/pdks/openlane/sky130A/libs.tech/magic/sky130A.magicrc /openlane/scripts/magic/drc.tcl </dev/null |& tee >&@stdout /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/finishing/27-drc.log"
+
+Sun Dec 26 22:49:06 UTC 2021 - Executing "openroad -python /openlane/scripts/magic_drc_to_tcl.py -i /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/finishing/drc.rpt -o /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/finishing/drc.tcl"
+
+Sun Dec 26 22:49:06 UTC 2021 - Executing "openroad -python /openlane/scripts/magic_drc_to_tr_drc.py -i /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/finishing/drc.rpt -o /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/finishing/drc.tr"
+
+Sun Dec 26 22:49:06 UTC 2021 - Executing "openroad -python /openlane/scripts/tr_drc_to_klayout_drc.py -i /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/finishing/drc.tr -o /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/finishing/drc.klayout.xml --design-name mgmt_core_wrapper"
+
+Sun Dec 26 22:49:06 UTC 2021 - Executing "openroad -python /openlane/scripts/magic_drc_to_rdb.py --magic_drc_in /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/finishing/drc.rpt --rdb_out /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/finishing/drc.rdb"
+
+Sun Dec 26 22:49:07 UTC 2021 - Executing "openroad -exit /openlane/scripts/openroad/antenna_check.tcl"
+
+Sun Dec 26 22:49:07 UTC 2021 - Executing "openroad -python /openlane/scripts/generate_reports.py -d /project/openlane/mgmt_core_wrapper --design_name mgmt_core_wrapper --tag RUN_2021.12.26_22.44.57 --output_file /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/final_summary_report.csv --man_report /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/manufacturability_report.rpt --run_path /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57"
+

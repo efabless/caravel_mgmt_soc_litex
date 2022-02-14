@@ -1,0 +1,16 @@
+
+25. Printing statistics.
+
+=== mgmt_core_wrapper ===
+
+   Number of wires:                 65
+   Number of wire bits:            817
+   Number of public wires:          65
+   Number of public wire bits:     817
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     DFFRAM                          1
+     mgmt_core                       1
+

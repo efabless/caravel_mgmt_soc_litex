@@ -1,0 +1,323 @@
+<?xml version="1.0" ?>
+<report-database>
+    <categories>
+        <category>
+            <name>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</name>
+        </category>
+    </categories>
+    <cells>
+        <cell>
+            <name>mgmt_core_wrapper</name>
+        </cell>
+    </cells>
+    <items>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (192.370,13.400;192.650,13.445)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (192.370,13.390;192.650,13.400)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (231.470,13.400;231.750,13.445)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (231.470,13.390;231.750,13.400)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (341.410,13.400;341.690,13.445)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (341.410,13.390;341.690,13.400)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (342.330,13.400;342.610,13.445)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (342.330,13.390;342.610,13.400)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (409.490,13.400;409.770,13.445)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (409.490,13.390;409.770,13.400)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (530.470,13.400;530.510,13.445)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (530.470,13.390;530.510,13.400)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (530.470,13.400;530.750,13.445)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (530.470,13.390;530.750,13.400)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (444.920,746.340;445.180,746.450)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (444.920,746.310;445.180,746.340)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (460.310,746.260;460.360,746.290)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (460.310,746.170;460.360,746.260)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (460.100,745.970;460.360,746.000)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (460.310,746.260;460.360,746.290)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (460.310,746.000;460.360,746.260)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (460.310,745.970;460.360,746.000)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (478.960,746.340;479.220,746.450)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (478.960,746.310;479.220,746.340)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (496.440,746.340;496.700,746.450)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (496.440,746.310;496.700,746.340)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (2218.280,12.595;2219.810,12.650)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+        <item>
+            <category>Metal2_gt_3um_spacing_to_unrelated_m2_lt_0dot28um_met2dot3b</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (2219.530,12.595;2219.810,12.650)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between N/A N/A'</value>
+            </values>
+        </item>
+    </items>
+</report-database>

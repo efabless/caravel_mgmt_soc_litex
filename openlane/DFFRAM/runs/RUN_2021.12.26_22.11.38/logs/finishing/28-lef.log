@@ -1,0 +1,266 @@
+
+Magic 8.3 revision 209 - Compiled on Wed Dec 22 17:18:33 UTC 2021.
+Starting magic under Tcl interpreter
+Using the terminal as the console.
+Using NULL graphics device.
+Processing system .magicrc file
+Sourcing design .magicrc for technology sky130A ...
+2 Magic internal units = 1 Lambda
+Input style sky130(vendor): scaleFactor=2, multiplier=2
+Scaled tech values by 2 / 1 to match internal grid scaling
+Loading sky130A Device Generator Menu ...
+Loading "/openlane/scripts/magic/lef.tcl" from command line.
+Reading LEF data from file /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd.tlef.
+This action cannot be undone.
+LEF read, Line 77 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 78 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 110 (Message): Unknown keyword "MINENCLOSEDAREA" in LEF file; ignoring.
+LEF read, Line 112 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 113 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 119 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 120 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 121 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 153 (Message): Unknown keyword "MINENCLOSEDAREA" in LEF file; ignoring.
+LEF read, Line 161 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 162 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 164 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 165 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 166 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 202 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 203 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 205 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 206 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 207 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 243 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 244 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read, Line 246 (Message): Unknown keyword "MAXIMUMDENSITY" in LEF file; ignoring.
+LEF read, Line 247 (Message): Unknown keyword "DENSITYCHECKWINDOW" in LEF file; ignoring.
+LEF read, Line 248 (Message): Unknown keyword "DENSITYCHECKSTEP" in LEF file; ignoring.
+LEF read, Line 284 (Message): Unknown keyword "ANTENNAMODEL" in LEF file; ignoring.
+LEF read, Line 285 (Message): Unknown keyword "ANTENNADIFFSIDEAREARATIO" in LEF file; ignoring.
+LEF read: Processed 791 lines.
+DFFRAM: 10000 rects
+DFFRAM: 20000 rects
+DFFRAM: 30000 rects
+DFFRAM: 40000 rects
+DFFRAM: 50000 rects
+DFFRAM: 60000 rects
+DFFRAM: 70000 rects
+DFFRAM: 80000 rects
+DFFRAM: 90000 rects
+DFFRAM: 100000 rects
+DFFRAM: 110000 rects
+DFFRAM: 120000 rects
+DFFRAM: 130000 rects
+DFFRAM: 140000 rects
+DFFRAM: 150000 rects
+DFFRAM: 160000 rects
+DFFRAM: 170000 rects
+DFFRAM: 180000 rects
+DFFRAM: 190000 rects
+DFFRAM: 200000 rects
+DFFRAM: 210000 rects
+DFFRAM: 220000 rects
+DFFRAM: 230000 rects
+DFFRAM: 240000 rects
+DFFRAM: 250000 rects
+DFFRAM: 260000 rects
+DFFRAM: 270000 rects
+DFFRAM: 280000 rects
+DFFRAM: 290000 rects
+DFFRAM: 300000 rects
+DFFRAM: 310000 rects
+DFFRAM: 320000 rects
+DFFRAM: 330000 rects
+DFFRAM: 340000 rects
+DFFRAM: 350000 rects
+DFFRAM: 360000 rects
+DFFRAM: 370000 rects
+DFFRAM: 380000 rects
+DFFRAM: 390000 rects
+DFFRAM: 400000 rects
+DFFRAM: 410000 rects
+DFFRAM: 420000 rects
+DFFRAM: 430000 rects
+DFFRAM: 440000 rects
+DFFRAM: 450000 rects
+DFFRAM: 460000 rects
+DFFRAM: 470000 rects
+DFFRAM: 480000 rects
+DFFRAM: 490000 rects
+DFFRAM: 500000 rects
+DFFRAM: 510000 rects
+DFFRAM: 520000 rects
+DFFRAM: 530000 rects
+DFFRAM: 540000 rects
+DFFRAM: 550000 rects
+DFFRAM: 560000 rects
+DFFRAM: 570000 rects
+DFFRAM: 580000 rects
+DFFRAM: 590000 rects
+DFFRAM: 600000 rects
+DFFRAM: 610000 rects
+DFFRAM: 620000 rects
+DFFRAM: 630000 rects
+DFFRAM: 640000 rects
+DFFRAM: 650000 rects
+DFFRAM: 660000 rects
+DFFRAM: 670000 rects
+DFFRAM: 680000 rects
+DFFRAM: 690000 rects
+DFFRAM: 700000 rects
+DFFRAM: 710000 rects
+DFFRAM: 720000 rects
+DFFRAM: 730000 rects
+DFFRAM: 740000 rects
+DFFRAM: 750000 rects
+DFFRAM: 760000 rects
+DFFRAM: 770000 rects
+DFFRAM: 780000 rects
+DFFRAM: 790000 rects
+DFFRAM: 800000 rects
+DFFRAM: 810000 rects
+DFFRAM: 820000 rects
+DFFRAM: 830000 rects
+DFFRAM: 840000 rects
+DFFRAM: 850000 rects
+DFFRAM: 860000 rects
+DFFRAM: 870000 rects
+DFFRAM: 880000 rects
+DFFRAM: 890000 rects
+DFFRAM: 900000 rects
+DFFRAM: 910000 rects
+DFFRAM: 920000 rects
+DFFRAM: 930000 rects
+DFFRAM: 940000 rects
+DFFRAM: 950000 rects
+DFFRAM: 960000 rects
+DFFRAM: 970000 rects
+DFFRAM: 980000 rects
+DFFRAM: 990000 rects
+DFFRAM: 1000000 rects
+DFFRAM: 1010000 rects
+DFFRAM: 1020000 rects
+DFFRAM: 1030000 rects
+DFFRAM: 1040000 rects
+DFFRAM: 1050000 rects
+DFFRAM: 1060000 rects
+DFFRAM: 1070000 rects
+DFFRAM: 1080000 rects
+DFFRAM: 1090000 rects
+DFFRAM: 1100000 rects
+DFFRAM: 1110000 rects
+DFFRAM: 1120000 rects
+DFFRAM: 1130000 rects
+DFFRAM: 1140000 rects
+DFFRAM: 1150000 rects
+DFFRAM: 1160000 rects
+DFFRAM: 1170000 rects
+DFFRAM: 1180000 rects
+DFFRAM: 1190000 rects
+DFFRAM: 1200000 rects
+DFFRAM: 1210000 rects
+DFFRAM: 1220000 rects
+DFFRAM: 1230000 rects
+DFFRAM: 1240000 rects
+DFFRAM: 1250000 rects
+DFFRAM: 1260000 rects
+DFFRAM: 1270000 rects
+[INFO]: Writing abstract LEF
+Generating LEF output /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/DFFRAM.lef for cell DFFRAM:
+Diagnostic:  Write LEF header for cell DFFRAM
+Diagnostic:  Writing LEF output for cell DFFRAM
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__decap_3" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__decap_3.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__decap_3.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__tapvpwrvgnd_1" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__tapvpwrvgnd_1.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__tapvpwrvgnd_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__decap_12" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__decap_12.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__decap_12.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__decap_6" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__decap_6.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__decap_6.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__ebufn_2" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__ebufn_2.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__ebufn_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__fill_1" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__fill_1.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__fill_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__fill_2" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__fill_2.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__fill_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__decap_4" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__decap_4.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__decap_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__diode_2" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__diode_2.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__diode_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__dfxtp_1" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__dfxtp_1.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__dfxtp_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__decap_8" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__decap_8.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__decap_8.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__mux2_1" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__mux2_1.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__mux2_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__mux4_1" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__mux4_1.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__mux4_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__inv_1" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__inv_1.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__inv_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__conb_1" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__conb_1.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__conb_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__dlclkp_1" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__dlclkp_1.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__dlclkp_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and2_1" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__and2_1.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and2_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkbuf_2" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__clkbuf_2.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkbuf_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkbuf_16" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__clkbuf_16.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkbuf_16.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkbuf_1" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__clkbuf_1.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkbuf_1.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and2_2" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__and2_2.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and2_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and3b_4" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__and3b_4.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and3b_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and3_4" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__and3_4.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and3_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor3b_4" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__nor3b_4.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor3b_4.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and4_2" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__and4_2.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and4_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and4b_2" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__and4b_2.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and4b_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and4bb_2" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__and4bb_2.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and4bb_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__nor4b_2" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__nor4b_2.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__nor4b_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__and2b_2" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__and2b_2.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__and2b_2.mag.
+The discovered version will be used.
+Warning:  Parent cell lists instance of "sky130_fd_sc_hd__clkbuf_4" at bad file path /project/openlane/DFFRAM/runs/RUN_2021.12.26_22.11.38/results/finishing/sky130_fd_sc_hd__clkbuf_4.mag.
+The cell exists in the search paths at /ciic/pdks/openlane/sky130A/libs.ref/sky130_fd_sc_hd/maglef/sky130_fd_sc_hd__clkbuf_4.mag.
+The discovered version will be used.
+Diagnostic:  Scale value is 0.005000
+Processing timestamp mismatches: sky130_fd_sc_hd__clkbuf_4, sky130_fd_sc_hd__and2b_2, sky130_fd_sc_hd__nor4b_2, sky130_fd_sc_hd__and4bb_2, sky130_fd_sc_hd__and4b_2, sky130_fd_sc_hd__and4_2, sky130_fd_sc_hd__nor3b_4, sky130_fd_sc_hd__and3_4, sky130_fd_sc_hd__and3b_4, sky130_fd_sc_hd__and2_2, sky130_fd_sc_hd__clkbuf_1, sky130_fd_sc_hd__clkbuf_16, sky130_fd_sc_hd__clkbuf_2, sky130_fd_sc_hd__and2_1, sky130_fd_sc_hd__dlclkp_1, sky130_fd_sc_hd__conb_1, sky130_fd_sc_hd__inv_1, sky130_fd_sc_hd__mux4_1, sky130_fd_sc_hd__mux2_1, sky130_fd_sc_hd__decap_8, sky130_fd_sc_hd__dfxtp_1, sky130_fd_sc_hd__diode_2, sky130_fd_sc_hd__decap_4, sky130_fd_sc_hd__fill_2, sky130_fd_sc_hd__fill_1, sky130_fd_sc_hd__ebufn_2, sky130_fd_sc_hd__decap_6, sky130_fd_sc_hd__decap_12, sky130_fd_sc_hd__tapvpwrvgnd_1, sky130_fd_sc_hd__decap_3.
+[INFO]: LEF Write Complete
+Using technology "sky130A", version 1.0.255-0-g476f742

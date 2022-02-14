@@ -1,0 +1,21 @@
+Design Name: mgmt_core_wrapper
+Run Directory: /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57
+----------------------------------------
+
+Magic DRC Summary:
+Source: /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/finishing/drc.rpt
+Violation Message "Metal2 > 3um spacing to unrelated m2 < 0.28um (met2.3b) "found 46 Times.
+Total Magic DRC violations is 46
+----------------------------------------
+
+LVS Summary:
+Source: /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/logs/finishing/26-mgmt_core_wrapper.lvs.lef.log
+    net count difference = 0
+    unmatched nets = 0
+Total errors = 1
+----------------------------------------
+
+Antenna Summary:
+Source: /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/reports/finishing/antenna.rpt
+Number of pins violated: 0
+Number of nets violated: 0

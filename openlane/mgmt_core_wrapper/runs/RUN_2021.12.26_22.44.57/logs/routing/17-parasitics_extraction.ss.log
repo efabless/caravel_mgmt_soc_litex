@@ -1,0 +1,37 @@
+OpenROAD e9d88df58cd6e61dec17d0cd7d355f7d6ec25778 
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ODB-0222] Reading LEF file: /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/merged_unpadded.lef
+[INFO ODB-0223]     Created 13 technology layers
+[INFO ODB-0224]     Created 25 technology vias
+[INFO ODB-0225]     Created 443 library cells
+[INFO ODB-0226] Finished LEF file:  /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/merged_unpadded.lef
+[WARNING ORD-0033] -order_wires is deprecated.
+[INFO ODB-0127] Reading DEF file: /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/results/routing/mgmt_core_wrapper.def
+[INFO ODB-0128] Design: mgmt_core_wrapper
+[INFO ODB-0130]     Created 742 pins.
+[INFO ODB-0131]     Created 2 components and 899 component-terminals.
+[INFO ODB-0132]     Created 2 special nets and 4 connections.
+[INFO ODB-0133]     Created 817 nets and 895 connections.
+[INFO ODB-0134] Finished DEF file: /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/results/routing/mgmt_core_wrapper.def
+[INFO]: Setting RC values...
+[INFO RCX-0431] Defined process_corner X with ext_model_index 0
+[INFO RCX-0029] Defined extraction corner X
+[INFO RCX-0008] extracting parasitics of mgmt_core_wrapper ...
+[INFO RCX-0435] Reading extraction model file /ciic/pdks/openlane/sky130A/libs.tech/openlane/rcx_rules.info ...
+[INFO RCX-0436] RC segment generation mgmt_core_wrapper (max_merge_res 50.0) ...
+[INFO RCX-0040] Final 3472 rc segments
+[INFO RCX-0439] Coupling Cap extraction mgmt_core_wrapper ...
+[INFO RCX-0440] Coupling threshhold is 0.1000 fF, coupling capacitance less than 0.1000 fF will be grounded.
+[INFO RCX-0043] 5788 wires to be extracted
+[INFO RCX-0442] 44% completion -- 2575 wires have been extracted
+[INFO RCX-0442] 48% completion -- 2818 wires have been extracted
+[INFO RCX-0442] 62% completion -- 3629 wires have been extracted
+[INFO RCX-0442] 71% completion -- 4167 wires have been extracted
+[INFO RCX-0442] 80% completion -- 4686 wires have been extracted
+[INFO RCX-0442] 100% completion -- 5788 wires have been extracted
+[INFO RCX-0045] Extract 817 nets, 4289 rsegs, 4289 caps, 6019 ccs
+[INFO RCX-0015] Finished extracting mgmt_core_wrapper.
+[INFO RCX-0016] Writing SPEF ...
+[INFO RCX-0443] 817 nets finished
+[INFO RCX-0017] Finished writing SPEF ...

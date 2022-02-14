@@ -1,0 +1,104 @@
+timestamp 1640303615
+version 8.3
+tech sky130A
+style ngspice()
+scale 1000 1 500000
+resistclasses 4400000 2200000 1700000 3050000 120000 197000 114000 191000 120000 197000 114000 191000 48200 319800 2000000 48200 48200 12200 125 125 47 47 29 5
+abstract
+port "VGND" 2 17 17 78 119 li
+port "VGND" 2 198 17 250 122 li
+port "VGND" 2 370 17 422 129 li
+port "VGND" 2 542 17 594 113 li
+port "VGND" 2 714 17 766 113 li
+port "VGND" 2 886 17 935 113 li
+port "VGND" 2 1058 17 1107 113 li
+port "VGND" 2 1229 17 1279 113 li
+port "VGND" 2 1401 17 1451 113 li
+port "VGND" 2 1573 17 1625 113 li
+port "VGND" 2 1745 17 1805 113 li
+port "VGND" 2 0 -17 1840 17 li
+port "VGND" 2 29 -17 63 17 v0
+port "VGND" 2 121 -17 155 17 v0
+port "VGND" 2 213 -17 247 17 v0
+port "VGND" 2 305 -17 339 17 v0
+port "VGND" 2 397 -17 431 17 v0
+port "VGND" 2 489 -17 523 17 v0
+port "VGND" 2 581 -17 615 17 v0
+port "VGND" 2 673 -17 707 17 v0
+port "VGND" 2 765 -17 799 17 v0
+port "VGND" 2 857 -17 891 17 v0
+port "VGND" 2 949 -17 983 17 v0
+port "VGND" 2 1041 -17 1075 17 v0
+port "VGND" 2 1133 -17 1167 17 v0
+port "VGND" 2 1225 -17 1259 17 v0
+port "VGND" 2 1317 -17 1351 17 v0
+port "VGND" 2 1409 -17 1443 17 v0
+port "VGND" 2 1501 -17 1535 17 v0
+port "VGND" 2 1593 -17 1627 17 v0
+port "VGND" 2 1685 -17 1719 17 v0
+port "VGND" 2 1777 -17 1811 17 v0
+port "VGND" 2 0 -48 1840 48 m1
+port "A" 1 17 153 80 265 li
+port "X" 6 456 347 508 492 li
+port "X" 6 628 347 680 492 li
+port "X" 6 800 347 852 492 li
+port "X" 6 972 347 1024 492 li
+port "X" 6 1141 347 1193 492 li
+port "X" 6 1313 347 1365 492 li
+port "X" 6 1485 347 1537 492 li
+port "X" 6 456 344 1537 347 li
+port "X" 6 1659 344 1717 492 li
+port "X" 6 456 299 1805 344 li
+port "X" 6 1572 181 1805 299 li
+port "X" 6 456 147 1805 181 li
+port "X" 6 456 56 508 147 li
+port "X" 6 628 56 680 147 li
+port "X" 6 800 56 852 147 li
+port "X" 6 969 56 1024 147 li
+port "X" 6 1141 56 1193 147 li
+port "X" 6 1313 56 1365 147 li
+port "X" 6 1485 56 1537 147 li
+port "X" 6 1659 56 1711 147 li
+port "VPWR" 5 0 527 1840 561 li
+port "VPWR" 5 19 365 78 527 li
+port "VPWR" 5 198 365 250 527 li
+port "VPWR" 5 370 526 1625 527 li
+port "VPWR" 5 370 367 422 526 li
+port "VPWR" 5 542 381 594 526 li
+port "VPWR" 5 714 381 766 526 li
+port "VPWR" 5 886 381 938 526 li
+port "VPWR" 5 1058 381 1107 526 li
+port "VPWR" 5 1230 381 1279 526 li
+port "VPWR" 5 1402 381 1451 526 li
+port "VPWR" 5 1574 381 1625 526 li
+port "VPWR" 5 1751 378 1805 527 li
+port "VPWR" 5 29 527 63 561 v0
+port "VPWR" 5 121 527 155 561 v0
+port "VPWR" 5 213 527 247 561 v0
+port "VPWR" 5 305 527 339 561 v0
+port "VPWR" 5 397 527 431 561 v0
+port "VPWR" 5 489 527 523 561 v0
+port "VPWR" 5 581 527 615 561 v0
+port "VPWR" 5 673 527 707 561 v0
+port "VPWR" 5 765 527 799 561 v0
+port "VPWR" 5 857 527 891 561 v0
+port "VPWR" 5 949 527 983 561 v0
+port "VPWR" 5 1041 527 1075 561 v0
+port "VPWR" 5 1133 527 1167 561 v0
+port "VPWR" 5 1225 527 1259 561 v0
+port "VPWR" 5 1317 527 1351 561 v0
+port "VPWR" 5 1409 527 1443 561 v0
+port "VPWR" 5 1501 527 1535 561 v0
+port "VPWR" 5 1593 527 1627 561 v0
+port "VPWR" 5 1685 527 1719 561 v0
+port "VPWR" 5 1777 527 1811 561 v0
+port "VPWR" 5 0 496 1840 592 m1
+port "VPB" 4 -38 261 1878 582 nw
+port "VNB" 3 1 21 1822 157 pw
+port "VNB" 3 29 -17 63 21 pw
+node "VGND" 0 0 0 -48 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "A" 0 0 17 153 li 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "X" 0 0 1659 56 li 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "VPWR" 0 0 0 496 m1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+node "VPB" 0 0 -38 261 nw 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+substrate "VNB" 0 0 29 -17 pw 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0

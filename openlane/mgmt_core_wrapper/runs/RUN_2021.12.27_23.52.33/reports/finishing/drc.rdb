@@ -1,0 +1,6 @@
+$mgmt_core_wrapper
+ 100
+r_0_met2.3b
+500 500 2 Nov 29 03:26:39 2020
+Rule File Pathname: /project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.27_23.52.33/reports/finishing/drc.rpt
+met2.3b: Metal2 > 3um spacing to unrelated m2 < 0.28um 

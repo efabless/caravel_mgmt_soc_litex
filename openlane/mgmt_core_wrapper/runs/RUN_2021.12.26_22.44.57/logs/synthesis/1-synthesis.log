@@ -1,0 +1,723 @@
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Wolf <claire@symbioticeda.com>          |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.9+4052 (git sha1 UNKNOWN, gcc 8.3.1 -fPIC -Os)
+
+[TCL: yosys -import] Command name collision: found pre-existing command `cd' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `eval' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `exec' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `read' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `trace' -> skip.
+
+1. Executing Verilog-2005 frontend: /project/openlane/mgmt_core_wrapper/../../verilog/rtl/defines.v
+Parsing SystemVerilog input from `/project/openlane/mgmt_core_wrapper/../../verilog/rtl/defines.v' to AST representation.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: /project/openlane/mgmt_core_wrapper/../../verilog/rtl/mgmt_core.v
+Parsing SystemVerilog input from `/project/openlane/mgmt_core_wrapper/../../verilog/rtl/mgmt_core.v' to AST representation.
+Generating RTLIL representation for module `\mgmt_core'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: /project/openlane/mgmt_core_wrapper/../../verilog/rtl/DFFRAM.v
+Parsing SystemVerilog input from `/project/openlane/mgmt_core_wrapper/../../verilog/rtl/DFFRAM.v' to AST representation.
+Generating RTLIL representation for module `\DFFRAM'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: /project/openlane/mgmt_core_wrapper/../../verilog/rtl/defines.v
+Parsing SystemVerilog input from `/project/openlane/mgmt_core_wrapper/../../verilog/rtl/defines.v' to AST representation.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: /project/openlane/mgmt_core_wrapper/../../verilog/rtl/mgmt_core_wrapper.v
+Parsing SystemVerilog input from `/project/openlane/mgmt_core_wrapper/../../verilog/rtl/mgmt_core_wrapper.v' to AST representation.
+Generating RTLIL representation for module `\mgmt_core_wrapper'.
+Successfully finished Verilog frontend.
+
+6. Generating Graphviz representation of design.
+Writing dot description to `/project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/synthesis/hierarchy.dot'.
+Dumping module mgmt_core_wrapper to page 1.
+
+7. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1. Analyzing design hierarchy..
+Top module:  \mgmt_core_wrapper
+
+7.2. Analyzing design hierarchy..
+Top module:  \mgmt_core_wrapper
+Removed 0 unused modules.
+
+8. Executing TRIBUF pass.
+
+9. Executing SYNTH pass.
+
+9.1. Executing HIERARCHY pass (managing design hierarchy).
+
+9.1.1. Analyzing design hierarchy..
+Top module:  \mgmt_core_wrapper
+
+9.1.2. Analyzing design hierarchy..
+Top module:  \mgmt_core_wrapper
+Removed 0 unused modules.
+
+9.2. Executing PROC pass (convert processes to netlists).
+
+9.2.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+9.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+9.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+9.2.4. Executing PROC_INIT pass (extract init attributes).
+
+9.2.5. Executing PROC_ARST pass (detect async resets in processes).
+
+9.2.6. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+9.2.7. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+9.2.8. Executing PROC_DFF pass (convert process syncs to FFs).
+
+9.2.9. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+9.2.10. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+9.3. Executing FLATTEN pass (flatten design).
+
+9.4. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.6. Executing CHECK pass (checking for obvious problems).
+Checking module mgmt_core_wrapper...
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_csb:
+    port sram_ro_csb[0] of cell core (mgmt_core)
+    module input sram_ro_csb[0]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_clk:
+    port sram_ro_clk[0] of cell core (mgmt_core)
+    module input sram_ro_clk[0]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [7]:
+    port sram_ro_addr[7] of cell core (mgmt_core)
+    module input sram_ro_addr[7]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [6]:
+    port sram_ro_addr[6] of cell core (mgmt_core)
+    module input sram_ro_addr[6]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [5]:
+    port sram_ro_addr[5] of cell core (mgmt_core)
+    module input sram_ro_addr[5]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [4]:
+    port sram_ro_addr[4] of cell core (mgmt_core)
+    module input sram_ro_addr[4]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [3]:
+    port sram_ro_addr[3] of cell core (mgmt_core)
+    module input sram_ro_addr[3]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [2]:
+    port sram_ro_addr[2] of cell core (mgmt_core)
+    module input sram_ro_addr[2]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [1]:
+    port sram_ro_addr[1] of cell core (mgmt_core)
+    module input sram_ro_addr[1]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [0]:
+    port sram_ro_addr[0] of cell core (mgmt_core)
+    module input sram_ro_addr[0]
+Found and reported 10 problems.
+
+9.7. Executing OPT pass (performing simple optimizations).
+
+9.7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mgmt_core_wrapper..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+9.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mgmt_core_wrapper.
+Performed a total of 0 changes.
+
+9.7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.7.9. Finished OPT passes. (There is nothing left to do.)
+
+9.8. Executing FSM pass (extract and optimize FSM).
+
+9.8.1. Executing FSM_DETECT pass (finding FSMs in design).
+
+9.8.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+9.8.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+9.8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.8.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+9.8.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+9.8.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+9.8.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+9.9. Executing OPT pass (performing simple optimizations).
+
+9.9.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.9.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.9.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mgmt_core_wrapper..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+9.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mgmt_core_wrapper.
+Performed a total of 0 changes.
+
+9.9.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.9.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.9.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.9.9. Finished OPT passes. (There is nothing left to do.)
+
+9.10. Executing WREDUCE pass (reducing word size of cells).
+
+9.11. Executing PEEPOPT pass (run peephole optimizers).
+
+9.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.13. Executing ALUMACC pass (create $alu and $macc cells).
+Extracting $alu and $macc cells in module mgmt_core_wrapper:
+  created 0 $alu and 0 $macc cells.
+
+9.14. Executing SHARE pass (SAT-based resource sharing).
+
+9.15. Executing OPT pass (performing simple optimizations).
+
+9.15.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.15.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.15.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mgmt_core_wrapper..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+9.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mgmt_core_wrapper.
+Performed a total of 0 changes.
+
+9.15.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.15.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.15.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.15.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.15.9. Finished OPT passes. (There is nothing left to do.)
+
+9.16. Executing MEMORY pass.
+
+9.16.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+9.16.2. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+9.16.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.16.4. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+9.16.5. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.16.6. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+9.17. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.18. Executing OPT pass (performing simple optimizations).
+
+9.18.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.18.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.18.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.18.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.18.5. Finished fast OPT passes.
+
+9.19. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+9.20. Executing OPT pass (performing simple optimizations).
+
+9.20.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.20.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.20.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mgmt_core_wrapper..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+9.20.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mgmt_core_wrapper.
+Performed a total of 0 changes.
+
+9.20.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.20.6. Executing OPT_SHARE pass.
+
+9.20.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.20.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.20.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.20.10. Finished OPT passes. (There is nothing left to do.)
+
+9.21. Executing TECHMAP pass (map to technology primitives).
+
+9.21.1. Executing Verilog-2005 frontend: /build/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/build/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+9.21.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~67 debug messages>
+
+9.22. Executing OPT pass (performing simple optimizations).
+
+9.22.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.22.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.22.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.22.5. Finished fast OPT passes.
+
+9.23. Executing ABC pass (technology mapping using ABC).
+
+9.23.1. Extracting gate netlist of module `\mgmt_core_wrapper' to `<abc-temp-dir>/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+9.24. Executing OPT pass (performing simple optimizations).
+
+9.24.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+9.24.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+9.24.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+9.24.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+9.24.5. Finished fast OPT passes.
+
+9.25. Executing HIERARCHY pass (managing design hierarchy).
+
+9.25.1. Analyzing design hierarchy..
+Top module:  \mgmt_core_wrapper
+
+9.25.2. Analyzing design hierarchy..
+Top module:  \mgmt_core_wrapper
+Removed 0 unused modules.
+
+9.26. Printing statistics.
+
+=== mgmt_core_wrapper ===
+
+   Number of wires:                 65
+   Number of wire bits:            817
+   Number of public wires:          65
+   Number of public wire bits:     817
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     DFFRAM                          1
+     mgmt_core                       1
+
+9.27. Executing CHECK pass (checking for obvious problems).
+Checking module mgmt_core_wrapper...
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_csb:
+    port sram_ro_csb[0] of cell core (mgmt_core)
+    module input sram_ro_csb[0]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_clk:
+    port sram_ro_clk[0] of cell core (mgmt_core)
+    module input sram_ro_clk[0]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [7]:
+    port sram_ro_addr[7] of cell core (mgmt_core)
+    module input sram_ro_addr[7]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [6]:
+    port sram_ro_addr[6] of cell core (mgmt_core)
+    module input sram_ro_addr[6]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [5]:
+    port sram_ro_addr[5] of cell core (mgmt_core)
+    module input sram_ro_addr[5]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [4]:
+    port sram_ro_addr[4] of cell core (mgmt_core)
+    module input sram_ro_addr[4]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [3]:
+    port sram_ro_addr[3] of cell core (mgmt_core)
+    module input sram_ro_addr[3]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [2]:
+    port sram_ro_addr[2] of cell core (mgmt_core)
+    module input sram_ro_addr[2]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [1]:
+    port sram_ro_addr[1] of cell core (mgmt_core)
+    module input sram_ro_addr[1]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [0]:
+    port sram_ro_addr[0] of cell core (mgmt_core)
+    module input sram_ro_addr[0]
+Found and reported 10 problems.
+
+10. Generating Graphviz representation of design.
+Writing dot description to `/project/openlane/mgmt_core_wrapper/runs/RUN_2021.12.26_22.44.57/tmp/synthesis/post_techmap.dot'.
+Dumping module mgmt_core_wrapper to page 1.
+
+11. Executing SHARE pass (SAT-based resource sharing).
+
+12. Executing OPT pass (performing simple optimizations).
+
+12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+12.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \mgmt_core_wrapper..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+12.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \mgmt_core_wrapper.
+Performed a total of 0 changes.
+
+12.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\mgmt_core_wrapper'.
+Removed a total of 0 cells.
+
+12.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+12.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+12.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module mgmt_core_wrapper.
+
+12.9. Finished OPT passes. (There is nothing left to do.)
+
+13. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+14. Printing statistics.
+
+=== mgmt_core_wrapper ===
+
+   Number of wires:                 65
+   Number of wire bits:            817
+   Number of public wires:          65
+   Number of public wire bits:     817
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     DFFRAM                          1
+     mgmt_core                       1
+
+mapping tbuf
+
+15. Executing TECHMAP pass (map to technology primitives).
+
+15.1. Executing Verilog-2005 frontend: /ciic/pdks/openlane/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tribuff_map.v
+Parsing Verilog input from `/ciic/pdks/openlane/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tribuff_map.v' to AST representation.
+Generating RTLIL representation for module `\$_TBUF_'.
+Successfully finished Verilog frontend.
+
+15.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~3 debug messages>
+
+16. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+17. Executing MUXCOVER pass (mapping to wider MUXes).
+Covering MUX trees in module mgmt_core_wrapper..
+  Treeifying 0 MUXes:
+    Finished treeification: Found 0 trees.
+  Covering trees:
+  Added a total of 0 decoder MUXes.
+<suppressed ~1 debug messages>
+
+18. Executing TECHMAP pass (map to technology primitives).
+
+18.1. Executing Verilog-2005 frontend: /ciic/pdks/openlane/sky130A/libs.tech/openlane/sky130_fd_sc_hd/mux4_map.v
+Parsing Verilog input from `/ciic/pdks/openlane/sky130A/libs.tech/openlane/sky130_fd_sc_hd/mux4_map.v' to AST representation.
+Generating RTLIL representation for module `\$_MUX4_'.
+Successfully finished Verilog frontend.
+
+18.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~3 debug messages>
+
+19. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+20. Executing TECHMAP pass (map to technology primitives).
+
+20.1. Executing Verilog-2005 frontend: /ciic/pdks/openlane/sky130A/libs.tech/openlane/sky130_fd_sc_hd/mux2_map.v
+Parsing Verilog input from `/ciic/pdks/openlane/sky130A/libs.tech/openlane/sky130_fd_sc_hd/mux2_map.v' to AST representation.
+Generating RTLIL representation for module `\$_MUX_'.
+Successfully finished Verilog frontend.
+
+20.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~3 debug messages>
+
+21. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+22. Executing TECHMAP pass (map to technology primitives).
+
+22.1. Executing Verilog-2005 frontend: /ciic/pdks/openlane/sky130A/libs.tech/openlane/sky130_fd_sc_hd/latch_map.v
+Parsing Verilog input from `/ciic/pdks/openlane/sky130A/libs.tech/openlane/sky130_fd_sc_hd/latch_map.v' to AST representation.
+Generating RTLIL representation for module `\$_DLATCH_P_'.
+Generating RTLIL representation for module `\$_DLATCH_N_'.
+Successfully finished Verilog frontend.
+
+22.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~4 debug messages>
+
+23. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+24. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell sky130_fd_sc_hd__dfxtp_2 (noninv, pins=3, area=21.27) is a direct match for cell type $_DFF_P_.
+  cell sky130_fd_sc_hd__dfrtp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN0_.
+  cell sky130_fd_sc_hd__dfstp_2 (noninv, pins=4, area=26.28) is a direct match for cell type $_DFF_PN1_.
+  cell sky130_fd_sc_hd__dfbbn_2 (noninv, pins=6, area=35.03) is a direct match for cell type $_DFFSR_NNN_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \sky130_fd_sc_hd__dfxtp_2 _DFF_P_ (.CLK( C), .D( D), .Q( Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sky130_fd_sc_hd__dfrtp_2 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    \sky130_fd_sc_hd__dfstp_2 _DFF_PN1_ (.CLK( C), .D( D), .Q( Q), .SET_B( R));
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    \sky130_fd_sc_hd__dfbbn_2 _DFFSR_NNN_ (.CLK_N( C), .D( D), .Q( Q), .Q_N(~Q), .RESET_B( R), .SET_B( S));
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    unmapped dff cell: $_DFFSR_PNN_
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+24.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+Mapping DFF cells in module `\mgmt_core_wrapper':
+
+25. Printing statistics.
+
+=== mgmt_core_wrapper ===
+
+   Number of wires:                 65
+   Number of wire bits:            817
+   Number of public wires:          65
+   Number of public wire bits:     817
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     DFFRAM                          1
+     mgmt_core                       1
+
+[INFO]: ABC: WireLoad : S_1
+
+26. Executing ABC pass (technology mapping using ABC).
+
+26.1. Extracting gate netlist of module `\mgmt_core_wrapper' to `/tmp/yosys-abc-VXp4pv/input.blif'..
+Extracted 0 gates and 0 wires to a netlist network with 0 inputs and 0 outputs.
+Don't call ABC as there is nothing to map.
+Removing temp directory.
+
+27. Executing SETUNDEF pass (replace undef values with defined constants).
+
+28. Executing HILOMAP pass (mapping to constant drivers).
+
+29. Executing SPLITNETS pass (splitting up multi-bit signals).
+
+30. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \mgmt_core_wrapper..
+
+31. Executing INSBUF pass (insert buffer cells for connected wires).
+
+32. Executing CHECK pass (checking for obvious problems).
+Checking module mgmt_core_wrapper...
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_csb:
+    port sram_ro_csb[0] of cell core (mgmt_core)
+    module input sram_ro_csb[0]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_clk:
+    port sram_ro_clk[0] of cell core (mgmt_core)
+    module input sram_ro_clk[0]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [7]:
+    port sram_ro_addr[7] of cell core (mgmt_core)
+    module input sram_ro_addr[7]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [6]:
+    port sram_ro_addr[6] of cell core (mgmt_core)
+    module input sram_ro_addr[6]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [5]:
+    port sram_ro_addr[5] of cell core (mgmt_core)
+    module input sram_ro_addr[5]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [4]:
+    port sram_ro_addr[4] of cell core (mgmt_core)
+    module input sram_ro_addr[4]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [3]:
+    port sram_ro_addr[3] of cell core (mgmt_core)
+    module input sram_ro_addr[3]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [2]:
+    port sram_ro_addr[2] of cell core (mgmt_core)
+    module input sram_ro_addr[2]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [1]:
+    port sram_ro_addr[1] of cell core (mgmt_core)
+    module input sram_ro_addr[1]
+Warning: multiple conflicting drivers for mgmt_core_wrapper.\sram_ro_addr [0]:
+    port sram_ro_addr[0] of cell core (mgmt_core)
+    module input sram_ro_addr[0]
+Found and reported 10 problems.
+
+33. Printing statistics.
+
+=== mgmt_core_wrapper ===
+
+   Number of wires:                137
+   Number of wire bits:            817
+   Number of public wires:         137
+   Number of public wire bits:     817
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     DFFRAM                          1
+     mgmt_core                       1
+
+   Area for cell type \mgmt_core is unknown!
+   Area for cell type \DFFRAM is unknown!
+
+34. Executing Verilog backend.
+Dumping module `\mgmt_core_wrapper'.
+
+Warnings: 10 unique messages, 30 total
+End of script. Logfile hash: 11303cf842, CPU: user 0.93s system 0.04s, MEM: 54.66 MB peak
+Yosys 0.9+4052 (git sha1 UNKNOWN, gcc 8.3.1 -fPIC -Os)
+Time spent: 38% 4x stat (0 sec), 32% 15x read_verilog (0 sec), ...

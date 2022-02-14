@@ -1,0 +1,17 @@
+OpenROAD e9d88df58cd6e61dec17d0cd7d355f7d6ec25778 
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ODB-0222] Reading LEF file: /project/openlane/DFFRAM/runs/RUN_2021.12.27_21.29.28/tmp/merged.lef
+[INFO ODB-0223]     Created 13 technology layers
+[INFO ODB-0224]     Created 25 technology vias
+[INFO ODB-0225]     Created 441 library cells
+[INFO ODB-0226] Finished LEF file:  /project/openlane/DFFRAM/runs/RUN_2021.12.27_21.29.28/tmp/merged.lef
+[INFO ODB-0127] Reading DEF file: /project/openlane/DFFRAM/runs/RUN_2021.12.27_21.29.28/tmp/floorplan/3-initial_fp.def
+[INFO ODB-0128] Design: DFFRAM
+[INFO ODB-0130]     Created 78 pins.
+[INFO ODB-0131]     Created 21680 components and 150258 component-terminals.
+[INFO ODB-0133]     Created 13534 nets and 63506 connections.
+[INFO ODB-0134] Finished DEF file: /project/openlane/DFFRAM/runs/RUN_2021.12.27_21.29.28/tmp/floorplan/3-initial_fp.def
+Top-level design name: DFFRAM
+Block boundaries: 0 0 550000 740000
+Writing /project/openlane/DFFRAM/runs/RUN_2021.12.27_21.29.28/tmp/floorplan/4-io.def...

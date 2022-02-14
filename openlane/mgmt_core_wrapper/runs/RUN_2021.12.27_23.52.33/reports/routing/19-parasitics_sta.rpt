@@ -1,0 +1,24 @@
+
+===========================================================================
+report_checks -unconstrained
+============================================================================
+Startpoint: core_clk (clock source 'core_clk')
+Endpoint: DFFRAM_0/CLK (internal pin)
+Path Group: (none)
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                  0.36    0.34   12.84 v core_clk (in)
+     2    0.17                           core_clk (net)
+                  0.43    0.00   12.84 v DFFRAM_0/CLK (DFFRAM)
+                                 12.84   data arrival time
+-----------------------------------------------------------------------------
+(Path is unconstrained)
+
+
+
+===========================================================================
+report_checks --slack_max -0.01
+============================================================================
+No paths found.
