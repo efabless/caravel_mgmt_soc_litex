@@ -138,6 +138,8 @@ extern uint32_t flashio_worker_end;
 
 // User Project Slaves (0x3000_0000)
 #define reg_mprj_slave (*(volatile uint32_t*)0x30000000)
+#define reg_wb_enable	  (*(volatile uint32_t*)0xf0003800)
+
 
 // Flash Control SPI Configuration (2D00_0000)
 #define reg_spictrl (*(volatile uint32_t*)0x2d000000)         
