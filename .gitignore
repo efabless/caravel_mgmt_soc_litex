@@ -1,2 +1,7 @@
 /.idea/
 /litex/build/
+./openlane/runs
+*.hex*
+*.lst
+*.vcd
+*.gtkw
