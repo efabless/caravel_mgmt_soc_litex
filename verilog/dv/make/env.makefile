@@ -14,18 +14,6 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
-#######################################################################
-## Caravel Verilog for Integration Tests
-#####################################################a##################
-
-export CARAVEL_VERILOG_PATH ?=  $(DESIGNS)/caravel/verilog
-export CORE_VERILOG_PATH    ?=  $(DESIGNS)/mgmt_core_wrapper/verilog
-export USER_PROJECT_VERILOG ?=  $(DESIGNS)/verilog
-
-export CARAVEL_PATH = $(CARAVEL_VERILOG_PATH)
-export VERILOG_PATH = $(CORE_VERILOG_PATH)
-
 #######################################################################
 ## Global Environment Variables for local repo  
 #######################################################################
@@ -35,11 +23,22 @@ export VIP_PATH =      $(CORE_VERILOG_PATH)/dv/vip
 export FIRMWARE_PATH = $(CORE_VERILOG_PATH)/dv/firmware
 
 #######################################################################
+## Caravel Verilog for Integration Tests
+#######################################################################
+
+export CARAVEL_VERILOG_PATH ?=  $(DESIGNS)/caravel/verilog
+export CORE_VERILOG_PATH    ?=  $(DESIGNS)/caravel_mgmt_soc_litex/verilog
+export USER_PROJECT_VERILOG ?=  $(DESIGNS)/verilog
+
+export CARAVEL_PATH = $(CARAVEL_VERILOG_PATH)
+export VERILOG_PATH = $(CORE_VERILOG_PATH)
+
+#######################################################################
 ## Compiler Information 
 #######################################################################
-export GCC_PATH ?=      ${TOOLS}/bin
-export GCC_PREFIX ?=    riscv32-unknown-elf
 
+export GCC_PATH?=      $(TOOLS)/bin
+export GCC_PREFIX?=    riscv32-unknown-linux-gnu
 
 
 
