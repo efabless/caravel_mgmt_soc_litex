@@ -1,8 +1,12 @@
+/* INCLUDE ../../generated/output_format.ld */
+
 OUTPUT_FORMAT("elf32-littleriscv")
 
 ENTRY(_start)
 
 __DYNAMIC = 0;
+
+/* INCLUDE ../../generated/regions.ld */
 
 MEMORY {
 	vexriscv_debug : ORIGIN = 0xf00f0000, LENGTH = 0x00000100
@@ -13,7 +17,6 @@ MEMORY {
 	hk : ORIGIN = 0x26000000, LENGTH = 0x00100000
 	csr : ORIGIN = 0xf0000000, LENGTH = 0x00010000
 }
-
 
 SECTIONS
 {
