@@ -66,6 +66,11 @@ extern uint32_t flashio_worker_end;
 #define reg_la1_data (*(volatile uint32_t*) (CSR_LA_OUT_ADDR + 8))
 #define reg_la0_data (*(volatile uint32_t*) (CSR_LA_OUT_ADDR + 12))
 
+#define reg_la3_data_in (*(volatile uint32_t*) CSR_LA_IN_ADDR)
+#define reg_la2_data_in (*(volatile uint32_t*) (CSR_LA_IN_ADDR + 4))
+#define reg_la1_data_in (*(volatile uint32_t*) (CSR_LA_IN_ADDR + 8))
+#define reg_la0_data_in (*(volatile uint32_t*) (CSR_LA_IN_ADDR + 12))
+
 #define reg_la3_oenb (*(volatile uint32_t*) CSR_LA_OE_ADDR)
 #define reg_la2_oenb (*(volatile uint32_t*) (CSR_LA_OE_ADDR + 4))
 #define reg_la1_oenb (*(volatile uint32_t*) (CSR_LA_OE_ADDR + 8))
@@ -76,7 +81,7 @@ extern uint32_t flashio_worker_end;
 #define reg_la1_iena (*(volatile uint32_t*) (CSR_LA_IEN_ADDR + 8))
 #define reg_la0_iena (*(volatile uint32_t*) (CSR_LA_IEN_ADDR + 12))
 
-#define reg_la_sample (*(volatile uint32_t*) 0x25000030)
+#define reg_la_sample (*(volatile uint32_t*)0x25000030)
 
 // User Project Control (0x2300_0000)
 #define reg_mprj_xfer (*(volatile uint32_t*)0x26000000)
@@ -133,6 +138,8 @@ extern uint32_t flashio_worker_end;
 
 // User Project Slaves (0x3000_0000)
 #define reg_mprj_slave (*(volatile uint32_t*)0x30000000)
+#define reg_wb_enable	  (*(volatile uint32_t*)0xf0003800)
+
 
 // Flash Control SPI Configuration (2D00_0000)
 #define reg_spictrl (*(volatile uint32_t*)0x2d000000)         
