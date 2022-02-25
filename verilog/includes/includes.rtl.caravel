@@ -44,7 +44,7 @@
 -v $(CARAVEL_PATH)/rtl/housekeeping.v		     
 -v $(CARAVEL_PATH)/rtl/caravel_clocking.v	     
 -v $(CARAVEL_PATH)/rtl/digital_pll.v		     
--v $(CARAVEL_PATH)/rtl/__user_project_wrapper.v	     
+#-v $(CARAVEL_PATH)/rtl/__user_project_wrapper.v	     
 -v $(CARAVEL_PATH)/rtl/user_id_programming.v	     
 -v $(CARAVEL_PATH)/rtl/caravel.v 		     
 
