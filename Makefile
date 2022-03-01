@@ -46,6 +46,9 @@ LARGE_FILES_GZ_SPLIT += $(addsuffix .00.split, $(ARCHIVES))
 MCW_ROOT?=$(PWD)/mgmt_core_wrapper
 MCW ?=LITEX_VEXRISCV
 
+# PDK switch varient
+export PDK_VARIENT?=sky130B
+
 # Install lite version of caravel, (1): caravel-lite, (0): caravel
 MCW_LITE?=1
 
@@ -125,7 +128,7 @@ __ship:
 		exit;" > $(UPRJ_ROOT)/mag/mag2gds_caravel.tcl
 ### Runs from CARAVEL_ROOT
 	@mkdir -p ./signoff/build
-	@cd $(CARAVEL_ROOT)/mag && PDKPATH=${PDK_ROOT}/sky130A magic -noc -dnull $(UPRJ_ROOT)/mag/mag2gds_caravel.tcl 2>&1 | tee $(UPRJ_ROOT)/signoff/build/make_ship.out
+	@cd $(CARAVEL_ROOT)/mag && PDKPATH=${PDK_ROOT}/$(PDK_VARIENT) magic -noc -dnull $(UPRJ_ROOT)/mag/mag2gds_caravel.tcl 2>&1 | tee $(UPRJ_ROOT)/signoff/build/make_ship.out
 ###	@rm $(UPRJ_ROOT)/mag/mag2gds_caravel.tcl
 
 truck: check-env uncompress uncompress-caravel
@@ -168,7 +171,7 @@ __truck:
 		exit;" > $(UPRJ_ROOT)/mag/mag2gds_caravan.tcl
 ### Runs from CARAVEL_ROOT
 	@mkdir -p ./signoff/build
-	@cd $(CARAVEL_ROOT)/mag && PDKPATH=${PDK_ROOT}/sky130A magic -noc -dnull $(UPRJ_ROOT)/mag/mag2gds_caravan.tcl 2>&1 | tee $(UPRJ_ROOT)/signoff/build/make_truck.out
+	@cd $(CARAVEL_ROOT)/mag && PDKPATH=${PDK_ROOT}/$(PDK_VARIENT) magic -noc -dnull $(UPRJ_ROOT)/mag/mag2gds_caravan.tcl 2>&1 | tee $(UPRJ_ROOT)/signoff/build/make_truck.out
 ###	@rm $(UPRJ_ROOT)/mag/mag2gds_caravan.tcl
 
 .PHONY: clean
@@ -256,7 +259,7 @@ xor-wrapper: uncompress uncompress-caravel
 		-o signoff/user_project_wrapper_xor/total.txt
 ### screenshot the result for convenience
 	sh $(CARAVEL_ROOT)/utils/scrotLayout.sh \
-		$(PDK_ROOT)/sky130A/libs.tech/klayout/sky130A.lyt \
+		$(PDK_ROOT)/$(PDK_VARIENT)/libs.tech/klayout/$(PDK_VARIENT).lyt \
 		signoff/user_project_wrapper_xor/user_project_wrapper.xor.gds
 	@cat signoff/user_project_wrapper_xor/total.txt
 
@@ -282,7 +285,7 @@ xor-analog-wrapper: uncompress uncompress-caravel
 		-o signoff/user_analog_project_wrapper_xor/total.txt
 ### screenshot the result for convenience
 	sh $(CARAVEL_ROOT)/utils/scrotLayout.sh \
-		$(PDK_ROOT)/sky130A/libs.tech/klayout/sky130A.lyt \
+		$(PDK_ROOT)/$(PDK_VARIENT)/libs.tech/klayout/$(PDK_VARIENT).lyt \
 		signoff/user_analog_project_wrapper_xor/user_analog_project_wrapper.xor.gds
 	@cat signoff/user_analog_project_wrapper_xor/total.txt
 
@@ -313,7 +316,7 @@ $(LVS_BLOCKS): lvs-% : ./mag/%.mag ./verilog/gl/%.v
 		exit;" > ./mag/extract_$*.tcl
 	cd mag && \
 		export MAGTYPE=maglef; \
-		magic -rcfile ${PDK_ROOT}/sky130A/libs.tech/magic/sky130A.magicrc -noc -dnull extract_$*.tcl < /dev/null
+		magic -rcfile ${PDK_ROOT}/$(PDK_VARIENT)/libs.tech/magic/$(PDK_VARIENT).magicrc -noc -dnull extract_$*.tcl < /dev/null
 	mv ./mag/$*.spice ./spi/lvs
 	rm ./mag/*.ext
 	mv -f ./mag/extract_$*.tcl ./mag/tmp
@@ -350,7 +353,7 @@ $(LVS_GDS_BLOCKS): lvs-gds-% : ./gds/%.gds ./verilog/gl/%.v
 		feedback save extract_$*.log;\
 		exit;" > ./gds/extract_$*.tcl
 	cd gds && \
-		magic -rcfile ${PDK_ROOT}/sky130A/libs.tech/magic/sky130A.magicrc -noc -dnull extract_$*.tcl < /dev/null
+		magic -rcfile ${PDK_ROOT}/$(PDK_VARIENT)/libs.tech/magic/$(PDK_VARIENT).magicrc -noc -dnull extract_$*.tcl < /dev/null
 	mv ./gds/$*.spice ./spi/lvs
 	rm ./gds/*.ext
 	mv -f ./gds/extract_$*.tcl ./gds/tmp
@@ -413,7 +416,7 @@ DRC_BLOCKS = $(foreach block, $(BLOCKS), drc-$(block))
 $(DRC_BLOCKS): drc-% : ./gds/%.gds
 	echo "Running DRC on $*"
 	mkdir -p ./gds/tmp
-	cd gds && export DESIGN_IN_DRC=$* && export MAGTYPE=mag; magic -rcfile ${PDK_ROOT}/sky130A/libs.tech/magic/sky130A.magicrc -noc -dnull $(CARAVEL_ROOT)/gds/drc_on_gds.tcl < /dev/null
+	cd gds && export DESIGN_IN_DRC=$* && export MAGTYPE=mag; magic -rcfile ${PDK_ROOT}/$(PDK_VARIENT)/libs.tech/magic/$(PDK_VARIENT).magicrc -noc -dnull $(CARAVEL_ROOT)/gds/drc_on_gds.tcl < /dev/null
 	@echo "DRC result: ./gds/tmp/$*.drc"
 
 # Antenna
@@ -422,7 +425,7 @@ ANTENNA_BLOCKS = $(foreach block, $(BLOCKS), antenna-$(block))
 $(ANTENNA_BLOCKS): antenna-% : ./gds/%.gds
 	echo "Running Antenna Checks on $*"
 	mkdir -p ./gds/tmp
-	cd gds && export DESIGN_IN_ANTENNA=$* && export MAGTYPE=mag; magic -rcfile ${PDK_ROOT}/sky130A/libs.tech/magic/sky130A.magicrc -noc -dnull $(CARAVEL_ROOT)/gds/antenna_on_gds.tcl < /dev/null 2>&1 | tee ./tmp/$*.antenna
+	cd gds && export DESIGN_IN_ANTENNA=$* && export MAGTYPE=mag; magic -rcfile ${PDK_ROOT}/$(PDK_VARIENT)/libs.tech/magic/$(PDK_VARIENT).magicrc -noc -dnull $(CARAVEL_ROOT)/gds/antenna_on_gds.tcl < /dev/null 2>&1 | tee ./tmp/$*.antenna
 	mv -f ./gds/*.ext ./gds/tmp/
 	@echo "Antenna result: ./gds/tmp/$*.antenna"
 
@@ -441,7 +444,7 @@ $(MAG_BLOCKS): mag2gds-% : ./mag/%.mag uncompress
 		expand;\
 		gds write $*.gds;\
 		exit;" > ./mag/mag2gds_$*.tcl
-	cd ./mag && magic -rcfile ${PDK_ROOT}/sky130A/libs.tech/magic/sky130A.magicrc -noc -dnull mag2gds_$*.tcl < /dev/null
+	cd ./mag && magic -rcfile ${PDK_ROOT}/$(PDK_VARIENT)/libs.tech/magic/$(PDK_VARIENT).magicrc -noc -dnull mag2gds_$*.tcl < /dev/null
 	rm ./mag/mag2gds_$*.tcl
 	mv -f ./mag/$*.gds ./gds/
 
@@ -457,7 +460,7 @@ $(MAG_BLOCKS): mag2lef-% : ./mag/%.mag uncompress
 		load $*;\
 		lef write $*.lef;\
 		exit;" > ./mag/mag2lef_$*.tcl
-	cd ./mag && magic -rcfile ${PDK_ROOT}/sky130A/libs.tech/magic/sky130A.magicrc -noc -dnull mag2lef_$*.tcl < /dev/null
+	cd ./mag && magic -rcfile ${PDK_ROOT}/$(PDK_VARIENT)/libs.tech/magic/$(PDK_VARIENT).magicrc -noc -dnull mag2lef_$*.tcl < /dev/null
 	rm ./mag/mag2lef_$*.tcl
 	mv -f ./mag/$*.lef ./lef/
 
@@ -473,12 +476,12 @@ $(RCX_BLOCKS): rcx-% : ./def/%.def
 	echo "Running RC Extraction on $*"
 	mkdir -p ./def/tmp 
 	# merge techlef and standard cell lef files
-	python3 $(OPENLANE_ROOT)/scripts/mergeLef.py -i $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/techlef/$(STD_CELL_LIBRARY).tlef $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lef/*.lef -o ./def/tmp/merged.lef
+	python3 $(OPENLANE_ROOT)/scripts/mergeLef.py -i $(PDK_ROOT)/$(PDK_VARIENT)/libs.ref/$(STD_CELL_LIBRARY)/techlef/$(STD_CELL_LIBRARY).tlef $(PDK_ROOT)/$(PDK_VARIENT)/libs.ref/$(STD_CELL_LIBRARY)/lef/*.lef -o ./def/tmp/merged.lef
 	echo "\
-		read_liberty $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__tt_025C_1v80.lib;\
-		read_liberty $(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib;\
+		read_liberty $(PDK_ROOT)/$(PDK_VARIENT)/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__tt_025C_1v80.lib;\
+		read_liberty $(PDK_ROOT)/$(PDK_VARIENT)/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib;\
 		set std_cell_lef ./def/tmp/merged.lef;\
-		set sram_lef $(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lef/sky130_sram_2kbyte_1rw1r_32x512_8.lef;\
+		set sram_lef $(PDK_ROOT)/$(PDK_VARIENT)/libs.ref/sky130_sram_macros/lef/sky130_sram_2kbyte_1rw1r_32x512_8.lef;\
 		if {[catch {read_lef \$$std_cell_lef} errmsg]} {\
     			puts stderr \$$errmsg;\
     			exit 1;\
@@ -517,7 +520,7 @@ $(RCX_BLOCKS): rcx-% : ./def/%.def
 		set_wire_rc -signal -layer met2;\
 		set_wire_rc -clock -layer met5;\
 		define_process_corner -ext_model_index 0 X;\
-		extract_parasitics -ext_model_file ${PDK_ROOT}/sky130A/libs.tech/openlane/rcx_rules.info -corner_cnt 1 -max_res 50 -coupling_threshold 0.1 -cc_model 10 -context_depth 5;\
+		extract_parasitics -ext_model_file ${PDK_ROOT}/$(PDK_VARIENT)/libs.tech/openlane/rcx_rules.info -corner_cnt 1 -max_res 50 -coupling_threshold 0.1 -cc_model 10 -context_depth 5;\
 		write_spef ./spef/$*.spef" > ./def/tmp/rcx_$*.tcl
 ## Generate Spef file
 	docker run -it -v $(OPENLANE_ROOT):/openlane -v $(PDK_ROOT):$(PDK_ROOT) -v $(PWD):/caravel -e PDK_ROOT=$(PDK_ROOT) -u $(shell id -u $(USER)):$(shell id -g $(USER)) $(OPENLANE_IMAGE_NAME) \
@@ -525,7 +528,7 @@ $(RCX_BLOCKS): rcx-% : ./def/%.def
 ## Run OpenSTA
 	echo "\
 		set std_cell_lef ./def/tmp/merged.lef;\
-		set sram_lef $(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lef/sky130_sram_2kbyte_1rw1r_32x512_8.lef;\
+		set sram_lef $(PDK_ROOT)/$(PDK_VARIENT)/libs.ref/sky130_sram_macros/lef/sky130_sram_2kbyte_1rw1r_32x512_8.lef;\
 		if {[catch {read_lef \$$std_cell_lef} errmsg]} {\
     			puts stderr \$$errmsg;\
     			exit 1;\
@@ -541,8 +544,8 @@ $(RCX_BLOCKS): rcx-% : ./def/%.def
 			}\
 		};\
 		set_cmd_units -time ns -capacitance pF -current mA -voltage V -resistance kOhm -distance um;\
-		read_liberty $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__tt_025C_1v80.lib;\
-		read_liberty $(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib;\
+		read_liberty $(PDK_ROOT)/$(PDK_VARIENT)/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__tt_025C_1v80.lib;\
+		read_liberty $(PDK_ROOT)/$(PDK_VARIENT)/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib;\
 		read_verilog ./verilog/gl/$*.v;\
 		link_design $*;\
 		read_spef ./spef/$*.spef;\
@@ -560,8 +563,8 @@ mgmt_core_wrapper_timing: ./verilog/gl/mgmt_core_wrapper.v ./spef/mgmt_core_wrap
 	mkdir -p ./def/tmp
 ## Run OpenSTA
 	echo "\
-		read_liberty $(PDK_ROOT)/sky130A/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__ss_100C_1v60.lib;\
-		read_liberty $(PDK_ROOT)/sky130A/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib;\
+		read_liberty $(PDK_ROOT)/$(PDK_VARIENT)/libs.ref/$(STD_CELL_LIBRARY)/lib/$(STD_CELL_LIBRARY)__ss_100C_1v60.lib;\
+		read_liberty $(PDK_ROOT)/$(PDK_VARIENT)/libs.ref/sky130_sram_macros/lib/sky130_sram_2kbyte_1rw1r_32x512_8_TT_1p8V_25C.lib;\
 		read_verilog ./verilog/gl/mgmt_core.v;\
 		read_verilog ./verilog/gl/DFFRAM.v;\
 		read_verilog ./verilog/gl/mgmt_core_wrapper.v;\
@@ -664,12 +667,12 @@ skywater-library: check-env $(PDK_ROOT)/skywater-pdk
 		git submodule update --init libraries/$(SPECIAL_VOLTAGE_LIBRARY)/latest && \
 		git submodule update --init libraries/$(PRIMITIVES_LIBRARY)/latest
 
-gen-sources: $(PDK_ROOT)/sky130A
-	touch $(PDK_ROOT)/sky130A/SOURCES
-	echo -ne "skywater-pdk " >> $(PDK_ROOT)/sky130A/SOURCES
-	cd $(PDK_ROOT)/skywater-pdk && git rev-parse HEAD >> $(PDK_ROOT)/sky130A/SOURCES
-	echo -ne "open_pdks " >> $(PDK_ROOT)/sky130A/SOURCES
-	cd $(PDK_ROOT)/open_pdks && git rev-parse HEAD >> $(PDK_ROOT)/sky130A/SOURCES
+gen-sources: $(PDK_ROOT)/$(PDK_VARIENT)
+	touch $(PDK_ROOT)/$(PDK_VARIENT)/SOURCES
+	echo -ne "skywater-pdk " >> $(PDK_ROOT)/$(PDK_VARIENT)/SOURCES
+	cd $(PDK_ROOT)/skywater-pdk && git rev-parse HEAD >> $(PDK_ROOT)/$(PDK_VARIENT)/SOURCES
+	echo -ne "open_pdks " >> $(PDK_ROOT)/$(PDK_VARIENT)/SOURCES
+	cd $(PDK_ROOT)/open_pdks && git rev-parse HEAD >> $(PDK_ROOT)/$(PDK_VARIENT)/SOURCES
 
 skywater-timing: check-env $(PDK_ROOT)/skywater-pdk
 	cd $(PDK_ROOT)/skywater-pdk && \
@@ -686,10 +689,10 @@ open_pdks: check-env $(PDK_ROOT)/open_pdks
 
 .PHONY: build-pdk
 build-pdk: check-env $(PDK_ROOT)/open_pdks $(PDK_ROOT)/skywater-pdk
-	[ -d $(PDK_ROOT)/sky130A ] && \
-		(echo "Warning: A sky130A build already exists under $(PDK_ROOT). It will be deleted first!" && \
+	[ -d $(PDK_ROOT)/$(PDK_VARIENT) ] && \
+		(echo "Warning: A $(PDK_VARIENT) build already exists under $(PDK_ROOT). It will be deleted first!" && \
 		sleep 5 && \
-		rm -rf $(PDK_ROOT)/sky130A) || \
+		rm -rf $(PDK_ROOT)/$(PDK_VARIENT)) || \
 		true
 	cd $(PDK_ROOT)/open_pdks && \
 		./configure --enable-sky130-pdk=$(PDK_ROOT)/skywater-pdk/libraries --with-sky130-local-path=$(PDK_ROOT) --enable-sram-sky130=$(INSTALL_SRAM) && \

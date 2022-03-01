@@ -17,10 +17,10 @@ fi
 ########################################################
 
 export MAGIC=magic
-export PDKPATH=$PDK_ROOT/sky130A ; 
+export PDKPATH=$PDK_ROOT/$PDK_VARIENT ; 
 export MAGTYPE=$2
 
-$MAGIC -dnull -noconsole -rcfile $PDKPATH/libs.tech/magic/sky130A.magicrc  << EOF
+$MAGIC -dnull -noconsole -rcfile $PDKPATH/libs.tech/magic/$PDK_VARIENT.magicrc  << EOF
 
 path search [concat "../$MAGTYPE" [path search]]
 addpath ${PDKPATH}/libs.ref/sky130_ml_xx_hd/mag
@@ -74,7 +74,7 @@ export NETGEN_COLUMNS=60
 netgen -batch lvs \
         "./netlists/${MAGTYPE}-extracted-${1%.gds}.spice ${1%.mag}" \
 		"./netlists/cdl-source-${1%.mag}.spice ${1%.mag}" \
-			     ./pdk/sky130A_setup.tcl \
+			     ./pdk/$PDK_VARIENT_setup.tcl \
 			         ./reports/${MAGTYPE}-vs-cdl-${1%.mag}.out
 				 
 ########################################################

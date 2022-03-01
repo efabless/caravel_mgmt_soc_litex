@@ -3,7 +3,7 @@ export MAGIC=magic
 
 export MAGTYPE=mag; 
 
-$MAGIC -dnull -noconsole -rcfile $PDK_ROOT/sky130A/libs.tech/magic/sky130A.magicrc  <<EOF
+$MAGIC -dnull -noconsole -rcfile $PDK_ROOT/$PDK_VARIENT/libs.tech/magic/$PDK_VARIENT.magicrc  <<EOF
 addpath ${PDKPATH}/libs.ref/sky130_ml_xx_hd/mag
 addpath ../mag/hexdigits
 addpath ../mag/

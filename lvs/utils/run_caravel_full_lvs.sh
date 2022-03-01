@@ -7,7 +7,7 @@
 echo ${PDK_ROOT:=/usr/share/pdk} > /dev/null
 
 if [ ! -f caravel.spice ]; then
-magic -dnull -noconsole -rcfile $PDK_ROOT/sky130A/libs.tech/magic/sky130A.magicrc << EOF
+magic -dnull -noconsole -rcfile $PDK_ROOT/$PDK_VARIENT/libs.tech/magic/$PDK_VARIENT.magicrc << EOF
 drc off
 crashbackups stop
 load caravel
@@ -59,7 +59,7 @@ readnet verilog ../verilog/gl/mgmt_protect.v \$f
 # readnet verilog ../verilog/gl/housekeeping.v \$f
 readnet verilog ../verilog/gl/caravel.v \$f
 set l [readnet spice caravel.spice] 
-lvs "\$l caravel" "\$f caravel" $PDK_ROOT/sky130A/libs.tech/netgen/sky130A_setup.tcl comp.out
+lvs "\$l caravel" "\$f caravel" $PDK_ROOT/$PDK_VARIENT/libs.tech/netgen/$PDK_VARIENT_setup.tcl comp.out
 EOF
 
 export NETGEN_COLUMNS=60
