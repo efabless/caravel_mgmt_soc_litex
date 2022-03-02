@@ -18,7 +18,7 @@
 ## Global Environment Variables for local repo  
 #######################################################################
 
-export PDK_PATH =      $(PDK_ROOT)/$(PDK_VARIENT)
+export PDK_PATH =      $(PDK_ROOT)/$(PDK)
 export VIP_PATH =      $(CORE_VERILOG_PATH)/dv/vip
 export FIRMWARE_PATH = $(CORE_VERILOG_PATH)/dv/firmware
 

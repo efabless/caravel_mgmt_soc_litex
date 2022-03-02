@@ -17,10 +17,10 @@ fi
 ########################################################
 
 export MAGIC=magic
-export PDKPATH=$PDK_ROOT/$PDK_VARIENT ; 
+export PDKPATH=$PDK_ROOT/$PDK ; 
 export MAGTYPE=$2
 
-$MAGIC -dnull -noconsole -rcfile $PDKPATH/libs.tech/magic/$PDK_VARIENT.magicrc  << EOF
+$MAGIC -dnull -noconsole -rcfile $PDKPATH/libs.tech/magic/$PDK.magicrc  << EOF
 
 path search [concat "../$MAGTYPE" [path search]]
 addpath ${PDKPATH}/libs.ref/sky130_ml_xx_hd/mag
