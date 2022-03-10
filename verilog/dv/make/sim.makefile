@@ -67,10 +67,15 @@ ifeq ($(SIM),RTL)
 		iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
         -f$(VERILOG_PATH)/includes/includes.rtl.caravel \
         -f$(USER_PROJECT_VERILOG)/includes/includes.rtl.$(CONFIG) -o $@ $<
+    endif
+    ifeq ($(CONFIG),caravel)
+		iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
+		-f$(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) \
+		-o $@ $(CARAVEL_PATH)/rtl/__user_project_wrapper.v $<
     else
 		iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
 		-f$(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) \
-		-f$(CARAVEL_PATH)/rtl/__user_project_wrapper.v -o $@ $<
+		-o $@ $<
     endif
 endif 
 
@@ -80,10 +85,15 @@ ifeq ($(SIM),GL)
 		iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
         -f$(VERILOG_PATH)/includes/includes.gl.caravel \
         -f$(USER_PROJECT_VERILOG)/includes/includes.gl.$(CONFIG) -o $@ $<
+    endif
+    ifeq ($(CONFIG),caravel)
+        iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
+        -f$(VERILOG_PATH)/includes/includes.gl.$(CONFIG) \
+		-o $@ $(CARAVEL_PATH)/gl/__user_project_wrapper.v $<
     else
 		iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
         -f$(VERILOG_PATH)/includes/includes.gl.$(CONFIG) \
-		-f$(CARAVEL_PATH)/gl/__user_project_wrapper.v -o $@ $<
+		-o $@ $<
     endif
 endif 
 
