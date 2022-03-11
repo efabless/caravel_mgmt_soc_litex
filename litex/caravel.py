@@ -10,7 +10,6 @@ import argparse
 from os import path
 
 from migen import *
-from litex.soc.cores.spi_flash import SpiFlash
 from litex.soc.integration.soc_core import SoCCore
 from litex.soc.integration.builder import Builder, builder_argdict, builder_args
 from litex.soc.integration.soc_core import soc_core_argdict, soc_core_args
