@@ -56,7 +56,7 @@ hex:  ${BLOCKS:=.hex}
 	
 	
 ##############################################################################
-# Runing the simulations
+# Running the simulations
 ##############################################################################
 
 %.vvp: %_tb.v %.hex
@@ -70,7 +70,7 @@ ifeq ($(SIM),RTL)
     else
 		iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
 		-f$(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) \
-		-f$(CARAVEL_PATH)/rtl/__user_project_wrapper.v -o $@ $<
+		$(CARAVEL_PATH)/rtl/__user_project_wrapper.v -o $@ $<
     endif
 endif 
 
@@ -83,7 +83,7 @@ ifeq ($(SIM),GL)
     else
 		iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
         -f$(VERILOG_PATH)/includes/includes.gl.$(CONFIG) \
-		-f$(CARAVEL_PATH)/gl/__user_project_wrapper.v -o $@ $<
+		$(CARAVEL_PATH)/gl/__user_project_wrapper.v -o $@ $<
     endif
 endif 
 
@@ -100,7 +100,7 @@ ifeq ($(SIM),GL_SDF)
 		+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
 		+change_port_type +dump2fst +fst+parallel2=on   +nointeractive +notimingchecks +mipdopt \
 		-f $(VERILOG_PATH)/includes/includes.gl+sdf.$(CONFIG) \
-		-f $CARAVEL_PATH/gl/__user_project_wrapper.v $<
+		$CARAVEL_PATH/gl/__user_project_wrapper.v $<
     endif
 endif
 
