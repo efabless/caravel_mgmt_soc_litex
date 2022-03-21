@@ -46,12 +46,12 @@ module irq_tb;
 
 	initial begin
 		$dumpfile("irq.vcd");
-		$dumpvars(1, irq_tb);
+		$dumpvars(0, irq_tb);
 		
-		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (50) begin
-			repeat (1000) @(posedge clock);
-			$display("+1000 cycles");
+		// Repeat cycles of 10000 clock edges as needed to complete testbench
+		repeat (110) begin
+			repeat (10000) @(posedge clock);
+			$display("+10000 cycles");
 		end
 		$display("%c[1;31m",27);
 		`ifdef GL
@@ -76,6 +76,9 @@ module irq_tb;
 	wire flash_io0;
 	wire flash_io1;
 	wire gpio;
+
+	wire [5:0] user_irq;
+	wire [2:0] user_irq_en;
 
 	reg RSTB;
 
@@ -199,8 +202,8 @@ module irq_tb;
         .sram_ro_data(),
         .trap(),
         .uart_enabled(),
-        .irq(6'b0),
-        .user_irq_ena()
+        .irq(user_irq),
+        .user_irq_ena(user_irq_en)
 	);
 
 	spiflash #(
@@ -214,5 +217,30 @@ module irq_tb;
 		.io3()			// not used
 	);
 
+	usr_irq_gen irq_gen_i (
+		.irq_o (user_irq),
+		.irq_en_i (user_irq_en)
+	);
+
 endmodule
+
+module usr_irq_gen
+(
+	input [2:0] irq_en_i,
+	output reg [5:0] irq_o
+);
+
+	always @(*)
+	begin
+		irq_o = '0;
+		if (irq_en_i == 0) begin
+			irq_o = '0;
+		end
+		else begin
+			irq_o[irq_en_i-1] = 1'b1;
+		end
+	end
+
+endmodule
+
 `default_nettype wire
