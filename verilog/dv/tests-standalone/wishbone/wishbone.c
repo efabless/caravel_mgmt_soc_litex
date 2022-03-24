@@ -26,7 +26,7 @@
 void main()
 {
     volatile unsigned int *wb_start_addr = (volatile unsigned int *) MPRJ_BASE;
-    unsigned int exp_size = 0x10000000;
+    unsigned int exp_size = 0x01000000;
     unsigned int error = 0;
     int i;
 
@@ -40,15 +40,16 @@ void main()
     }
     // test the whole WB address space - walking "1"
     reg_la0_data = 0x2;
-    for (i = 1; i < exp_size; i = i << 1) {
-        *(wb_start_addr+i) = i;
+    for (i = 1; i < exp_size/sizeof(unsigned int*); i = i << 1) {
+        *(wb_start_addr+(i/sizeof(unsigned int*))) = i;
         if (*(wb_start_addr+i) != i) {
             reg_la0_data = 0xE0000001;
         }
     }
-    // check reset value - last address
+    // check last address
     reg_la0_data = 0x3;
-    if (*(wb_start_addr+exp_size-1) != 0xDEADBEEF) {
+    *(wb_start_addr+exp_size/sizeof(unsigned int*)-1) = 0xDEADBEEF;
+    if (*(wb_start_addr+exp_size/sizeof(unsigned int*)-1) != 0xDEADBEEF) {
         reg_la0_data = 0xE0000002;
     }
 

@@ -18,6 +18,7 @@
 `timescale 1 ns / 1 ps
 
 
+
 module spi_master_tb;
 	reg clock;
 	reg RSTB;
@@ -50,6 +51,8 @@ module spi_master_tb;
 	initial begin
 		clock = 0;
 	end
+
+`include "caravel-sdf.v"
 
 	initial begin
 		$dumpfile("spi_master.vcd");
