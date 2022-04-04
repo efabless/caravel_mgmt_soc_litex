@@ -26,7 +26,7 @@
 void main()
 {
     volatile unsigned int *wb_start_addr = (volatile unsigned int *) MPRJ_BASE;
-    unsigned int exp_size = 0x01000000;
+    unsigned int exp_size = 0x10000000;
     unsigned int error = 0;
     int i;
 
