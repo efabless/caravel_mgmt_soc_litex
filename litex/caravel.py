@@ -182,7 +182,7 @@ class MGMTSoC(SoCMini):
         # Add a wb port for external slaves user_project
         mprj_ports = platform.request("mprj")
         mprj = wishbone.Interface()
-        self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x1000000))
+        self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x10000000))
         self.submodules.mprj_wb_iena = GPIOOut(mprj_ports.wb_iena)
         self.comb += mprj_ports.cyc_o.eq(mprj.cyc)
         self.comb += mprj_ports.stb_o.eq(mprj.stb)

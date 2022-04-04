@@ -146,7 +146,6 @@ module wishbone_tb;
 	assign VDD3V3 = power1;
 	assign VDD1V8 = power2;
 	assign VSS = 1'b0;
-	
 	mgmt_core_wrapper uut (
 	`ifdef USE_POWER_PINS
 		.VPWR		  (VDD1V8),
@@ -243,7 +242,6 @@ module wishbone_tb;
 	tbuart tbuart (
 		.ser_rx(uart_tx)
 	);
-		
 endmodule
 
 // Dummy wishbone slave
