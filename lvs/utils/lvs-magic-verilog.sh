@@ -15,10 +15,10 @@ fi
 
 
 export MAGIC=magic
-export PDKPATH=$PDK_ROOT/sky130A ; 
+export PDKPATH=$PDK_ROOT/$PDK ; 
 export MAGTYPE=$2
 
-$MAGIC -dnull -noconsole -rcfile $PDKPATH/libs.tech/magic/sky130A.magicrc  << EOF
+$MAGIC -dnull -noconsole -rcfile $PDKPATH/libs.tech/magic/$PDK.magicrc  << EOF
 
 
 path search [concat "../$MAGTYPE" [path search]]
@@ -51,7 +51,7 @@ export NETGEN_COLUMNS=60
 netgen -batch lvs \
 "./netlists/$MAGTYPE-extracted-${1%.mag}.spice  ${1%.mag}" \
  "../verilog/gl/${1%.mag}.v ${1%.mag}" \
-./pdk/sky130A_setup.tcl \
+./pdk/$PDK_VARIENT_setup.tcl \
 ./reports/${MAGTYPE}-vs-verilog-${1%.mag}.out
 
 
