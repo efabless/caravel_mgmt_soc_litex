@@ -41,7 +41,13 @@ Table of contents
 -  `Checklist for Open-MPW
    Submission <#checklist-for-open-mpw-submission>`__
 
-.. include:: generated/index.rst
+Test
+=======
+
+.. toctree::
+    :maxdepth: 1
+
+    generated/interrupts
 
 Overview
 ========
