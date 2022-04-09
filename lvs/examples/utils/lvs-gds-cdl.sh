@@ -19,10 +19,10 @@ fi
 ########################################################
 
 export MAGIC=magic
-export PDKPATH=$PDK_ROOT/sky130A ; 
+export PDKPATH=$PDK_ROOT/$PDK ; 
 export MAGTYPE=mag
 
-MAGTYPE=$MAGTYPE $MAGIC -dnull -noconsole -rcfile $PDKPATH/libs.tech/magic/sky130A.magicrc  << EOF
+MAGTYPE=$MAGTYPE $MAGIC -dnull -noconsole -rcfile $PDKPATH/libs.tech/magic/$PDK.magicrc  << EOF
 
 #path search [concat "../$MAGTYPE" [path search]]
 crashbackups stop
@@ -35,8 +35,8 @@ cif istyle sky130(vendor)
 gds read $1
 load ${1%.gds} -dereference
 select top cell
-#lef read  $PDK_ROOT/openlane/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef
-#readspice $PDK_ROOT/openlane/sky130A/libs.ref/sky130_fd_sc_hd/cdl/sky130_fd_sc_hd.cdl}
+#lef read  $PDK_ROOT/openlane/$PDK/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef
+#readspice $PDK_ROOT/openlane/$PDK/libs.ref/sky130_fd_sc_hd/cdl/sky130_fd_sc_hd.cdl}
 #extract no all
 extract do local
 extract all
@@ -78,7 +78,7 @@ export MAGIC_EXT_USE_GDS=1
 netgen -batch lvs \
         "./netlists/${1%.gds}-gds-extracted.spice ${1%.gds}" \
 		"./netlists/${1%.gds}-source.spice ${1%.gds}" \
-			     ./pdk/sky130A_setup.tcl \
+			     ./pdk/$PDK_VARIENT_setup.tcl \
 			         ./reports/lvs-compare-${1%.gds}-gds-vs-spice.out
 				 
 ########################################################

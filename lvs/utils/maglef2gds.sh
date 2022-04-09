@@ -4,7 +4,7 @@ export MAGIC=/magic
 
 export MAGTYPE=maglef; 
 
-$MAGIC -dnull -noconsole -rcfile $PDK_ROOT/sky130A/libs.tech/magic/sky130A.magicrc  <<EOF
+$MAGIC -dnull -noconsole -rcfile $PDK_ROOT/$PDK/libs.tech/magic/$PDK.magicrc  <<EOF
 drc off
 gds readonly true
 gds rescale false
