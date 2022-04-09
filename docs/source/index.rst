@@ -18,7 +18,7 @@
    # SPDX-License-Identifier: Apache-2.0
    -->
 
-Caravel User Project
+Caravel Management SoC - Litex
 ====================
 
 |License| |User CI| |Caravel Build|
