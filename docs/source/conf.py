@@ -51,6 +51,12 @@ copyright = '2022, Efabless'
 #   'sphinx.ext.todo'
 # ]
 
+extensions.extend([
+    "myst_parser",
+    "sphinx.ext.mathjax",
+    "sphinx.ext.todo"
+])
+
 # Add any paths that contain templates here, relative to this directory.
 # templates_path = ['_templates']
 

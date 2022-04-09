@@ -41,6 +41,8 @@ Table of contents
 -  `Checklist for Open-MPW
    Submission <#checklist-for-open-mpw-submission>`__
 
+.. include:: generated/index.rst
+
 Overview
 ========
 
