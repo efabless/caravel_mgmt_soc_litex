@@ -20,7 +20,7 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-from ..generated.conf import *
+from generated.conf import *
 
 # -- Path setup --------------------------------------------------------------
 

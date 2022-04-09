@@ -1,8 +1,10 @@
 /.idea/
 /litex/build/
-/openlane/mgmt_core/runs/
-/openlane/mgmt_core/wrapper/runs/
+./openlane/mgmt_core/runs/
+/openlane/mgmt_core_wrapper/runs/
 *.hex*
 *.lst
 *.vcd
 *.gtkw
+/openlane/mgmt_core/runs/
+/openlane/mgmt_core_wrapper/runs/
