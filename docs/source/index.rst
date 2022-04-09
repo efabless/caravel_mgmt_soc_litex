@@ -47,7 +47,7 @@ Test
 .. toctree::
     :maxdepth: 1
 
-    generated/interrupts
+    generated/index
 
 Overview
 ========
