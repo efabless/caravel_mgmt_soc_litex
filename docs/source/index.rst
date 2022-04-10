@@ -23,36 +23,7 @@ Caravel Management SoC - Litex
 
 |License| |User CI| |Caravel Build|
 
-Table of Contents
-=================
-
 .. contents:: Table of Contents
-    :local:
-
-.. toctree::
-    :maxdepth: 1
-    :numbered:
-
-    references
-    overview
-    Install Caravel <#install-caravel>
-    :ref: `Caravel Integration <#caravel-integration>`
-
--  `Overview <#overview>`__
--  `Install Caravel <#install-caravel>`__
--  `Caravel Integration <#caravel-integration>`__
--  `Junk <#junk>`__
-
-   -  `Repo Integration <#repo-integration>`__
-   -  `Verilog Integration <#verilog-integration>`__
-   -  `Layout Integration <#layout-integration>`__
-
--  `Running Full Chip Simulation <#running-full-chip-simulation>`__
--  `User Project Wrapper Requirements <#user-project-wrapper-requirements>`__
--  `Hardening the User Project using
-   Openlane <#hardening-the-user-project-using-openlane>`__
--  `Checklist for Open-MPW
-   Submission <#checklist-for-open-mpw-submission>`__
 
 Overview
 ========
@@ -445,4 +416,4 @@ Checklist for Open-MPW Submission
 References
 ==========
 
-.. include::references.rst
+.. include:: references.rst
