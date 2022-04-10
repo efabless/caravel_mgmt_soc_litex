@@ -28,9 +28,12 @@ Table of Contents
 
 .. toctree::
     :maxdepth: 1
+    :numbered:
 
     references
-    `Overview <#overview>`__
+    #overview
+    Install Caravel <#install-caravel>
+    :ref: `Caravel Integration <#caravel-integration>`
 
 -  `Overview <#overview>`__
 -  `Install Caravel <#install-caravel>`__
