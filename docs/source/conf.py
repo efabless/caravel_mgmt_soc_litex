@@ -86,20 +86,20 @@ extensions.extend([
 
 
 # -- Options for HTML output -------------------------------------------------
-"""
-html_theme_options = {
-    'header_links' : [
-        ("Home", 'index', False, 'home'),
-        ("GitHub", "https://github.com/efabless/caravel_mgmt_soc_litex", True, 'code'),
-    ],
-    'hide_symbiflow_links': True,
-    'license_url' : 'https://www.apache.org/licenses/LICENSE-2.0',
-}
-"""
+# """
+# html_theme_options = {
+#     'header_links' : [
+#         ("Home", 'index', False, 'home'),
+#         ("GitHub", "https://github.com/efabless/caravel_mgmt_soc_litex", True, 'code'),
+#     ],
+#     'hide_symbiflow_links': True,
+#     'license_url' : 'https://www.apache.org/licenses/LICENSE-2.0',
+# }
+# """
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+# html_theme = 'sphinx_rtd_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
