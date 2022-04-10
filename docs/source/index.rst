@@ -72,6 +72,14 @@ to control functionality off chip.  One example user case is to set an enable fo
 Debug
 =====
 
+Description
+-----------
+Debug support is enabled in the core and can be accessed through a dedicated UART port configured as a wishbone master.
+The baud rate for the port is 9600.
+
+See the following reference for more information <https://github.com/SpinalHDL/VexRiscv#debugplugin>.
+
+
 .. include:: generated/timer0.rst
 
 Logic Analyzer
