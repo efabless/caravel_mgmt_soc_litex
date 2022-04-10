@@ -56,11 +56,48 @@ The core has not been configured with compress or multiply instructions.
 
 .. include:: generated/uart.rst
 
-The baud rate is configured at 9600.
+Description
+-----------
+The UART provide general serial communication with the management SoC.  The baud rate is configured at 9600.
 
 .. include:: generated/spi_master.rst
 
-Functionality
+.. include:: generated/gpio.rst
+
+Description
+-----------
+A single GPIO port is provided from the Management SoC as general indicator and diagnostic for programming or as a means
+to control functionality off chip.  One example user case is to set an enable for an off-chip LDO enabling a controlled power-up sequence for the user project.
+
+Debug
+=====
+
+.. include:: generated/timer0.rst
+
+Logic Analyzer
+==============
+
+.. include:: generated/la.rst
+
+Memory Map
+==========
+
+.. table:: Memory Regions
+   :widths: auto
+
+    =====           ==========      ==========
+    region          address         size
+    =====           ==========      ==========
+    dff             0x00000000      0x00000400
+    sram            0x01000000      0x00000800
+    flash           0x10000000      0x01000000
+    hk              0x26000000      0x00100000
+    user project    0x30000000      0x10000000
+    csr             0xf0000000      0x00010000
+    vexriscv_debug  0xf00f0000      0x00000100
+    =====           ==========      ==========
+
+Other Registers
 =============
 
 .. toctree::
@@ -77,9 +114,6 @@ Functionality
     generated/la
     generated/mprj_wb_iena
     generated/spi_enabled
-    generated/spi_master
-    generated/timer0
-    generated/uart
     generated/uart_enabled
     generated/user_irq_0
     generated/user_irq_1
@@ -89,263 +123,9 @@ Functionality
     generated/user_irq_5
     generated/user_irq_ena
 
-Prerequisites
-=============
-
-- Docker
-
-Install Caravel
-===============
-
-To setup caravel, run the following:
-
-.. code:: bash
-    
-    git clone https://github.com/efabless/caravel_user_project.git
-    cd caravel_user_project
-    
-    make install
-
-To remove caravel, run
-
-.. code:: bash
-
-    make uninstall
-
-By default
-`caravel-lite <https://github.com/efabless/caravel-lite.git>`__ is
-installed. To install the full version of caravel, run this prior to
-calling make install.
-
-.. code:: bash
-
-    export CARAVEL_LITE=0
-
-Caravel Integration
-===================
-
-Repo Integration
-----------------
-
-Caravel files are kept separate from the user project by having caravel
-as submodule. The submodule commit should point to the latest of
-caravel/caravel-lite master/main branch. The following files should have a symbolic
-link to `caravel's <https://github.com/efabless/caravel.git>`__
-corresponding files:
-
--  `Openlane Makefile <../../openlane/Makefile>`__: This provides an easier
-   way for running openlane to harden your macros. Refer to `Hardening
-   the User Project Macro using
-   Openlane <#hardening-the-user-project-using-openlane>`__. Also,
-   the makefile retains the openlane summary reports under the signoff
-   directory.
-
--  `Pin order <../../openlane/user_project_wrapper/pin_order.cfg>`__ file for
-   the user wrapper: The hardened user project wrapper macro must have
-   the same pin order specified in caravel's repo. Failing to adhere to
-   the same order will fail the gds integration of the macro with
-   caravel's back-end.
-
-The symbolic links are automatically set when you run ``make install``.
-
-Verilog Integration
--------------------
-
-You need to create a wrapper around your macro that adheres to the
-template at
-`user\_project\_wrapper <https://github.com/efabless/caravel/blob/master/verilog/rtl/__user_project_wrapper.v>`__.
-The wrapper top module must be named ``user_project_wrapper`` and must
-have the same input and output ports as the golden wrapper `template <https://github.com/efabless/caravel/blob/master/verilog/rtl/__user_project_wrapper.v>`__. The wrapper gives access to the
-user space utilities provided by caravel like IO ports, logic analyzer
-probes, and wishbone bus connection to the management SoC.
-
-For this sample project, the user macro makes use of:
-
--  The IO ports for displaying the count register values on the IO pads.
-
--  The LA probes for supplying an optional reset and clock signals and
-   for setting an initial value for the count register.
-
--  The wishbone port for reading/writing the count value through the
-   management SoC.
-
-Refer to `user\_project\_wrapper <../../verilog/rtl/user_project_wrapper.v>`__
-for more information.
-
-.. raw:: html
-
-   <p align="center">
-   <img src="./_static/counter_32.png" width="50%" height="50%">
-   </p>
-
-.. raw:: html
-
-   </p>
-
-
-Running Full Chip Simulation
-============================
-
-First, you will need to install the simulation environment, by
-
-.. code:: bash
-
-    make simenv
-
-This will pull a docker image with the needed tools installed.
-
-Then, run the RTL simulation by
-
-.. code:: bash
-
-    export PDK_ROOT=<pdk-installation-path>
-    # specify simulation mode: RTL/GL
-    export SIM=RTL
-    # Run RTL simulation on IO ports testbench, make verify-io_ports
-    make verify-<testbench-name>
-
-Once you have the physical implementation done and you have the gate-level netlists ready, it is crucial to run full gate-level simulations to make sure that your design works as intended after running the physical implementation. 
-
-Run the gate-level simulation by: 
-
-.. code:: bash
-
-    export PDK_ROOT=<pdk-installation-path>
-    # specify simulation mode: RTL/GL
-    export SIM=GL
-    # Run RTL simulation on IO ports testbench, make verify-io_ports
-    make verify-<testbench-name>
-
-
-This sample project comes with four example testbenches to test the IO port connection, wishbone interface, and logic analyzer. The test-benches are under the
-`verilog/dv <https://github.com/efabless/caravel_user_project/tree/main/verilog/dv>`__ directory. For more information on setting up the
-simulation environment and the available testbenches for this sample
-project, refer to `README <https://github.com/efabless/caravel_user_project/blob/main/verilog/dv/README.md>`__.
-
-
-User Project Wrapper Requirements
-=================================
-
-Your hardened ``user_project_wrapper`` must match the `golden user_project_wrapper <https://github.com/efabless/caravel/blob/master/gds/user_project_wrapper_empty.gds.gz>`__ in the following: 
-
-- Area ``(2.920um x 3.520um)``
-- Top module name ``"user_project_wrapper"``
-- Pin Placement
-- Pin Sizes 
-- Core Rings Width and Offset
-- PDN Vertical and Horizontal Straps Width 
-
-
-.. raw:: html
-
-   <p align="center">
-   <img src="./_static/empty.png" width="40%" height="40%">
-   </p>
- 
-You are allowed to change the following if you need to: 
-
-- PDN Vertical and Horizontal Pitch & Offset
-
-.. raw:: html
-
-   <p align="center">
-   <img src="./_static/pitch.png" width="30%" height="30%">
-   </p>
- 
-To make sure that you adhere to these requirements, we run an exclusive-or (XOR) check between your hardened ``user_project_wrapper`` GDS and the golden wrapper GDS after processing both layouts to include only the boundary (pins and core rings). This check is done as part of the `mpw-precheck <https://github.com/efabless/mpw_precheck>`__ tool. 
-
-
-Hardening the User Project using OpenLane
-==========================================
-
-OpenLane Installation 
----------------------
-
-You will need to install openlane by running the following
-
-.. code:: bash
-
-   export OPENLANE_ROOT=<openlane-installation-path>
-
-   # you can optionally specify the openlane tag to use
-   # by running: export OPENLANE_TAG=<openlane-tag>
-   # if you do not set the tag, it defaults to the last verfied tag tested for this project
-
-   make openlane
-
-For detailed instructions on the openlane and the pdk installation refer
-to
-`README <https://github.com/The-OpenROAD-Project/OpenLane#setting-up-openlane>`__.
-
-Hardening Options 
------------------
-
-There are three options for hardening the user project macro using
-openlane:
-
-+--------------------------------------------------------------+--------------------------------------------+--------------------------------------------+
-|           Option 1                                           |            Option 2                        |           Option 3                         |
-+--------------------------------------------------------------+--------------------------------------------+--------------------------------------------+
-| Hardening the user macro(s) first, then inserting it in the  |  Flattening the user macro(s) with the     | Placing multiple macros in the wrapper     |
-| user project wrapper with no standard cells on the top level |  user_project_wrapper                      | along with standard cells on the top level |
-+==============================================================+============================================+============================================+
-| |pic1|                                                       | |pic2|                                     | |pic3|                                     |
-|                                                              |                                            |                                            |
-+--------------------------------------------------------------+--------------------------------------------+--------------------------------------------+
-|           ex: |link1|                                        |                                            |           ex: |link2|                      |
-+--------------------------------------------------------------+--------------------------------------------+--------------------------------------------+
-
-.. |link1| replace:: `caravel_user_project <https://github.com/efabless/caravel_user_project>`__
-
-.. |link2| replace:: `caravel_ibex <https://github.com/efabless/caravel_ibex>`__
-
-
-.. |pic1| image:: ./_static/option1.png
-   :width: 48%
-
-.. |pic2| image:: ./_static/option2.png
-   :width: 140%
-
-.. |pic3| image:: ./_static/option3.png
-   :width: 72%
-
-For more details on hardening macros using openlane, refer to `README <https://github.com/The-OpenROAD-Project/OpenLane/blob/master/docs/source/hardening_macros.md>`__.
-
-
-Running OpenLane 
------------------
-
-For this sample project, we went for the first option where the user
-macro is hardened first, then it is inserted in the user project
-wrapper without having any standard cells on the top level.
-
-.. raw:: html
-
-   <p align="center">
-   <img src="./_static/wrapper.png" width="30%" height="30%">
-   </p>
-
-.. raw:: html
-
-   </p>
-   
-To reproduce hardening this project, run the following:
-
-.. code:: bash
-
-   # DO NOT cd into openlane
-
-   # Run openlane to harden user_proj_example
-   make user_proj_example
-   # Run openlane to harden user_project_wrapper
-   make user_project_wrapper
-
-
-For more information on the openlane flow, check `README <https://github.com/The-OpenROAD-Project/OpenLane#readme>`__.
-
 
 .. include:: references.rst
-   
+
    
 .. |License| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
    :target: https://opensource.org/licenses/Apache-2.0
