@@ -26,6 +26,9 @@ Caravel Management SoC - Litex
 Table of Contents
 =================
 
+.. contents:: Table of Contents
+    :local:
+
 .. toctree::
     :maxdepth: 1
     :numbered:
@@ -438,3 +441,8 @@ Checklist for Open-MPW Submission
    :target: https://github.com/efabless/caravel_project_example/actions/workflows/user_project_ci.yml
 .. |Caravel Build| image:: https://github.com/efabless/caravel_project_example/actions/workflows/caravel_build.yml/badge.svg
    :target: https://github.com/efabless/caravel_project_example/actions/workflows/caravel_build.yml
+
+References
+==========
+
+.. include::references.rst
