@@ -17,7 +17,6 @@
    #
    # SPDX-License-Identifier: Apache-2.0
    -->
-
 ==============================
 Caravel Management SoC - Litex
 ==============================
@@ -25,6 +24,7 @@ Caravel Management SoC - Litex
 |License| |User CI| |Caravel Build|
 
 .. contents:: Table of Contents
+    :local:
     :depth: 2
 
 Overview
@@ -59,6 +59,8 @@ The core has not been configured with compress or multiply instructions.
 Description
 -----------
 The UART provide general serial communication with the management SoC.  The baud rate is configured at 9600.
+
+The reg_uart_enable must be set in order to run (disabled by default).
 
 .. include:: generated/spi_master.rst
 
@@ -118,7 +120,6 @@ Other Registers
     generated/debug_oeb
     generated/flash_core
     generated/flash_phy
-    generated/gpio
     generated/la
     generated/mprj_wb_iena
     generated/spi_enabled
