@@ -25,6 +25,7 @@ Caravel Management SoC - Litex
 |License| |User CI| |Caravel Build|
 
 .. contents:: Table of Contents
+    :depth: 2
 
 Overview
 ========
@@ -54,6 +55,10 @@ The core has not been configured with compress or multiply instructions.
 .. include:: generated/interrupts.rst
 
 .. include:: generated/uart.rst
+
+The baud rate is configured at 9600.
+
+.. include:: generated/spi_master.rst
 
 Functionality
 =============
