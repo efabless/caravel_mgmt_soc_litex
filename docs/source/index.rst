@@ -52,24 +52,72 @@ Processor
 The processor core is based on a VexRiscv minimal+debug configuration.  The core has been configured with 64 bytes of instruction cache.
 The core has not been configured with compress or multiply instructions.
 
-.. include:: generated/interrupts.rst
+Flash Controller
+================
 
-.. include:: generated/uart.rst
+Description
+-----------
+
+The flash controller supports single mode SPI to a compatible W25Q128JV Flash device.  The configuration supports
+execute-in-place and the CPU reset vector is configured for the beginning of the Flash memory region.
+
+Interrupts (IRQ)
+================
+
+Description
+-----------
+
+The processor is configured with interrupts for the Uart and Timer devices.  It also supports 6 user IRQS extended
+to the user project.
+
+The corresponding register must be set to enable interrupts from the respective device.  The following registers are
+applicable:
+
+* reg_timer0_irq_en
+* reg_timer0_irq_en
+* reg_timer0_irq_en
+
+.. include:: generated/interrupts.rst
+    :start-after: Interrupt
+
+
+UART
+====
 
 Description
 -----------
 The UART provide general serial communication with the management SoC.  The baud rate is configured at 9600.
 
-The reg_uart_enable must be set in order to run (disabled by default).
+The ``reg_uart_enable`` must be set in order to run (disabled by default).
+
+``reg_uart_enable`` can be used to read and write data to the port.
+
+.. include:: generated/uart.rst
+    :start-after: UART
+
+SPI Controller
+==============
+
+Description
+-----------
+The SPI controller is operated through the ``reg_spimaster_control`` and ``reg_spimaster_status'' registers.
+
+``reg_spimaster_rdata`` and ``reg_spimaster_wdata`` are used to read abd write data through to the port.
 
 .. include:: generated/spi_master.rst
+    :start-after: SPI_MASTER
 
+GPIO
+====
 .. include:: generated/gpio.rst
+    :start-after: GPIO
 
 Description
 -----------
 A single GPIO port is provided from the Management SoC as general indicator and diagnostic for programming or as a means
-to control functionality off chip.  One example user case is to set an enable for an off-chip LDO enabling a controlled power-up sequence for the user project.
+to control functionality off chip.
+
+One example user case is to set an enable for an off-chip LDO enabling a controlled power-up sequence for the user project.
 
 Debug
 =====
@@ -81,13 +129,26 @@ The baud rate for the port is 9600.
 
 See the following reference for more information <https://github.com/SpinalHDL/VexRiscv#debugplugin>.
 
+Counter / Timer
+===============
 
+Description
+-----------
 .. include:: generated/timer0.rst
+    :start-after: Timer
 
 Logic Analyzer
 ==============
 
+Description
+-----------
+The logic analyzer function provides a flexible means to monitor signals from the user project wrapper or drive them
+from the management core.
+
+The logic analyzer supports 128 signals mapped to separated GPIO in, out and oeb ports.
+
 .. include:: generated/la.rst
+    :start-after: LA
 
 Memory Regions
 ==============
@@ -112,7 +173,7 @@ Memory Regions
 
 
 Other Registers
-=============
+===============
 
 .. toctree::
     :maxdepth: 1

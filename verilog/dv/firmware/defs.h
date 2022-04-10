@@ -160,23 +160,16 @@ extern uint32_t flashio_worker_end;
 #define reg_timer0_data   (*(volatile uint32_t*) CSR_TIMER0_LOAD_ADDR)
 #define reg_timer0_irq_en   (*(volatile uint32_t*) CSR_TIMER0_EV_ENABLE_ADDR)
 
-// Counter-Timer 1 Configuration
-#define reg_timer1_config (*(volatile uint32_t*)0x23000000)
-#define reg_timer1_value  (*(volatile uint32_t*)0x23000004)
-#define reg_timer1_data   (*(volatile uint32_t*)0x23000008)
-
 // Bit fields for Counter-timer configuration
 #define TIMER_ENABLE		0x01
 #define TIMER_ONESHOT		0x02
 #define TIMER_UPCOUNT		0x04
-#define TIMER_CHAIN		0x08
+#define TIMER_CHAIN		    0x08
 #define TIMER_IRQ_ENABLE	0x10
 
 // SPI Master Configuration
-//#define reg_spimaster_config (*(volatile uint32_t*) 0x24000000)
 #define reg_spimaster_control (*(volatile uint32_t*) CSR_SPI_MASTER_CONTROL_ADDR)
 #define reg_spimaster_status (*(volatile uint32_t*) CSR_SPI_MASTER_STATUS_ADDR)
-//#define reg_spimaster_data   (*(volatile uint32_t*) 0x24000004)
 #define reg_spimaster_wdata   (*(volatile uint32_t*) CSR_SPI_MASTER_MOSI_ADDR)
 #define reg_spimaster_rdata   (*(volatile uint32_t*) CSR_SPI_MASTER_MISO_ADDR)
 #define reg_spimaster_cs   (*(volatile uint32_t*) CSR_SPI_MASTER_CS_ADDR)
