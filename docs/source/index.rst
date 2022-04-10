@@ -18,6 +18,7 @@
    # SPDX-License-Identifier: Apache-2.0
    -->
 
+==============================
 Caravel Management SoC - Litex
 ==============================
 
@@ -30,14 +31,32 @@ Overview
 
 This repository contains an implementation of the management area for
 `Caravel <https://github.com/efabless/caravel.git>`__.
-The management area is SoC generated using Litex containing a VexRiscv core with memory, a flash controller, SPI, UART and debug port. is a simple counter that showcases how to make use of
-`caravel's <https://github.com/efabless/caravel.git>`__ user space
-utilities like IO pads, logic analyzer probes, and wishbone port. The
-repo also demonstrates the recommended structure for the open-mpw
-shuttle projects.
+The management area is SoC generated using Litex containing a VexRiscv core with memory, a flash controller and serial peripherals.
+
+Features
+=============
+
+* VexRiscv core with debug port
+* 2 kB SRAM plus 1 kB of DFFRAM
+* XIP SPI Flash controller
+* UART, SPI and GPIO ports
+* 128 port logic analyzer
+* Counter / timer
+* 32-bit Wishbone bus extending to the user project area
+* 6 user interrupts
+
+Processor
+=========
+
+The processor core is based on a VexRiscv minimal+debug configuration.  The core has been configured with 64 bytes of instruction cache.
+The core has not been configured with compress or multiply instructions.
+
+.. include:: generated/interrupts.rst
+
+.. include:: generated/uart.rst
 
 Functionality
-=======
+=============
 
 .. toctree::
     :maxdepth: 1
@@ -319,93 +338,10 @@ To reproduce hardening this project, run the following:
 
 For more information on the openlane flow, check `README <https://github.com/The-OpenROAD-Project/OpenLane#readme>`__.
 
-Running MPW Precheck Locally
-=================================
 
-You can install the `mpw-precheck <https://github.com/efabless/mpw_precheck>`__ by running 
-
-.. code:: bash
-
-   # By default, this install the precheck in your home directory
-   # To change the installtion path, run "export PRECHECK_ROOT=<precheck installation path>" 
-   make precheck
-
-This will clone the precheck repo and pull the latest precheck docker image. 
-
-
-Then, you can run the precheck by running
-
-.. code:: bash
-
-   make run-precheck
-
-This will run all the precheck checks on your project and will produce the logs under the ``checks`` directory.
-
-
-Other Miscellaneous Targets
-============================
-
-The makefile provides a number of useful that targets that can run LVS, DRC, and XOR checks on your hardened design outside of openlane's flow. 
-
-Run ``make help`` to display available targets. 
-
-Run lvs on the mag view, 
-
-.. code:: bash
-
-   make lvs-<macro_name>
-
-Run lvs on the gds, 
-
-.. code:: bash
-
-   make lvs-gds-<macro_name>
-
-Run lvs on the maglef, 
-
-.. code:: bash
-
-   make lvs-maglef-<macro_name>
-
-Run drc using magic,
-
-.. code:: bash
-
-   make drc-<macro_name>
-
-Run antenna check using magic, 
-
-.. code:: bash
-
-   make antenna-<macro_name>
-
-Run XOR check, 
-
-.. code:: bash
-
-   make xor-wrapper
+.. include:: references.rst
    
    
-
-
-Checklist for Open-MPW Submission
-=================================
-
--  ✔️ The project repo adheres to the same directory structure in this
-   repo.
--  ✔️ The project repo contain info.yaml at the project root.
--  ✔️ Top level macro is named ``user_project_wrapper``.
--  ✔️ Full Chip Simulation passes for RTL and GL (gate-level)
--  ✔️ The hardened Macros are LVS and DRC clean
--  ✔️ The project contains a gate-level netlist for ``user_project_wrapper`` at verilog/gl/user_project_wrapper.v
--  ✔️ The hardened ``user_project_wrapper`` adheres to the same pin
-   order specified at
-   `pin\_order <https://github.com/efabless/caravel/blob/master/openlane/user_project_wrapper_empty/pin_order.cfg>`__
--  ✔️ The hardened ``user_project_wrapper`` adheres to the fixed wrapper configuration specified at `fixed_wrapper_cfgs <https://github.com/efabless/caravel/blob/master/openlane/user_project_wrapper_empty/fixed_wrapper_cfgs.tcl>`__
--  ✔️ XOR check passes with zero total difference.
--  ✔️ Openlane summary reports are retained under ./signoff/
--  ✔️ The design passes the `mpw-precheck <https://github.com/efabless/mpw_precheck>`__ 
-
 .. |License| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
    :target: https://opensource.org/licenses/Apache-2.0
 .. |User CI| image:: https://github.com/efabless/caravel_project_example/actions/workflows/user_project_ci.yml/badge.svg
@@ -413,7 +349,3 @@ Checklist for Open-MPW Submission
 .. |Caravel Build| image:: https://github.com/efabless/caravel_project_example/actions/workflows/caravel_build.yml/badge.svg
    :target: https://github.com/efabless/caravel_project_example/actions/workflows/caravel_build.yml
 
-References
-==========
-
-.. include:: references.rst
