@@ -66,6 +66,7 @@ master_doc = 'index'
 # ]
 
 extensions.extend([
+    "sphinx_rtd_theme",
     "myst_parser",
     "sphinx.ext.mathjax",
     "sphinx.ext.todo"
