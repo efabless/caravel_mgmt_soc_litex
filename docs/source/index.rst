@@ -31,7 +31,7 @@ Table of Contents
     :numbered:
 
     references
-    #overview
+    overview
     Install Caravel <#install-caravel>
     :ref: `Caravel Integration <#caravel-integration>`
 

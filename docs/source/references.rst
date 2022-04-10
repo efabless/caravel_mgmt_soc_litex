@@ -21,6 +21,8 @@
 References
 ==========
 
+* http://github.com/enjoy-digital/litex/wiki
+* https://github.com/SpinalHDL/VexRiscv
 * http://riscv.org/
 * http://riscv.org/software-status/
 * https://riscv.org/technical/specifications
