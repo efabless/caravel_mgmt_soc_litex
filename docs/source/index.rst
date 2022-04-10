@@ -19,16 +19,23 @@
    -->
 
 Caravel Management SoC - Litex
-====================
+==============================
 
 |License| |User CI| |Caravel Build|
 
-Table of contents
+Table of Contents
 =================
+
+.. toctree::
+    :maxdepth: 1
+
+    test.md
+    `Overview <#overview>`__
 
 -  `Overview <#overview>`__
 -  `Install Caravel <#install-caravel>`__
 -  `Caravel Integration <#caravel-integration>`__
+-  `Junk <#junk>`__
 
    -  `Repo Integration <#repo-integration>`__
    -  `Verilog Integration <#verilog-integration>`__
@@ -41,24 +48,45 @@ Table of contents
 -  `Checklist for Open-MPW
    Submission <#checklist-for-open-mpw-submission>`__
 
-Test
+Overview
+========
+
+This repository contains an implementation of the management area for
+`Caravel <https://github.com/efabless/caravel.git>`__.
+The management area is SoC generated using Litex containing a VexRiscv core with memory, a flash controller, SPI, UART and debug port. is a simple counter that showcases how to make use of
+`caravel's <https://github.com/efabless/caravel.git>`__ user space
+utilities like IO pads, logic analyzer probes, and wishbone port. The
+repo also demonstrates the recommended structure for the open-mpw
+shuttle projects.
+
+Functionality
 =======
 
 .. toctree::
     :maxdepth: 1
 
-    generated/index
+    generated/interrupts
 
-Overview
-========
-
-This repo contains a sample user project that utilizes the
-`caravel <https://github.com/efabless/caravel.git>`__ chip user space.
-The user project is a simple counter that showcases how to make use of
-`caravel's <https://github.com/efabless/caravel.git>`__ user space
-utilities like IO pads, logic analyzer probes, and wishbone port. The
-repo also demonstrates the recommended structure for the open-mpw
-shuttle projects.
+    generated/ctrl
+    generated/debug_mode
+    generated/debug_oeb
+    generated/flash_core
+    generated/flash_phy
+    generated/gpio
+    generated/la
+    generated/mprj_wb_iena
+    generated/spi_enabled
+    generated/spi_master
+    generated/timer0
+    generated/uart
+    generated/uart_enabled
+    generated/user_irq_0
+    generated/user_irq_1
+    generated/user_irq_2
+    generated/user_irq_3
+    generated/user_irq_4
+    generated/user_irq_5
+    generated/user_irq_ena
 
 Prerequisites
 =============
@@ -153,37 +181,6 @@ for more information.
 
    </p>
 
-
-Layout Integration
--------------------
-
-The caravel layout is pre-designed with an empty golden wrapper in the user space. You only need to provide us with a valid ``user_project_wrapper`` GDS file. And, as part of the tapeout process, your hardened ``user_project_wrapper`` will be inserted into a vanilla caravel layout to get the final layout shipped for fabrication. 
-
-.. raw:: html
-
-   <p align="center">
-   <img src="./_static/layout.png" width="80%" height="80%">
-   </p>
-   
-To make sure that this integration process goes smoothly without having any DRC or LVS issues, your hardened ``user_project_wrapper`` must adhere to a number of requirements listed at `User Project Wrapper Requirements <#user-project-wrapper-requirements>`__ .
-
-
-Building the PDK 
-================
-
-Make sure you have `Magic VLSI Layout Tool <http://opencircuitdesign.com/magic/index.html>`__ installed on your machine before building the pdk. 
-The pdk build is tested with magic version ``8.3.265``. 
-
-.. code:: bash
-
-    # set PDK_ROOT to the path you wish to use for the pdk
-    export PDK_ROOT=<pdk-installation-path>
-
-    # you can optionally specify skywater-pdk and open-pdks commit used
-    # by setting and exporting SKYWATER_COMMIT and OPEN_PDKS_COMMIT
-    # if you do not set them, they default to the last verfied commits tested for this project
-
-    make pdk
 
 Running Full Chip Simulation
 ============================

@@ -752,12 +752,4 @@ README.rst: README.src.rst docs/source/getting-started.rst docs/source/tool-vers
 				-e's@:doc:`tool-versioning`@`tool-versioning.rst <./docs/source/tool-versioning.rst>`__@g' \
 				-e's@.. note::@**NOTE:**@g' \
 				-e's@.. warning::@**WARNING:**@g' \
-				> README.rst && \
-		rst_include include openlane/README.src.rst - | \
-			sed \
-				-e's@https://github.com/efabless/caravel/blob/master/verilog@../verilog@g' \
-				-e's@:ref:`getting-started`@`README.rst <../README.rst>`__@g' \
-				-e's@https://github.com/efabless/caravel/blob/master/openlane/@./@g' \
-				-e's@.. note::@**NOTE:**@g' \
-				-e's@.. warning::@**WARNING:**@g' \
-				> openlane/README.rst
+				> README.rst

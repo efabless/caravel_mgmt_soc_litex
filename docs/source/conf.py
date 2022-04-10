@@ -20,7 +20,21 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-from generated.conf import *
+######## generated
+project = 'Caravel Management SoC'
+copyright = '2022, Efabless'
+author = 'Efabless'
+extensions = [
+    'sphinx.ext.autosectionlabel',
+    'sphinxcontrib.wavedrom',
+]
+templates_path = ['_templates']
+exclude_patterns = []
+offline_skin_js_path = "https://wavedrom.com/skins/default.js"
+offline_wavedrom_js_path = "https://wavedrom.com/WaveDrom.js"
+html_theme = 'alabaster'
+html_static_path = ['_static']
+master_doc = 'index'
 
 # -- Path setup --------------------------------------------------------------
 
@@ -36,7 +50,7 @@ from generated.conf import *
 # -- Project information -----------------------------------------------------
 
 # project = 'Caravel Mgmt SoC Litex'
-copyright = '2022, Efabless'
+# copyright = '2022, Efabless'
 # author = 'Efabless'
 
 
