@@ -35,7 +35,7 @@ This repository contains an implementation of the management area for
 The management area is SoC generated using Litex containing a VexRiscv core with memory, a flash controller and serial peripherals.
 
 .. image:: _static/block_diagram.png
-    :width: 10%
+    :width: 100%
     :alt: Caravel Management Area Block Diagram
 
 Features
