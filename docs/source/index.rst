@@ -34,6 +34,10 @@ This repository contains an implementation of the management area for
 `Caravel <https://github.com/efabless/caravel.git>`__.
 The management area is SoC generated using Litex containing a VexRiscv core with memory, a flash controller and serial peripherals.
 
+.. image:: _static/block_diagram.png
+    :width: 10%
+    :alt: Caravel Management Area Block Diagram
+
 Features
 =============
 
