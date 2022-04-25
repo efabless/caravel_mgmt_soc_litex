@@ -33,8 +33,8 @@ all: $(SIM)
 # Runing the simulations
 ##############################################################################
 .PHONY: RTL
-.PHONY: RTL.vcd
-RTL.vcd : $(BLOCKS)_tb.v $(BLOCKS).hex
+.PHONY: RTL.vvp
+RTL.vvp : $(BLOCKS)_tb.v $(BLOCKS).hex
 	# this is RTL
 ifeq ($(CONFIG),caravel_user_project)
 	iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
@@ -47,8 +47,8 @@ else
 endif
 
 .PHONY: GL
-.PHONY: GL.vcd
-GL.vcd : $(BLOCKS)_tb.v $(BLOCKS).hex
+.PHONY: GL.vvp
+GL.vvp : $(BLOCKS)_tb.v $(BLOCKS).hex
 	# this is gl
 ifeq ($(CONFIG),caravel_user_project)
 	iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
@@ -61,8 +61,8 @@ else
 endif
 
 .PHONY: GL_SDF
-.PHONY: GL_SDF.vvp
-GL_SDF.vvp : $(BLOCKS)_tb.v $(BLOCKS).hex
+.PHONY: GL_SDF.vcd
+GL_SDF.vcd : $(BLOCKS)_tb.v $(BLOCKS).hex
 	# this is GL_SDF
 ifeq ($(CONFIG),caravel_user_project)
 	cvc64 +interp \
@@ -77,16 +77,17 @@ else
 		-f $(VERILOG_PATH)/includes/includes.gl+sdf.$(CONFIG) \
 		-f $CARAVEL_PATH/gl/__user_project_wrapper.v $< | tee $@.log
 endif
+	echo "logged to $(realpath $@.log )"
 
-GL_SDF : % : %.vvp
+GL_SDF : % : %.vcd
 	# GL_SDF done simulation $(BLOCKS)
 
 
-RTL GL : % : %.vvp
+RTL GL : % : %.vcd
 	# RTL GL done simulating $(BLOCKS)
 
 
-RTL.vvp GL.vvp : %.vvp : %.vcd
+RTL.vcd GL.vcd : %.vcd : %.vvp
 	vvp $< | tee $<.log
 
 
