@@ -47,7 +47,7 @@ MCW_ROOT?=$(PWD)/mgmt_core_wrapper
 MCW ?=LITEX_VEXRISCV
 
 # PDK switch varient
-export PDK?=sky130B
+export PDK?=sky130A
 
 # Install lite version of caravel, (1): caravel-lite, (0): caravel
 MCW_LITE?=1
