@@ -69,8 +69,8 @@ ifeq ($(SIM),RTL)
         -f$(USER_PROJECT_VERILOG)/includes/includes.rtl.$(CONFIG) -o $@ $<
     else
 		iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
-		-f$(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) \
-		-f$(CARAVEL_PATH)/rtl/__user_project_wrapper.v -o $@ $<
+		-f $(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) \
+		-o $@ $(CARAVEL_PATH)/rtl/__user_project_wrapper.v $<
     endif
 endif 
 
@@ -83,7 +83,7 @@ ifeq ($(SIM),GL)
     else
 		iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
         -f$(VERILOG_PATH)/includes/includes.gl.$(CONFIG) \
-		-f$(CARAVEL_PATH)/gl/__user_project_wrapper.v -o $@ $<
+		-o $@ $(CARAVEL_PATH)/gl/__user_project_wrapper.v $<
     endif
 endif 
 
