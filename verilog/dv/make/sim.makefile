@@ -20,6 +20,7 @@ export IVERILOG_DUMPER = fst
 # RTL/GL/GL_SDF
 SIM?=RTL
 
+
 .SUFFIXES:
 
 
@@ -32,7 +33,6 @@ hex:  ${BLOCKS:=.hex}
 ##############################################################################
 # Comiple firmeware
 ##############################################################################
-
 %.elf: %.c $(LINKER_SCRIPT) $(SOURCE_FILES)
 	${GCC_PATH}/${GCC_PREFIX}-gcc -g \
 	-I$(FIRMWARE_PATH) \
@@ -63,22 +63,45 @@ hex:  ${BLOCKS:=.hex}
 
 ## RTL
 ifeq ($(SIM),RTL)
-	iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
-	-f$(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) -o $@ $<
+    ifeq ($(CONFIG),caravel_user_project)
+		iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
+        -f$(VERILOG_PATH)/includes/includes.rtl.caravel \
+        -f$(USER_PROJECT_VERILOG)/includes/includes.rtl.$(CONFIG) -o $@ $<
+    else
+		iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
+		-f $(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) \
+		-o $@ $(CARAVEL_PATH)/rtl/__user_project_wrapper.v $<
+    endif
 endif 
 
 ## GL
 ifeq ($(SIM),GL)
-	iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
-        -f$(VERILOG_PATH)/includes/includes.gl.$(CONFIG) -o $@ $<
+    ifeq ($(CONFIG),caravel_user_project)
+		iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
+        -f$(VERILOG_PATH)/includes/includes.gl.caravel \
+        -f$(USER_PROJECT_VERILOG)/includes/includes.gl.$(CONFIG) -o $@ $<
+    else
+		iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
+        -f$(VERILOG_PATH)/includes/includes.gl.$(CONFIG) \
+		-o $@ $(CARAVEL_PATH)/gl/__user_project_wrapper.v $<
+    endif
 endif 
 
 ## GL+SDF
 ifeq ($(SIM),GL_SDF)
-	cvc64  +interp \
-	+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
-	+change_port_type +dump2fst +fst+parallel2=on   +nointeractive +notimingchecks +mipdopt \
-	 -f $(VERILOG_PATH)/includes/includes.gl+sdf.$(CONFIG) $<
+    ifeq ($(CONFIG),caravel_user_project)
+		cvc64  +interp \
+		+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
+		+change_port_type +dump2fst +fst+parallel2=on   +nointeractive +notimingchecks +mipdopt \
+		-f $(VERILOG_PATH)/includes/includes.gl+sdf.caravel \
+		-f $(USER_PROJECT_VERILOG)/includes/includes.gl+sdf.$(CONFIG) $<
+	else
+		cvc64  +interp \
+		+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
+		+change_port_type +dump2fst +fst+parallel2=on   +nointeractive +notimingchecks +mipdopt \
+		-f $(VERILOG_PATH)/includes/includes.gl+sdf.$(CONFIG) \
+		-f $CARAVEL_PATH/gl/__user_project_wrapper.v $<
+    endif
 endif
 
 %.vcd: %.vvp
@@ -102,14 +125,14 @@ check-env:
 ifndef PDK_ROOT
 	$(error PDK_ROOT is undefined, please export it before running make)
 endif
-ifeq (,$(wildcard $(PDK_ROOT)/sky130A))
-	$(error $(PDK_ROOT)/sky130A not found, please install pdk before running make)
+ifeq (,$(wildcard $(PDK_ROOT)/$(PDK)))
+	$(error $(PDK_ROOT)/$(PDK) not found, please install pdk before running make)
 endif
 ifeq (,$(wildcard $(GCC_PATH)/$(GCC_PREFIX)-gcc ))
 	$(error $(GCC_PATH)/$(GCC_PREFIX)-gcc is not found, please export GCC_PATH and GCC_PREFIX before running make)
 endif
 # check for efabless style installation
-ifeq (,$(wildcard $(PDK_ROOT)/sky130A/libs.ref/*/verilog))
+ifeq (,$(wildcard $(PDK_ROOT)/$(PDK)/libs.ref/*/verilog))
 SIM_DEFINES := ${SIM_DEFINES} -DEF_STYLE
 endif
 

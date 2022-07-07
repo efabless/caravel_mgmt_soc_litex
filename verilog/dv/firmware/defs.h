@@ -66,6 +66,11 @@ extern uint32_t flashio_worker_end;
 #define reg_la1_data (*(volatile uint32_t*) (CSR_LA_OUT_ADDR + 8))
 #define reg_la0_data (*(volatile uint32_t*) (CSR_LA_OUT_ADDR + 12))
 
+#define reg_la3_data_in (*(volatile uint32_t*) CSR_LA_IN_ADDR)
+#define reg_la2_data_in (*(volatile uint32_t*) (CSR_LA_IN_ADDR + 4))
+#define reg_la1_data_in (*(volatile uint32_t*) (CSR_LA_IN_ADDR + 8))
+#define reg_la0_data_in (*(volatile uint32_t*) (CSR_LA_IN_ADDR + 12))
+
 #define reg_la3_oenb (*(volatile uint32_t*) CSR_LA_OE_ADDR)
 #define reg_la2_oenb (*(volatile uint32_t*) (CSR_LA_OE_ADDR + 4))
 #define reg_la1_oenb (*(volatile uint32_t*) (CSR_LA_OE_ADDR + 8))
@@ -76,7 +81,7 @@ extern uint32_t flashio_worker_end;
 #define reg_la1_iena (*(volatile uint32_t*) (CSR_LA_IEN_ADDR + 8))
 #define reg_la0_iena (*(volatile uint32_t*) (CSR_LA_IEN_ADDR + 12))
 
-#define reg_la_sample (*(volatile uint32_t*) 0x25000030)
+#define reg_la_sample (*(volatile uint32_t*)0x25000030)
 
 // User Project Control (0x2300_0000)
 #define reg_mprj_xfer (*(volatile uint32_t*)0x26000000)
@@ -133,6 +138,8 @@ extern uint32_t flashio_worker_end;
 
 // User Project Slaves (0x3000_0000)
 #define reg_mprj_slave (*(volatile uint32_t*)0x30000000)
+#define reg_wb_enable	  (*(volatile uint32_t*)0xf0003800)
+
 
 // Flash Control SPI Configuration (2D00_0000)
 #define reg_spictrl (*(volatile uint32_t*)0x2d000000)         
@@ -153,23 +160,16 @@ extern uint32_t flashio_worker_end;
 #define reg_timer0_data   (*(volatile uint32_t*) CSR_TIMER0_LOAD_ADDR)
 #define reg_timer0_irq_en   (*(volatile uint32_t*) CSR_TIMER0_EV_ENABLE_ADDR)
 
-// Counter-Timer 1 Configuration
-#define reg_timer1_config (*(volatile uint32_t*)0x23000000)
-#define reg_timer1_value  (*(volatile uint32_t*)0x23000004)
-#define reg_timer1_data   (*(volatile uint32_t*)0x23000008)
-
 // Bit fields for Counter-timer configuration
 #define TIMER_ENABLE		0x01
 #define TIMER_ONESHOT		0x02
 #define TIMER_UPCOUNT		0x04
-#define TIMER_CHAIN		0x08
+#define TIMER_CHAIN		    0x08
 #define TIMER_IRQ_ENABLE	0x10
 
 // SPI Master Configuration
-//#define reg_spimaster_config (*(volatile uint32_t*) 0x24000000)
 #define reg_spimaster_control (*(volatile uint32_t*) CSR_SPI_MASTER_CONTROL_ADDR)
 #define reg_spimaster_status (*(volatile uint32_t*) CSR_SPI_MASTER_STATUS_ADDR)
-//#define reg_spimaster_data   (*(volatile uint32_t*) 0x24000004)
 #define reg_spimaster_wdata   (*(volatile uint32_t*) CSR_SPI_MASTER_MOSI_ADDR)
 #define reg_spimaster_rdata   (*(volatile uint32_t*) CSR_SPI_MASTER_MISO_ADDR)
 #define reg_spimaster_cs   (*(volatile uint32_t*) CSR_SPI_MASTER_CS_ADDR)
