@@ -92,7 +92,7 @@ ifeq ($(SIM),GL_SDF)
     ifeq ($(CONFIG),caravel_user_project)
 		cvc64  +interp \
 		+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
-		+change_port_type +dump2fst +fst+parallel2=on   +nointeractive +notimingchecks +mipdopt \
+		+change_port_type +dump2fst +fst+parallel2=on   +nointeractive +mipdopt \
 		-f $(VERILOG_PATH)/includes/includes.gl+sdf.caravel \
 		-f $(USER_PROJECT_VERILOG)/includes/includes.gl+sdf.$(CONFIG) $<
 	else
