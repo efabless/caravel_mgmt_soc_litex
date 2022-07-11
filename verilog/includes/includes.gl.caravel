@@ -56,7 +56,7 @@
 -v $(CARAVEL_PATH)/gl/housekeeping.v		     
 -v $(CARAVEL_PATH)/gl/caravel_clocking.v	     
 -v $(CARAVEL_PATH)/gl/digital_pll.v		     
--v $(CARAVEL_PATH)/gl/__user_project_wrapper.v	     
+#-v $(CARAVEL_PATH)/gl/__user_project_wrapper.v
 -v $(CARAVEL_PATH)/gl/user_id_programming.v	     
 -v $(CARAVEL_PATH)/gl/caravel.v 		     
 

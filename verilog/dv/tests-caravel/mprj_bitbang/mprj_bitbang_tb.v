@@ -202,7 +202,7 @@ module mprj_bitbang_tb;
 
 	    // Give 100us for the startup code to complete and the GPIO output
 	    // value set.
-	    #100000;
+	    #200000;
 
 	    // NOTE:  The SPI takes precedence over the wishbone back-door
 	    // access and the GPIO lines will not get set from the program
@@ -418,6 +418,7 @@ module mprj_bitbang_tb;
 		`else
 			$display("Monitor: Test GPIO bit-bang (RTL) Passed");
 		`endif
+		#5000
  	    $finish;
 	end
 
@@ -444,7 +445,10 @@ module mprj_bitbang_tb;
 	assign mprj_io[3] = hk_csb;
 	assign mprj_io[2] = hk_sdi;
 	assign SDO = mprj_io[1];
-	
+
+    assign mprj_io[3] = 1'b1;  // Force CSB high.
+	assign mprj_io[0] = 1'b0;  // Disable debug mode
+
 	caravel uut (
 		.vddio	  (VDD3V3),
 		.vssio	  (VSS),

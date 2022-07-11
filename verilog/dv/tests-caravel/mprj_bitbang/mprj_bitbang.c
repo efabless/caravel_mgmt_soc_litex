@@ -34,9 +34,10 @@ void main()
     /* config for the management SoC to apply output.		*/
 
     reg_mprj_io_35 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_datal = 0xffffffff;
+    reg_mprj_datal = 0x00000000;
+//    reg_mprj_datal = 0xffffffff;
     reg_mprj_datah = 0x0000003f;
 
-    return;
+    while(1) {};
 }
 
