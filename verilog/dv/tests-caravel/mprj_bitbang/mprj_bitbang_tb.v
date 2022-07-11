@@ -397,7 +397,8 @@ module mprj_bitbang_tb;
 	    // There is no point in resetting bit bang mode because at
 	    // this point the SPI pins just got disabled by loading zeros.
 
-	    #10000;
+	    //#10000;
+	    #5000;
 
 	    // Timeout condition
 		`ifdef GL
@@ -418,7 +419,7 @@ module mprj_bitbang_tb;
 		`else
 			$display("Monitor: Test GPIO bit-bang (RTL) Passed");
 		`endif
-		#5000
+		#1000
  	    $finish;
 	end
 
