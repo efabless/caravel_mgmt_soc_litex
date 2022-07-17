@@ -40,18 +40,5 @@ void main()
 
     while(1) {};
 
-    reg_mprj_datal = 0x00000000;
-    reg_mprj_datah = 0x0000003f;
-    reg_mprj_datal = 0x00000000;
-    reg_mprj_datah = 0x0000003f;
-    reg_mprj_datal = 0x00000000;
-    reg_mprj_datah = 0x0000003f;
-    reg_mprj_datal = 0x00000000;
-    reg_mprj_datah = 0x0000003f;
-    reg_mprj_datal = 0x00000000;
-    reg_mprj_datah = 0x0000003f;
-    reg_mprj_datal = 0x00000000;
-    reg_mprj_datah = 0x0000003f;
-
 }
 

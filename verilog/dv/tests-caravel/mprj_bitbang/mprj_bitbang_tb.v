@@ -447,7 +447,7 @@ module mprj_bitbang_tb;
 	assign mprj_io[2] = hk_sdi;
 	assign SDO = mprj_io[1];
 
-    assign mprj_io[3] = 1'b1;  // Force CSB high.
+    // assign mprj_io[3] = 1'b1;  // Force CSB high
 	assign mprj_io[0] = 1'b0;  // Disable debug mode
 
 	caravel uut (
