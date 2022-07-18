@@ -63,7 +63,7 @@ Disassembly of section .text:
 100000c4:	00000513          	li	a0,0
 100000c8:	00000593          	li	a1,0
 100000cc:	00000617          	auipc	a2,0x0
-100000d0:	17c60613          	addi	a2,a2,380 # 10000248 <_erodata>
+100000d0:	17c60613          	addi	a2,a2,380 # 10000248 <_fdata_rom>
 
 100000d4 <data_loop>:
 100000d4:	00b50c63          	beq	a0,a1,100000ec <bss_init>
@@ -130,15 +130,15 @@ Disassembly of section .text:
 10000188:	00000513          	li	a0,0
 1000018c:	fc5ff0ef          	jal	ra,10000150 <irq_setmask>
 10000190:	f00037b7          	lui	a5,0xf0003
-10000194:	03878793          	addi	a5,a5,56 # f0003038 <_erodata+0xe0002df0>
+10000194:	03878793          	addi	a5,a5,56 # f0003038 <_fdata_rom+0xe0002df0>
 10000198:	00a00713          	li	a4,10
 1000019c:	00e7a023          	sw	a4,0(a5)
 100001a0:	f00037b7          	lui	a5,0xf0003
-100001a4:	03c78793          	addi	a5,a5,60 # f000303c <_erodata+0xe0002df4>
+100001a4:	03c78793          	addi	a5,a5,60 # f000303c <_fdata_rom+0xe0002df4>
 100001a8:	00020737          	lui	a4,0x20
 100001ac:	00e7a023          	sw	a4,0(a5)
 100001b0:	00100713          	li	a4,1
-100001b4:	00e01023          	sh	a4,0(zero) # 0 <flag>
+100001b4:	00e01023          	sh	a4,0(zero) # 0 <__DYNAMIC>
 100001b8:	00000013          	nop
 100001bc:	00c12083          	lw	ra,12(sp)
 100001c0:	00812403          	lw	s0,8(sp)
@@ -168,15 +168,15 @@ Disassembly of section .text:
 10000208:	00812623          	sw	s0,12(sp)
 1000020c:	01010413          	addi	s0,sp,16
 10000210:	260007b7          	lui	a5,0x26000
-10000214:	0b078793          	addi	a5,a5,176 # 260000b0 <_erodata+0x15fffe68>
+10000214:	0b078793          	addi	a5,a5,176 # 260000b0 <_fdata_rom+0x15fffe68>
 10000218:	00002737          	lui	a4,0x2
 1000021c:	80970713          	addi	a4,a4,-2039 # 1809 <_ebss+0x1801>
 10000220:	00e7a023          	sw	a4,0(a5)
 10000224:	260007b7          	lui	a5,0x26000
-10000228:	00c78793          	addi	a5,a5,12 # 2600000c <_erodata+0x15fffdc4>
+10000228:	00c78793          	addi	a5,a5,12 # 2600000c <_fdata_rom+0x15fffdc4>
 1000022c:	0007a023          	sw	zero,0(a5)
 10000230:	260007b7          	lui	a5,0x26000
-10000234:	01078793          	addi	a5,a5,16 # 26000010 <_erodata+0x15fffdc8>
+10000234:	01078793          	addi	a5,a5,16 # 26000010 <_fdata_rom+0x15fffdc8>
 10000238:	03f00713          	li	a4,63
 1000023c:	00e7a023          	sw	a4,0(a5)
 10000240:	0000006f          	j	10000240 <main+0x3c>

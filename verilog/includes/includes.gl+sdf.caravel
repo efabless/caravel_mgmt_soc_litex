@@ -38,7 +38,7 @@ $CARAVEL_PATH/gl/spare_logic_block.v
 $CARAVEL_PATH/gl/housekeeping.v 		
 $CARAVEL_PATH/gl/caravel_clocking.v		
 $CARAVEL_PATH/gl/digital_pll.v  		
-$CARAVEL_PATH/gl/__user_project_wrapper.v	
+// $CARAVEL_PATH/gl/__user_project_wrapper.v	
 $CARAVEL_PATH/gl/user_id_programming.v  	
 $CARAVEL_PATH/gl/caravel.v			
 
