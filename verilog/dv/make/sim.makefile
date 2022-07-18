@@ -88,10 +88,19 @@ endif
 
 ## GL+SDF
 ifeq ($(SIM),GL_SDF)
-	cvc64  +interp \
-	+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
-	+change_port_type +dump2fst +fst+parallel2=on   +nointeractive +notimingchecks +mipdopt \
-	 -f $(VERILOG_PATH)/includes/includes.gl+sdf.$(CONFIG) $<
+    ifeq ($(CONFIG),caravel_user_project)
+		cvc64  +interp \
+		+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
+		+change_port_type +dump2fst +fst+parallel2=on   +nointeractive +mipdopt \
+		-f$(VERILOG_PATH)/includes/includes.sdf+gl.caravel \
+        -f$(USER_PROJECT_VERILOG)/includes/includes.gl.$(CONFIG) $<
+    else
+		cvc64  +interp \
+		+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY=#0 +define+ENABLE_SDF \
+		+change_port_type +dump2fst +fst+parallel2=on   +nointeractive +mipdopt \
+		-f $(VERILOG_PATH)/includes/includes.gl+sdf.$(CONFIG) \
+		-o $@ $(CARAVEL_PATH)/gl/__user_project_wrapper.v $<
+    endif
 endif
 
 %.vcd: %.vvp
