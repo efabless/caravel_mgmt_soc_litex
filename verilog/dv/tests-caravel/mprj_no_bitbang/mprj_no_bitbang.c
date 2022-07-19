@@ -23,6 +23,7 @@
 /*
  *	User Project IO Control by Bit-bang Method Test
  */
+volatile int x[100] = { 0 };
 
 void main()
 {
@@ -33,9 +34,9 @@ void main()
     /* However, the internal config must match the controller	*/
     /* config for the management SoC to apply output.		*/
 
-    reg_mprj_io_35 = GPIO_MODE_MGMT_STD_OUTPUT;
-    reg_mprj_datal = 0x00000000;
-//    reg_mprj_datal = 0xffffffff;
+    reg_mprj_io_31 = GPIO_MODE_MGMT_STD_OUTPUT;
+//    reg_mprj_datal = 0x00000000;
+    reg_mprj_datal = 0xffffffff;
     reg_mprj_datah = 0x0000003f;
 
     reg_mprj_xfer = 1;
