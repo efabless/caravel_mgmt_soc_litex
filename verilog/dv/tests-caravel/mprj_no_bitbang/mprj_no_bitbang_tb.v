@@ -228,8 +228,8 @@ module mprj_no_bitbang_tb;
 	end
 
 	initial begin
-	    // Wait for channel 35 to go high
-	    wait(mprj_io[35] == 1'b1);
+	    // Wait for channel 31 to go high
+	    wait(mprj_io[31] == 1'b1);
 
 		`ifdef GL
 			$display("Monitor: Test GPIO bit-bang (GL) Passed");

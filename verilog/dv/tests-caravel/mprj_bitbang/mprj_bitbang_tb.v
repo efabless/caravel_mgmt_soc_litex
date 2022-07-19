@@ -484,6 +484,10 @@ module mprj_bitbang_tb;
 	    // This moves ahead of the bidirectional registers at the front.
 	    bitbang_thirteen_clocks();
 	    bitbang_thirteen_clocks();
+	    bitbang_thirteen_clocks();
+	    bitbang_thirteen_clocks();
+	    bitbang_thirteen_clocks();
+	    bitbang_thirteen_clocks();
 	    bitbang_load();
 
 	    // There is no point in resetting bit bang mode because at
@@ -503,8 +507,8 @@ module mprj_bitbang_tb;
 	end
 
 	initial begin
-	    // Wait for channel 35 to go high
-	    wait(mprj_io[35] == 1'b1);
+	    // Wait for channel 31 to go high
+	    wait(mprj_io[31] == 1'b1);
 
 		`ifdef GL
 			$display("Monitor: Test GPIO bit-bang (GL) Passed");
