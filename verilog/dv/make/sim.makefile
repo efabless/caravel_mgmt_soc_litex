@@ -17,7 +17,7 @@
 export IVERILOG_DUMPER = fst
 
 # RTL/GL/GL_SDF
-SIM?=RTL
+SIM ?= RTL
 SIMS = RTL GL GL_SDF
 
 VCDS = RTL.vcd GL.vcd
@@ -28,14 +28,13 @@ VVPS = $(foreach i,$(SIMS),$(i).vvp)
 all: $(SIM)
 
 
-
 ##############################################################################
 # Runing the simulations
 ##############################################################################
 .PHONY: RTL
 .PHONY: RTL.vvp
 RTL.vvp : $(BLOCKS)_tb.v $(BLOCKS).hex
-	# this is RTL
+	# running RTL
 ifeq ($(CONFIG),caravel_user_project)
 	iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
 		-f$(VERILOG_PATH)/includes/includes.rtl.caravel \
@@ -43,49 +42,46 @@ ifeq ($(CONFIG),caravel_user_project)
 else
 	iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
 		-f$(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) \
-		-f$(CARAVEL_PATH)/rtl/__user_project_wrapper.v -o $@ $<
+		$(CARAVEL_PATH)/rtl/__user_project_wrapper.v -o $@ $<
 endif
 
 .PHONY: GL
 .PHONY: GL.vvp
 GL.vvp : $(BLOCKS)_tb.v $(BLOCKS).hex
-	# this is gl
+	# running GL
 ifeq ($(CONFIG),caravel_user_project)
 	iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
-        -f$(VERILOG_PATH)/includes/includes.gl.caravel \
-        -f$(USER_PROJECT_VERILOG)/includes/includes.gl.$(CONFIG) -o $@ $<
+		-f$(VERILOG_PATH)/includes/includes.gl.caravel \
+		-f$(USER_PROJECT_VERILOG)/includes/includes.gl.$(CONFIG) -o $@ $<
 else
 	iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
-        -f$(VERILOG_PATH)/includes/includes.gl.$(CONFIG) \
-		-f$(CARAVEL_PATH)/gl/__user_project_wrapper.v -o $@ $<
+		-f$(VERILOG_PATH)/includes/includes.gl.$(CONFIG) \
+		$(CARAVEL_PATH)/gl/__user_project_wrapper.v -o $@ $<
 endif
 
 .PHONY: GL_SDF
 .PHONY: GL_SDF.vcd
 GL_SDF.vcd : $(BLOCKS)_tb.v $(BLOCKS).hex
-	# this is GL_SDF
 ifeq ($(CONFIG),caravel_user_project)
 	cvc64 +interp \
 		+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
-		+change_port_type +dump2fst +fst+parallel2=on   +nointeractive \
+		+change_port_type +dump2fst +fst+parallel2=on +nointeractive +mipdopt \
 		-f $(VERILOG_PATH)/includes/includes.gl+sdf.caravel \
 		-f $(USER_PROJECT_VERILOG)/includes/includes.gl+sdf.$(CONFIG) $< | tee $@.log
 else
 	cvc64 +interp \
 		+define+SIM +define+FUNCTIONAL +define+GL +define+USE_POWER_PINS +define+UNIT_DELAY +define+ENABLE_SDF \
-		+change_port_type +dump2fst +fst+parallel2=on   +nointeractive \
+		+change_port_type +dump2fst +fst+parallel2=on +nointeractive +mipdopt \
 		-f $(VERILOG_PATH)/includes/includes.gl+sdf.$(CONFIG) \
-		-f $CARAVEL_PATH/gl/__user_project_wrapper.v $< | tee $@.log
+		-f $(CARAVEL_PATH)/gl/__user_project_wrapper.v $< | tee $@.log
 endif
 	echo "logged to $(realpath $@.log )"
 
 GL_SDF : % : %.vcd
 	# GL_SDF done simulation $(BLOCKS)
 
-
 RTL GL : % : %.vcd
 	# RTL GL done simulating $(BLOCKS)
-
 
 RTL.vcd GL.vcd : %.vcd : %.vvp
 	vvp $< | tee $<.log
@@ -115,7 +111,6 @@ RTL.vcd GL.vcd : %.vcd : %.vvp
 
 %.bin: %.elf
 	${GCC_PATH}/${GCC_PREFIX}-objcopy -O binary $< /dev/stdout | tail -c +1048577 > $@
-
 
 
 # ---- Clean ----
