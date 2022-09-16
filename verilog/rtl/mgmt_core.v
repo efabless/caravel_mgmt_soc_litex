@@ -8373,6 +8373,10 @@ always @(posedge sys_clk) begin
 end
 
 sky130_sram_2kbyte_1rw1r_32x512_8 sky130_sram_2kbyte_1rw1r_32x512_8(
+`ifdef USE_POWER_PINS
+	.vccd1(VPWR),
+	.vssd1(VGND),
+`endif
 	.addr0(sram_bus_adr[8:0]),
 	.addr1(sram_adr1),
 	.clk0(sys_clk),
