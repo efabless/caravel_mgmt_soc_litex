@@ -8373,6 +8373,10 @@ always @(posedge sys_clk) begin
 end
 
 sky130_sram_2kbyte_1rw1r_32x512_8 sky130_sram_2kbyte_1rw1r_32x512_8(
+`ifdef USE_POWER_PINS
+	.vccd1(VPWR),
+	.vssd1(VGND),
+`endif
 	.addr0(sram_bus_adr[8:0]),
 	.addr1(sram_adr1),
 	.clk0(sys_clk),
@@ -8421,6 +8425,10 @@ assign uart_rx_fifo_wrport_dat_r = memdat_2;
 assign uart_rx_fifo_rdport_dat_r = memdat_3;
 
 VexRiscv VexRiscv(
+`ifdef USE_POWER_PINS
+	.VPWR(VPWR),
+	.VGND(VGND),
+`endif
 	.clk(sys_clk),
 	.dBusWishbone_ACK(mgmtsoc_dbus_dbus_ack),
 	.dBusWishbone_DAT_MISO(mgmtsoc_dbus_dbus_dat_r),
