@@ -27,7 +27,8 @@ export FIRMWARE_PATH = $(CORE_VERILOG_PATH)/dv/firmware
 ## Caravel Verilog for Integration Tests
 #######################################################################
 
-export CARAVEL_VERILOG_PATH ?=  $(DESIGNS)/caravel/verilog
+# export CARAVEL_VERILOG_PATH ?=  $(DESIGNS)/caravel/verilog
+export CARAVEL_VERILOG_PATH ?=  $(DESIGNS)/verilog
 export CORE_VERILOG_PATH    ?=  $(DESIGNS)/caravel_mgmt_soc_litex/verilog
 export USER_PROJECT_VERILOG ?=  $(DESIGNS)/verilog
 
