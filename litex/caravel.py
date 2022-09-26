@@ -198,7 +198,7 @@ class MGMTSoC(SoCMini):
 
         # Add a wb port for external slaves housekeeping
         hk = wishbone.Interface()
-        self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x08000000))
+        self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x02000000))
         hk_ports = platform.request("hk")
         self.comb += hk_ports.stb_o.eq(hk.stb)
         self.comb += hk_ports.cyc_o.eq(hk.cyc)
