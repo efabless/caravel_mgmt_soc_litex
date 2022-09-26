@@ -18,7 +18,8 @@ all: mgmt_soc
 
 mgmt_soc: caravel.py
 	python3 caravel.py
-	cp build/caravel_platform/gateware/mgmt_core.v ../verilog/rtl/.
+	python3 add_debug_logic.py
+	cp build/caravel_platform/gateware/mgmt_core_modified.v ../verilog/rtl/mgmt_core.v
 	cp -R build/caravel_platform/software/include/generated ../verilog/dv/.
 
 setup:

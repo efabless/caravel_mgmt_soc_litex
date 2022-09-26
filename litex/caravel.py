@@ -94,6 +94,7 @@ class MGMTSoC(SoCMini):
                 "flash": 0x10000000,
                 "mprj": 0x30000000,
                 "hk": 0x26000000,
+                "hk2": 0x2c000000,
                 "csr": 0x20000000,
                 # "csr": 0xf0000000,
             }
@@ -183,7 +184,7 @@ class MGMTSoC(SoCMini):
         # Add a wb port for external slaves user_project
         mprj_ports = platform.request("mprj")
         mprj = wishbone.Interface()
-        self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x0100000))
+        self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x10000000))
         self.submodules.mprj_wb_iena = GPIOOut(mprj_ports.wb_iena)
         self.comb += mprj_ports.cyc_o.eq(mprj.cyc)
         self.comb += mprj_ports.stb_o.eq(mprj.stb)
@@ -197,7 +198,7 @@ class MGMTSoC(SoCMini):
 
         # Add a wb port for external slaves housekeeping
         hk = wishbone.Interface()
-        self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
+        self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x08000000))
         hk_ports = platform.request("hk")
         self.comb += hk_ports.stb_o.eq(hk.stb)
         self.comb += hk_ports.cyc_o.eq(hk.cyc)
