@@ -61,6 +61,10 @@ module pll_tb;
 
 	initial begin
 		clock = 0;
+        `ifndef SIM
+		    $display("Monitor: Testbench supports RTL only");
+		    $finish;
+		`endif
 	end
 
 	initial begin
