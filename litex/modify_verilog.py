@@ -11,6 +11,7 @@ addline = addfile.readline()
 
 while line != '':
      outfile.write(str(line))
+     last_line = line
      line = infile.readline()
 
      # add logic for debug_uart reset initialization
@@ -36,6 +37,14 @@ while line != '':
           outfile.write("    .vssd1(VGND),\n")
           outfile.write("`endif\n")
           line = infile.readline()
+
+     # remove duplicate assign statements for uart
+     while line.startswith("assign {uart_rx_fifo_fifo_out_last, uart_rx_fifo_fifo_out_first, uart_rx_fifo_fifo_out_payload_data}") or \
+           line.startswith("assign {uart_tx_fifo_fifo_out_last, uart_tx_fifo_fifo_out_first, uart_tx_fifo_fifo_out_payload_data}"):
+          if line == last_line:
+               line = infile.readline()
+          else:
+               break
 
 infile.close()
 outfile.close()
