@@ -24,16 +24,16 @@ while line != '':
      if line.startswith("sky130_sram_2kbyte_1rw1r_32x512_8"):
           outfile.write(str(line))
           outfile.write("`ifdef USE_POWER_PINS\n")
-          outfile.write("    .VPWR(VPWR),\n")
-          outfile.write("    .VGND(VGND),\n")
+          outfile.write("    .vccd1(VPWR),\n")
+          outfile.write("    .vssd1(VGND),\n")
           outfile.write("`endif\n")
           line = infile.readline()
 
      if line.startswith("VexRiscv VexRiscv("):
           outfile.write(str(line))
           outfile.write("`ifdef USE_POWER_PINS\n")
-          outfile.write("    .VPWR(VPWR),\n")
-          outfile.write("    .VGND(VGND),\n")
+          outfile.write("    .vccd1(VPWR),\n")
+          outfile.write("    .vssd1(VGND),\n")
           outfile.write("`endif\n")
           line = infile.readline()
 
