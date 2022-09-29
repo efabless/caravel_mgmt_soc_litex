@@ -94,7 +94,6 @@ class MGMTSoC(SoCMini):
                 "flash": 0x10000000,
                 "mprj": 0x30000000,
                 "hk": 0x26000000,
-                "hk2": 0x2c000000,
                 "csr": 0x20000000,
                 # "csr": 0xf0000000,
             }
