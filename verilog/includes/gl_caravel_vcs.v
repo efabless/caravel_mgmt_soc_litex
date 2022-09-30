@@ -56,7 +56,7 @@
 `include "caravel/verilog/gl/housekeeping.v"		     
 `include "caravel/verilog/gl/caravel_clocking.v"	     
 `include "caravel/verilog/gl/digital_pll.v"		     
-//`include "caravel/verilog/gl/__user_project_wrapper.v"
+`include "caravel/verilog/gl/__user_project_wrapper.v"
 `include "caravel/verilog/gl/user_id_programming.v"	     
 `include "caravel/verilog/gl/caravel.v" 		     
 
