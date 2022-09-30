@@ -41,6 +41,7 @@ extern uint32_t flashio_worker_end;
 #define reg_uart_data   (*(volatile uint32_t*) CSR_UART_RXTX_ADDR)
 #define reg_uart_txfull   (*(volatile uint32_t*) CSR_UART_TXFULL_ADDR)
 #define reg_uart_enable (*(volatile uint32_t*) CSR_UART_ENABLED_OUT_ADDR)
+#define reg_uart_irq_en    (*(volatile uint32_t*) CSR_UART_EV_ENABLE_ADDR)
 
 // DEBUG (0x2000_0000)
 //#define reg_uart_clkdiv (*(volatile uint32_t*)0x20000000)
@@ -140,6 +141,10 @@ extern uint32_t flashio_worker_end;
 #define reg_mprj_slave (*(volatile uint32_t*)0x30000000)
 #define reg_wb_enable	  (*(volatile uint32_t*)0xf0003800)
 
+// Debug reg DEBUG_ON
+#define reg_debug_1 (*(volatile uint32_t*)0x300FFFF8)
+#define reg_debug_2 (*(volatile uint32_t*)0x300FFFFC)
+
 
 // Flash Control SPI Configuration (2D00_0000)
 #define reg_spictrl (*(volatile uint32_t*)0x2d000000)         
@@ -207,6 +212,14 @@ extern uint32_t flashio_worker_end;
 // Bit fields for reg_irq_source
 #define IRQ7_SOURCE 0x01
 #define IRQ8_SOURCE 0x02
+
+// Added IRQ bit enable
+#define reg_user0_irq_en   (*(volatile uint32_t*) CSR_USER_IRQ_0_EV_ENABLE_ADDR)
+#define reg_user1_irq_en   (*(volatile uint32_t*) CSR_USER_IRQ_1_EV_ENABLE_ADDR)
+#define reg_user2_irq_en   (*(volatile uint32_t*) CSR_USER_IRQ_2_EV_ENABLE_ADDR)
+#define reg_user3_irq_en   (*(volatile uint32_t*) CSR_USER_IRQ_3_EV_ENABLE_ADDR)
+#define reg_user4_irq_en   (*(volatile uint32_t*) CSR_USER_IRQ_4_EV_ENABLE_ADDR) // mprj[7]
+#define reg_user5_irq_en   (*(volatile uint32_t*) CSR_USER_IRQ_5_EV_ENABLE_ADDR)
 
 // Individual bit fields for the GPIO pad control
 #define MGMT_ENABLE	  0x0001
