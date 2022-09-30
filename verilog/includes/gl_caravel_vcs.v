@@ -1,26 +1,26 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// VIP
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-`include "mgmt_core_wrapper/verilog/dv/vip/tbuart.v"
-`include "mgmt_core_wrapper/verilog/dv/vip/spiflash.v"
-`include "mgmt_core_wrapper/verilog/dv/vip/wb_rw_test.v"
+`include "caravel_mgmt_soc_litex/verilog/dv/vip/tbuart.v"
+`include "caravel_mgmt_soc_litex/verilog/dv/vip/spiflash.v"
+`include "caravel_mgmt_soc_litex/verilog/dv/vip/wb_rw_test.v"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// DFFRAM - either behavioral or GL
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //// DFFRAM Full GL
-`include "mgmt_core_wrapper/verilog/gl/DFFRAM.v"
+`include "caravel_mgmt_soc_litex/verilog/gl/DFFRAM.v"
 
 //// DFFRAM Behavioral Model
-//`include "mgmt_core_wrapper/verilog/dv/vip/DFFRAM.v"
+//`include "caravel_mgmt_soc_litex/verilog/dv/vip/DFFRAM.v"
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Mgmt Core Wrapper
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-`include "mgmt_core_wrapper/verilog/rtl/defines.v"
-`include "mgmt_core_wrapper/verilog/gl/mgmt_core.v"
-`include "mgmt_core_wrapper/verilog/gl/mgmt_core_wrapper.v"
+`include "caravel_mgmt_soc_litex/verilog/rtl/defines.v"
+`include "caravel_mgmt_soc_litex/verilog/gl/mgmt_core.v"
+`include "caravel_mgmt_soc_litex/verilog/gl/mgmt_core_wrapper.v"
 
 // Caravel
 
@@ -83,13 +83,13 @@
 
 
 //// STD CELLS - they need to be below the defines.v" files 
-////vmgmt_core_wrapper/verilog/cvc-pdk/sky130_ef_io.v"
-//`include "mgmt_core_wrapper/verilog/cvc-pdk/sky130_fd_io.v"
-//`include "mgmt_core_wrapper/verilog/cvc-pdk/primitives_hd.v"
-//`include "mgmt_core_wrapper/verilog/cvc-pdk/sky130_fd_sc_hd.v"
-//`include "mgmt_core_wrapper/verilog/cvc-pdk/primitives_hvl.v"
-//`include "mgmt_core_wrapper/verilog/cvc-pdk/sky130_fd_sc_hvl.v"
- `include "mgmt_core_wrapper/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v"
+////vcaravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_ef_io.v"
+//`include "caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_fd_io.v"
+//`include "caravel_mgmt_soc_litex/verilog/cvc-pdk/primitives_hd.v"
+//`include "caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_fd_sc_hd.v"
+//`include "caravel_mgmt_soc_litex/verilog/cvc-pdk/primitives_hvl.v"
+//`include "caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_fd_sc_hvl.v"
+ `include "caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v"
 
 
 
