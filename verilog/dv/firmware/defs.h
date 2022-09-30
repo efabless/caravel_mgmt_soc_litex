@@ -163,6 +163,7 @@ extern uint32_t flashio_worker_end;
 #define reg_timer0_update  (*(volatile uint32_t*) CSR_TIMER0_UPDATE_VALUE_ADDR)
 #define reg_timer0_value  (*(volatile uint32_t*) CSR_TIMER0_VALUE_ADDR)
 #define reg_timer0_data   (*(volatile uint32_t*) CSR_TIMER0_LOAD_ADDR)
+#define reg_timer0_data_periodic  (*(volatile uint32_t*) CSR_TIMER0_RELOAD_ADDR)
 #define reg_timer0_irq_en   (*(volatile uint32_t*) CSR_TIMER0_EV_ENABLE_ADDR)
 
 // Bit fields for Counter-timer configuration
