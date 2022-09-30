@@ -56,7 +56,8 @@
 `include "caravel/verilog/gl/housekeeping.v"		     
 `include "caravel/verilog/gl/caravel_clocking.v"	     
 `include "caravel/verilog/gl/digital_pll.v"		     
-`include "caravel/verilog/gl/__user_project_wrapper.v"
+`include "caravel/verilog/rtl/debug_regs.v"
+`include "caravel/verilog/rtl/__user_project_wrapper.v" // TODO: use gl wrapper when integrating with user project
 `include "caravel/verilog/gl/user_id_programming.v"	     
 `include "caravel/verilog/gl/caravel.v" 		     
 
