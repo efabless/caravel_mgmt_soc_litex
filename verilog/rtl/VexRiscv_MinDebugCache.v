@@ -45,8 +45,8 @@
 
 module VexRiscv (
 `ifdef USE_POWER_PINS
-  inout      	      VPWR,
-  inout		      VGND,
+    inout vccd1,	    /* 1.8V domain */
+    inout vssd1,
 `endif
   input      [31:0]   externalResetVector,
   input               timerInterrupt,

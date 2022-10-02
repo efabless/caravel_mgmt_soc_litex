@@ -14,15 +14,18 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-all: mgmt_soc
 
-mgmt_soc: caravel.py
-	python3 caravel.py
-	python3 modify_verilog.py
-	cp build/caravel_platform/gateware/mgmt_core_modified.v ../verilog/rtl/mgmt_core.v
-	cp -R build/caravel_platform/software/include/generated ../verilog/dv/.
+ 
+PWDD := $(shell pwd)
+BLOCKS := $(shell basename $(PWDD))
 
-setup:
-	pip3 install -r requirements.txt
+# ---- Include Partitioned Makefiles ----
 
-.PHONY: clean hex all
+CONFIG = caravel
+
+include ../../make/env.makefile
+include ../../make/var.makefile
+include ../../make/cpu.makefile
+include ../../make/sim.makefile
+
+
