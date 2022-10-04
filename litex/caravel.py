@@ -278,6 +278,14 @@ class MGMTSoC(SoCMini):
             setattr(self.submodules,"user_irq_"+str(i),GPIOIn(user_irq[i], with_irq=True))
             self.irq.add("user_irq_"+str(i), use_loc_if_exists=True)
 
+        # Pass-thru clock and reset
+        clk_in = platform.request("clk_in")
+        clk_out = platform.request("clk_out")
+        reset_in = platform.request("reset_in")
+        reset_out = platform.request("reset_out")
+        self.comb += clk_out.eq(clk_in)
+        self.comb += reset_out.eq(reset_in)
+
     #####################
 
     def new_add_spi_flash(self, name="flash", mode="4x", dummy_cycles=None, clk_freq=None, module=None, phy=None, rate="1:1", **kwargs):
