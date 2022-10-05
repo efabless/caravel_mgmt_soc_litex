@@ -57,7 +57,7 @@ class OpenRAM(Module):
 
             # ro port
             i_clk1    = self.clk1,
-            i_addr1   = self.adr1,
+            i_addr1   = self.adr1[:9],
             i_csb1    = self.cs_b1,
             o_dout1   = self.dataout1
         )

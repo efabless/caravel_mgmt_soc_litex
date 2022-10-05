@@ -233,9 +233,9 @@ module mgmt_core_wrapper (
         .mgmt_soc_dff_A(mgmt_soc_dff_A),
 
         // SRAM read-only access from housekeeping
-        .sram_ro_clk(no_connect1),
-        .sram_ro_csb(no_connect2),
-        .sram_ro_addr(no_connect3),
+        .sram_ro_clk(sram_ro_clk),
+        .sram_ro_csb(sram_ro_csb),
+        .sram_ro_addr(sram_ro_addr),
         .sram_ro_data(sram_ro_data)
     );
 
