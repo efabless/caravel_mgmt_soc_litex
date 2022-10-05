@@ -6,6 +6,10 @@ module mgmt_core(
     inout VPWR,	    /* 1.8V domain */
     inout VGND,
 `endif
+	input wire clk_in,
+	input wire resetn_in,
+	output wire clk_out,
+	output wire resetn_out,
 	input wire core_clk,
 	input wire core_rstn,
 	output wire mgmt_soc_dff_EN,
@@ -8462,5 +8466,8 @@ VexRiscv VexRiscv(
 	.iBusWishbone_STB(mgmtsoc_ibus_ibus_stb),
 	.iBusWishbone_WE(mgmtsoc_ibus_ibus_we)
 );
+
+assign clk_out = clk_in;
+assign resetn_out = resetn_in;
 
 endmodule
