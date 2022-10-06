@@ -281,10 +281,10 @@ class MGMTSoC(SoCMini):
         # Pass-thru clock and reset
         clk_in = platform.request("clk_in")
         clk_out = platform.request("clk_out")
-        reset_in = platform.request("reset_in")
-        reset_out = platform.request("reset_out")
+        resetn_in = platform.request("resetn_in")
+        resetn_out = platform.request("resetn_out")
         self.comb += clk_out.eq(clk_in)
-        self.comb += reset_out.eq(reset_in)
+        self.comb += resetn_out.eq(resetn_in)
 
     #####################
 

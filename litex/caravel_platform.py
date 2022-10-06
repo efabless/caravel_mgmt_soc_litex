@@ -17,8 +17,8 @@ _io = [
     # pass-thru pins for clock and reset
     ("clk_in", 0, Pins(1)),
     ("clk_out", 0, Pins(1)),
-    ("reset_in", 0, Pins(1)),
-    ("reset_out", 0, Pins(1)),
+    ("resetn_in", 0, Pins(1)),
+    ("resetn_out", 0, Pins(1)),
 
     # GPIO mgmt
     ("gpio", 0,
