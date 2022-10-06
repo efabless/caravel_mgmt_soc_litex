@@ -106,12 +106,12 @@ _io = [
     ),
 
     # SRAM read-only access from housekeeping
-    ("sram_ro", 0,
-     Subsignal("clk", Pins(1)),
-     Subsignal("csb", Pins(1)),
-     Subsignal("addr", Pins(8)),
-     Subsignal("data", Pins(32)),
-     ),
+    # ("sram_ro", 0,
+    #  Subsignal("clk", Pins(1)),
+    #  Subsignal("csb", Pins(1)),
+    #  Subsignal("addr", Pins(8)),
+    #  Subsignal("data", Pins(32)),
+    #  ),
 
     ("trap", 0, Pins(1)),
 
