@@ -80,7 +80,9 @@ extern uint32_t flashio_worker_end;
 
 // User Project Slaves (0x3000_0000)
 #define reg_mprj_slave (*(volatile uint32_t*)0x30000000)
-#define reg_wb_enable	  (*(volatile uint32_t*)0xf0003800)
+
+#define reg_wb_enable	  	(*(volatile uint32_t*) CSR_MPRJ_WB_IENA_OUT_ADDR)
+#define reg_user_irq_enable	(*(volatile uint32_t*) CSR_USER_IRQ_ENA_OUT_ADDR)
 
 // Counter-Timer 0 Configuration
 #define reg_timer0_config (*(volatile uint32_t*) CSR_TIMER0_EN_ADDR)
