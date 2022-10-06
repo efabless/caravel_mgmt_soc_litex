@@ -126,11 +126,11 @@ module mgmt_core_wrapper (
 );
 
     // Memory Interface 
-    wire mgmt_soc_dff_EN;
-    wire [3:0] mgmt_soc_dff_WE;
-    wire [7:0] mgmt_soc_dff_A;
-    wire [31:0] mgmt_soc_dff_Di;
-    wire [31:0] mgmt_soc_dff_Do;
+    //wire mgmt_soc_dff_EN;
+    //wire [3:0] mgmt_soc_dff_WE;
+    //wire [7:0] mgmt_soc_dff_A;
+    //wire [31:0] mgmt_soc_dff_Di;
+    //wire [31:0] mgmt_soc_dff_Do;
 
 // Signals below are sram_ro ports that left no_connect
 // as they are tied down inside mgmt_core
@@ -223,35 +223,36 @@ module mgmt_core_wrapper (
     	.spi_mosi(spi_sdo),
     	.debug_in(debug_in),
     	.debug_out(debug_out),
-    	.debug_oeb(debug_oeb),
+    	.debug_oeb(debug_oeb)
 
         // DFFRAM Interface 
-        .mgmt_soc_dff_WE(mgmt_soc_dff_WE),
-        .mgmt_soc_dff_EN(mgmt_soc_dff_EN),
-        .mgmt_soc_dff_Do(mgmt_soc_dff_Do),
-        .mgmt_soc_dff_Di(mgmt_soc_dff_Di),
-        .mgmt_soc_dff_A(mgmt_soc_dff_A),
+        //.mgmt_soc_dff_WE(mgmt_soc_dff_WE),
+        //.mgmt_soc_dff_EN(mgmt_soc_dff_EN),
+        //.mgmt_soc_dff_Do(mgmt_soc_dff_Do),
+        //.mgmt_soc_dff_Di(mgmt_soc_dff_Di),
+        //.mgmt_soc_dff_A(mgmt_soc_dff_A)
 
         // SRAM read-only access from housekeeping
-        .sram_ro_clk(sram_ro_clk),
-        .sram_ro_csb(sram_ro_csb),
-        .sram_ro_addr(sram_ro_addr),
-        .sram_ro_data(sram_ro_data)
+        // .sram_ro_clk(sram_ro_clk),
+        // .sram_ro_csb(sram_ro_csb),
+        // .sram_ro_addr(sram_ro_addr),
+        // .sram_ro_data(sram_ro_data)
+
     );
 
     // DFFRAM
-    DFFRAM DFFRAM_0 (
-    `ifdef USE_POWER_PINS
-        .VPWR(VPWR),
-        .VGND(VGND),
-    `endif
-        .CLK(core_clk),
-        .WE(mgmt_soc_dff_WE),
-        .EN(mgmt_soc_dff_EN),
-        .Di(mgmt_soc_dff_Di),
-        .Do(mgmt_soc_dff_Do),
-        .A(mgmt_soc_dff_A)   // 8-bit address if using the default custom DFF RAM
-    );
+    // DFFRAM DFFRAM_0 (
+    //`ifdef USE_POWER_PINS
+    //    .VPWR(VPWR),
+    //    .VGND(VGND),
+    //`endif
+    //    .CLK(core_clk),
+    //    .WE(mgmt_soc_dff_WE),
+    //    .EN(mgmt_soc_dff_EN),
+    //    .Di(mgmt_soc_dff_Di),
+    //    .Do(mgmt_soc_dff_Do),
+    //    .A(mgmt_soc_dff_A)   // 8-bit address if using the default custom DFF RAM
+    //);
 
 endmodule
 `default_nettype wire
