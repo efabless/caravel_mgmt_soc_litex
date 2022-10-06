@@ -123,13 +123,13 @@ _io = [
     #  Subsignal("wdata", Pins(32)),
     #  Subsignal("rdata", Pins(32)),
     #  ),
-    ("mgmt_soc_dff", 0,
-     Subsignal("EN", Pins(1)),
-     Subsignal("WE", Pins(4)),
-     Subsignal("A", Pins(8)),
-     Subsignal("Di", Pins(32)),
-     Subsignal("Do", Pins(32)),
-     ),
+    # ("mgmt_soc_dff", 0,
+    #  Subsignal("EN", Pins(1)),
+    #  Subsignal("WE", Pins(4)),
+    #  Subsignal("A", Pins(8)),
+    #  Subsignal("Di", Pins(32)),
+    #  Subsignal("Do", Pins(32)),
+    #  ),
 
 ]
 
