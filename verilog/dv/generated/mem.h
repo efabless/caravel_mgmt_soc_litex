@@ -26,12 +26,12 @@
 
 #ifndef MPRJ_BASE
 #define MPRJ_BASE 0x30000000L
-#define MPRJ_SIZE 0x00100000
+#define MPRJ_SIZE 0x10000000
 #endif
 
 #ifndef HK_BASE
 #define HK_BASE 0x26000000L
-#define HK_SIZE 0x00100000
+#define HK_SIZE 0x00300000
 #endif
 
 #ifndef CSR_BASE

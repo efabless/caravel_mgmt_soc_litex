@@ -3316,8 +3316,6 @@ assign uart_tx_status = uart_tx_trigger;
 assign uart_rx_status = uart_rx_trigger;
 assign uart_tx_fifo_syncfifo_din = {uart_tx_fifo_fifo_in_last, uart_tx_fifo_fifo_in_first, uart_tx_fifo_fifo_in_payload_data};
 assign {uart_tx_fifo_fifo_out_last, uart_tx_fifo_fifo_out_first, uart_tx_fifo_fifo_out_payload_data} = uart_tx_fifo_syncfifo_dout;
-assign {uart_tx_fifo_fifo_out_last, uart_tx_fifo_fifo_out_first, uart_tx_fifo_fifo_out_payload_data} = uart_tx_fifo_syncfifo_dout;
-assign {uart_tx_fifo_fifo_out_last, uart_tx_fifo_fifo_out_first, uart_tx_fifo_fifo_out_payload_data} = uart_tx_fifo_syncfifo_dout;
 assign uart_tx_fifo_sink_ready = uart_tx_fifo_syncfifo_writable;
 assign uart_tx_fifo_syncfifo_we = uart_tx_fifo_sink_valid;
 assign uart_tx_fifo_fifo_in_first = uart_tx_fifo_sink_first;
@@ -3347,8 +3345,6 @@ assign uart_tx_fifo_rdport_re = uart_tx_fifo_do_read;
 assign uart_tx_fifo_syncfifo_writable = (uart_tx_fifo_level0 != 5'd16);
 assign uart_tx_fifo_syncfifo_readable = (uart_tx_fifo_level0 != 1'd0);
 assign uart_rx_fifo_syncfifo_din = {uart_rx_fifo_fifo_in_last, uart_rx_fifo_fifo_in_first, uart_rx_fifo_fifo_in_payload_data};
-assign {uart_rx_fifo_fifo_out_last, uart_rx_fifo_fifo_out_first, uart_rx_fifo_fifo_out_payload_data} = uart_rx_fifo_syncfifo_dout;
-assign {uart_rx_fifo_fifo_out_last, uart_rx_fifo_fifo_out_first, uart_rx_fifo_fifo_out_payload_data} = uart_rx_fifo_syncfifo_dout;
 assign {uart_rx_fifo_fifo_out_last, uart_rx_fifo_fifo_out_first, uart_rx_fifo_fifo_out_payload_data} = uart_rx_fifo_syncfifo_dout;
 assign uart_rx_fifo_sink_ready = uart_rx_fifo_syncfifo_writable;
 assign uart_rx_fifo_syncfifo_we = uart_rx_fifo_sink_valid;
@@ -4807,8 +4803,8 @@ always @(*) begin
 	slave_sel[1] = (shared_adr[29:8] == 1'd0);
 	slave_sel[2] = (shared_adr[29:8] == 1'd1);
 	slave_sel[3] = (shared_adr[29:22] == 5'd16);
-	slave_sel[4] = (shared_adr[29:18] == 10'd768);
-	slave_sel[5] = (shared_adr[29:18] == 10'd608);
+	slave_sel[4] = (shared_adr[29:26] == 2'd3);
+	slave_sel[5] = (shared_adr[29:20] == 8'd152);
 	slave_sel[6] = (shared_adr[29:14] == 16'd61440);
 end
 assign mgmtsoc_vexriscv_debug_bus_adr = shared_adr;
@@ -7822,6 +7818,22 @@ always @(posedge sys_clk) begin
 	end
 	user_irq_ena_re <= csrbank19_out0_re;
 	if (sys_rst) begin
+    // ****** added to correct GL testbench failure
+    dbg_uart_tx_data <= 8'd0;
+    dbg_uart_tx_count <= 4'd0;
+    dbg_uart_tx_tick <= 1'd0;
+    dbg_uart_tx_phase <= 32'd0;
+    dbg_uart_rx_tick <= 1'd0;
+    dbg_uart_rx_phase <= 32'd0;
+    dbg_uart_rx_rx_d <= 1'd0;
+    dbg_uart_cmd <= 8'd0;
+    dbg_uart_incr <= 1'd0;
+    dbg_uart_address <= 32'd0;
+    dbg_uart_data <= 32'd0;
+    dbg_uart_bytes_count <= 2'd0;
+    dbg_uart_words_count <= 8'd0;
+    dbg_uart_count <= 20'd1000000;
+    // ******
 		mgmtsoc_reset_storage <= 2'd0;
 		mgmtsoc_reset_re <= 1'd0;
 		mgmtsoc_scratch_storage <= 32'd305419896;
@@ -8385,6 +8397,10 @@ assign uart_rx_fifo_wrport_dat_r = memdat_2;
 assign uart_rx_fifo_rdport_dat_r = memdat_3;
 
 VexRiscv VexRiscv(
+`ifdef USE_POWER_PINS
+    .vccd1(VPWR),
+    .vssd1(VGND),
+`endif
 	.clk(sys_clk),
 	.dBusWishbone_ACK(mgmtsoc_dbus_dbus_ack),
 	.dBusWishbone_DAT_MISO(mgmtsoc_dbus_dbus_dat_r),
