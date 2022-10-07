@@ -138,8 +138,8 @@ extern uint32_t flashio_worker_end;
 //#define reg_mprj_io_37 (*(volatile uint32_t*)0x260000b8)
 
 // User Project Slaves (0x3000_0000)
-#define reg_mprj_slave (*(volatile uint32_t*)0x30000000)
-#define reg_wb_enable	  (*(volatile uint32_t*)0xf0003800)
+#define reg_wb_enable	  	(*(volatile uint32_t*) CSR_MPRJ_WB_IENA_OUT_ADDR)
+#define reg_user_irq_enable	(*(volatile uint32_t*) CSR_USER_IRQ_ENA_OUT_ADDR)
 
 
 // Flash Control SPI Configuration (2D00_0000)
