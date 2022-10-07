@@ -43,6 +43,10 @@ module mgmt_core_wrapper (
     // Clock and reset
     input core_clk,
     input core_rstn,
+    input clk_in,
+    input resetn_in,
+    output clk_out,
+    output resetn_out,
 
     // GPIO (one pin)
     output gpio_out_pad,	// Connect to out on gpio pad
@@ -132,6 +136,10 @@ module mgmt_core_wrapper (
 	`endif
     	.core_clk(core_clk),
     	.core_rstn(core_rstn),
+        .clk_in(clk_in),
+        .clk_out(clk_out),
+        .resetn_in(resetn_in),
+        .resetn_out(resetn_out),
 
     	// Trap state from CPU
     	.trap(trap),
