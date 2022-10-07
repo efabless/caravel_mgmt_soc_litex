@@ -69,6 +69,7 @@
 `include "caravel/verilog/gl/mgmt_protect_hv.v" 	     		     
 `include "caravel/verilog/gl/gpio_defaults_block_0403.v"     
 `include "caravel/verilog/gl/gpio_defaults_block_1803.v"     
+`include "caravel/verilog/gl/gpio_defaults_block_0801.v"     
 						    		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // STD CELLS - they need to be below the defines.v" files 

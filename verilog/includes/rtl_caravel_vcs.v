@@ -31,6 +31,7 @@
 `include "caravel/verilog/rtl/clock_div.v"
 `include "caravel/verilog/rtl/housekeeping_spi.v"
 					     
+`include "caravel/verilog/rtl/constant_block.v" 
 `include "caravel/verilog/rtl/chip_io.v" 		     
 `include "caravel/verilog/rtl/mprj_logic_high.v" 	     
 `include "caravel/verilog/rtl/mprj2_logic_high.v"	     
