@@ -84,9 +84,19 @@ module mem_tb;
 		power2 <= 1'b1;
 	end
 
-	always @(checkbits) begin
-		if(checkbits == 16'hA040) begin
+    reg flag_1 = 0;
+	reg flag_2 = 0;
+	reg flag_3 = 0;
+	reg flag_4 = 0;
+	reg flag_5 = 0;
+	reg flag_6 = 0;
+	reg flag_7 = 0;
+
+	always @(posedge clock) begin
+		if(checkbits == 16'hA040 && flag_1 === 0 ) begin
 			$display("Mem Test (word rw) started");
+            $display("GPIO state = %h", checkbits);
+			flag_1 <= 1;
 		end
 		else if(checkbits == 16'hAB40) begin
 			$display("%c[1;31m",27);
@@ -98,15 +108,18 @@ module mem_tb;
 			$display("%c[0m",27);
 			$finish;
 		end
-		else if(checkbits == 16'hAB41) begin
+		else if(checkbits == 16'hAB41 && flag_2 == 0) begin
 			`ifdef GL
 				$display("Monitor: Test MEM (GL) [word rw]  passed");
 			`else
 				$display("Monitor: Test MEM (RTL) [word rw]  passed");
 			`endif
+			$display("GPIO state = %h", checkbits);
+			flag_2 <= 1;
 		end
-		else if(checkbits == 16'hA020) begin
+		else if(checkbits == 16'hA020  && flag_3 == 0) begin
 			$display("Mem Test (short rw) started");
+			flag_3 <= 1;
 		end
 		else if(checkbits == 16'hAB20) begin
 			$display("%c[1;31m",27);
@@ -124,9 +137,11 @@ module mem_tb;
 			`else
 				$display("Monitor: Test MEM (RTL) [short rw]  passed");
 			`endif
+			flag_4 <= 1;
 		end
-		else if(checkbits == 16'hA010) begin
+		else if(checkbits == 16'hA010 && flag_5 == 0) begin
 			$display("Mem Test (byte rw) started");
+			flag_5 <= 1;
 		end
 		else if(checkbits == 16'hAB10) begin
 			$display("%c[1;31m",27);
@@ -138,11 +153,33 @@ module mem_tb;
 			$display("%c[0m",27);
 			$finish;
 		end
-		else if(checkbits == 16'hAB11) begin
+		else if(checkbits == 16'hAB11 && flag_6 == 0) begin
 			`ifdef GL
 				$display("Monitor: Test MEM (GL) [byte rw] passed");
 			`else
 				$display("Monitor: Test MEM (RTL) [byte rw] passed");
+			`endif
+			flag_6 <= 1;
+		end
+		else if(checkbits === 16'hA050 && flag_7 == 0) begin
+			$display("Mem Test (byte w word r) started");
+			flag_7 <= 1;
+		end
+		else if(checkbits === 16'hAB50) begin
+			$display("%c[1;31m",27);
+			`ifdef GL
+				$display("Monitor: Test MEM (GL) [byte w word r] failed");
+			`else
+				$display("Monitor: Test MEM (RTL) [byte w word r] failed");
+			`endif
+			$display("%c[0m",27);
+			$finish;
+		end
+		else if(checkbits === 16'hAB51) begin
+			`ifdef GL
+				$display("Monitor: Test MEM (GL) [byte w word r] passed");
+			`else
+				$display("Monitor: Test MEM (RTL) [byte w word r] passed");
 			`endif
 			$finish;
 		end

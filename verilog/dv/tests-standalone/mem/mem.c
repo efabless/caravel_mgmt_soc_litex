@@ -33,7 +33,8 @@
 //unsigned char bytes[10];
 unsigned long *ints    = (unsigned long *)  0x00000100;
 unsigned short *shorts = (unsigned short *) 0x00000200;
-unsigned char *bytes   = (unsigned char *)  0x0000300;
+unsigned char *bytes   = (unsigned char *)  0x00000300;
+unsigned long *ints_rd = (unsigned long *)  0x00000300;
 
 void main()
 {
@@ -43,6 +44,7 @@ void main()
     unsigned long *dff1_ints    = (unsigned long *)  0x00000400;
     unsigned short *dff1_shorts = (unsigned short *) 0x00000500;
     unsigned char *dff1_bytes   = (unsigned char *)  0x00000600;
+    unsigned long *dff1_ints_rd = (unsigned long *)  0x00000600;
 
     // start test
     reg_la0_oenb = 0;
@@ -91,4 +93,23 @@ void main()
     }
 
     reg_la0_data = 0xAB110000;
+
+    // --------------------------------
+
+    // Test byte W and word R
+    reg_la0_data = 0xA0500000;
+    for(i=0; i<COUNT*4; i++) {
+        *(dff1_bytes+i) = 1 << i % 4;
+        *(bytes+i) = 1 << i % 4;
+    }
+
+    for(i=0; i<COUNT; i++) {
+        v = 0x08040201;
+        if(v != *(ints_rd+i) && v != *(dff1_ints_rd+i)) {
+            reg_la0_data = 0xAB500000;
+        }
+    }
+
+    reg_la0_data = 0xAB510000;
+
 }

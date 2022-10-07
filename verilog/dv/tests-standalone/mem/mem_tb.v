@@ -62,7 +62,7 @@ module mem_tb;
 		$dumpvars(0, mem_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
-		repeat (60) begin
+		repeat (80) begin
 			repeat (5000) @(posedge clock);
 			$display("+5000 cycles");
 		end
@@ -97,6 +97,8 @@ module mem_tb;
 	reg flag_3 = 0;
 	reg flag_4 = 0;
 	reg flag_5 = 0;
+	reg flag_6 = 0;
+	reg flag_7 = 0;
 
 	always @(posedge clock) begin
 		if(checkbits === 16'hA040 && flag_1 === 0 ) begin
@@ -160,11 +162,33 @@ module mem_tb;
 			$display("%c[0m",27);
 			$finish;
 		end
-		else if(checkbits === 16'hAB11) begin
+		else if(checkbits === 16'hAB11 && flag_6 == 0) begin
 			`ifdef GL
 				$display("Monitor: Test MEM (GL) [byte rw] passed");
 			`else
 				$display("Monitor: Test MEM (RTL) [byte rw] passed");
+			`endif
+			flag_6 <= 1;
+		end
+        else if(checkbits === 16'hA050 && flag_7 == 0) begin
+			$display("Mem Test (byte w word r) started");
+			flag_7 <= 1;
+		end
+		else if(checkbits === 16'hAB50) begin
+			$display("%c[1;31m",27);
+			`ifdef GL
+				$display("Monitor: Test MEM (GL) [byte w word r] failed");
+			`else
+				$display("Monitor: Test MEM (RTL) [byte w word r] failed");
+			`endif
+			$display("%c[0m",27);
+			$finish;
+		end
+		else if(checkbits === 16'hAB51) begin
+			`ifdef GL
+				$display("Monitor: Test MEM (GL) [byte w word r] passed");
+			`else
+				$display("Monitor: Test MEM (RTL) [byte w word r] passed");
 			`endif
 			$finish;
 		end
