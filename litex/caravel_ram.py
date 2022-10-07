@@ -89,4 +89,13 @@ class DFFRAM(Module):
             self.en.eq(self.bus.stb & self.bus.cyc),
         ]
 
+        self.specials += Instance("DFFRAM",
+                                  i_CLK=ClockSignal("sys"),
+                                  i_A=self.bus.adr[:8],
+                                  i_Di=self.di,
+                                  i_WE=self.we,
+                                  i_EN=self.en,
+                                  o_Do=self.do
+        )
+
         self.sync += self.bus.ack.eq(self.bus.stb & self.bus.cyc & ~self.bus.ack)

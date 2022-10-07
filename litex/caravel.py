@@ -77,7 +77,8 @@ class MGMTSoC(SoCMini):
 
             self.mem_map = {
                 "dff": 0x00000000,
-                "sram": 0x01000000,
+                "dff2": 0x00000400,
+                # "sram": 0x01000000,
                 "flash": 0x10000000,
                 "mprj": 0x30000000,
                 "hk": 0x26000000,
@@ -145,22 +146,27 @@ class MGMTSoC(SoCMini):
         dff_size = 1 * 1024
         dff = self.submodules.mem = DFFRAM(size=dff_size)
         self.register_mem("dff", self.mem_map["dff"], self.mem.bus, dff_size)
-        mgmt_soc_dff = platform.request("mgmt_soc_dff")
-        self.comb += mgmt_soc_dff.WE.eq(dff.we)
-        self.comb += mgmt_soc_dff.A.eq(dff.bus.adr)
-        self.comb += dff.do.eq(mgmt_soc_dff.Do)
-        self.comb += mgmt_soc_dff.Di.eq(dff.di)
-        self.comb += mgmt_soc_dff.EN.eq(dff.en)
+        # mgmt_soc_dff = platform.request("mgmt_soc_dff")
+        # self.comb += mgmt_soc_dff.WE.eq(dff.we)
+        # self.comb += mgmt_soc_dff.A.eq(dff.bus.adr)
+        # self.comb += dff.do.eq(mgmt_soc_dff.Do)
+        # self.comb += mgmt_soc_dff.Di.eq(dff.di)
+        # self.comb += mgmt_soc_dff.EN.eq(dff.en)
 
-        #OpenRAM
-        spram_size = 2 * 1024
-        sram = self.submodules.spram = OpenRAM(size=spram_size)
-        self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
-        sram_ro_ports = platform.request("sram_ro")
-        self.comb += sram_ro_ports.clk.eq(sram.clk1)
-        self.comb += sram_ro_ports.csb.eq(sram.cs_b1)
-        self.comb += sram_ro_ports.addr.eq(sram.adr1)
-        self.comb += sram_ro_ports.data.eq(sram.dataout1)
+        #DFFRAM2
+        dff2_size = 1 * 1024
+        dff2 = self.submodules.mem2 = DFFRAM(size=dff2_size)
+        self.register_mem("dff2", self.mem_map["dff2"], self.mem2.bus, dff2_size)
+
+        # #OpenRAM
+        # spram_size = 2 * 1024
+        # sram = self.submodules.spram = OpenRAM(size=spram_size)
+        # self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
+        # sram_ro_ports = platform.request("sram_ro")
+        # self.comb += sram_ro_ports.clk.eq(sram.clk1)
+        # self.comb += sram_ro_ports.csb.eq(sram.cs_b1)
+        # self.comb += sram_ro_ports.addr.eq(sram.adr1)
+        # self.comb += sram_ro_ports.data.eq(sram.dataout1)
 
         # SPI Flash --------------------------------------------------------------------------------
         from litespi.modules import W25Q128JV
@@ -271,6 +277,14 @@ class MGMTSoC(SoCMini):
         for i in range(len(user_irq)):
             setattr(self.submodules,"user_irq_"+str(i),GPIOIn(user_irq[i], with_irq=True))
             self.irq.add("user_irq_"+str(i), use_loc_if_exists=True)
+
+        # Pass-thru clock and reset
+        clk_in = platform.request("clk_in")
+        clk_out = platform.request("clk_out")
+        resetn_in = platform.request("resetn_in")
+        resetn_out = platform.request("resetn_out")
+        self.comb += clk_out.eq(clk_in)
+        self.comb += resetn_out.eq(resetn_in)
 
     #####################
 
