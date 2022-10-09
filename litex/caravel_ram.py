@@ -99,3 +99,39 @@ class DFFRAM(Module):
         )
 
         self.sync += self.bus.ack.eq(self.bus.stb & self.bus.cyc & ~self.bus.ack)
+
+
+class DFFRAM_512(Module):
+    def __init__(self, width=32, size=512):
+        self.bus = wishbone.Interface(width)
+
+        # # #
+        #assert width in [32]
+        #assert size in [1*kB]
+
+        self.di   = Signal(32)
+        self.do  = Signal(32)
+        self.we   = Signal(4)
+        self.en     = Signal()
+
+        self.comb += [
+            self.di.eq(self.bus.dat_w[0:32]),
+            # self.we.eq((self.bus.we & self.bus.stb & self.bus.cyc)),
+            self.we[0].eq(self.bus.sel[0] & self.bus.we & self.bus.stb & self.bus.cyc),
+            self.we[1].eq(self.bus.sel[1] & self.bus.we & self.bus.stb & self.bus.cyc),
+            self.we[2].eq(self.bus.sel[2] & self.bus.we & self.bus.stb & self.bus.cyc),
+            self.we[3].eq(self.bus.sel[3] & self.bus.we & self.bus.stb & self.bus.cyc),
+            self.bus.dat_r[0:32].eq(self.do),
+            self.en.eq(self.bus.stb & self.bus.cyc),
+        ]
+
+        self.specials += Instance("DFFRAM_512",
+                                  i_CLK=ClockSignal("sys"),
+                                  i_A=self.bus.adr[:7],
+                                  i_Di=self.di,
+                                  i_WE=self.we,
+                                  i_EN=self.en,
+                                  o_Do=self.do
+        )
+
+        self.sync += self.bus.ack.eq(self.bus.stb & self.bus.cyc & ~self.bus.ack)
