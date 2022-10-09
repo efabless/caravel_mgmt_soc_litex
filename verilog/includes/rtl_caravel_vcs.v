@@ -46,6 +46,12 @@
 `include "caravel/verilog/rtl/caravel_clocking.v"	     
 `include "caravel/verilog/rtl/digital_pll.v"		     
 `include "caravel/verilog/rtl/debug_regs.v"
+`ifdef LA_TESTING
+`include "caravel/verilog/rtl/__user_project_la_example.v"
+`endif
+`ifdef GPIO_TESTING
+`include "caravel/verilog/rtl/__user_project_gpio_example.v"
+`endif
 `include "caravel/verilog/rtl/__user_project_wrapper.v"
 `include "caravel/verilog/rtl/user_id_programming.v"	     
 `include "caravel/verilog/rtl/caravel.v" 		     

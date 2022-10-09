@@ -57,6 +57,12 @@
 `include "caravel/verilog/gl/caravel_clocking.v"	     
 `include "caravel/verilog/gl/digital_pll.v"		     
 `include "caravel/verilog/rtl/debug_regs.v"
+`ifdef LA_TESTING
+`include "caravel/verilog/rtl/__user_project_la_example.v"
+`endif
+`ifdef GPIO_TESTING
+`include "caravel/verilog/rtl/__user_project_gpio_example.v"
+`endif
 `include "caravel/verilog/rtl/__user_project_wrapper.v" // TODO: use gl wrapper when integrating with user project
 `include "caravel/verilog/gl/user_id_programming.v"	     
 `include "caravel/verilog/gl/caravel.v" 		     
