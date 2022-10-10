@@ -129,8 +129,8 @@ class DFFRAM_512(Module):
                                   i_CLK=ClockSignal("sys"),
                                   i_A0=self.bus.adr[:7],
                                   i_Di0=self.di,
-                                  i_WE=self.we,
-                                  i_EN00=self.en,
+                                  i_WE0=self.we,
+                                  i_EN0=self.en,
                                   o_Do0=self.do
         )
 
