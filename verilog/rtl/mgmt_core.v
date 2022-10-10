@@ -8359,13 +8359,13 @@ DFFRAM DFFRAM(
 	.Do(dff_do)
 );
 
-DFFRAM_512 DFFRAM_512(
-	.A(dff2_bus_adr[6:0]),
+RAM128 DFFRAM_512(
+	.A0(dff2_bus_adr[6:0]),
 	.CLK(sys_clk),
-	.Di(dff2_di),
-	.EN(dff2_en),
-	.WE(dff2_we),
-	.Do(dff2_do)
+	.Di0(dff2_di),
+	.EN0(dff2_en),
+	.WE0(dff2_we),
+	.Do0(dff2_do)
 );
 
 reg [9:0] storage[0:15];
