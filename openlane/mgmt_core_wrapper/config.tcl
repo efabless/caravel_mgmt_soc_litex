@@ -13,109 +13,94 @@
 # limitations under the License.
 # SPDX-License-Identifier: Apache-2.0
 
-set script_dir [file dirname [file normalize [info script]]]
 
 set ::env(DESIGN_NAME) mgmt_core_wrapper
-set ::env(DESIGN_IS_CORE) 1
 
-set ::env(ROUTING_CORES) "6"
-set ::env(RUN_KLAYOUT) 0
 set ::env(CLOCK_PORT) "core_clk"
-set ::env(CLOCK_NET) ""
+set ::env(CLOCK_NET) "core_clk"
 set ::env(CLOCK_PERIOD) "25"
 
-## Synthesis
-set ::env(SYNTH_STRATEGY) "DELAY 1"
-set ::env(SYNTH_MAX_FANOUT) 6
+set ::env(RESET_PORT) "core_rstn"
 
-set ::env(CLOCK_TREE_SYNTH) 0
+set ::env(BASE_SDC_FILE) $::env(DESIGN_DIR)/base.sdc 
 
-##set ::env(BASE_SDC_FILE) $script_dir/base.sdc 
+set ::env(SYNTH_STRATEGY) "DELAY 0"
+set ::env(SYNTH_MAX_FANOUT) 8
+set ::env(SYNTH_READ_BLACKBOX_LIB) 1
 
-## Floorplan
-set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
+
+set ::env(FP_PIN_ORDER_CFG) $::env(DESIGN_DIR)/pin_order.cfg
 set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 2620 820"
 
-set ::env(FP_IO_VEXTEND) 2
-set ::env(FP_IO_HEXTEND) 2
+set ::env(MACRO_PLACEMENT_CFG) $::env(DESIGN_DIR)/macro_placement.cfg
+set ::env(PL_TARGET_DENSITY) 0.1
+set ::env(PL_TIME_DRIVEN) 0
+set ::env(DPL_CELL_PADDING) 2
+set ::env(GPL_CELL_PADDING) 2
 
-set ::env(FILL_INSERTION) 0
-set ::env(TAP_DECAP_INSERTION) 0
+set ::env(LEFT_MARGIN_MULT) 22
+set ::env(RIGHT_MARGIN_MULT) 22
+set ::env(TOP_MARGIN_MULT) "5"
+set ::env(BOTTOM_MARGIN_MULT) "5"
 
 ## PDN
-set ::env(PDN_CFG) $script_dir/pdn.tcl
-
+set ::env(FP_PDN_CORE_RING) 1
 set ::env(FP_PDN_VPITCH) 50
 set ::env(FP_PDN_HPITCH) 130
 
-set ::env(FP_PDN_CHECK_NODES) 0
-set ::env(FP_PDN_IRDROP) 0
+set ::env(FP_PDN_VWIDTH) 1.6
+set ::env(FP_PDN_CORE_RING_VWIDTH) 1.6
 
-set ::env(FP_PDN_ENABLE_RAILS) 0
-
-set ::env(FP_HORIZONTAL_HALO) -6
-set ::env(FP_VERTICAL_HALO) 25
-
-set ::env(FP_PDN_HOFFSET) 60 
-set ::env(FP_PDN_HWIDTH) 3.2
-
-set ::env(TOP_MARGIN_MULT) "10"
+## CTS
+set ::env(CTS_CLK_BUFFER_LIST) "sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_16"
+set ::env(CTS_SINK_CLUSTERING_MAX_DIAMETER) 50
+set ::env(CTS_SINK_CLUSTERING_SIZE) 20
 
 ## Placement
-set ::env(PL_TARGET_DENSITY) 0.18
-
 set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
 set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 0
 
+set ::env(PL_RESIZER_MAX_SLEW_MARGIN) 2
+set ::env(PL_RESIZER_MAX_CAP_MARGIN) 2
+
 ## Routing
-set ::env(GLB_RT_ADJUSTMENT) 0
-set ::env(GLB_RT_L2_ADJUSTMENT) 0.31
-set ::env(GLB_RT_L3_ADJUSTMENT) 0.31
-set ::env(GLB_RT_L4_ADJUSTMENT) 0.21
-set ::env(GLB_RT_L5_ADJUSTMENT) 0.21
-set ::env(GLB_RT_L6_ADJUSTMENT) 0.1
-set ::env(GLB_RT_ALLOW_CONGESTION) 1
-set ::env(GLB_RT_OVERFLOW_ITERS) 200
+set ::env(GRT_OVERFLOW_ITERS) 200
 
-set ::env(GLB_RT_MINLAYER) 2
-set ::env(GLB_RT_MAXLAYER) 6
-
-set ::env(GLB_RT_OBS) "\
-   li1 $::env(DIE_AREA),
-   met5 5 10 555 750, \
-   met4 5 10 555 750"
-
+set ::env(PL_RESIZER_HOLD_SLACK_MARGIN) 0.2
 set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 0
-
-## DRC
-set ::env(MAGIC_DRC_USE_GDS) 0
-set ::env(QUIT_ON_MAGIC_DRC) 0
-
-## LVS
-set ::env(QUIT_ON_LVS_ERROR) 0
+set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) 0.3
 
 ## Diode Insertion
-set ::env(DIODE_INSERTION_STRATEGY) 0
+set ::env(DIODE_INSERTION_STRATEGY) 4
 
 ## Internal Macros
-set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
-
-
-set ::env(VERILOG_FILES) "\
-	$script_dir/../../verilog/rtl/defines.v\
-	$script_dir/../../verilog/rtl/mgmt_core_wrapper.v"
-
 set ::env(VERILOG_FILES_BLACKBOX) "\
-	$script_dir/../../verilog/rtl/defines.v\
-	$script_dir/../../verilog/rtl/mgmt_core.v\
-	$script_dir/../../verilog/rtl/DFFRAM.v"
+    $::env(MCW_ROOT)/verilog/gl/DFFRAM.v"
 
 set ::env(EXTRA_LEFS) "\
-	$script_dir/../../lef/DFFRAM.lef
-	$script_dir/../../lef/mgmt_core.lef"
+    $::env(MCW_ROOT)/lef/DFFRAM.lef"
 
 set ::env(EXTRA_GDS_FILES) "\
-	$script_dir/../../gds/mgmt_core.gds
-	$script_dir/../../gds/DFFRAM.gds"
+    $::env(MCW_ROOT)/gds/DFFRAM.gds"
 
+set ::env(VERILOG_FILES) "\
+    $::env(MCW_ROOT)/verilog/rtl/mgmt_core_wrapper.v
+    $::env(MCW_ROOT)/verilog/rtl/defines.v \
+    $::env(MCW_ROOT)/verilog/rtl/mgmt_core.v \
+    $::env(MCW_ROOT)/verilog/rtl/picorv32.v \
+    $::env(MCW_ROOT)/verilog/rtl/ibex_all.v \
+    $::env(MCW_ROOT)/verilog/rtl/VexRiscv_MinDebugCache.v"
+
+
+set ::env(QUIT_ON_MAGIC_DRC) 0
+set ::env(QUIT_ON_TIMING_VIOLATIONS) 0
+set ::env(QUIT_ON_LVS_ERROR) 0
+set ::env(STA_REPORT_POWER) 0
+set ::env(RUN_IRDROP_REPORT) 0
+set ::env(FP_PDN_CHECK_NODES) 0
+
+set ::env(GRT_ADJUSTMENT) "0.22"
+set ::env(PL_TARGET_DENSITY) "0.35"
+
+set ::env(FP_PDN_MACRO_HOOKS) "DFFRAM VPWR VGND VPWR VGND, DFFRAM_1 VPWR VGND VPWR VGND"

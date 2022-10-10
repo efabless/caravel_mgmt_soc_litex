@@ -154,8 +154,8 @@ class MGMTSoC(SoCMini):
         # self.comb += mgmt_soc_dff.EN.eq(dff.en)
 
         #DFFRAM2
-        dff2_size = 1 * 1024
-        dff2 = self.submodules.mem2 = DFFRAM(size=dff2_size)
+        dff2_size = 512
+        dff2 = self.submodules.mem2 = DFFRAM_512(size=dff2_size)
         self.register_mem("dff2", self.mem_map["dff2"], self.mem2.bus, dff2_size)
 
         # #OpenRAM

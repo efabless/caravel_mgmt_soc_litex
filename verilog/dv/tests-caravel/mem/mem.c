@@ -42,9 +42,9 @@ void main()
 
     // DFFRAM_1
     unsigned long *dff1_ints    = (unsigned long *)  0x00000400;
-    unsigned short *dff1_shorts = (unsigned short *) 0x00000500;
-    unsigned char *dff1_bytes   = (unsigned char *)  0x00000600;
-    unsigned long *dff1_ints_rd = (unsigned long *)  0x00000600;
+    unsigned short *dff1_shorts = (unsigned short *) 0x00000480;
+    unsigned char *dff1_bytes   = (unsigned char *)  0x00000500;
+    unsigned long *dff1_ints_rd = (unsigned long *)  0x00000500;
 
 
     /* Upper 16 user area pins are configured to be GPIO output */
