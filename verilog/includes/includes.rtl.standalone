@@ -4,7 +4,8 @@
 -v $(VERILOG_PATH)/dv/vip/wb_rw_test.v
 
 ## DFFRAM Behavioral Model
--v $(VERILOG_PATH)/dv/vip/DFFRAM.v
+-v $(VERILOG_PATH)/dv/vip/RAM256.v
+-v $(VERILOG_PATH)/dv/vip/RAM128.v
 
 ## DFFRAM Full RTL
 #-v $(VERILOG_PATH)/rtl/DFFRAM.v
