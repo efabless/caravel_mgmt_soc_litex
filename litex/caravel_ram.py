@@ -89,7 +89,7 @@ class DFFRAM(Module):
             self.en.eq(self.bus.stb & self.bus.cyc),
         ]
 
-        self.specials += Instance("DFFRAM",
+        self.specials += Instance("RAM256",
                                   i_CLK=ClockSignal("sys"),
                                   i_A0=self.bus.adr[:8],
                                   i_Di0=self.di,
@@ -125,7 +125,7 @@ class DFFRAM_512(Module):
             self.en.eq(self.bus.stb & self.bus.cyc),
         ]
 
-        self.specials += Instance("DFFRAM_512",
+        self.specials += Instance("RAM128",
                                   i_CLK=ClockSignal("sys"),
                                   i_A0=self.bus.adr[:7],
                                   i_Di0=self.di,
