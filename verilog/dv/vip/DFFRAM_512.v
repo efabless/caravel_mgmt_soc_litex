@@ -1,4 +1,4 @@
-module DFFRAM #( parameter COLS=1)
+module DFFRAM_512 #( parameter COLS=1)
 (
 `ifdef USE_POWER_PINS
     VPWR,
@@ -11,7 +11,7 @@ module DFFRAM #( parameter COLS=1)
     Do0,
     A0
 );
-    localparam A_WIDTH = 8+$clog2(COLS);
+    localparam A_WIDTH = 7+$clog2(COLS);
 
     input   wire            VPWR;
     input   wire            VGND;
