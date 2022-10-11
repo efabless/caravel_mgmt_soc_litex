@@ -5,8 +5,9 @@ create_clock [get_ports $::env(CLOCK_PORT)]  -name $::env(CLOCK_PORT)  -period $
 set_false_path -from [get_port $::env(RESET_PORT)]
 
 ## INPUT/OUTPUT DELAYS
-set input_delay_value [expr $::env(CLOCK_PERIOD) * $::env(IO_PCT)]
-set output_delay_value [expr $::env(CLOCK_PERIOD) * $::env(IO_PCT)]
+set input_delay_value 5
+set output_delay_value 5
+# set output_delay_value 20
 puts "\[INFO\]: Setting output delay to: $output_delay_value"
 puts "\[INFO\]: Setting input delay to: $input_delay_value"
 
@@ -93,26 +94,26 @@ set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [
 
 ## INPUT DRIVER
 #set_driving_cell -lib_cell $::env(SYNTH_DRIVING_CELL) -pin $::env(SYNTH_DRIVING_CELL_PIN) [all_inputs]
-set cap_load 0.2
+set cap_load 0.15
 puts "\[INFO\]: Setting load to: $cap_load"
 set_load $cap_load [all_outputs]
 
-set ::env(SYNTH_CLOCK_UNCERTAINITY) 0.3
+set ::env(SYNTH_CLOCK_UNCERTAINITY) 0.18
 puts "\[INFO\]: Setting clock uncertainity to: $::env(SYNTH_CLOCK_UNCERTAINITY)"
 set_clock_uncertainty $::env(SYNTH_CLOCK_UNCERTAINITY) [get_clocks $::env(CLOCK_PORT)]
 
-set ::env(SYNTH_CLOCK_TRANSITION) [expr $::env(CLOCK_PERIOD)*0.01]
+set ::env(SYNTH_CLOCK_TRANSITION) 0.15
 puts "\[INFO\]: Setting clock transition to: $::env(SYNTH_CLOCK_TRANSITION)"
 set_clock_transition $::env(SYNTH_CLOCK_TRANSITION) [get_clocks $::env(CLOCK_PORT)]
 
 puts "\[INFO\]: Setting timing derate to: [expr {$::env(SYNTH_TIMING_DERATE) * 10}] %"
 set_timing_derate -early 0.95
 set_timing_derate -late 1.05
-set_max_fanout $::env(SYNTH_MAX_FANOUT) [current_design]
+set_max_fanout 20 [current_design]
 
-set_max_transition 1.25 [current_design]
-set clk_input [get_port $::env(CLOCK_PORT))]
-set clk_indx [lsearch [all_inputs] $clk_input]
-set all_inputs_wo_clk [lreplace [all_inputs] $clk_indx $clk_indx ""]
+set_max_transition 0.75 [current_design]
+# set clk_input [get_port $::env(CLOCK_PORT))]
+# set clk_indx [lsearch [all_inputs] $clk_input]
+# set all_inputs_wo_clk [lreplace [all_inputs] $clk_indx $clk_indx ""]
 
-set_input_transition 5.0 $all_inputs_wo_clk
+# set_input_transition 5.0 $all_inputs_wo_clk
