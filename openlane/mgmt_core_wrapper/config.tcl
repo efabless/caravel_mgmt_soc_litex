@@ -13,6 +13,9 @@
 # limitations under the License.
 # SPDX-License-Identifier: Apache-2.0
 
+#Change this to the directory of caravel_mgmt_soc_litex
+set ::env(MGMT_SOC_ROOT) $::env(HOME)/home/hosni/caravel_redesign/caravel_mgmt_soc_litex
+#
 set ::env(DESIGN_NAME) mgmt_core_wrapper
 
 set ::env(CLOCK_PORT) "core_clk"
@@ -22,12 +25,15 @@ set ::env(CLOCK_PERIOD) "25"
 set ::env(RESET_PORT) "core_rstn"
 
 set ::env(BASE_SDC_FILE) $::env(DESIGN_DIR)/base.sdc 
+set ::env(RUN_KLAYOUT) 0
 
 ## SYNTH
-set ::env(SYNTH_STRATEGY) "DELAY 0"
-set ::env(SYNTH_MAX_FANOUT) 8
+set ::env(SYNTH_STRATEGY) "AREA 0"
+set ::env(SYNTH_MAX_FANOUT) 20
 set ::env(SYNTH_READ_BLACKBOX_LIB) 1
-# set ::env(SYNTH_BUFFERING) 0
+set ::env(SYNTH_BUFFERING) 0
+set ::env(NO_SYNTH_CELL_LIST) [glob $::env(DESIGN_DIR)/no_synth.list] 
+set ::env(DRC_EXCLUDE_CELL_LIST) [glob $::env(DESIGN_DIR)/drc_exclude.list]
 
 ## FP
 set ::env(FP_PIN_ORDER_CFG) $::env(DESIGN_DIR)/pin_order.cfg
@@ -69,24 +75,32 @@ set ::env(PL_RESIZER_MAX_CAP_MARGIN) 2
 set ::env(GRT_ALLOW_CONGESTION) 1
 set ::env(GRT_OVERFLOW_ITERS) 200
 
-set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 0
+set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 1
 set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) 0.15
 
 ## Diode Insertion
 set ::env(DIODE_INSERTION_STRATEGY) 3
-# set ::env(PL_RESIZER_MAX_WIRE_LENGTH) 300
-# set ::env(GLB_RESIZER_MAX_WIRE_LENGTH) 230
-set ::env(GRT_ANT_ITERS) 2
-set ::env(GRT_MAX_DIODE_INS_ITERS) 5
+set ::env(PL_RESIZER_MAX_WIRE_LENGTH) 75
+set ::env(GLB_RESIZER_MAX_WIRE_LENGTH) 230
+set ::env(GRT_ANT_ITERS) 12
+set ::env(GRT_MAX_DIODE_INS_ITERS) 10
 
 ## Internal Macros
-set ::env(VERILOG_FILES_BLACKBOX) "$::env(DESIGN_DIR)/macros/verilog/DFFRAM.v $::env(DESIGN_DIR)/macros/verilog/RAM128.v"
+set ::env(VERILOG_FILES_BLACKBOX) "$::env(MGMT_SOC_ROOT)/verilog/gl/RAM128.v $::env(MGMT_SOC_ROOT)/verilog/gl/RAM256.v"
 
-set ::env(EXTRA_LEFS) "$::env(DESIGN_DIR)/macros/lef/DFFRAM.lef $::env(DESIGN_DIR)/macros/lef/RAM128.lef"
+set ::env(EXTRA_LEFS) "$::env(MGMT_SOC_ROOT)/lef/RAM128.lef $::env(MGMT_SOC_ROOT)/lef/RAM256.lef"
 
-set ::env(EXTRA_GDS_FILES) "$::env(DESIGN_DIR)/macros/gds/DFFRAM.gds $::env(DESIGN_DIR)/macros/gds/RAM128.gds"
+set ::env(EXTRA_GDS_FILES) "$::env(MGMT_SOC_ROOT)/gds/RAM128.gds $::env(MGMT_SOC_ROOT)/gds/RAM256.gds"
 
-set ::env(VERILOG_FILES) $::env(DESIGN_DIR)/src/*.v
+set ::env(EXTRA_LIBS) "$::env(MGMT_SOC_ROOT)/lib/RAM256.lib \
+        $::env(DESIGN_DIR)/RAM128.lib"
+
+set ::env(VERILOG_FILES) "$::env(MGMT_SOC_ROOT)/verilog/rtl/defines.v \
+        $::env(MGMT_SOC_ROOT)/verilog/rtl/ibex_all.v \
+        $::env(MGMT_SOC_ROOT)/verilog/rtl/mgmt_core_wrapper.v \
+        $::env(MGMT_SOC_ROOT)/verilog/rtl/mgmt_core.v \
+        $::env(MGMT_SOC_ROOT)/verilog/rtl/picorv32.v \
+        $::env(MGMT_SOC_ROOT)/verilog/rtl/VexRiscv_MinDebugCache.v"
 
 ## 
 set ::env(ROUTING_CORES) 24
@@ -98,7 +112,7 @@ set ::env(RUN_IRDROP_REPORT) 0
 set ::env(FP_PDN_CHECK_NODES) 0
 
 set ::env(GRT_ADJUSTMENT) 0.22
-set ::env(PL_TARGET_DENSITY) 0.22
-set ::env(MAGIC_EXT_USE_GDS) 1
+set ::env(PL_TARGET_DENSITY) 0.2
+set ::env(MAGIC_EXT_USE_GDS) 0
 
-set ::env(FP_PDN_MACRO_HOOKS) "DFFRAM VPWR VGND VPWR VGND, DFFRAM_512 VPWR VGND VPWR VGND"
+set ::env(FP_PDN_MACRO_HOOKS) "RAM256 VPWR VGND VPWR VGND, RAM128 VPWR VGND VPWR VGND"
