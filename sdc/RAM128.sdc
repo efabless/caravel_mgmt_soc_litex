@@ -1,52 +1,113 @@
-if {[info exists ::env(CLOCK_PORT)] && $::env(CLOCK_PORT) != ""} {
-    create_clock [get_ports $::env(CLOCK_PORT)]  -name $::env(CLOCK_PORT)  -period $::env(CLOCK_PERIOD)
-} else {
-    create_clock -name __VIRTUAL_CLK__ -period $::env(CLOCK_PERIOD)
-    set ::env(CLOCK_PORT) __VIRTUAL_CLK__
-}
-set input_delay_value [expr $::env(CLOCK_PERIOD) * $::env(IO_PCT)]
-set output_delay_value [expr $::env(CLOCK_PERIOD) * $::env(IO_PCT)]
-puts "\[INFO\]: Setting output delay to: $output_delay_value"
-puts "\[INFO\]: Setting input delay to: $input_delay_value"
+create_clock [get_ports CLK]  -name CLK  -period 25
 
-set_max_fanout $::env(SYNTH_MAX_FANOUT) [current_design]
-
-set clk_input [get_port $::env(CLOCK_PORT)]
-set clk_indx [lsearch [all_inputs] $clk_input]
-set all_inputs_wo_clk [lreplace [all_inputs] $clk_indx $clk_indx ""]
-
-#set rst_input [get_port resetn]
-#set rst_indx [lsearch [all_inputs] $rst_input]
-#set all_inputs_wo_clk_rst [lreplace $all_inputs_wo_clk $rst_indx $rst_indx ""]
-set all_inputs_wo_clk_rst $all_inputs_wo_clk
-
-# correct resetn
-set_input_delay $input_delay_value  -clock [get_clocks $::env(CLOCK_PORT)] $all_inputs_wo_clk_rst
-#set_input_delay 0.0 -clock [get_clocks $::env(CLOCK_PORT)] {resetn}
-set_output_delay $output_delay_value  -clock [get_clocks $::env(CLOCK_PORT)] [all_outputs]
-
-if { ![info exists ::env(SYNTH_CLK_DRIVING_CELL)] } {
-    set ::env(SYNTH_CLK_DRIVING_CELL) $::env(SYNTH_DRIVING_CELL)
-}
-
-if { ![info exists ::env(SYNTH_CLK_DRIVING_CELL_PIN)] } {
-    set ::env(SYNTH_CLK_DRIVING_CELL_PIN) $::env(SYNTH_DRIVING_CELL_PIN)
-}
-
-set_driving_cell -lib_cell $::env(SYNTH_DRIVING_CELL) -pin $::env(SYNTH_DRIVING_CELL_PIN) $all_inputs_wo_clk_rst
-
-set_driving_cell -lib_cell $::env(SYNTH_CLK_DRIVING_CELL) -pin $::env(SYNTH_CLK_DRIVING_CELL_PIN) $clk_input
-
-set cap_load [expr $::env(SYNTH_CAP_LOAD) / 1000.0]
-puts "\[INFO\]: Setting load to: $cap_load"
-set_load  $cap_load [all_outputs]
-
-puts "\[INFO\]: Setting clock uncertainty to: $::env(SYNTH_CLOCK_UNCERTAINTY)"
-set_clock_uncertainty $::env(SYNTH_CLOCK_UNCERTAINTY) [get_clocks $::env(CLOCK_PORT)]
-
-puts "\[INFO\]: Setting clock transition to: $::env(SYNTH_CLOCK_TRANSITION)"
-set_clock_transition $::env(SYNTH_CLOCK_TRANSITION) [get_clocks $::env(CLOCK_PORT)]
-
-puts "\[INFO\]: Setting timing derate to: [expr {$::env(SYNTH_TIMING_DERATE) * 10}] %"
-set_timing_derate -early [expr {1-$::env(SYNTH_TIMING_DERATE)}]
-set_timing_derate -late [expr {1+$::env(SYNTH_TIMING_DERATE)}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[0]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[1]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[2]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[3]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[4]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[5]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[6]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[0]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[10]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[11]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[12]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[13]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[14]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[15]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[16]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[17]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[18]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[19]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[1]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[20]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[21]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[22]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[23]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[24]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[25]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[26]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[27]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[28]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[29]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[2]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[30]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[31]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[3]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[4]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[5]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[6]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[7]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[8]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Di0[9]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {EN0}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {WE0[0]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {WE0[1]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {WE0[2]}]
+set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {WE0[3]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[0]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[10]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[11]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[12]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[13]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[14]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[15]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[16]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[17]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[18]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[19]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[1]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[20]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[21]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[22]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[23]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[24]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[25]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[26]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[27]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[28]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[29]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[2]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[30]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[31]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[3]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[4]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[5]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[6]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[7]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[8]}]
+set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[9]}]
+###############################################################################
+# Environment
+###############################################################################
+set_load -pin_load 0.1500 [get_ports {Do0[31]}]
+set_load -pin_load 0.1500 [get_ports {Do0[30]}]
+set_load -pin_load 0.1500 [get_ports {Do0[29]}]
+set_load -pin_load 0.1500 [get_ports {Do0[28]}]
+set_load -pin_load 0.1500 [get_ports {Do0[27]}]
+set_load -pin_load 0.1500 [get_ports {Do0[26]}]
+set_load -pin_load 0.1500 [get_ports {Do0[25]}]
+set_load -pin_load 0.1500 [get_ports {Do0[24]}]
+set_load -pin_load 0.1500 [get_ports {Do0[23]}]
+set_load -pin_load 0.1500 [get_ports {Do0[22]}]
+set_load -pin_load 0.1500 [get_ports {Do0[21]}]
+set_load -pin_load 0.1500 [get_ports {Do0[20]}]
+set_load -pin_load 0.1500 [get_ports {Do0[19]}]
+set_load -pin_load 0.1500 [get_ports {Do0[18]}]
+set_load -pin_load 0.1500 [get_ports {Do0[17]}]
+set_load -pin_load 0.1500 [get_ports {Do0[16]}]
+set_load -pin_load 0.1500 [get_ports {Do0[15]}]
+set_load -pin_load 0.1500 [get_ports {Do0[14]}]
+set_load -pin_load 0.1500 [get_ports {Do0[13]}]
+set_load -pin_load 0.1500 [get_ports {Do0[12]}]
+set_load -pin_load 0.1500 [get_ports {Do0[11]}]
+set_load -pin_load 0.1500 [get_ports {Do0[10]}]
+set_load -pin_load 0.1500 [get_ports {Do0[9]}]
+set_load -pin_load 0.1500 [get_ports {Do0[8]}]
+set_load -pin_load 0.1500 [get_ports {Do0[7]}]
+set_load -pin_load 0.1500 [get_ports {Do0[6]}]
+set_load -pin_load 0.1500 [get_ports {Do0[5]}]
+set_load -pin_load 0.1500 [get_ports {Do0[4]}]
+set_load -pin_load 0.1500 [get_ports {Do0[3]}]
+set_load -pin_load 0.1500 [get_ports {Do0[2]}]
+set_load -pin_load 0.1500 [get_ports {Do0[1]}]
+set_load -pin_load 0.1500 [get_ports {Do0[0]}]
