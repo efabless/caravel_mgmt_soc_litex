@@ -11,6 +11,8 @@
 
 ## DFFRAM Full GL
 -v $VERILOG_PATH/gl/DFFRAM.v
+-v $VERILOG_PATH/gl/RAM128.v
+-v $VERILOG_PATH/gl/RAM256.v
 
 ## DFFRAM Behavioral Model
 #-v $VERILOG_PATH/dv/vip/DFFRAM.v
@@ -19,7 +21,6 @@
 # Mgmt Core Wrapper
 ###########################################################
 -v $VERILOG_PATH/rtl/defines.v
--v $VERILOG_PATH/gl/RAM128.v
 -v $VERILOG_PATH/gl/mgmt_core.v
 -v $VERILOG_PATH/gl/mgmt_core_wrapper.v
 
@@ -67,8 +68,8 @@
 ###########################################################
 ## These blocks are manually designed 		
 ###########################################################
--v $CARAVEL_PATH/rtl/constant_block.v
--v $CARAVEL_PATH/rtl/chip_io.v 
+-v $CARAVEL_PATH/gl/constant_block.v
+-v $CARAVEL_PATH/gl/chip_io.v 
 -v $CARAVEL_PATH/gl/mgmt_protect.v		     
 -v $CARAVEL_PATH/gl/mgmt_protect_hv.v 	     		     
 -v $CARAVEL_PATH/gl/gpio_defaults_block_0403.v     
