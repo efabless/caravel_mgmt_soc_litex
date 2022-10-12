@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+<report-database>
+    <categories>
+        <category>
+            <name>Short</name>
+        </category>
+    </categories>
+    <cells>
+        <cell>
+            <name>mgmt_core_wrapper</name>
+        </cell>
+    </cells>
+    <items>
+        <item>
+            <category>Short</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (1137.74,775.98;1137.88,776.12)</value>
+                <value>text: 'On layer met1'</value>
+                <value>text: 'Between net:net1761 net:net6060'</value>
+            </values>
+        </item>
+        <item>
+            <category>Short</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (1076.56,773.6;1076.7,773.74)</value>
+                <value>text: 'On layer met2'</value>
+                <value>text: 'Between net:net1760 net:net32269'</value>
+            </values>
+        </item>
+        <item>
+            <category>Short</category>
+            <cell>mgmt_core_wrapper</cell>
+            <visited>false</visited>
+            <multiplicity>1</multiplicity>
+            <values>
+                <value>box: (1203.52,775.98;1203.66,776.12)</value>
+                <value>text: 'On layer met1'</value>
+                <value>text: 'Between net:net32058 net:net34464'</value>
+            </values>
+        </item>
+    </items>
+</report-database>

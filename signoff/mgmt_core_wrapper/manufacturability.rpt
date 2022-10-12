@@ -1,0 +1,16 @@
+Design Name: mgmt_core_wrapper
+Run Directory: /openlane/designs/mgmt_core_wrapper/runs/LITEX
+----------------------------------------
+
+Magic DRC Summary:
+Source: /openlane/designs/mgmt_core_wrapper/runs/LITEX/reports/signoff/drc.rpt
+Total Magic DRC violations is 0
+----------------------------------------
+
+LVS Summary:
+Source: /openlane/designs/mgmt_core_wrapper/runs/LITEX/logs/signoff/mgmt_core_wrapper.lvs.lef.log
+Source not found.
+----------------------------------------
+
+Antenna Summary:
+No antenna report found.
