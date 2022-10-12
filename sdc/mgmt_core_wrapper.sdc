@@ -1,6 +1,6 @@
 ###############################################################################
 # Created by write_sdc
-# Tue Oct 11 21:30:07 2022
+# Sun Oct  9 23:00:55 2022
 ###############################################################################
 current_design mgmt_core_wrapper
 ###############################################################################
@@ -8,7 +8,7 @@ current_design mgmt_core_wrapper
 ###############################################################################
 create_clock -name core_clk -period 25.0000 [get_ports {core_clk}]
 set_clock_transition 0.1500 [get_clocks {core_clk}]
-set_clock_uncertainty 0.1200 core_clk
+set_clock_uncertainty 0.1800 core_clk
 set_propagated_clock [get_clocks {core_clk}]
 set_input_delay 5.6000 -clock [get_clocks {core_clk}] -add_delay [get_ports {debug_in}]
 set_input_delay 5.6000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io0_di}]
@@ -214,15 +214,15 @@ set_input_delay 5.8000 -clock [get_clocks {core_clk}] -add_delay [get_ports {spi
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {debug_mode}]
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {debug_oeb}]
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {debug_out}]
-set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_clk}]
-set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io0_do}]
-set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io0_oeb}]
-set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io1_do}]
-set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io1_oeb}]
-set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io2_do}]
-set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io2_oeb}]
-set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io3_do}]
-set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io3_oeb}]
+set_output_delay 15.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_clk}]
+set_output_delay 15.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io0_do}]
+set_output_delay 15.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io0_oeb}]
+set_output_delay 15.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io1_do}]
+set_output_delay 15.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io1_oeb}]
+set_output_delay 15.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io2_do}]
+set_output_delay 15.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io2_oeb}]
+set_output_delay 15.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io3_do}]
+set_output_delay 15.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io3_oeb}]
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_inenb_pad}]
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_mode0_pad}]
 set_output_delay 5.0000 -clock [get_clocks {core_clk}] -add_delay [get_ports {gpio_mode1_pad}]
@@ -1195,5 +1195,4 @@ set_timing_derate -late 1.0500
 # Design Rules
 ###############################################################################
 set_max_transition 0.7500 [current_design]
-set_max_transition -clock_path 0.5000 [get_clocks {core_clk}]
 set_max_fanout 20.0000 [current_design]

@@ -45,7 +45,7 @@ set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [
 set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {debug_oeb}]
 set_output_delay $output_delay_value -clock [get_clocks {core_clk}] -add_delay [get_ports {debug_out}]
 
-set flash_output_delay 5 
+set flash_output_delay 15 
 set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_clk}]
 set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_cs_n}]
 set_output_delay $flash_output_delay -clock [get_clocks {core_clk}] -add_delay [get_ports {flash_io0_do}]
@@ -98,7 +98,7 @@ set cap_load 0.15
 puts "\[INFO\]: Setting load to: $cap_load"
 set_load $cap_load [all_outputs]
 
-set ::env(SYNTH_CLOCK_UNCERTAINITY) 0.12
+set ::env(SYNTH_CLOCK_UNCERTAINITY) 0.18
 puts "\[INFO\]: Setting clock uncertainity to: $::env(SYNTH_CLOCK_UNCERTAINITY)"
 set_clock_uncertainty $::env(SYNTH_CLOCK_UNCERTAINITY) [get_clocks $::env(CLOCK_PORT)]
 
@@ -112,7 +112,6 @@ set_timing_derate -late 1.05
 set_max_fanout 20 [current_design]
 
 set_max_transition 0.75 [current_design]
-set_max_transition 0.5 [get_clocks {core_clk}] -clock_path
 # set clk_input [get_port $::env(CLOCK_PORT))]
 # set clk_indx [lsearch [all_inputs] $clk_input]
 # set all_inputs_wo_clk [lreplace [all_inputs] $clk_indx $clk_indx ""]
