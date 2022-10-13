@@ -98,11 +98,11 @@ set cap_load 0.15
 puts "\[INFO\]: Setting load to: $cap_load"
 set_load $cap_load [all_outputs]
 
-set ::env(SYNTH_CLOCK_UNCERTAINITY) 0.12
+set ::env(SYNTH_CLOCK_UNCERTAINITY) 0.3
 puts "\[INFO\]: Setting clock uncertainity to: $::env(SYNTH_CLOCK_UNCERTAINITY)"
 set_clock_uncertainty $::env(SYNTH_CLOCK_UNCERTAINITY) [get_clocks $::env(CLOCK_PORT)]
 
-set ::env(SYNTH_CLOCK_TRANSITION) 0.15
+set ::env(SYNTH_CLOCK_TRANSITION) 0.5
 puts "\[INFO\]: Setting clock transition to: $::env(SYNTH_CLOCK_TRANSITION)"
 set_clock_transition $::env(SYNTH_CLOCK_TRANSITION) [get_clocks $::env(CLOCK_PORT)]
 

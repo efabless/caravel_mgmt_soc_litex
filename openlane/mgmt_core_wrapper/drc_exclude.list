@@ -1,7 +1,6 @@
 sky130_fd_sc_hd__a2111oi_0
 sky130_fd_sc_hd__a21boi_0
 sky130_fd_sc_hd__and2_0
-sky130_fd_sc_hd__buf_16
 sky130_fd_sc_hd__clkdlybuf4s15_1
 sky130_fd_sc_hd__clkdlybuf4s18_1
 sky130_fd_sc_hd__fa_4
@@ -66,4 +65,3 @@ sky130_fd_sc_hd__dlymetal6s2s_1
 sky130_fd_sc_hd__dlymetal6s4s_1
 sky130_fd_sc_hd__dlymetal6s6s_1
 sky130_fd_sc_hd__buf_1
-sky130_fd_sc_hd__buf_2
