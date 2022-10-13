@@ -1624,7 +1624,26 @@ sky130_fd_io__top_gpiov2 gpiov2_base (
 );
 
 endmodule
+// TODO: might move module from here for now
+module sky130_ef_sc_hd__decap_12 (
+    VPWR,
+    VGND,
+    VPB ,
+    VNB
+);
 
+    input VPWR;
+    input VGND;
+    input VPB ;
+    input VNB ;
+    sky130_fd_sc_hd__decap base (
+        .VPWR(VPWR),
+        .VGND(VGND),
+        .VPB(VPB),
+        .VNB(VNB)
+    );
+
+endmodule
 
 //--------EOF---------
 
