@@ -1,0 +1,9 @@
+RAM256-min-f-sta STA:    Failed
+RAM256-max-t-sta STA:    Failed
+RAM256-nom-t-sta STA:    Failed
+RAM256-min-t-sta STA:    Failed
+RAM256-max-s-sta STA:    Passed
+RAM256-nom-f-sta STA:    Failed
+RAM256-min-s-sta STA:    Passed
+RAM256-nom-s-sta STA:    Passed
+RAM256-max-f-sta STA:    Failed

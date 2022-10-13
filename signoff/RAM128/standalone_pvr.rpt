@@ -1,0 +1,9 @@
+RAM128-min-s-sta STA:    Passed
+RAM128-nom-s-sta STA:    Passed
+RAM128-nom-f-sta STA:    Passed
+RAM128-max-s-sta STA:    Passed
+RAM128-nom-t-sta STA:    Failed
+RAM128-max-t-sta STA:    Failed
+RAM128-min-f-sta STA:    Passed
+RAM128-min-t-sta STA:    Failed
+RAM128-max-f-sta STA:    Passed
