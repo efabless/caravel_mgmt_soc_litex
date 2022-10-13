@@ -12,13 +12,16 @@
 -v $VERILOG_PATH/dv/vip/wb_rw_test.v
 
 ## DFFRAM Behavioral Model
--v $VERILOG_PATH/dv/vip/DFFRAM.v
+#-v $VERILOG_PATH/dv/vip/DFFRAM.v
+-v $VERILOG_PATH/dv/vip/RAM128.v
+-v $VERILOG_PATH/dv/vip/RAM256.v
 
 ## DFFRAM Full RTL
 #-v $VERILOG_PATH/rtl/DFFRAM.v
 #-v $VERILOG_PATH/rtl/DFFRAMBB.v
 
 # Mgmt Core Wrapper
+
 -v $VERILOG_PATH/rtl/mgmt_core.v
 -v $VERILOG_PATH/rtl/mgmt_core_wrapper.v
 -v $VERILOG_PATH/rtl/VexRiscv_MinDebugCache.v

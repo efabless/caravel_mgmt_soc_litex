@@ -10,7 +10,9 @@
 ###########################################################
 
 ## DFFRAM Full GL
--v $VERILOG_PATH/gl/DFFRAM.v
+#-v $VERILOG_PATH/gl/DFFRAM.v
+-v $VERILOG_PATH/gl/RAM128.v
+-v $VERILOG_PATH/gl/RAM256.v
 
 ## DFFRAM Behavioral Model
 #-v $VERILOG_PATH/dv/vip/DFFRAM.v
@@ -54,8 +56,9 @@
 -v $CARAVEL_PATH/gl/xres_buf.v		     
 -v $CARAVEL_PATH/gl/spare_logic_block.v	     
 -v $CARAVEL_PATH/gl/housekeeping.v		     
--v $CARAVEL_PATH/gl/caravel_clocking.v	     
--v $CARAVEL_PATH/gl/digital_pll.v		     
+-v $CARAVEL_PATH/gl/caravel_clocking.v
+// TODO change	     
+-v $CARAVEL_PATH/rtl/digital_pll.v		     
 -v $CARAVEL_PATH/rtl/debug_regs.v
 -v $CARAVEL_PATH/rtl/__user_project_la_example.v
 -v $CARAVEL_PATH/rtl/__user_project_gpio_example.v
@@ -66,6 +69,7 @@
 ###########################################################
 ## These blocks are manually designed 		
 ###########################################################
+-v $CARAVEL_PATH/gl/constant_block.v
 -v $CARAVEL_PATH/gl/chip_io.v 
 -v $CARAVEL_PATH/gl/mgmt_protect.v		     
 -v $CARAVEL_PATH/gl/mgmt_protect_hv.v 	     		     
