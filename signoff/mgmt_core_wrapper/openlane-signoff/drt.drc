@@ -1,9 +1,0 @@
-  violation type: Short
-    srcs: net:net1761 net:net6060 
-    bbox = ( 1137.74, 775.98 ) - ( 1137.88, 776.12 ) on Layer met1
-  violation type: Short
-    srcs: net:net1760 net:net32269 
-    bbox = ( 1076.56, 773.6 ) - ( 1076.7, 773.74 ) on Layer met2
-  violation type: Short
-    srcs: net:net32058 net:net34464 
-    bbox = ( 1203.52, 775.98 ) - ( 1203.66, 776.12 ) on Layer met1
