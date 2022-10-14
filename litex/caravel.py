@@ -286,6 +286,34 @@ class MGMTSoC(SoCMini):
         self.comb += clk_out.eq(clk_in)
         self.comb += resetn_out.eq(resetn_in)
 
+        serial_load_in = platform.request("serial_load_in")
+        serial_load_out = platform.request("serial_load_out")
+        self.comb += serial_load_out.eq(serial_load_in)
+
+        serial_data_2_in = platform.request("serial_data_2_in")
+        serial_data_2_out = platform.request("serial_data_2_out")
+        self.comb += serial_data_2_out.eq(serial_data_2_in)
+
+        serial_resetn_in = platform.request("serial_resetn_in")
+        serial_resetn_out = platform.request("serial_resetn_out")
+        self.comb += serial_resetn_out.eq(serial_resetn_in)
+
+        serial_clock_in = platform.request("serial_clock_in")
+        serial_clock_out = platform.request("serial_clock_out")
+        self.comb += serial_clock_out.eq(serial_clock_in)
+
+        rstb_l_in = platform.request("rstb_l_in")
+        rstb_l_out = platform.request("rstb_l_out")
+        self.comb += rstb_l_out.eq(rstb_l_in)
+
+        por_l_in = platform.request("por_l_in")
+        por_l_out = platform.request("por_l_out")
+        self.comb += por_l_out.eq(por_l_in)
+
+        porb_h_in = platform.request("porb_h_in")
+        porb_h_out = platform.request("porb_h_out")
+        self.comb += porb_h_out.eq(porb_h_in)
+
     #####################
 
     def new_add_spi_flash(self, name="flash", mode="4x", dummy_cycles=None, clk_freq=None, module=None, phy=None, rate="1:1", **kwargs):
