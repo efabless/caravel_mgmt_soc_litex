@@ -1,4 +1,4 @@
-### Caravel Signoff SDC
+### SoC Signoff SDC
 ### Rev 1
 ### Date: 5/10/2022
 
