@@ -20,6 +20,21 @@ _io = [
     ("resetn_in", 0, Pins(1)),
     ("resetn_out", 0, Pins(1)),
 
+    ("serial_load_in", 0, Pins(1)),
+    ("serial_load_out", 0, Pins(1)),
+    ("serial_data_2_in", 0, Pins(1)),
+    ("serial_data_2_out", 0, Pins(1)),
+    ("serial_resetn_in", 0, Pins(1)),
+    ("serial_resetn_out", 0, Pins(1)),
+    ("serial_clock_in", 0, Pins(1)),
+    ("serial_clock_out", 0, Pins(1)),
+    ("rstb_l_in", 0, Pins(1)),
+    ("rstb_l_out", 0, Pins(1)),
+    ("por_l_in", 0, Pins(1)),
+    ("por_l_out", 0, Pins(1)),
+    ("porb_h_in", 0, Pins(1)),
+    ("porb_h_out", 0, Pins(1)),
+
     # GPIO mgmt
     ("gpio", 0,
      Subsignal("out_pad", Pins(1)),
