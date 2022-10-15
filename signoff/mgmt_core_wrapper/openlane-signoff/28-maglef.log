@@ -12,7 +12,7 @@ The following types are not handled by extraction and will be treated as non-ele
 Scaled tech values by 2 / 1 to match internal grid scaling
 Loading sky130A Device Generator Menu ...
 Using technology "sky130A", version 1.0.341-2-gde752ec
-Reading LEF data from file /home/hosni/My_forks/marwan/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_12.37.06/results/signoff/mgmt_core_wrapper.lef.
+Reading LEF data from file /home/hosni/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_19.50.29/results/signoff/mgmt_core_wrapper.lef.
 This action cannot be undone.
-LEF read: Processed 7488 lines.
+LEF read: Processed 7506 lines.
 [INFO]: DONE GENERATING MAGLEF VIEW
