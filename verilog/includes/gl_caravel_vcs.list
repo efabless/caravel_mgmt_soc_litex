@@ -65,6 +65,7 @@
 -v $CARAVEL_PATH/rtl/__user_project_wrapper.v	     
 -v $CARAVEL_PATH/gl/user_id_programming.v	     
 -v $CARAVEL_PATH/gl/caravel.v 		     
+-v $CARAVEL_PATH/gl/buff_flash_clkrst.v 		     
 
 ###########################################################
 ## These blocks are manually designed 		
