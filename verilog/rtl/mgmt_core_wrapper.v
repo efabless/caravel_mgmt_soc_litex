@@ -43,10 +43,28 @@ module mgmt_core_wrapper (
     // Clock and reset
     input core_clk,
     input core_rstn,
+
+    // Pass-thru signals
     input clk_in,
     input resetn_in,
     output clk_out,
     output resetn_out,
+
+    input serial_load_in,
+    input serial_data_2_in,
+    input serial_resetn_in,
+    input serial_clock_in,
+    input rstb_l_in,
+    input por_l_in,
+    input porb_h_in,
+
+    output serial_load_out,
+    output serial_data_2_out,
+    output serial_resetn_out,
+    output serial_clock_out,
+    output rstb_l_out,
+    output por_l_out,
+    output porb_h_out,
 
     // GPIO (one pin)
     output gpio_out_pad,    // Connect to out on gpio pad
@@ -136,10 +154,28 @@ module mgmt_core_wrapper (
     `endif
         .core_clk(core_clk),
         .core_rstn(core_rstn),
+
+        // Pass-thru signals
         .clk_in(clk_in),
         .clk_out(clk_out),
         .resetn_in(resetn_in),
         .resetn_out(resetn_out),
+
+        .serial_load_in(serial_load_in),
+        .serial_load_out(serial_load_out),
+        .serial_data_2_in(serial_data_2_in),
+        .serial_data_2_out(serial_data_2_out),
+        .serial_resetn_in(serial_resetn_in),
+        .serial_resetn_out(serial_resetn_out),
+        .serial_clock_in(serial_clock_in),
+        .serial_clock_out(serial_clock_out),
+
+        .rstb_l_in(rstb_l_in),
+        .rstb_l_out(rstb_l_out),
+        .por_l_in(por_l_in),
+        .por_l_out(por_l_out),
+        .porb_h_in(porb_h_in),
+        .porb_h_out(porb_h_out),
 
         // Trap state from CPU
         .trap(trap),
