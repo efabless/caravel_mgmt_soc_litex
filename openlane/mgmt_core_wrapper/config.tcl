@@ -124,3 +124,5 @@ set ::env(FP_PDN_MACRO_HOOKS) "RAM256 VPWR VGND VPWR VGND, RAM128 VPWR VGND VPWR
 # set ::env(CTS_CLK_BUFFER_LIST) {sky130_fd_sc_hd__clkbuf_16 sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_2}
 # set ::env(CTS_ROOT_BUFFER) {sky130_fd_sc_hd__clkbuf_16}
 # set ::env(CTS_CLK_MAX_WIRE_LENGTH) 300
+
+set ::env(MAGIC_DEF_LABELS) 0
