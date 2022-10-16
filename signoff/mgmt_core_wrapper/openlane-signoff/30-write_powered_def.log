@@ -1,27 +1,27 @@
 OpenROAD 4174c3ad802d2ac1d04d387d2c4b883903f6647e 
 This program is licensed under the BSD-3 license. See the LICENSE file for details.
 Components of this program may be licensed under more restrictive licenses which must be honored.
-[INFO ODB-0222] Reading LEF file: /home/hosni/My_forks/marwan/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_12.37.06/tmp/merged.nom.lef
+[INFO ODB-0222] Reading LEF file: /home/hosni/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_19.50.29/tmp/merged.nom.lef
 [WARNING ODB-0220] WARNING (LEFPARS-2036): SOURCE statement is obsolete in version 5.6 and later.
 The LEF parser will ignore this statement.
-To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /home/hosni/My_forks/marwan/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_12.37.06/tmp/merged.nom.lef at line 930.
+To avoid this warning in the future, remove this statement from the LEF file with version 5.6 or later. See file /home/hosni/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_19.50.29/tmp/merged.nom.lef at line 930.
 
 [INFO ODB-0223]     Created 13 technology layers
 [INFO ODB-0224]     Created 25 technology vias
 [INFO ODB-0225]     Created 443 library cells
-[INFO ODB-0226] Finished LEF file:  /home/hosni/My_forks/marwan/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_12.37.06/tmp/merged.nom.lef
-[INFO ODB-0127] Reading DEF file: /home/hosni/My_forks/marwan/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_12.37.06/results/routing/mgmt_core_wrapper.def
+[INFO ODB-0226] Finished LEF file:  /home/hosni/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_19.50.29/tmp/merged.nom.lef
+[INFO ODB-0127] Reading DEF file: /home/hosni/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_19.50.29/results/routing/mgmt_core_wrapper.def
 [INFO ODB-0128] Design: mgmt_core_wrapper
 [INFO ODB-0094] 		Created 100000 Insts
 [INFO ODB-0094] 		Created 200000 Insts
 [INFO ODB-0130]     Created 718 pins.
-[INFO ODB-0131]     Created 232616 components and 1009916 component-terminals.
-[INFO ODB-0132]     Created 2 special nets and 886216 connections.
-[INFO ODB-0133]     Created 24817 nets and 123689 connections.
-[INFO ODB-0134] Finished DEF file: /home/hosni/My_forks/marwan/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_12.37.06/results/routing/mgmt_core_wrapper.def
+[INFO ODB-0131]     Created 223517 components and 960157 component-terminals.
+[INFO ODB-0132]     Created 2 special nets and 849820 connections.
+[INFO ODB-0133]     Created 25047 nets and 110326 connections.
+[INFO ODB-0134] Finished DEF file: /home/hosni/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/runs/RUN_2022.10.15_19.50.29/results/routing/mgmt_core_wrapper.def
 Top-level design name: mgmt_core_wrapper
 Found default power net 'VPWR'
 Found default ground net 'VGND'
 Found 1 power ports.
 Found 1 ground ports.
-Modified power connections of 232616/232616 cells.
+Modified power connections of 223517/223517 cells.

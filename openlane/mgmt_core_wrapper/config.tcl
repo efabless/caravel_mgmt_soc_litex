@@ -27,11 +27,11 @@ set ::env(BASE_SDC_FILE) $::env(DESIGN_DIR)/base.sdc
 set ::env(RUN_KLAYOUT) 0
 
 ## SYNTH
-set ::env(SYNTH_STRATEGY) "DELAY 0"
+set ::env(SYNTH_STRATEGY) "DELAY 4"
 set ::env(SYNTH_MAX_FANOUT) 12
 set ::env(SYNTH_READ_BLACKBOX_LIB) 1
 set ::env(SYNTH_BUFFERING) 0
-# set ::env(NO_SYNTH_CELL_LIST) [glob $::env(DESIGN_DIR)/no_synth.list] 
+set ::env(NO_SYNTH_CELL_LIST) [glob $::env(DESIGN_DIR)/no_synth.list] 
 # set ::env(DRC_EXCLUDE_CELL_LIST) [glob $::env(DESIGN_DIR)/drc_exclude.list]
 
 ## FP
@@ -116,7 +116,7 @@ set ::env(RUN_IRDROP_REPORT) 0
 set ::env(FP_PDN_CHECK_NODES) 0
 
 set ::env(GRT_ADJUSTMENT) 0.22
-set ::env(PL_TARGET_DENSITY) 0.3
+set ::env(PL_TARGET_DENSITY) 0.26
 set ::env(MAGIC_EXT_USE_GDS) 0
 
 set ::env(FP_PDN_MACRO_HOOKS) "RAM256 VPWR VGND VPWR VGND, RAM128 VPWR VGND VPWR VGND"
