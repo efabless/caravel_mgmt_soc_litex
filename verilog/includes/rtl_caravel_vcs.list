@@ -5,7 +5,7 @@
 
 
 -v $CARAVEL_PATH/rtl/caravel.v 		     
--v $CARAVEL_PATH/gl/buff_flash_clkrst.v		     
+-v $CARAVEL_PATH/rtl/buff_flash_clkrst.v		     
 -v $CARAVEL_PATH/rtl/gpio_signal_buffering.v
 
 ## VIP
