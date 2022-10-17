@@ -57,8 +57,7 @@
 -v $CARAVEL_PATH/gl/spare_logic_block.v	     
 -v $CARAVEL_PATH/gl/housekeeping.v		     
 -v $CARAVEL_PATH/gl/caravel_clocking.v
-// TODO change	     
--v $CARAVEL_PATH/rtl/digital_pll.v		     
+-v $CARAVEL_PATH/gl/digital_pll.v		     
 -v $CARAVEL_PATH/rtl/debug_regs.v
 -v $CARAVEL_PATH/rtl/__user_project_la_example.v
 -v $CARAVEL_PATH/rtl/__user_project_gpio_example.v
