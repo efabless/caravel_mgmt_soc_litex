@@ -27,11 +27,11 @@ set ::env(BASE_SDC_FILE) $::env(DESIGN_DIR)/base.sdc
 set ::env(RUN_KLAYOUT) 0
 
 ## SYNTH
-set ::env(SYNTH_STRATEGY) "DELAY 4"
+set ::env(SYNTH_STRATEGY) "DELAY 0"
 set ::env(SYNTH_MAX_FANOUT) 12
 set ::env(SYNTH_READ_BLACKBOX_LIB) 1
 set ::env(SYNTH_BUFFERING) 0
-set ::env(NO_SYNTH_CELL_LIST) [glob $::env(DESIGN_DIR)/no_synth.list] 
+set ::env(NO_SYNTH_CELL_LIST) [glob $::env(DESIGN_DIR)/no_synth.list]
 # set ::env(DRC_EXCLUDE_CELL_LIST) [glob $::env(DESIGN_DIR)/drc_exclude.list]
 
 ## FP
@@ -112,7 +112,6 @@ set ::env(QUIT_ON_MAGIC_DRC) 1
 set ::env(QUIT_ON_TIMING_VIOLATIONS) 1
 set ::env(QUIT_ON_LVS_ERROR) 1
 set ::env(STA_REPORT_POWER) 0
-set ::env(RUN_IRDROP_REPORT) 0
 set ::env(FP_PDN_CHECK_NODES) 0
 
 set ::env(GRT_ADJUSTMENT) 0.22
@@ -121,7 +120,7 @@ set ::env(MAGIC_EXT_USE_GDS) 0
 
 set ::env(FP_PDN_MACRO_HOOKS) "RAM256 VPWR VGND VPWR VGND, RAM128 VPWR VGND VPWR VGND"
 
-# set ::env(CTS_CLK_BUFFER_LIST) {sky130_fd_sc_hd__clkbuf_16 sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_2}
+#  set ::env(CTS_CLK_BUFFER_LIST) {sky130_fd_sc_hd__clkbuf_16 sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_4}
 # set ::env(CTS_ROOT_BUFFER) {sky130_fd_sc_hd__clkbuf_16}
 # set ::env(CTS_CLK_MAX_WIRE_LENGTH) 300
 
