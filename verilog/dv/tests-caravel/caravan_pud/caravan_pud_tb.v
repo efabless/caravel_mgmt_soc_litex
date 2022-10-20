@@ -22,7 +22,7 @@
  */
 `timescale 1 ns / 1 ps
 
-module pullupdown_tb;
+module caravan_pud_tb;
 
 	reg clock;
 	reg power1;
@@ -35,8 +35,8 @@ module pullupdown_tb;
 	end
 
 	initial begin
-		$dumpfile("pullupdown.vcd");
-		$dumpvars(3, pullupdown_tb);
+		$dumpfile("caravan_pud.vcd");
+		$dumpvars(3, caravan_pud_tb);
 
 		// Repeat cycles of 1000 clock edges as needed to complete testbench
 		repeat (500) begin
@@ -75,7 +75,7 @@ module pullupdown_tb;
 
 	// Monitor
 	initial begin
-		#4000;
+		#4000
 		if (mprj_io[3] !== 1'b1) begin
 		    $display("Monitor: CSB value %b should be 1.", mprj_io[3]);
 		    $display("Monitor: Test CSB check-pullup failed.");
@@ -90,15 +90,16 @@ module pullupdown_tb;
 		    $finish;
 		end
 		mprj_apply[3] = 1'bz;
-		wait(checkbits_hi == 6'h20);
+		wait(checkbits_hi == 6'h30);
 		$display("Monitor: CSB default pull-up state check passed");
 
 		wait(checkbits_hi == 6'h30);
-		for (i = 0; i < 32; i++) begin
+		for (i = 0; i < 14; i++) begin
+	   	   $display("Monitor: Testing channel %d", i);
 		   wait(checkbits_hi == 6'h31);
 		   if (mprj_io[i] !== 1'b0) begin
 			$display("Monitor: wire value %b should be 0.", mprj_io[i]);
-			$display("Monitor: Test pullupdown check-pulldown failed.");
+			$display("Monitor: Test caravan_pud check-pulldown failed.");
 			$finish;
 		   end
 		   // Should be able to force the pin high against the pull-down
@@ -106,14 +107,14 @@ module pullupdown_tb;
 		   #10;
 		   if (mprj_io[i] !== 1'b1) begin
 			$display("Monitor: wire value %b should be 1.", mprj_io[i]);
-			$display("Monitor: Test pullupdown force-high failed.");
+			$display("Monitor: Test caravan_pud force-high failed.");
 			$finish;
 		   end
 		   mprj_apply[i] = 1'bz;
 		   wait(checkbits_hi == 6'h32);
 		   if (mprj_io[i] !== 1'b1) begin
 			$display("Monitor: wire value %b should be 1.", mprj_io[i]);
-			$display("Monitor: Test pullupdown check-pullup failed.");
+			$display("Monitor: Test caravan_pud check-pullup failed.");
 			$finish;
 		   end
 		   // Should be able to force the pin low against the pull-up
@@ -121,14 +122,74 @@ module pullupdown_tb;
 		   #10;
 		   if (mprj_io[i] !== 1'b0) begin
 			$display("Monitor: wire value %b should be 0.", mprj_io[i]);
-			$display("Monitor: Test pullupdown force-low failed.");
+			$display("Monitor: Test caravan_pud force-low failed.");
 			$finish;
 		   end
 		   mprj_apply[i] = 1'bz;
 		   wait(checkbits_hi == 6'h33);
 		   if (mprj_io[i] !== 1'bz) begin
 			$display("Monitor: wire value %b should be z.", mprj_io[i]);
-			$display("Monitor: Test pullupdown check-disabled failed.");
+			$display("Monitor: Test caravan_pud check-disabled failed.");
+			$finish;
+		   end
+		end
+		for (i = 14; i < 25; i++) begin
+	   	   $display("Monitor: Testing channel %d", i);
+		   wait(checkbits_hi == 6'h31);
+		   if (mprj_io[i] !== 1'bz) begin
+			$display("Monitor: wire value %b should be z.", mprj_io[i]);
+			$display("Monitor: Test caravan_pud check-pulldown failed.");
+			$finish;
+		   end
+		   wait(checkbits_hi == 6'h32);
+		   if (mprj_io[i] !== 1'bz) begin
+			$display("Monitor: wire value %b should be z.", mprj_io[i]);
+			$display("Monitor: Test caravan_pud check-pulldown failed.");
+			$finish;
+		   end
+		   wait(checkbits_hi == 6'h33);
+		   if (mprj_io[i] !== 1'bz) begin
+			$display("Monitor: wire value %b should be z.", mprj_io[i]);
+			$display("Monitor: Test caravan_pud check-pulldown failed.");
+			$finish;
+		   end
+		end
+		for (i = 25; i < 32; i++) begin
+	   	   $display("Monitor: Testing channel %d", i);
+		   wait(checkbits_hi == 6'h31);
+		   if (mprj_io[i] !== 1'b0) begin
+			$display("Monitor: wire value %b should be 0.", mprj_io[i]);
+			$display("Monitor: Test caravan_pud check-pulldown failed.");
+			$finish;
+		   end
+		   // Should be able to force the pin high against the pull-down
+		   mprj_apply[i] = 1'b1;
+		   #10;
+		   if (mprj_io[i] !== 1'b1) begin
+			$display("Monitor: wire value %b should be 1.", mprj_io[i]);
+			$display("Monitor: Test caravan_pud force-high failed.");
+			$finish;
+		   end
+		   mprj_apply[i] = 1'bz;
+		   wait(checkbits_hi == 6'h32);
+		   if (mprj_io[i] !== 1'b1) begin
+			$display("Monitor: wire value %b should be 1.", mprj_io[i]);
+			$display("Monitor: Test caravan_pud check-pullup failed.");
+			$finish;
+		   end
+		   // Should be able to force the pin low against the pull-up
+		   mprj_apply[i] = 1'b0;
+		   #10;
+		   if (mprj_io[i] !== 1'b0) begin
+			$display("Monitor: wire value %b should be 0.", mprj_io[i]);
+			$display("Monitor: Test caravan_pud force-low failed.");
+			$finish;
+		   end
+		   mprj_apply[i] = 1'bz;
+		   wait(checkbits_hi == 6'h33);
+		   if (mprj_io[i] !== 1'bz) begin
+			$display("Monitor: wire value %b should be z.", mprj_io[i]);
+			$display("Monitor: Test caravan_pud check-disabled failed.");
 			$finish;
 		   end
 		end
@@ -139,10 +200,11 @@ module pullupdown_tb;
 		wait(checkbits_lo == 6'h36);
 		$display("Monitor: Start test of high GPIOs");
 		for (i = 32; i < 38; i++) begin
+	   	   $display("Monitor: Testing channel %d", i);
 		   wait(checkbits_lo == 6'h37);
 		   if (mprj_io[i] !== 1'b0) begin
 			$display("Monitor: wire value %b should be 0.", mprj_io[i]);
-			$display("Monitor: Test pullupdown check-pulldown failed.");
+			$display("Monitor: Test caravan_pud check-pulldown failed.");
 			$finish;
 		   end
 		   // Should be able to force the pin high against the pull-down
@@ -150,14 +212,14 @@ module pullupdown_tb;
 		   #10;
 		   if (mprj_io[i] !== 1'b1) begin
 			$display("Monitor: wire value %b should be 1.", mprj_io[i]);
-			$display("Monitor: Test pullupdown force-high failed.");
+			$display("Monitor: Test caravan_pud force-high failed.");
 			$finish;
 		   end
 		   mprj_apply[i] = 1'bz;
 		   wait(checkbits_lo == 6'h38);
 		   if (mprj_io[i] !== 1'b1) begin
 			$display("Monitor: wire value %b should be 1.", mprj_io[i]);
-			$display("Monitor: Test pullupdown check-pullup failed.");
+			$display("Monitor: Test caravan_pud check-pullup failed.");
 			$finish;
 		   end
 		   // Should be able to force the pin low against the pull-up
@@ -165,14 +227,14 @@ module pullupdown_tb;
 		   #10;
 		   if (mprj_io[i] !== 1'b0) begin
 			$display("Monitor: wire value %b should be 0.", mprj_io[i]);
-			$display("Monitor: Test pullupdown force-low failed.");
+			$display("Monitor: Test caravan_pud force-low failed.");
 			$finish;
 		   end
 		   mprj_apply[i] = 1'bz;
 		   wait(checkbits_lo == 6'h39);
 		   if (mprj_io[i] !== 1'bz) begin
 			$display("Monitor: wire value %b should be z.", mprj_io[i]);
-			$display("Monitor: Test pullupdown check-disabled failed.");
+			$display("Monitor: Test caravan_pud check-disabled failed.");
 			$finish;
 		   end
 		end
@@ -230,7 +292,7 @@ module pullupdown_tb;
 	// ser_tx    = mgmt_gpio_io[6]              (output)
 	// irq       = mgmt_gpio_io[7]              (input)
 
- 	caravel uut (
+ 	caravan uut (
 		.vddio	  (VDD3V3),
 		.vddio_2  (VDD3V3),		
 		.vssio	  (VSS),
@@ -260,7 +322,7 @@ module pullupdown_tb;
 	);
 
 	spiflash #(
-		.FILENAME("pullupdown.hex")
+		.FILENAME("caravan_pud.hex")
 	) spiflash (
 		.csb(flash_csb),
 		.clk(flash_clk),
