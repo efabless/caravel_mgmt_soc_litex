@@ -34,6 +34,8 @@ export USER_PROJECT_VERILOG ?=  $(DESIGNS)/caravel_user_project/verilog
 export CARAVEL_PATH = $(CARAVEL_VERILOG_PATH)
 export VERILOG_PATH = $(CORE_VERILOG_PATH)
 
+export TOPLEVEL ?= 	caravel
+
 #######################################################################
 ## Compiler Information 
 #######################################################################
