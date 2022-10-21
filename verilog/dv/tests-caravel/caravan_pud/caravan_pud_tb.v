@@ -75,7 +75,7 @@ module caravan_pud_tb;
 
 	// Monitor
 	initial begin
-		#4000
+		#4000;
 		if (mprj_io[3] !== 1'b1) begin
 		    $display("Monitor: CSB value %b should be 1.", mprj_io[3]);
 		    $display("Monitor: Test CSB check-pullup failed.");
@@ -90,7 +90,7 @@ module caravan_pud_tb;
 		    $finish;
 		end
 		mprj_apply[3] = 1'bz;
-		wait(checkbits_hi == 6'h30);
+		wait(checkbits_hi == 6'h20);
 		$display("Monitor: CSB default pull-up state check passed");
 
 		wait(checkbits_hi == 6'h30);
