@@ -10,7 +10,9 @@
 ###########################################################
 
 ## DFFRAM Full GL
--v $(VERILOG_PATH)/gl/DFFRAM.v
+#-v $(VERILOG_PATH)/gl/DFFRAM.v
+-v $(VERILOG_PATH)/gl/RAM128.v
+-v $(VERILOG_PATH)/gl/RAM256.v
 
 ## DFFRAM Behavioral Model
 #-v $(VERILOG_PATH)/dv/vip/DFFRAM.v
@@ -19,7 +21,7 @@
 # Mgmt Core Wrapper
 ###########################################################
 -v $(VERILOG_PATH)/rtl/defines.v
--v $(VERILOG_PATH)/gl/mgmt_core.v
+#-v $(VERILOG_PATH)/gl/mgmt_core.v
 -v $(VERILOG_PATH)/gl/mgmt_core_wrapper.v
 
 # Caravel
@@ -56,13 +58,20 @@
 -v $(CARAVEL_PATH)/gl/housekeeping.v		     
 -v $(CARAVEL_PATH)/gl/caravel_clocking.v	     
 -v $(CARAVEL_PATH)/gl/digital_pll.v		     
+-v $(CARAVEL_PATH)/rtl/debug_regs.v
 #-v $(CARAVEL_PATH)/gl/__user_project_wrapper.v	     
--v $(CARAVEL_PATH)/gl/user_id_programming.v	     
+-v $(CARAVEL_PATH)/gl/user_id_programming.v	   
+-v $(CARAVEL_PATH)/gl/buff_flash_clkrst.v 		     
+-v $(CARAVEL_PATH)/gl/gpio_signal_buffering_alt.v	     
+-v $(CARAVEL_PATH)/gl/gpio_signal_buffering.v   
 -v $(CARAVEL_PATH)/gl/caravel.v 		     
+-v $(CARAVEL_PATH)/gl/caravan.v 		     
 
 ###########################################################
 ## These blocks are manually designed 		
 ###########################################################
+-v $(CARAVEL_PATH)/gl/constant_block.v
+-v $(CARAVEL_PATH)/gl/chip_io_alt.v 
 -v $(CARAVEL_PATH)/gl/chip_io.v 
 -v $(CARAVEL_PATH)/gl/mgmt_protect.v		     
 -v $(CARAVEL_PATH)/gl/mgmt_protect_hv.v 	     		     

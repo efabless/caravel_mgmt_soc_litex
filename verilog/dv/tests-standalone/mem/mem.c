@@ -33,16 +33,18 @@
 //unsigned char bytes[10];
 unsigned long *ints    = (unsigned long *)  0x00000100;
 unsigned short *shorts = (unsigned short *) 0x00000200;
-unsigned char *bytes   = (unsigned char *)  0x0000300;
+unsigned char *bytes   = (unsigned char *)  0x00000300;
+unsigned long *ints_rd = (unsigned long *)  0x00000300;
 
 void main()
 {
     int i, v;
 
-    // SRAM
-    unsigned long *sr_ints    = (unsigned long *)  0x01000000;
-    unsigned short *sr_shorts = (unsigned short *) 0x01000200;
-    unsigned char *sr_bytes   = (unsigned char *)  0x01000400;
+    // DFFRAM_1
+    unsigned long *dff1_ints    = (unsigned long *)  0x00000400;
+    unsigned short *dff1_shorts = (unsigned short *) 0x00000480;
+    unsigned char *dff1_bytes   = (unsigned char *)  0x00000500;
+    unsigned long *dff1_ints_rd = (unsigned long *)  0x00000500;
 
     // start test
     reg_la0_oenb = 0;
@@ -50,13 +52,13 @@ void main()
 
     // Test Word R/W
     for (i=0; i<COUNT; i++) {
-	     *(sr_ints+i) = i*5000 + 10000;
+	     *(dff1_ints+i) = i*5000 + 10000;
 	     *(ints+i) = i*5000 + 10000;
      }
 
     for (i=0; i<COUNT; i++) {
         v = i*5000+10000;
-        if ( v != *(ints+i) || v != *(sr_ints+i) )
+        if ( v != *(ints+i) || v != *(dff1_ints+i) )
             reg_la0_data = 0xAB400000;
     }
 
@@ -65,13 +67,13 @@ void main()
     // Test Half Word R/W
     reg_la0_data = 0xA0200000;
     for (i=0; i<COUNT; i++) {
-	    *(sr_shorts+i) = i*500 + 100;
+	    *(dff1_shorts+i) = i*500 + 100;
 	    *(shorts+i) = i*500 + 100;
     }
 
     for(i=0; i<COUNT; i++) {
         v = i*500+100;
-        if(v != *(shorts+i) || v != *(sr_shorts+i))
+        if(v != *(shorts+i) || v != *(dff1_shorts+i))
             reg_la0_data = 0xAB200000;
     }
 
@@ -80,15 +82,34 @@ void main()
     // Test byte R/W
     reg_la0_data = 0xA0100000;
     for(i=0; i<COUNT; i++) {
-        *(sr_bytes+i) = i*5 + 10;
+        *(dff1_bytes+i) = i*5 + 10;
         *(bytes+i) = i*5 + 10;
     }
 
     for(i=0; i<COUNT; i++) {
         v = i*5+10;
-        if(v != *(bytes+i) && v != *(sr_bytes+i))
+        if(v != *(bytes+i) && v != *(dff1_bytes+i))
             reg_la0_data = 0xAB100000;
     }
 
     reg_la0_data = 0xAB110000;
+
+    // --------------------------------
+
+    // Test byte W and word R
+    reg_la0_data = 0xA0500000;
+    for(i=0; i<COUNT*4; i++) {
+        *(dff1_bytes+i) = 1 << i % 4;
+        *(bytes+i) = 1 << i % 4;
+    }
+
+    for(i=0; i<COUNT; i++) {
+        v = 0x08040201;
+        if(v != *(ints_rd+i) && v != *(dff1_ints_rd+i)) {
+            reg_la0_data = 0xAB500000;
+        }
+    }
+
+    reg_la0_data = 0xAB510000;
+
 }

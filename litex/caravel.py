@@ -77,7 +77,8 @@ class MGMTSoC(SoCMini):
 
             self.mem_map = {
                 "dff": 0x00000000,
-                "sram": 0x01000000,
+                "dff2": 0x00000400,
+                # "sram": 0x01000000,
                 "flash": 0x10000000,
                 "mprj": 0x30000000,
                 "hk": 0x26000000,
@@ -145,22 +146,27 @@ class MGMTSoC(SoCMini):
         dff_size = 1 * 1024
         dff = self.submodules.mem = DFFRAM(size=dff_size)
         self.register_mem("dff", self.mem_map["dff"], self.mem.bus, dff_size)
-        mgmt_soc_dff = platform.request("mgmt_soc_dff")
-        self.comb += mgmt_soc_dff.WE.eq(dff.we)
-        self.comb += mgmt_soc_dff.A.eq(dff.bus.adr)
-        self.comb += dff.do.eq(mgmt_soc_dff.Do)
-        self.comb += mgmt_soc_dff.Di.eq(dff.di)
-        self.comb += mgmt_soc_dff.EN.eq(dff.en)
+        # mgmt_soc_dff = platform.request("mgmt_soc_dff")
+        # self.comb += mgmt_soc_dff.WE.eq(dff.we)
+        # self.comb += mgmt_soc_dff.A.eq(dff.bus.adr)
+        # self.comb += dff.do.eq(mgmt_soc_dff.Do)
+        # self.comb += mgmt_soc_dff.Di.eq(dff.di)
+        # self.comb += mgmt_soc_dff.EN.eq(dff.en)
 
-        #OpenRAM
-        spram_size = 2 * 1024
-        sram = self.submodules.spram = OpenRAM(size=spram_size)
-        self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
-        sram_ro_ports = platform.request("sram_ro")
-        self.comb += sram_ro_ports.clk.eq(sram.clk1)
-        self.comb += sram_ro_ports.csb.eq(sram.cs_b1)
-        self.comb += sram_ro_ports.addr.eq(sram.adr1)
-        self.comb += sram_ro_ports.data.eq(sram.dataout1)
+        #DFFRAM2
+        dff2_size = 512
+        dff2 = self.submodules.mem2 = DFFRAM_512(size=dff2_size)
+        self.register_mem("dff2", self.mem_map["dff2"], self.mem2.bus, dff2_size)
+
+        # #OpenRAM
+        # spram_size = 2 * 1024
+        # sram = self.submodules.spram = OpenRAM(size=spram_size)
+        # self.register_mem("sram", self.mem_map["sram"], self.spram.bus, spram_size)
+        # sram_ro_ports = platform.request("sram_ro")
+        # self.comb += sram_ro_ports.clk.eq(sram.clk1)
+        # self.comb += sram_ro_ports.csb.eq(sram.cs_b1)
+        # self.comb += sram_ro_ports.addr.eq(sram.adr1)
+        # self.comb += sram_ro_ports.data.eq(sram.dataout1)
 
         # SPI Flash --------------------------------------------------------------------------------
         from litespi.modules import W25Q128JV
@@ -183,7 +189,7 @@ class MGMTSoC(SoCMini):
         # Add a wb port for external slaves user_project
         mprj_ports = platform.request("mprj")
         mprj = wishbone.Interface()
-        self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x0100000))
+        self.bus.add_slave(name="mprj", slave=mprj, region=SoCRegion(origin=self.mem_map["mprj"], size=0x10000000))
         self.submodules.mprj_wb_iena = GPIOOut(mprj_ports.wb_iena)
         self.comb += mprj_ports.cyc_o.eq(mprj.cyc)
         self.comb += mprj_ports.stb_o.eq(mprj.stb)
@@ -197,7 +203,7 @@ class MGMTSoC(SoCMini):
 
         # Add a wb port for external slaves housekeeping
         hk = wishbone.Interface()
-        self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x0100000))
+        self.bus.add_slave(name="hk", slave=hk, region=SoCRegion(origin=self.mem_map["hk"], size=0x00300000))
         hk_ports = platform.request("hk")
         self.comb += hk_ports.stb_o.eq(hk.stb)
         self.comb += hk_ports.cyc_o.eq(hk.cyc)
@@ -271,6 +277,42 @@ class MGMTSoC(SoCMini):
         for i in range(len(user_irq)):
             setattr(self.submodules,"user_irq_"+str(i),GPIOIn(user_irq[i], with_irq=True))
             self.irq.add("user_irq_"+str(i), use_loc_if_exists=True)
+
+        # Pass-thru clock and reset
+        clk_in = platform.request("clk_in")
+        clk_out = platform.request("clk_out")
+        resetn_in = platform.request("resetn_in")
+        resetn_out = platform.request("resetn_out")
+        self.comb += clk_out.eq(clk_in)
+        self.comb += resetn_out.eq(resetn_in)
+
+        serial_load_in = platform.request("serial_load_in")
+        serial_load_out = platform.request("serial_load_out")
+        self.comb += serial_load_out.eq(serial_load_in)
+
+        serial_data_2_in = platform.request("serial_data_2_in")
+        serial_data_2_out = platform.request("serial_data_2_out")
+        self.comb += serial_data_2_out.eq(serial_data_2_in)
+
+        serial_resetn_in = platform.request("serial_resetn_in")
+        serial_resetn_out = platform.request("serial_resetn_out")
+        self.comb += serial_resetn_out.eq(serial_resetn_in)
+
+        serial_clock_in = platform.request("serial_clock_in")
+        serial_clock_out = platform.request("serial_clock_out")
+        self.comb += serial_clock_out.eq(serial_clock_in)
+
+        rstb_l_in = platform.request("rstb_l_in")
+        rstb_l_out = platform.request("rstb_l_out")
+        self.comb += rstb_l_out.eq(rstb_l_in)
+
+        por_l_in = platform.request("por_l_in")
+        por_l_out = platform.request("por_l_out")
+        self.comb += por_l_out.eq(por_l_in)
+
+        porb_h_in = platform.request("porb_h_in")
+        porb_h_out = platform.request("porb_h_out")
+        self.comb += porb_h_out.eq(porb_h_in)
 
     #####################
 

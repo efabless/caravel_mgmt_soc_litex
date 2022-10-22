@@ -1,6 +1,0 @@
-$mgmt_core
- 100
-r_0_met3.3d
-500 500 2 Nov 29 03:26:39 2020
-Rule File Pathname: /project/openlane/mgmt_core/runs/mgmt_core/reports/finishing/drc.rpt
-met3.3d: Metal3 > 3um spacing to unrelated m3 < 0.4um 

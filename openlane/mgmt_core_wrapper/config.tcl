@@ -13,109 +13,115 @@
 # limitations under the License.
 # SPDX-License-Identifier: Apache-2.0
 
-set script_dir [file dirname [file normalize [info script]]]
-
+set ::env(MGMT_SOC_ROOT) $::env(DESIGN_DIR)/../..
+#
 set ::env(DESIGN_NAME) mgmt_core_wrapper
-set ::env(DESIGN_IS_CORE) 1
 
-set ::env(ROUTING_CORES) "6"
-set ::env(RUN_KLAYOUT) 0
 set ::env(CLOCK_PORT) "core_clk"
-set ::env(CLOCK_NET) ""
-set ::env(CLOCK_PERIOD) "25"
+set ::env(CLOCK_NET) "core_clk"
+set ::env(CLOCK_PERIOD) "20"
 
-## Synthesis
-set ::env(SYNTH_STRATEGY) "DELAY 1"
-set ::env(SYNTH_MAX_FANOUT) 6
+set ::env(RESET_PORT) "core_rstn"
 
-set ::env(CLOCK_TREE_SYNTH) 0
+set ::env(BASE_SDC_FILE) $::env(DESIGN_DIR)/base.sdc 
+set ::env(RUN_KLAYOUT) 0
 
-##set ::env(BASE_SDC_FILE) $script_dir/base.sdc 
+## SYNTH
+set ::env(SYNTH_STRATEGY) "DELAY 0"
+set ::env(SYNTH_MAX_FANOUT) 12
+set ::env(SYNTH_READ_BLACKBOX_LIB) 1
+set ::env(SYNTH_BUFFERING) 0
+set ::env(NO_SYNTH_CELL_LIST) [glob $::env(DESIGN_DIR)/no_synth.list]
+# set ::env(DRC_EXCLUDE_CELL_LIST) [glob $::env(DESIGN_DIR)/drc_exclude.list]
 
-## Floorplan
-set ::env(FP_PIN_ORDER_CFG) $script_dir/pin_order.cfg
+## FP
+set ::env(FP_DEF_TEMPLATE) $::env(DESIGN_DIR)/io.def
+# set ::env(FP_PIN_ORDER_CFG) $::env(DESIGN_DIR)/pin_order.cfg
 set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 2620 820"
 
-set ::env(FP_IO_VEXTEND) 2
-set ::env(FP_IO_HEXTEND) 2
+set ::env(MACRO_PLACEMENT_CFG) $::env(DESIGN_DIR)/macro_placement.cfg
+set ::env(PL_TIME_DRIVEN) 1
+set ::env(DPL_CELL_PADDING) 2
+set ::env(GPL_CELL_PADDING) 2
 
-set ::env(FILL_INSERTION) 0
-set ::env(TAP_DECAP_INSERTION) 0
+set ::env(LEFT_MARGIN_MULT) 22
+set ::env(RIGHT_MARGIN_MULT) 22
+set ::env(TOP_MARGIN_MULT) "5"
+set ::env(BOTTOM_MARGIN_MULT) "5"
 
 ## PDN
-set ::env(PDN_CFG) $script_dir/pdn.tcl
-
+set ::env(FP_PDN_CORE_RING) 1
 set ::env(FP_PDN_VPITCH) 50
-set ::env(FP_PDN_HPITCH) 130
+set ::env(FP_PDN_HPITCH) 50
+set ::env(FP_PDN_VSPACING) 10
+set ::env(FP_PDN_HSPACING) 10
 
-set ::env(FP_PDN_CHECK_NODES) 0
-set ::env(FP_PDN_IRDROP) 0
+set ::env(FP_PDN_VWIDTH) 1.6
+set ::env(FP_PDN_CORE_RING_VWIDTH) 1.6
 
-set ::env(FP_PDN_ENABLE_RAILS) 0
-
-set ::env(FP_HORIZONTAL_HALO) -6
-set ::env(FP_VERTICAL_HALO) 25
-
-set ::env(FP_PDN_HOFFSET) 60 
-set ::env(FP_PDN_HWIDTH) 3.2
-
-set ::env(TOP_MARGIN_MULT) "10"
+## CTS
+# set ::env(CTS_CLK_BUFFER_LIST) "sky130_fd_sc_hd__clkbuf_4 sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_16"
+# set ::env(CTS_SINK_CLUSTERING_MAX_DIAMETER) 50
+# set ::env(CTS_SINK_CLUSTERING_SIZE) 20
 
 ## Placement
-set ::env(PL_TARGET_DENSITY) 0.18
+set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 1
+set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 1
+set ::env(PL_RESIZER_HOLD_SLACK_MARGIN) 0.1
 
-set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
-set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 0
+# set ::env(PL_RESIZER_MAX_SLEW_MARGIN) 70
+# set ::env(PL_RESIZER_MAX_CAP_MARGIN) 70
 
 ## Routing
-set ::env(GLB_RT_ADJUSTMENT) 0
-set ::env(GLB_RT_L2_ADJUSTMENT) 0.31
-set ::env(GLB_RT_L3_ADJUSTMENT) 0.31
-set ::env(GLB_RT_L4_ADJUSTMENT) 0.21
-set ::env(GLB_RT_L5_ADJUSTMENT) 0.21
-set ::env(GLB_RT_L6_ADJUSTMENT) 0.1
-set ::env(GLB_RT_ALLOW_CONGESTION) 1
-set ::env(GLB_RT_OVERFLOW_ITERS) 200
+set ::env(GRT_ALLOW_CONGESTION) 1
+set ::env(GRT_OVERFLOW_ITERS) 200
 
-set ::env(GLB_RT_MINLAYER) 2
-set ::env(GLB_RT_MAXLAYER) 6
-
-set ::env(GLB_RT_OBS) "\
-   li1 $::env(DIE_AREA),
-   met5 5 10 555 750, \
-   met4 5 10 555 750"
-
-set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 0
-
-## DRC
-set ::env(MAGIC_DRC_USE_GDS) 0
-set ::env(QUIT_ON_MAGIC_DRC) 0
-
-## LVS
-set ::env(QUIT_ON_LVS_ERROR) 0
+set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 1
+set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) 0.2
+set ::env(GLB_RESIZER_SETUP_SLACK_MARGIN) 0.4
 
 ## Diode Insertion
-set ::env(DIODE_INSERTION_STRATEGY) 0
+set ::env(DIODE_INSERTION_STRATEGY) 3
+# set ::env(PL_RESIZER_MAX_WIRE_LENGTH) 250
+# set ::env(GLB_RESIZER_MAX_WIRE_LENGTH) 250
+set ::env(GRT_ANT_ITERS) 50
+set ::env(GRT_MAX_DIODE_INS_ITERS) 50
 
 ## Internal Macros
-set ::env(MACRO_PLACEMENT_CFG) $script_dir/macro_placement.cfg
+set ::env(VERILOG_FILES_BLACKBOX) "$::env(MGMT_SOC_ROOT)/verilog/gl/RAM128.v $::env(MGMT_SOC_ROOT)/verilog/gl/RAM256.v"
 
+set ::env(EXTRA_LEFS) "$::env(MGMT_SOC_ROOT)/lef/RAM128.lef $::env(MGMT_SOC_ROOT)/lef/RAM256.lef"
 
-set ::env(VERILOG_FILES) "\
-	$script_dir/../../verilog/rtl/defines.v\
-	$script_dir/../../verilog/rtl/mgmt_core_wrapper.v"
+set ::env(EXTRA_GDS_FILES) "$::env(MGMT_SOC_ROOT)/gds/RAM128.gds $::env(MGMT_SOC_ROOT)/gds/RAM256.gds"
 
-set ::env(VERILOG_FILES_BLACKBOX) "\
-	$script_dir/../../verilog/rtl/defines.v\
-	$script_dir/../../verilog/rtl/mgmt_core.v\
-	$script_dir/../../verilog/rtl/DFFRAM.v"
+set ::env(EXTRA_LIBS) "$::env(MGMT_SOC_ROOT)/lib/RAM256.lib \
+        $::env(MGMT_SOC_ROOT)/lib/RAM128.lib"
 
-set ::env(EXTRA_LEFS) "\
-	$script_dir/../../lef/DFFRAM.lef
-	$script_dir/../../lef/mgmt_core.lef"
+set ::env(VERILOG_FILES) "$::env(MGMT_SOC_ROOT)/verilog/rtl/defines.v \
+        $::env(MGMT_SOC_ROOT)/verilog/rtl/ibex_all.v \
+        $::env(MGMT_SOC_ROOT)/verilog/rtl/mgmt_core_wrapper.v \
+        $::env(MGMT_SOC_ROOT)/verilog/rtl/mgmt_core.v \
+        $::env(MGMT_SOC_ROOT)/verilog/rtl/picorv32.v \
+        $::env(MGMT_SOC_ROOT)/verilog/rtl/VexRiscv_MinDebugCache.v"
 
-set ::env(EXTRA_GDS_FILES) "\
-	$script_dir/../../gds/mgmt_core.gds
-	$script_dir/../../gds/DFFRAM.gds"
+set ::env(CTS_MAX_CAP) 0.25
+## 
+set ::env(ROUTING_CORES) 24
+set ::env(QUIT_ON_MAGIC_DRC) 1
+set ::env(QUIT_ON_TIMING_VIOLATIONS) 1
+set ::env(QUIT_ON_LVS_ERROR) 1
+set ::env(STA_REPORT_POWER) 0
+set ::env(FP_PDN_CHECK_NODES) 0
 
+set ::env(GRT_ADJUSTMENT) 0.22
+set ::env(PL_TARGET_DENSITY) 0.26
+set ::env(MAGIC_EXT_USE_GDS) 0
+
+set ::env(FP_PDN_MACRO_HOOKS) "RAM256 VPWR VGND VPWR VGND, RAM128 VPWR VGND VPWR VGND"
+
+#  set ::env(CTS_CLK_BUFFER_LIST) {sky130_fd_sc_hd__clkbuf_16 sky130_fd_sc_hd__clkbuf_8 sky130_fd_sc_hd__clkbuf_4}
+# set ::env(CTS_ROOT_BUFFER) {sky130_fd_sc_hd__clkbuf_16}
+# set ::env(CTS_CLK_MAX_WIRE_LENGTH) 300
+
+set ::env(MAGIC_DEF_LABELS) 0

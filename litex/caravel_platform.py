@@ -14,6 +14,27 @@ _io = [
     # ("core_rst", 0, Pins(1)),
     ("core_rstn", 0, Pins(1)),
 
+    # pass-thru pins for clock and reset
+    ("clk_in", 0, Pins(1)),
+    ("clk_out", 0, Pins(1)),
+    ("resetn_in", 0, Pins(1)),
+    ("resetn_out", 0, Pins(1)),
+
+    ("serial_load_in", 0, Pins(1)),
+    ("serial_load_out", 0, Pins(1)),
+    ("serial_data_2_in", 0, Pins(1)),
+    ("serial_data_2_out", 0, Pins(1)),
+    ("serial_resetn_in", 0, Pins(1)),
+    ("serial_resetn_out", 0, Pins(1)),
+    ("serial_clock_in", 0, Pins(1)),
+    ("serial_clock_out", 0, Pins(1)),
+    ("rstb_l_in", 0, Pins(1)),
+    ("rstb_l_out", 0, Pins(1)),
+    ("por_l_in", 0, Pins(1)),
+    ("por_l_out", 0, Pins(1)),
+    ("porb_h_in", 0, Pins(1)),
+    ("porb_h_out", 0, Pins(1)),
+
     # GPIO mgmt
     ("gpio", 0,
      Subsignal("out_pad", Pins(1)),
@@ -106,12 +127,12 @@ _io = [
     ),
 
     # SRAM read-only access from housekeeping
-    ("sram_ro", 0,
-     Subsignal("clk", Pins(1)),
-     Subsignal("csb", Pins(1)),
-     Subsignal("addr", Pins(8)),
-     Subsignal("data", Pins(32)),
-     ),
+    # ("sram_ro", 0,
+    #  Subsignal("clk", Pins(1)),
+    #  Subsignal("csb", Pins(1)),
+    #  Subsignal("addr", Pins(8)),
+    #  Subsignal("data", Pins(32)),
+    #  ),
 
     ("trap", 0, Pins(1)),
 
@@ -123,13 +144,13 @@ _io = [
     #  Subsignal("wdata", Pins(32)),
     #  Subsignal("rdata", Pins(32)),
     #  ),
-    ("mgmt_soc_dff", 0,
-     Subsignal("EN", Pins(1)),
-     Subsignal("WE", Pins(4)),
-     Subsignal("A", Pins(8)),
-     Subsignal("Di", Pins(32)),
-     Subsignal("Do", Pins(32)),
-     ),
+    # ("mgmt_soc_dff", 0,
+    #  Subsignal("EN", Pins(1)),
+    #  Subsignal("WE", Pins(4)),
+    #  Subsignal("A", Pins(8)),
+    #  Subsignal("Di", Pins(32)),
+    #  Subsignal("Do", Pins(32)),
+    #  ),
 
 ]
 

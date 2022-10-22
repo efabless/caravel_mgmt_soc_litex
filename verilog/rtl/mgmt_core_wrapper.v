@@ -32,25 +32,47 @@
 `ifndef _MGMT_CORE_WRAPPER_
 `define _MGMT_CORE_WRAPPER_
 
-/* Wrapper module around management SoC core for pin compatibility	*/
-/* with the Caravel harness chip. */	
+/* Wrapper module around management SoC core for pin compatibility  */
+/* with the Caravel harness chip. */    
 
 module mgmt_core_wrapper (
 `ifdef USE_POWER_PINS
-    inout VPWR,	    /* 1.8V domain */
+    inout VPWR,     /* 1.8V domain */
     inout VGND,
 `endif
     // Clock and reset
     input core_clk,
     input core_rstn,
 
+    // Pass-thru signals
+    input clk_in,
+    input resetn_in,
+    output clk_out,
+    output resetn_out,
+
+    input serial_load_in,
+    input serial_data_2_in,
+    input serial_resetn_in,
+    input serial_clock_in,
+    input rstb_l_in,
+    input por_l_in,
+    input porb_h_in,
+
+    output serial_load_out,
+    output serial_data_2_out,
+    output serial_resetn_out,
+    output serial_clock_out,
+    output rstb_l_out,
+    output por_l_out,
+    output porb_h_out,
+
     // GPIO (one pin)
-    output gpio_out_pad,	// Connect to out on gpio pad
-    input  gpio_in_pad,		// Connect to in on gpio pad
-    output gpio_mode0_pad,	// Connect to dm[0] on gpio pad
-    output gpio_mode1_pad,	// Connect to dm[2] on gpio pad
-    output gpio_outenb_pad,	// Connect to oe_n on gpio pad
-    output gpio_inenb_pad,	// Connect to inp_dis on gpio pad
+    output gpio_out_pad,    // Connect to out on gpio pad
+    input  gpio_in_pad,     // Connect to in on gpio pad
+    output gpio_mode0_pad,  // Connect to dm[0] on gpio pad
+    output gpio_mode1_pad,  // Connect to dm[2] on gpio pad
+    output gpio_outenb_pad, // Connect to oe_n on gpio pad
+    output gpio_inenb_pad,  // Connect to inp_dis on gpio pad
 
     // Logic analyzer signals
     input  [127:0] la_input,            // From user project to CPU
@@ -78,24 +100,24 @@ module mgmt_core_wrapper (
     input  flash_io3_di,
 
     // Exported Wishboned bus
-    output	  mprj_wb_iena,	// Enable for the user wishbone return signals
-    output 	  mprj_cyc_o,
-    output 	  mprj_stb_o,
-    output 	  mprj_we_o,
+    output    mprj_wb_iena, // Enable for the user wishbone return signals
+    output    mprj_cyc_o,
+    output    mprj_stb_o,
+    output    mprj_we_o,
     output [3:0]  mprj_sel_o,
     output [31:0] mprj_adr_o,
     output [31:0] mprj_dat_o,
-    input  	  mprj_ack_i,
+    input     mprj_ack_i,
     input  [31:0] mprj_dat_i,
 
-    output 	  hk_cyc_o,
-    output 	  hk_stb_o,
+    output    hk_cyc_o,
+    output    hk_stb_o,
     input  [31:0] hk_dat_i,
-    input  	  hk_ack_i,
+    input     hk_ack_i,
 
     // IRQ
-    input  [5:0] irq,		// IRQ from SPI and user project
-    output [2:0] user_irq_ena,	// Enables for user project IRQ
+    input  [5:0] irq,       // IRQ from SPI and user project
+    output [2:0] user_irq_ena,  // Enables for user project IRQ
 
     // Module status
     output qspi_enabled,
@@ -115,60 +137,65 @@ module mgmt_core_wrapper (
     output debug_out,
     output debug_oeb,
 
-    // SRAM read-only access from housekeeping
-    input sram_ro_clk,
-    input sram_ro_csb,
-    input [7:0] sram_ro_addr,
-    output [31:0] sram_ro_data,
-
     // Trap state from CPU
     output trap
 );
 
-    // Memory Interface 
-    wire mgmt_soc_dff_EN;
-    wire [3:0] mgmt_soc_dff_WE;
-    wire [7:0] mgmt_soc_dff_A;
-    wire [31:0] mgmt_soc_dff_Di;
-    wire [31:0] mgmt_soc_dff_Do;
 
 // Signals below are sram_ro ports that left no_connect
 // as they are tied down inside mgmt_core
 
-    wire no_connect1 ;
-    wire no_connect2 ;
-    wire [7:0] no_connect3 ;
-
-
     /* Implement the PicoSoC core */
 
     mgmt_core core (
-	`ifdef USE_POWER_PINS
-	    .VPWR(VPWR),	    /* 1.8V domain */
-	    .VGND(VGND),
-	`endif
-    	.core_clk(core_clk),
-    	.core_rstn(core_rstn),
+    `ifdef USE_POWER_PINS
+        .VPWR(VPWR),        /* 1.8V domain */
+        .VGND(VGND),
+    `endif
+        .core_clk(core_clk),
+        .core_rstn(core_rstn),
 
-    	// Trap state from CPU
-    	.trap(trap),
+        // Pass-thru signals
+        .clk_in(clk_in),
+        .clk_out(clk_out),
+        .resetn_in(resetn_in),
+        .resetn_out(resetn_out),
 
-    	// GPIO (one pin)
-    	.gpio_out_pad(gpio_out_pad),		// Connect to out on gpio pad
-    	.gpio_in_pad(gpio_in_pad),		// Connect to in on gpio pad
-    	.gpio_mode0_pad(gpio_mode0_pad),	// Connect to dm[0] on gpio pad
-    	.gpio_mode1_pad(gpio_mode1_pad),	// Connect to dm[2] on gpio pad
-    	.gpio_outenb_pad(gpio_outenb_pad),	// Connect to oe_n on gpio pad
-    	.gpio_inenb_pad(gpio_inenb_pad),	// Connect to inp_dis on gpio pad
+        .serial_load_in(serial_load_in),
+        .serial_load_out(serial_load_out),
+        .serial_data_2_in(serial_data_2_in),
+        .serial_data_2_out(serial_data_2_out),
+        .serial_resetn_in(serial_resetn_in),
+        .serial_resetn_out(serial_resetn_out),
+        .serial_clock_in(serial_clock_in),
+        .serial_clock_out(serial_clock_out),
 
-        .la_input(la_input),			// From user project to CPU
-        .la_output(la_output),			// From CPU to user project
-        .la_oenb(la_oenb),			// Logic analyzer output enable
-        .la_iena(la_iena),			// Logic analyzer input enable
+        .rstb_l_in(rstb_l_in),
+        .rstb_l_out(rstb_l_out),
+        .por_l_in(por_l_in),
+        .por_l_out(por_l_out),
+        .porb_h_in(porb_h_in),
+        .porb_h_out(porb_h_out),
+
+        // Trap state from CPU
+        .trap(trap),
+
+        // GPIO (one pin)
+        .gpio_out_pad(gpio_out_pad),        // Connect to out on gpio pad
+        .gpio_in_pad(gpio_in_pad),      // Connect to in on gpio pad
+        .gpio_mode0_pad(gpio_mode0_pad),    // Connect to dm[0] on gpio pad
+        .gpio_mode1_pad(gpio_mode1_pad),    // Connect to dm[2] on gpio pad
+        .gpio_outenb_pad(gpio_outenb_pad),  // Connect to oe_n on gpio pad
+        .gpio_inenb_pad(gpio_inenb_pad),    // Connect to inp_dis on gpio pad
+
+        .la_input(la_input),            // From user project to CPU
+        .la_output(la_output),          // From CPU to user project
+        .la_oenb(la_oenb),          // Logic analyzer output enable
+        .la_iena(la_iena),          // Logic analyzer input enable
 
         // IRQ
-        .user_irq(irq),		// IRQ from SPI and user project
-	    .user_irq_ena(user_irq_ena),
+        .user_irq(irq),     // IRQ from SPI and user project
+        .user_irq_ena(user_irq_ena),
 
         // Flash memory control (SPI master)
         .flash_cs_n(flash_csb),
@@ -190,7 +217,7 @@ module mgmt_core_wrapper (
         .flash_io3_di(flash_io3_di),
 
         // Exported wishbone bus (User project)
-	    .mprj_wb_iena(mprj_wb_iena),
+        .mprj_wb_iena(mprj_wb_iena),
         .mprj_ack_i(mprj_ack_i),
         .mprj_dat_i(mprj_dat_i),
         .mprj_cyc_o(mprj_cyc_o),
@@ -205,53 +232,28 @@ module mgmt_core_wrapper (
         .hk_dat_i(hk_dat_i),
         .hk_ack_i(hk_ack_i),
 
-    	// Module status
-    	.qspi_enabled(qspi_enabled),
-    	.uart_enabled(uart_enabled),
-    	.spi_enabled(spi_enabled),
-    	.debug_mode(debug_mode),
+        // Module status
+        .qspi_enabled(qspi_enabled),
+        .uart_enabled(uart_enabled),
+        .spi_enabled(spi_enabled),
+        .debug_mode(debug_mode),
 
-    	// Module I/O
-//    	.ser_tx(ser_tx),
-//    	.ser_rx(ser_rx),
+        // Module I/O
+//      .ser_tx(ser_tx),
+//      .ser_rx(ser_rx),
         .serial_tx(ser_tx),
-    	.serial_rx(ser_rx),
-    	.spi_cs_n(spi_csb),
-    	.spi_clk(spi_sck),
-    	.spi_miso(spi_sdi),
-    	.spi_sdoenb(spi_sdoenb),
-    	.spi_mosi(spi_sdo),
-    	.debug_in(debug_in),
-    	.debug_out(debug_out),
-    	.debug_oeb(debug_oeb),
+        .serial_rx(ser_rx),
+        .spi_cs_n(spi_csb),
+        .spi_clk(spi_sck),
+        .spi_miso(spi_sdi),
+        .spi_sdoenb(spi_sdoenb),
+        .spi_mosi(spi_sdo),
+        .debug_in(debug_in),
+        .debug_out(debug_out),
+        .debug_oeb(debug_oeb)
 
-        // DFFRAM Interface 
-        .mgmt_soc_dff_WE(mgmt_soc_dff_WE),
-        .mgmt_soc_dff_EN(mgmt_soc_dff_EN),
-        .mgmt_soc_dff_Do(mgmt_soc_dff_Do),
-        .mgmt_soc_dff_Di(mgmt_soc_dff_Di),
-        .mgmt_soc_dff_A(mgmt_soc_dff_A),
-
-        // SRAM read-only access from housekeeping
-        .sram_ro_clk(no_connect1),
-        .sram_ro_csb(no_connect2),
-        .sram_ro_addr(no_connect3),
-        .sram_ro_data(sram_ro_data)
     );
 
-    // DFFRAM
-    DFFRAM DFFRAM_0 (
-    `ifdef USE_POWER_PINS
-        .VPWR(VPWR),
-        .VGND(VGND),
-    `endif
-        .CLK(core_clk),
-        .WE(mgmt_soc_dff_WE),
-        .EN(mgmt_soc_dff_EN),
-        .Di(mgmt_soc_dff_Di),
-        .Do(mgmt_soc_dff_Do),
-        .A(mgmt_soc_dff_A)   // 8-bit address if using the default custom DFF RAM
-    );
 
 endmodule
 `default_nettype wire

@@ -4,7 +4,8 @@
 -v $(VERILOG_PATH)/dv/vip/wb_rw_test.v
 
 ## DFFRAM Behavioral Model
--v $(VERILOG_PATH)/dv/vip/DFFRAM.v
+-v $(VERILOG_PATH)/dv/vip/RAM256.v
+-v $(VERILOG_PATH)/dv/vip/RAM128.v
 
 ## DFFRAM Full RTL
 #-v $(VERILOG_PATH)/rtl/DFFRAM.v
@@ -30,7 +31,8 @@
 -v $(CARAVEL_PATH)/rtl/ring_osc2x13.v		
 -v $(CARAVEL_PATH)/rtl/clock_div.v
 -v $(CARAVEL_PATH)/rtl/housekeeping_spi.v
-					     
+
+-v $(CARAVEL_PATH)/rtl/chip_io_alt.v				     
 -v $(CARAVEL_PATH)/rtl/chip_io.v 		     
 -v $(CARAVEL_PATH)/rtl/mprj_logic_high.v 	     
 -v $(CARAVEL_PATH)/rtl/mprj2_logic_high.v	     
@@ -39,19 +41,25 @@
 -v $(CARAVEL_PATH)/rtl/gpio_control_block.v	     
 -v $(CARAVEL_PATH)/rtl/gpio_defaults_block.v	     
 -v $(CARAVEL_PATH)/rtl/gpio_logic_high.v 	     
+-v $(CARAVEL_PATH)/rtl/constant_block.v 	     
 -v $(CARAVEL_PATH)/rtl/xres_buf.v		     
 -v $(CARAVEL_PATH)/rtl/spare_logic_block.v	     
 -v $(CARAVEL_PATH)/rtl/housekeeping.v		     
 -v $(CARAVEL_PATH)/rtl/caravel_clocking.v	     
 -v $(CARAVEL_PATH)/rtl/digital_pll.v		     
 #-v $(CARAVEL_PATH)/rtl/__user_project_wrapper.v	     
--v $(CARAVEL_PATH)/rtl/user_id_programming.v	     
--v $(CARAVEL_PATH)/rtl/caravel.v 		     
+-v $(CARAVEL_PATH)/rtl/debug_regs.v
+-v $(CARAVEL_PATH)/rtl/user_id_programming.v
+-v $(CARAVEL_PATH)/rtl/buff_flash_clkrst.v		     
+-v $(CARAVEL_PATH)/rtl/gpio_signal_buffering.v	     
+-v $(CARAVEL_PATH)/rtl/caravel.v 	
+-v $(CARAVEL_PATH)/rtl/gpio_signal_buffering_alt.v	     
+-v $(CARAVEL_PATH)/rtl/caravan.v 		     
 
 ## These blocks are manually designed 		
 -v $(CARAVEL_PATH)/gl/gpio_defaults_block_0403.v     
 -v $(CARAVEL_PATH)/gl/gpio_defaults_block_1803.v     
-
+-v $(CARAVEL_PATH)/gl/gpio_defaults_block_0801.v
 
 # STD CELLS - they need to be below the defines.v files 
  -v $(PDK_ROOT)/$(PDK)/libs.ref/sky130_fd_io/verilog/sky130_fd_io.v
