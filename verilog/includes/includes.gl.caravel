@@ -76,6 +76,7 @@
 -v $(CARAVEL_PATH)/gl/mgmt_protect.v		     
 -v $(CARAVEL_PATH)/gl/mgmt_protect_hv.v 	     		     
 -v $(CARAVEL_PATH)/gl/gpio_defaults_block_0403.v     
+-v $(CARAVEL_PATH)/gl/gpio_defaults_block_0801.v     
 -v $(CARAVEL_PATH)/gl/gpio_defaults_block_1803.v     
 						    		
 ###########################################################
