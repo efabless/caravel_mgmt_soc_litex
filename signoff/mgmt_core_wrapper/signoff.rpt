@@ -1,0 +1,11 @@
+Klayout MR DRC:    Passed
+Layout Vs Schematic:    Passed
+mgmt_core_wrapper-max-s-sta STA:    Failed
+mgmt_core_wrapper-nom-s-sta STA:    Failed
+mgmt_core_wrapper-min-t-sta STA:    Passed (max_tran & max_cap)
+mgmt_core_wrapper-min-f-sta STA:    Passed (max_tran)
+mgmt_core_wrapper-nom-f-sta STA:    Passed (max_tran)
+mgmt_core_wrapper-max-f-sta STA:    Passed (max_tran)
+mgmt_core_wrapper-nom-t-sta STA:    Passed (max_tran & max_cap)
+mgmt_core_wrapper-max-t-sta STA:    Failed
+mgmt_core_wrapper-min-s-sta STA:    Failed
