@@ -52,9 +52,14 @@
 `ifdef GPIO_TESTING
 `include "caravel/verilog/rtl/__user_project_gpio_example.v"
 `endif
-`include "caravel/verilog/rtl/__user_project_wrapper.v"
+// `ifndef CARAVAN
+// `include "caravel/verilog/rtl/__user_project_wrapper.v"
+// `else
+// `include "caravel/verilog/rtl/__user_analog_project_wrapper.v"
+// `endif
 `include "caravel/verilog/rtl/user_id_programming.v"	     
 `include "caravel/verilog/rtl/caravel.v" 		     
+`include "caravel/verilog/rtl/caravan.v" 		     
 
 // These blocks are manually designed 		
 `include "caravel/verilog/gl/gpio_defaults_block_0403.v"     
