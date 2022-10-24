@@ -19,6 +19,7 @@
 // These blocks need to stay in RTL
 `include "caravel/verilog/rtl/buff_flash_clkrst.v"			
 `include "caravel/verilog/rtl/gpio_signal_buffering.v"			
+`include "caravel/verilog/rtl/gpio_signal_buffering_alt.v"			
 `include "caravel/verilog/rtl/pads.v"			
 `include "caravel/verilog/rtl/defines.v" 		     		
 `include "caravel/verilog/rtl/user_defines.v"		     
@@ -32,6 +33,7 @@
 `include "caravel/verilog/rtl/housekeeping_spi.v"
 					     
 `include "caravel/verilog/rtl/constant_block.v" 
+`include "caravel/verilog/rtl/chip_io_alt.v" 		     
 `include "caravel/verilog/rtl/chip_io.v" 		     
 `include "caravel/verilog/rtl/mprj_logic_high.v" 	     
 `include "caravel/verilog/rtl/mprj2_logic_high.v"	     
