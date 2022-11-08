@@ -15,7 +15,7 @@
 
 # User config
 set ::env(DESIGN_NAME) RAM256
-set ::env(DESIGN_IS_CORE) 1
+set ::env(DESIGN_IS_CORE) 0
 
 set ::env(ROUTING_CORES) 48
 set ::env(RUN_KLAYOUT) 0
@@ -24,8 +24,6 @@ set ::env(RUN_KLAYOUT) 0
 set ::env(SYNTH_READ_BLACKBOX_LIB) 1
 set ::env(VERILOG_FILES) "\
 	$::env(DESIGN_DIR)/RAM256.nl.v"
-
-#set ::env(FP_DEF_TEMPLATE) $::env(DESIGN_DIR)/template/DFFRAM.def
 
 set ::env(BASE_SDC_FILE) $::env(DESIGN_DIR)/base.sdc
 
@@ -38,7 +36,7 @@ set ::env(SYNTH_READ_BLACKBOX_LIB) 1
 
 ## Floorplan
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 500 700"
+set ::env(DIE_AREA) "0 0 800 550"
 
 set ::env(FP_PIN_ORDER_CFG) $::env(DESIGN_DIR)/pin_order.cfg
 
@@ -60,13 +58,10 @@ set ::env(FP_PDN_VSPACING) "75.2"
 set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 0
 set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
 
-set ::env(PL_TARGET_DENSITY) 0.89
+set ::env(PL_TARGET_DENSITY) 0.7
 
 ## Routing
 set ::env(GRT_ADJUSTMENT) 0.18
-
-
-# set ::env(GLB_RT_OBS) "li1 $::env(DIE_AREA)"
 
 set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 0
 ## Diode Insertion
