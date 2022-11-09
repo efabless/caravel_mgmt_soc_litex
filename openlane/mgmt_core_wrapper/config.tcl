@@ -95,8 +95,8 @@ set ::env(EXTRA_LEFS) "$::env(MGMT_SOC_ROOT)/lef/RAM128.lef $::env(MGMT_SOC_ROOT
 
 set ::env(EXTRA_GDS_FILES) "$::env(MGMT_SOC_ROOT)/gds/RAM128.gds $::env(MGMT_SOC_ROOT)/gds/RAM256.gds"
 
-set ::env(EXTRA_LIBS) "$::env(MGMT_SOC_ROOT)/lib/RAM256.lib \
-        $::env(MGMT_SOC_ROOT)/lib/RAM128.lib"
+set ::env(EXTRA_LIBS) "$::env(MGMT_SOC_ROOT)/signoff/RAM256/primetime-signoff/lib/nom/RAM256.tt.lib \
+        $::env(MGMT_SOC_ROOT)/signoff/RAM128/primetime-signoff/lib/nom/RAM128.tt.lib"
 
 set ::env(VERILOG_FILES) "$::env(MGMT_SOC_ROOT)/verilog/rtl/defines.v \
         $::env(MGMT_SOC_ROOT)/verilog/rtl/ibex_all.v \
