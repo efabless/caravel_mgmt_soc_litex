@@ -6,8 +6,10 @@
 # Timing Constraints
 ###############################################################################
 create_clock -name CLK -period 25.0000 [get_ports {CLK}]
-set_clock_transition 0.2500 [get_clocks {CLK}]
+set_clock_transition 0.1500 [get_clocks {CLK}]
 set_clock_uncertainty 0.1000 CLK
+set_propagated_clock [get_clocks {CLK}]
+
 set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[0]}]
 set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[1]}]
 set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[2]}]
