@@ -4,20 +4,20 @@ Report : analysis_coverage
 	-sort_by slack
 Design : mgmt_core_wrapper
 Version: T-2022.03-SP3
-Date   : Tue Oct 18 15:12:01 2022
+Date   : Thu Nov 10 06:47:48 2022
 ****************************************
 
 Type of Check         Total              Met         Violated         Untested
 --------------------------------------------------------------------------------
-setup                 17399     17330 (100%)        62 (  0%)         7 (  0%)
-hold                  17399     17203 ( 99%)       189 (  1%)         7 (  0%)
+setup                 17399     16263 ( 93%)      1129 (  6%)         7 (  0%)
+hold                  17399     17192 ( 99%)       200 (  1%)         7 (  0%)
 min_pulse_width       24046     24046 (100%)         0 (  0%)         0 (  0%)
 clock_gating_setup     1536         0 (  0%)      1536 (100%)         0 (  0%)
 clock_gating_hold      1536      1536 (100%)         0 (  0%)         0 (  0%)
-out_setup               483       452 ( 94%)        20 (  4%)        11 (  2%)
+out_setup               483       466 ( 96%)         6 (  1%)        11 (  2%)
 out_hold                483       472 ( 98%)         0 (  0%)        11 (  2%)
 --------------------------------------------------------------------------------
-All Checks            62882     61039 ( 97%)      1807 (  3%)        36 (  0%)
+All Checks            62882     59975 ( 95%)      2871 (  5%)        36 (  0%)
 
 
 Constrained                  Related             Check
@@ -47,16 +47,16 @@ mprj_adr_o[0]                -         core_clk  out_hold  untested  no_paths
 mprj_adr_o[0]                -         core_clk  out_setup untested  no_paths
 _32558_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
 _32558_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
-_32563_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
-_32563_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
-_32574_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
-_32574_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
-_32562_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
-_32562_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
 _32560_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
 _32560_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
 _32554_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
 _32554_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
+_32563_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
+_32563_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
+_32562_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
+_32562_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
 _32108_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
 _32108_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
+_32574_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
+_32574_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
 1
