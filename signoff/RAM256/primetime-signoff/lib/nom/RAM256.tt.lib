@@ -119,7 +119,7 @@ pin("CLK") {
 	capacitance : 0.065199 ;
 
 	/* Other user defined attributes. */
-	original_pin : CLK;
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : min_pulse_width ;
@@ -146,7 +146,7 @@ pin("EN0") {
 	capacitance : 0.095216 ;
 
 	/* Other user defined attributes. */
-	original_pin : EN0;
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -276,7 +276,7 @@ pin("A0[7]") {
 	is_unconstrained : true;
 
 	/* Other user defined attributes. */
-	original_pin : A0[7];
+	
 	is_unconstrained : true;
 	timing () {
 		related_pin : "CLK" ;
@@ -384,7 +384,7 @@ pin("A0[6]") {
 	capacitance : 0.098175 ;
 
 	/* Other user defined attributes. */
-	original_pin : A0[6];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -491,7 +491,7 @@ pin("A0[5]") {
 	capacitance : 0.100982 ;
 
 	/* Other user defined attributes. */
-	original_pin : A0[5];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -598,7 +598,7 @@ pin("A0[4]") {
 	capacitance : 0.071935 ;
 
 	/* Other user defined attributes. */
-	original_pin : A0[4];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -705,7 +705,7 @@ pin("A0[3]") {
 	capacitance : 0.075573 ;
 
 	/* Other user defined attributes. */
-	original_pin : A0[3];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -812,7 +812,7 @@ pin("A0[2]") {
 	capacitance : 0.076133 ;
 
 	/* Other user defined attributes. */
-	original_pin : A0[2];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -919,7 +919,7 @@ pin("A0[1]") {
 	capacitance : 0.081806 ;
 
 	/* Other user defined attributes. */
-	original_pin : A0[1];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1026,7 +1026,7 @@ pin("A0[0]") {
 	capacitance : 0.076361 ;
 
 	/* Other user defined attributes. */
-	original_pin : A0[0];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1138,7 +1138,7 @@ pin("Di0[31]") {
 	capacitance : 0.117920 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[31];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1195,7 +1195,7 @@ pin("Di0[30]") {
 	capacitance : 0.112314 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[30];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1252,7 +1252,7 @@ pin("Di0[29]") {
 	capacitance : 0.085250 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[29];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1309,7 +1309,7 @@ pin("Di0[28]") {
 	capacitance : 0.080113 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[28];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1366,7 +1366,7 @@ pin("Di0[27]") {
 	capacitance : 0.075809 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[27];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1423,7 +1423,7 @@ pin("Di0[26]") {
 	capacitance : 0.079826 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[26];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1480,7 +1480,7 @@ pin("Di0[25]") {
 	capacitance : 0.077449 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[25];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1537,7 +1537,7 @@ pin("Di0[24]") {
 	capacitance : 0.076025 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[24];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1594,7 +1594,7 @@ pin("Di0[23]") {
 	capacitance : 0.080037 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[23];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1651,7 +1651,7 @@ pin("Di0[22]") {
 	capacitance : 0.057505 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[22];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1708,7 +1708,7 @@ pin("Di0[21]") {
 	capacitance : 0.072143 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[21];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1765,7 +1765,7 @@ pin("Di0[20]") {
 	capacitance : 0.046352 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[20];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1822,7 +1822,7 @@ pin("Di0[19]") {
 	capacitance : 0.048154 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[19];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1879,7 +1879,7 @@ pin("Di0[18]") {
 	capacitance : 0.047611 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[18];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1936,7 +1936,7 @@ pin("Di0[17]") {
 	capacitance : 0.072352 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[17];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -1993,7 +1993,7 @@ pin("Di0[16]") {
 	capacitance : 0.065383 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[16];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2050,7 +2050,7 @@ pin("Di0[15]") {
 	capacitance : 0.046925 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[15];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2107,7 +2107,7 @@ pin("Di0[14]") {
 	capacitance : 0.059530 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[14];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2164,7 +2164,7 @@ pin("Di0[13]") {
 	capacitance : 0.054788 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[13];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2221,7 +2221,7 @@ pin("Di0[12]") {
 	capacitance : 0.055059 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[12];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2278,7 +2278,7 @@ pin("Di0[11]") {
 	capacitance : 0.050429 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[11];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2335,7 +2335,7 @@ pin("Di0[10]") {
 	capacitance : 0.055159 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[10];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2392,7 +2392,7 @@ pin("Di0[9]") {
 	capacitance : 0.046880 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[9];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2449,7 +2449,7 @@ pin("Di0[8]") {
 	capacitance : 0.049995 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[8];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2506,7 +2506,7 @@ pin("Di0[7]") {
 	capacitance : 0.072961 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[7];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2563,7 +2563,7 @@ pin("Di0[6]") {
 	capacitance : 0.066124 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[6];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2620,7 +2620,7 @@ pin("Di0[5]") {
 	capacitance : 0.070277 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[5];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2677,7 +2677,7 @@ pin("Di0[4]") {
 	capacitance : 0.069456 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[4];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2734,7 +2734,7 @@ pin("Di0[3]") {
 	capacitance : 0.069868 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[3];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2791,7 +2791,7 @@ pin("Di0[2]") {
 	capacitance : 0.076449 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[2];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2848,7 +2848,7 @@ pin("Di0[1]") {
 	capacitance : 0.069612 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[1];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2905,7 +2905,7 @@ pin("Di0[0]") {
 	capacitance : 0.072870 ;
 
 	/* Other user defined attributes. */
-	original_pin : Di0[0];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_rising ;
@@ -2968,7 +2968,7 @@ pin("Do0[31]") {
 	capacitance : 0.083405 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[31];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -3585,7 +3585,7 @@ pin("Do0[30]") {
 	capacitance : 0.072287 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[30];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -4202,7 +4202,7 @@ pin("Do0[29]") {
 	capacitance : 0.069801 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[29];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -4819,7 +4819,7 @@ pin("Do0[28]") {
 	capacitance : 0.062708 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[28];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -5436,7 +5436,7 @@ pin("Do0[27]") {
 	capacitance : 0.055982 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[27];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -6053,7 +6053,7 @@ pin("Do0[26]") {
 	capacitance : 0.061825 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[26];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -6670,7 +6670,7 @@ pin("Do0[25]") {
 	capacitance : 0.056019 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[25];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -7287,7 +7287,7 @@ pin("Do0[24]") {
 	capacitance : 0.043163 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[24];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -7904,7 +7904,7 @@ pin("Do0[23]") {
 	capacitance : 0.040353 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[23];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -8521,7 +8521,7 @@ pin("Do0[22]") {
 	capacitance : 0.035797 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[22];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -9138,7 +9138,7 @@ pin("Do0[21]") {
 	capacitance : 0.030098 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[21];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -9755,7 +9755,7 @@ pin("Do0[20]") {
 	capacitance : 0.024297 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[20];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -10372,7 +10372,7 @@ pin("Do0[19]") {
 	capacitance : 0.020555 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[19];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -10989,7 +10989,7 @@ pin("Do0[18]") {
 	capacitance : 0.020751 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[18];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -11606,7 +11606,7 @@ pin("Do0[17]") {
 	capacitance : 0.024204 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[17];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -12223,7 +12223,7 @@ pin("Do0[16]") {
 	capacitance : 0.031272 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[16];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -12840,7 +12840,7 @@ pin("Do0[15]") {
 	capacitance : 0.024288 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[15];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -13457,7 +13457,7 @@ pin("Do0[14]") {
 	capacitance : 0.022938 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[14];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -14074,7 +14074,7 @@ pin("Do0[13]") {
 	capacitance : 0.028517 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[13];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -14691,7 +14691,7 @@ pin("Do0[12]") {
 	capacitance : 0.031401 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[12];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -15308,7 +15308,7 @@ pin("Do0[11]") {
 	capacitance : 0.037043 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[11];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -15925,7 +15925,7 @@ pin("Do0[10]") {
 	capacitance : 0.039742 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[10];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -16542,7 +16542,7 @@ pin("Do0[9]") {
 	capacitance : 0.044237 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[9];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -17159,7 +17159,7 @@ pin("Do0[8]") {
 	capacitance : 0.048000 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[8];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -17776,7 +17776,7 @@ pin("Do0[7]") {
 	capacitance : 0.052525 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[7];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -18393,7 +18393,7 @@ pin("Do0[6]") {
 	capacitance : 0.052511 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[6];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -19010,7 +19010,7 @@ pin("Do0[5]") {
 	capacitance : 0.054073 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[5];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -19627,7 +19627,7 @@ pin("Do0[4]") {
 	capacitance : 0.065868 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[4];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -20244,7 +20244,7 @@ pin("Do0[3]") {
 	capacitance : 0.071121 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[3];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -20861,7 +20861,7 @@ pin("Do0[2]") {
 	capacitance : 0.073412 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[2];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -21478,7 +21478,7 @@ pin("Do0[1]") {
 	capacitance : 0.073096 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[1];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -22095,7 +22095,7 @@ pin("Do0[0]") {
 	capacitance : 0.073040 ;
 
 	/* Other user defined attributes. */
-	original_pin : Do0[0];
+	
 	timing () {
 		related_pin : "A0[5]" ;
 		timing_type : combinational ;
@@ -22716,7 +22716,7 @@ pin("WE0[3]") {
 	capacitance : 0.049856 ;
 
 	/* Other user defined attributes. */
-	original_pin : WE0[3];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_falling ;
@@ -22775,7 +22775,7 @@ pin("WE0[2]") {
 	capacitance : 0.045669 ;
 
 	/* Other user defined attributes. */
-	original_pin : WE0[2];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_falling ;
@@ -22834,7 +22834,7 @@ pin("WE0[1]") {
 	capacitance : 0.023690 ;
 
 	/* Other user defined attributes. */
-	original_pin : WE0[1];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_falling ;
@@ -22893,7 +22893,7 @@ pin("WE0[0]") {
 	capacitance : 0.047958 ;
 
 	/* Other user defined attributes. */
-	original_pin : WE0[0];
+	
 	timing () {
 		related_pin : "CLK" ;
 		timing_type : setup_falling ;
