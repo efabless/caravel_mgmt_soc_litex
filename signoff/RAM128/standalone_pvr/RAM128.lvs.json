@@ -31,8 +31,8 @@
   },
   {
    "name": [
-      "sky130_fd_sc_hd__ebufn_2",
-      "sky130_fd_sc_hd__ebufn_2"
+      "sky130_fd_sc_hd__ebufn_4",
+      "sky130_fd_sc_hd__ebufn_4"
    ],
    "devices": [
        [
@@ -53,21 +53,57 @@
    ],
    "pins": [
       [
-        "VGND",
-        "TE_B",
-        "VPWR",
+        "Z",
+        "A",
         "VNB",
         "VPB",
-        "Z",
-        "A"
+        "VGND",
+        "TE_B",
+        "VPWR"
       ], [
-        "VGND",
-        "TE_B",
-        "VPWR",
+        "Z",
+        "A",
         "VNB",
         "VPB",
-        "Z",
-        "A"
+        "VGND",
+        "TE_B",
+        "VPWR"
+      ]
+   ]
+  },
+  {
+   "name": [
+      "sky130_fd_sc_hd__diode_2",
+      "sky130_fd_sc_hd__diode_2"
+   ],
+   "devices": [
+       [
+         ["sky130_fd_pr__diode_pw2nd_05v5", 1 ]
+       ], [
+         ["sky130_fd_pr__diode_pw2nd_05v5", 1 ]
+       ]
+   ],
+   "nets": [
+    2,
+    2
+   ],
+   "badnets": [
+   ],
+   "badelements": [
+   ],
+   "pins": [
+      [
+        "VNB",
+        "DIODE",
+        "VGND",
+        "VPWR",
+        "VPB"
+      ], [
+        "VNB",
+        "DIODE",
+        "VGND",
+        "VPWR",
+        "VPB"
       ]
    ]
   },
@@ -243,21 +279,21 @@
   },
   {
    "name": [
-      "sky130_fd_sc_hd__inv_1",
-      "sky130_fd_sc_hd__inv_1"
+      "sky130_fd_sc_hd__decap_8",
+      "sky130_fd_sc_hd__decap_8"
    ],
    "devices": [
        [
-         ["sky130_fd_pr__nfet_01v8", 1],
-         ["sky130_fd_pr__pfet_01v8_hvt", 1 ]
+         ["sky130_fd_pr__pfet_01v8_hvt", 1],
+         ["sky130_fd_pr__nfet_01v8", 1 ]
        ], [
-         ["sky130_fd_pr__nfet_01v8", 1 ],
-         ["sky130_fd_pr__pfet_01v8_hvt", 1 ]
+         ["sky130_fd_pr__pfet_01v8_hvt", 1 ],
+         ["sky130_fd_pr__nfet_01v8", 1 ]
        ]
    ],
    "nets": [
-    6,
-    6
+    4,
+    4
    ],
    "badnets": [
    ],
@@ -265,19 +301,15 @@
    ],
    "pins": [
       [
-        "VGND",
+        "VPB",
         "VNB",
         "VPWR",
-        "VPB",
-        "A",
-        "Y"
+        "VGND"
       ], [
-        "VGND",
+        "VPB",
         "VNB",
         "VPWR",
-        "VPB",
-        "A",
-        "Y"
+        "VGND"
       ]
    ]
   },
@@ -325,6 +357,46 @@
   },
   {
    "name": [
+      "sky130_fd_sc_hd__inv_1",
+      "sky130_fd_sc_hd__inv_1"
+   ],
+   "devices": [
+       [
+         ["sky130_fd_pr__nfet_01v8", 1],
+         ["sky130_fd_pr__pfet_01v8_hvt", 1 ]
+       ], [
+         ["sky130_fd_pr__nfet_01v8", 1 ],
+         ["sky130_fd_pr__pfet_01v8_hvt", 1 ]
+       ]
+   ],
+   "nets": [
+    6,
+    6
+   ],
+   "badnets": [
+   ],
+   "badelements": [
+   ],
+   "pins": [
+      [
+        "VGND",
+        "VNB",
+        "VPWR",
+        "VPB",
+        "A",
+        "Y"
+      ], [
+        "VGND",
+        "VNB",
+        "VPWR",
+        "VPB",
+        "A",
+        "Y"
+      ]
+   ]
+  },
+  {
+   "name": [
       "sky130_fd_sc_hd__and2_1",
       "sky130_fd_sc_hd__and2_1"
    ],
@@ -367,44 +439,8 @@
   },
   {
    "name": [
-      "sky130_fd_sc_hd__diode_2",
-      "sky130_fd_sc_hd__diode_2"
-   ],
-   "devices": [
-       [
-         ["sky130_fd_pr__diode_pw2nd_05v5", 1 ]
-       ], [
-         ["sky130_fd_pr__diode_pw2nd_05v5", 1 ]
-       ]
-   ],
-   "nets": [
-    2,
-    2
-   ],
-   "badnets": [
-   ],
-   "badelements": [
-   ],
-   "pins": [
-      [
-        "VNB",
-        "DIODE",
-        "VGND",
-        "VPWR",
-        "VPB"
-      ], [
-        "VNB",
-        "DIODE",
-        "VGND",
-        "VPWR",
-        "VPB"
-      ]
-   ]
-  },
-  {
-   "name": [
-      "sky130_fd_sc_hd__decap_12",
-      "sky130_fd_sc_hd__decap_12"
+      "sky130_fd_sc_hd__decap_6",
+      "sky130_fd_sc_hd__decap_6"
    ],
    "devices": [
        [
@@ -439,8 +475,80 @@
   },
   {
    "name": [
-      "sky130_fd_sc_hd__decap_8",
-      "sky130_fd_sc_hd__decap_8"
+      "sky130_ef_sc_hd__decap_12",
+      "sky130_ef_sc_hd__decap_12"
+   ],
+   "devices": [
+       [
+         ["sky130_fd_pr__pfet_01v8_hvt", 1],
+         ["sky130_fd_pr__nfet_01v8", 1 ]
+       ], [
+         ["sky130_fd_pr__pfet_01v8_hvt", 1 ],
+         ["sky130_fd_pr__nfet_01v8", 1 ]
+       ]
+   ],
+   "nets": [
+    4,
+    4
+   ],
+   "badnets": [
+   ],
+   "badelements": [
+   ],
+   "pins": [
+      [
+        "VPB",
+        "VNB",
+        "VPWR",
+        "VGND"
+      ], [
+        "VPB",
+        "VNB",
+        "VPWR",
+        "VGND"
+      ]
+   ]
+  },
+  {
+   "name": [
+      "sky130_fd_sc_hd__decap_3",
+      "sky130_fd_sc_hd__decap_3"
+   ],
+   "devices": [
+       [
+         ["sky130_fd_pr__pfet_01v8_hvt", 1],
+         ["sky130_fd_pr__nfet_01v8", 1 ]
+       ], [
+         ["sky130_fd_pr__pfet_01v8_hvt", 1 ],
+         ["sky130_fd_pr__nfet_01v8", 1 ]
+       ]
+   ],
+   "nets": [
+    4,
+    4
+   ],
+   "badnets": [
+   ],
+   "badelements": [
+   ],
+   "pins": [
+      [
+        "VPB",
+        "VNB",
+        "VPWR",
+        "VGND"
+      ], [
+        "VPB",
+        "VNB",
+        "VPWR",
+        "VGND"
+      ]
+   ]
+  },
+  {
+   "name": [
+      "sky130_fd_sc_hd__decap_4",
+      "sky130_fd_sc_hd__decap_4"
    ],
    "devices": [
        [
@@ -550,114 +658,6 @@
         "VGND",
         "VNB",
         "A"
-      ]
-   ]
-  },
-  {
-   "name": [
-      "sky130_fd_sc_hd__decap_4",
-      "sky130_fd_sc_hd__decap_4"
-   ],
-   "devices": [
-       [
-         ["sky130_fd_pr__pfet_01v8_hvt", 1],
-         ["sky130_fd_pr__nfet_01v8", 1 ]
-       ], [
-         ["sky130_fd_pr__pfet_01v8_hvt", 1 ],
-         ["sky130_fd_pr__nfet_01v8", 1 ]
-       ]
-   ],
-   "nets": [
-    4,
-    4
-   ],
-   "badnets": [
-   ],
-   "badelements": [
-   ],
-   "pins": [
-      [
-        "VPB",
-        "VNB",
-        "VPWR",
-        "VGND"
-      ], [
-        "VPB",
-        "VNB",
-        "VPWR",
-        "VGND"
-      ]
-   ]
-  },
-  {
-   "name": [
-      "sky130_fd_sc_hd__decap_6",
-      "sky130_fd_sc_hd__decap_6"
-   ],
-   "devices": [
-       [
-         ["sky130_fd_pr__pfet_01v8_hvt", 1],
-         ["sky130_fd_pr__nfet_01v8", 1 ]
-       ], [
-         ["sky130_fd_pr__pfet_01v8_hvt", 1 ],
-         ["sky130_fd_pr__nfet_01v8", 1 ]
-       ]
-   ],
-   "nets": [
-    4,
-    4
-   ],
-   "badnets": [
-   ],
-   "badelements": [
-   ],
-   "pins": [
-      [
-        "VPB",
-        "VNB",
-        "VPWR",
-        "VGND"
-      ], [
-        "VPB",
-        "VNB",
-        "VPWR",
-        "VGND"
-      ]
-   ]
-  },
-  {
-   "name": [
-      "sky130_fd_sc_hd__decap_3",
-      "sky130_fd_sc_hd__decap_3"
-   ],
-   "devices": [
-       [
-         ["sky130_fd_pr__pfet_01v8_hvt", 1],
-         ["sky130_fd_pr__nfet_01v8", 1 ]
-       ], [
-         ["sky130_fd_pr__pfet_01v8_hvt", 1 ],
-         ["sky130_fd_pr__nfet_01v8", 1 ]
-       ]
-   ],
-   "nets": [
-    4,
-    4
-   ],
-   "badnets": [
-   ],
-   "badelements": [
-   ],
-   "pins": [
-      [
-        "VPB",
-        "VNB",
-        "VPWR",
-        "VGND"
-      ], [
-        "VPB",
-        "VNB",
-        "VPWR",
-        "VGND"
       ]
    ]
   },
@@ -1026,22 +1026,22 @@
    ],
    "devices": [
        [
-         ["sky130_fd_sc_hd__ebufn_2", 4224],
+         ["sky130_fd_sc_hd__ebufn_4", 4224],
+         ["sky130_fd_sc_hd__diode_2", 734],
          ["sky130_fd_sc_hd__clkbuf_4", 153],
          ["sky130_fd_sc_hd__dlclkp_1", 512],
          ["sky130_fd_sc_hd__dlxtp_1", 4096],
          ["sky130_fd_sc_hd__and4bb_2", 48],
-         ["sky130_fd_sc_hd__inv_1", 1024],
-         ["sky130_fd_sc_hd__dfxtp_1", 128],
-         ["sky130_fd_sc_hd__and2_1", 512],
-         ["sky130_fd_sc_hd__diode_2", 386],
-         ["sky130_fd_sc_hd__decap_12", 1],
          ["sky130_fd_sc_hd__decap_8", 1],
+         ["sky130_fd_sc_hd__dfxtp_1", 128],
+         ["sky130_fd_sc_hd__inv_1", 1024],
+         ["sky130_fd_sc_hd__and2_1", 512],
+         ["sky130_fd_sc_hd__decap_6", 1],
+         ["sky130_ef_sc_hd__decap_12", 1],
+         ["sky130_fd_sc_hd__decap_3", 1],
+         ["sky130_fd_sc_hd__decap_4", 1],
          ["sky130_fd_sc_hd__clkbuf_2", 348],
          ["sky130_fd_sc_hd__clkbuf_16", 160],
-         ["sky130_fd_sc_hd__decap_4", 1],
-         ["sky130_fd_sc_hd__decap_6", 1],
-         ["sky130_fd_sc_hd__decap_3", 1],
          ["sky130_fd_sc_hd__and4b_2", 48],
          ["sky130_fd_sc_hd__mux4_1", 32],
          ["sky130_fd_sc_hd__conb_1", 16],
@@ -1051,22 +1051,22 @@
          ["sky130_fd_sc_hd__and3b_2", 10],
          ["sky130_fd_sc_hd__and3_2", 5 ]
        ], [
-         ["sky130_fd_sc_hd__ebufn_2", 4224 ],
+         ["sky130_fd_sc_hd__ebufn_4", 4224 ],
+         ["sky130_fd_sc_hd__diode_2", 734 ],
          ["sky130_fd_sc_hd__clkbuf_4", 153 ],
          ["sky130_fd_sc_hd__dlclkp_1", 512 ],
          ["sky130_fd_sc_hd__dlxtp_1", 4096 ],
          ["sky130_fd_sc_hd__and4bb_2", 48 ],
-         ["sky130_fd_sc_hd__inv_1", 1024 ],
-         ["sky130_fd_sc_hd__dfxtp_1", 128 ],
-         ["sky130_fd_sc_hd__and2_1", 512 ],
-         ["sky130_fd_sc_hd__diode_2", 386 ],
-         ["sky130_fd_sc_hd__decap_12", 1 ],
          ["sky130_fd_sc_hd__decap_8", 1 ],
+         ["sky130_fd_sc_hd__dfxtp_1", 128 ],
+         ["sky130_fd_sc_hd__inv_1", 1024 ],
+         ["sky130_fd_sc_hd__and2_1", 512 ],
+         ["sky130_fd_sc_hd__decap_6", 1 ],
+         ["sky130_ef_sc_hd__decap_12", 1 ],
+         ["sky130_fd_sc_hd__decap_3", 1 ],
+         ["sky130_fd_sc_hd__decap_4", 1 ],
          ["sky130_fd_sc_hd__clkbuf_2", 348 ],
          ["sky130_fd_sc_hd__clkbuf_16", 160 ],
-         ["sky130_fd_sc_hd__decap_4", 1 ],
-         ["sky130_fd_sc_hd__decap_6", 1 ],
-         ["sky130_fd_sc_hd__decap_3", 1 ],
          ["sky130_fd_sc_hd__and4b_2", 48 ],
          ["sky130_fd_sc_hd__mux4_1", 32 ],
          ["sky130_fd_sc_hd__conb_1", 16 ],
@@ -1087,165 +1087,165 @@
    ],
    "pins": [
       [
+        "Do0[1]",
+        "Do0[3]",
+        "Do0[5]",
+        "Do0[7]",
+        "Do0[0]",
+        "Do0[2]",
+        "Do0[4]",
+        "Do0[6]",
+        "Do0[9]",
+        "Do0[11]",
+        "Do0[13]",
+        "Do0[15]",
+        "Do0[8]",
+        "Do0[10]",
+        "Do0[12]",
+        "Do0[14]",
+        "Do0[18]",
+        "Do0[20]",
+        "Do0[19]",
+        "Do0[21]",
+        "Do0[22]",
+        "Do0[17]",
+        "Do0[23]",
+        "Do0[16]",
+        "Do0[24]",
+        "Do0[25]",
+        "Do0[30]",
+        "Do0[28]",
+        "Do0[27]",
+        "Do0[29]",
+        "Do0[31]",
+        "Do0[26]",
+        "VGND",
+        "VPWR",
         "A0[5]",
         "A0[6]",
         "CLK",
-        "Di0[0]",
-        "Di0[10]",
-        "Di0[11]",
-        "Di0[12]",
-        "Di0[13]",
-        "Di0[14]",
-        "Di0[15]",
-        "Di0[16]",
-        "Di0[17]",
         "Di0[18]",
-        "Di0[19]",
-        "Di0[1]",
-        "Di0[20]",
-        "Di0[21]",
         "Di0[22]",
+        "Di0[17]",
+        "Di0[16]",
         "Di0[23]",
+        "Di0[20]",
         "Di0[24]",
         "Di0[25]",
-        "Di0[26]",
-        "Di0[27]",
-        "Di0[28]",
-        "Di0[29]",
-        "Di0[2]",
         "Di0[30]",
+        "Di0[19]",
+        "Di0[21]",
+        "Di0[26]",
+        "Di0[29]",
+        "Di0[28]",
         "Di0[31]",
-        "Di0[3]",
+        "Di0[27]",
+        "Di0[1]",
+        "Di0[0]",
         "Di0[4]",
         "Di0[5]",
         "Di0[6]",
+        "Di0[3]",
         "Di0[7]",
-        "Di0[8]",
+        "Di0[2]",
         "Di0[9]",
-        "Do0[0]",
-        "Do0[1]",
-        "Do0[2]",
-        "Do0[3]",
-        "Do0[4]",
-        "Do0[5]",
-        "Do0[6]",
-        "Do0[7]",
-        "Do0[8]",
-        "Do0[9]",
-        "Do0[10]",
-        "Do0[11]",
-        "Do0[12]",
-        "Do0[13]",
-        "Do0[14]",
-        "Do0[15]",
-        "Do0[16]",
-        "Do0[17]",
-        "Do0[18]",
-        "Do0[19]",
-        "Do0[20]",
-        "Do0[21]",
-        "Do0[22]",
-        "Do0[23]",
-        "Do0[24]",
-        "Do0[25]",
-        "Do0[26]",
-        "Do0[27]",
-        "Do0[28]",
-        "Do0[29]",
-        "Do0[30]",
-        "Do0[31]",
+        "Di0[11]",
+        "Di0[12]",
+        "Di0[13]",
+        "Di0[15]",
+        "Di0[10]",
+        "Di0[14]",
+        "Di0[8]",
         "EN0",
-        "A0[3]",
-        "A0[4]",
-        "A0[0]",
-        "A0[1]",
-        "A0[2]",
         "WE0[0]",
         "WE0[1]",
+        "A0[1]",
         "WE0[2]",
+        "A0[3]",
+        "A0[4]",
         "WE0[3]",
-        "VGND",
-        "VPWR"
+        "A0[0]",
+        "A0[2]"
       ], [
+        "Do0[1]",
+        "Do0[3]",
+        "Do0[5]",
+        "Do0[7]",
+        "Do0[0]",
+        "Do0[2]",
+        "Do0[4]",
+        "Do0[6]",
+        "Do0[9]",
+        "Do0[11]",
+        "Do0[13]",
+        "Do0[15]",
+        "Do0[8]",
+        "Do0[10]",
+        "Do0[12]",
+        "Do0[14]",
+        "Do0[18]",
+        "Do0[20]",
+        "Do0[19]",
+        "Do0[21]",
+        "Do0[22]",
+        "Do0[17]",
+        "Do0[23]",
+        "Do0[16]",
+        "Do0[24]",
+        "Do0[25]",
+        "Do0[30]",
+        "Do0[28]",
+        "Do0[27]",
+        "Do0[29]",
+        "Do0[31]",
+        "Do0[26]",
+        "VGND",
+        "VPWR",
         "A0[5]",
         "A0[6]",
         "CLK",
-        "Di0[0]",
-        "Di0[10]",
-        "Di0[11]",
-        "Di0[12]",
-        "Di0[13]",
-        "Di0[14]",
-        "Di0[15]",
-        "Di0[16]",
-        "Di0[17]",
         "Di0[18]",
-        "Di0[19]",
-        "Di0[1]",
-        "Di0[20]",
-        "Di0[21]",
         "Di0[22]",
+        "Di0[17]",
+        "Di0[16]",
         "Di0[23]",
+        "Di0[20]",
         "Di0[24]",
         "Di0[25]",
-        "Di0[26]",
-        "Di0[27]",
-        "Di0[28]",
-        "Di0[29]",
-        "Di0[2]",
         "Di0[30]",
+        "Di0[19]",
+        "Di0[21]",
+        "Di0[26]",
+        "Di0[29]",
+        "Di0[28]",
         "Di0[31]",
-        "Di0[3]",
+        "Di0[27]",
+        "Di0[1]",
+        "Di0[0]",
         "Di0[4]",
         "Di0[5]",
         "Di0[6]",
+        "Di0[3]",
         "Di0[7]",
-        "Di0[8]",
+        "Di0[2]",
         "Di0[9]",
-        "Do0[0]",
-        "Do0[1]",
-        "Do0[2]",
-        "Do0[3]",
-        "Do0[4]",
-        "Do0[5]",
-        "Do0[6]",
-        "Do0[7]",
-        "Do0[8]",
-        "Do0[9]",
-        "Do0[10]",
-        "Do0[11]",
-        "Do0[12]",
-        "Do0[13]",
-        "Do0[14]",
-        "Do0[15]",
-        "Do0[16]",
-        "Do0[17]",
-        "Do0[18]",
-        "Do0[19]",
-        "Do0[20]",
-        "Do0[21]",
-        "Do0[22]",
-        "Do0[23]",
-        "Do0[24]",
-        "Do0[25]",
-        "Do0[26]",
-        "Do0[27]",
-        "Do0[28]",
-        "Do0[29]",
-        "Do0[30]",
-        "Do0[31]",
+        "Di0[11]",
+        "Di0[12]",
+        "Di0[13]",
+        "Di0[15]",
+        "Di0[10]",
+        "Di0[14]",
+        "Di0[8]",
         "EN0",
-        "A0[3]",
-        "A0[4]",
-        "A0[0]",
-        "A0[1]",
-        "A0[2]",
         "WE0[0]",
         "WE0[1]",
+        "A0[1]",
         "WE0[2]",
+        "A0[3]",
+        "A0[4]",
         "WE0[3]",
-        "VGND",
-        "VPWR"
+        "A0[0]",
+        "A0[2]"
       ]
    ]
   }
