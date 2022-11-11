@@ -4,7 +4,7 @@ Report : analysis_coverage
 	-sort_by slack
 Design : mgmt_core_wrapper
 Version: T-2022.03-SP3
-Date   : Tue Oct 18 15:14:07 2022
+Date   : Thu Nov 10 06:50:52 2022
 ****************************************
 
 Type of Check         Total              Met         Violated         Untested
@@ -47,16 +47,16 @@ mprj_adr_o[0]                -         core_clk  out_hold  untested  no_paths
 mprj_adr_o[0]                -         core_clk  out_setup untested  no_paths
 _32558_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
 _32558_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
-_32563_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
-_32563_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
-_32574_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
-_32574_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
-_32562_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
-_32562_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
 _32560_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
 _32560_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
 _32554_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
 _32554_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
+_32563_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
+_32563_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
+_32562_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
+_32562_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
 _32108_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
 _32108_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
+_32574_/D                    CLK(rise) core_clk  hold      untested  no_startpoint_clock
+_32574_/D                    CLK(rise) core_clk  setup     untested  no_startpoint_clock
 1

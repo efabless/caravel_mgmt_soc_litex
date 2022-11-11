@@ -1,0 +1,46 @@
+antenna violation on met3 in cell ICV_171: 577.06 || without diffusion || ratio/400 = 1.44 || coordinates = 2096285 591775
+antenna violation on met3 in cell ICV_171: 1364.29 || with diffusion area: 0.43 || ratio/400 = 3.41 || coordinates = 2032550 560500
+antenna violation on met3 in cell ICV_159: 591.67 || without diffusion || ratio/400 = 1.48 || coordinates = 391525 662495
+antenna violation on met3 in cell ICV_102: 839.92 || without diffusion || ratio/400 = 2.1 || coordinates = 1491590 813460
+antenna violation on met3 in cell ICV_102: 1551.98 || without diffusion || ratio/400 = 3.88 || coordinates = 1694245 807335
+antenna violation on met3 in cell ICV_102: 828.97 || without diffusion || ratio/400 = 2.07 || coordinates = 2135385 799175
+antenna violation on met3 in cell mgmt_core_wrapper: 1282.63 || with diffusion area: 1.77 || ratio/400 = 3.21 || coordinates = 1918265 436735
+antenna violation on met3 in cell mgmt_core_wrapper: 1782.14 || without diffusion || ratio/400 = 4.46 || coordinates = 1368310 695140
+antenna violation on met3 in cell mgmt_core_wrapper: 617.06 || without diffusion || ratio/400 = 1.54 || coordinates = 485110 754980
+antenna violation on met2 in cell mgmt_core_wrapper: 1814.68 || without diffusion || ratio/400 = 4.54 || coordinates = 1677250 101475
+antenna violation on met2 in cell mgmt_core_wrapper: 2450.79 || without diffusion || ratio/400 = 6.13 || coordinates = 1646430 343555
+antenna violation on met2 in cell mgmt_core_wrapper: 2449.15 || without diffusion || ratio/400 = 6.12 || coordinates = 2311590 275915
+antenna violation on met2 in cell mgmt_core_wrapper: 1329.25 || without diffusion || ratio/400 = 3.32 || coordinates = 1028190 648195
+antenna violation on met2 in cell mgmt_core_wrapper: 1155.16 || without diffusion || ratio/400 = 2.89 || coordinates = 1624350 629835
+antenna violation on met2 in cell mgmt_core_wrapper: 1304.68 || without diffusion || ratio/400 = 3.26 || coordinates = 2412330 638675
+antenna violation on met1 in cell ICV_204: 1268.49 || without diffusion || ratio/400 = 3.17 || coordinates = 644070 25880
+antenna violation on met1 in cell ICV_204: 1263.45 || without diffusion || ratio/400 = 3.16 || coordinates = 1669410 20100
+antenna violation on met1 in cell ICV_192: 1734.01 || without diffusion || ratio/400 = 4.34 || coordinates = 653730 44580
+antenna violation on met1 in cell ICV_189: 2045.56 || without diffusion || ratio/400 = 5.11 || coordinates = 1289910 90820
+antenna violation on met1 in cell ICV_187: 1734.44 || without diffusion || ratio/400 = 4.34 || coordinates = 939850 150320
+antenna violation on met1 in cell ICV_187: 1173.25 || without diffusion || ratio/400 = 2.93 || coordinates = 1950010 181600
+antenna violation on met1 in cell ICV_186: 1362.78 || without diffusion || ratio/400 = 3.41 || coordinates = 1273350 205740
+antenna violation on met1 in cell ICV_185: 1410.19 || without diffusion || ratio/400 = 3.53 || coordinates = 1702990 279520
+antenna violation on met1 in cell ICV_184: 2455.64 || without diffusion || ratio/400 = 6.14 || coordinates = 1387890 330180
+antenna violation on met1 in cell ICV_180: 1305.63 || without diffusion || ratio/400 = 3.26 || coordinates = 1151925 425395
+antenna violation on met1 in cell ICV_176: 1266.27 || without diffusion || ratio/400 = 3.17 || coordinates = 1222305 505295
+antenna violation on met1 in cell ICV_176: 1165.87 || without diffusion || ratio/400 = 2.91 || coordinates = 1406290 475360
+antenna violation on met1 in cell ICV_163: 1695.48 || without diffusion || ratio/400 = 4.24 || coordinates = 476630 642300
+antenna violation on met1 in cell ICV_163: 3529.37 || without diffusion || ratio/400 = 8.82 || coordinates = 930190 621560
+antenna violation on met1 in cell ICV_159: 1193.65 || without diffusion || ratio/400 = 2.98 || coordinates = 648640 678015
+antenna violation on met1 in cell ICV_159: 1710.0 || without diffusion || ratio/400 = 4.28 || coordinates = 2315250 691940
+antenna violation on met1 in cell ICV_159: 1187.6 || without diffusion || ratio/400 = 2.97 || coordinates = 2309730 673240
+antenna violation on met1 in cell ICV_143: 2116.9 || without diffusion || ratio/400 = 5.29 || coordinates = 311505 723915
+antenna violation on met1 in cell ICV_102: 2191.51 || without diffusion || ratio/400 = 5.48 || coordinates = 665230 786800
+antenna violation on met1 in cell ICV_102: 1176.85 || without diffusion || ratio/400 = 2.94 || coordinates = 1613750 773540
+antenna violation on met1 in cell ICV_275: 1224.05 || without diffusion || ratio/400 = 3.06 || coordinates = 348820 106480
+antenna violation on met1 in cell ICV_273: 1237.54 || without diffusion || ratio/400 = 3.09 || coordinates = 67785 173860
+antenna violation on met1 in cell ICV_264: 1883.25 || without diffusion || ratio/400 = 4.71 || coordinates = 425640 389360
+antenna violation on met1 in cell ICV_256: 1315.16 || without diffusion || ratio/400 = 3.29 || coordinates = 185520 481840
+antenna violation on met1 in cell ICV_281: 1309.68 || without diffusion || ratio/400 = 3.27 || coordinates = 2160400 279215
+antenna violation on met1 in cell ICV_280: 1483.17 || without diffusion || ratio/400 = 3.71 || coordinates = 2197030 304700
+antenna violation on met1 in cell ICV_279: 1642.82 || without diffusion || ratio/400 = 4.11 || coordinates = 2202090 360800
+antenna violation on met4 in cell RAM256: 1329.6 || with diffusion area: 0.86 || ratio/400 = 3.32 || coordinates = 497625 262335
+antenna violation on met4 in cell RAM256: 1210.87 || with diffusion area: 0.86 || ratio/400 = 3.03 || coordinates = 503145 269815
+antenna violation on met4 in cell RAM256: 1200.08 || with diffusion area: 0.86 || ratio/400 = 3.0 || coordinates = 517865 264375
+antenna violation on met4 in cell RAM256: 1275.63 || with diffusion area: 0.86 || ratio/400 = 3.19 || coordinates = 518785 269815

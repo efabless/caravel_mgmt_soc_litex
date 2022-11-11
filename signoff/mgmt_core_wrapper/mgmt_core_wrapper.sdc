@@ -1195,3 +1195,8 @@ set_load -pin_load 0.1500 [get_ports {user_irq_ena[0]}]
 ###############################################################################
 set_max_transition 0.7500 [current_design]
 set_max_fanout 7 [current_design]
+
+set derate 0.0375
+puts "\[INFO\]: Setting derate factor to: [expr $derate * 100] %"
+set_timing_derate -early [expr 1-$derate]
+set_timing_derate -late [expr 1+$derate]
