@@ -1,0 +1,6 @@
+mgmt_core_wrapper.ff-max_timing.rpt
+mgmt_core_wrapper.ff-min_timing.rpt
+mgmt_core_wrapper.ss-max_timing.rpt
+mgmt_core_wrapper.ss-min_timing.rpt
+mgmt_core_wrapper.tt-max_timing.rpt
+mgmt_core_wrapper.tt-min_timing.rpt
