@@ -23,7 +23,7 @@ from caravel_gpio import *
 from litex.soc.cores.spi import SPIMaster, SPISlave
 import litex.soc.doc as lxsocdoc
 
-from caravel_platform import Platform
+from caravel_platform import CaravelPlatform
 from caravel_ram import *
 
 # SoCMini.mem_map = {
@@ -37,16 +37,16 @@ from caravel_ram import *
 
 # MGMTSoC
 class MGMTSoC(SoCMini):
-    def __init__(self, sys_clk_freq=int(10e6), **kwargs ):
+    def __init__(self, sys_clk_freq=int(10e6), platform_class=CaravelPlatform, cpu='vexriscv', **kwargs ):
 
         ##
         ## Uncomment cpu selection for mgmt core below
         ##
         # cpu = 'picorv32'
         # cpu = 'ibex'
-        cpu = 'vexriscv'
+        # cpu = 'vexriscv'
 
-        platform = Platform("mgmt_soc")
+        platform = platform_class("mgmt_soc")
 
         # CRG --------------------------------------------------------------------------------------
         # self.submodules.crg = CRG(platform.request("core_clk"), rst=platform.request("core_rst"))
@@ -352,8 +352,21 @@ class MGMTSoC(SoCMini):
             self.add_constant("SPIFLASH_MODULE_QPI_CAPABLE")
 
 def main():
-    soc     = MGMTSoC()
-    builder = Builder(soc, compile_software=False)
+    platforms = {
+        "caravel": CaravelPlatform
+    }
+    parser = argparse.ArgumentParser(
+        description="Caravel Management SoC"
+    )
+    parser.add_argument("--platform", default="caravel", choices=platforms.keys(),
+        help="Target platform (default=\"caravel\")" )
+    parser.add_argument("--cpu", default="vexriscv", choices=['picorv32', 'ibex', 'vexriscv'],
+        help="Main processor (default=\"vexriscv\")" )
+    parser.add_argument("--compile-software", action="store_true", help="Compile LiteX software components")
+    args = parser.parse_args()
+
+    soc     = MGMTSoC(platform_class=platforms[args.platform], cpu=args.cpu)
+    builder = Builder(soc, compile_software=args.compile_software)
     builder.build()
 
     lxsocdoc.generate_docs(soc, "build/documentation/", project_name="Caravel Management SoC", author="Efabless")
