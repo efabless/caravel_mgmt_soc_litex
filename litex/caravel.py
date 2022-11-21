@@ -143,7 +143,7 @@ class MGMTSoC(SoCMini):
         #DFFRAM
         dff_size = 1 * 1024
         dff = self.submodules.mem = DFFRAM(size=dff_size)
-        self.register_mem("dff", self.mem_map["dff"], self.mem.bus, dff_size)
+        self.bus.add_slave("dff", self.mem.bus, SoCRegion(origin=self.mem_map["dff"], size=dff_size))
         # mgmt_soc_dff = platform.request("mgmt_soc_dff")
         # self.comb += mgmt_soc_dff.WE.eq(dff.we)
         # self.comb += mgmt_soc_dff.A.eq(dff.bus.adr)
@@ -154,7 +154,7 @@ class MGMTSoC(SoCMini):
         #DFFRAM2
         dff2_size = 512
         dff2 = self.submodules.mem2 = DFFRAM_512(size=dff2_size)
-        self.register_mem("dff2", self.mem_map["dff2"], self.mem2.bus, dff2_size)
+        self.bus.add_slave("dff2", self.mem2.bus, SoCRegion(origin=self.mem_map["dff2"], size=dff2_size))
 
         # #OpenRAM
         # spram_size = 2 * 1024
@@ -217,7 +217,7 @@ class MGMTSoC(SoCMini):
         # Add Debug Interface (UART)
         dbg_uart = Record([('rx',1),('tx',1)])
         self.submodules.dbg_uart = UARTWishboneBridge(dbg_uart, sys_clk_freq, baudrate=115200)
-        self.add_wb_master(self.dbg_uart.wishbone)
+        self.bus.add_master(master=self.dbg_uart.wishbone)
 
         # Instantiate ports for debug & serial i/f
         uart_ports = platform.request("serial")
