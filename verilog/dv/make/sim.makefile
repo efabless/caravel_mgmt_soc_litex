@@ -77,11 +77,11 @@ endif
 ## GL
 ifeq ($(SIM),GL)
     ifeq ($(CONFIG),caravel_user_project)
-		iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
+		iverilog -Ttyp -DFUNCTIONAL -DGL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
         -f$(VERILOG_PATH)/includes/includes.gl.caravel \
         -f$(USER_PROJECT_VERILOG)/includes/includes.gl.$(CONFIG) -o $@ $<
     else
-		iverilog -Ttyp -DFUNCTIONAL -DGL -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
+		iverilog -Ttyp -DFUNCTIONAL -DGL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
         -f$(VERILOG_PATH)/includes/includes.gl.$(CONFIG) \
 		-o $@ $(CARAVEL_PATH)/gl/__user_project_wrapper.v $<
     endif
