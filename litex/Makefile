@@ -13,16 +13,19 @@
 # limitations under the License.
 #
 # SPDX-License-Identifier: Apache-2.0
+PYTHON ?= python3
+IN_ENV  = if [ -e env/bin/activate ]; then . env/bin/activate; fi;
 
 all: mgmt_soc
 
 mgmt_soc: caravel.py
-	python3 caravel.py
-	python3 modify_verilog.py
+	@$(IN_ENV) python caravel.py
+	@$(IN_ENV) python modify_verilog.py
 	cp build/caravel_platform/gateware/mgmt_core_modified.v ../verilog/rtl/mgmt_core.v
 	cp -R build/caravel_platform/software/include/generated ../verilog/dv/.
 
 setup:
-	pip3 install -r requirements.txt
+	@$(PYTHON) -mvenv env
+	@$(IN_ENV) pip3 install -r requirements.txt
 
 .PHONY: clean hex all
