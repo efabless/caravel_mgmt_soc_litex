@@ -3,9 +3,9 @@
 import os
 import sys
 
-infile = open("build/caravel_platform/gateware/mgmt_core.v","r")
+infile = open(sys.argv[1],"r")
 addfile = open("debug_reset.v","r")
-outfile = open("build/caravel_platform/gateware/mgmt_core_modified.v","wt")
+outfile = open(sys.argv[2],"wt")
 line = infile.readline()
 addline = addfile.readline()
 
