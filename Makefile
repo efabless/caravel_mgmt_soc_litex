@@ -89,6 +89,10 @@ SKYWATER_COMMIT ?= c094b6e83a4f9298e47f696ec5a7fd53535ec5eb
 OPEN_PDKS_COMMIT ?= de752ec0ba4da0ecb1fbcd309eeec4993d88f5bc
 INSTALL_SRAM ?= disabled
 
+#Generates the header files for the mgmt soc core
+generate_mgmt_soc_headers:
+	$(MAKE) -C litex $@
+
 .DEFAULT_GOAL := ship
 # We need portable GDS_FILE pointers...
 .PHONY: ship
