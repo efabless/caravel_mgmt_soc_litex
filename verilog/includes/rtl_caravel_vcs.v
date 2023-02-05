@@ -60,6 +60,8 @@
 // `include "caravel/verilog/rtl/__user_analog_project_wrapper.v"
 // `endif
 `include "caravel/verilog/rtl/user_id_programming.v"	     
+`include "caravel/verilog/rtl/mprj_io_buffer.v"	     
+`include "caravel/verilog/rtl/caravel_core.v" 		     
 `include "caravel/verilog/rtl/caravel.v" 		     
 `include "caravel/verilog/rtl/caravan.v" 		     
 

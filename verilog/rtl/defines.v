@@ -60,4 +60,9 @@
 `define OENB_INIT 1'b0
 `define DM_INIT 3'b110
 
+
+`define LA_SIZE 'd128
+`define USER_SPACE_ADDR 32'h30000000 
+`define USER_SPACE_SIZE 'hFFFFC // sum with USER_SPACE_ADDR is the address of last address
+
 `endif // __GLOBAL_DEFINE_H
