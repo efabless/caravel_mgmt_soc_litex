@@ -47,18 +47,7 @@
 `include "caravel/verilog/rtl/housekeeping.v"		     
 `include "caravel/verilog/rtl/caravel_clocking.v"	     
 `include "caravel/verilog/rtl/digital_pll.v"		     
-`include "caravel/verilog/rtl/debug_regs.v"
-`ifdef LA_TESTING
-`include "caravel/verilog/rtl/__user_project_la_example.v"
-`endif
-`ifdef GPIO_TESTING
-`include "caravel/verilog/rtl/__user_project_gpio_example.v"
-`endif
-// `ifndef CARAVAN
-// `include "caravel/verilog/rtl/__user_project_wrapper.v"
-// `else
-// `include "caravel/verilog/rtl/__user_analog_project_wrapper.v"
-// `endif
+
 `include "caravel/verilog/rtl/user_id_programming.v"	     
 `include "caravel/verilog/rtl/mprj_io_buffer.v"	     
 `include "caravel/verilog/rtl/caravel_core.v" 		     
@@ -72,3 +61,4 @@
 
 `include "caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v"
 
+`include "caravel/verilog/rtl/empty_macro.v" 

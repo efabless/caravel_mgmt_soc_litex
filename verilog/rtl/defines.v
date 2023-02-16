@@ -64,5 +64,6 @@
 `define LA_SIZE 'd128
 `define USER_SPACE_ADDR 32'h30000000 
 `define USER_SPACE_SIZE 'hFFFFC // sum with USER_SPACE_ADDR is the address of last address
+`define IO_CTRL_BITS 'd13 // size of gpio_control_reg
 
 `endif // __GLOBAL_DEFINE_H
