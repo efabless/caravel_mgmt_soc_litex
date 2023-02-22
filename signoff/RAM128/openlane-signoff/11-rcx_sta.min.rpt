@@ -1,0 +1,284 @@
+
+===========================================================================
+report_checks -path_delay min (Hold)
+============================================================================
+Startpoint: Di0[0] (input port clocked by CLK)
+Endpoint: BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.BIT[0].genblk1.STORAGE
+          (positive level-sensitive latch clocked by CLK')
+Path Group: CLK
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          3.75    3.75 v input external delay
+                  0.01    0.00    3.75 v Di0[0] (in)
+     1    0.01                           Di0[0] (net)
+                  0.01    0.00    3.75 v DIBUF[0].__cell__/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.07    0.15    3.90 v DIBUF[0].__cell__/X (sky130_fd_sc_hd__clkbuf_16)
+     4    0.08                           BLOCK[0].RAM32.DIBUF[0].A (net)
+                  0.08    0.01    3.92 v BLOCK[3].RAM32.DIBUF[0].__cell__/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.06    0.18    4.10 v BLOCK[3].RAM32.DIBUF[0].__cell__/X (sky130_fd_sc_hd__clkbuf_16)
+    32    0.07                           BLOCK[3].RAM32.DIBUF[0].X (net)
+                  0.06    0.00    4.10 v BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.BIT[0].genblk1.STORAGE/D (sky130_fd_sc_hd__dlxtp_1)
+                                  4.10   data arrival time
+
+                          0.00    0.00   clock CLK' (fall edge)
+                          0.00    0.00   clock source latency
+                  0.17    0.14    0.14 ^ CLK (in)
+     1    0.11                           CLK (net)
+                  0.18    0.00    0.14 ^ CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.25    0.35    0.48 ^ CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_4)
+     8    0.08                           BLOCK[0].RAM32.CLK (net)
+                  0.25    0.01    0.49 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.29    0.40    0.89 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_4)
+     3    0.10                           BLOCK[3].RAM32.SLICE_16[1].RAM16.CLKBUF.X (net)
+                  0.29    0.00    0.90 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.12    0.24    1.14 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.02                           BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.CLKBUF.X (net)
+                  0.12    0.00    1.14 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.CLKBUF/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.25    0.32    1.47 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.CLKBUF/X (sky130_fd_sc_hd__clkbuf_4)
+     8    0.08                           BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.CLK (net)
+                  0.25    0.01    1.47 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.genblk1.CLKINV/A (sky130_fd_sc_hd__inv_1)
+                  0.07    0.09    1.57 v BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.genblk1.CLKINV/Y (sky130_fd_sc_hd__inv_1)
+     1    0.01                           BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.CLK_B (net)
+                  0.07    0.00    1.57 v BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.genblk1.CG/CLK (sky130_fd_sc_hd__dlclkp_1)
+                  0.17    0.26    1.83 v BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.genblk1.CG/GCLK (sky130_fd_sc_hd__dlclkp_1)
+     8    0.03                           BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.GCLK (net)
+                  0.17    0.00    1.83 v BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.BIT[0].genblk1.STORAGE/GATE (sky130_fd_sc_hd__dlxtp_1)
+                          0.25    2.08   clock uncertainty
+                          0.00    2.08   clock reconvergence pessimism
+                          0.01    2.09   library hold time
+                                  2.09   data required time
+-----------------------------------------------------------------------------
+                                  2.09   data required time
+                                 -4.10   data arrival time
+-----------------------------------------------------------------------------
+                                  2.01   slack (MET)
+
+
+Startpoint: Di0[1] (input port clocked by CLK)
+Endpoint: BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.BIT[1].genblk1.STORAGE
+          (positive level-sensitive latch clocked by CLK')
+Path Group: CLK
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          3.75    3.75 v input external delay
+                  0.01    0.00    3.75 v Di0[1] (in)
+     1    0.01                           Di0[1] (net)
+                  0.01    0.00    3.75 v DIBUF[1].__cell__/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.07    0.15    3.90 v DIBUF[1].__cell__/X (sky130_fd_sc_hd__clkbuf_16)
+     4    0.08                           BLOCK[0].RAM32.DIBUF[1].A (net)
+                  0.08    0.01    3.92 v BLOCK[3].RAM32.DIBUF[1].__cell__/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.07    0.18    4.10 v BLOCK[3].RAM32.DIBUF[1].__cell__/X (sky130_fd_sc_hd__clkbuf_16)
+    32    0.07                           BLOCK[3].RAM32.DIBUF[1].X (net)
+                  0.07    0.00    4.10 v BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.BIT[1].genblk1.STORAGE/D (sky130_fd_sc_hd__dlxtp_1)
+                                  4.10   data arrival time
+
+                          0.00    0.00   clock CLK' (fall edge)
+                          0.00    0.00   clock source latency
+                  0.17    0.14    0.14 ^ CLK (in)
+     1    0.11                           CLK (net)
+                  0.18    0.00    0.14 ^ CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.25    0.35    0.48 ^ CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_4)
+     8    0.08                           BLOCK[0].RAM32.CLK (net)
+                  0.25    0.01    0.49 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.29    0.40    0.89 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_4)
+     3    0.10                           BLOCK[3].RAM32.SLICE_16[1].RAM16.CLKBUF.X (net)
+                  0.29    0.00    0.90 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.12    0.24    1.14 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.02                           BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.CLKBUF.X (net)
+                  0.12    0.00    1.14 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.CLKBUF/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.25    0.32    1.47 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.CLKBUF/X (sky130_fd_sc_hd__clkbuf_4)
+     8    0.08                           BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.CLK (net)
+                  0.25    0.01    1.47 ^ BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.genblk1.CLKINV/A (sky130_fd_sc_hd__inv_1)
+                  0.07    0.09    1.57 v BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.genblk1.CLKINV/Y (sky130_fd_sc_hd__inv_1)
+     1    0.01                           BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.CLK_B (net)
+                  0.07    0.00    1.57 v BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.genblk1.CG/CLK (sky130_fd_sc_hd__dlclkp_1)
+                  0.17    0.26    1.83 v BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.genblk1.CG/GCLK (sky130_fd_sc_hd__dlclkp_1)
+     8    0.03                           BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.GCLK (net)
+                  0.17    0.00    1.83 v BLOCK[3].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[5].W.BYTE[0].B.BIT[1].genblk1.STORAGE/GATE (sky130_fd_sc_hd__dlxtp_1)
+                          0.25    2.08   clock uncertainty
+                          0.00    2.08   clock reconvergence pessimism
+                          0.01    2.09   library hold time
+                                  2.09   data required time
+-----------------------------------------------------------------------------
+                                  2.09   data required time
+                                 -4.10   data arrival time
+-----------------------------------------------------------------------------
+                                  2.01   slack (MET)
+
+
+Startpoint: Di0[0] (input port clocked by CLK)
+Endpoint: BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.BYTE[0].B.BIT[0].genblk1.STORAGE
+          (positive level-sensitive latch clocked by CLK')
+Path Group: CLK
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          3.75    3.75 v input external delay
+                  0.01    0.00    3.75 v Di0[0] (in)
+     1    0.01                           Di0[0] (net)
+                  0.01    0.00    3.75 v DIBUF[0].__cell__/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.07    0.15    3.90 v DIBUF[0].__cell__/X (sky130_fd_sc_hd__clkbuf_16)
+     4    0.08                           BLOCK[0].RAM32.DIBUF[0].A (net)
+                  0.08    0.01    3.92 v BLOCK[3].RAM32.DIBUF[0].__cell__/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.06    0.18    4.10 v BLOCK[3].RAM32.DIBUF[0].__cell__/X (sky130_fd_sc_hd__clkbuf_16)
+    32    0.07                           BLOCK[3].RAM32.DIBUF[0].X (net)
+                  0.06    0.00    4.10 v BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.BYTE[0].B.BIT[0].genblk1.STORAGE/D (sky130_fd_sc_hd__dlxtp_1)
+                                  4.10   data arrival time
+
+                          0.00    0.00   clock CLK' (fall edge)
+                          0.00    0.00   clock source latency
+                  0.17    0.14    0.14 ^ CLK (in)
+     1    0.11                           CLK (net)
+                  0.18    0.00    0.14 ^ CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.25    0.35    0.48 ^ CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_4)
+     8    0.08                           BLOCK[0].RAM32.CLK (net)
+                  0.25    0.01    0.49 ^ BLOCK[3].RAM32.SLICE_16[0].RAM16.CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.31    0.41    0.90 ^ BLOCK[3].RAM32.SLICE_16[0].RAM16.CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_4)
+     3    0.10                           BLOCK[3].RAM32.SLICE_16[0].RAM16.CLKBUF.X (net)
+                  0.31    0.00    0.91 ^ BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.13    0.25    1.15 ^ BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.02                           BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.CLKBUF.X (net)
+                  0.13    0.00    1.16 ^ BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.CLKBUF/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.24    0.32    1.47 ^ BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.CLKBUF/X (sky130_fd_sc_hd__clkbuf_4)
+     8    0.08                           BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.BYTE[0].B.CLK (net)
+                  0.24    0.01    1.48 ^ BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.BYTE[0].B.genblk1.CLKINV/A (sky130_fd_sc_hd__inv_1)
+                  0.07    0.09    1.58 v BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.BYTE[0].B.genblk1.CLKINV/Y (sky130_fd_sc_hd__inv_1)
+     1    0.01                           BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.BYTE[0].B.CLK_B (net)
+                  0.07    0.00    1.58 v BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.BYTE[0].B.genblk1.CG/CLK (sky130_fd_sc_hd__dlclkp_1)
+                  0.15    0.25    1.82 v BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.BYTE[0].B.genblk1.CG/GCLK (sky130_fd_sc_hd__dlclkp_1)
+     8    0.03                           BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.BYTE[0].B.GCLK (net)
+                  0.15    0.00    1.82 v BLOCK[3].RAM32.SLICE_16[0].RAM16.SLICE[0].RAM8.WORD[4].W.BYTE[0].B.BIT[0].genblk1.STORAGE/GATE (sky130_fd_sc_hd__dlxtp_1)
+                          0.25    2.07   clock uncertainty
+                          0.00    2.07   clock reconvergence pessimism
+                          0.01    2.08   library hold time
+                                  2.08   data required time
+-----------------------------------------------------------------------------
+                                  2.08   data required time
+                                 -4.10   data arrival time
+-----------------------------------------------------------------------------
+                                  2.02   slack (MET)
+
+
+Startpoint: Di0[0] (input port clocked by CLK)
+Endpoint: BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.BYTE[0].B.BIT[0].genblk1.STORAGE
+          (positive level-sensitive latch clocked by CLK')
+Path Group: CLK
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          3.75    3.75 v input external delay
+                  0.01    0.00    3.75 v Di0[0] (in)
+     1    0.01                           Di0[0] (net)
+                  0.01    0.00    3.75 v DIBUF[0].__cell__/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.07    0.15    3.90 v DIBUF[0].__cell__/X (sky130_fd_sc_hd__clkbuf_16)
+     4    0.08                           BLOCK[0].RAM32.DIBUF[0].A (net)
+                  0.07    0.01    3.92 v BLOCK[2].RAM32.DIBUF[0].__cell__/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.06    0.18    4.09 v BLOCK[2].RAM32.DIBUF[0].__cell__/X (sky130_fd_sc_hd__clkbuf_16)
+    32    0.07                           BLOCK[2].RAM32.DIBUF[0].X (net)
+                  0.06    0.00    4.10 v BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.BYTE[0].B.BIT[0].genblk1.STORAGE/D (sky130_fd_sc_hd__dlxtp_1)
+                                  4.10   data arrival time
+
+                          0.00    0.00   clock CLK' (fall edge)
+                          0.00    0.00   clock source latency
+                  0.17    0.14    0.14 ^ CLK (in)
+     1    0.11                           CLK (net)
+                  0.18    0.00    0.14 ^ CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.25    0.35    0.48 ^ CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_4)
+     8    0.08                           BLOCK[0].RAM32.CLK (net)
+                  0.25    0.01    0.49 ^ BLOCK[2].RAM32.SLICE_16[0].RAM16.CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.29    0.40    0.89 ^ BLOCK[2].RAM32.SLICE_16[0].RAM16.CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_4)
+     3    0.10                           BLOCK[2].RAM32.SLICE_16[0].RAM16.CLKBUF.X (net)
+                  0.29    0.00    0.90 ^ BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.13    0.25    1.14 ^ BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.02                           BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.CLKBUF.X (net)
+                  0.13    0.00    1.14 ^ BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.CLKBUF/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.25    0.32    1.47 ^ BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.CLKBUF/X (sky130_fd_sc_hd__clkbuf_4)
+     8    0.08                           BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.BYTE[0].B.CLK (net)
+                  0.25    0.01    1.47 ^ BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.BYTE[0].B.genblk1.CLKINV/A (sky130_fd_sc_hd__inv_1)
+                  0.07    0.09    1.56 v BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.BYTE[0].B.genblk1.CLKINV/Y (sky130_fd_sc_hd__inv_1)
+     1    0.01                           BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.BYTE[0].B.CLK_B (net)
+                  0.07    0.00    1.56 v BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.BYTE[0].B.genblk1.CG/CLK (sky130_fd_sc_hd__dlclkp_1)
+                  0.15    0.25    1.81 v BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.BYTE[0].B.genblk1.CG/GCLK (sky130_fd_sc_hd__dlclkp_1)
+     8    0.03                           BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.BYTE[0].B.GCLK (net)
+                  0.15    0.00    1.82 v BLOCK[2].RAM32.SLICE_16[0].RAM16.SLICE[1].RAM8.WORD[0].W.BYTE[0].B.BIT[0].genblk1.STORAGE/GATE (sky130_fd_sc_hd__dlxtp_1)
+                          0.25    2.07   clock uncertainty
+                          0.00    2.07   clock reconvergence pessimism
+                          0.01    2.07   library hold time
+                                  2.07   data required time
+-----------------------------------------------------------------------------
+                                  2.07   data required time
+                                 -4.10   data arrival time
+-----------------------------------------------------------------------------
+                                  2.02   slack (MET)
+
+
+Startpoint: Di0[0] (input port clocked by CLK)
+Endpoint: BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.BYTE[0].B.BIT[0].genblk1.STORAGE
+          (positive level-sensitive latch clocked by CLK')
+Path Group: CLK
+Path Type: min
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock CLK (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          3.75    3.75 v input external delay
+                  0.01    0.00    3.75 v Di0[0] (in)
+     1    0.01                           Di0[0] (net)
+                  0.01    0.00    3.75 v DIBUF[0].__cell__/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.07    0.15    3.90 v DIBUF[0].__cell__/X (sky130_fd_sc_hd__clkbuf_16)
+     4    0.08                           BLOCK[0].RAM32.DIBUF[0].A (net)
+                  0.07    0.01    3.91 v BLOCK[1].RAM32.DIBUF[0].__cell__/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.06    0.18    4.09 v BLOCK[1].RAM32.DIBUF[0].__cell__/X (sky130_fd_sc_hd__clkbuf_16)
+    32    0.07                           BLOCK[1].RAM32.DIBUF[0].X (net)
+                  0.06    0.00    4.09 v BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.BYTE[0].B.BIT[0].genblk1.STORAGE/D (sky130_fd_sc_hd__dlxtp_1)
+                                  4.09   data arrival time
+
+                          0.00    0.00   clock CLK' (fall edge)
+                          0.00    0.00   clock source latency
+                  0.17    0.14    0.14 ^ CLK (in)
+     1    0.11                           CLK (net)
+                  0.18    0.00    0.14 ^ CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.25    0.35    0.48 ^ CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_4)
+     8    0.08                           BLOCK[0].RAM32.CLK (net)
+                  0.25    0.01    0.49 ^ BLOCK[1].RAM32.SLICE_16[1].RAM16.CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.29    0.40    0.89 ^ BLOCK[1].RAM32.SLICE_16[1].RAM16.CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_4)
+     3    0.10                           BLOCK[1].RAM32.SLICE_16[1].RAM16.CLKBUF.X (net)
+                  0.29    0.00    0.89 ^ BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.CLKBUF.__cell__/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.13    0.25    1.14 ^ BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.CLKBUF.__cell__/X (sky130_fd_sc_hd__clkbuf_2)
+     8    0.02                           BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.CLKBUF.X (net)
+                  0.13    0.00    1.14 ^ BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.CLKBUF/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.24    0.32    1.45 ^ BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.CLKBUF/X (sky130_fd_sc_hd__clkbuf_4)
+     8    0.08                           BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.BYTE[0].B.CLK (net)
+                  0.24    0.01    1.47 ^ BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.BYTE[0].B.genblk1.CLKINV/A (sky130_fd_sc_hd__inv_1)
+                  0.07    0.09    1.56 v BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.BYTE[0].B.genblk1.CLKINV/Y (sky130_fd_sc_hd__inv_1)
+     1    0.01                           BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.BYTE[0].B.CLK_B (net)
+                  0.07    0.00    1.56 v BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.BYTE[0].B.genblk1.CG/CLK (sky130_fd_sc_hd__dlclkp_1)
+                  0.16    0.25    1.81 v BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.BYTE[0].B.genblk1.CG/GCLK (sky130_fd_sc_hd__dlclkp_1)
+     8    0.03                           BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.BYTE[0].B.GCLK (net)
+                  0.16    0.00    1.81 v BLOCK[1].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[7].W.BYTE[0].B.BIT[0].genblk1.STORAGE/GATE (sky130_fd_sc_hd__dlxtp_1)
+                          0.25    2.06   clock uncertainty
+                          0.00    2.06   clock reconvergence pessimism
+                          0.01    2.07   library hold time
+                                  2.07   data required time
+-----------------------------------------------------------------------------
+                                  2.07   data required time
+                                 -4.09   data arrival time
+-----------------------------------------------------------------------------
+                                  2.02   slack (MET)
+
+

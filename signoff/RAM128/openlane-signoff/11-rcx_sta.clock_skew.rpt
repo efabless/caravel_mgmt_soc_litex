@@ -1,0 +1,11 @@
+
+===========================================================================
+ report_clock_skew
+============================================================================
+Clock CLK
+Latency      CRPR       Skew
+BLOCK[0].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[4].W.BYTE[1].B.BIT[0].genblk1.STORAGE/GATE ^
+   1.68
+BLOCK[0].RAM32.SLICE_16[1].RAM16.Do0_REG.OUTREG_BYTE[1].Do_FF[0]/CLK ^
+   1.31     -0.06       0.30
+

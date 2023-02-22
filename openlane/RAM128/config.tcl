@@ -36,7 +36,7 @@ set ::env(SYNTH_READ_BLACKBOX_LIB) 1
 
 ## Floorplan
 set ::env(FP_SIZING) absolute
-set ::env(DIE_AREA) "0 0 480 450"
+set ::env(DIE_AREA) "0 0 475 475"
 
 set ::env(FP_PIN_ORDER_CFG) $::env(DESIGN_DIR)/pin_order.cfg
 

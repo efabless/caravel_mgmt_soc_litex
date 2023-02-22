@@ -1,0 +1,219 @@
+
+===========================================================================
+report_parasitic_annotation -report_unannotated
+============================================================================
+Found 0 unannotated nets.
+Found 0 partially unannotated nets.
+parastic_annotation_check
+check_slew
+
+===========================================================================
+ report_check_types -max_slew -max_cap -max_fanout -violators
+============================================================================
+max fanout
+
+Pin                                   Limit Fanout  Slack
+---------------------------------------------------------
+BLOCK[0].RAM32.DIBUF[0].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[10].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[11].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[12].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[13].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[14].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[15].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[16].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[17].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[18].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[19].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[1].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[20].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[21].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[22].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[23].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[24].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[25].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[26].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[27].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[28].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[29].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[2].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[30].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[31].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[3].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[4].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[5].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[6].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[7].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[8].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[0].RAM32.DIBUF[9].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[0].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[10].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[11].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[12].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[13].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[14].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[15].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[16].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[17].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[18].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[19].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[1].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[20].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[21].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[22].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[23].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[24].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[25].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[26].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[27].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[28].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[29].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[2].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[30].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[31].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[3].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[4].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[5].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[6].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[7].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[8].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[1].RAM32.DIBUF[9].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[0].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[10].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[11].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[12].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[13].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[14].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[15].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[16].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[17].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[18].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[19].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[1].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[20].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[21].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[22].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[23].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[24].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[25].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[26].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[27].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[28].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[29].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[2].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[30].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[31].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[3].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[4].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[5].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[6].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[7].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[8].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[2].RAM32.DIBUF[9].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[0].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[10].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[11].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[12].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[13].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[14].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[15].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[16].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[17].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[18].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[19].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[1].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[20].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[21].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[22].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[23].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[24].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[25].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[26].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[27].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[28].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[29].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[2].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[30].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[31].__cell__/X      10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[3].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[4].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[5].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[6].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[7].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[8].__cell__/X       10     32    -22 (VIOLATED)
+BLOCK[3].RAM32.DIBUF[9].__cell__/X       10     32    -22 (VIOLATED)
+
+
+===========================================================================
+max slew violation count 0
+max fanout violation count 128
+max cap violation count 0
+============================================================================
+check_slew_end
+tns_report
+
+===========================================================================
+ report_tns
+============================================================================
+tns 0.00
+tns_report_end
+wns_report
+
+===========================================================================
+ report_wns
+============================================================================
+wns 0.00
+wns_report_end
+worst_slack
+
+===========================================================================
+ report_worst_slack -max (Setup)
+============================================================================
+worst slack 0.29
+
+===========================================================================
+ report_worst_slack -min (Hold)
+============================================================================
+worst slack 2.01
+worst_slack_end
+clock_skew
+
+===========================================================================
+ report_clock_skew
+============================================================================
+Clock CLK
+Latency      CRPR       Skew
+BLOCK[0].RAM32.SLICE_16[1].RAM16.SLICE[1].RAM8.WORD[4].W.BYTE[1].B.BIT[0].genblk1.STORAGE/GATE ^
+   1.68
+BLOCK[0].RAM32.SLICE_16[1].RAM16.Do0_REG.OUTREG_BYTE[1].Do_FF[0]/CLK ^
+   1.31     -0.06       0.30
+
+clock_skew_end
+power_report
+
+===========================================================================
+ report_power
+============================================================================
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power (Watts)
+----------------------------------------------------------------
+Sequential             8.64e-03   9.42e-05   3.46e-08   8.74e-03  39.1%
+Combinational          2.93e-03   1.07e-02   3.91e-08   1.36e-02  60.9%
+Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+----------------------------------------------------------------
+Total                  1.16e-02   1.08e-02   7.37e-08   2.23e-02 100.0%
+                          51.8%      48.2%       0.0%
+power_report_end
+area_report
+
+===========================================================================
+ report_design_area
+============================================================================
+Design area 154446 u^2 84% utilization.
+area_report_end
+Setting global connections for newly added cells...
+[WARNING] Did not save OpenROAD database!
+Writing SDF to /mnt/dffram/build/128x32_DEFAULT/openlane/runs/RUN_2023.02.07_17.13.21/results/routing/mca/process_corner_nom/RAM128.sdf...
+Writing timing model to /mnt/dffram/build/128x32_DEFAULT/openlane/runs/RUN_2023.02.07_17.13.21/results/routing/mca/process_corner_nom/RAM128.lib...
+

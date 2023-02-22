@@ -1,0 +1,16 @@
+Design Name: RAM128
+Run Directory: /mnt/dffram/build/128x32_DEFAULT/openlane/runs/RUN_2023.02.07_17.13.21
+----------------------------------------
+
+Magic DRC Summary:
+Source: /mnt/dffram/build/128x32_DEFAULT/openlane/runs/RUN_2023.02.07_17.13.21/reports/signoff/drc.rpt
+Total Magic DRC violations is 0
+----------------------------------------
+
+LVS Summary:
+Source: /mnt/dffram/build/128x32_DEFAULT/openlane/runs/RUN_2023.02.07_17.13.21/logs/signoff/RAM128.lvs.lef.log
+Source not found.
+----------------------------------------
+
+Antenna Summary:
+No antenna report found.
