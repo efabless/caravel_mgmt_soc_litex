@@ -1,1 +1,0 @@
-[WARNING]: There are max fanout violations in the design at the typical corner. Please refer to 'build/128x32_DEFAULT/openlane/runs/RUN_2023.02.07_17.13.21/reports/signoff/11-rcx_sta.slew.rpt'.
