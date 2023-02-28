@@ -20,4 +20,5 @@ jobs:
         uses: AButler/upload-release-assets@v2.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.ref_name }}.tar.gz
+          files: ${{ github.ref_name }}.tar.gz
+          release-tag: ${{ github.ref }}
