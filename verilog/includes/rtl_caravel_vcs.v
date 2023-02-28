@@ -62,3 +62,10 @@
 `include "caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v"
 
 `include "caravel/verilog/rtl/empty_macro.v" 
+`include "caravel/verilog/rtl/manual_power_connections.v" 
+`include "caravel/verilog/rtl/manual_power_connections.v" 
+`include "caravel/verilog/rtl/copyright_block.v" 
+`include "caravel/verilog/rtl/caravel_logo.v" 
+`include "caravel/verilog/rtl/caravel_motto.v" 
+`include "caravel/verilog/rtl/open_source.v" 
+`include "caravel/verilog/rtl/user_id_textblock.v" 		
