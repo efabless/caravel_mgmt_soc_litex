@@ -17,9 +17,7 @@ jobs:
         run: |
           tar -czf ${{ github.ref_name }}.tar.gz mag def lef openlane/Makefile signoff/*/openlane-signoff/spef verilog LICENSE Makefile
       - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
+        uses: AButler/upload-release-assets@v2.0
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           file: ${{ github.ref_name }}.tar.gz
-          tag: ${{ github.ref }}
-          overwrite: true
