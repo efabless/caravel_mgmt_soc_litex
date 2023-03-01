@@ -14,8 +14,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 module RAM256 #(parameter   USE_LATCH=1,
-                            WSIZE=1 ) 
+                            WSIZE=4 ) 
 (
+    `ifdef USE_POWER_PINS
+    inout VPWR,	    /* 1.8V domain */
+    inout VGND,
+    `endif
     input   wire                CLK,    // FO: 2
     input   wire [WSIZE-1:0]     WE0,     // FO: 2
     input                        EN0,     // FO: 2
@@ -36,7 +40,7 @@ module RAM256 #(parameter   USE_LATCH=1,
     generate
         genvar i;
         for (i=0; i< 2; i=i+1) begin : BANK128
-            RAM128 RAM128 (.CLK(CLK), .EN0(SEL0[i]), .WE0(WE0), .Di0(Di0), .Do0(Do0_pre[i]), .A0(A0[6:0]) );        
+            RAM128 RAM128 (`ifdef USE_POWER_PINS .VPWR(VPWR), .VGND(VGND),  `endif .CLK(CLK), .EN0(SEL0[i]), .WE0(WE0), .Di0(Di0), .Do0(Do0_pre[i]), .A0(A0[6:0]) );        
         end
      endgenerate
 
