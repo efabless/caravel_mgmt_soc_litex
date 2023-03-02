@@ -57,6 +57,7 @@
 // These blocks are manually designed 		
 `include "caravel/verilog/gl/gpio_defaults_block_0403.v"     
 `include "caravel/verilog/gl/gpio_defaults_block_1803.v"     
+`include "caravel/verilog/gl/gpio_defaults_block_0801.v"     
 
 
 `include "caravel/verilog/gl/empty_macro.v" 

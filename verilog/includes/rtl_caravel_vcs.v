@@ -59,6 +59,7 @@
 // These blocks are manually designed 		
 `include "caravel/verilog/gl/gpio_defaults_block_0403.v"     
 `include "caravel/verilog/gl/gpio_defaults_block_1803.v"     
+`include "caravel/verilog/gl/gpio_defaults_block_0801.v"     
 
 
 `include "caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v"
