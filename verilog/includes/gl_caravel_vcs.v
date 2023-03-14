@@ -9,6 +9,7 @@
 
 
 // Mgmt Core Wrapper
+`include "caravel/verilog/rtl/user_defines.v"		     
 `include "caravel_mgmt_soc_litex/verilog/rtl/defines.v"
 // `include "caravel_mgmt_soc_litex/verilog/rtl/mgmt_core.v"
 `include "caravel_mgmt_soc_litex/verilog/gl/RAM128.v"

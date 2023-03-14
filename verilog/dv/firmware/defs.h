@@ -273,4 +273,5 @@ extern uint32_t flashio_worker_end;
 #define reg_debug_2 (*(volatile unsigned int*)(USER_SPACE_ADDR + USER_SPACE_SIZE))
 #define reg_debug_1 (*(volatile unsigned int*)(USER_SPACE_ADDR + USER_SPACE_SIZE - 4))
 
+#define CPU_TYPE VexRISC
 #endif
