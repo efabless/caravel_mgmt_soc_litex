@@ -253,4 +253,25 @@ extern uint32_t flashio_worker_end;
 //#define GPIO_MODE_USER_STD_ANALOG   	   0x000a
 
 // --------------------------------------------------------
+
+// configurations
+#define SKY    1
+#define LA_SIZE 128
+#define CTRL_BITS_SIZE   13 // number of control bits in gpio control module 
+#define TRAP_SUP 1 // trap support
+#define PLL_SUP 0 // pll support
+
+// RAM PARAMETER
+#define DFF1_START_ADDR 0x00000000 
+#define DFF1_SIZE 0x400
+#define DFF2_START_ADDR 0x00000400 
+#define DFF2_SIZE 0x200 
+
+#define USER_SPACE_ADDR 0x30000000 
+#define USER_SPACE_SIZE 0xFFFFC // sum with USER_SPACE_ADDR is the address of last address
+
+#define reg_debug_2 (*(volatile unsigned int*)(USER_SPACE_ADDR + USER_SPACE_SIZE))
+#define reg_debug_1 (*(volatile unsigned int*)(USER_SPACE_ADDR + USER_SPACE_SIZE - 4))
+
+#define CPU_TYPE VexRISC
 #endif

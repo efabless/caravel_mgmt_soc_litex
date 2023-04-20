@@ -2,8 +2,8 @@
 ### Rev 1
 ### Date: 9/10/2022
 
-create_clock [get_ports CLK]  -name CLK  -period 25
-set_clock_transition 0.1500 [get_clocks {CLK}]
+create_clock [get_ports CLK]  -name CLK  -period 20
+set_clock_transition 0.1000 [get_clocks {CLK}]
 set_clock_uncertainty 0.1000 CLK
 set_propagated_clock [get_clocks {CLK}]
 set_input_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {A0[0]}]
@@ -85,35 +85,44 @@ set_output_delay 1.0000 -clock [get_clocks {CLK}] -add_delay [get_ports {Do0[9]}
 ###############################################################################
 # Environment
 ###############################################################################
-set_load -pin_load 0.1500 [get_ports {Do0[31]}]
-set_load -pin_load 0.1500 [get_ports {Do0[30]}]
-set_load -pin_load 0.1500 [get_ports {Do0[29]}]
-set_load -pin_load 0.1500 [get_ports {Do0[28]}]
-set_load -pin_load 0.1500 [get_ports {Do0[27]}]
-set_load -pin_load 0.1500 [get_ports {Do0[26]}]
-set_load -pin_load 0.1500 [get_ports {Do0[25]}]
-set_load -pin_load 0.1500 [get_ports {Do0[24]}]
-set_load -pin_load 0.1500 [get_ports {Do0[23]}]
-set_load -pin_load 0.1500 [get_ports {Do0[22]}]
-set_load -pin_load 0.1500 [get_ports {Do0[21]}]
-set_load -pin_load 0.1500 [get_ports {Do0[20]}]
-set_load -pin_load 0.1500 [get_ports {Do0[19]}]
-set_load -pin_load 0.1500 [get_ports {Do0[18]}]
-set_load -pin_load 0.1500 [get_ports {Do0[17]}]
-set_load -pin_load 0.1500 [get_ports {Do0[16]}]
-set_load -pin_load 0.1500 [get_ports {Do0[15]}]
-set_load -pin_load 0.1500 [get_ports {Do0[14]}]
-set_load -pin_load 0.1500 [get_ports {Do0[13]}]
-set_load -pin_load 0.1500 [get_ports {Do0[12]}]
-set_load -pin_load 0.1500 [get_ports {Do0[11]}]
-set_load -pin_load 0.1500 [get_ports {Do0[10]}]
-set_load -pin_load 0.1500 [get_ports {Do0[9]}]
-set_load -pin_load 0.1500 [get_ports {Do0[8]}]
-set_load -pin_load 0.1500 [get_ports {Do0[7]}]
-set_load -pin_load 0.1500 [get_ports {Do0[6]}]
-set_load -pin_load 0.1500 [get_ports {Do0[5]}]
-set_load -pin_load 0.1500 [get_ports {Do0[4]}]
-set_load -pin_load 0.1500 [get_ports {Do0[3]}]
-set_load -pin_load 0.1500 [get_ports {Do0[2]}]
-set_load -pin_load 0.1500 [get_ports {Do0[1]}]
-set_load -pin_load 0.1500 [get_ports {Do0[0]}]
+set_load -pin_load 0.1 [get_ports {Do0[31]}]
+set_load -pin_load 0.1 [get_ports {Do0[30]}]
+set_load -pin_load 0.1 [get_ports {Do0[29]}]
+set_load -pin_load 0.1 [get_ports {Do0[28]}]
+set_load -pin_load 0.1 [get_ports {Do0[27]}]
+set_load -pin_load 0.1 [get_ports {Do0[26]}]
+set_load -pin_load 0.1 [get_ports {Do0[25]}]
+set_load -pin_load 0.1 [get_ports {Do0[24]}]
+set_load -pin_load 0.1 [get_ports {Do0[23]}]
+set_load -pin_load 0.1 [get_ports {Do0[22]}]
+set_load -pin_load 0.1 [get_ports {Do0[21]}]
+set_load -pin_load 0.1 [get_ports {Do0[20]}]
+set_load -pin_load 0.1 [get_ports {Do0[19]}]
+set_load -pin_load 0.1 [get_ports {Do0[18]}]
+set_load -pin_load 0.1 [get_ports {Do0[17]}]
+set_load -pin_load 0.1 [get_ports {Do0[16]}]
+set_load -pin_load 0.1 [get_ports {Do0[15]}]
+set_load -pin_load 0.1 [get_ports {Do0[14]}]
+set_load -pin_load 0.1 [get_ports {Do0[13]}]
+set_load -pin_load 0.1 [get_ports {Do0[12]}]
+set_load -pin_load 0.1 [get_ports {Do0[11]}]
+set_load -pin_load 0.1 [get_ports {Do0[10]}]
+set_load -pin_load 0.1 [get_ports {Do0[9]}]
+set_load -pin_load 0.1 [get_ports {Do0[8]}]
+set_load -pin_load 0.1 [get_ports {Do0[7]}]
+set_load -pin_load 0.1 [get_ports {Do0[6]}]
+set_load -pin_load 0.1 [get_ports {Do0[5]}]
+set_load -pin_load 0.1 [get_ports {Do0[4]}]
+set_load -pin_load 0.1 [get_ports {Do0[3]}]
+set_load -pin_load 0.1 [get_ports {Do0[2]}]
+set_load -pin_load 0.1 [get_ports {Do0[1]}]
+set_load -pin_load 0.1 [get_ports {Do0[0]}]
+
+###############################################################################
+# Design Rules
+###############################################################################
+set_max_transition 0.75 [current_design]
+set derate 0.0375
+puts "\[INFO\]: Setting timing derate to: [expr {$derate * 100}] %"
+set_timing_derate -early [expr 1-$derate]
+set_timing_derate -late [expr 1+$derate]

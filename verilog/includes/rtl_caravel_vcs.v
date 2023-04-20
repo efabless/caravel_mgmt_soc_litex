@@ -5,7 +5,9 @@
 
 // DFFRAM Behavioral Model
 `include "caravel_mgmt_soc_litex/verilog/dv/vip/RAM128.v"
-`include "caravel_mgmt_soc_litex/verilog/dv/vip/RAM256.v"
+// `include "caravel_mgmt_soc_litex/verilog/gl/RAM128.v"
+// `include "caravel_mgmt_soc_litex/verilog/dv/vip/RAM256.v"
+`include "caravel_mgmt_soc_litex/verilog/rtl/RAM256.v"
 
 
 // Mgmt Core Wrapper
@@ -47,26 +49,25 @@
 `include "caravel/verilog/rtl/housekeeping.v"		     
 `include "caravel/verilog/rtl/caravel_clocking.v"	     
 `include "caravel/verilog/rtl/digital_pll.v"		     
-`include "caravel/verilog/rtl/debug_regs.v"
-`ifdef LA_TESTING
-`include "caravel/verilog/rtl/__user_project_la_example.v"
-`endif
-`ifdef GPIO_TESTING
-`include "caravel/verilog/rtl/__user_project_gpio_example.v"
-`endif
-// `ifndef CARAVAN
-// `include "caravel/verilog/rtl/__user_project_wrapper.v"
-// `else
-// `include "caravel/verilog/rtl/__user_analog_project_wrapper.v"
-// `endif
+
 `include "caravel/verilog/rtl/user_id_programming.v"	     
+`include "caravel/verilog/rtl/mprj_io_buffer.v"	     
+`include "caravel/verilog/rtl/caravel_core.v" 		     
 `include "caravel/verilog/rtl/caravel.v" 		     
 `include "caravel/verilog/rtl/caravan.v" 		     
 
 // These blocks are manually designed 		
 `include "caravel/verilog/gl/gpio_defaults_block_0403.v"     
 `include "caravel/verilog/gl/gpio_defaults_block_1803.v"     
+`include "caravel/verilog/gl/gpio_defaults_block_0801.v"     
 
 
 `include "caravel_mgmt_soc_litex/verilog/cvc-pdk/sky130_sram_2kbyte_1rw1r_32x512_8.v"
 
+`include "caravel/verilog/rtl/empty_macro.v" 
+`include "caravel/verilog/rtl/manual_power_connections.v" 
+`include "caravel/verilog/rtl/copyright_block.v" 
+`include "caravel/verilog/rtl/caravel_logo.v" 
+`include "caravel/verilog/rtl/caravel_motto.v" 
+`include "caravel/verilog/rtl/open_source.v" 
+`include "caravel/verilog/rtl/user_id_textblock.v" 
