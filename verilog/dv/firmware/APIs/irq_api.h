@@ -7,19 +7,6 @@
 // IRQ 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 extern unsigned int flag;
-unsigned int flag;
-void HK_IRQ0_Handler(void){flag = 1;}
-void HK_IRQ1_Handler(void){flag = 1;}
-void HK_IRQ2_Handler(void){flag = 1;}
-void TMR0_Handler(void){flag = 1;clear_TMR0_Handler();}
-void UART0_Handler(void){flag = 1;clear_UART0_Handler();}
-void clear_TMR0_Handler(){
-reg_timer0_irq =1;
-}
-void clear_UART0_Handler(){
-reg_uart_isc =0x3;
-}
-#endif
 char IRQ_getFlag(){
     return flag;
 }

@@ -1,20 +1,20 @@
 /**
  \file
 */
-#ifndef COMMON_C_HEADER_FILE
-#define COMMON_C_HEADER_FILE
+#ifndef FIRMWARE_APIS_C_HEADER_FILE
+#define FIRMWARE_APIS_C_HEADER_FILE
 
 #include <defs.h>
 #include <stub.c>
 #include <uart.h>
 #include <irq_vex.h>
 
-#endif
 #include <gpios.h>
 #include <timer0.h>
 #include <mgmt_gpio.h>
 #include <la.h>
 #include <uart_api.h>
+#include <irq_api.h>
 #include <spi_master.h>
 #include <user_space.h>
 
@@ -54,7 +54,6 @@ void wait_debug_reg2(unsigned int data){while (get_debug_reg2() != data);}
 #define reg_mprj_userh (*(volatile unsigned int*)0x300FFFF4)
 #define reg_oeb_userl  (*(volatile unsigned int*)0x300FFFEC)
 #define reg_oeb_userh  (*(volatile unsigned int*)0x300FFFE8)
-#endif
 
 // gpio_user 
 void set_gpio_user_l(unsigned int data){reg_mprj_userl = data;}
@@ -102,4 +101,4 @@ void mgmt_debug_enable(){reg_wb_enable = reg_wb_enable | 0x10;}
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
 
-#endif // COMMON_C_HEADER_FILE
+#endif // FIRMWARE_APIS_C_HEADER_FILE
