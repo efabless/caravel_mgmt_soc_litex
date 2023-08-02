@@ -33,6 +33,7 @@ void IRQ_enableExternal1(bool is_enable){
         irq_setmask(irq_getmask() & ~(1 << USER_IRQ_4_INTERRUPT));
         reg_user4_irq_en =0;
         user_irq_4_ev_pending_i0_write(1); // to clear the interrupt
+        IRQ_clearFlag();
     }
 }
 
@@ -54,6 +55,7 @@ void IRQ_enableExternal2(bool is_enable){
         irq_setmask(irq_getmask() & ~(1 << USER_IRQ_5_INTERRUPT));
         reg_user5_irq_en =0;
         user_irq_5_ev_pending_i0_write(1); // to clear the interrupt
+        IRQ_clearFlag();
     }    
 }
 /**
@@ -76,6 +78,7 @@ void IRQ_enableUser0(bool is_enable){
         reg_user0_irq_en =0;
         reg_user_irq_enable &=0x6;
         user_irq_0_ev_pending_i0_write(1); // to clear the interrupt
+        IRQ_clearFlag();
     }    
 }
 /**
@@ -98,6 +101,7 @@ void IRQ_enableUser1(bool is_enable){
         reg_user1_irq_en =0;
         reg_user_irq_enable &=0x5;
         user_irq_1_ev_pending_i0_write(1); // to clear the interrupt
+        IRQ_clearFlag();
     }    
 }
 
@@ -121,6 +125,7 @@ void IRQ_enableUser2(bool is_enable){
         reg_user2_irq_en =0;
         reg_user_irq_enable &=0x3;
         user_irq_2_ev_pending_i0_write(1); // to clear the interrupt
+        IRQ_clearFlag();
     }    
 }
 /**
@@ -141,6 +146,7 @@ void IRQ_enableTimer(bool is_enable){
         irq_setmask(irq_getmask() & ~(1 << TIMER0_INTERRUPT));
         reg_timer0_irq_en = 0;
         timer0_ev_pending_zero_write(1); // to clear the interrupt
+        IRQ_clearFlag();
     }
 }
 /**
@@ -162,6 +168,7 @@ void IRQ_enableUartTx(bool is_enable){
         irq_setie(1);
         irq_setmask(irq_getmask() & ~(1 << UART_INTERRUPT));
         uart_ev_pending_tx_write(1);    // to clear the interrupt
+        IRQ_clearFlag();
     }
 }
 /**
@@ -184,6 +191,7 @@ void IRQ_enableUartRx(bool is_enable){
         irq_setie(1);
         irq_setmask(irq_getmask() & ~(1 << UART_INTERRUPT));
         uart_ev_pending_rx_write(1);    // to clear the interrupt
+        IRQ_clearFlag();
     }
 }
 /**
@@ -204,6 +212,7 @@ void IRQ_hkSpi(bool is_enable){
         irq_setmask(irq_getmask() & ~(1 << USER_IRQ_3_INTERRUPT));
         reg_user3_irq_en =0;
         user_irq_3_ev_pending_i0_write(1); // to clear the interrupt
+        IRQ_clearFlag();
     }
 }
 
