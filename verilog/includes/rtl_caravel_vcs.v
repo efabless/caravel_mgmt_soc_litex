@@ -47,6 +47,7 @@
 `include "caravel/verilog/rtl/xres_buf.v"		     
 `include "caravel/verilog/rtl/spare_logic_block.v"	     
 `include "caravel/verilog/rtl/housekeeping.v"		     
+`include "caravel/verilog/rtl/housekeeping_alt.v"		     
 `include "caravel/verilog/rtl/caravel_clocking.v"	     
 `include "caravel/verilog/rtl/digital_pll.v"		     
 
@@ -55,6 +56,7 @@
 `include "caravel/verilog/rtl/caravel_core.v" 		     
 `include "caravel/verilog/rtl/caravel.v" 		     
 `include "caravel/verilog/rtl/caravan.v" 		     
+`include "caravel/verilog/rtl/caravan_core.v" 		     
 
 // These blocks are manually designed 		
 `include "caravel/verilog/gl/gpio_defaults_block_0403.v"     
@@ -67,7 +69,10 @@
 `include "caravel/verilog/rtl/empty_macro.v" 
 `include "caravel/verilog/rtl/manual_power_connections.v" 
 `include "caravel/verilog/rtl/copyright_block.v" 
+`include "caravel/verilog/rtl/copyright_block_a.v" 
 `include "caravel/verilog/rtl/caravel_logo.v" 
+`include "caravel/verilog/rtl/caravan_logo.v" 
 `include "caravel/verilog/rtl/caravel_motto.v" 
+`include "caravel/verilog/rtl/caravan_motto.v" 
 `include "caravel/verilog/rtl/open_source.v" 
 `include "caravel/verilog/rtl/user_id_textblock.v" 

@@ -29,7 +29,7 @@
 // `include "caravel/verilog/rtl/clock_div.v"
 					     
 `include "caravel/verilog/gl/constant_block.v" 
-// `include "caravel/verilog/rtl/chip_io_alt.v" 		     
+`include "caravel/verilog/gl/chip_io_alt.v" 		     
 `include "caravel/verilog/gl/chip_io.v" 		     
 `include "caravel/verilog/gl/mprj_logic_high.v" 	     
 `include "caravel/verilog/gl/mprj2_logic_high.v"	     
@@ -41,6 +41,7 @@
 `include "caravel/verilog/gl/xres_buf.v"		     
 `include "caravel/verilog/gl/spare_logic_block.v"	     
 `include "caravel/verilog/gl/housekeeping.v"		     
+`include "caravel/verilog/gl/housekeeping_alt.v"		     
 `include "caravel/verilog/gl/caravel_clocking.v"	     
 // `include "caravel/verilog/rtl/digital_pll.v"		     
 
@@ -64,7 +65,10 @@
 `include "caravel/verilog/gl/empty_macro.v" 
 `include "caravel/verilog/gl/manual_power_connections.v" 
 `include "caravel/verilog/gl/copyright_block.v" 
+`include "caravel/verilog/rtl/copyright_block_a.v" 
 `include "caravel/verilog/gl/caravel_logo.v" 
+`include "caravel/verilog/rtl/caravan_logo.v" 
 `include "caravel/verilog/gl/caravel_motto.v" 
+`include "caravel/verilog/rtl/caravan_motto.v" 
 `include "caravel/verilog/gl/open_source.v" 
 `include "caravel/verilog/gl/user_id_textblock.v" 
