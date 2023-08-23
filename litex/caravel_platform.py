@@ -158,7 +158,7 @@ _io = [
 
 # Platform -----------------------------------------------------------------------------------------
 
-class Platform(GenericPlatform):
+class CaravelPlatform(GenericPlatform):
     def __init__(self, vname=""):
         GenericPlatform.__init__(self, "", _io)
         

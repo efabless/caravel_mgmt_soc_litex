@@ -1,0 +1,39 @@
+[submodule "litex/third_party/litex"]
+	path = litex/third_party/litex
+	url = https://github.com/enjoy-digital/litex.git
+[submodule "litex/third_party/litespi"]
+	path = litex/third_party/litespi
+	url = https://github.com/litex-hub/litespi.git
+[submodule "litex/third_party/pythondata-cpu-vexriscv"]
+	path = litex/third_party/pythondata-cpu-vexriscv
+	url = https://github.com/litex-hub/pythondata-cpu-vexriscv.git
+[submodule "litex/third_party/pythondata-software-picolibc"]
+	path = litex/third_party/pythondata-software-picolibc
+	url = https://github.com/litex-hub/pythondata-software-picolibc.git
+[submodule "litex/third_party/migen"]
+	path = litex/third_party/migen
+	url = http://github.com/m-labs/migen.git
+[submodule "litex/third_party/pythondata-cpu-picorv32"]
+	path = litex/third_party/pythondata-cpu-picorv32
+	url = https://github.com/litex-hub/pythondata-cpu-picorv32.git
+[submodule "litex/third_party/pythondata-cpu-ibex"]
+	path = litex/third_party/pythondata-cpu-ibex
+	url = https://github.com/litex-hub/pythondata-cpu-ibex.git
+[submodule "litex/third_party/litedram"]
+	path = litex/third_party/litedram
+	url = https://github.com/enjoy-digital/litedram
+[submodule "litex/third_party/liteeth"]
+	path = litex/third_party/liteeth
+	url = https://github.com/enjoy-digital/liteeth
+[submodule "litex/third_party/liteiclink"]
+	path = litex/third_party/liteiclink
+	url = https://github.com/enjoy-digital/liteiclink
+[submodule "litex/third_party/litescope"]
+	path = litex/third_party/litescope
+	url = https://github.com/enjoy-digital/litescope
+[submodule "litex/third_party/pythondata-misc-tapcfg"]
+	path = litex/third_party/pythondata-misc-tapcfg
+	url = https://github.com/litex-hub/pythondata-misc-tapcfg.git
+[submodule "litex/third_party/pythondata-software-compiler_rt"]
+	path = litex/third_party/pythondata-software-compiler_rt
+	url = https://github.com/litex-hub/pythondata-software-compiler_rt.git
