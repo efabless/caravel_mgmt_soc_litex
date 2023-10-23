@@ -41,7 +41,7 @@
 -v $(CARAVEL_PATH)/gl/mprj_io_buffer.v	   
 -v $(CARAVEL_PATH)/gl/caravel.v 		     
 -v $(CARAVEL_PATH)/gl/caravan.v 
--v $(CARAVEL_PATH)/gl/caravel_core.v 
+#-v $(CARAVEL_PATH)/gl/caravel_core.v 
 -v $(CARAVEL_PATH)/gl/caravan_core.v 
 
 ###########################################################
@@ -51,9 +51,9 @@
 -v $(CARAVEL_PATH)/gl/chip_io.v 
 -v $(CARAVEL_PATH)/gl/chip_io_alt.v 
 -v $(CARAVEL_PATH)/gl/mgmt_protect_hv.v 	     		     
--v $(CARAVEL_PATH)/gl/gpio_defaults_block_0403.v     
--v $(CARAVEL_PATH)/gl/gpio_defaults_block_0801.v     
--v $(CARAVEL_PATH)/gl/gpio_defaults_block_1803.v   
+#-v $(CARAVEL_PATH)/gl/gpio_defaults_block_0403.v     
+#-v $(CARAVEL_PATH)/gl/gpio_defaults_block_0801.v     
+#-v $(CARAVEL_PATH)/gl/gpio_defaults_block_1803.v   
 
 ###########################################################
 # STD CELLS - they need to be below the defines.v files 

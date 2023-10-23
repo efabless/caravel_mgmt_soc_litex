@@ -21,8 +21,9 @@
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 void enable_debug(){
     User_enableIF();
-    set_debug_reg1(0);
-    set_debug_reg2(0);
+    flash_phy_clk_divisor_write(0);
+    // set_debug_reg1(0);
+    // set_debug_reg2(0);
     
 }
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
