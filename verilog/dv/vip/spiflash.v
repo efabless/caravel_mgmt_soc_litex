@@ -106,7 +106,14 @@ module spiflash #(
 	// 16 MB (128Mb) Flash
 	reg [7:0] memory [0:16*1024*1024-1];
 
+	integer i;
+
 	initial begin
+		// Initialize memory or else prefetch past the end of the
+		// loaded program can cause undefined values to propagate.
+		for (i=0; i < 16*1024*1024; i=i+1)
+		    memory[i] = 0;
+
 		$display("Reading %s",  FILENAME);
 		$readmemh(FILENAME, memory);
 		//$display("Memory 5 bytes = 0x%02x 0x%02x 0x%02x 0x%02x 0x%02x",
