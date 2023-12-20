@@ -98,7 +98,7 @@ set cap_load 0.15
 puts "\[INFO\]: Setting load to: $cap_load"
 set_load $cap_load [all_outputs]
 
-set ::env(SYNTH_CLOCK_UNCERTAINITY) 0.3
+set ::env(SYNTH_CLOCK_UNCERTAINITY) 0.1
 puts "\[INFO\]: Setting clock uncertainity to: $::env(SYNTH_CLOCK_UNCERTAINITY)"
 set_clock_uncertainty $::env(SYNTH_CLOCK_UNCERTAINITY) [get_clocks $::env(CLOCK_PORT)]
 
@@ -111,7 +111,7 @@ set_timing_derate -early 0.95
 set_timing_derate -late 1.05
 set_max_fanout 20 [current_design]
 
-set_max_transition 0.75 [current_design]
+set_max_transition 1.5 [current_design]
 set_max_transition 0.5 [get_clocks {core_clk}] -clock_path
 # set clk_input [get_port $::env(CLOCK_PORT))]
 # set clk_indx [lsearch [all_inputs] $clk_input]
