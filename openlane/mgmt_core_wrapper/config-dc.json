@@ -1,0 +1,149 @@
+{
+	"meta": {
+		"version": 2,
+		"flow": [
+			"Yosys.JsonHeader",
+			"DC.Synthesis",
+			"OpenROAD.CheckSDCFiles",
+			"OpenROAD.Floorplan",
+			"Odb.SetPowerConnections",
+			"Odb.ManualMacroPlacement",
+			"OpenROAD.TapEndcapInsertion",
+			"OpenROAD.GlobalPlacementSkipIO",
+			"OpenROAD.IOPlacement",
+			"Odb.CustomIOPlacement",
+			"OpenROAD.GlobalPlacement",
+			"Odb.AddPDNObstructions",
+			"OpenROAD.GeneratePDN",
+			"OpenROAD.RepairDesignPostGPL",
+			"OpenROAD.CTS",
+			"OpenROAD.ResizerTimingPostCTS",
+			"OpenROAD.RepairDesignPostGRT",
+			"OpenROAD.ResizerTimingPostGRT",
+			"Odb.DiodesOnPorts",
+			"Odb.HeuristicDiodeInsertion",
+			"OpenROAD.DetailedPlacement",
+			"OpenROAD.GlobalRouting",
+			"OpenROAD.RepairAntennas",
+			"OpenROAD.DetailedRouting",
+			"Checker.TrDRC",
+			"Odb.ReportDisconnectedPins",
+			"Odb.ReportWireLength",
+			"OpenROAD.CheckAntennas",
+			"Checker.WireLength",
+			"OpenROAD.FillInsertion",
+			"OpenROAD.RCX",
+			"OpenROAD.IRDropReport",
+			"Magic.StreamOut",
+			"KLayout.StreamOut",
+			"Magic.WriteLEF",
+			"KLayout.XOR",
+			"Checker.XOR",
+			"Magic.DRC",
+			"Checker.MagicDRC",
+			"Magic.SpiceExtraction",
+			"Checker.IllegalOverlap",
+			"Netgen.LVS",
+			"Checker.LVS"
+		]
+	},
+	"SOURCE_SDC": true,
+	"DC_MIN_DB": "dir::/../../dependencies/pt_libs/scs130hd_ff_1.95v_-40C.db",
+	"DC_MAX_DB": "dir::/../../dependencies/pt_libs/scs130hd_ss_1.60v_100C.db",
+	"DC_TARGET_DB": "dir::/../../dependencies/pt_libs/scs130hd_ss_1.60v_100C.db",
+	"DC_SYNTH_SDC": "dir::DC_cons.sdc",
+	"DESIGN_NAME": "mgmt_core_wrapper",
+	"CLOCK_PORT": "core_clk",
+	"CLOCK_NET": "core_clk",
+	"CLOCK_PERIOD": 25,
+	"PNR_SDC_FILE": "dir::/base.sdc",
+    "SIGNOFF_SDC_FILE": "dir::/signoff.sdc",
+	"MAX_FANOUT_CONSTRAINT": 12,
+	"FP_PIN_ORDER_CFG": "dir::/pin_order.cfg",
+	"FP_SIZING": "absolute",
+	"DIE_AREA": [0, 0, 2620, 820],
+	"MACROS": {
+		"RAM128": {
+			"gds": [
+				"dir::/../../gds/RAM128.gds"
+			],
+			"lef": [
+				"dir::/../../lef/RAM128.lef"
+			],
+			"instances": {
+				"core_RAM128": {
+					"location": [2050, 50],
+					"orientation": "N"
+				},
+				"core_RAM256_BANK128_0__RAM128": {
+					"location": [50, 50],
+					"orientation": "N"
+				},
+				"core_RAM256_BANK128_1__RAM128": {
+					"location": [550, 50],
+					"orientation": "FN"
+				}
+			},
+			"nl": [
+				"dir::/../../verilog/gl/RAM128.v"
+			],
+			"spef": {
+				"min_*": [
+					"dir::/../../signoff/RAM128/openlane-signoff/spef/RAM128.min.spef"
+				],
+				"nom_*": [
+					"dir::/../../signoff/RAM128/openlane-signoff/spef/RAM128.nom.spef"
+				],
+				"max_*": [
+					"dir::/../../signoff/RAM128/openlane-signoff/spef/RAM128.max.spef"
+				]
+			},
+			"lib": {
+				"*": [
+					"dir::/../../signoff/RAM128/primetime/lib/tt/RAM128.nom.lib"
+				]
+			}
+		}
+	},
+	"PL_TIME_DRIVEN": true,
+	"FP_PDN_CORE_RING": true,
+	"FP_PDN_VPITCH": 50,
+	"FP_PDN_HPITCH": 50,
+	"FP_PDN_VSPACING": 10,
+	"FP_PDN_HSPACING": 10,
+	"FP_PDN_VWIDTH": 1.6,
+	"FP_PDN_CORE_RING_VWIDTH": 1.6,
+	"PL_RESIZER_DESIGN_OPTIMIZATIONS": true,
+	"PL_RESIZER_TIMING_OPTIMIZATIONS": true,
+	"PL_RESIZER_HOLD_SLACK_MARGIN": 0.1,
+	"PL_RESIZER_MAX_SLEW_MARGIN": 10,
+	"PL_RESIZER_MAX_CAP_MARGIN": 10,
+	"GRT_ALLOW_CONGESTION": true,
+	"GRT_OVERFLOW_ITERS": 30,
+	"GLB_RESIZER_TIMING_OPTIMIZATIONS": true,
+	"GLB_RESIZER_HOLD_SLACK_MARGIN": 0.05,
+	"GLB_RESIZER_SETUP_SLACK_MARGIN": 0.2,
+	"GRT_REPAIR_ANTENNAS": true,
+	"DESIGN_REPAIR_MAX_WIRE_LENGTH": 500,
+	"GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH": 500,
+	"GRT_ANTENNA_ITERS": 50,
+	"VERILOG_FILES": [
+		"dir::/../../verilog/rtl/defines.v",
+		"dir::/../../verilog/rtl/RAM256.v",
+		"dir::/../../verilog/rtl/ibex_all.v",
+		"dir::/../../verilog/rtl/mgmt_core_wrapper.v",
+		"dir::/../../verilog/rtl/mgmt_core.v",
+		"dir::/../../verilog/rtl/picorv32.v",
+		"dir::/../../verilog/rtl/VexRiscv_MinDebugCache.v"
+	],
+	"CTS_MAX_CAP": 0.25,
+	"DRT_THREADS": 24,
+	"FP_PDN_CHECK_NODES": false,
+	"GRT_ADJUSTMENT": 0.22,
+	"PL_TARGET_DENSITY_PCT": 28,
+	"PDN_MACRO_CONNECTIONS": [
+		"__uuf__.*.RAM.* VPWR VGND VPWR VGND"
+	],
+	"MAGIC_DEF_LABELS": false
+}
+	
