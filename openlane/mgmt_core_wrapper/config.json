@@ -55,7 +55,7 @@
 	"CLOCK_PORT": "core_clk",
 	"CLOCK_NET": "core_clk",
 	"CLOCK_PERIOD": 25,
-	"PNR_SDC_FILE": "dir::/base.sdc",
+	"PNR_SDC_FILE": "dir::/base-2.sdc",
 	"SIGNOFF_SDC_FILE": "dir::/signoff.sdc",
 	"MAX_FANOUT_CONSTRAINT": 14,
 	"FP_PIN_ORDER_CFG": "dir::/pin_order.cfg",
@@ -70,7 +70,7 @@
 				"dir::/../../dependencies/OL-DFFRAM/layout/lef/DFFRAM128x32.lef"
 			],
 			"instances": {
-				"__dut__.__uuf__.core_RAM128": {
+				"u__dut_____uuf___core_RAM128": {
 					"location": [1950, 50],
 					"orientation": "FS"
 				}
@@ -103,7 +103,7 @@
 				"dir::/../../dependencies/OL-DFFRAM/layout/lef/DFFRAM256x32.lef"
 			],
 			"instances": {
-				"__dut__.__uuf__.core_RAM256": {
+				"u__dut_____uuf___core_RAM256": {
 					"location": [50, 50],
 					"orientation": "FS"
 				}
@@ -151,15 +151,16 @@
 	"GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH": 1300,
 	"GRT_ANTENNA_ITERS": 50,
 	"VERILOG_FILES": [
-		"dir::/mgmt_core_wrapper.dc.jtag.v"
+		"dir::/mgmt_core_wrapper.dc.jtag.eco.v"
 	],
 	"SYNTH_ELABORATE_ONLY": true,
+	"RSZ_DONT_TOUCH_RX": "eco_cell",
 	"CTS_MAX_CAP": 0.25,
 	"CTS_CLK_MAX_WIRE_LENGTH": 500,
 	"RT_CLOCK_MIN_LAYER": "met3",
 	"DRT_THREADS": 24,
 	"GRT_ADJUSTMENT": 0.05,
-	"PL_TARGET_DENSITY_PCT": 32,
+	"PL_TARGET_DENSITY_PCT": 35,
 	"PDN_MACRO_CONNECTIONS": [
 		".*RAM.* VPWR VGND VPWR VGND"
 	],
