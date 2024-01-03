@@ -89,7 +89,7 @@ void output_enable_all_gpio_user(char is_enable){
  * 
  */
 void dummyDelay(int num){
-    for (int i=0;i < num;i++){
+    for (volatile int i=0;i < num;i++){
         continue;
     }
 }

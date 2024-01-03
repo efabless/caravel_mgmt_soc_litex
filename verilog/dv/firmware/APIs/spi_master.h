@@ -20,6 +20,7 @@ char spi_done(){return reg_spimaster_status & 0x1;}
 void MSPI_write(char c){
     reg_spimaster_wdata = (unsigned long) c;
     reg_spimaster_control = 0x0801;
+    while (reg_spimaster_status != 1);
 }
 /**
  * Read byte (8bits) through SPI master 
