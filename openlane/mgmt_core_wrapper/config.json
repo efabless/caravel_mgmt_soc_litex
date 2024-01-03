@@ -16,15 +16,16 @@
 			"Odb.AddPDNObstructions",
 			"OpenROAD.GeneratePDN",
 			"OpenROAD.RepairDesignPostGPL",
+			"OpenROAD.DetailedPlacement",
 			"OpenROAD.CTS",
 			"OpenROAD.ResizerTimingPostCTS",
-			"OpenROAD.RepairDesignPostGRT",
-			"OpenROAD.ResizerTimingPostGRT",
 			"Odb.DiodesOnPorts",
 			"Odb.HeuristicDiodeInsertion",
 			"OpenROAD.DetailedPlacement",
 			"OpenROAD.GlobalRouting",
-			"OpenROAD.RepairAntennas",
+			"OpenROAD.RepairDesignPostGRT",
+			"OpenROAD.ResizerTimingPostGRT",
+			"OpenROAD.DetailedPlacement",
 			"OpenROAD.DetailedRouting",
 			"Checker.TrDRC",
 			"Odb.ReportDisconnectedPins",
@@ -33,6 +34,7 @@
 			"Checker.WireLength",
 			"OpenROAD.FillInsertion",
 			"OpenROAD.RCX",
+			"OpenROAD.STAPostPNR",
 			"OpenROAD.IRDropReport",
 			"Magic.StreamOut",
 			"KLayout.StreamOut",
@@ -40,7 +42,9 @@
 			"KLayout.XOR",
 			"Checker.XOR",
 			"Magic.DRC",
+			"KLayout.DRC",
 			"Checker.MagicDRC",
+			"Checker.KLayoutDRC",
 			"Magic.SpiceExtraction",
 			"Checker.IllegalOverlap",
 			"Netgen.LVS",
@@ -52,8 +56,8 @@
 	"CLOCK_NET": "core_clk",
 	"CLOCK_PERIOD": 25,
 	"PNR_SDC_FILE": "dir::/base.sdc",
-    "SIGNOFF_SDC_FILE": "dir::/signoff.sdc",
-	"MAX_FANOUT_CONSTRAINT": 12,
+	"SIGNOFF_SDC_FILE": "dir::/signoff.sdc",
+	"MAX_FANOUT_CONSTRAINT": 14,
 	"FP_PIN_ORDER_CFG": "dir::/pin_order.cfg",
 	"FP_SIZING": "absolute",
 	"DIE_AREA": [0, 0, 2620, 820],
@@ -86,18 +90,12 @@
 				]
 			},
 			"lib": {
-				"*tt*": [
-					"dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM128x32/tt/DFFRAM128x32.nom.lib"
-				],
-                "*ss*": [
-                    "dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM128x32/ss/DFFRAM128x32.max.lib"
-                ],
-                "*ff*": [
-                    "dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM128x32/ff/DFFRAM128x32.min.lib"
-                ]
+				"*": [
+					"dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM128x32/ff/DFFRAM128x32.nom.lib"
+				]
 			}
 		},
-        "DFFRAM256x32": {
+		"DFFRAM256x32": {
 			"gds": [
 				"dir::/../../dependencies/OL-DFFRAM/layout/gds/DFFRAM256x32.gds.gz"
 			],
@@ -125,15 +123,9 @@
 				]
 			},
 			"lib": {
-				"*tt*": [
-					"dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM256x32/tt/DFFRAM256x32.nom.lib"
-				],
-                "*ss*": [
-                    "dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM256x32/ss/DFFRAM256x32.max.lib"
-                ],
-                "*ff*": [
-                    "dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM256x32/ff/DFFRAM256x32.min.lib"
-                ]
+				"*": [
+					"dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM256x32/ff/DFFRAM256x32.nom.lib"
+				]
 			}
 		}
 	},
@@ -155,20 +147,21 @@
 	"GLB_RESIZER_TIMING_OPTIMIZATIONS": true,
 	"GRT_RESIZER_HOLD_SLACK_MARGIN": 0.05,
 	"GRT_RESIZER_SETUP_SLACK_MARGIN": 0.2,
-	"DESIGN_REPAIR_MAX_WIRE_LENGTH": 500,
-	"GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH": 500,
+	"DESIGN_REPAIR_MAX_WIRE_LENGTH": 1300,
+	"GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH": 1300,
 	"GRT_ANTENNA_ITERS": 50,
 	"VERILOG_FILES": [
 		"dir::/mgmt_core_wrapper.dc.jtag.v"
 	],
 	"SYNTH_ELABORATE_ONLY": true,
 	"CTS_MAX_CAP": 0.25,
+	"CTS_CLK_MAX_WIRE_LENGTH": 500,
+	"RT_CLOCK_MIN_LAYER": "met3",
 	"DRT_THREADS": 24,
-	"GRT_ADJUSTMENT": 0.22,
+	"GRT_ADJUSTMENT": 0.05,
 	"PL_TARGET_DENSITY_PCT": 32,
 	"PDN_MACRO_CONNECTIONS": [
-		".*.RAM.* VPWR VGND VPWR VGND"
+		".*RAM.* VPWR VGND VPWR VGND"
 	],
 	"MAGIC_DEF_LABELS": false
 }
-	

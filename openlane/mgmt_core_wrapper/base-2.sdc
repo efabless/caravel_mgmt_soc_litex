@@ -17,14 +17,14 @@ puts "\[INFO\]: Setting output delay to: $output_delay_value"
 puts "\[INFO\]: Setting input delay to: $input_delay_value"
 
 ## HK INPUTS 
-set hk_min_input_delay 3 
-set_input_delay $hk_min_input_delay -clock [get_clocks core_clk] [get_ports irq[*]]
+set hk_min_input_delay 2 
+set_input_delay 1 -clock [get_clocks core_clk] [get_ports irq[*]]
 set_input_delay 5.60 -clock [get_clocks core_clk] [get_ports flash_io0_di]
-set_input_delay 5.80 -clock [get_clocks core_clk] [get_ports flash_io1_di]
+set_input_delay 3 -clock [get_clocks core_clk] [get_ports flash_io1_di]
 set_input_delay 5.60 -clock [get_clocks core_clk] [get_ports flash_io2_di]
 set_input_delay 5.60 -clock [get_clocks core_clk] [get_ports flash_io3_di]
-set_input_delay 3.0 -clock [get_clocks core_clk] [get_ports hk_dat_i[*]]
-set_input_delay 3.0 -clock [get_clocks core_clk] [get_ports hk_ack_i]
+set_input_delay 1.1 -clock [get_clocks core_clk] [get_ports hk_dat_i[*]]
+set_input_delay 1.1 -clock [get_clocks core_clk] [get_ports hk_ack_i]
 set_input_delay 5.80 -clock [get_clocks core_clk] [get_ports spi_sdi]
 set_input_delay 5.60 -clock [get_clocks core_clk] [get_ports debug_in]
 # set_input_delay $hk_min_input_delay -clock [get_clocks core_clk] [get_ports sram_ro_clk]
@@ -33,13 +33,13 @@ set_input_delay 5.60 -clock [get_clocks core_clk] [get_ports debug_in]
 
 
 ## USER PROJECT WRAPPER INPUTS
-set user_input_delay 5
+set user_input_delay 3 
 set_input_delay $user_input_delay -clock [get_clocks core_clk] [get_ports la_input[*]]
 set_input_delay $user_input_delay -clock [get_clocks core_clk] [get_ports mprj_ack_i]
 set_input_delay $user_input_delay -clock [get_clocks core_clk] [get_ports mprj_dat_i[*]]
 
 ## PADFRAME INPUTS
-set padframe_input_delay 4 
+set padframe_input_delay 3 
 set_input_delay $padframe_input_delay  -clock [get_clocks core_clk] [get_ports gpio_in_pad]
 
 ## OUTPUT DELAYS
@@ -102,8 +102,8 @@ set cap_load 0.15
 puts "\[INFO\]: Setting load to: $cap_load"
 set_load $cap_load [all_outputs]
 
-set_clock_uncertainty 0.1 [get_clocks core_clk]
-# set_clock_uncertainty 0.1 [get_clocks tck]
+set_clock_uncertainty 0.250 [get_clocks core_clk]
+# set_clock_uncertainty 0.5 [get_clocks tck]
 
 # set ::env(SYNTH_CLOCK_TRANSITION) 0.5
 # puts "\[INFO\]: Setting clock transition to: $::env(SYNTH_CLOCK_TRANSITION)"
@@ -115,7 +115,7 @@ set_timing_derate -early 0.95
 set_timing_derate -late 1.05
 set_max_fanout 20 [current_design]
 
-set_max_transition 1.5 [current_design]
+set_max_transition 0.75 [current_design]
 set_max_transition 0.5 [get_clocks core_clk] -clock_path
 # set clk_input [get_port core_clk)]
 # set clk_indx [lsearch [all_inputs] $clk_input]

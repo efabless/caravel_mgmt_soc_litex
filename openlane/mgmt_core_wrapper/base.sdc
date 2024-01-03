@@ -1,8 +1,10 @@
 ## MASTER CLOCKS
 create_clock [get_ports core_clk]  -name core_clk  -period 25
-# create_clock [get_ports tck]  -name tck -period 200
+create_clock [get_ports tck]  -name tck -period 200
 
-# set_clock_groups -logically_exclusive -group core_clk -group tck
+set_clock_groups -logically_exclusive -group core_clk -group tck
+
+set_propagated_clock [all_clocks]
 
 ## FALSE PATHS
 set_false_path -from [get_port core_rstn]
@@ -16,9 +18,9 @@ puts "\[INFO\]: Setting input delay to: $input_delay_value"
 
 ## HK INPUTS 
 set hk_min_input_delay 2 
-set_input_delay $hk_min_input_delay -clock [get_clocks core_clk] [get_ports irq[*]]
+set_input_delay 1 -clock [get_clocks core_clk] [get_ports irq[*]]
 set_input_delay 5.60 -clock [get_clocks core_clk] [get_ports flash_io0_di]
-set_input_delay 5.80 -clock [get_clocks core_clk] [get_ports flash_io1_di]
+set_input_delay 3 -clock [get_clocks core_clk] [get_ports flash_io1_di]
 set_input_delay 5.60 -clock [get_clocks core_clk] [get_ports flash_io2_di]
 set_input_delay 5.60 -clock [get_clocks core_clk] [get_ports flash_io3_di]
 set_input_delay 1.1 -clock [get_clocks core_clk] [get_ports hk_dat_i[*]]
@@ -37,7 +39,7 @@ set_input_delay $user_input_delay -clock [get_clocks core_clk] [get_ports mprj_a
 set_input_delay $user_input_delay -clock [get_clocks core_clk] [get_ports mprj_dat_i[*]]
 
 ## PADFRAME INPUTS
-set padframe_input_delay 4 
+set padframe_input_delay 3 
 set_input_delay $padframe_input_delay  -clock [get_clocks core_clk] [get_ports gpio_in_pad]
 
 ## OUTPUT DELAYS
@@ -100,8 +102,8 @@ set cap_load 0.15
 puts "\[INFO\]: Setting load to: $cap_load"
 set_load $cap_load [all_outputs]
 
-set_clock_uncertainty 0.3 [get_clocks core_clk]
-# set_clock_uncertainty 0.5 [get_clocks tck]
+set_clock_uncertainty 0.300 [get_clocks core_clk]
+set_clock_uncertainty 0.300 [get_clocks tck]
 
 # set ::env(SYNTH_CLOCK_TRANSITION) 0.5
 # puts "\[INFO\]: Setting clock transition to: $::env(SYNTH_CLOCK_TRANSITION)"
