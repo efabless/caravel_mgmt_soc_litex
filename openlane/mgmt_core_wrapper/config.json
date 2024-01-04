@@ -18,6 +18,8 @@
 			"OpenROAD.RepairDesignPostGPL",
 			"OpenROAD.DetailedPlacement",
 			"OpenROAD.CTS",
+			"OpenROAD.CTS",
+			"OpenROAD.ResizerTimingPostCTS",
 			"OpenROAD.ResizerTimingPostCTS",
 			"Odb.DiodesOnPorts",
 			"Odb.HeuristicDiodeInsertion",
@@ -25,6 +27,8 @@
 			"OpenROAD.GlobalRouting",
 			"OpenROAD.RepairDesignPostGRT",
 			"OpenROAD.ResizerTimingPostGRT",
+			"OpenROAD.ResizerTimingPostGRT",
+			"OpenROAD.RepairAntennas",
 			"OpenROAD.DetailedPlacement",
 			"OpenROAD.DetailedRouting",
 			"Checker.TrDRC",
@@ -34,6 +38,7 @@
 			"Checker.WireLength",
 			"OpenROAD.FillInsertion",
 			"OpenROAD.RCX",
+			"OpenROAD.STAPostPNR",
 			"OpenROAD.STAPostPNR",
 			"OpenROAD.IRDropReport",
 			"Magic.StreamOut",
@@ -55,7 +60,7 @@
 	"CLOCK_PORT": "core_clk",
 	"CLOCK_NET": "core_clk",
 	"CLOCK_PERIOD": 25,
-	"PNR_SDC_FILE": "dir::/base-2.sdc",
+	"PNR_SDC_FILE": "dir::/base.sdc",
 	"SIGNOFF_SDC_FILE": "dir::/signoff.sdc",
 	"MAX_FANOUT_CONSTRAINT": 14,
 	"FP_PIN_ORDER_CFG": "dir::/pin_order.cfg",
@@ -70,8 +75,8 @@
 				"dir::/../../dependencies/OL-DFFRAM/layout/lef/DFFRAM128x32.lef"
 			],
 			"instances": {
-				"u__dut_____uuf___core_RAM128": {
-					"location": [1950, 50],
+				"__dut__.__uuf__.core_RAM128": {
+					"location": [1975, 50],
 					"orientation": "FS"
 				}
 			},
@@ -103,7 +108,7 @@
 				"dir::/../../dependencies/OL-DFFRAM/layout/lef/DFFRAM256x32.lef"
 			],
 			"instances": {
-				"u__dut_____uuf___core_RAM256": {
+				"__dut__.__uuf__.core_RAM256": {
 					"location": [50, 50],
 					"orientation": "FS"
 				}
@@ -147,20 +152,21 @@
 	"GLB_RESIZER_TIMING_OPTIMIZATIONS": true,
 	"GRT_RESIZER_HOLD_SLACK_MARGIN": 0.05,
 	"GRT_RESIZER_SETUP_SLACK_MARGIN": 0.2,
-	"DESIGN_REPAIR_MAX_WIRE_LENGTH": 1300,
-	"GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH": 1300,
+	"DESIGN_REPAIR_MAX_WIRE_LENGTH": 1100,
+	"GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH": 1100,
 	"GRT_ANTENNA_ITERS": 50,
 	"VERILOG_FILES": [
-		"dir::/mgmt_core_wrapper.dc.jtag.eco.v"
+		"dir::/mgmt_core_wrapper.dc.jtag.v"
 	],
 	"SYNTH_ELABORATE_ONLY": true,
-	"RSZ_DONT_TOUCH_RX": "eco_cell",
 	"CTS_MAX_CAP": 0.25,
-	"CTS_CLK_MAX_WIRE_LENGTH": 500,
+	"CTS_CLK_MAX_WIRE_LENGTH": 800,
+	"CTS_SINK_CLUSTERING_SIZE": 30,
+    "CTS_SINK_CLUSTERING_MAX_DIAMETER": 140,
 	"RT_CLOCK_MIN_LAYER": "met3",
 	"DRT_THREADS": 24,
-	"GRT_ADJUSTMENT": 0.05,
-	"PL_TARGET_DENSITY_PCT": 35,
+	"GRT_ADJUSTMENT": 0.02,
+	"PL_TARGET_DENSITY_PCT": 32,
 	"PDN_MACRO_CONNECTIONS": [
 		".*RAM.* VPWR VGND VPWR VGND"
 	],

@@ -1,13 +1,11 @@
 ## MASTER CLOCKS
 create_clock [get_ports core_clk]  -name core_clk  -period 25
-# create_clock [get_ports tck]  -name tck -period 200
-
-# set_clock_groups -logically_exclusive -group core_clk -group tck
-
+set_clock_uncertainty 0.1 [all_clocks]
 set_propagated_clock [all_clocks]
 
 ## FALSE PATHS
 set_false_path -from [get_port core_rstn]
+set_false_path -from [get_port trst]
 
 ## INPUT/OUTPUT DELAYS
 set input_delay_value 5
@@ -27,9 +25,6 @@ set_input_delay 3.0 -clock [get_clocks core_clk] [get_ports hk_dat_i[*]]
 set_input_delay 3.0 -clock [get_clocks core_clk] [get_ports hk_ack_i]
 set_input_delay 5.80 -clock [get_clocks core_clk] [get_ports spi_sdi]
 set_input_delay 5.60 -clock [get_clocks core_clk] [get_ports debug_in]
-# set_input_delay $hk_min_input_delay -clock [get_clocks core_clk] [get_ports sram_ro_clk]
-# set_input_delay $hk_min_input_delay -clock [get_clocks core_clk] [get_ports sram_ro_csb]
-# set_input_delay $hk_min_input_delay -clock [get_clocks core_clk] [get_ports sram_ro_addr[*]]
 
 
 ## USER PROJECT WRAPPER INPUTS
@@ -70,10 +65,6 @@ set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [ge
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {la_iena[*]}]
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {la_oenb[*]}]
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {la_output[*]}]
-# set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {mgmt_soc_dff_A[*]}]
-# set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {mgmt_soc_dff_Di[*]}]
-# set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {mgmt_soc_dff_EN}]
-# set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {mgmt_soc_dff_WE[*]}]
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {mprj_adr_o[*]}]
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {mprj_cyc_o}]
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {mprj_dat_o[*]}]
@@ -88,37 +79,37 @@ set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [ge
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {spi_enabled}]
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {spi_sdo}]
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {spi_sdoenb}]
-# set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {sram_ro_addr[*]}]
-# set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {sram_ro_clk}]
-# set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {sram_ro_csb}]
-# set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {sram_ro_data[*]}]
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {trap}]
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {uart_enabled}]
 set_output_delay $output_delay_value -clock [get_clocks core_clk] -add_delay [get_ports {user_irq_ena[*]}]
 
 ## INPUT DRIVER
 #set_driving_cell -lib_cell $::env(SYNTH_DRIVING_CELL) -pin $::env(SYNTH_DRIVING_CELL_PIN) [all_inputs]
-set cap_load 0.15
+set cap_load 0.1
 puts "\[INFO\]: Setting load to: $cap_load"
 set_load $cap_load [all_outputs]
-
-set_clock_uncertainty 0.1 [get_clocks core_clk]
-# set_clock_uncertainty 0.1 [get_clocks tck]
 
 # set ::env(SYNTH_CLOCK_TRANSITION) 0.5
 # puts "\[INFO\]: Setting clock transition to: $::env(SYNTH_CLOCK_TRANSITION)"
 # set_clock_transition $::env(SYNTH_CLOCK_TRANSITION) [get_clocks core_clk]
 set_driving_cell -lib_cell sky130_fd_sc_hd__clkbuf_4 -pin {X} [all_inputs]
 
-puts "\[INFO\]: Setting timing derate to: [expr {$::env(SYNTH_TIMING_DERATE) * 10}] %"
-set_timing_derate -early 0.95
-set_timing_derate -late 1.05
-set_max_fanout 20 [current_design]
+set derate 0.05
+puts "\[INFO\]: Setting timing derate to: [expr {$derate * 100}] %"
+set_timing_derate -early [expr {1 - $derate}]
+set_timing_derate -late [expr {1 + $derate}]
 
 set_max_transition 1.5 [current_design]
-set_max_transition 0.5 [get_clocks core_clk] -clock_path
-# set clk_input [get_port core_clk)]
-# set clk_indx [lsearch [all_inputs] $clk_input]
-# set all_inputs_wo_clk [lreplace [all_inputs] $clk_indx $clk_indx ""]
 
-# set_input_transition 5.0 $all_inputs_wo_clk
+puts "\[INFO\]: Mode: $::env(MODE) operation"
+if {$::env(MODE) == "TEST"} {
+    set_case_analysis 1 [get_ports {tms}]
+    create_clock [get_ports tck]  -name tck -period 200
+    set_clock_uncertainty 0.1 [get_clocks tck]
+
+    set_clock_groups -logically_exclusive -group core_clk -group tck
+    set_propagated_clock [all_clocks]
+} else {
+    set_case_analysis 0 [get_ports {tms}]
+    set_case_analysis 0 [get_ports {tck}]
+}
