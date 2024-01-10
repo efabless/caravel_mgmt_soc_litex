@@ -1,0 +1,135 @@
+{
+	"meta": {
+		"version": 2,
+		"flow": [
+			"Yosys.JsonHeader",
+			"DC.Synthesis"
+		]
+	},
+	"SOURCE_SDC": true,
+	"DC_MIN_DB": "dir::/../../dependencies/pt_libs/scs130hd_ff_1.95v_-40C.db",
+	"DC_MAX_DB": "dir::/../../dependencies/pt_libs/scs130hd_ss_1.60v_100C.db",
+	"DC_TARGET_DB": "dir::/../../dependencies/pt_libs/scs130hd_ss_1.60v_100C.db",
+    "DC_MACRO_DBS": ["dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM128x32/ss/DFFRAM128x32.max.db", "dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM256x32/ss/DFFRAM256x32.max.db"],
+	"DC_SYNTH_SDC": "dir::DC_cons.sdc",
+	"DESIGN_NAME": "mgmt_core_wrapper",
+	"CLOCK_PORT": "core_clk",
+	"CLOCK_NET": "core_clk",
+	"CLOCK_PERIOD": 25,
+	"PNR_SDC_FILE": "dir::/base.sdc",
+	"SIGNOFF_SDC_FILE": "dir::/signoff.sdc",
+	"MAX_FANOUT_CONSTRAINT": 14,
+	"FP_PIN_ORDER_CFG": "dir::/pin_order.cfg",
+	"FP_SIZING": "absolute",
+	"DIE_AREA": [0, 0, 2620, 820],
+	"MACROS": {
+		"DFFRAM128x32": {
+			"gds": [
+				"dir::/../../dependencies/OL-DFFRAM/layout/gds/DFFRAM128x32.gds.gz"
+			],
+			"lef": [
+				"dir::/../../dependencies/OL-DFFRAM/layout/lef/DFFRAM128x32.lef"
+			],
+			"instances": {
+				"__dut__.__uuf__.core_RAM128": {
+					"location": [1950, 50],
+					"orientation": "FS"
+				}
+			},
+			"nl": [
+				"dir::/../../dependencies/OL-DFFRAM/hdl/gl/DFFRAM128x32.v"
+			],
+			"spef": {
+				"min_*": [
+					"dir::/../../dependencies/OL-DFFRAM/timing/spef/DFFRAM128x32.min.spef"
+				],
+				"nom_*": [
+					"dir::/../../dependencies/OL-DFFRAM/timing/spef/DFFRAM128x32.nom.spef"
+				],
+				"max_*": [
+					"dir::/../../dependencies/OL-DFFRAM/timing/spef/DFFRAM128x32.max.spef"
+				]
+			},
+			"lib": {
+				"*": [
+					"dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM128x32/ff/DFFRAM128x32.nom.lib"
+				]
+			}
+		},
+		"DFFRAM256x32": {
+			"gds": [
+				"dir::/../../dependencies/OL-DFFRAM/layout/gds/DFFRAM256x32.gds.gz"
+			],
+			"lef": [
+				"dir::/../../dependencies/OL-DFFRAM/layout/lef/DFFRAM256x32.lef"
+			],
+			"instances": {
+				"__dut__.__uuf__.core_RAM256": {
+					"location": [50, 50],
+					"orientation": "FS"
+				}
+			},
+			"nl": [
+				"dir::/../../dependencies/OL-DFFRAM/hdl/gl/DFFRAM256x32.v"
+			],
+			"spef": {
+				"min_*": [
+					"dir::/../../dependencies/OL-DFFRAM/timing/spef/DFFRAM256x32.min.spef"
+				],
+				"nom_*": [
+					"dir::/../../dependencies/OL-DFFRAM/timing/spef/DFFRAM256x32.nom.spef"
+				],
+				"max_*": [
+					"dir::/../../dependencies/OL-DFFRAM/timing/spef/DFFRAM256x32.max.spef"
+				]
+			},
+			"lib": {
+				"*": [
+					"dir::/../../dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM256x32/ff/DFFRAM256x32.nom.lib"
+				]
+			}
+		}
+	},
+	"PL_TIME_DRIVEN": true,
+	"FP_PDN_CORE_RING": true,
+	"FP_PDN_VPITCH": 50,
+	"FP_PDN_HPITCH": 50,
+	"FP_PDN_VSPACING": 10,
+	"FP_PDN_HSPACING": 10,
+	"FP_PDN_VWIDTH": 1.6,
+	"FP_PDN_CORE_RING_VWIDTH": 1.6,
+	"PL_RESIZER_DESIGN_OPTIMIZATIONS": true,
+	"PL_RESIZER_TIMING_OPTIMIZATIONS": true,
+	"PL_RESIZER_HOLD_SLACK_MARGIN": 0.1,
+	"DESIGN_REPAIR_MAX_SLEW_PCT": 10,
+	"DESIGN_REPAIR_MAX_CAP_PCT": 10,
+	"GRT_ALLOW_CONGESTION": true,
+	"GRT_OVERFLOW_ITERS": 30,
+	"GLB_RESIZER_TIMING_OPTIMIZATIONS": true,
+	"GRT_RESIZER_HOLD_SLACK_MARGIN": 0.05,
+	"GRT_RESIZER_SETUP_SLACK_MARGIN": 0.2,
+	"DESIGN_REPAIR_MAX_WIRE_LENGTH": 1300,
+	"GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH": 1300,
+	"GRT_ANTENNA_ITERS": 50,
+	"VERILOG_FILES": [
+		"dir::/../../verilog/rtl/defines.v",
+		"dir::/../../verilog/rtl/RAM256.v",
+		"dir::/../../verilog/rtl/ibex_all.v",
+		"dir::/../../verilog/rtl/mgmt_core_wrapper.v",
+		"dir::/../../verilog/rtl/mgmt_core.v",
+		"dir::/../../verilog/rtl/picorv32.v",
+		"dir::/../../verilog/rtl/VexRiscv_MinDebugCache.v"
+	],
+	"SYNTH_ELABORATE_ONLY": false,
+	"SYNTH_EXCLUSION_CELL_LIST": "dir::/no_synth.cells",
+	"CTS_MAX_CAP": 0.25,
+	"CTS_CLK_MAX_WIRE_LENGTH": 500,
+	"RT_CLOCK_MIN_LAYER": "met3",
+	"DRT_THREADS": 24,
+	"GRT_ADJUSTMENT": 0.05,
+	"PL_TARGET_DENSITY_PCT": 32,
+	"PDN_MACRO_CONNECTIONS": [
+		".*RAM.* VPWR VGND VPWR VGND"
+	],
+	"MAGIC_DEF_LABELS": false
+}

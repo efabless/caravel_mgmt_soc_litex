@@ -1,5 +1,5 @@
 ## MASTER CLOCKS
-create_clock [get_ports $::env(CLOCK_PORT)] -name $::env(CLOCK_PORT)  -period $::env(CLOCK_PERIOD)
+create_clock [get_ports $::env(CLOCK_PORT)] -name $::env(CLOCK_PORT)  -period 10
 
 ## FALSE PATHS
 set_false_path -from [get_port core_rstn]
