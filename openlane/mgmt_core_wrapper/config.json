@@ -156,7 +156,7 @@
 	"GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH": 1100,
 	"GRT_ANTENNA_ITERS": 50,
 	"VERILOG_FILES": [
-		"dir::/mgmt_core_wrapper.dc.jtag.v"
+		"dir::/mgmt_core_wrapper.tap.v"
 	],
 	"SYNTH_ELABORATE_ONLY": true,
 	"CTS_MAX_CAP": 0.25,

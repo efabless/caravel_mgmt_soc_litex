@@ -1,0 +1,7 @@
+rm -rf openlane/mgmt_core_wrapper/runs/OPT-9
+export MODE=NA   ; openlane openlane/mgmt_core_wrapper/config.json --run-tag OPT-9 --to OpenROAD.CTS
+export MODE=TEST ; openlane openlane/mgmt_core_wrapper/config.json --run-tag OPT-9 --from OpenROAD.CTS-1 --to OpenROAD.ResizerTimingPostCTS
+export MODE=NA   ; openlane openlane/mgmt_core_wrapper/config.json --run-tag OPT-9 --from OpenROAD.ResizerTimingPostCTS-1 --to OpenROAD.RepairDesignPostGRT
+export MODE=TEST ; openlane openlane/mgmt_core_wrapper/config.json --run-tag OPT-9 --only OpenROAD.ResizerTimingPostGRT
+export MODE=NA   ; openlane openlane/mgmt_core_wrapper/config.json --run-tag OPT-9 --from OpenROAD.ResizerTimingPostGRT-1 --to OpenROAD.STAPostPNR
+export MODE=TEST ; openlane openlane/mgmt_core_wrapper/config.json --run-tag OPT-9 --from OpenROAD.STAPostPNR-1
