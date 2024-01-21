@@ -1,0 +1,269 @@
+{
+    "STD_CELL_LIBRARY": "sky130_fd_sc_hd",
+    "VDD_PIN": "VPWR",
+    "VDD_PIN_VOLTAGE": 1.8,
+    "GND_PIN": "VGND",
+    "WIRE_LENGTH_THRESHOLD": null,
+    "TECH_LEFS": {
+        "nom_*": "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__nom.tlef",
+        "min_*": "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__min.tlef",
+        "max_*": "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/techlef/sky130_fd_sc_hd__max.tlef"
+    },
+    "GPIO_PADS_LEF": [
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_io/lef/sky130_fd_io.lef",
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_io/lef/sky130_ef_io.lef"
+    ],
+    "GPIO_PADS_LEF_CORE_SIDE": [
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/custom_cells/lef/sky130_fd_io_core.lef",
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/custom_cells/lef/sky130_ef_io_core.lef"
+    ],
+    "GPIO_PADS_VERILOG": [
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_io/verilog/sky130_ef_io.v"
+    ],
+    "GPIO_PAD_CELLS": [
+        "sky130_fd_io*",
+        "sky130_ef_io*"
+    ],
+    "PRIMARY_GDSII_STREAMOUT_TOOL": "magic",
+    "DEFAULT_MAX_TRAN": null,
+    "DATA_WIRE_RC_LAYER": "met2",
+    "CLOCK_WIRE_RC_LAYER": "met5",
+    "DEFAULT_CORNER": "nom_tt_025C_1v80",
+    "STA_CORNERS": [
+        "nom_tt_025C_1v80",
+        "nom_ss_100C_1v60",
+        "nom_ff_n40C_1v95",
+        "min_tt_025C_1v80",
+        "min_ss_100C_1v60",
+        "min_ff_n40C_1v95",
+        "max_tt_025C_1v80",
+        "max_ss_100C_1v60",
+        "max_ff_n40C_1v95"
+    ],
+    "FP_TRACKS_INFO": "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/tracks.info",
+    "FP_TAPCELL_DIST": 13,
+    "FP_IO_HLAYER": "met3",
+    "FP_IO_VLAYER": "met2",
+    "RT_MIN_LAYER": "met1",
+    "RT_MAX_LAYER": "met5",
+    "SCL_GROUND_PINS": [
+        "VGND",
+        "VNB"
+    ],
+    "SCL_POWER_PINS": [
+        "VPWR",
+        "VPB"
+    ],
+    "TRISTATE_CELLS": [
+        "sky130_fd_sc_hd__ebuf*"
+    ],
+    "FILL_CELL": [
+        "sky130_fd_sc_hd__fill*"
+    ],
+    "DECAP_CELL": [
+        "sky130_ef_sc_hd__decap_12",
+        "sky130_fd_sc_hd__decap_8",
+        "sky130_fd_sc_hd__decap_6",
+        "sky130_fd_sc_hd__decap_4",
+        "sky130_fd_sc_hd__decap_3"
+    ],
+    "LIB": {
+        "*_tt_025C_1v80": [
+            "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib"
+        ],
+        "*_ss_100C_1v60": [
+            "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib"
+        ],
+        "*_ff_n40C_1v95": [
+            "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib"
+        ]
+    },
+    "CELL_LEFS": [
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_ef_sc_hd.lef",
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/lef/sky130_fd_sc_hd.lef"
+    ],
+    "CELL_GDS": [
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/gds/sky130_fd_sc_hd.gds"
+    ],
+    "CELL_VERILOG_MODELS": [
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/verilog/primitives.v",
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd.v"
+    ],
+    "CELL_BB_VERILOG_MODELS": [
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd__blackbox.v",
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd__blackbox_pp.v"
+    ],
+    "CELL_SPICE_MODELS": [
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_ef_sc_hd__decap_12.spice",
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_ef_sc_hd__fill_12.spice",
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_ef_sc_hd__fill_4.spice",
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_ef_sc_hd__fill_8.spice",
+        "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.ref/sky130_fd_sc_hd/spice/sky130_fd_sc_hd.spice"
+    ],
+    "SYNTH_EXCLUSION_CELL_LIST": "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/no_synth.cells",
+    "PNR_EXCLUSION_CELL_LIST": "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a/sky130A/libs.tech/openlane/sky130_fd_sc_hd/drc_exclude.cells",
+    "OUTPUT_CAP_LOAD": 33.442,
+    "MAX_FANOUT_CONSTRAINT": 14,
+    "MAX_TRANSITION_CONSTRAINT": 0.75,
+    "MAX_CAPACITANCE_CONSTRAINT": 0.2,
+    "CLOCK_UNCERTAINTY_CONSTRAINT": 0.25,
+    "CLOCK_TRANSITION_CONSTRAINT": 0.15,
+    "TIME_DERATING_CONSTRAINT": 5,
+    "IO_DELAY_CONSTRAINT": 20,
+    "SYNTH_DRIVING_CELL": "sky130_fd_sc_hd__inv_2/Y",
+    "SYNTH_CLK_DRIVING_CELL": null,
+    "SYNTH_TIEHI_CELL": "sky130_fd_sc_hd__conb_1/HI",
+    "SYNTH_TIELO_CELL": "sky130_fd_sc_hd__conb_1/LO",
+    "SYNTH_BUFFER_CELL": "sky130_fd_sc_hd__buf_2/A/X",
+    "CTS_ROOT_BUFFER": "sky130_fd_sc_hd__clkbuf_16",
+    "CTS_CLK_BUFFERS": [
+        "sky130_fd_sc_hd__clkbuf_8",
+        "sky130_fd_sc_hd__clkbuf_4",
+        "sky130_fd_sc_hd__clkbuf_2"
+    ],
+    "CTS_MAX_CAP": 0.25,
+    "FP_WELLTAP_CELL": "sky130_fd_sc_hd__tapvpwrvgnd_1",
+    "FP_ENDCAP_CELL": "sky130_fd_sc_hd__decap_3",
+    "IGNORE_DISCONNECTED_MODULES": [
+        "sky130_fd_sc_hd__conb_1"
+    ],
+    "PLACE_SITE": "unithd",
+    "GPL_CELL_PADDING": 0,
+    "DPL_CELL_PADDING": 0,
+    "CELL_PAD_EXCLUDE": [
+        "sky130_fd_sc_hd__tap*",
+        "sky130_fd_sc_hd__decap*",
+        "sky130_ef_sc_hd__decap*",
+        "sky130_fd_sc_hd__fill*"
+    ],
+    "DIODE_CELL": "sky130_fd_sc_hd__diode_2/DIODE",
+    "GRT_LAYER_ADJUSTMENTS": [
+        0.99,
+        0,
+        0,
+        0,
+        0,
+        0
+    ],
+    "DESIGN_DIR": "/home/hosni/caravel-3/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper",
+    "PDK_ROOT": "/home/hosni/.volare/volare/sky130/versions/bdc9412b3e468c102d01b7cf6337be06ec6e9c9a",
+    "DESIGN_NAME": "mgmt_core_wrapper",
+    "PDK": "sky130A",
+    "CLOCK_PERIOD": 25,
+    "CLOCK_PORT": "core_clk",
+    "CLOCK_NET": "core_clk",
+    "VDD_NETS": null,
+    "GND_NETS": null,
+    "DIE_AREA": [
+        0,
+        0,
+        2500,
+        720
+    ],
+    "MACROS": {
+        "DFFRAM128x32": {
+            "gds": [
+                "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/layout/gds/DFFRAM128x32.gds.gz"
+            ],
+            "lef": [
+                "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/layout/lef/DFFRAM128x32.lef"
+            ],
+            "instances": {
+                "__dut__.__uuf__.core_RAM128": {
+                    "location": [
+                        1905,
+                        50
+                    ],
+                    "orientation": "FS"
+                }
+            },
+            "nl": [
+                "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/hdl/gl/DFFRAM128x32.v"
+            ],
+            "spef": {
+                "min_*": [
+                    "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/timing/spef/DFFRAM128x32.min.spef"
+                ],
+                "nom_*": [
+                    "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/timing/spef/DFFRAM128x32.nom.spef"
+                ],
+                "max_*": [
+                    "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/timing/spef/DFFRAM128x32.max.spef"
+                ]
+            },
+            "lib": {
+                "*": [
+                    "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM128x32/ff/DFFRAM128x32.nom.lib"
+                ]
+            },
+            "spice": [],
+            "sdf": {},
+            "json_h": null
+        },
+        "DFFRAM256x32": {
+            "gds": [
+                "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/layout/gds/DFFRAM256x32.gds.gz"
+            ],
+            "lef": [
+                "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/layout/lef/DFFRAM256x32.lef"
+            ],
+            "instances": {
+                "__dut__.__uuf__.core_RAM256": {
+                    "location": [
+                        50,
+                        50
+                    ],
+                    "orientation": "FS"
+                }
+            },
+            "nl": [
+                "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/hdl/gl/DFFRAM256x32.v"
+            ],
+            "spef": {
+                "min_*": [
+                    "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/timing/spef/DFFRAM256x32.min.spef"
+                ],
+                "nom_*": [
+                    "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/timing/spef/DFFRAM256x32.nom.spef"
+                ],
+                "max_*": [
+                    "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/timing/spef/DFFRAM256x32.max.spef"
+                ]
+            },
+            "lib": {
+                "*": [
+                    "/home/hosni/caravel-3/caravel_mgmt_soc_litex/dependencies/OL-DFFRAM/timing/pt-etm/DFFRAM256x32/ff/DFFRAM256x32.nom.lib"
+                ]
+            },
+            "spice": [],
+            "sdf": {},
+            "json_h": null
+        }
+    },
+    "EXTRA_LEFS": null,
+    "EXTRA_VERILOG_MODELS": null,
+    "EXTRA_SPICE_MODELS": null,
+    "EXTRA_LIBS": null,
+    "EXTRA_GDS_FILES": null,
+    "FP_CONTEXT_DEF": null,
+    "FP_CONTEXT_LEF": null,
+    "FP_PADFRAME_CFG": null,
+    "GRT_OBS": null,
+    "LVS_INSERT_POWER_PINS": true,
+    "RUN_CVC": true,
+    "LEC_ENABLE": false,
+    "CHECK_ASSIGN_STATEMENTS": false,
+    "FALLBACK_SDC_FILE": "/nix/store/kgp7f9978zh02m58g6vcxsw5xj2n5ydj-python3-3.11.6-env/lib/python3.11/site-packages/openlane/scripts/base.sdc",
+    "PDN_CONNECT_MACROS_TO_GRID": true,
+    "PDN_MACRO_CONNECTIONS": [
+        ".*RAM.* VPWR VGND VPWR VGND"
+    ],
+    "PDN_ENABLE_GLOBAL_CONNECTIONS": true,
+    "PNR_SDC_FILE": "/home/hosni/caravel-3/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/base.sdc",
+    "STA_MACRO_PRIORITIZE_NL": true,
+    "SIGNOFF_SDC_FILE": "/home/hosni/caravel-3/caravel_mgmt_soc_litex/openlane/mgmt_core_wrapper/signoff.sdc",
+    "meta": {
+        "openlane_version": "2.0.0b16",
+        "step": "OpenROAD.STAPostPNR"
+    }
+}

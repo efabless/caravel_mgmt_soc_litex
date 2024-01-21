@@ -1,7 +1,7 @@
 if {$::env(MODE) != "TEST"} {
     ## MASTER CLOCKS
     create_clock [get_ports core_clk]  -name core_clk  -period 25
-    set_clock_uncertainty 0.300 [all_clocks]
+    set_clock_uncertainty 0.100 [all_clocks]
     set_propagated_clock [all_clocks]
 
     ## FALSE PATHS
@@ -36,7 +36,7 @@ if {$::env(MODE) != "TEST"} {
 
     ## PADFRAME INPUTS
     set padframe_input_delay 3 
-    set_input_delay $padframe_input_delay  -clock [get_clocks core_clk] [get_ports gpio_in_pad]
+    set_input_delay 2.8  -clock [get_clocks core_clk] [get_ports gpio_in_pad]
 
     ## OUTPUT DELAYS
     #set_output_delay $output_delay_value  -clock [get_clocks core_clk] [all_outputs]

@@ -1,0 +1,13 @@
+
+===========================================================================
+Clock Skew (Hold)
+============================================================================
+======================= min_ff_n40C_1v95 Corner ===================================
+
+Clock core_clk
+Latency      CRPR       Skew
+__dut__.__uuf__.core_VexRiscv_dBus_cmd_rData_data_reg_6_/CLK ^
+1.819594
+__dut__.__uuf__.core_RAM128/RAM.SLICE_16[4].RAM16.SLICE[0].RAM8.WORD[5].W.BYTE[0].B.BIT[6].genblk1.STORAGE/GATE v
+3.119880   -0.114235    -1.414521
+

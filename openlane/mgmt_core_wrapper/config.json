@@ -9,7 +9,6 @@
 			"Odb.SetPowerConnections",
 			"Odb.ManualMacroPlacement",
 			"OpenROAD.TapEndcapInsertion",
-			"OpenROAD.GlobalPlacementSkipIO",
 			"OpenROAD.IOPlacement",
 			"Odb.CustomIOPlacement",
 			"OpenROAD.GlobalPlacement",
@@ -65,7 +64,7 @@
 	"MAX_FANOUT_CONSTRAINT": 14,
 	"FP_PIN_ORDER_CFG": "dir::/pin_order.cfg",
 	"FP_SIZING": "absolute",
-	"DIE_AREA": [0, 0, 2620, 820],
+	"DIE_AREA": [0, 0, 2500, 720],
 	"MACROS": {
 		"DFFRAM128x32": {
 			"gds": [
@@ -76,7 +75,7 @@
 			],
 			"instances": {
 				"__dut__.__uuf__.core_RAM128": {
-					"location": [1975, 50],
+					"location": [1905, 50],
 					"orientation": "FS"
 				}
 			},
@@ -144,7 +143,7 @@
 	"FP_PDN_CORE_RING_VWIDTH": 1.6,
 	"PL_RESIZER_DESIGN_OPTIMIZATIONS": true,
 	"PL_RESIZER_TIMING_OPTIMIZATIONS": true,
-	"PL_RESIZER_HOLD_SLACK_MARGIN": 0.1,
+	"PL_RESIZER_HOLD_SLACK_MARGIN": 0.15,
 	"DESIGN_REPAIR_MAX_SLEW_PCT": 10,
 	"DESIGN_REPAIR_MAX_CAP_PCT": 10,
 	"GRT_ALLOW_CONGESTION": true,
@@ -166,7 +165,7 @@
 	"RT_CLOCK_MIN_LAYER": "met3",
 	"DRT_THREADS": 24,
 	"GRT_ADJUSTMENT": 0.02,
-	"PL_TARGET_DENSITY_PCT": 32,
+	"PL_TARGET_DENSITY_PCT": 45,
 	"PDN_MACRO_CONNECTIONS": [
 		".*RAM.* VPWR VGND VPWR VGND"
 	],

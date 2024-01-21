@@ -1,0 +1,13 @@
+
+===========================================================================
+Clock Skew (Setup)
+============================================================================
+======================= min_ff_n40C_1v95 Corner ===================================
+
+Clock core_clk
+Latency      CRPR       Skew
+__dut__.__uuf__.core_RAM128/RAM.SLICE_16[7].RAM16.Do0_REG.OUTREG_BYTE[3].Do_FF[1]/CLK ^
+2.922151
+__dut__.__uuf__.core_VexRiscv_iBusWishbone_DAT_MISO_regNext_reg_25_/CLK ^
+1.820876   -0.114235    0.987040
+
