@@ -1,0 +1,25 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: Publish release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Create tarball
+        run: |
+          tar -czf ${{ github.ref_name }}.tar.gz mag def lef openlane/Makefile signoff/*/openlane-signoff/spef verilog LICENSE Makefile
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: ${{ github.ref_name }}.tar.gz
+          tag: ${{ github.ref }}
+          overwrite: true
