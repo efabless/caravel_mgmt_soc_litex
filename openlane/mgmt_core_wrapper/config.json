@@ -64,7 +64,7 @@
 	"MAX_FANOUT_CONSTRAINT": 14,
 	"FP_PIN_ORDER_CFG": "dir::/pin_order.cfg",
 	"FP_SIZING": "absolute",
-	"DIE_AREA": [0, 0, 2500, 720],
+	"DIE_AREA": [0, 0, 2520, 740],
 	"MACROS": {
 		"DFFRAM128x32": {
 			"gds": [
@@ -75,7 +75,7 @@
 			],
 			"instances": {
 				"__dut__.__uuf__.core_RAM128": {
-					"location": [1905, 50],
+					"location": [1925, 50],
 					"orientation": "FS"
 				}
 			},
@@ -134,6 +134,7 @@
 		}
 	},
 	"PL_TIME_DRIVEN": true,
+	"PL_WIRE_LENGTH_COEF": 0.10,
 	"FP_PDN_CORE_RING": true,
 	"FP_PDN_VPITCH": 50,
 	"FP_PDN_HPITCH": 50,
@@ -151,9 +152,9 @@
 	"GLB_RESIZER_TIMING_OPTIMIZATIONS": true,
 	"GRT_RESIZER_HOLD_SLACK_MARGIN": 0.05,
 	"GRT_RESIZER_SETUP_SLACK_MARGIN": 0.2,
-	"DESIGN_REPAIR_MAX_WIRE_LENGTH": 1100,
+	"DESIGN_REPAIR_MAX_WIRE_LENGTH": 700,
 	"GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH": 1100,
-	"GRT_ANTENNA_ITERS": 50,
+	"GRT_ANTENNA_ITERS": 3,
 	"VERILOG_FILES": [
 		"dir::/mgmt_core_wrapper.tap.v"
 	],
@@ -161,11 +162,11 @@
 	"CTS_MAX_CAP": 0.25,
 	"CTS_CLK_MAX_WIRE_LENGTH": 800,
 	"CTS_SINK_CLUSTERING_SIZE": 30,
-    "CTS_SINK_CLUSTERING_MAX_DIAMETER": 140,
+	"CTS_SINK_CLUSTERING_MAX_DIAMETER": 140,
 	"RT_CLOCK_MIN_LAYER": "met3",
 	"DRT_THREADS": 24,
-	"GRT_ADJUSTMENT": 0.02,
-	"PL_TARGET_DENSITY_PCT": 45,
+	"GRT_ADJUSTMENT": 0.05,
+	"PL_TARGET_DENSITY_PCT": 42,
 	"PDN_MACRO_CONNECTIONS": [
 		".*RAM.* VPWR VGND VPWR VGND"
 	],

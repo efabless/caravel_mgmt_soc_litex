@@ -95,12 +95,12 @@ set_load $cap_load [all_outputs]
 # set_clock_transition $::env(SYNTH_CLOCK_TRANSITION) [get_clocks core_clk]
 set_driving_cell -lib_cell sky130_fd_sc_hd__clkbuf_4 -pin {X} [all_inputs]
 
-set derate 0.05
+set derate 0.075
 puts "\[INFO\]: Setting timing derate to: [expr {$derate * 100}] %"
 set_timing_derate -early [expr {1 - $derate}]
 set_timing_derate -late [expr {1 + $derate}]
 
-set_max_transition 0.75 [current_design]
+set_max_transition 0.700 [current_design]
 
 puts "\[INFO\]: Mode: $::env(MODE) operation"
 if {$::env(MODE) == "TEST"} {
