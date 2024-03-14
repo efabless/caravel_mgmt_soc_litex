@@ -1,4 +1,0 @@
-'DIODE_ON_PORTS' is set to 'none': skipping…
-'GPL_CELL_PADDING' is set to 0. This step may cause overlap failures.
-Threshold for Threshold-surpassing long wires is not set. The checker will be skipped.
-VSRC_LOC_FILES was not given a value, which may make the results of IR drop analysis inaccurate. If you are not integrating a top-level chip for manufacture, you may ignore this warning, otherwise, see the documentation for VSRC_LOC_FILES.

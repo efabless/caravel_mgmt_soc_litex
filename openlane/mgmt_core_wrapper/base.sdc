@@ -93,7 +93,7 @@ set_load $cap_load [all_outputs]
 # set ::env(SYNTH_CLOCK_TRANSITION) 0.5
 # puts "\[INFO\]: Setting clock transition to: $::env(SYNTH_CLOCK_TRANSITION)"
 # set_clock_transition $::env(SYNTH_CLOCK_TRANSITION) [get_clocks core_clk]
-set_driving_cell -lib_cell sky130_fd_sc_hd__clkbuf_4 -pin {X} [all_inputs]
+set_driving_cell -lib_cell sky130_fd_sc_hd__clkbuf_2 -pin {X} [all_inputs]
 
 set derate 0.075
 puts "\[INFO\]: Setting timing derate to: [expr {$derate * 100}] %"

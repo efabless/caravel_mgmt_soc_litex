@@ -158,6 +158,7 @@
 	"VERILOG_FILES": [
 		"dir::/mgmt_core_wrapper.tap.v"
 	],
+	"DEFAULT_CORNER": "max_ss_100C_1v60",
 	"SYNTH_ELABORATE_ONLY": true,
 	"CTS_MAX_CAP": 0.25,
 	"CTS_CLK_MAX_WIRE_LENGTH": 800,
