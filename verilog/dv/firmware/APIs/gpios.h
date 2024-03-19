@@ -19,10 +19,10 @@ void GPIOs_configureAll(enum gpio_mode config){
     reg_mprj_io_34 = config;
     reg_mprj_io_33 = config;
     reg_mprj_io_32 = config;
-    reg_mprj_io_31 = config;
-    reg_mprj_io_30 = config;
-    reg_mprj_io_29 = config;
-    reg_mprj_io_28 = config;
+    // reg_mprj_io_31 = config;
+    // reg_mprj_io_30 = config;
+    // reg_mprj_io_29 = config;
+    // reg_mprj_io_28 = config;
     reg_mprj_io_27 = config;
     reg_mprj_io_26 = config;
     reg_mprj_io_25 = config;
