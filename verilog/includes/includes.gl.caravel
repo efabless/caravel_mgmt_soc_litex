@@ -10,9 +10,11 @@
 ###########################################################
 
 ## DFFRAM Full GL
-#-v $(VERILOG_PATH)/gl/DFFRAM.v
--v $(VERILOG_PATH)/gl/RAM128.v
--v $(VERILOG_PATH)/gl/RAM256.v
+-v $(VERILOG_PATH)/gl/OL-DFFRAM/hdl/gl/DFFRAM128x32.v
+-v $(VERILOG_PATH)/gl/OL-DFFRAM/hdl/gl/DFFRAM256x32.v
+## mgmt
+-v $(VERILOG_PATH)/gl/mgmt_core_wrapper.v
+
 
 ###########################################################
 ## Must stay in RTL regardless of the type of simulation
@@ -28,6 +30,7 @@
 ## These blocks are either synthesized or STD cell based 
 ## Manually designed blocks
 ###########################################################							     
+-v $(CARAVEL_PATH)/gl/digital_locked_loop.v 
 -v $(CARAVEL_PATH)/gl/mprj_logic_high.v 	     
 -v $(CARAVEL_PATH)/gl/mprj2_logic_high.v	     
 -v $(CARAVEL_PATH)/gl/gpio_defaults_block.v	     
@@ -88,4 +91,5 @@
 -v $(CARAVEL_PATH)/rtl/caravan_motto.v 		     
 -v $(CARAVEL_PATH)/gl/open_source.v 		     
 -v $(CARAVEL_PATH)/gl/user_id_textblock.v 
+-v $(CARAVEL_PATH)/gl/mprj_vias.v 
 
