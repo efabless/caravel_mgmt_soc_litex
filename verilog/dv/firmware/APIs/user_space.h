@@ -91,7 +91,7 @@ inline volatile int USER_readWord(int offset){
  */
 inline void USER_writeHalfWord(volatile short data,volatile int offset,bool is_first_word){
     volatile int half_word_offset = offset *2 + is_first_word;
-    *(((volatile int *) USER_SPACE_ADDR)+half_word_offset) = data;
+    *(((volatile short *) USER_SPACE_ADDR)+half_word_offset) = data;
     
 }
 /**
@@ -116,7 +116,7 @@ inline void USER_writeHalfWord(volatile short data,volatile int offset,bool is_f
  */
 inline volatile short USER_readHalfWord(volatile int offset,bool is_first_word){
     volatile int half_word_offset = offset *2 + is_first_word;
-    return *(((volatile int *) USER_SPACE_ADDR)+half_word_offset);
+    return *(((volatile short *) USER_SPACE_ADDR)+half_word_offset);
 }
 /**
  * Write byte  at user address space 32 bit register
@@ -143,7 +143,7 @@ inline void USER_writeByte(volatile char data,volatile int offset,volatile char 
     if (byte_num > 3) 
         byte_num =0; 
     volatile int byte_offset = offset *4 + byte_num;
-    *(((volatile int *) USER_SPACE_ADDR)+byte_offset) = data;
+    *(((volatile char *) USER_SPACE_ADDR)+byte_offset) = data;
 }
 /**
  * Read byte  at user address space 32 bit register
@@ -169,7 +169,7 @@ volatile char USER_readByte( volatile int offset,volatile char byte_num){
     if (byte_num > 3) 
         byte_num =0; 
     volatile int byte_offset = offset *4 + byte_num;
-    return *(((volatile int *) USER_SPACE_ADDR)+byte_offset);
+    return *(((volatile char *) USER_SPACE_ADDR)+byte_offset);
 }
 
 #endif // USER_ADDR_SPACE_C_HEADER_FILE
