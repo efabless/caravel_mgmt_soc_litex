@@ -142,11 +142,6 @@ extern uint32_t flashio_worker_end;
 #define reg_wb_enable	  	(*(volatile uint32_t*) CSR_MPRJ_WB_IENA_OUT_ADDR)
 #define reg_user_irq_enable	(*(volatile uint32_t*) CSR_USER_IRQ_ENA_OUT_ADDR)
 
-// Debug reg DEBUG_ON
-#define reg_debug_1 (*(volatile uint32_t*)0x300FFFF8)
-#define reg_debug_2 (*(volatile uint32_t*)0x300FFFFC)
-
-
 // Flash Control SPI Configuration (2D00_0000)
 //#define reg_spictrl (*(volatile uint32_t*)0x2d000000)
 
