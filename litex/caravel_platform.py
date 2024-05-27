@@ -213,7 +213,6 @@ class Platform(GenericPlatform):
     verilog._print_combinatorial_logic_sim = _new_print_combinatorial_logic_sim
 
     def _new_print_module(f, ios, name, ns, attr_translate):
-        sigs = verilog.list_signals(f) | verilog.list_special_ios(f, ins=True, outs=True, inouts=True)
         special_outs = verilog.list_special_ios(f, ins=False, outs=True, inouts=True)
         inouts = verilog.list_special_ios(f, ins=False, outs=False, inouts=True)
         targets = verilog.list_targets(f) | special_outs
@@ -247,6 +246,15 @@ class Platform(GenericPlatform):
                 sig.direction = "input"
                 r += "\tinput wire " + verilog._print_signal(ns, sig)
         r += "\n);\n\n"
+        return r
+
+    verilog._print_module = _new_print_module
+
+    def _new_print_signals(f, ios, name, ns, attr_translate):
+        sigs = verilog.list_signals(f) | verilog.list_special_ios(f, ins=True, outs=True, inouts=True)
+        special_outs = verilog.list_special_ios(f, ins=False, outs=True, inouts=True)
+        wires = verilog._list_comb_wires(f) | special_outs
+        r = ""
         for sig in sorted(sigs - ios, key=lambda x: x.duid):
             attr = verilog._print_attribute(sig.attr, attr_translate)
             if attr:
@@ -258,4 +266,4 @@ class Platform(GenericPlatform):
         r += "\n"
         return r
 
-    verilog._print_module = _new_print_module
+    verilog._print_signals = _new_print_signals

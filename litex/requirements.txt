@@ -11,3 +11,4 @@ git+https://github.com/enjoy-digital/liteeth
 git+https://github.com/enjoy-digital/liteiclink
 git+https://github.com/enjoy-digital/litescope
 git+https://github.com/litex-hub/pythondata-misc-tapcfg.git
+git+https://github.com/litex-hub/pythondata-software-compiler_rt.git
