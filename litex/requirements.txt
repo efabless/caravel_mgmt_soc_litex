@@ -1,13 +1,15 @@
-git+https://github.com/enjoy-digital/litex.git
-git+https://github.com/litex-hub/litespi.git
-git+https://github.com/litex-hub/pythondata-cpu-vexriscv.git
-git+https://github.com/litex-hub/pythondata-software-picolibc.git
--e git+http://github.com/m-labs/migen.git#egg=migen
-git+https://github.com/litex-hub/pythondata-cpu-picorv32.git
-git+https://github.com/litex-hub/pythondata-cpu-ibex.git
+packaging==23.0
+-e ./third_party/litex
+-e ./third_party/litespi
+-e ./third_party/pythondata-cpu-vexriscv
+-e ./third_party/pythondata-software-picolibc
+-e ./third_party/pythondata-software-compiler_rt
+-e ./third_party/migen
+-e ./third_party/pythondata-cpu-picorv32
+-e ./third_party/pythondata-cpu-ibex
 #added to support sim_example
-git+https://github.com/enjoy-digital/litedram
-git+https://github.com/enjoy-digital/liteeth
-git+https://github.com/enjoy-digital/liteiclink
-git+https://github.com/enjoy-digital/litescope
-git+https://github.com/litex-hub/pythondata-misc-tapcfg.git
+-e ./third_party/litedram
+-e ./third_party/liteeth
+-e ./third_party/liteiclink
+-e ./third_party/litescope
+-e ./third_party/pythondata-misc-tapcfg

@@ -10,7 +10,6 @@
         dbg_uart_incr <= 1'd0;
         dbg_uart_address <= 32'd0;
         dbg_uart_data <= 32'd0;
-        dbg_uart_bytes_count <= 2'd0;
         dbg_uart_words_count <= 8'd0;
         dbg_uart_count <= 20'd1000000;
 	    // ******

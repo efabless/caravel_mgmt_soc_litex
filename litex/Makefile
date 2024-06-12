@@ -13,16 +13,33 @@
 # limitations under the License.
 #
 # SPDX-License-Identifier: Apache-2.0
+PYTHON ?= python3
+IN_ENV = if [ -e env/bin/activate ]; then . env/bin/activate; fi;
+ROOT_DIR:=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
+LITEX_BUILD_DIR = $(ROOT_DIR)/build/caravel_platform
+MGMT_SOC_DIR = $(ROOT_DIR)/../verilog
 
-all: mgmt_soc
+all: update_mgmt_soc_gateware generate_mgmt_soc_headers
 
-mgmt_soc: caravel.py
-	python3 caravel.py
-	python3 modify_verilog.py
-	cp build/caravel_platform/gateware/mgmt_core_modified.v ../verilog/rtl/mgmt_core.v
-	cp -R build/caravel_platform/software/include/generated ../verilog/dv/.
+update_mgmt_soc_gateware: $(MGMT_SOC_DIR)/rtl/mgmt_core.v
+generate_mgmt_soc_headers: $(MGMT_SOC_DIR)/dv/generated/variables.mak
 
-setup:
-	pip3 install -r requirements.txt
+$(MGMT_SOC_DIR)/rtl/mgmt_core.v: $(LITEX_BUILD_DIR)/gateware/mgmt_core.v
+	$(IN_ENV) python modify_verilog.py $< $@
 
-.PHONY: clean hex all
+$(MGMT_SOC_DIR)/dv/generated/variables.mak: $(LITEX_BUILD_DIR)/software/include/generated/variables.mak
+	cp -R $(LITEX_BUILD_DIR)/software/include/generated $(MGMT_SOC_DIR)/dv/.
+
+$(LITEX_BUILD_DIR)/gateware/mgmt_core.v $(LITEX_BUILD_DIR)/software/include/generated/variables.mak: caravel.py | env
+	$(IN_ENV) python caravel.py
+
+setup: env
+
+env:
+	@$(PYTHON) -mvenv env
+	@$(IN_ENV) pip3 install -r requirements.txt
+
+clean:
+	rm -rf build env __pycache__
+
+.PHONY: clean all

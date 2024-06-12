@@ -1,5 +1,9 @@
+*.swp
+*.swo
 /.idea/
 /litex/build/
+/litex/env/
+/litex/__pycache__
 ./openlane/mgmt_core/runs/
 /openlane/mgmt_core_wrapper/runs/
 *.hex*
