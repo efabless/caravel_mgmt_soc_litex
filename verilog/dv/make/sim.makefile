@@ -31,7 +31,7 @@ hex:  ${BLOCKS:=.hex}
 #.SUFFIXES:
 
 ##############################################################################
-# Comiple firmeware
+# Compile firmware
 ##############################################################################
 %.elf: %.c $(LINKER_SCRIPT) $(SOURCE_FILES)
 	${GCC_PATH}/${GCC_PREFIX}-gcc -g \
@@ -70,7 +70,8 @@ ifeq ($(SIM),RTL)
     else
 		iverilog -Ttyp -DFUNCTIONAL -DSIM -DUSE_POWER_PINS -DUNIT_DELAY=#1 \
 		-f $(VERILOG_PATH)/includes/includes.rtl.$(CONFIG) \
-		-o $@ $(CARAVEL_PATH)/rtl/__user_project_wrapper.v $<
+		-o $@ $(CARAVEL_PATH)/rtl/__user_project_wrapper.v \
+		      $(CARAVEL_PATH)/rtl/debug_regs.v $<
     endif
 endif 
 
