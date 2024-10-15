@@ -13,7 +13,7 @@ void isr(void);
 
 uint16_t flag;
 
-void isr(void)
+void __attribute__((section(".dff_text"))) isr(void)
 {
 //	__attribute__((unused)) unsigned int irqs;
 //

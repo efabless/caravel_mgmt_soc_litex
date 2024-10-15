@@ -12,6 +12,8 @@ _start:
   nop
   nop
 
+.section .dff_text, "ax"  /* Code section in dff */
+
 .global  trap_entry
 trap_entry:
   sw x1,  - 1*4(sp)
@@ -50,13 +52,27 @@ trap_entry:
   lw x31,  0*4(sp)
   addi sp,sp,16*4
   mret
-  .text
+.section .text, "ax"       /* Now we are back in the standard .text section */
 
 
 crt_init:
   la sp, _fstack
   la a0, trap_entry
   csrw mtvec, a0
+
+# Move dff code to RAM
+init_dff_code:
+	la a0, __dff_text_lma_start__
+	la a1, __dff_text_vma_start__
+	la a2, __dff_text_vma_end__
+	bge a1, a2, end_init_dff_code
+loop_init_dff_code:
+	lw a3, 0(a0)
+	sw a3, 0(a1)
+	addi a0, a0, 4
+	addi a1, a1, 4
+	blt a1, a2, loop_init_dff_code
+end_init_dff_code:
 
 data_init:
   la a0, _fdata

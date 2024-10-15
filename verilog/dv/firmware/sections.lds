@@ -42,7 +42,18 @@ SECTIONS
 		. = ALIGN(8);
 		_erodata = .;
 	} > flash
+	
+	/* Custom section for code to be executed from soc dff*/
+    .dff_text () :
+    {
+		. = ALIGN(8);
+        __dff_text_lma_start__ = LOADADDR(.dff_text);
+        __dff_text_vma_start__ = .;
+        *(.dff_text*)
+        __dff_text_vma_end__ = .;
 
+    } > dff AT > flash
+	
 	.data :
 	{
 		. = ALIGN(8);
