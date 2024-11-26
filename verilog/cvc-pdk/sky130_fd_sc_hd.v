@@ -127875,5 +127875,29 @@ endmodule
 `default_nettype wire
 `endif  // SKY130_FD_SC_HD__XOR3_4_V
 
+`ifdef USE_POWER_PINS
 
-//--------EOF---------
+`celldefine
+module sky130_ef_sc_hd__newfill_12 (
+    VPWR,
+    VGND,
+    VPB ,
+    VNB
+);
+
+    input VPWR;
+    input VGND;
+    input VPB ;
+    input VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+`else // USE_POWER_PINS
+`celldefine
+module sky130_ef_sc_hd__newfill_12 ();
+    // No contents.
+endmodule
+`endcelldefine
+`endif // USE_POWER_PINS
+
+//--------EOF---------`
