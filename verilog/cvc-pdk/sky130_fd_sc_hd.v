@@ -114772,7 +114772,7 @@ endmodule
 
 // Import user defined primitives.
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfrbp (
     Q      ,
     Q_N    ,
@@ -114813,7 +114813,7 @@ module sky130_fd_sc_hd__sdfrbp (
     not                                             not1      (Q_N    , buf_Q                            );
 
 endmodule
-// `endcelldefine
+`endcelldefine
 
 `default_nettype wire
 `endif  // SKY130_FD_SC_HD__SDFRBP_FUNCTIONAL_PP_V
@@ -115134,7 +115134,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfrbp_1 (
     Q      ,
     Q_N    ,
@@ -115214,7 +115214,7 @@ $width ( negedge RESET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
@@ -115343,7 +115343,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfrbp_2 (
     Q      ,
     Q_N    ,
@@ -115423,7 +115423,7 @@ $width ( negedge RESET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
@@ -116176,7 +116176,7 @@ endmodule
 
 // Import user defined primitives.
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfrtp (
     Q      ,
     CLK    ,
@@ -116214,7 +116214,7 @@ module sky130_fd_sc_hd__sdfrtp (
     buf                                             buf0      (Q      , buf_Q                            );
 
 endmodule
-// `endcelldefine
+`endcelldefine
 
 `default_nettype wire
 `endif  // SKY130_FD_SC_HD__SDFRTP_FUNCTIONAL_PP_V
@@ -116526,7 +116526,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfrtp_1 (
     Q      ,
     CLK    ,
@@ -116604,7 +116604,7 @@ $recovery (posedge RESET_B, posedge CLK,  0:0:0, notifier);
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
@@ -116732,7 +116732,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfrtp_2 (
     Q      ,
     CLK    ,
@@ -116808,7 +116808,7 @@ $width ( negedge RESET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
@@ -116933,7 +116933,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfrtp_4 (
     Q      ,
     CLK    ,
@@ -117008,7 +117008,7 @@ $width ( negedge RESET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
@@ -117981,7 +117981,7 @@ endmodule
 
 // Import user defined primitives.
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfstp (
     Q    ,
     CLK  ,
@@ -118019,7 +118019,7 @@ module sky130_fd_sc_hd__sdfstp (
     buf                                             buf0      (Q      , buf_Q                          );
 
 endmodule
-// `endcelldefine
+`endcelldefine
 
 `default_nettype wire
 `endif  // SKY130_FD_SC_HD__SDFSTP_FUNCTIONAL_PP_V
@@ -118331,7 +118331,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfstp_1 (
     Q    ,
     CLK  ,
@@ -118406,7 +118406,7 @@ $width ( negedge SET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
@@ -118531,7 +118531,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfstp_2 (
     Q    ,
     CLK  ,
@@ -118607,7 +118607,7 @@ $width ( negedge SET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
@@ -118732,7 +118732,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfstp_4 (
     Q    ,
     CLK  ,
@@ -118807,7 +118807,7 @@ $width ( negedge SET_B &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
@@ -119714,7 +119714,7 @@ endmodule
 
 // Import user defined primitives.
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfxtp (
     Q   ,
     CLK ,
@@ -119748,7 +119748,7 @@ module sky130_fd_sc_hd__sdfxtp (
     buf                                            buf0      (Q      , buf_Q                     );
 
 endmodule
-// `endcelldefine
+`endcelldefine
 
 `default_nettype wire
 `endif  // SKY130_FD_SC_HD__SDFXTP_FUNCTIONAL_PP_V
@@ -120034,7 +120034,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfxtp_1 (
     Q   ,
     CLK ,
@@ -120103,7 +120103,7 @@ $width ( negedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
@@ -120220,7 +120220,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfxtp_2 (
     Q   ,
     CLK ,
@@ -120289,7 +120289,7 @@ $width ( negedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
@@ -120407,7 +120407,7 @@ endmodule
 `ifdef USE_POWER_PINS
 /*********************************************************/
 
-// `celldefine
+`celldefine
 module sky130_fd_sc_hd__sdfxtp_4 (
     Q   ,
     CLK ,
@@ -120476,7 +120476,7 @@ $width ( negedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
 endspecify
 `endif
 endmodule
-// `endcelldefine
+`endcelldefine
 
 /*********************************************************/
 `else // If not USE_POWER_PINS
