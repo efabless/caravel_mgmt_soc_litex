@@ -20,7 +20,10 @@
 // --------------------------------------------------------
 
 /*
- * GPIO Pin test pull-up and pull-down modes.
+ * GPIO Pin test pull-up and pull-down modes on caravan.
+ * This is a modification of the "pullupdown" testbench,
+ * which checks that the pins that have the GPIOs
+ * removed on caravan are always in an unknown state.
  */
 
 void main()
