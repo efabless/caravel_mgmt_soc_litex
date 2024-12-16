@@ -36384,7 +36384,8 @@ module sky130_fd_sc_hd__dfbbn_2 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
-wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, notifier, D_delayed, CONDB, SETB_delayed; 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, SETB_delayed; 
+reg notifier;
 
 specify
 ( negedge RESET_B => ( Q +: RESET_B ) ) = ( 0:0:0 ) ;   // delay is tfall
@@ -37707,7 +37708,7 @@ module sky130_fd_sc_hd__dfrbp_2 (
 
 wire RESETB_delayed; 
 wire AWAKE;
-wire notifier;
+reg notifier;
 wire D_delayed;
 wire CLK_delayed;
 wire COND1, COND0; 
@@ -38244,7 +38245,8 @@ module sky130_fd_sc_hd__dfrtn_1 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
-wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, notifier, D_delayed; 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed; 
+reg notifier;
 
 specify
 ( negedge RESET_B => ( Q +: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
@@ -39127,6 +39129,9 @@ module sky130_fd_sc_hd__dfrtp_4 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLK_delayed, D_delayed; 
+reg notifier;
+
 specify
 ( negedge RESET_B => ( Q +: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
 ( posedge CLK => ( Q : CLK ) ) = ( 0:0:0 , 0:0:0 ) ; // delays are tris , tfall
@@ -39662,6 +39667,9 @@ module sky130_fd_sc_hd__dfsbp_1 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, SETB_delayed, CLK_delayed, D_delayed; 
+reg notifier;
+
 specify
 ( negedge SET_B => ( Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
 ( negedge SET_B => ( Q_N +: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
@@ -39846,6 +39854,9 @@ module sky130_fd_sc_hd__dfsbp_2 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+
+wire AWAKE, COND0, COND1, RESETB_delayed, CLK_delayed, D_delayed, SETB_delayed; 
+reg notifier;
 
 specify
 ( negedge SET_B => ( Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
@@ -40364,6 +40375,9 @@ module sky130_fd_sc_hd__dfstp_1 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, SETB_delayed, CLK_delayed, D_delayed; 
+reg notifier;
+
 specify
 ( negedge SET_B => ( Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
 ( posedge CLK => ( Q : CLK ) ) = ( 0:0:0 , 0:0:0 ) ; // delays are tris , tfall
@@ -40543,6 +40557,9 @@ module sky130_fd_sc_hd__dfstp_2 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, SETB_delayed, CLK_delayed, D_delayed; 
+reg notifier;
+
 specify
 ( negedge SET_B => ( Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
 ( posedge CLK => ( Q : CLK ) ) = ( 0:0:0 , 0:0:0 ) ; // delays are tris , tfall
@@ -40721,6 +40738,9 @@ module sky130_fd_sc_hd__dfstp_4 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+
+wire AWAKE, COND0, COND1, RESETB_delayed, SETB_delayed, CLK_delayed, D_delayed; 
+reg notifier;
 
 specify
 ( negedge SET_B => ( Q -: SET_B ) ) = ( 0:0:0 ) ;  // delay is tris
@@ -41221,6 +41241,9 @@ module sky130_fd_sc_hd__dfxbp_1 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLK_delayed, D_delayed; 
+reg notifier;
+
 specify
 ( posedge CLK => ( Q : CLK ) ) = ( 0:0:0 , 0:0:0 ) ; // delays are tris , tfall
 ( posedge CLK => ( Q_N : CLK ) ) = ( 0:0:0 , 0:0:0 ) ; // delays are tris , tfall
@@ -41392,6 +41415,10 @@ module sky130_fd_sc_hd__dfxbp_2 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+
+wire AWAKE, COND0, COND1, RESETB_delayed, CLK_delayed, D_delayed, CONDB, GATEN_delayed, SETB_delayed; 
+reg notifier;
+
 
 specify
 ( posedge CLK => ( Q : CLK ) ) = ( 0:0:0 , 0:0:0 ) ; // delays are tris , tfall
@@ -41869,6 +41896,9 @@ module sky130_fd_sc_hd__dfxtp_1 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLK_delayed, D_delayed; 
+reg notifier;
+
 specify
 ( posedge CLK => ( Q : CLK ) ) = ( 0:0:0 , 0:0:0 ) ; // delays are tris , tfall
 $width ( posedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
@@ -42032,6 +42062,9 @@ module sky130_fd_sc_hd__dfxtp_2 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLK_delayed, D_delayed; 
+reg notifier;
+
 specify
 ( posedge CLK => ( Q : CLK ) ) = ( 0:0:0 , 0:0:0 ) ; // delays are tris , tfall
 $width ( posedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
@@ -42194,6 +42227,10 @@ module sky130_fd_sc_hd__dfxtp_4 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+
+wire AWAKE, COND0, COND1, RESETB_delayed, CLK_delayed, D_delayed, CONDB, GATEN_delayed, SETB_delayed; 
+reg notifier;
+
 
 specify
 ( posedge CLK => ( Q : CLK ) ) = ( 0:0:0 , 0:0:0 ) ; // delays are tris , tfall
@@ -43022,6 +43059,10 @@ module sky130_fd_sc_hd__dlclkp_1 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, CLK_delayed, GATE_delayed, SETB_delayed; 
+reg notifier;
+
+
 specify
 ( CLK +=> GCLK ) = ( 0:0:0 , 0:0:0 ) ;                         // delays are tris , tfall
 $width ( negedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
@@ -43184,6 +43225,9 @@ module sky130_fd_sc_hd__dlclkp_2 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, GATE_delayed, CLK_delayed, SETB_delayed; 
+reg notifier;
+
 specify
 ( CLK +=> GCLK ) = ( 0:0:0 , 0:0:0 ) ;                         // delays are tris , tfall
 $width ( negedge CLK &&& AWAKE , 1.0:1.0:1.0 , 0 , notifier ) ;
@@ -43344,6 +43388,9 @@ module sky130_fd_sc_hd__dlclkp_4 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+wire AWAKE, COND0, COND1, RESETB_delayed, CLK_delayed, D_delayed, CONDB, GATE_delayed, SETB_delayed; 
+reg notifier;
+
 
 specify
 ( CLK +=> GCLK ) = ( 0:0:0 , 0:0:0 ) ;                         // delays are tris , tfall
@@ -43893,6 +43940,10 @@ module sky130_fd_sc_hd__dlrbn_1 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, GATEN_delayed, SETB_delayed; 
+reg notifier;
+
+
 specify
 ( negedge RESET_B => ( Q +: RESET_B ) ) = ( 0:0:0 , 0:0:0 ) ;  // delay is tfall
 ( D +=> Q ) = ( 0:0:0 , 0:0:0 ) ;  // delays are tris , tfall
@@ -44082,6 +44133,9 @@ module sky130_fd_sc_hd__dlrbn_2 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, GATEN_delayed, SETB_delayed; 
+reg notifier;
 
 specify
 ( negedge RESET_B => ( Q +: RESET_B ) ) = ( 0:0:0 , 0:0:0 ) ;  // delay is tfall
@@ -45357,6 +45411,9 @@ module sky130_fd_sc_hd__dlrtn_1 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, GATEN_delayed, SETB_delayed; 
+reg notifier;
+
 specify
 ( negedge RESET_B => ( Q +: RESET_B ) ) = ( 0:0:0 , 0:0:0 ) ;  // delay is tfall
 ( D +=> Q ) = ( 0:0:0 , 0:0:0 ) ;  // delays are tris , tfall
@@ -45533,6 +45590,9 @@ module sky130_fd_sc_hd__dlrtn_2 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, GATEN_delayed, SETB_delayed; 
+reg notifier;
 
 specify
 ( negedge RESET_B => ( Q +: RESET_B ) ) = ( 0:0:0 , 0:0:0 ) ;  // delay is tfall
@@ -45711,7 +45771,8 @@ module sky130_fd_sc_hd__dlrtn_4 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
-
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, GATEN_delayed, SETB_delayed; 
+reg notifier;
 specify
 ( negedge RESET_B => ( Q +: RESET_B ) ) = ( 0:0:0 , 0:0:0 ) ;  // delay is tfall
 ( D +=> Q ) = ( 0:0:0 , 0:0:0 ) ;  // delays are tris , tfall
@@ -46235,6 +46296,10 @@ module sky130_fd_sc_hd__dlrtp_1 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, GATE_delayed, SETB_delayed; 
+reg notifier;
+
 
 specify
 ( negedge RESET_B => ( Q +: RESET_B ) ) = ( 0:0:0 , 0:0:0 ) ;  // delay is tfall
@@ -48281,6 +48346,9 @@ module sky130_fd_sc_hd__dlxtn_1 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, RESETB_delayed, CLK_delayed, D_delayed, CONDB, GATEN_delayed, SETB_delayed; 
+reg notifier;
+
 specify
 ( D +=> Q ) = ( 0:0:0 , 0:0:0 ) ;  // delays are tris , tfall
 ( negedge GATE_N => ( Q +: D ) ) = ( 0:0:0 , 0:0:0 ) ; // delays are tris , tfall
@@ -48444,6 +48512,10 @@ module sky130_fd_sc_hd__dlxtn_2 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, GATEN_delayed, SETB_delayed; 
+reg notifier;
+
 
 specify
 ( D +=> Q ) = ( 0:0:0 , 0:0:0 ) ;  // delays are tris , tfall
@@ -48609,6 +48681,9 @@ module sky130_fd_sc_hd__dlxtn_4 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+
+wire AWAKE, COND0, COND1, RESETB_delayed, CLKN_delayed, D_delayed, CONDB, GATEN_delayed, SETB_delayed; 
+reg notifier;
 
 specify
 ( D +=> Q ) = ( 0:0:0 , 0:0:0 ) ;  // delays are tris , tfall
@@ -66444,6 +66519,10 @@ module sky130_fd_sc_hd__lpflow_inputisolatch_1 (
  *
  * SPDX-License-Identifier: Apache-2.0
 */
+
+wire AWAKE, COND0, COND1, RESETB_delayed, CLK_delayed, D_delayed, CONDB, SLEEPB_delayed, SETB_delayed; 
+reg notifier;
+
 
 specify
 (D +=> Q ) = (0:0:0,0:0:0);  // delays are tris,tfall
@@ -113709,6 +113788,9 @@ module sky130_fd_sc_hd__sdfbbn_1 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, COND_D, COND_SCD,COND_SCE, RESETB_delayed, CLKN_delayed,SCE_delayed, SCD_delayed, D_delayed, CONDB, SETB_delayed; 
+reg notifier;
+
 specify
 ( negedge RESET_B => ( Q +: RESET_B ) ) = ( 0:0:0 ) ;   // delay is tfall
 ( negedge RESET_B => ( Q_N -: RESET_B ) ) = ( 0:0:0 ) ;  // delay is tris
@@ -114582,7 +114664,7 @@ module sky130_fd_sc_hd__sdfbbp_1 (
 */
 
 
-wire AWAKE, COND0, COND1,CONDB, COND_D, COND_SCD,COND_SCE, RESETB_delayed, CLKN_delayed,SCE_delayed,CLK_delayed, SCD_delayed, D_delayed, CONDB, SETB_delayed; 
+wire AWAKE, COND0, COND1,CONDB, COND_D, COND_SCD,COND_SCE, RESETB_delayed, CLKN_delayed,SCE_delayed,CLK_delayed, SCD_delayed, D_delayed, SETB_delayed; 
 reg notifier;
 
 specify
@@ -121331,6 +121413,8 @@ module sky130_fd_sc_hd__sdlclkp_4 (
  * SPDX-License-Identifier: Apache-2.0
 */
 
+wire AWAKE, COND0, COND1, COND2, COND3, RESETB_delayed, SETB_delayed, GATE_AWAKE, SCE_AWAKE, GATE_delayed, CLK_delayed, D_delayed, SCD_delayed, SCE_delayed; 
+reg notifier;
 specify
 ( CLK +=> GCLK ) = ( 0:0:0 , 0:0:0 ) ;                         // delays are tris , tfall
 $setuphold ( posedge CLK , posedge SCE , 0:0:0 , 0:0:0 , notifier , SCE_AWAKE , SCE_AWAKE , CLK_delayed , SCE_delayed ) ;

@@ -13,8 +13,10 @@ module RAM128 #( parameter COLS=1)
 );
     localparam A_WIDTH = 7+$clog2(COLS);
 
-    input   wire            VPWR;
-    input   wire            VGND;
+    `ifdef USE_POWER_PINS
+        input   wire            VPWR;
+        input   wire            VGND;
+    `endif
     input   wire            CLK;
     input   wire    [3:0]   WE0;
     input   wire            EN0;

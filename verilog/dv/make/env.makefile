@@ -29,7 +29,7 @@ export FIRMWARE_PATH = $(CORE_VERILOG_PATH)/dv/firmware
 
 export CARAVEL_VERILOG_PATH ?=  $(DESIGNS)/caravel/verilog
 export CORE_VERILOG_PATH    ?=  $(DESIGNS)/caravel_mgmt_soc_litex/verilog
-export USER_PROJECT_VERILOG ?=  $(DESIGNS)/caravel_user_project/verilog
+export USER_PROJECT_VERILOG ?=  $(DESIGNS)/verilog
 
 export CARAVEL_PATH = $(CARAVEL_VERILOG_PATH)
 export VERILOG_PATH = $(CORE_VERILOG_PATH)

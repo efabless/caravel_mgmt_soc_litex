@@ -19,7 +19,7 @@ set ::env(DESIGN_NAME) mgmt_core_wrapper
 
 set ::env(CLOCK_PORT) "core_clk"
 set ::env(CLOCK_NET) "core_clk"
-set ::env(CLOCK_PERIOD) "20"
+set ::env(CLOCK_PERIOD) "25"
 
 set ::env(RESET_PORT) "core_rstn"
 
@@ -70,21 +70,21 @@ set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 1
 set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 1
 set ::env(PL_RESIZER_HOLD_SLACK_MARGIN) 0.1
 
-# set ::env(PL_RESIZER_MAX_SLEW_MARGIN) 70
-# set ::env(PL_RESIZER_MAX_CAP_MARGIN) 70
+set ::env(PL_RESIZER_MAX_SLEW_MARGIN) 10
+set ::env(PL_RESIZER_MAX_CAP_MARGIN) 10
 
 ## Routing
 set ::env(GRT_ALLOW_CONGESTION) 1
-set ::env(GRT_OVERFLOW_ITERS) 200
+set ::env(GRT_OVERFLOW_ITERS) 30
 
 set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 1
-set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) 0.2
-set ::env(GLB_RESIZER_SETUP_SLACK_MARGIN) 0.4
+set ::env(GLB_RESIZER_HOLD_SLACK_MARGIN) 0.05
+set ::env(GLB_RESIZER_SETUP_SLACK_MARGIN) 0.2
 
 ## Diode Insertion
 set ::env(DIODE_INSERTION_STRATEGY) 3
-# set ::env(PL_RESIZER_MAX_WIRE_LENGTH) 250
-# set ::env(GLB_RESIZER_MAX_WIRE_LENGTH) 250
+set ::env(PL_RESIZER_MAX_WIRE_LENGTH) 500
+set ::env(GLB_RESIZER_MAX_WIRE_LENGTH) 500
 set ::env(GRT_ANT_ITERS) 50
 set ::env(GRT_MAX_DIODE_INS_ITERS) 50
 
@@ -95,8 +95,8 @@ set ::env(EXTRA_LEFS) "$::env(MGMT_SOC_ROOT)/lef/RAM128.lef $::env(MGMT_SOC_ROOT
 
 set ::env(EXTRA_GDS_FILES) "$::env(MGMT_SOC_ROOT)/gds/RAM128.gds $::env(MGMT_SOC_ROOT)/gds/RAM256.gds"
 
-set ::env(EXTRA_LIBS) "$::env(MGMT_SOC_ROOT)/lib/RAM256.lib \
-        $::env(MGMT_SOC_ROOT)/lib/RAM128.lib"
+set ::env(EXTRA_LIBS) "$::env(MGMT_SOC_ROOT)/signoff/RAM256/primetime-signoff/lib/nom/RAM256.tt.lib \
+        $::env(MGMT_SOC_ROOT)/signoff/RAM128/primetime-signoff/lib/nom/RAM128.tt.lib"
 
 set ::env(VERILOG_FILES) "$::env(MGMT_SOC_ROOT)/verilog/rtl/defines.v \
         $::env(MGMT_SOC_ROOT)/verilog/rtl/ibex_all.v \
@@ -115,7 +115,7 @@ set ::env(STA_REPORT_POWER) 0
 set ::env(FP_PDN_CHECK_NODES) 0
 
 set ::env(GRT_ADJUSTMENT) 0.22
-set ::env(PL_TARGET_DENSITY) 0.26
+set ::env(PL_TARGET_DENSITY) 0.28
 set ::env(MAGIC_EXT_USE_GDS) 0
 
 set ::env(FP_PDN_MACRO_HOOKS) "RAM256 VPWR VGND VPWR VGND, RAM128 VPWR VGND VPWR VGND"
@@ -125,3 +125,6 @@ set ::env(FP_PDN_MACRO_HOOKS) "RAM256 VPWR VGND VPWR VGND, RAM128 VPWR VGND VPWR
 # set ::env(CTS_CLK_MAX_WIRE_LENGTH) 300
 
 set ::env(MAGIC_DEF_LABELS) 0
+set ::env(RUN_IRDROP_REPORT) 0
+set ::env(QUIT_ON_MAGIC_DRC) 0
+set ::env(QUIT_ON_TR_DRC) 0

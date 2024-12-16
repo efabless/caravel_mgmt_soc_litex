@@ -26,6 +26,7 @@ $CARAVEL_PATH/rtl/clock_div.v
 $CARAVEL_PATH/rtl/housekeeping_spi.v
 				     
 $CARAVEL_PATH/gl/chip_io.v			
+$CARAVEL_PATH/gl/chip_io_alt.v			
 $CARAVEL_PATH/gl/mprj_logic_high.v		
 $CARAVEL_PATH/gl/mprj2_logic_high.v		
 $CARAVEL_PATH/gl/mgmt_protect.v 		
@@ -36,16 +37,31 @@ $CARAVEL_PATH/gl/gpio_logic_high.v
 $CARAVEL_PATH/gl/xres_buf.v			
 $CARAVEL_PATH/gl/spare_logic_block.v		
 $CARAVEL_PATH/gl/housekeeping.v 		
+$CARAVEL_PATH/gl/housekeeping_alt.v 		
 $CARAVEL_PATH/gl/caravel_clocking.v		
 $CARAVEL_PATH/gl/digital_pll.v  		
 // $CARAVEL_PATH/gl/__user_project_wrapper.v	
 $CARAVEL_PATH/gl/user_id_programming.v  	
 $CARAVEL_PATH/gl/caravel.v			
+$CARAVEL_PATH/gl/caravan.v			
+$CARAVEL_PATH/gl/caravel_core.v			
+$CARAVEL_PATH/gl/caravan_core.v			
 
 // These blocks are manually designed	     
 $CARAVEL_PATH/gl/gpio_defaults_block_0403.v	
 $CARAVEL_PATH/gl/gpio_defaults_block_1803.v	
 
+
+$CARAVEL_PATH/gl/empty_macro.v 		     
+$CARAVEL_PATH/gl/manual_power_connections.v 		     
+$CARAVEL_PATH/gl/copyright_block.v 		     
+$CARAVEL_PATH/rtl/copyright_block_a.v 		     
+$CARAVEL_PATH/gl/caravel_logo.v 		     
+$CARAVEL_PATH/rtl/caravan_logo.v 		     
+$CARAVEL_PATH/gl/caravel_motto.v 		     
+$CARAVEL_PATH/rtl/caravan_motto.v 		     
+$CARAVEL_PATH/gl/open_source.v 		     
+$CARAVEL_PATH/gl/user_id_textblock.v 
 
 //$PDK_ROOT/$PDK/libs.ref/sky130_fd_io/verilog/sky130_fd_io.v
 //$PDK_ROOT/$PDK/libs.ref/sky130_fd_io/verilog/sky130_ef_io.v
