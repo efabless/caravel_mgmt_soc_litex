@@ -127876,45 +127876,17 @@ endmodule
 `endif  // SKY130_FD_SC_HD__XOR3_4_V
 
 `ifdef USE_POWER_PINS
-
-`celldefine
-module sky130_ef_sc_hd__newfill_12 (
-    VPWR,
-    VGND,
-    VPB ,
-    VNB
-);
-
-    input VPWR;
-    input VGND;
-    input VPB ;
-    input VNB ;
-    // No contents.
-endmodule
-`endcelldefine
-`else // USE_POWER_PINS
-`celldefine
-module sky130_ef_sc_hd__newfill_12 ();
-    // No contents.
-endmodule
-`endcelldefine
-`endif // USE_POWER_PINS
-
-
-`ifdef USE_POWER_PINS
 /*********************************************************/
 
 `celldefine
-
-
-
-module sky130_ef_sc_hd__fill_12 (
+module sky130_ef_sc_hd__fill_2 (
     VPWR,
     VGND,
     VPB ,
     VNB
 );
 
+    // Module ports
     input VPWR;
     input VGND;
     input VPB ;
@@ -127922,11 +127894,13 @@ module sky130_ef_sc_hd__fill_12 (
     // No contents.
 endmodule
 `endcelldefine
+
 /*********************************************************/
 `else // If not USE_POWER_PINS
 /*********************************************************/
+
 `celldefine
-module sky130_ef_sc_hd__fill_12 ();
+module sky130_ef_sc_hd__fill_2 ();
 
     // Voltage supply signals
     supply1 VPWR;
@@ -127937,8 +127911,217 @@ module sky130_ef_sc_hd__fill_12 ();
 endmodule
 `endcelldefine
 
-
 /*********************************************************/
 `endif // USE_POWER_PINS
+
+
+`ifdef USE_POWER_PINS
+/*********************************************************/
+
+`celldefine
+module sky130_ef_sc_hd__decap_20_12 (
+    VPWR,
+    VGND,
+    VPB ,
+    VNB
+);
+
+    // Module ports
+    input VPWR;
+    input VGND;
+    input VPB ;
+    input VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+
+/*********************************************************/
+`else // If not USE_POWER_PINS
+/*********************************************************/
+
+`ifdef FUNCTIONAL
+
+`celldefine
+module sky130_ef_sc_hd__decap_20_12 ();
+    // No contents.
+endmodule
+`endcelldefine
+
+`else // If not FUNCTIONAL
+
+`celldefine
+module sky130_ef_sc_hd__decap_20_12 ();
+
+    // Voltage supply signals
+    supply1 VPWR;
+    supply0 VGND;
+    supply1 VPB ;
+    supply0 VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+
+`endif // If not FUNCTIONAL
+
+/*********************************************************/
+`endif // If not USE_POWER_PINS
+
+
+`ifdef USE_POWER_PINS
+/*********************************************************/
+
+`celldefine
+module sky130_ef_sc_hd__decap_40_12 (
+    VPWR,
+    VGND,
+    VPB ,
+    VNB
+);
+
+    // Module ports
+    input VPWR;
+    input VGND;
+    input VPB ;
+    input VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+
+/*********************************************************/
+`else // If not USE_POWER_PINS
+/*********************************************************/
+
+`ifdef FUNCTIONAL
+
+`celldefine
+module sky130_ef_sc_hd__decap_40_12 ();
+    // No contents.
+endmodule
+`endcelldefine
+
+`else // If not FUNCTIONAL
+
+`celldefine
+module sky130_ef_sc_hd__decap_40_12 ();
+
+    // Voltage supply signals
+    supply1 VPWR;
+    supply0 VGND;
+    supply1 VPB ;
+    supply0 VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+
+`endif // If not FUNCTIONAL
+
+/*********************************************************/
+`endif // If not USE_POWER_PINS
+
+`ifdef USE_POWER_PINS
+/*********************************************************/
+
+`celldefine
+module sky130_ef_sc_hd__decap_60_12 (
+    VPWR,
+    VGND,
+    VPB ,
+    VNB
+);
+
+    // Module ports
+    input VPWR;
+    input VGND;
+    input VPB ;
+    input VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+
+/*********************************************************/
+`else // If not USE_POWER_PINS
+/*********************************************************/
+
+`ifdef FUNCTIONAL
+
+`celldefine
+module sky130_ef_sc_hd__decap_60_12 ();
+    // No contents.
+endmodule
+`endcelldefine
+
+`else // If not FUNCTIONAL
+
+`celldefine
+module sky130_ef_sc_hd__decap_60_12 ();
+
+    // Voltage supply signals
+    supply1 VPWR;
+    supply0 VGND;
+    supply1 VPB ;
+    supply0 VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+
+`endif // If not FUNCTIONAL
+
+
+
+/*********************************************************/
+`endif // If not USE_POWER_PINS
+
+
+
+`ifdef USE_POWER_PINS
+/*********************************************************/
+
+`celldefine
+module sky130_ef_sc_hd__decap_80_12 (
+    VPWR,
+    VGND,
+    VPB ,
+    VNB
+);
+
+    // Module ports
+    input VPWR;
+    input VGND;
+    input VPB ;
+    input VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+
+/*********************************************************/
+`else // If not USE_POWER_PINS
+/*********************************************************/
+
+`ifdef FUNCTIONAL
+
+`celldefine
+module sky130_ef_sc_hd__decap_80_12 ();
+    // No contents.
+endmodule
+`endcelldefine
+
+`else // If not FUNCTIONAL
+
+`celldefine
+module sky130_ef_sc_hd__decap_80_12 ();
+
+    // Voltage supply signals
+    supply1 VPWR;
+    supply0 VGND;
+    supply1 VPB ;
+    supply0 VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+
+`endif // If not FUNCTIONAL
+
+/*********************************************************/
+`endif // If not USE_POWER_PINS
 
 //--------EOF---------`
