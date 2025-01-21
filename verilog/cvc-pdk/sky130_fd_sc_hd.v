@@ -128121,6 +128121,46 @@ endmodule
 
 `endif // If not FUNCTIONAL
 
+`ifdef USE_POWER_PINS
+/*********************************************************/
+
+`celldefine
+
+
+
+module sky130_ef_sc_hd__fill_12 (
+    VPWR,
+    VGND,
+    VPB ,
+    VNB
+);
+
+    input VPWR;
+    input VGND;
+    input VPB ;
+    input VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+/*********************************************************/
+`else // If not USE_POWER_PINS
+/*********************************************************/
+`celldefine
+module sky130_ef_sc_hd__fill_12 ();
+
+    // Voltage supply signals
+    supply1 VPWR;
+    supply0 VGND;
+    supply1 VPB ;
+    supply0 VNB ;
+    // No contents.
+endmodule
+`endcelldefine
+
+
+/*********************************************************/
+`endif // USE_POWER_PINS
+
 /*********************************************************/
 `endif // If not USE_POWER_PINS
 
